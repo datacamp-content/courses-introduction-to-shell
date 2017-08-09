@@ -37,3 +37,52 @@ chapters:
           - a program
           - an operating system
           - a text-only mode of the file explorer
+  - chapter_title: Core Commands
+    chapter_description: >-
+      - `whoami`
+
+      - `pwd` and a comment on how cryptic commands are
+
+      - interpreting output of `pwd`: folders containing folders
+
+      - `ls` (depends on a certain file setup)
+
+      - `cat`
+
+      - Editing text files (use `nano` and explain how a shell can have multiple
+      personalities)
+
+      - Text vs. binary files
+
+      - `cp`
+
+      - `mv`
+
+      - `rm`
+
+      - `mkdir` and `rmdir`
+    exercises:
+      - type: MultipleChoiceExercise
+        title: Absolute and Relative Paths
+        content: >-
+          Starting from `/Users/jasmine/data/`, which of the following commands
+          could Jasmine use to navigate to  `/Users/jasmine`?
+
+
+          1. `cd .`
+
+          2. `cd /`
+
+          3. `cd /home/jasmine`
+
+          4. `cd ../..`
+
+          5. `cd ~`
+
+          6. `cd home`
+
+          7. `cd ~/data/..`
+
+          8. `cd`
+
+          9. `cd ..`
