@@ -282,4 +282,202 @@ chapters:
       - `sort`
       - `uniq`
       - `nl`
+      - `man`
+    exercises:
+      - type: NormalExercise
+        title: Selecting Dates and Names
+        content: >-
+          Write a command that selects *only* the date and name field from each
+          record in `mortality.txt`.
+      - type: NormalExercise
+        title: Selecting Specific Years
+        content: >-
+          Write a command that selects *only* the data from 2000, 2005, and 2010
+          from `mortality.txt`.
+      - type: MultipleChoiceExercise
+        title: Removing Duplicates from Multiple Files
+        content: >-
+          You want to remove duplicate lines from multiple files with one
+          command, so you write `uniq births.txt mortality.txt`. What actually
+          happens?
+
+
+          1. The command removes any duplicate lines that occur in either
+          `births.txt` or `mortality.txt`.
+
+          2. The command removes duplicate lines in `births.txt` and
+          `mortality.txt` independently.
+
+          3. The command removes duplicate lines in `births.txt` and
+          `mortality.txt`, *and* removes the first line(s) of `second.txt` if
+          they duplicate the last line(s) of `births.txt`.
+
+          4. The command removes duplicate lines from `births.txt` and stores
+          the result in `mortality.txt`.
+      - type: NormalExercise
+        title: Unintended Consequences
+        content: >-
+          Given your answer to the previous question, what happens if you run
+          the command `uniq births.txt births.txt`?
+
+
+          1. It removes duplicate lines from `births.txt` and stores the result
+          in `births.txt`.
+
+          2. It erases the contents of `births.txt`.
+
+          3. It produces no output, because every line of input now appears to
+          be duplicated.
+      - type: NormalExercise
+        title: Sorting Multiple Files
+        content: >-
+          What does `sort births.txt mortality.txt` do?
+
+
+          1. It sorts the contents of `births.txt` and then the contents of
+          `mortality.txt` separately.
+
+          2. It sorts the merged contents of `births.txt` and `mortality.txt` as
+          if they were one file.
+
+          3. It sorts `births.txt` and writes the output to `mortality.txt`
+          (overwriting whatever was there).
+
+          4. None of the above.
+      - type: NormalExercise
+        title: Suppressing Headers
+        content: >-
+          By default, `tail` displays the names of the files it is tailing when
+          it is asked to tail multiple files. Use `man tail` to examine its
+          documentation (or type `man tail` into your favorite search engine)
+          and then write a single command that displays the last line of
+          `birth.txt` and `mortality.txt` *without* filename headers.
+  - chapter_title: Reusing and Combining Commands
+    chapter_description: |-
+      - `history`
+      - re-executing with `!name` and `!number`
+      - output redirection with `>`
+      - why this is a clumsy way to combine multiple commands
+      - using `|`
+    exercises:
+      - type: NormalExercise
+        title: Unique Dates
+        content: >-
+          Using pipes to combine two or more basic commands, write a single-line
+          command that displays unique dates in `mortality.txt`.
+      - type: NormalExercise
+        title: Counting Causes
+        content: >-
+          Using pipes to combine two or more basic commands, write a single-line
+          command that displays a list of causes of death in `mortality.txt`
+          sorted in order of decreasing frequency. Display the frequency as well
+          as the cause.
+      - type: NormalExercise
+        title: Unique Causes
+        content: >-
+          Using pipes to combine two or more basic commands, write a single-line
+          command that lists unique causes of death in `mortality.txt`, i.e.,
+          causes that only occur once.  Display only the frequency, *not* the
+          cause.
+      - type: NormalExercise
+        title: File Lengths
+        content: >-
+          Use `man wc` to find out how to count the number of lines in one or
+          more files, and then use it in a pipe to list `births.txt`,
+          `mortality.txt`, and `accidents.txt` from fewest to greatest number of
+          lines.
+      - type: NormalExercise
+        title: Analyzing Pipelines
+        content: >-
+          A file called `animals.txt` contains the following data:
+
+
+          ```
+
+          2012-11-05,deer
+
+          2012-11-05,rabbit
+
+          2012-11-05,raccoon
+
+          2012-11-06,rabbit
+
+          2012-11-06,deer
+
+          2012-11-06,fox
+
+          2012-11-07,rabbit
+
+          2012-11-07,bear
+
+          ```
+
+
+          What text passes through each of the pipes and the final redirect in
+          the pipeline below?
+
+
+          ```
+
+          $ cat animals.txt | head -n 5 | tail -n 3 | sort -r > final.txt
+
+          ```
+      - type: MultipleChoiceExercise
+        title: Which Pipeline?
+        content: >-
+          `animals.txt` contains data formatted as follows:
+
+
+          ```
+
+          2012-11-05,deer
+
+          2012-11-05,rabbit
+
+          2012-11-05,raccoon
+
+          2012-11-06,rabbit
+
+          ...
+
+          ```
+
+
+          What command would you use to produce a table that shows the total
+          count of each type of animal in the file?
+
+
+          1.  `grep {deer, rabbit, raccoon, deer, fox, bear} animals.txt | wc
+          -l`
+
+          2.  `sort animals.txt | uniq -c`
+
+          3.  `sort -t, -k2,2 animals.txt | uniq -c`
+
+          4.  `cut -d, -f 2 animals.txt | uniq -c`
+
+          5.  `cut -d, -f 2 animals.txt | sort | uniq -c`
+
+          6.  `cut -d, -f 2 animals.txt | sort | uniq -c | wc -l`
+  - chapter_title: Building New Commands
+    chapter_description: >-
+      - putting fixed commands in a shell script
+
+      - executing scripts with `bash scriptname`
+
+      - making scripts executable with `chmod` (hate to introduce this in
+      passing, but...)
+
+      - handling multiple filenames with `$@`
+
+      - using wildcards `*` and `?`
+
+      - using `history | tail > file.sh` to start a shell script
+    exercises: []
+  - chapter_title: Next Steps
+    chapter_description: |-
+      - quick summary of what's been learned
+      - the Unix philosophy: lots of little tools combined in ad hoc ways
+      - Noble's Rules for laying out projects (and why)
+      - pointer to the second course (loops, finding files, etc.)
     exercises: []
