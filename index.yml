@@ -141,3 +141,145 @@ chapters:
           last change.
 
           4. None of the above.
+      - type: NormalExercise
+        title: Editing a File
+        content: >-
+          Use `nano` to create a file called `workplan.txt` in the directory
+          `personal` that contains the following text:
+
+
+          ```
+
+          Step 1: choose problem.
+
+          Step 2: think really hard.
+
+          Step 3: profit!
+
+          ```
+
+
+          Make sure there are no trailing spaces at the ends of lines, or blank
+          lines at the end of the file.
+      - type: NormalExercise
+        title: Backing Up Files
+        content: >-
+          Create a new directory called `backup` below your home directory, and
+          then copy the files `biography.txt` and `thesis.txt` into that
+          directory.  When you are done, the command `ls backup` should show
+          you:
+
+
+          ```
+
+          biography.txt .   thesis.txt
+
+          ```
+      - type: MultipleChoiceExercise
+        title: Special Directory Names
+        content: >-
+          What is the difference between `cd ./..` and `cd ../.` ?
+
+
+          1. Both move you up one directory.
+
+          2. The first moves you up one directory, while the second leaves you
+          where you are.
+
+          3. The first leaves you where you are, while the second moves you up
+          one directory.
+
+          4. Both leave you where you are.
+      - type: NormalExercise
+        title: Moving and Copying
+        content: >-
+          What is the output of the closing `ls` command in the sequence shown
+          below?
+
+
+          ```
+
+          $ pwd
+
+          /Users/jasmine/data
+
+
+          $ ls
+
+          mortality.dat
+
+
+          $ mkdir old
+
+          $ mv mortality.dat old
+
+          $ cp old/mortality.dat ../mortality-saved.dat
+
+          $ ls
+
+          ```
+
+
+          1. `mortality-saved.dat old`
+
+          2. `old`
+
+          3. `mortality.dat old`
+
+          4. `mortality-saved.dat`
+      - type: MultipleChoiceExercise
+        title: Copy With Multiple Filenames
+        content: >-
+          ```
+
+          $ ls -F
+
+          analysis/  births/  home-ownership.txt  mortality.txt  temp/
+
+
+          $ cp mortality.txt home-ownership.txt births
+
+          ```
+
+
+          1. Produces an error message.
+
+          2. Makes backup copies of both files and the entire `births`
+          directory.
+
+          3. Copies the two files to the `births` directory.
+      - type: NormalExercise
+        title: More Copying With Multiple Filenames
+        content: >-
+          Given your answer to the previous exercise, what would happen if you
+          ran the following command instead:
+
+
+          ```
+
+          $ cp mortality.txt births home-ownership.txt
+
+          ```
+
+
+          1. Produce an error message.
+
+          2. Copy `mortality.txt` to `births`.
+
+          3. Copy the two files to the `births` directory.
+      - type: NormalExercise
+        title: Moving to the Current Folder
+        content: >-
+          You are in the directory `~/analyzed`, and the directory `~/raw`
+          contains a file called `output.txt`. Run a single command to move the
+          file to the `analyzed` directory.  (Remember that `~` is a shorthand
+          for your home directory.)
+  - chapter_title: Manipulating Data
+    chapter_description: |-
+      - `head` and `tail`
+      - `cut`
+      - `grep` (with very simple patterns)
+      - `sort`
+      - `uniq`
+      - `nl`
+    exercises: []
