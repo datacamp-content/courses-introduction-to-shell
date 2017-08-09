@@ -7,7 +7,7 @@ description: |-
   - why this is a clumsy way to combine multiple commands
   - using `|`
 
---- type:NormalExercise lang:python xp:100 skills:2 key:e936249fb9
+--- type:NormalExercise lang:python xp:100 skills:2 key:c8849c910a
 ## Unique Dates
 
 Using pipes to combine two or more basic commands, write a single-line command that displays unique dates in `mortality.txt`.
@@ -36,7 +36,7 @@ Using pipes to combine two or more basic commands, write a single-line command t
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:72272842b3
+--- type:NormalExercise lang:python xp:100 skills:2 key:88bdea13ed
 ## Counting Causes
 
 Using pipes to combine two or more basic commands, write a single-line command that displays a list of causes of death in `mortality.txt` sorted in order of decreasing frequency. Display the frequency as well as the cause.
@@ -65,7 +65,7 @@ Using pipes to combine two or more basic commands, write a single-line command t
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:b61af275cc
+--- type:NormalExercise lang:python xp:100 skills:2 key:4735a5c485
 ## Unique Causes
 
 Using pipes to combine two or more basic commands, write a single-line command that lists unique causes of death in `mortality.txt`, i.e., causes that only occur once.  Display only the frequency, *not* the cause.
@@ -94,7 +94,7 @@ Using pipes to combine two or more basic commands, write a single-line command t
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:decd82f7fe
+--- type:NormalExercise lang:python xp:100 skills:2 key:b36da33088
 ## File Lengths
 
 Use `man wc` to find out how to count the number of lines in one or more files, and then use it in a pipe to list `births.txt`, `mortality.txt`, and `accidents.txt` from fewest to greatest number of lines.
@@ -123,7 +123,7 @@ Use `man wc` to find out how to count the number of lines in one or more files, 
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:3693f2643c
+--- type:NormalExercise lang:python xp:100 skills:2 key:9da43b400e
 ## Analyzing Pipelines
 
 A file called `animals.txt` contains the following data:
@@ -169,7 +169,7 @@ $ cat animals.txt | head -n 5 | tail -n 3 | sort -r > final.txt
 
 ```
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:602662f1b6
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:1f083596da
 ## Which Pipeline?
 
 `animals.txt` contains data formatted as follows:

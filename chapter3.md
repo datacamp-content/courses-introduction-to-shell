@@ -9,7 +9,7 @@ description: |-
   - `nl`
   - `man`
 
---- type:NormalExercise lang:python xp:100 skills:2 key:b25231fd77
+--- type:NormalExercise lang:python xp:100 skills:2 key:1da7f1a48e
 ## Selecting Dates and Names
 
 Write a command that selects *only* the date and name field from each record in `mortality.txt`.
@@ -38,7 +38,7 @@ Write a command that selects *only* the date and name field from each record in 
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:813626aa9f
+--- type:NormalExercise lang:python xp:100 skills:2 key:a275f58b84
 ## Selecting Specific Years
 
 Write a command that selects *only* the data from 2000, 2005, and 2010 from `mortality.txt`.
@@ -67,7 +67,7 @@ Write a command that selects *only* the data from 2000, 2005, and 2010 from `mor
 
 ```
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:bbd401e455
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:a1bd1ed592
 ## Removing Duplicates from Multiple Files
 
 You want to remove duplicate lines from multiple files with one command, so you write `uniq births.txt mortality.txt`. What actually happens?
@@ -91,7 +91,7 @@ You want to remove duplicate lines from multiple files with one command, so you 
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:142f05d04d
+--- type:NormalExercise lang:python xp:100 skills:2 key:c878621e83
 ## Unintended Consequences
 
 Given your answer to the previous question, what happens if you run the command `uniq births.txt births.txt`?
@@ -124,7 +124,7 @@ Given your answer to the previous question, what happens if you run the command 
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:70719cd907
+--- type:NormalExercise lang:python xp:100 skills:2 key:124fb79fda
 ## Sorting Multiple Files
 
 What does `sort births.txt mortality.txt` do?
@@ -158,7 +158,7 @@ What does `sort births.txt mortality.txt` do?
 
 ```
 
---- type:NormalExercise lang:python xp:100 skills:2 key:4642d03585
+--- type:NormalExercise lang:python xp:100 skills:2 key:3c9240d4c6
 ## Suppressing Headers
 
 By default, `tail` displays the names of the files it is tailing when it is asked to tail multiple files. Use `man tail` to examine its documentation (or type `man tail` into your favorite search engine) and then write a single command that displays the last line of `birth.txt` and `mortality.txt` *without* filename headers.

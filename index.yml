@@ -473,11 +473,88 @@ chapters:
       - using wildcards `*` and `?`
 
       - using `history | tail > file.sh` to start a shell script
-    exercises: []
+    exercises:
+      - type: NormalExercise
+        title: Using Wildcards in Pipes
+        content: >-
+          We want to find the three files in our current directory which have
+          the least number of lines. Which command listed below would work?
+
+
+          1. `wc -l * > sort -n > head -n 3`
+
+          2. `wc -l * | sort -n | head -n 1-3`
+
+          3. `wc -l * | head -n 3 | sort -n`
+
+          4. `wc -l * | sort -n | head -n 3`
+      - type: NormalExercise
+        title: Removing Unneeded Files
+        content: >-
+          Suppose you want to delete your processed data files, and only keep
+          your raw files and processing script to save storage. The raw files
+          end in `.dat` and the processed files end in `.txt`. Which of the
+          following would remove all the processed data files, and *only* the
+          processed data files?
+
+
+          1. `rm ?.txt`
+
+          2. `rm *.txt`
+
+          3. `rm * .txt`
+
+          4. `rm *.*`
+      - type: NormalExercise
+        title: Wildcard Expressions
+        content: >-
+          The wildcard `[xy]` matches *either* a single `x` or a single `y`
+          character. Fill in the blank in the expression below to list only the
+          files from 2012 and 2013.
+
+
+          ```
+
+          ls ____.dat
+
+          ```
+      - type: NormalExercise
+        title: Reproducing Your Work
+        content: >-
+          Fill in the blanks in the shell script `dates.sh` to select unique
+          dates from the file `mortality.txt`.
+      - type: NormalExercise
+        title: Generalizing Your Work
+        content: >-
+          Fill in the blanks in the shell script `dates.sh` to select unique
+          dates from a single file whose name is given as the script's sole
+          command-line argument.
+      - type: NormalExercise
+        title: Diagnosis
+        content: >-
+          When you run this command:
+
+
+          ```
+
+          head -10 | tail -3 mortality.txt
+
+          ```
+
+
+          it prints the last 3 lines of `mortality.txt` and then hangs (i.e., it
+          doesn't give you a fresh shell prompt for writing more commands). 
+          Why?
   - chapter_title: Next Steps
     chapter_description: |-
       - quick summary of what's been learned
       - the Unix philosophy: lots of little tools combined in ad hoc ways
       - Noble's Rules for laying out projects (and why)
       - pointer to the second course (loops, finding files, etc.)
-    exercises: []
+    exercises:
+      - type: NormalExercise
+        title: Tidying Up
+        content: >-
+          Using whatever commands you want, reorganize this project to follow
+          the structure laid out in Noble's Rules. Run the command `bin/check`
+          to see what's out of place.
