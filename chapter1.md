@@ -5,7 +5,7 @@ description: >-
   operating system, just like the GUIs that learners are probably familiar with,
   but because it's textual, it supports history and automation.
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:cafffecb4e
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:f1096f651c
 ## How are they connected?
 
 What is the relationship between the graphical file explorer that most people use and the shell?
@@ -28,7 +28,7 @@ What is the relationship between the graphical file explorer that most people us
 
 ```
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:7b02fc0af2
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:0b5d8fbf79
 ## What is a shell?
 
 What kind of thing is a shell?
