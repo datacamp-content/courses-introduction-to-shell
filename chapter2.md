@@ -192,7 +192,7 @@ Make sure there are no trailing spaces at the ends of lines, or blank lines at t
 Create a new directory called `backup` below your home directory, and then copy the files `biography.txt` and `thesis.txt` into that directory.  When you are done, the command `ls backup` should show you:
 
 ```
-biography.txt .   thesis.txt
+biography.txt   thesis.txt
 ```
 
 *** =instructions
