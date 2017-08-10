@@ -411,7 +411,7 @@ Prerequisites: none.
 ## Conclusion
 
 Thirty years ago,
-[Parnas and Clements pointed out][parnas-clements] wrote:
+[Parnas and Clements][parnas-clements] wrote:
 
 > Many have sought a software design process that allows a program to be derived systematically
 > from a precise statement of requirements.
