@@ -108,7 +108,7 @@ or some other form.*
 to present examples of what learners will be able to do at its end.
 This is directly analogous to [test-driven development][tdd]:
 rather than working forward from a (probably ambiguous) set of learning objectives,
-designers work backward from concrete examples of where their learners are going.
+designers work backward from concrete examples of where their learners are going.*
 
 *Output: 2-3 exercises that use all of the skills the learner is to develop.*
 
