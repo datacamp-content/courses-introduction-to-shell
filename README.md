@@ -28,6 +28,8 @@ particular course outlines will reference these and add the fifth.*
 
 *Owner: CL (shared).*
 
+(Images courtesy of [RoboHash][robohash].)
+
 **Jasmine**
 
 ![Jasmine](img/jasmine.png)
@@ -96,7 +98,7 @@ or some other form.*
 
 1. *It's tempting to write learning objectives at this point.
    Resist!
-   Step 5 will almost certainly result in material being cut.*
+   Step 4 will almost certainly result in material being cut.*
 
 2. *New instructors may struggle with this step,
    so we will walk them through it for their first course
@@ -114,7 +116,7 @@ designers work backward from concrete examples of where their learners are going
 
 *Owner: CL.*
 
-### Exercise 1
+### Summative Exercise 1: Shell Scripts
 
 You have several dozen data files, each of which is formatted like this:
 
@@ -151,7 +153,7 @@ Each file is processed separately.
 > done
 > ```
 
-### Exercise 2
+### Summative Exercise 2: Wildcards
 
 The directory `./data` contains four CSV files and three shell scripts:
 
@@ -225,10 +227,10 @@ echo $@.csv
 *Formative assessments are exercises done while learning is taking place,
 rather than at the end to determine whether it has.
 Formative assessments serve two purposes:
-to tell the learner and the instructor if the learner is making progress
+to tell the learner and the instructor if learners are making progress
 (or conversely, what they still need to work on),
-and to give the learner a chance to exercise the skills and knowledge
-that will be needed in the summative assessment.*
+and to give learners a chance to exercise the skills and knowledge
+they will need in the summative assessment.*
 
 *In order to create formative assessments,
 the CL works backward from the summative assessment written in Step 2.*
@@ -239,7 +241,7 @@ their purpose is to communicate concrete goals to the CD.*
 
 *Owner: CL.*
 
-### Exercise 1
+### Formative Exercise 1: The Shell vs. GUIs
 
 What is the relationship between the shell
 and graphical file explorer that most people use?
@@ -249,18 +251,7 @@ and graphical file explorer that most people use?
 3. The shell is part of the operating system, while the file explorer is separate.
 4. They are both interfaces for issuing commands to the operating system.
 
-### Exercise 2
-
-Create a new directory called `backup` below your home directory,
-and then copy the files `biography.txt` and `thesis.txt` into that directory.
-When you are done,
-the command `ls backup` should show you:
-
-```
-biography.txt   thesis.txt
-```
-
-### Exercise 3
+### Formative Exercise 2: Manipulating Files and Directories
 
 What is the output of the final `ls` command in the sequence shown below?
 
@@ -282,22 +273,22 @@ $ ls
 3. `mortality.dat old`
 4. `mortality-saved.dat`
 
-### Exercise 4
+### Formative Exercise 3: Selecting Data by Value
 
 Write a command that selects *only* the date and name fields (columns 2 and 3)
 from each record in `mortality.txt`.
 
-### Exercise 5
+### Formative Exercise 4: Selecting Data by Field
 
 Write a command that selects *only* the data from the years 2000, 2005, and 2010
 from `mortality.txt`.
 
-### Exercise 6
+### Formative Exercise 5: Creating Pipes
 
 Using pipes to combine two or more basic commands,
 write a single-line command that displays unique dates in `mortality.txt`.
 
-### Exercise 7
+### Formative Exercise 6: Tracing Pipes and Redirection
 
 A file called `animals.txt` contains the following data:
 
@@ -318,7 +309,7 @@ What text passes through each of the pipes and the final redirect in the pipelin
 $ cat animals.txt | head -n 5 | tail -n 3 | sort -r > final.txt
 ```
 
-### Exercise 8
+### Formative Exercise 7: Wildcards
 
 Suppose you want to delete your processed data files,
 and only keep your raw files and processing script to save storage.
@@ -331,70 +322,76 @@ and *only* the processed data files?
 3. `rm * .txt`
 4. `rm *.*`
 
-### Exercise 9
+### Formative Exercise 8: Shell Scripts
 
 Fill in the blanks in the shell script `dates.sh`
 to select unique dates from a single file
 whose name is given as the script's sole command-line argument.
 
-## Step 4: Sequencing
+## Step 4: Course Outline
 
 *In this stage,
-formative assessments are put in a linear order that respects their dependencies.
-This is the point at which CDs often discover all the dependencies they forgot to list earlier,
-i.e.,
-all the skills and tools they didn't realize they would need to teach.*
+formative assessments are put in an order that respects their dependencies.
+This is the point at which the CL discovers all the dependencies she forgot to list earlier.
+The CL then creates a point-form outline of chapters and lessons:
+each chapter has a title,
+and each lesson has a handful of keywords describing what it will cover.*
 
 *Output: an instructional sequence.*
 
-*Owner: CD (for sequence) and curriulum lead (to approve what gets cut off).*
+*Owner: CL.*
 
-The exercises in Step 3 are already arranged in a workable sequence.
+The formative assessments in Step 3 are already in order.
+The chapter and lesson outline is:
 
-## Step 5: Chapters
+1. Manipulating Files and Directories
+   1. What a shell is; how it compares to a graphical interface.
+   2. `whoami`; `pwd`; files vs. directories
+   3. `ls`; `cp`; `mv`; `rm`
+   4. `cat`; `nano`
+   5. `mkdir`; `rmdir`
+2. Manipulating Data
+   1. `head`; `tail`; command-line flags
+   2. `man`
+   3. `cut`
+   4. `history`; `!number` and `!command`
+   4. `grep`; single-quoting
+   5. `uniq`; `sort`
+3. Combining Tools
+   1. Redirection with `>`
+   2. Piping with `|`
+   3. Using the `*` and `?` wildcards
+4. Automating Repeated Tasks
+   1. Storing commands in files; running files with `bash script.sh`
+   2. Permissions; changing permissions; using `!#`
+   3. Using positional arguments `$1`, `$2`, etc.
+   4. Using `$@`
 
-*At this point,
-writing the actual chapters is straightforward.
-This is also the point at which it's worth writing formal learning objectives.
-Doing it earlier often wastes effort,
+## Step 5: Course Description
+
+*The CL is now ready to write the course's learning objectives,
+to write a short blurb for the course,
+and to specify the course's prerequisites.
+Doing this earlier often wastes effort,
 since material may be added or cut in Step 4.*
 
-*Output: chapters (detailed point form or finished prose).*
+*Output: learning objectives, course overview, and prerequisites.*
 
-*Owner: CD.*
+*Owner: CL.*
 
 **Learning Objectives**
 
 - Explain the similarities and differences between the Unix shell and graphical user interfaces.
 - Demonstrate fluency with core Unix commands.
-  - `whoami` and `pwd`
-  - `ls`, `cp`, `mv`, `rm`
-  - `cat` and `nano`
-  - `mkdir` and `rmdir`
-- Demonstrate fluency with basic data manipulation commands.
-  - `head` and `tail`
-  - `cut`
-  - `grep` (with very simple patterns)
-  - `sort`
-  - `uniq`
-- Find and interpret help (`man`).
 - Explain what files and directories are.
 - Match files and directories to relative and absolute paths.
+- Demonstrate fluency with basic data manipulation commands.
+- Find and interpret help.
 - Predict the paths matched by wildcards and specify wildcards to match sets of paths.
 - Combine programs using pipes to process large data sets.
-- Write shell scripts to automate repetitive tasks.
+- Write shell scripts to re-run command pipes with a varying number of command-line arguments.
 
-## Step 6: Course Description
-
-*The CD is now ready to work with the CL and marketing
-to write a short blurb for the course
-to be posted on the DataCamp website
-and included in announcements.
-The course's prerequisites should also be specified at this point.*
-
-*Output: course blurb.*
-
-*Owners: CD, CL, marketing.*
+**Course Description**
 
 The Unix command line has survived and thrived for almost fifty years
 because it lets people to do complex things with just a few keystrokes.
@@ -406,7 +403,9 @@ that may be halfway around the world.
 This course will introduce its key elements
 and show you how to use them efficiently.
 
-Prerequisites: none.
+**Prerequisites**
+
+None.
 
 ## Conclusion
 
@@ -422,8 +421,11 @@ Thirty years ago,
 The same is true of courses:
 this process is described as a one-way flow,
 but in practice,
-CLs and CDs will loop back repeatedly
-as each stage informs them of something they've overlooked or don't need in a previous stage.
+the CL will loop back repeatedly
+as each stage informs her of something she overlooked.
+Similarly,
+the CD may add, move, or remove some specific lesson items as she fills in content
+(though she must review any significant changes with the CL).
 With practice,
 those loops become tighter and more productive,
 and multi-author maintenance of lessons will become less expensive.
@@ -433,5 +435,6 @@ and multi-author maintenance of lessons will become less expensive.
 [developer-roadmap]: https://github.com/kamranahmedse/developer-roadmap
 [learner-profiles]: http://third-bit.com/teaching/lessons.html#learner-profiles
 [parnas-clements]: http://ieeexplore.ieee.org/document/6312940/
+[robohash]: http://robohash.org
 [robust-software]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005412
 [tdd]: https://en.wikipedia.org/wiki/Test-driven_development
