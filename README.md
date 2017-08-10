@@ -30,7 +30,7 @@ particular course outlines will reference these and add the fifth.*
 
 **Jasmine**
 
-![Jasmine](jasmine.png)
+![Jasmine](img/jasmine.png)
 
 1. Jasmine, 28, did a commerce degree at the University of North Carolina,
    and then an MBA at Georgia State.
@@ -56,7 +56,7 @@ particular course outlines will reference these and add the fifth.*
 
 **Thanh**
 
-![Thanh](thanh.png)
+![Thanh](img/thanh.png)
 
 1. Thanh, 35, has an undergraduate degree in psychology with a minor in statistics.
    He now works for the Quebec Ministry of Education,
@@ -90,7 +90,7 @@ or some other form.*
 
 *Owner: CL (per course).*
 
-![Basic Unix Concepts](unix.png)
+![Basic Unix Concepts](img/unix.png)
 
 *Notes:*
 
