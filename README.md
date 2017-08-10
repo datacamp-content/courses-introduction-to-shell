@@ -114,7 +114,9 @@ designers work backward from concrete examples of where their learners are going
 
 *Owner: CL.*
 
-Exercise 1: you have several dozen data files, each of which is formatted like this:
+### Exercise 1
+
+You have several dozen data files, each of which is formatted like this:
 
 ```
 2013-11-05,deer,5
@@ -149,7 +151,9 @@ Each file is processed separately.
 > done
 > ```
 
-Exercise 2: the directory `./data` contains four CSV files and three shell scripts:
+### Exercise 2
+
+The directory `./data` contains four CSV files and three shell scripts:
 
 ```
 $ ls *.csv
@@ -235,7 +239,8 @@ their purpose is to communicate concrete goals to the CD.*
 
 *Owner: CL.*
 
-Exercise 1:
+### Exercise 1
+
 What is the relationship between the shell
 and graphical file explorer that most people use?
 
@@ -244,7 +249,8 @@ and graphical file explorer that most people use?
 3. The shell is part of the operating system, while the file explorer is separate.
 4. They are both interfaces for issuing commands to the operating system.
 
-Exercise 2:
+### Exercise 2
+
 Create a new directory called `backup` below your home directory,
 and then copy the files `biography.txt` and `thesis.txt` into that directory.
 When you are done,
@@ -254,7 +260,8 @@ the command `ls backup` should show you:
 biography.txt   thesis.txt
 ```
 
-Exercise 3:
+### Exercise 3
+
 What is the output of the final `ls` command in the sequence shown below?
 
 ```
@@ -275,19 +282,23 @@ $ ls
 3. `mortality.dat old`
 4. `mortality-saved.dat`
 
-Exercise 4:
+### Exercise 4
+
 Write a command that selects *only* the date and name fields (columns 2 and 3)
 from each record in `mortality.txt`.
 
-Exercise 5:
+### Exercise 5
+
 Write a command that selects *only* the data from the years 2000, 2005, and 2010
 from `mortality.txt`.
 
-Exercise 6:
+### Exercise 6
+
 Using pipes to combine two or more basic commands,
 write a single-line command that displays unique dates in `mortality.txt`.
 
-Exercise 7:
+### Exercise 7
+
 A file called `animals.txt` contains the following data:
 
 ```
@@ -307,7 +318,8 @@ What text passes through each of the pipes and the final redirect in the pipelin
 $ cat animals.txt | head -n 5 | tail -n 3 | sort -r > final.txt
 ```
 
-Exercise 8:
+### Exercise 8
+
 Suppose you want to delete your processed data files,
 and only keep your raw files and processing script to save storage.
 The raw files end in `.dat` and the processed files end in `.txt`.
@@ -319,7 +331,8 @@ and *only* the processed data files?
 3. `rm * .txt`
 4. `rm *.*`
 
-Exercise 9:
+### Exercise 9
+
 Fill in the blanks in the shell script `dates.sh`
 to select unique dates from a single file
 whose name is given as the script's sole command-line argument.
