@@ -86,9 +86,8 @@ particular course outlines will reference these and add the fifth.*
 
 *This is a brainstorming stage to determine what we want learners to know at the end of the course.
 Its concrete output is usually a [concept map][concept-map] showing the main ideas and their relationships,
-but in some cases it may be more productive to represent the learning as a map,
-a [decision tree][abela-chart],
-or some other form.*
+but in some cases it may be more helpful to represent the goal as a [decision tree][abela-chart]
+or some other graphical form.*
 
 *Output: graphical representation of learner's final mental model.*
 
