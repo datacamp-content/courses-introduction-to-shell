@@ -368,7 +368,7 @@ The chapter and lesson outline is:
    3. Using positional arguments `$1`, `$2`, etc.
    4. Using `$@`
 
-## Step 5: Course Description
+## Step 5: Course Overview
 
 *The CL is now ready to write the course's learning objectives,
 to write a short blurb for the course,
@@ -379,18 +379,6 @@ since material may be added or cut in Step 4.*
 *Output: learning objectives, course overview, and prerequisites.*
 
 *Owner: CL.*
-
-**Learning Objectives**
-
-- Explain the similarities and differences between the Unix shell and graphical user interfaces.
-- Demonstrate fluency with core Unix commands.
-- Explain what files and directories are.
-- Match files and directories to relative and absolute paths.
-- Demonstrate fluency with basic data manipulation commands.
-- Find and interpret help.
-- Predict the paths matched by wildcards and specify wildcards to match sets of paths.
-- Combine programs using pipes to process large data sets.
-- Write shell scripts to re-run command pipes with a varying number of command-line arguments.
 
 **Course Description**
 
@@ -403,6 +391,18 @@ and run programs on clusters and clouds
 that may be halfway around the world.
 This course will introduce its key elements
 and show you how to use them efficiently.
+
+**Learning Objectives**
+
+- Explain the similarities and differences between the Unix shell and graphical user interfaces.
+- Demonstrate fluency with core Unix commands.
+- Explain what files and directories are.
+- Match files and directories to relative and absolute paths.
+- Demonstrate fluency with basic data manipulation commands.
+- Find and interpret help.
+- Predict the paths matched by wildcards and specify wildcards to match sets of paths.
+- Combine programs using pipes to process large data sets.
+- Write shell scripts to re-run command pipes with a varying number of command-line arguments.
 
 **Prerequisites**
 
