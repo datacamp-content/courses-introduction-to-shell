@@ -2,8 +2,10 @@
 ---
 # Introduction to the Unix Shell for Data Science
 
-*This document is a starting point for discussion of
-what a new DataCamp course outline and development procedure might look like.
+*This document proposes a new format for DataCamp course outlines
+and a new process for developing them,
+based on both Wiggins & McTighe's *[Understanding by Design][ubd]*
+and [Software Carpentry's experience][teaching].
 Feedback would be greatly appreciated.*
 
 *Terminology:*
@@ -438,3 +440,5 @@ and multi-author maintenance of lessons will become less expensive.
 [robohash]: http://robohash.org
 [robust-software]: http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005412
 [tdd]: https://en.wikipedia.org/wiki/Test-driven_development
+[teaching]: http://third-bit.com/teaching/
+[ubd]: https://www.amazon.com/Understanding-Design-Grant-Wiggins/dp/1416600353/
