@@ -1,5 +1,4 @@
 ---
-avatarwidth: 150
 ---
 # Introduction to the Unix Shell for Data Science
 
@@ -10,7 +9,7 @@ Feedback would be greatly appreciated.*
 *Terminology:*
 
 - *CL: curriculum lead*
-- *CD: CD*
+- *CD: course developer*
 
 ## Step 0: Learner Profiles
 
@@ -31,7 +30,7 @@ particular course outlines will reference these and add the fifth.*
 
 **Jasmine**
 
-<img src="https://robohash.org/Jasmine" width="{{page.avatarwidth}}" />
+![Jasmine](jasmine.png)
 
 1. Jasmine, 28, did a commerce degree at the University of North Carolina,
    and then an MBA at Georgia State.
@@ -57,7 +56,7 @@ particular course outlines will reference these and add the fifth.*
 
 **Thanh**
 
-<img src="https://robohash.org/Thanh" width="{{page.avatarwidth}}" />
+![Thanh](thanh.png)
 
 1. Thanh, 35, has an undergraduate degree in psychology with a minor in statistics.
    He now works for the Quebec Ministry of Education,
