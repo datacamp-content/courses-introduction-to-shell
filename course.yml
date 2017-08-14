@@ -6,4 +6,4 @@ description: >-
   programs in new ways, automate repetitive tasks, and run programs on clusters
   and clouds that may be halfway around the world. This lesson will introduce
   its key elements and show you how to use them efficiently.
-programming_language: python
+programming_language: bash
