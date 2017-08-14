@@ -8,11 +8,6 @@ based on both Wiggins & McTighe's *[Understanding by Design][ubd]*
 and [Software Carpentry's experience][teaching].
 Feedback would be greatly appreciated.*
 
-*Terminology:*
-
-- *CL: curriculum lead*
-- *CD: course developer*
-
 ## Step 0: Learner Profiles
 
 *Terms like "beginner" and "expert" mean different things to different people,
@@ -27,8 +22,6 @@ DataCamp will have a handful of stock profiles that define the first four points
 particular course outlines will reference these and add the fifth.*
 
 *Output: brief descriptions of intended audience.*
-
-*Owner: CL (shared).*
 
 (Images courtesy of [RoboHash][robohash].)
 
@@ -91,8 +84,6 @@ or some other graphical form.*
 
 *Output: graphical representation of learner's final mental model.*
 
-*Owner: CL (per course).*
-
 ![Basic Unix Concepts](img/unix.png)
 
 *Notes:*
@@ -101,9 +92,9 @@ or some other graphical form.*
    Resist!
    Step 4 will almost certainly result in material being cut.*
 
-2. *New instructors may struggle with this step,
-   so we will walk them through it for their first course
-   as part of their onboarding process.*
+2. *If this is your first time creating a concept map, 
+   you may struggle with this step.
+   Have no fear—we're here to help!*
 
 ## Step 2: Summative Assessment
 
@@ -114,8 +105,6 @@ rather than working forward from a (probably ambiguous) set of learning objectiv
 designers work backward from concrete examples of where their learners are going.*
 
 *Output: 2-3 exercises that use all of the skills the learner is to develop.*
-
-*Owner: CL.*
 
 ### Summative Exercise 1: Shell Scripts
 
@@ -217,9 +206,9 @@ echo $@.csv
 *Notes:*
 
 1. *These summative assessments will normally be included in the course
-   as its final capstone exercises.*
+   as its final exercises.*
 
-2. *If CLs and CDs find this approach productive,
+2. *If we find this approach productive,
    we may eventually stitch these concept maps together
    to create something like Kamran Ahmed's [developer roadmap][developer-roadmap].
 
@@ -234,13 +223,11 @@ and to give learners a chance to exercise the skills and knowledge
 they will need in the summative assessment.*
 
 *In order to create formative assessments,
-the CL works backward from the summative assessment written in Step 2.*
+the you'll work backward from the summative assessment written in Step 2.*
 
 *Output: 2-3 formative assessments for each chapter of the course.
 As with the summative assessments,
-their purpose is to communicate concrete goals to the CD.*
-
-*Owner: CL.*
+their purpose is to communicate concrete goals of the course.*
 
 ### Formative Exercise 1: The Shell vs. GUIs
 
@@ -333,14 +320,12 @@ whose name is given as the script's sole command-line argument.
 
 *In this stage,
 formative assessments are put in an order that respects their dependencies.
-This is the point at which the CL discovers all the dependencies she forgot to list earlier.
-The CL then creates a point-form outline of chapters and lessons:
-each chapter has a title,
+This is the point at which you'll discover all the dependencies you forgot to list earlier.
+You'll then create a point-form outline of chapters and lessons:
+each chapter has a title and 3-5 lessons,
 and each lesson has a handful of keywords describing what it will cover.*
 
 *Output: an instructional sequence.*
-
-*Owner: CL.*
 
 The formative assessments in Step 3 are already in order.
 The chapter and lesson outline is:
@@ -370,15 +355,13 @@ The chapter and lesson outline is:
 
 ## Step 5: Course Overview
 
-*The CL is now ready to write the course's learning objectives,
+*You're now ready to write the course's learning objectives,
 to write a short blurb for the course,
 and to specify the course's prerequisites.
 Doing this earlier often wastes effort,
 since material may be added or cut in Step 4.*
 
 *Output: learning objectives, course overview, and prerequisites.*
-
-*Owner: CL.*
 
 **Course Description**
 
@@ -422,14 +405,11 @@ Thirty years ago,
 The same is true of courses:
 this process is described as a one-way flow,
 but in practice,
-the CL will loop back repeatedly
-as each stage informs her of something she overlooked.
+you will loop back repeatedly
+as each stage informs you of something you overlooked.
 Similarly,
-the CD may add, move, or remove some specific lesson items as she fills in content
-(though she must review any significant changes with the CL).
-With practice,
-those loops become tighter and more productive,
-and multi-author maintenance of lessons will become less expensive.
+you may add, move, or remove some specific lesson items after you begin writing exercises
+(though we must approve any signficant structural changes to the course).
 
 [abela-chart]: http://extremepresentation.typepad.com/.shared/image.html?/photos/uncategorized/choosing_a_good_chart.jpg
 [concept-map]: http://third-bit.com/teaching/memory.html#concept-maps
