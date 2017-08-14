@@ -223,7 +223,7 @@ and to give learners a chance to exercise the skills and knowledge
 they will need in the summative assessment.*
 
 *In order to create formative assessments,
-the you'll work backward from the summative assessment written in Step 2.*
+you'll work backward from the summative assessment written in Step 2.*
 
 *Output: 2-3 formative assessments for each chapter of the course.
 As with the summative assessments,
