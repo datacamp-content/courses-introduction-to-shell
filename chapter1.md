@@ -210,3 +210,55 @@ ls people/jasmine.dat
 Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use ls followed by a path')
 Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use ls followed by a path, but do not put spaces inside the path')
 ```
+
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
+## Changing directories
+
+Just as you can move around in a file browser by double-clicking on folders,
+you can move around in the shell using the command `cd`
+(which stands for "change directory").
+If you type `cd seasonal` and then type `pwd`,
+the shell will tell you that you are now in `/home/repl/seasonal`.
+If you run `ls` on its own,
+it now shows you the contents of `/home/repl/seasonal`,
+because that's where you are.
+If you want to get back to your home directory `/home/repl`,
+you can use the command `cd /home/repl`.
+
+*** =instructions
+
+1. Go into `/home/repl/seasonal` using a relative path.
+2. Use `pwd` to check that you're there.
+3. Use `ls` without any paths to see what's in that directory.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+# Go into `/home/repl/seasonal` using a relative path.
+
+# Check where you are.
+
+# List the contents of this directory.
+
+```
+
+*** =solution
+```{shell}
+cd seasonal
+pwd
+ls
+```
+
+*** =sct
+```{shell}
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd followed by a path')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory"')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='ls with no paths will show the contents of the current directory')
+```
