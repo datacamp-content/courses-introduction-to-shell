@@ -6,7 +6,7 @@ description : >-
   graphical tools you may be more familiar with, how to move around in the
   shell, and how to create, modify, and delete files and folders.
 
---- type:PlainMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PlainMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
 ## The shell and your file explorer
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
