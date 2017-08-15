@@ -6,6 +6,7 @@ description : >-
   graphical tools you may be more familiar with, how to move around in the
   shell, and how to create, modify, and delete files and folders.
 
+
 --- type:PlainMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
 ## The shell and your file explorer
 
@@ -64,4 +65,88 @@ err3 = "The shell and the file explorer are both programs that translate user co
 correct = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
 
 Ex().test_mc(4, [err1, err2, err3, correct])
+```
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
+## Where am I?
+
+The part of the operating system responsible for managing files and directories
+is called the *file system*.
+It organizes our data into files,
+which hold information,
+and directories (also called "folders"),
+which hold files or other directories.
+
+Every file or directory is identified by an *absolute path*
+that specifies how to get to it from the top (or *root*) of the file system.
+For example,
+the path `/Users/jasmine` is the path to a directory called `jasmine` inside a directory called `Users`,
+while the path `/tmp/output.txt` identifies a file called `output.txt` inside a directory called `tmp`.
+
+To find out where you are in the file system,
+type the command `pwd`
+(which stands for "print working directory").
+This tells you the absolute path of the directory where the shell will run commands and look for files
+unless and until you tell it to do so elsewhere.
+
+<hr>
+Run `pwd` in the shell window to the right.
+Where are you right now?
+
+*** =instructions
+- `/Users`
+- `/jasmine`
+- `/Users/jasmine`
+
+*** =hint
+
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+err = "That is not the correct path."
+correct = "Correct - you are in /Users/jasmine."
+
+Ex().test_mc(3, [err, err, correct])
+```
+
+--- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
+## What's where?
+
+`pwd` tells you where you are,
+but doesn't tell you what files and directories are there.
+To find out,
+you can use the command `ls` (which is short for "listing").
+Entered on its own,
+it lists the contents of your current working directory
+(the one displayed by `pwd`).
+
+<hr>
+Use `ls` with an appropriate argument to get a listing of the files in the `seasonal` directory.
+Which of the following files is *not* in that directory?
+
+*** =instructions
+- `autumn.dat`
+- `fall.dat`
+- `spring.dat`
+- `winter.dat`
+
+*** =hint
+If you give `ls` a path, it shows what's in that path.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+err = "That file is in the `seasonal` directory."
+correct = "Correct - that file is *not* in the `seasonal` directory."
+
+Ex().test_mc(2, [err, correct, err, err])
 ```
