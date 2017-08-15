@@ -262,3 +262,59 @@ Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd followe
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory"')
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='ls with no paths will show the contents of the current directory')
 ```
+
+--- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
+## Special paths
+
+You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
+More often,
+though,
+you will take advantage of the fact that the special path `..`
+(two dots with no spaces) means "the directory above the one I'm currently in.
+If you are in `/home/repl/seasonal`,
+then `cd ..` moves you up to `/home/repl`.
+If you use `cd ..` once again,
+it puts you in `/home`.
+One more `cd ..` puts you in the *root directory* `/`,
+which is the very top of the file system.
+
+A single dot on its own, `.`, always means "the current directory",
+so `ls` on its own and `ls .` do the same thing,
+while `cd .` has no effect
+(because it moves you into the directory you're currently in).
+This may not seem particularly useful,
+but `.` is to paths what zero is to arithmetic:
+we will see situations later where it's very handy.
+
+One final special path is `~`
+(the tilde character),
+which means "your home directory".
+No matter where you are,
+`ls ~` will always list the contents of your home directory,
+and `cd ~` will always take you home.
+
+<hr>
+If you are in `/home/repl/seasonal`,
+where does `cd ~/../.` take you?
+
+*** =instructions
+- `/home/repl`
+- `/home`
+- `/home/repl/seasonal`
+
+*** =hint
+Trace the path one directory at a time.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+err1 = "No, but either ~ or .. on its own would take you there."
+correct = "Correct - the path means 'home directory', 'up a level', 'here'."
+err3 = "No, but '.' on its own would do that."
+
+Ex().test_mc(2, [err1, correct, err3])
+```
