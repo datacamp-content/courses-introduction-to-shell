@@ -124,9 +124,14 @@ you can use the command `ls` (which is short for "listing").
 Entered on its own,
 it lists the contents of your current working directory
 (the one displayed by `pwd`).
+If you add the names of one or more files or directories to the line,
+`ls` will list those files and the contents of those directories.
+For example,
+`ls /home/repl` will show you the contents of your home directory
+(which is the same as what it shows you if you are in that directory and type `ls` on its own).
 
 <hr>
-Use `ls` with an appropriate argument to get a listing of the files in the `seasonal` directory.
+Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`.
 Which of the following files is *not* in that directory?
 
 *** =instructions
@@ -149,4 +154,59 @@ err = "That file is in the `seasonal` directory."
 correct = "Correct - that file is *not* in the `seasonal` directory."
 
 Ex().test_mc(2, [err, correct, err, err])
+```
+
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:a766184b59
+## Relative paths
+
+An absolute path is like the latitude and longitude of a point on a map:
+it specifies the same thing no matter where you are.
+A *relative path*,
+on the other hand,
+specifies a location starting from where you are:
+it's like saying "20 kilometers north".
+For example,
+if you are in the directory `/home/repl`,
+the relative path `course.txt` specifies the same file as `/home/repl/course.txt`,
+and the relative path `seasonal/winter.dat` specifies the same file as `/home/repl/seasonal/winter.dat`.
+
+The shell can tell whether a path is absolute or relative by looking at its first character.
+If the path begins with `/`, it is absolute;
+if it doesn't,
+it is relative.
+
+*** =instructions
+
+You are in the directory `/home/repl`.
+Use `ls some/relative/path` to list the files identified by each of the absolute paths in the sample code one by one.
+
+*** =hint
+You can often construct the relative path to a file or directory below your current location
+by subtracting the absolute path of your current location
+from the absolute path of the thing you want.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+# /home/repl/instructions.txt
+
+# /home/repl/people/jasmine.dat
+
+```
+
+*** =solution
+```{shell}
+ls instructions.txt
+ls people/jasmine.dat
+```
+
+*** =sct
+```{shell}
+Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use ls followed by a path')
+Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use ls followed by a path, but do not put spaces inside the path')
 ```
