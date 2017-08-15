@@ -80,8 +80,8 @@ which hold files or other directories.
 Every file or directory is identified by an *absolute path*
 that specifies how to get to it from the top (or *root*) of the file system.
 For example,
-the path `/Users/jasmine` is the path to a directory called `jasmine` inside a directory called `Users`,
-while the path `/tmp/output.txt` identifies a file called `output.txt` inside a directory called `tmp`.
+the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
+while the path `/home/repl/course.txt` identifies a file called `output.txt` inside a directory called `tmp`.
 
 To find out where you are in the file system,
 type the command `pwd`
@@ -94,9 +94,9 @@ Run `pwd` in the shell window to the right.
 Where are you right now?
 
 *** =instructions
-- `/Users`
-- `/jasmine`
-- `/Users/jasmine`
+- `/home`
+- `/repl`
+- `/home/repl`
 
 *** =hint
 
@@ -109,7 +109,7 @@ Where are you right now?
 *** =sct
 ```{python}
 err = "That is not the correct path."
-correct = "Correct - you are in /Users/jasmine."
+correct = "Correct - you are in /home/repl."
 
 Ex().test_mc(3, [err, err, correct])
 ```
