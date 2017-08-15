@@ -58,10 +58,10 @@ Remember that a user can only interact with an operating system through a progra
 
 *** =sct
 ```{python}
-msg1 = "Both allow you to view and edit files and run programs."
-msg2 = "Graphical file explorers and the shell both call the same underlying operating system functions."
-msg3 = "The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system."
-success_msg = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
+err1 = "Both allow you to view and edit files and run programs."
+err2 = "Graphical file explorers and the shell both call the same underlying operating system functions."
+err3 = "The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system."
+correct = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
 
-Ex().test_mc(4, [msg1, msg2, msg3, success_msg])
+Ex().test_mc(4, [err1, err2, err3, correct])
 ```
