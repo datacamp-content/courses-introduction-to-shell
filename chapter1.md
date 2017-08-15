@@ -1,272 +1,68 @@
 ---
-title       : Example chapter 1
-description : Some description.
+title       : Manipulating files and directories
+description : >-
+  This chapter is a brief introduction to the Unix shell.  You'll learn
+  why it is still in use after almost fifty years, how it compares to the
+  graphical tools you may be more familiar with, how to move around in the
+  shell, and how to create, modify, and delete files and folders.
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:ed8e15ca12
-## Example of MultipleChoiceExercise
+--- type:PlainMultipleChoiceExercise lang:bash xp:50 key:
+## The shell and your file explorer
 
-This is a MultipleChoiceExercise.
+An operating system like Windows, Linux, or Mac OS is a special kind of program.
+It controls the computer's processor, hard drive, and network connection,
+and can run (and stop) other programs.
+Each operating system provides a set of functions called an *API*
+(for "application programming interface")
+that other programs can call to create and delete files,
+fetch data from the network,
+and so on.
+The differences between these APIs are what give each operating system its unique personality.
+
+Since human beings aren't digital,
+they need some sort of interface to interact with the API the operating system provides.
+The most common interface these days is a graphical file explorer,
+which translates clicks and double-clicks into commands to open files and run programs,
+and understands that dragging an icon into the trash can means "delete this thing".
+Before computers had graphical displays,
+though,
+people typed instructions into a program called a *command-line shell*,
+or just "shell" for short.
+Each time a command is entered,
+the shell calls one or more API functions,
+prints their output in human-readable form,
+and then displays a *prompt* to signal that it's ready to accept the next command.
+
+Typing commands instead of clicking and dragging may seem clumsy at first,
+but as you will see,
+once you start spelling out what you want the computer to do,
+you can combine old commands to create new ones
+and automate repetitive operations
+with just a few keystrokes.
+
+<hr>
+What is the relationship between the graphical file explorer that most people use and the command-line shell?
 
 *** =instructions
-- response a
-- response b (correct)
-- response c
-- response d
+- The file explorer lets you view and edit files, while the shell lets you run programs.
+- The file explorer is built on top of the shell.
+- The shell is part of the operating system, while the file explorer is separate.
+- They are both interfaces for issuing commands to the operating system.
 
 *** =hint
-The second one is correct.
-
-*** =sct
-```{shell}
-Ex().test_mc(2, ['wrong', 'right', 'wrong', 'wrong'])
-```
-
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:e0f8fe3b7c
-## Example of PlainMultipleChoiceExercise
-
-This is a PlainMultipleChoiceExercise.
-
-*** =instructions
-- response a
-- response b (correct)
-- response c
-- response d
-
-*** =hint
-The second one is correct.
-
-*** =sct
-```{shell}
-Ex().test_mc(2, ['wrong', 'right', 'wrong', 'wrong'])
-```
-
---- type:NormalExercise xp:100 key:c778ff1b1a
-## Example of NormalExercise
-
-This is a NormalExercise
-
-*** =instructions
-- Create a variable `a`, equal to `'2'` and print it out.
+Remember that a user can only interact with an operating system through a program.
 
 *** =pre_exercise_code
 ```{python}
-```
 
-*** =sample_code
-```{bash}
-# Create variable a
-
-
-# Print out a
-
-```
-
-*** =solution
-```{bash}
-# Create variable a
-a='2'
-
-# Print out a
-echo $a
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed("a='2'", fixed = True)
-Ex().success_msg("Great!")
-```
+msg1 = "Both allow you to view and edit files and run programs."
+msg2 = "Graphical file explorers and the shell both call the same underlying operating system functions."
+msg3 = "The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system."
+success_msg = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
 
-
---- type:ConsoleExercise xp:100 key:4dd1296871
-## Example of ConsoleExercise
-
-*** =instructions
-- Create a new directory, called `test`.
-
-*** =solution
-```{bash}
-mkdir test
-```
-
-*** =sct
-```{python}
-# see https://stackoverflow.com/questions/59838/check-if-a-directory-exists-in-a-shell-script
-Ex().test_expr_error('[ -d "test" ]')
-Ex().success_msg("Great!")
-```
-
---- type:TabConsoleExercise key:ed98f7522c
-## TabConsoleExercise
-
-This is a TabConsoleExercise. Great! Super great!
-XP should be defined at the subexercise level
-
-*** =pre_exercise_code
-```{python}
-```
-
-*** =type1: ConsoleExercise
-*** =key1: f8b2c20c47
-*** =xp1: 10
-
-*** =instructions1
-Create a folder named `films`
-
-*** =hint1
-Here's a hint for instruction 1
-
-*** =sample_code1
-```{bash}
-echo no sample code
-```
-
-*** =solution1
-```{bash}
-mkdir films;
-```
-
-*** =sct1
-```{python}
-Ex().test_expr_error('ls films', output = "0")
-Ex().success_msg("Great!")
-```
-
-*** =type2: ConsoleExercise
-*** =key2: a4d37ad20b
-*** =xp2: 20
-
-*** =instructions2
-List me all the files/folders in the current directory
-
-*** =hint3
-Here's a hint for instruction 2
-
-*** =sample_code2
-```{bash}
-echo no sample code
-```
-
-*** =solution2
-```{bash}
-ls;
-```
-
-*** =sct2
-```{python}
-# MC-NOTE: if these exercises aren't stateful, won't have anything in cwd, so SCT will fail
-Ex().test_output_contains('films', "Does the output of your command include the `films`?")
-Ex().success_msg("Great!")
-```
-
-*** =type3: ConsoleExercise
-*** =key3: 936cddd386
-*** =xp3: 30
-
-*** =instructions3
-List me all the files/folders in the current directory with the permissions of each files/folders
-
-*** =hint3
-Here's a hint for instruction 3
-
-*** =sample_code3
-```{bash}
-echo no sample code
-```
-
-*** =solution3
-```{bash}
-ls -la;
-```
-
-*** =sct3
-```{python}
-Ex().test_expr_output('ls -la')
-Ex().success_msg("Great!")
-```
-
---- type:BulletConsoleExercise key:6713a94c6b
-## BulletConsoleExercise Example
-
-This is a BulletConsoleExercise. Great! Super great!
-
-*** =pre_exercise_code
-```{python}
-```
-
-*** =type1: ConsoleExercise
-*** =key1: 1c22440a1b
-*** =xp1: 10
-
-*** =instructions1
-Create a folder named `films`
-
-*** =hint1
-Here's a hint for instruction 1
-
-*** =sample_code1
-```{bash}
-echo no sample code
-```
-
-*** =solution1
-```{bash}
-mkdir films;
-```
-
-*** =sct1
-```{python}
-Ex().success_msg("Great!")
-```
-
-*** =type2: ConsoleExercise
-*** =key2: 0c25cc523d
-*** =xp2: 20
-
-*** =instructions2
-List me all the files/folders in the current directory
-
-*** =hint3
-Here's a hint for instruction 2
-
-*** =sample_code2
-```{bash}
-echo no sample code
-```
-
-*** =solution2
-```{bash}
-ls;
-```
-
-*** =sct2
-```{python}
-# MC-NOTE: if these exercises aren't stateful, won't have anything in cwd, so SCT will fail
-Ex().test_output_contains('films', "Does the output of your command include the `films`?")
-Ex().success_msg("Great!")
-```
-
-*** =type3: ConsoleExercise
-*** =key3: 7c098026e2
-*** =xp3: 30
-
-*** =instructions3
-List me all the files/folders in the current directory with the permissions of each files/folders
-
-*** =hint3
-Here's a hint for instruction 3
-
-*** =sample_code3
-```{bash}
-echo no code
-```
-
-*** =solution3
-```{bash}
-ls -la;
-```
-
-*** =sct3
-```{python}
-Ex().test_expr_output('ls -la')
-Ex().success_msg("Great!")
+Ex().test_mc(4, [msg1, msg2, msg3, success_msg])
 ```
