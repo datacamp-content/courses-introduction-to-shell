@@ -421,11 +421,48 @@ Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', f
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
 ## Moving and renaming files
 
-FIXME
+While `cp` gives you a way to copy a file,
+`mv` lets you move it from one directory to another,
+just as if you had dragged it in a graphical file browser.
+It handles its parameters the same way as `cp`,
+so the command:
+
+```{shell}
+mv autumn.dat winter.dat ..
+```
+
+moves the files `autumn.dat` and `winter.dat` from the current working directory
+up one level to its parent directory
+(because `..` always refers to the directory above your current location).
+
+`mv` can also be used to rename files.
+If you run:
+
+```{shell}
+mv course.txt old-course.txt
+```
+
+then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
+This is different from the way file browsers work,
+but is often handy.
+
+One warning:
+just like `cp`,
+`mv` will overwrite existing files.
+If,
+for example,
+you already have a file called `old-course.txt`,
+then the command shown above will replace it with whatever is in `course.txt`.
 
 *** =instructions
 
+Go into the `seasonal` directory
+and rename the file `winter.dat` to be `winter.dat.bck`,
+then run `ls` to check that everything has worked.
+
 *** =hint
+
+You will need to use three commands.
 
 *** =pre_exercise_code
 ```{shell}
@@ -434,17 +471,25 @@ FIXME
 
 *** =sample_code
 ```{shell}
+# Change directory to seasonal.
 
+# Rename winter.dat to winter.dat.bck.
+
+# List the directory's contents to check
 ```
 
 *** =solution
 ```{shell}
-
+cd seasonal
+mv winter.dat winter.dat.bck
+ls
 ```
 
 *** =sct
 ```{shell}
-
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
+Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use mv to rename a file')
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use ls to list the directory contents')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
