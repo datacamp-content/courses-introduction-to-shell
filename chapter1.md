@@ -495,11 +495,36 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use ls to list the direct
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
 ## Deleting files
 
-FIXME
+We can create files,
+copy them,
+and move them around:
+the only thing left is to delete them.
+The command to do this is `rm`,
+which stands for "remove".
+As with `cp` and `mv`,
+you can give `rm` the names of as many files as you'd like.
+
+```{shell}
+rm thesis.txt backup/thesis-2017-08.txt
+```
+
+removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+
+`rm` does exactly what its name says,
+and it does it right away:
+unlike graphical file browsers,
+the shell doesn't have a trash can,
+so when you type the command above,
+your thesis is gone for good.
 
 *** =instructions
 
+1. Go into the `seasonal` directory and remove `autumn.dat`
+2. Go back to your home directory and remove `summer.dat` from there.
+
 *** =hint
+
+Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home directory.
 
 *** =pre_exercise_code
 ```{shell}
@@ -508,17 +533,29 @@ FIXME
 
 *** =sample_code
 ```{shell}
+# Change directory to seasonal.
 
+# Remove autumn.dat
+
+# Return to your home directory.
+
+# Remove summer.dat from the seasonal directory.
 ```
 
 *** =solution
 ```{shell}
-
+cd seasonal
+rm autumn.dat
+cd .. # or cd ~
+rm seasonal/summer.dat
 ```
 
 *** =sct
 ```{shell}
-
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
+Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use rm to remove a single file')
+Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use cd .. to go up a level or cd ~ to return home')
+Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='rm works with paths')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
