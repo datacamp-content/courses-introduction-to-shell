@@ -156,7 +156,6 @@ correct = "Correct - that file is *not* in the `seasonal` directory."
 Ex().test_mc(2, [err, correct, err, err])
 ```
 
-
 --- type:NormalExercise lang:shell xp:100 skills:1 key:a766184b59
 ## Relative paths
 
@@ -210,7 +209,6 @@ ls people/jasmine.dat
 Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use ls followed by a path')
 Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use ls followed by a path, but do not put spaces inside the path')
 ```
-
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
 ## Changing directories
@@ -317,4 +315,192 @@ correct = "Correct - the path means 'home directory', 'up a level', 'here'."
 err3 = "No, but '.' on its own would do that."
 
 Ex().test_mc(2, [err1, correct, err3])
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
+## Editing files
+
+FIXME: fill this in once we know how learners will edit files in the web app.
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+
+```
+--- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
+## Copying files
+
+Once you have some files,
+you will often want to make copies,
+move them into other directories in order to organize them,
+or rename them.
+Unix provides several tools to do this.
+The first is `cp`, which is short for "copy".
+If `original.txt` is an existing file,
+then the command:
+
+```{shell}
+cp original.txt duplicate.txt
+```
+
+creates a copy of `original.txt` called `duplicate.txt`.
+If there already was a file called `duplicate.txt`,
+it is overwritten.
+
+But `cp` can do more than this.
+If the second parameter is an existing directory such as `backup`,
+then the command:
+
+```{shell}
+cp original.txt backup
+```
+
+creates a new file called `backup/original.txt`.
+In fact,
+if the last parameter is a directory,
+and all the parameters before it are the names of files,
+then `cp` copies *all* of those files into that directory,
+which means that:
+
+```{shell}
+cp seasonal/autumn.dat seasonal/winter.dat ~
+```
+
+will copy two files from the `seasonal` directory into your home directory.
+
+*** =instructions
+
+Using a single command,
+make a copy of `seasonal/summer.dat` in the `backup` directory,
+changing the name to `summer.bck`.
+
+*** =hint
+
+Since you are changing the name,
+you need to provide a path for the destination
+rather than just a directory.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+cp seasonal/summer.dat backup/summer.bck
+```
+
+*** =sct
+```{shell}
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to cp')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
+## Moving and renaming files
+
+FIXME
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
+## Deleting files
+
+FIXME
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
+## Creating and deleting directories
+
+FIXME
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+
 ```
