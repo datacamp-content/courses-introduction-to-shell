@@ -561,11 +561,43 @@ Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='rm 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
 ## Creating and deleting directories
 
-FIXME
+`mv` treats directories the same way it treats files:
+if you are in your home directory and run `mv seasonal by-season`,
+for example,
+`mv` changes the name of the `seasonal` directory to `by-season`.
+However,
+`rm` works differently.
+If you try to `rm` a directory,
+the shell will print an error message telling you that it can't do that,
+primarily to stop you from accidentally deleting an entire directory full of work.
+Instead,
+you must use a separate command called `rmdir` to remove a directory.
+For added safety,
+it only works when the directory is empty,
+so you must delete all the files in a directory *before* you delete the directory.
+
+To create a new directory,
+you must use another commmand called `mkdir`
+(which stands for "make directory").
+For example,
+if you want to store a copy of `course.txt` in a directory called `info`,
+which doesn't yet exist,
+you could run:
+
+```{shell}
+mkdir info
+cp course.txt info
+```
 
 *** =instructions
 
+Create a new directory called `2017` inside a new directory called `backup`.
+Do not change directory while doing this.
+
 *** =hint
+
+Make the upper directory first,
+then create the lower directory inside it.
 
 *** =pre_exercise_code
 ```{shell}
@@ -579,10 +611,12 @@ FIXME
 
 *** =solution
 ```{shell}
-
+mkdir backup
+mkdir backup/2017
 ```
 
 *** =sct
 ```{shell}
-
+Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory')
+Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path')
 ```
