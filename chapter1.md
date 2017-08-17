@@ -320,7 +320,7 @@ Ex().test_mc(2, [err1, correct, err3])
 --- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
 ## Editing files
 
-FIXME: fill this in once we know how learners will edit files in the web app.
+FIXME: fill this in once we know how learners will edit files in the campus app.
 
 *** =instructions
 
@@ -415,7 +415,7 @@ cp seasonal/summer.dat backup/summer.bck
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to cp')
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
@@ -471,25 +471,33 @@ You will need to use three commands.
 
 *** =sample_code
 ```{shell}
-# Change directory to seasonal.
+# Change directory to seasonal
 
-# Rename winter.dat to winter.dat.bck.
+
+# Rename winter.dat to winter.dat.bck
+
 
 # List the directory's contents to check
+
 ```
 
 *** =solution
 ```{shell}
+# Change directory to seasonal
 cd seasonal
+
+# Rename winter.dat to winter.dat.bck
 mv winter.dat winter.dat.bck
+
+# List the directory's contents to check
 ls
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
-Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use mv to rename a file')
-Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use ls to list the directory contents')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
+Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
