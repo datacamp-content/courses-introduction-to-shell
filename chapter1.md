@@ -57,8 +57,6 @@ Remember that a user can only interact with an operating system through a progra
 - Graphical file explorers and the shell both call the same underlying operating system functions.
 - The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
 - Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
-
-Ex().test_mc(4, [err1, err2, err3, correct])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
