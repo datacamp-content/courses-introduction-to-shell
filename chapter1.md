@@ -159,6 +159,7 @@ A *relative path*,
 on the other hand,
 specifies a location starting from where you are:
 it's like saying "20 kilometers north".
+
 For example,
 if you are in the directory `/home/repl`,
 the relative path `course.txt` specifies the same file as `/home/repl/course.txt`,
@@ -195,7 +196,10 @@ from the absolute path of the thing you want.
 
 *** =solution
 ```{shell}
+# /home/repl/instructions.txt
 ls instructions.txt
+
+# /home/repl/people/jasmine.dat
 ls people/jasmine.dat
 ```
 
@@ -211,6 +215,7 @@ Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use 
 Just as you can move around in a file browser by double-clicking on folders,
 you can move around in the shell using the command `cd`
 (which stands for "change directory").
+
 If you type `cd seasonal` and then type `pwd`,
 the shell will tell you that you are now in `/home/repl/seasonal`.
 If you run `ls` on its own,
@@ -221,9 +226,9 @@ you can use the command `cd /home/repl`.
 
 *** =instructions
 
-1. Go into `/home/repl/seasonal` using a relative path.
-2. Use `pwd` to check that you're there.
-3. Use `ls` without any paths to see what's in that directory.
+- Go into `/home/repl/seasonal` using a relative path.
+- Use `pwd` to check that you're there.
+- Use `ls` without any paths to see what's in that directory.
 
 *** =hint
 
@@ -234,29 +239,36 @@ you can use the command `cd /home/repl`.
 
 *** =sample_code
 ```{shell}
-# Go into `/home/repl/seasonal` using a relative path.
+# Go into `/home/repl/seasonal` using a relative path
 
-# Check where you are.
 
-# List the contents of this directory.
+# Check where you are
+
+
+# List the contents of this directory
 
 ```
 
 *** =solution
 ```{shell}
+# Go into `/home/repl/seasonal` using a relative path
 cd seasonal
+
+# Check where you are
 pwd
+
+# List the contents of this directory
 ls
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd followed by a path')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory"')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='ls with no paths will show the contents of the current directory')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` followed by a path.')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory".')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will show the contents of the current directory.')
 ```
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
+--- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## Special paths
 
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
@@ -276,11 +288,11 @@ so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
 This may not seem particularly useful,
-but `.` is to paths what zero is to arithmetic:
-we will see situations later where it's very handy.
+but `.` is to paths what zero is to arithmetic;
+you will see situations later where it's very handy.
 
 One final special path is `~`
-(the tilde character),
+(the tilde character, pronounced *til-duh*),
 which means "your home directory".
 No matter where you are,
 `ls ~` will always list the contents of your home directory,
@@ -290,27 +302,20 @@ and `cd ~` will always take you home.
 If you are in `/home/repl/seasonal`,
 where does `cd ~/../.` take you?
 
-*** =instructions
+*** =possible_answers
 - `/home/repl`
-- `/home`
+- [`/home`]
 - `/home/repl/seasonal`
 
 *** =hint
 Trace the path one directory at a time.
 
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sct
-```{shell}
-err1 = "No, but either ~ or .. on its own would take you there."
-correct = "Correct - the path means 'home directory', 'up a level', 'here'."
-err3 = "No, but '.' on its own would do that."
+*** =feedbacks
+- No, but either `~` or `..` on its own would take you there.
+- Correct - the path means 'home directory', 'up a level', 'here'.
+- No, but `.` on its own would do that.
 
 Ex().test_mc(2, [err1, correct, err3])
-```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
 ## Editing files
