@@ -103,12 +103,12 @@ Where are you right now?
 *** =sct
 ```{python}
 err = "That is not the correct path."
-correct = "Correct - you are in /home/repl."
+correct = "Correct - you are in `/home/repl`."
 
 Ex().test_mc(3, [err, err, correct])
 ```
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
 ## What's where?
 
 `pwd` tells you where you are,
