@@ -7,7 +7,7 @@ description : >-
   shell, and how to create, modify, and delete files and folders.
 
 
---- type:PlainMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
 ## The shell and your file explorer
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
@@ -43,26 +43,20 @@ with just a few keystrokes.
 <hr>
 What is the relationship between the graphical file explorer that most people use and the command-line shell?
 
-*** =instructions
+*** =possible_answers
 - The file explorer lets you view and edit files, while the shell lets you run programs.
 - The file explorer is built on top of the shell.
 - The shell is part of the operating system, while the file explorer is separate.
-- They are both interfaces for issuing commands to the operating system.
+- [They are both interfaces for issuing commands to the operating system.]
 
 *** =hint
 Remember that a user can only interact with an operating system through a program.
 
-*** =pre_exercise_code
-```{python}
-
-```
-
-*** =sct
-```{python}
-err1 = "Both allow you to view and edit files and run programs."
-err2 = "Graphical file explorers and the shell both call the same underlying operating system functions."
-err3 = "The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system."
-correct = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
+*** =feedbacks
+- Both allow you to view and edit files and run programs.
+- Graphical file explorers and the shell both call the same underlying operating system functions.
+- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
+- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
 
 Ex().test_mc(4, [err1, err2, err3, correct])
 ```
