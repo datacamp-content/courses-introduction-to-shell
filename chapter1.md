@@ -505,7 +505,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the dire
 
 We can create files,
 copy them,
-and move them around:
+and move them around;
 the only thing left is to delete them.
 The command to do this is `rm`,
 which stands for "remove".
@@ -527,8 +527,8 @@ your thesis is gone for good.
 
 *** =instructions
 
-1. Go into the `seasonal` directory and remove `autumn.dat`
-2. Go back to your home directory and remove `summer.dat` from there.
+- Go into the `seasonal` directory and remove `autumn.dat`
+- Go back to your home directory and remove `summer.dat` from there.
 
 *** =hint
 
@@ -541,29 +541,40 @@ Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home dire
 
 *** =sample_code
 ```{shell}
-# Change directory to seasonal.
+# Change directory to seasonal
+
 
 # Remove autumn.dat
 
-# Return to your home directory.
 
-# Remove summer.dat from the seasonal directory.
+# Return to your home directory
+
+
+# Remove summer.dat from the seasonal directory
+
 ```
 
 *** =solution
 ```{shell}
+# Change directory to seasonal
 cd seasonal
+
+# Remove autumn.dat
 rm autumn.dat
+
+# Return to your home directory
 cd .. # or cd ~
+
+# Remove summer.dat from the seasonal directory
 rm seasonal/summer.dat
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
-Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use rm to remove a single file')
-Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use cd .. to go up a level or cd ~ to return home')
-Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='rm works with paths')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
+Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use `rm` to remove a single file.')
+Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
+Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='`rm` works with paths.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
@@ -575,6 +586,7 @@ for example,
 `mv` changes the name of the `seasonal` directory to `by-season`.
 However,
 `rm` works differently.
+
 If you try to `rm` a directory,
 the shell will print an error message telling you that it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
@@ -585,7 +597,7 @@ it only works when the directory is empty,
 so you must delete all the files in a directory *before* you delete the directory.
 
 To create a new directory,
-you must use another commmand called `mkdir`
+you must use another command called `mkdir`
 (which stands for "make directory").
 For example,
 if you want to store a copy of `course.txt` in a directory called `info`,
@@ -625,6 +637,6 @@ mkdir backup/2017
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory')
-Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path')
+Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
+Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
