@@ -338,3 +338,59 @@ head autumn.dat
 ```{shell}
 
 ```
+
+--- type:NormalExercise lang:shell xp:50 skills:1 key:1e207b45b3
+## Selecting by value
+
+`head` and `tail` select rows,
+`cut` selects columns,
+and the inelegantly-named command `grep` selects lines according to what they contain.
+In its simplest form,
+`grep` takes a piece of text as its first parameter,
+followed by one or more filenames,
+and prints all of the lines that contain that text.
+For example,
+`grep bicuspid seasonal/winter.csv`
+will select all of the lines from the winter data file that contain the word "bicuspid".
+
+`grep` can actually search for patterns, not just specific pieces of text;
+we will explore those patterns in the second course in this sequence.
+What's more important right now is some of `grep`'s more common flags,
+including:
+
+- `-c`: print a count of matching lines rather than the lines themselves
+- `-h`: do *not* print the names of files when searching multiple files
+- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
+- `-l`: only print the names of files that contain matches, not the matches themselves
+- `-n`: print line numbers for matching lines
+- `-v`: invert the match, i.e., only show lines that *don't* match
+
+*** =instructions
+
+1. Find all of the lines containing the word `molar` in the autumn data.
+2. Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
+3. Count how many lines contain the word `incisor` in all four of the seasonal data files using a single command.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+grep molar seasonal/autumn.csv
+grep -v -n molar seasonal/spring.csv
+grep -c incisor seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
+```
+
+*** =sct
+```{shell}
+
+```
