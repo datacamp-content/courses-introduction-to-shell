@@ -7,7 +7,7 @@ description : >-
   shell, and how to create, modify, and delete files and folders.
 
 
---- type:PlainMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
 ## The shell and your file explorer
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
@@ -43,28 +43,20 @@ with just a few keystrokes.
 <hr>
 What is the relationship between the graphical file explorer that most people use and the command-line shell?
 
-*** =instructions
+*** =possible_answers
 - The file explorer lets you view and edit files, while the shell lets you run programs.
 - The file explorer is built on top of the shell.
 - The shell is part of the operating system, while the file explorer is separate.
-- They are both interfaces for issuing commands to the operating system.
+- [They are both interfaces for issuing commands to the operating system.]
 
 *** =hint
 Remember that a user can only interact with an operating system through a program.
 
-*** =pre_exercise_code
-```{python}
-
-```
-
-*** =sct
-```{python}
-err1 = "Both allow you to view and edit files and run programs."
-err2 = "Graphical file explorers and the shell both call the same underlying operating system functions."
-err3 = "The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system."
-correct = "Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system."
-
-Ex().test_mc(4, [err1, err2, err3, correct])
+*** =feedbacks
+- Both allow you to view and edit files and run programs.
+- Graphical file explorers and the shell both call the same underlying operating system functions.
+- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
+- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
@@ -109,12 +101,12 @@ Where are you right now?
 *** =sct
 ```{python}
 err = "That is not the correct path."
-correct = "Correct - you are in /home/repl."
+correct = "Correct - you are in `/home/repl`."
 
 Ex().test_mc(3, [err, err, correct])
 ```
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
 ## What's where?
 
 `pwd` tells you where you are,
@@ -165,6 +157,7 @@ A *relative path*,
 on the other hand,
 specifies a location starting from where you are:
 it's like saying "20 kilometers north".
+
 For example,
 if you are in the directory `/home/repl`,
 the relative path `course.txt` specifies the same file as `/home/repl/course.txt`,
@@ -194,20 +187,24 @@ from the absolute path of the thing you want.
 ```{shell}
 # /home/repl/instructions.txt
 
+
 # /home/repl/people/jasmine.dat
 
 ```
 
 *** =solution
 ```{shell}
+# /home/repl/instructions.txt
 ls instructions.txt
+
+# /home/repl/people/jasmine.dat
 ls people/jasmine.dat
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use ls followed by a path')
-Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use ls followed by a path, but do not put spaces inside the path')
+Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
+Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
@@ -216,6 +213,7 @@ Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use 
 Just as you can move around in a file browser by double-clicking on folders,
 you can move around in the shell using the command `cd`
 (which stands for "change directory").
+
 If you type `cd seasonal` and then type `pwd`,
 the shell will tell you that you are now in `/home/repl/seasonal`.
 If you run `ls` on its own,
@@ -226,9 +224,9 @@ you can use the command `cd /home/repl`.
 
 *** =instructions
 
-1. Go into `/home/repl/seasonal` using a relative path.
-2. Use `pwd` to check that you're there.
-3. Use `ls` without any paths to see what's in that directory.
+- Go into `/home/repl/seasonal` using a relative path.
+- Use `pwd` to check that you're there.
+- Use `ls` without any paths to see what's in that directory.
 
 *** =hint
 
@@ -239,29 +237,36 @@ you can use the command `cd /home/repl`.
 
 *** =sample_code
 ```{shell}
-# Go into `/home/repl/seasonal` using a relative path.
+# Go into `/home/repl/seasonal` using a relative path
 
-# Check where you are.
 
-# List the contents of this directory.
+# Check where you are
+
+
+# List the contents of this directory
 
 ```
 
 *** =solution
 ```{shell}
+# Go into `/home/repl/seasonal` using a relative path
 cd seasonal
+
+# Check where you are
 pwd
+
+# List the contents of this directory
 ls
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd followed by a path')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory"')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='ls with no paths will show the contents of the current directory')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` followed by a path.')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory".')
+Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will show the contents of the current directory.')
 ```
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
+--- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## Special paths
 
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
@@ -281,11 +286,11 @@ so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
 This may not seem particularly useful,
-but `.` is to paths what zero is to arithmetic:
-we will see situations later where it's very handy.
+but `.` is to paths what zero is to arithmetic;
+you will see situations later where it's very handy.
 
 One final special path is `~`
-(the tilde character),
+(the tilde character, pronounced *til-duh*),
 which means "your home directory".
 No matter where you are,
 `ls ~` will always list the contents of your home directory,
@@ -295,32 +300,25 @@ and `cd ~` will always take you home.
 If you are in `/home/repl/seasonal`,
 where does `cd ~/../.` take you?
 
-*** =instructions
+*** =possible_answers
 - `/home/repl`
-- `/home`
+- [`/home`]
 - `/home/repl/seasonal`
 
 *** =hint
 Trace the path one directory at a time.
 
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sct
-```{shell}
-err1 = "No, but either ~ or .. on its own would take you there."
-correct = "Correct - the path means 'home directory', 'up a level', 'here'."
-err3 = "No, but '.' on its own would do that."
+*** =feedbacks
+- No, but either `~` or `..` on its own would take you there.
+- Correct - the path means 'home directory', 'up a level', 'here'.
+- No, but `.` on its own would do that.
 
 Ex().test_mc(2, [err1, correct, err3])
-```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
 ## Editing files
 
-FIXME: fill this in once we know how learners will edit files in the web app.
+FIXME: fill this in once we know how learners will edit files in the campus app.
 
 *** =instructions
 
@@ -415,7 +413,7 @@ cp seasonal/summer.dat backup/summer.bck
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to cp')
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
@@ -471,25 +469,33 @@ You will need to use three commands.
 
 *** =sample_code
 ```{shell}
-# Change directory to seasonal.
+# Change directory to seasonal
 
-# Rename winter.dat to winter.dat.bck.
+
+# Rename winter.dat to winter.dat.bck
+
 
 # List the directory's contents to check
+
 ```
 
 *** =solution
 ```{shell}
+# Change directory to seasonal
 cd seasonal
+
+# Rename winter.dat to winter.dat.bck
 mv winter.dat winter.dat.bck
+
+# List the directory's contents to check
 ls
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
-Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use mv to rename a file')
-Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use ls to list the directory contents')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
+Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
@@ -497,7 +503,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use ls to list the direct
 
 We can create files,
 copy them,
-and move them around:
+and move them around;
 the only thing left is to delete them.
 The command to do this is `rm`,
 which stands for "remove".
@@ -519,8 +525,8 @@ your thesis is gone for good.
 
 *** =instructions
 
-1. Go into the `seasonal` directory and remove `autumn.dat`
-2. Go back to your home directory and remove `summer.dat` from there.
+- Go into the `seasonal` directory and remove `autumn.dat`
+- Go back to your home directory and remove `summer.dat` from there.
 
 *** =hint
 
@@ -533,29 +539,40 @@ Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home dire
 
 *** =sample_code
 ```{shell}
-# Change directory to seasonal.
+# Change directory to seasonal
+
 
 # Remove autumn.dat
 
-# Return to your home directory.
 
-# Remove summer.dat from the seasonal directory.
+# Return to your home directory
+
+
+# Remove summer.dat from the seasonal directory
+
 ```
 
 *** =solution
 ```{shell}
+# Change directory to seasonal
 cd seasonal
+
+# Remove autumn.dat
 rm autumn.dat
+
+# Return to your home directory
 cd .. # or cd ~
+
+# Remove summer.dat from the seasonal directory
 rm seasonal/summer.dat
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use cd to change directory')
-Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use rm to remove a single file')
-Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use cd .. to go up a level or cd ~ to return home')
-Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='rm works with paths')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
+Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use `rm` to remove a single file.')
+Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
+Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='`rm` works with paths.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
@@ -567,6 +584,7 @@ for example,
 `mv` changes the name of the `seasonal` directory to `by-season`.
 However,
 `rm` works differently.
+
 If you try to `rm` a directory,
 the shell will print an error message telling you that it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
@@ -577,7 +595,7 @@ it only works when the directory is empty,
 so you must delete all the files in a directory *before* you delete the directory.
 
 To create a new directory,
-you must use another commmand called `mkdir`
+you must use another command called `mkdir`
 (which stands for "make directory").
 For example,
 if you want to store a copy of `course.txt` in a directory called `info`,
@@ -617,6 +635,6 @@ mkdir backup/2017
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory')
-Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path')
+Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
+Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
