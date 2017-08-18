@@ -168,6 +168,81 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 ```
 
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:602d47e70c
+## Wildcards
+
+Most Unix commands will work on multiple files at once
+provided you give them the names of those files.
+For example,
+you can get the first column from all of the seasonal data files at once like this:
+
+```{shell}
+cut -d , -f 1 seasonal/winter.csv sesaonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
+```
+
+But typing the names of many files over and over is a bad idea:
+it wastes time,
+and sooner or later you will either leave a file out or repeat a file's name.
+To make your life better,
+the shell allows you to use *wildcards* to specify a list of files with a single expression.
+The most commonly used wildcard is the `*` character,
+which means "match zero or more characters".
+For example,
+we can run the same `cut` command shown above like this:
+
+```{shell}
+cut -d , -f 1 seasonal/*
+```
+
+or:
+
+```{shell}
+cut -d , -f 1 seasonal/*.csv
+```
+
+or even:
+
+```{shell}
+cut -d , -f 1 sea*/*.c*
+```
+
+In each case,
+the shell *expands* the `*` to find all files whose names match the pattern.
+
+The shell has other wildcards as well,
+though they are less commonly used:
+
+- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
+- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
+- `{...}` matches any of the command-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+
+*** =instructions
+
+Write a single command to get the first three lines from the spring and summer data files but *not* the autumn or winter data files.
+Use a wildcard instead of spelling out the files' names in full.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+head seasonal/s*.csv
+```
+
+*** =sct
+```{shell}
+
+```
 --- type:NormalExercise lang:shell xp:100 skills:1 key:ed77aed337
 ## Sorting and removing duplicates
 
