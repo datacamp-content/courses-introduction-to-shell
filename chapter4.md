@@ -159,7 +159,7 @@ cut -d , -f $2 $1
 --- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:f7f6b78f25
 ## File details
 
-FIXME: modify this to start with file lengths, then add information on permissions.
+FIXME: modify this to discuss only file lengths and modification dates - move the permissions and owners to the next exercise.
 
 Unix keeps track of what it is and isn't allowed to do with particular files and directories
 by storing a set of *permissions* for each one.
@@ -217,6 +217,26 @@ and also read by everyone else on the machine (`r--`).
 
 ```
 
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c73b6e18e
+## File permissions
+
+FIXME: concentrate on the owner/group and the `rwx` bits.
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+
+```
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b1d307aae6
 ## Making scripts runnable
 
