@@ -204,7 +204,7 @@ ls people/jasmine.dat
 *** =sct
 ```{shell}
 Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
-Ex().text_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
+Ex().test_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
