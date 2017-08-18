@@ -56,14 +56,6 @@ tail -n 3 top.csv
 A quick check confirms that this is lines 3-5 of our original file,
 because it is the last 3 lines of the first 5.
 
-This trick can be used to combine any series of commands,
-but has two drawbacks:
-
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
-
-The next exercise in this chapter will show you a more elegant way to do this.
-
 *** =instructions
 
 Use two commands to select the second-to-last line from `seasonal/winter.csv`.
@@ -87,6 +79,88 @@ The second-to-last line is the first line of the last two lines of the file.
 ```{shell}
 tail -n 2 seasonal/winter.csv > bottom.csv
 head -1 bottom.csv
+```
+
+*** =sct
+```{shell}
+
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b36aea9a1e
+## Pipes
+
+Redirection can be used to combine any series of commands,
+but has two drawbacks:
+
+1. It leaves a lot of intermediate files lying around (like `top.csv`).
+2. The commands to produce your final result are scattered across several lines of history.
+
+The shell provides another tool that solves both of these problems at once called a *pipe*.
+Once again,
+start by running `head`:
+
+```{shell}
+head -n 5 seasonal/summer.csv
+```
+
+Instead of sending `head`'s output to a file,
+add a vertical bar and the `tail` command *without* a filename:
+
+```{shell}
+head -n 5 seasonal/summer.csv | tail -n 3
+```
+
+The pipe symbol tells the shell to use the output of the command on the left
+as the input to the command on the right
+without creating any intermediate files.
+The data might be written temporarily to disk,
+stored in memory,
+or bounced off a mirror on the moon via laser
+(yes, this has actually been done);
+all you need to know is that what comes out of the first command goes into the second.
+
+Combining commands with pipes is like combining functions in math,
+but instead of reading from the inside out,
+you read from left to right.
+And just like functions,
+you can chain any number of commands together.
+For example,
+this pipe:
+
+```{shell}
+cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
+```
+
+does the following:
+
+1. Select the first column from the spring data.
+2. Remove the header line containing the word "Date".
+3. Select the first 10 lines of actual data.
+
+*** =instructions
+
+The command `wc` (short for "word count") will print the number of characters, words, and lines in a file.
+Look at its manual page to see how to get it to print only the number of lines,
+and then write a one-line command using pipes to count how many records there are in `seasonal/spring.csv`
+from July 2017.
+
+*** =hint
+
+Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+grep 2017-07 seasonal/spring.csv | wc -l
 ```
 
 *** =sct
