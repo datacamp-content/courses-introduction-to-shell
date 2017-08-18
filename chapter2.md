@@ -194,3 +194,147 @@ their `SEE ALSO` sections will also help you find what you need.
 FIXME: test that they run `man tail`.
 FIXME: MCQ for `tail -r -n +6`
 ```
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
+## Selecting columns
+
+`head` and `tail` let you select rows from a text file.
+If you want to select columns,
+you can use the command `cut`.
+It has several options (use `man cut` to explore them),
+but the most common is something like:
+
+```{shell}
+cut -d , -f 2-5,8 values.csv
+```
+
+which means
+"select columns 2 through 5 and columns 8,
+using comma as the separator".
+(You need to specify a separator because some files may use spaces, tabs, or colons to separate columns.)
+
+`cut` is a useful command,
+but there are things it can't do.
+In particular,
+it cannot re-order columns:
+`-d 2,1` will produce an error message rather than swapping the first two columns of a file.
+`cut` also doesn't understand quoted strings.
+If, for example, your file is:
+
+```
+Name,Age
+"Johel,Ranjit",28
+"Sharma,Rupinder",26
+```
+
+then the command:
+
+```{shell}
+cut -d , -f 2 everyone.csv`
+```
+
+will produce:
+
+```
+Age
+Ranjit"
+Rupinder"
+```
+
+rather than everyone's age.
+(Note that the closing double quote around the name is included in the output as well.)
+We will meet more intelligent commands that understand quoting and much else later in this course.
+
+<hr>
+
+What command will select all of the dates from all of the files in the `seasonal` directory in calendar order,
+starting with `spring.csv`?
+
+*** =instructions
+
+*** =hint
+
+Provide multiple filenames to `cut`.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{shell}
+FIXME
+```
+
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
+## Repeating commands
+
+One of the biggest advantages of using the shell is that
+it makes it easy for you to do things over again.
+If you run some commands,
+you can then press the up-arrow key to cycle back through them.
+You can also use the left and right arrow keys and the delete key to edit them,
+and then press the return key to run the modified the command.
+
+FIXME: how to insert very short video clip here of running commands, cycling back through them, and re-running.
+
+If you want an overview of what you have done recently,
+the `history` command will print a list.
+Each command is preceded by a serial number,
+which makes it easy to re-run a particular command:
+just type `!55` to re-run the 55th command in your history.
+You can also re-run a command by typing an exclamation mark followed by the command's name,
+such as `!head` or `!cut`,
+which will re-run the most recent use of that command.
+
+One final power tool is *tab completion*.
+If you start typing the name of a file and then press the tab key,
+the shell will do its best to auto-complete the path.
+For example,
+if you type `sea` and press tab,
+it will fill in the word `seasonal`.
+If you then type `a` and tab,
+it will complete the path as `seasonal/autumn.csv`.
+If the path is ambiguous,
+such as `seasonal/s`,
+pressing tab a second time will display a list of possibilities.
+Typing another character or two to make your path more specific
+and then pressing tab
+will fill in the rest of the name.
+
+*** =instructions
+
+1. Run `head summer.csv` in your home directory (which should fail).
+2. Change directory to `seasonal`.
+3. Re-run the `head` command using `!` followed by the command name.
+4. Use `history` to look at what you have done.
+5. Re-run `head` again using `!` followed by a command number.
+6. Run `head autumn.dat` without typing the full filename.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+head summer.csv
+cd seasonal
+!head
+history
+!3
+head autumn.dat
+```
+
+*** =sct
+```{shell}
+
+```
