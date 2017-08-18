@@ -129,7 +129,53 @@ FIXME
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
 ## Getting help
 
-FIXME: explain the `man` command
+In order to find out what a command does and how to get it to do what you want,
+you can use `man` (which stands for "manual").
+For example,
+the command `man head` produces something like this:
+
+```
+HEAD(1)                   BSD General Commands Manual                  HEAD(1)
+
+NAME
+     head -- display first lines of a file
+
+SYNOPSIS
+     head [-n count | -c bytes] [file ...]
+
+DESCRIPTION
+     This filter displays the first count lines or bytes of each of the specified files, or of the standard
+     input if no files are specified.  If count is omitted it defaults to 10.
+
+     If more than a single file is specified, each file is preceded by a header consisting of the string
+     ``==> XXX <=='' where ``XXX'' is the name of the file.
+
+EXIT STATUS
+     The head utility exits 0 on success, and >0 if an error occurs.
+
+SEE ALSO
+     tail(1)
+```
+
+The one-line description under `NAME` tells you briefly what the command does,
+and the summary under `SYNOPSIS` lists all of the options.
+By convention,
+anything that is optional is shown in square brackets `[...]`,
+either/or alternatives are separated by `|`,
+and things that can be repeated are shown by `...`,
+so `head`'s manual page is telling you that you can *either* give a line count with `-n`
+or a byte count with `-c`,
+and that you can give it zero or more filenames.
+(We will look at what happens when you don't give it any filenames in the next chapter.)
+The `EXIT STATUS` section will be explained later as well.
+
+The problem with the Unix manual from a newcomer's point of view is that
+you have to know what you're looking for in order to get help.
+If you don't know the name of the command you need,
+your best alternative is to search on a site like [Stack Overflow](https://stackoverflow.com/),
+or to ask a question on DataCamp's Slack channels.
+Once you know a couple of dozen commands,
+their `SEE ALSO` sections will also help you find what you need.
 
 *** =instructions
 
