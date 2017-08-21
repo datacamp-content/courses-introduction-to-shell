@@ -135,7 +135,7 @@ For example,
 the command `man head` produces something like this:
 
 ```
-HEAD(1)                   BSD General Commands Manual                  HEAD(1)
+HEAD(1)               BSD General Commands Manual              HEAD(1)
 
 NAME
      head -- display first lines of a file
@@ -144,14 +144,13 @@ SYNOPSIS
      head [-n count | -c bytes] [file ...]
 
 DESCRIPTION
-     This filter displays the first count lines or bytes of each of the specified files, or of the standard
-     input if no files are specified.  If count is omitted it defaults to 10.
+     This filter displays the first count lines or bytes of each of
+     the specified files, or of the standard input if no files are
+     specified.  If count is omitted it defaults to 10.
 
-     If more than a single file is specified, each file is preceded by a header consisting of the string
-     ``==> XXX <=='' where ``XXX'' is the name of the file.
-
-EXIT STATUS
-     The head utility exits 0 on success, and >0 if an error occurs.
+     If more than a single file is specified, each file is preceded by
+     a header consisting of the string ``==> XXX <=='' where ``XXX''
+     is the name of the file.
 
 SEE ALSO
      tail(1)
@@ -159,17 +158,14 @@ SEE ALSO
 
 The one-line description under `NAME` tells you briefly what the command does,
 and the summary under `SYNOPSIS` lists all of the options.
-By convention,
-anything that is optional is shown in square brackets `[...]`,
+Anything that is optional is shown in square brackets `[...]`,
 either/or alternatives are separated by `|`,
 and things that can be repeated are shown by `...`,
 so `head`'s manual page is telling you that you can *either* give a line count with `-n`
 or a byte count with `-c`,
-and that you can give it zero or more filenames.
-(We will look at what happens when you don't give it any filenames in the next chapter.)
-The `EXIT STATUS` section will be explained later as well.
+and that you can give it any number of filenames.
 
-The problem with the Unix manual from a newcomer's point of view is that
+The problem with the Unix manual is that
 you have to know what you're looking for in order to get help.
 If you don't know the name of the command you need,
 your best alternative is to search on a site like [Stack Overflow](https://stackoverflow.com/),
@@ -179,8 +175,8 @@ their `SEE ALSO` sections will also help you find what you need.
 
 *** =instructions
 
-1. Look at the manual page for `tail`.
-2. What flags would you give to `tail` to have it display the *first* 6 lines of a file in reverse order?
+- Look at the manual page for `tail`.
+- What flags would you give to `tail` to have it display the *first* 6 lines of a file in reverse order?
 
 *** =hint
 
@@ -305,12 +301,12 @@ will fill in the rest of the name.
 
 *** =instructions
 
-1. Run `head summer.csv` in your home directory (which should fail).
-2. Change directory to `seasonal`.
-3. Re-run the `head` command using `!` followed by the command name.
-4. Use `history` to look at what you have done.
-5. Re-run `head` again using `!` followed by a command number.
-6. Run `head autumn.dat` without typing the full filename.
+- Run `head summer.csv` in your home directory (which should fail).
+- Change directory to `seasonal`.
+- Re-run the `head` command using `!` followed by the command name.
+- Use `history` to look at what you have done.
+- Re-run `head` again using `!` followed by a command number.
+- Run `head autumn.dat` without typing the full filename.
 
 *** =hint
 
@@ -367,9 +363,9 @@ including:
 
 *** =instructions
 
-1. Find all of the lines containing the word `molar` in the autumn data.
-2. Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
-3. Count how many lines contain the word `incisor` in all four of the seasonal data files using a single command.
+- Find all of the lines containing the word `molar` in the autumn data.
+- Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
+- Count how many lines contain the word `incisor` in all four of the seasonal data files using a single command.
 
 *** =hint
 
