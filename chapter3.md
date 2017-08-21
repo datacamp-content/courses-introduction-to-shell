@@ -82,7 +82,7 @@ head -1 bottom.csv
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 
@@ -164,7 +164,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 
@@ -240,7 +240,7 @@ head seasonal/s*.csv
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 --- type:NormalExercise lang:shell xp:100 skills:1 key:ed77aed337
@@ -326,6 +326,95 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```
 
 *** =sct
-```{shell}
+```{python}
 
+```
+
+--- type:BulletConsoleExercise key:
+## Wrapping up
+
+To wrap up,
+you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+*** =xp1: 10
+
+*** =instructions1
+
+Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
+(Use a wildcard for the filenames instead of typing them all in by hand.)
+
+*** =hint1
+
+Use `-l` to list only the lines and `*` to match filenames.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+wc -l seasonal/*.csv
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/*.csv\s*', fixed=False, msg='Use `wc -l` and `seasonal/*.csv`.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+*** =xp2: 20
+
+*** =instructions2
+
+Add another command to the previous one using a pipe to remove the line reporting the total number of lines.
+
+*** =hint3
+
+Use `grep -v` to select lines that *don't* contain certain text.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+wc -l seasonal/*.csv | grep -v total
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/*.csv\s*|\s*grep\s+-v\s+total\s*', fixed=False, msg='Use `grep -v total` as the second stage of the pipe.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+*** =xp3: 30
+
+*** =instructions3
+
+Add two more stages to the pipeline that use `sort` and `head` to find the file containing the fewest lines.
+
+*** =hint3
+
+Remember to use `sort -n` to sort numerically.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
+```
+
+*** =sct3
+```{python}
+Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/*.csv\s*|\s*grep\s+-v\s+total\s*|\s*sort\s+-n\s*|\s*head\s+-n\s+1\s*', fixed=False, msg='Use `sort -n` and `head -n 1`.')
 ```
