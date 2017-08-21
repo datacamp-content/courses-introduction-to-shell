@@ -156,7 +156,7 @@ cut -d , -f $2 $1
 # FIXME check
 ```
 
---- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:
+--- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:4cfeef4849
 ## File details
 
 Unix stores a set of properties for each file along with its contents.
@@ -193,7 +193,7 @@ Use the same command shown in the lesson.
 - No - you are looking at the wrong row.
 - Yes.
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:934eccc0a9
 ## File permissions
 
 Unix keeps track of what it is and isn't allowed to do with particular files and directories
