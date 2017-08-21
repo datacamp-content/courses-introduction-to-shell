@@ -297,10 +297,10 @@ Write a single-line command using pipes to do each of the following tasks.
 You can write each command by using up-arrow to repeat the previous line
 and appending the next command to it.
 
-1. Get the second column from all of the data files in `seasonal`.
-2. As above, and remove the word "Tooth" from the output so that only tooth names are displayed.
-3. As above, and sort the output so that all occurrences of a particular tooth name are adjacent
-4. As above, and display each tooth name once along with a count of how often it occurs.
+- Get the second column from all of the data files in `seasonal`.
+- As above, and remove the word "Tooth" from the output so that only tooth names are displayed.
+- As above, and sort the output so that all occurrences of a particular tooth name are adjacent
+- As above, and display each tooth name once along with a count of how often it occurs.
 
 Consult the manual page for `uniq` to see how to display a count of unique lines.
 This select/sort/count idiom is very common in command-line data processing.
