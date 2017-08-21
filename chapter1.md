@@ -127,10 +127,10 @@ Use `ls` with an appropriate argument to get a listing of the files in the direc
 Which of the following files is *not* in that directory?
 
 *** =instructions
-- `autumn.dat`
-- `fall.dat`
-- `spring.dat`
-- `winter.dat`
+- `autumn.csv`
+- `fall.csv`
+- `spring.csv`
+- `winter.csv`
 
 *** =hint
 If you give `ls` a path, it shows what's in that path.
@@ -161,7 +161,7 @@ it's like saying "20 kilometers north".
 For example,
 if you are in the directory `/home/repl`,
 the relative path `course.txt` specifies the same file as `/home/repl/course.txt`,
-and the relative path `seasonal/winter.dat` specifies the same file as `/home/repl/seasonal/winter.dat`.
+and the relative path `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
 
 The shell can tell whether a path is absolute or relative by looking at its first character.
 If the path begins with `/`, it is absolute;
@@ -188,7 +188,7 @@ from the absolute path of the thing you want.
 # /home/repl/instructions.txt
 
 
-# /home/repl/people/jasmine.dat
+# /home/repl/people/agarwal.txt
 
 ```
 
@@ -197,14 +197,14 @@ from the absolute path of the thing you want.
 # /home/repl/instructions.txt
 ls instructions.txt
 
-# /home/repl/people/jasmine.dat
-ls people/jasmine.dat
+# /home/repl/people/agarwal.txt
+ls people/agarwal.txt
 ```
 
 *** =sct
 ```{shell}
 Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
-Ex().test_student_typed(r'\s*ls\s+people/jasmine.dat\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
+Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
@@ -379,7 +379,7 @@ then `cp` copies *all* of those files into that directory,
 which means that:
 
 ```{shell}
-cp seasonal/autumn.dat seasonal/winter.dat ~
+cp seasonal/autumn.csv seasonal/winter.csv ~
 ```
 
 will copy two files from the `seasonal` directory into your home directory.
@@ -387,7 +387,7 @@ will copy two files from the `seasonal` directory into your home directory.
 *** =instructions
 
 Using a single command,
-make a copy of `seasonal/summer.dat` in the `backup` directory,
+make a copy of `seasonal/summer.csv` in the `backup` directory,
 changing the name to `summer.bck`.
 
 *** =hint
@@ -408,12 +408,12 @@ rather than just a directory.
 
 *** =solution
 ```{shell}
-cp seasonal/summer.dat backup/summer.bck
+cp seasonal/summer.csv backup/summer.bck
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.dat\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
@@ -426,10 +426,10 @@ It handles its parameters the same way as `cp`,
 so the command:
 
 ```{shell}
-mv autumn.dat winter.dat ..
+mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.dat` and `winter.dat` from the current working directory
+moves the files `autumn.csv` and `winter.csv` from the current working directory
 up one level to its parent directory
 (because `..` always refers to the directory above your current location).
 
@@ -455,7 +455,7 @@ then the command shown above will replace it with whatever is in `course.txt`.
 *** =instructions
 
 Go into the `seasonal` directory
-and rename the file `winter.dat` to be `winter.dat.bck`,
+and rename the file `winter.csv` to be `winter.csv.bck`,
 then run `ls` to check that everything has worked.
 
 *** =hint
@@ -472,7 +472,7 @@ You will need to use three commands.
 # Change directory to seasonal
 
 
-# Rename winter.dat to winter.dat.bck
+# Rename winter.csv to winter.csv.bck
 
 
 # List the directory's contents to check
@@ -484,8 +484,8 @@ You will need to use three commands.
 # Change directory to seasonal
 cd seasonal
 
-# Rename winter.dat to winter.dat.bck
-mv winter.dat winter.dat.bck
+# Rename winter.csv to winter.csv.bck
+mv winter.csv winter.csv.bck
 
 # List the directory's contents to check
 ls
@@ -494,7 +494,7 @@ ls
 *** =sct
 ```{shell}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
-Ex().test_student_typed(r'\s*mv\s+winter.dat\s+winter.dat.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
+Ex().test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
 Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
 ```
 
@@ -525,8 +525,8 @@ your thesis is gone for good.
 
 *** =instructions
 
-- Go into the `seasonal` directory and remove `autumn.dat`
-- Go back to your home directory and remove `summer.dat` from there.
+- Go into the `seasonal` directory and remove `autumn.csv`
+- Go back to your home directory and remove `summer.csv` from there.
 
 *** =hint
 
@@ -542,13 +542,13 @@ Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home dire
 # Change directory to seasonal
 
 
-# Remove autumn.dat
+# Remove autumn.csv
 
 
 # Return to your home directory
 
 
-# Remove summer.dat from the seasonal directory
+# Remove summer.csv from the seasonal directory
 
 ```
 
@@ -557,22 +557,22 @@ Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home dire
 # Change directory to seasonal
 cd seasonal
 
-# Remove autumn.dat
-rm autumn.dat
+# Remove autumn.csv
+rm autumn.csv
 
 # Return to your home directory
 cd .. # or cd ~
 
-# Remove summer.dat from the seasonal directory
-rm seasonal/summer.dat
+# Remove summer.csv from the seasonal directory
+rm seasonal/summer.csv
 ```
 
 *** =sct
 ```{shell}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
-Ex().test_student_typed(r'\s*rm\s+autumn.dat\s*', fixed=False, msg='Use `rm` to remove a single file.')
+Ex().test_student_typed(r'\s*rm\s+autumn.csv\s*', fixed=False, msg='Use `rm` to remove a single file.')
 Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
-Ex().test_student_typed(r'\s*rm\s+seasonal/summer.dat\s*', fixed=False, msg='`rm` works with paths.')
+Ex().test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*', fixed=False, msg='`rm` works with paths.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
