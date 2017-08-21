@@ -78,8 +78,8 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```
 
 *** =sct
-```{shell}
-
+```{python}
+# FIXME check
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:1b0da86491
@@ -152,8 +152,8 @@ cut -d , -f $2 $1
 ```
 
 *** =sct
-```{shell}
-
+```{python}
+# FIXME check
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:
@@ -323,5 +323,100 @@ scripts/teeth.sh seasonal/*.csv
 
 *** =sct
 ```{shell}
+# FIXME: check file permissions
+```
 
+--- type:BulletConsoleExercise key:
+## BulletConsoleExercise Example
+
+To wrap up this course,
+you will create a script that tells you how many records are in the shortest and longest of your data files.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+*** =xp1: 10
+
+*** =instructions1
+
+Create a script called `range.sh`
+that uses `wc -l`, `grep`, `sort`, and `head` in a pipeline in that order
+to get the name of, and number of records in,
+the shortest data file in the `seasonal` directory.
+
+*** =hint1
+
+You solved this problem when we first introduced pipes.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
+```
+
+*** =sct1
+```{python}
+# FIXME: test file contents and permissions.
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+*** =xp2: 20
+
+*** =instructions2
+
+Modify `range.sh` so that it takes the name of a single directory as a command-line parameter
+and displays the name and record count of the shortest CSV file in that directory.
+
+*** =hint3
+
+The expression `$1` refers to the first command-line parameter given to a script.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+wc -l $1/*.csv | grep -v total | sort -n | head -n 1
+```
+
+*** =sct2
+```{python}
+# FIXME: test file contents and permissions.
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+*** =xp3: 30
+
+*** =instructions3
+
+Add another line to `range.sh` to print the name and record count of the *longest* file in the directory
+as well as the shortest.
+
+*** =hint3
+
+- A shell script can contain any number of commands.
+- `sort -n -r` sorts in reverse order.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+wc -l $1/*.csv | grep -v total | sort -n | head -n 1
+wc -l $1/*.csv | grep -v total | sort -n -r | head -n 1
+```
+
+*** =sct3
+```{python}
+# FIXME: test file contents and permissions.
 ```
