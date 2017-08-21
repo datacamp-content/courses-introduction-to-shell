@@ -156,10 +156,45 @@ cut -d , -f $2 $1
 
 ```
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:f7f6b78f25
+--- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:
 ## File details
 
-FIXME: modify this to discuss only file lengths and modification dates - move the permissions and owners to the next exercise.
+Unix stores a set of properties for each file along with its contents.
+You can use `ls` with the `-l` option to view these.
+For example,
+`ls -l` in the `seasonal` directory displays something like this:
+
+```
+-rw-r--r--  1 repl  staff  399 18 Aug 09:27 autumn.csv
+-rw-r--r--  1 repl  staff  458 18 Aug 09:27 spring.csv
+-rw-r--r--  1 repl  staff  479 18 Aug 09:27 summer.csv
+-rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
+```
+
+This listing shows that the files are owned by a user named `repl`
+who belongs to a group named `staff`,
+that they range in size from 399 to 497 bytes,
+that they were last modified on August 18 at 9:27 in the morning.
+(The next exercise will look at the cryptic `rw-` strings in the first column.)
+
+<hr>
+How many bytes are in the file `course.txt`?
+
+*** =possible_answers
+- 18
+- 102
+- [485]
+
+*** =hint
+Use the same command shown in the lesson.
+
+*** =feedbacks
+- No - you are looking at the wrong row.
+- No - you are looking at the wrong row.
+- Yes.
+
+--- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## File permissions
 
 Unix keeps track of what it is and isn't allowed to do with particular files and directories
 by storing a set of *permissions* for each one.
@@ -183,9 +218,6 @@ it actually stores three sets of permissions for each file or directory.
 One set specifies what the owner of that file or directory can do;
 the second specifies what people in the owner's group can do,
 and the third specifies what everyone else is allowed to do.
-To see something's permissions,
-use `ls` with the `-l` flag (meaning "long form").
-This option also displays how big things are (in bytes) and when they were last modified.
 For example,
 `ls -l` in the `seasonal` directory displays something like:
 
@@ -196,10 +228,7 @@ For example,
 -rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
 ```
 
-which shows that the files are owned by a user named `repl` in a group named `staff`,
-that they range in size from 399 to 497 bytes,
-that they were last modified on August 18 at 9:27 in the morning,
-and that each file can be read and written by their owner (the first `rw-`),
+which shows that each file can be read and written by their owner (the first `rw-`),
 read by other people in the `staff` group (`r--`),
 and also read by everyone else on the machine (`r--`).
 
