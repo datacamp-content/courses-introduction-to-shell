@@ -330,7 +330,7 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:659d3caa48
 ## Wrapping up
 
 To wrap up,
@@ -341,7 +341,8 @@ you will build a pipeline to find out how many records are in the shortest of th
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: b1f9c8ff84
+
 *** =xp1: 10
 
 *** =instructions1
@@ -368,7 +369,8 @@ Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/*.csv\s*', fixed=False, msg='Use
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 7f94acc679
+
 *** =xp2: 20
 
 *** =instructions2
@@ -394,7 +396,8 @@ Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/*.csv\s*|\s*grep\s+-v\s+total\s*
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: c5f55bff6b
+
 *** =xp3: 30
 
 *** =instructions3
