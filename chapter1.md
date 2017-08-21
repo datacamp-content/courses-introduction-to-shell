@@ -202,7 +202,7 @@ ls people/agarwal.txt
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
 Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
@@ -260,7 +260,7 @@ ls
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` followed by a path.')
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory".')
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will show the contents of the current directory.')
@@ -340,7 +340,7 @@ FIXME: fill this in once we know how learners will edit files in the campus app.
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
@@ -412,7 +412,7 @@ cp seasonal/summer.csv backup/summer.bck
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
 ```
 
@@ -492,7 +492,7 @@ ls
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
 Ex().test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
 Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
@@ -568,7 +568,7 @@ rm seasonal/summer.csv
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
 Ex().test_student_typed(r'\s*rm\s+autumn.csv\s*', fixed=False, msg='Use `rm` to remove a single file.')
 Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
@@ -634,7 +634,7 @@ mkdir backup/2017
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
 Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
