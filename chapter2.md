@@ -173,6 +173,8 @@ or to ask a question on DataCamp's Slack channels.
 Once you know a couple of dozen commands,
 their `SEE ALSO` sections will also help you find what you need.
 
+FIXME: is there a way to introduce the `less` pager here?  If not, introduce another exercise to teach it explicitly.
+
 *** =instructions
 
 - Look at the manual page for `tail`.
@@ -389,4 +391,98 @@ grep -c incisor seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seas
 *** =sct
 ```{shell}
 
+```
+
+--- type:BulletConsoleExercise key:
+## Wrapping up
+
+To pull together everything we have done in this chapter,
+you will find and use a command that stitches data files together in columns.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+*** =xp1: 10
+
+*** =instructions1
+
+Read the `SEE ALSO` section of the manual page for `cut`.
+One of the commands listed there is `colrm`.
+Type in the name of the other without any parameters
+to get a one-line summary of its usage.
+
+*** =hint1
+
+We often say "cut and something" when editing text, where "something" is the name of this command.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+paste
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*paste\s*', fixed=False, msg='Use `paste` on a line by itself to get a short usage summary.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+*** =xp2: 20
+
+*** =instructions2
+
+- Read the manual page for `paste`.
+- Run `paste` to combine the autumn and winter data files in a single table.
+
+*** =hint3
+
+Like many commands, `paste` takes any number of filenames as parameters.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+paste seasonal/autumn.csv seasonal/winter.csv
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*paste\s+seasonal/autumn.csv\s+seasonal/winter.csv\s*', fixed=False, msg='Use `paste` with the names of both files.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+*** =xp3: 30
+
+*** =instructions3
+
+Modify your previous command so that it joins the two files with a comma instead of a tab.
+
+*** =hint3
+
+Re-read the manual page if necessary to find out what flag you need to use.
+
+FIXME: need to comment here about the fact that the output file isn't usable because lines have been joined, not columns - there's a missing `,` to make two-column space whenever the second file overflows.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+paste -d , seasonal/autumn.csv seasonal/winter.csv
+```
+
+*** =sct3
+```{python}
+Ex().test_student_typed(r'\s*paste\s+-d\s*,\s+seasonal/autumn.csv\s+seasonal/winter.csv\s*', fixed=False, msg='Use `paste -d ,` with the names of both files.')
 ```
