@@ -47,6 +47,8 @@ What does `head` do when a file contains fewer than 10 lines?
 To find out,
 look at the head of `people/agarwal.txt`.
 
+FIXME: need to convert this to an MCQ with console code.
+
 *** =hint
 
 `head` takes the path to a file as its sole parameter.
@@ -68,7 +70,7 @@ head people/agarwal.txt
 
 *** =sct
 ```{python}
-FIXME
+Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*', fixed=False, msg='Use `head` on a short file.')
 ```
 
 
@@ -122,7 +124,7 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-FIXME
+Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*', fixed=False, msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
 
@@ -180,6 +182,8 @@ FIXME: is there a way to introduce the `less` pager here?  If not, introduce ano
 - Look at the manual page for `tail`.
 - What flags would you give to `tail` to have it display the *first* 6 lines of a file in reverse order?
 
+FIXME: MCQ for `tail -r -n +6`
+
 *** =hint
 
 *** =pre_exercise_code
@@ -189,8 +193,7 @@ FIXME: is there a way to introduce the `less` pager here?  If not, introduce ano
 
 *** =sct
 ```{python}
-FIXME: test that they run `man tail`.
-FIXME: MCQ for `tail -r -n +6`
+Ex().test_student_typed(r'\s*man\s+tail\s*', fixed=False, msg='Use `man` followed by the name of a command.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -245,10 +248,15 @@ We will meet more intelligent commands that understand quoting and much else lat
 
 <hr>
 
-What command will select all of the dates from all of the files in the `seasonal` directory in calendar order,
+What command will select the date columns from all of the files in the `seasonal` directory in calendar order,
 starting with `spring.csv`?
 
 *** =instructions
+
+- cut -d , -f 1 seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv seasonal/winter.csv
+- cut -d, -f1 seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv seasonal/winter.csv
+- Both of the above.
+- Neither of the above.
 
 *** =hint
 
@@ -258,12 +266,6 @@ Provide multiple filenames to `cut`.
 ```{shell}
 
 ```
-
-*** =sct
-```{python}
-FIXME
-```
-
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
 ## Repeating commands
