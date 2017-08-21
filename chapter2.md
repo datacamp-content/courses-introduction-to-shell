@@ -395,7 +395,7 @@ grep -c incisor seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seas
 
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:2054e64e49
 ## Wrapping up
 
 To pull together everything we have done in this chapter,
@@ -406,7 +406,8 @@ you will find and use a command that stitches data files together in columns.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 98a32c7a4d
+
 *** =xp1: 10
 
 *** =instructions1
@@ -435,7 +436,8 @@ Ex().test_student_typed(r'\s*paste\s*', fixed=False, msg='Use `paste` on a line 
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 8ad337a04f
+
 *** =xp2: 20
 
 *** =instructions2
@@ -462,7 +464,8 @@ Ex().test_student_typed(r'\s*paste\s+seasonal/autumn.csv\s+seasonal/winter.csv\s
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: a45f125925
+
 *** =xp3: 30
 
 *** =instructions3
