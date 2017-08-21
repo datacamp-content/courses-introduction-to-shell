@@ -638,3 +638,86 @@ mkdir backup/2017
 Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
 Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
+
+--- type:BulletConsoleExercise key:
+## Wrapping up
+
+You will often create intermediate files when analyzing data.
+Rather than storing them in your home directory,
+you can put them in `/tmp`,
+which is where Unix programs typically keep files that they only need briefly.
+This wrap-up exercise will show you how to do that.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+*** =xp1: 10
+
+*** =instructions1
+- Go into the `/tmp` directory.
+- List its contents.
+
+*** =hint1
+Use `cd` and then `ls`.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+cd /tmp
+ls
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your directory to `/tmp`.')
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what files and directories you have.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+*** =xp2: 20
+
+*** =instructions2
+Make a new directory called `scratch`.
+
+*** =hint3
+Use `mkdir` to make directories.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+mkdir scratch
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+```
+
+*** =type3: PureMultipleChoiceExercise
+*** =key3:
+*** =xp3: 30
+
+*** =instructions3
+What two commands could have used to check the contents of `/tmp` and then make the `scratch` directory without leaving your home directory?
+
+*** =possible_answers
+- `ls /tmp` and then `mkdir scratch`
+- `ls /tmp` and then `mkdir /scratch`
+- [`ls /tmp` and then `mkdir /tmp/scratch`]
+
+*** =feedbacks3
+- No, this would make the directory `scratch` under your home directory.
+- No, this would make a new top-level directory `/scratch` beside `/tmp`.
+- Correct - this will make `scratch` underneath `/tmp`.
+
+Ex().test_mc(3, [err1, err2, correct])
