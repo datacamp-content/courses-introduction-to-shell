@@ -67,7 +67,7 @@ head people/agarwal.txt
 ```
 
 *** =sct
-```{shell}
+```{python}
 FIXME
 ```
 
@@ -121,7 +121,7 @@ head -n 5 seasonal/winter.csv
 ```
 
 *** =sct
-```{shell}
+```{python}
 FIXME
 ```
 
@@ -188,7 +188,7 @@ FIXME: is there a way to introduce the `less` pager here?  If not, introduce ano
 ```
 
 *** =sct
-```{shell}
+```{python}
 FIXME: test that they run `man tail`.
 FIXME: MCQ for `tail -r -n +6`
 ```
@@ -260,7 +260,7 @@ Provide multiple filenames to `cut`.
 ```
 
 *** =sct
-```{shell}
+```{python}
 FIXME
 ```
 
@@ -333,7 +333,7 @@ head autumn.dat
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 
@@ -389,7 +389,7 @@ grep -c incisor seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seas
 ```
 
 *** =sct
-```{shell}
+```{python}
 
 ```
 
