@@ -234,38 +234,24 @@ and also read by everyone else on the machine (`r--`).
 
 *** =instructions
 
-*** =hint
+What can other users who *aren't* members of your group do with the file `course.txt`?
 
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sct
-```{shell}
-
-```
-
-
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c73b6e18e
-## File permissions
-
-FIXME: concentrate on the owner/group and the `rwx` bits.
-
-
-*** =instructions
+*** =possible_answers
+- [Read.]
+- Read and write.
+- Read and execute.
+- None of the above.
 
 *** =hint
 
-*** =pre_exercise_code
-```{shell}
+Use `ls -l` and read the permissions in groups of three characters.
 
-```
+*** =feedbacks
+- Correct.
+- No - the third group of characters does not contain a "w".
+- No - the third group of characters does not contain an "x".
+- No - the third group of characters contains an "r".
 
-*** =sct
-```{shell}
-
-```
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b1d307aae6
 ## Making scripts runnable
 
