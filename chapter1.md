@@ -639,7 +639,7 @@ Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the uppe
 Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:b1990e9a42
 ## Wrapping up
 
 You will often create intermediate files when analyzing data.
@@ -653,7 +653,8 @@ This wrap-up exercise will show you how to do that.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 59781bc43b
+
 *** =xp1: 10
 
 *** =instructions1
@@ -680,7 +681,8 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what file
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: c38cda3a5a
+
 *** =xp2: 20
 
 *** =instructions2
@@ -704,7 +706,8 @@ Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` 
 ```
 
 *** =type3: PureMultipleChoiceExercise
-*** =key3:
+*** =key3: 3f705d1d7c
+
 *** =xp3: 30
 
 *** =instructions3
