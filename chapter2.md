@@ -277,7 +277,7 @@ you can then press the up-arrow key to cycle back through them.
 You can also use the left and right arrow keys and the delete key to edit them,
 and then press the return key to run the modified the command.
 
-FIXME: how to insert very short video clip here of running commands, cycling back through them, and re-running.
+FIXME: insert short clip here of running commands, cycling back through them, and re-running.
 
 If you want an overview of what you have done recently,
 the `history` command will print a list.
@@ -288,21 +288,6 @@ You can also re-run a command by typing an exclamation mark followed by the comm
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
 
-One final power tool is *tab completion*.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the word `seasonal`.
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
-
 *** =instructions
 
 - Run `head summer.csv` in your home directory (which should fail).
@@ -310,7 +295,6 @@ will fill in the rest of the name.
 - Re-run the `head` command using `!` followed by the command name.
 - Use `history` to look at what you have done.
 - Re-run `head` again using `!` followed by a command number.
-- Run `head autumn.dat` without typing the full filename.
 
 *** =hint
 
@@ -331,12 +315,66 @@ cd seasonal
 !head
 history
 !3
-head autumn.dat
 ```
 
 *** =sct
 ```{python}
+Ex().test_student_typed(r'\s*head\s+summer.csv\s*', msg='Use `head` and a filename.')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*', msg='Use `cd` and a directory name.')
+Ex().test_student_typed(r'\s*!head\s*', msg='Use `!` followed by the name of the command.')
+Ex().test_student_typed(r'\s*history\s*', msg='Use `history` to get a list.')
+Ex().test_student_typed(r'\s*!3\s*', msg='Use `!` followed by a number.')
+```
 
+--- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
+## Tab completion
+
+Another shell power tool is *tab completion*.
+If you start typing the name of a file and then press the tab key,
+the shell will do its best to auto-complete the path.
+For example,
+if you type `sea` and press tab,
+it will fill in the word `seasonal`.
+If you then type `a` and tab,
+it will complete the path as `seasonal/autumn.csv`.
+If the path is ambiguous,
+such as `seasonal/s`,
+pressing tab a second time will display a list of possibilities.
+Typing another character or two to make your path more specific
+and then pressing tab
+will fill in the rest of the name.
+
+*** =instructions
+
+- Run `head seasonal/autumn.dat` without typing the full filename.
+- Run `head seasonal/spring.dat` without typing the full filename.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+# Run head seasonal/autumn.dat, typing as few characters as possible.
+
+
+# Run head seasonal/spring.dat, typing as few characters as possible.
+
+```
+
+*** =solution
+```{shell}
+head seasonal/autumn.dat
+head seasonal/spring.dat
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*head\s+seasonal/autumn.dat\s*', msg='Type `head s`, a tab, `a`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/spring.dat\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:1e207b45b3
