@@ -82,10 +82,7 @@ it will display the first 100 (assuming there are that many),
 and so on.
 
 Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention for more common options.
-More advanced or less-frequently-used flags will often have the form `--longer-name`,
-i.e.,
-two dashes followed by the flag's meaning spelled out in full.
+but it's a widely-used convention.
 A flag's name usually indicates its purpose
 (for example, `-n` is meant to signal "**n**umber of lines"),
 but what was obvious to the person who created the command
@@ -93,7 +90,7 @@ sometimes isn't obvious to everyone else.
 
 *** =instructions
 
-Display the first 5 lines of the winter data.
+Display the first 5 lines of the winter data in the `seasonal` directory.
 
 *** =hint
 
@@ -118,7 +115,7 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*', fixed=Fals
 ```
 
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
+--- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
 ## Getting help
 
 In order to find out what a command does and how to get it to do what you want,
@@ -169,10 +166,8 @@ FIXME: is there a way to introduce the `less` pager here?  If not, introduce ano
 
 *** =instructions
 
-- Look at the manual page for `tail`.
-- What flags would you give to `tail` to have it display the *first* 6 lines of a file in reverse order?
-
-FIXME: MCQ for `tail -r -n +6`
+Look at the manual page for `tail`,
+and then use that command to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint
 
@@ -181,9 +176,20 @@ FIXME: MCQ for `tail -r -n +6`
 
 ```
 
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+tail -n +6 seasonal/spring.csv
+```
+
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*man\s+tail\s*', fixed=False, msg='Use `man` followed by the name of a command.')
+Ex().test_student_typed(r'\s*tail\s+-n\s\+6\s+seasonal/spring.csv\s*', fixed=False, msg='Use `+NUMBER` to display lines from the top of the file.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
