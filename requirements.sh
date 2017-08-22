@@ -11,6 +11,9 @@ wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/dataset
 apt-get update
 apt-get -y install unzip
 
+# Reporting
+echo 'About to unzip in' $(pwd)
+
 # Unpack.
 unzip ./filesys.zip
 
@@ -22,6 +25,9 @@ mkdir ./backup
 
 # Change ownership.
 chown -R repl:repl .
+
+# Show what's been installed where.
+ls -R $(pwd)/*
 
 # Report end.
 echo 'ENDING requirements.sh'
