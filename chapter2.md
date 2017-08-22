@@ -186,7 +186,7 @@ tail -n +6 seasonal/spring.csv
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*man\s+tail\s*', fixed=False, msg='Use `man` followed by the name of a command.')
-Ex().test_student_typed(r'\s*tail\s+-n\s\+6\s+seasonal/spring.csv\s*', fixed=False, msg='Use `+NUMBER` to display lines from the top of the file.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*', fixed=False, msg='Use `+NUMBER` to display lines after the first NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -282,6 +282,8 @@ just type `!55` to re-run the 55th command in your history.
 You can also re-run a command by typing an exclamation mark followed by the command's name,
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
+
+FIXME: this exercise doesn't work because `history` doesn't run interactively.  Turn it into a ConsoleExercise?
 
 *** =instructions
 
@@ -484,6 +486,8 @@ Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seaso
 To pull together everything we have done in this chapter,
 you will find and use a command that stitches data files together in columns.
 
+FIXME: this exercise doesn't work right now because of platform limitations.
+
 *** =pre_exercise_code
 ```{python}
 ```
@@ -525,8 +529,8 @@ Ex().test_student_typed(r'\s*paste\s*', fixed=False, msg='Use `paste` on a line 
 
 *** =instructions2
 
-- Read the manual page for `paste`.
-- Run `paste` to combine the autumn and winter data files in a single table.
+Read the manual page for `paste`,
+and then run `paste` to combine the autumn and winter data files in a single table.
 
 *** =hint3
 
