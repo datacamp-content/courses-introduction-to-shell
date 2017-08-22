@@ -806,7 +806,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what file
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: edaf1bcf96
 
 *** =xp3: 20
 
@@ -831,7 +831,7 @@ Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` 
 ```
 
 *** =type4: PureMultipleChoiceExercise
-*** =key4:
+*** =key4: 8115890b4b
 
 *** =xp4: 30
 
