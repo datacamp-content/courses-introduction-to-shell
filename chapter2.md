@@ -346,8 +346,8 @@ will fill in the rest of the name.
 
 *** =instructions
 
-- Run `head seasonal/autumn.dat` without typing the full filename.
-- Run `head seasonal/spring.dat` without typing the full filename.
+- Run `head seasonal/autumn.csv` without typing the full filename.
+- Run `head seasonal/spring.csv` without typing the full filename.
 
 *** =hint
 
@@ -358,23 +358,23 @@ will fill in the rest of the name.
 
 *** =sample_code
 ```{shell}
-# Run head seasonal/autumn.dat, typing as few characters as possible.
+# Run head seasonal/autumn.csv, typing as few characters as possible.
 
 
-# Run head seasonal/spring.dat, typing as few characters as possible.
+# Run head seasonal/spring.csv, typing as few characters as possible.
 
 ```
 
 *** =solution
 ```{shell}
-head seasonal/autumn.dat
-head seasonal/spring.dat
+head seasonal/autumn.csv
+head seasonal/spring.csv
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/autumn.dat\s*', msg='Type `head s`, a tab, `a`, and a tab.')
-Ex().test_student_typed(r'\s*head\s+seasonal/spring.dat\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*', msg='Type `head s`, a tab, `a`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:1e207b45b3
