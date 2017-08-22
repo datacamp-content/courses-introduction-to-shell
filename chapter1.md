@@ -806,7 +806,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what file
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: edaf1bcf96
 
 *** =xp3: 20
 
