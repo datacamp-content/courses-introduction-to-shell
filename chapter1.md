@@ -451,7 +451,7 @@ Ex().test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+ba
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
-## Moving and renaming files
+## Moving files
 
 While `cp` gives you a way to copy a file,
 `mv` lets you move it from one directory to another,
@@ -466,6 +466,38 @@ mv autumn.csv winter.csv ..
 moves the files `autumn.csv` and `winter.csv` from the current working directory
 up one level to its parent directory
 (because `..` always refers to the directory above your current location).
+
+*** =instructions
+
+Using a single command,
+move the spring and summer data files to the `backup` directory.
+
+*** =hint
+
+Use two filenames and a directory name as parameters.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+mv seasonal/spring.csv seasonal/summer.csv backup
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Renaming files
 
 `mv` can also be used to rename files.
 If you run:
