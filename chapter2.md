@@ -5,8 +5,10 @@ description : >-
   This chapter will show you how to work with the data that's in those files.
   The tools we will look at are fairly simple,
   but are the model for everything that's more powerful.
-  
---- type:NormalExercise lang:shell xp:100 skills:1 key:088c6f17e3
+
+
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
 ## Looking at file headers
 
 The first thing most data scientists do when given a new dataset to analyze is
@@ -41,38 +43,26 @@ Date,Tooth
 2017-03-20,canine
 ```
 
+<hr>
+What does `head` do if there aren't 10 lines in the file?
+(To find out, use it to look at `people/agarwal.txt`.)
+
 *** =instructions
-
-What does `head` do when a file contains fewer than 10 lines?
-To find out,
-look at the head of `people/agarwal.txt`.
-
-FIXME: need to convert this to an MCQ with console code.
+- Print an error message because the file is too short.
+- Display as many lines as there are.
+- Display enough blank lines to bring the total to 10.
 
 *** =hint
-
-`head` takes the path to a file as its sole parameter.
 
 *** =pre_exercise_code
 ```{shell}
 
 ```
 
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-head people/agarwal.txt
-```
-
 *** =sct
-```{python}
-Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*', fixed=False, msg='Use `head` on a short file.')
+```{shell}
+Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*', fixed=False, msg='Use `head` on a short file.').test_mc(2, ['no', 'yes', 'no'])
 ```
-
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
 ## Modifying commands
