@@ -740,7 +740,7 @@ mkdir yearly/2017
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*mkdir\s+yearly\s*', fixed=False, msg='Make the upper directory.')
-Ex().test_student_typed(r'\s*cd\s+yearly/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
+Ex().test_student_typed(r'\s*mkdir\s+yearly/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:b1990e9a42
