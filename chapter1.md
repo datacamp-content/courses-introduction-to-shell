@@ -400,7 +400,7 @@ cp seasonal/summer.csv backup/summer.bck
 Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b055c990e7
 ## Copying multiple files
 
 `cp` can do more than copy one file at a time.
