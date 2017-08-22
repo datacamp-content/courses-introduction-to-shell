@@ -326,7 +326,7 @@ Ex().test_student_typed(r'\s*history\s*', msg='Use `history` to get a list.')
 Ex().test_student_typed(r'\s*!3\s*', msg='Use `!` followed by a number.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b887e95637
 ## Tab completion
 
 Another shell power tool is *tab completion*.
