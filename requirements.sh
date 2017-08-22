@@ -1,6 +1,9 @@
 # Report start.
 echo 'STARTING requirements.sh'
 
+# Make sure we're in the home directory.
+cd /home/repl
+
 # Get the zip file.
 wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
 
