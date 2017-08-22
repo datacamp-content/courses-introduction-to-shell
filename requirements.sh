@@ -7,6 +7,8 @@ echo 'After changing directory, in' $(pwd)
 
 # Get the zip file.
 wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
+echo 'after wget doing recursive ls of everything'
+ls -R $(pwd)/*
 
 # Make sure we have the unzip command.
 apt-get update
@@ -19,7 +21,11 @@ echo 'About to unzip in' $(pwd)
 unzip ./filesys.zip
 
 # Remove the zip file.
-rm -f ./filesys.zip
+# rm -f ./filesys.zip
+echo 'not removing filesys.zip in order to test that its download worked and touching test.txt instead'
+touch test.txt
+echo 'recursive ls after touching test.txt'
+ls -R $(pwd)/*
 
 # Make the `backup` directory (which starts empty).
 mkdir ./backup
