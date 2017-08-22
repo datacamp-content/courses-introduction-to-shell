@@ -787,7 +787,7 @@ Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your direct
 *** =xp2: 10
 
 *** =instructions2
-- Go into the `/tmp` directory.
+- List the contents of `/tmp`.
 
 *** =hint2
 
@@ -830,22 +830,25 @@ mkdir scratch
 Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
-*** =type4: PureMultipleChoiceExercise
+*** =type4: ConsoleExercise
 *** =key4:
 
 *** =xp4: 30
 
 *** =instructions4
-What two commands could have used to check the contents of `/tmp` and then make the `scratch` directory without leaving your home directory?
+Move `/home/repl/people/agarwal.txt` into `/tmp/scratch` using the `~` shortcut for your home directory
+and a relative path for the target directory.
 
-*** =possible_answers
-- `ls /tmp` and then `mkdir scratch`
-- `ls /tmp` and then `mkdir /scratch`
-- [`ls /tmp` and then `mkdir /tmp/scratch`]
+*** =sample_code4
+```{shell}
+```
 
-*** =feedbacks4
-- No, this would make the directory `scratch` under your home directory.
-- No, this would make a new top-level directory `/scratch` beside `/tmp`.
-- Correct - this will make `scratch` underneath `/tmp`.
+*** =solution4
+```{shell}
+mv ~/people/agarwal.txt scratch
+```
 
-Ex().test_mc(3, [err1, err2, correct])
+*** =sct4
+```{python}
+Ex().test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*', fixed=False, msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
+```
