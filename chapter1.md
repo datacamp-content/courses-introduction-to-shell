@@ -831,7 +831,7 @@ Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` 
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: a904a3a719
 
 *** =xp4: 30
 
