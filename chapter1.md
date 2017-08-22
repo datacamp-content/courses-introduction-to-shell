@@ -496,7 +496,7 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:8cbc17793f
 ## Renaming files
 
 `mv` can also be used to rename files.
