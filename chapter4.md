@@ -326,7 +326,7 @@ scripts/teeth.sh seasonal/*.csv
 # FIXME: check file permissions
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:99eae18d67
 ## BulletConsoleExercise Example
 
 To wrap up this course,
@@ -337,7 +337,8 @@ you will create a script that tells you how many records are in the shortest and
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: a1e55487fb
+
 *** =xp1: 10
 
 *** =instructions1
@@ -366,7 +367,8 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: e8ece27fe7
+
 *** =xp2: 20
 
 *** =instructions2
@@ -393,7 +395,8 @@ wc -l $1/*.csv | grep -v total | sort -n | head -n 1
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: a3b36a746e
+
 *** =xp3: 30
 
 *** =instructions3
