@@ -3,6 +3,7 @@ echo 'STARTING requirements.sh'
 
 # Make sure we're in the home directory.
 cd /home/repl
+echo 'After changing directory, in' $(pwd)
 
 # Get the zip file.
 wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
@@ -27,6 +28,7 @@ mkdir ./backup
 chown -R repl:repl .
 
 # Show what's been installed where.
+echo 'About to recursive ls'
 ls -R $(pwd)/*
 
 # Report end.
