@@ -351,7 +351,7 @@ Ex().test_student_typed(r'\s*FIXME\s*', fixed=False, msg='Type `FIXME` in all ca
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
-## Copying files
+## Copying single files
 
 Once you have some files,
 you will often want to make copies,
@@ -370,7 +370,40 @@ creates a copy of `original.txt` called `duplicate.txt`.
 If there already was a file called `duplicate.txt`,
 it is overwritten.
 
-But `cp` can do more than this.
+*** =instructions
+
+Make a copy of `seasonal/summer.csv` in the `backup` directory,
+calling the new file `summer.bck`.
+
+*** =hint
+
+Combine the name of the destination directory and the name of the copied file
+to create a relative path for the new file.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+cp seasonal/summer.csv backup/summer.bck
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Copying multiple files
+
+`cp` can do more than copy one file at a time.
 If the second parameter is an existing directory such as `backup`,
 then the command:
 
@@ -393,15 +426,9 @@ will copy two files from the `seasonal` directory into your home directory.
 
 *** =instructions
 
-Using a single command,
-make a copy of `seasonal/summer.csv` in the `backup` directory,
-changing the name to `summer.bck`.
+Copy the spring and summer data files into the `backup` directory.
 
 *** =hint
-
-Since you are changing the name,
-you need to provide a path for the destination
-rather than just a directory.
 
 *** =pre_exercise_code
 ```{shell}
@@ -415,12 +442,12 @@ rather than just a directory.
 
 *** =solution
 ```{shell}
-cp seasonal/summer.csv backup/summer.bck
+cp seasonal/spring.csv seasonal/summer.csv backup
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+Ex().test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Provide two filenames and a directory name to `cp`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
