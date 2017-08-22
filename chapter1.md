@@ -170,7 +170,10 @@ it is relative.
 *** =instructions
 
 You are in the directory `/home/repl`.
-Use `ls some/relative/path` to list the files identified by each of the absolute paths in the sample code one by one.
+Use `ls some/relative/path` to list the files identified by each of the following absolute paths:
+
+- `/home/repl/course.txt`
+- `/home/repl/people/agarwal.txt`
 
 *** =hint
 You can often construct the relative path to a file or directory below your current location
@@ -184,7 +187,7 @@ from the absolute path of the thing you want.
 
 *** =sample_code
 ```{shell}
-# /home/repl/instructions.txt
+# /home/repl/course.txt
 
 
 # /home/repl/people/agarwal.txt
@@ -193,8 +196,8 @@ from the absolute path of the thing you want.
 
 *** =solution
 ```{shell}
-# /home/repl/instructions.txt
-ls instructions.txt
+# /home/repl/course.txt
+ls course.txt
 
 # /home/repl/people/agarwal.txt
 ls people/agarwal.txt
@@ -202,7 +205,7 @@ ls people/agarwal.txt
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
+Ex().test_student_typed(r'\s*ls\s+course.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
 Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
@@ -215,8 +218,8 @@ you can move around in the shell using the command `cd`
 
 If you type `cd seasonal` and then type `pwd`,
 the shell will tell you that you are now in `/home/repl/seasonal`.
-If you run `ls` on its own,
-it now shows you the contents of `/home/repl/seasonal`,
+If you then run `ls` on its own,
+it shows you the contents of `/home/repl/seasonal`,
 because that's where you are.
 If you want to get back to your home directory `/home/repl`,
 you can use the command `cd /home/repl`.
@@ -268,6 +271,9 @@ Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## Special paths
 
+The *parent* of a directory is the directory above it.
+For example, `/home` is the parent of `/home/repl`,
+and `/home/repl` is the parent of `/home/repl/seasonal`.
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
 More often,
 though,
@@ -284,9 +290,6 @@ A single dot on its own, `.`, always means "the current directory",
 so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
-This may not seem particularly useful,
-but `.` is to paths what zero is to arithmetic;
-you will see situations later where it's very handy.
 
 One final special path is `~`
 (the tilde character, pronounced *til-duh*),
@@ -317,9 +320,13 @@ Ex().test_mc(2, [err1, correct, err3])
 --- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
 ## Editing files
 
-FIXME: fill this in once we know how learners will edit files in the campus app.
+FIXME: fill this in once we know how learners will edit files.
 
 *** =instructions
+
+FIXME: have learners edit `thesis.txt`.
+
+For now, please just type the word `FIXME` in all caps.
 
 *** =hint
 
@@ -340,8 +347,9 @@ FIXME: fill this in once we know how learners will edit files in the campus app.
 
 *** =sct
 ```{python}
-
+Ex().test_student_typed(r'\s*FIXME\s*', fixed=False, msg='Type `FIXME` in all caps.')
 ```
+
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
 ## Copying files
 
