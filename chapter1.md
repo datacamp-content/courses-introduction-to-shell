@@ -641,8 +641,8 @@ Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` t
 Ex().test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*', fixed=False, msg='`rm` works with paths.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
-## Creating and deleting directories
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Deleting directories
 
 `mv` treats directories the same way it treats files:
 if you are in your home directory and run `mv seasonal by-season`,
@@ -655,13 +655,50 @@ If you try to `rm` a directory,
 the shell will print an error message telling you that it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
 Instead,
-you must use a separate command called `rmdir` to remove a directory.
+you must use a separate command called `rmdir`.
 For added safety,
 it only works when the directory is empty,
 so you must delete all the files in a directory *before* you delete the directory.
 
-To create a new directory,
-you must use another command called `mkdir`
+*** =instructions
+
+Without changing directory,
+use two commands to delete the `people` directory.
+
+*** =hint
+
+Remove the directory's contents first,
+then remove the directory.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+rm people/agarwal.txt
+rmdir people
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*rm\s+people/agarwal.txt\s*', fixed=False, msg='Remove the file inside `people`.')
+Ex().test_student_typed(r'\s*rmdir\s+people\s*', fixed=False, msg='Remove the directory `people`.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
+## Creating directories
+
+A directory is a different kind of thing than a text file,
+so you cannot create directories using a text editor.
+Instead,
+you must use the command `mkdir`
 (which stands for "make directory").
 For example,
 if you want to store a copy of `course.txt` in a directory called `info`,
@@ -675,7 +712,8 @@ cp course.txt info
 
 *** =instructions
 
-Create a new directory called `2017` inside a new directory called `backup`.
+Using two commands,
+create a new directory called `2017` inside a new directory called `yearly`.
 Do not change directory while doing this.
 
 *** =hint
@@ -695,14 +733,14 @@ then create the lower directory inside it.
 
 *** =solution
 ```{shell}
-mkdir backup
-mkdir backup/2017
+mkdir yearly
+mkdir yearly/2017
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
-Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
+Ex().test_student_typed(r'\s*mkdir\s+yearly\s*', fixed=False, msg='Make the upper directory.')
+Ex().test_student_typed(r'\s*cd\s+yearly/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:b1990e9a42
