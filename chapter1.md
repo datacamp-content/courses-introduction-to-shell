@@ -787,7 +787,7 @@ Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your direct
 *** =xp2: 10
 
 *** =instructions2
-- List the contents of `/tmp`.
+- List the contents of `/tmp` *without* typing a directory name.
 
 *** =hint2
 
