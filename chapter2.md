@@ -374,7 +374,7 @@ Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*', msg='Type `head s`,
 Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:adf1516acf
 ## Selecting by value
 
 `head` and `tail` select rows,
@@ -403,7 +403,7 @@ What's more important right now is some of `grep`'s more common flags:
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 0d7ef2baa0
 
 *** =xp1: 10
 
@@ -430,7 +430,7 @@ Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*', fixed=False
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: a0eee34d1e
 
 *** =xp2: 20
 
@@ -455,7 +455,7 @@ Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spr
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: f5641234fe
 
 *** =xp3: 30
 
