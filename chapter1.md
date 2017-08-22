@@ -763,10 +763,8 @@ This wrap-up exercise will show you how to do that.
 
 *** =instructions1
 - Go into the `/tmp` directory.
-- List its contents.
 
 *** =hint1
-Use `cd` and then `ls`.
 
 *** =sample_code1
 ```{shell}
@@ -775,25 +773,23 @@ Use `cd` and then `ls`.
 *** =solution1
 ```{shell}
 cd /tmp
-ls
 ```
 
 *** =sct1
 ```{python}
 Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your directory to `/tmp`.')
-Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what files and directories you have.')
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: c38cda3a5a
 
-*** =xp2: 20
+*** =type1: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
 
 *** =instructions2
-Make a new directory called `scratch`.
+- Go into the `/tmp` directory.
 
-*** =hint3
-Use `mkdir` to make directories.
+*** =hint2
 
 *** =sample_code2
 ```{shell}
@@ -801,20 +797,45 @@ Use `mkdir` to make directories.
 
 *** =solution2
 ```{shell}
-mkdir scratch
+ls
 ```
 
 *** =sct2
 ```{python}
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what files and directories you have.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 20
+
+*** =instructions3
+Make a new directory called `scratch`.
+
+*** =hint3
+Use `mkdir` to make directories.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+mkdir scratch
+```
+
+*** =sct3
+```{python}
 Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
-*** =type3: PureMultipleChoiceExercise
-*** =key3: 3f705d1d7c
+*** =type4: PureMultipleChoiceExercise
+*** =key4:
 
-*** =xp3: 30
+*** =xp4: 30
 
-*** =instructions3
+*** =instructions4
 What two commands could have used to check the contents of `/tmp` and then make the `scratch` directory without leaving your home directory?
 
 *** =possible_answers
@@ -822,7 +843,7 @@ What two commands could have used to check the contents of `/tmp` and then make 
 - `ls /tmp` and then `mkdir /scratch`
 - [`ls /tmp` and then `mkdir /tmp/scratch`]
 
-*** =feedbacks3
+*** =feedbacks4
 - No, this would make the directory `scratch` under your home directory.
 - No, this would make a new top-level directory `/scratch` beside `/tmp`.
 - Correct - this will make `scratch` underneath `/tmp`.
