@@ -4,6 +4,9 @@ echo 'STARTING requirements.sh'
 # Get the zip file.
 wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
 
+# Make sure we have the unzip command.
+apt-get install -y unzip
+
 # Unpack.
 unzip ./filesys.zip
 
