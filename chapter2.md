@@ -202,20 +202,19 @@ It has several options (use `man cut` to explore them),
 but the most common is something like:
 
 ```{shell}
-cut -d , -f 2-5,8 values.csv
+cut -f 2-5,8 -d , values.csv
 ```
 
 which means
 "select columns 2 through 5 and columns 8,
 using comma as the separator".
-(You need to specify a separator because some files may use spaces, tabs, or colons to separate columns.)
+`cut` uses `-f` (meaning "fields") to specify columns
+and `-d` (meaning "delimiter") to specify the separator.
+You need to specify thelatter because some files may use spaces, tabs, or colons to separate columns.
 
-`cut` is a useful command,
-but there are things it can't do.
+`cut` is a simple-minded command.
 In particular,
-it cannot re-order columns:
-`-d 2,1` will produce an error message rather than swapping the first two columns of a file.
-`cut` also doesn't understand quoted strings.
+it doesn't understand quoted strings.
 If, for example, your file is:
 
 ```
@@ -224,10 +223,10 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then the command:
+then:
 
 ```{shell}
-cut -d , -f 2 everyone.csv`
+cut -f 2 -d , everyone.csv`
 ```
 
 will produce:
@@ -238,29 +237,34 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age.
-(Note that the closing double quote around the name is included in the output as well.)
+rather than everyone's age,
+because it will think the comma between last and first names is a column separator.
 We will meet more intelligent commands that understand quoting and much else later in this course.
 
 <hr>
 
-What command will select the date columns from all of the files in the `seasonal` directory in calendar order,
+What command will select the first column (containing dates) from the spring data?
 starting with `spring.csv`?
 
 *** =instructions
 
-- cut -d , -f 1 seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv seasonal/winter.csv
-- cut -d, -f1 seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv seasonal/winter.csv
-- Both of the above.
-- Neither of the above.
+- `cut -d , -f 1 seasonal/spring.csv`
+- `cut -d, -f1 seasonal/spring.csv`
+- Either of the above.
+- Neither of the above, because `-f` must come before `-d`.
 
 *** =hint
 
-Provide multiple filenames to `cut`.
+The order of the flags doesn't matter.
 
 *** =pre_exercise_code
 ```{shell}
 
+```
+
+*** =sct
+```{python}
+Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
