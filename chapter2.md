@@ -7,7 +7,6 @@ description : >-
   but are the model for everything that's more powerful.
 
 
-
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
 ## Looking at file headers
 
@@ -45,7 +44,7 @@ Date,Tooth
 
 <hr>
 What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at `people/agarwal.txt`.)
+(To find out, use it to look at the top of `people/agarwal.txt`.)
 
 *** =instructions
 - Print an error message because the file is too short.
@@ -154,20 +153,18 @@ so `head`'s manual page is telling you that you can *either* give a line count w
 or a byte count with `-c`,
 and that you can give it any number of filenames.
 
-The problem with the Unix manual is that
-you have to know what you're looking for in order to get help.
-If you don't know the name of the command you need,
-your best alternative is to search on a site like [Stack Overflow](https://stackoverflow.com/),
-or to ask a question on DataCamp's Slack channels.
-Once you know a couple of dozen commands,
-their `SEE ALSO` sections will also help you find what you need.
+The problem with the Unix manual is that you have to know what you're looking for.
+If you don't,
+you can search on [Stack Overflow](https://stackoverflow.com/),
+ask a question on DataCamp's Slack channels,
+or look at the `SEE ALSO` sections of the commands you already know.
 
 FIXME: is there a way to introduce the `less` pager here?  If not, introduce another exercise to teach it explicitly.
 
 *** =instructions
 
 Look at the manual page for `tail`,
-and then use that command to display all *but* the first six lines of `seasonal/spring.csv`.
+and then use it to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint
 
@@ -274,15 +271,13 @@ One of the biggest advantages of using the shell is that
 it makes it easy for you to do things over again.
 If you run some commands,
 you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them,
-and then press the return key to run the modified the command.
+You can also use the left and right arrow keys and the delete key to edit them.
+Pressing return will then run the modified command.
 
 FIXME: insert short clip here of running commands, cycling back through them, and re-running.
 
-If you want an overview of what you have done recently,
-the `history` command will print a list.
-Each command is preceded by a serial number,
-which makes it easy to re-run a particular command:
+Even better, `history` will print a list of commands you have run recently.
+Each one is preceded by a serial number to make it easy to re-run particular commands:
 just type `!55` to re-run the 55th command in your history.
 You can also re-run a command by typing an exclamation mark followed by the command's name,
 such as `!head` or `!cut`,
@@ -326,7 +321,7 @@ Ex().test_student_typed(r'\s*history\s*', msg='Use `history` to get a list.')
 Ex().test_student_typed(r'\s*!3\s*', msg='Use `!` followed by a number.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b887e95637
 ## Tab completion
 
 Another shell power tool is *tab completion*.
@@ -346,8 +341,8 @@ will fill in the rest of the name.
 
 *** =instructions
 
-- Run `head seasonal/autumn.dat` without typing the full filename.
-- Run `head seasonal/spring.dat` without typing the full filename.
+- Run `head seasonal/autumn.csv` without typing the full filename.
+- Run `head seasonal/spring.csv` without typing the full filename.
 
 *** =hint
 
@@ -358,23 +353,23 @@ will fill in the rest of the name.
 
 *** =sample_code
 ```{shell}
-# Run head seasonal/autumn.dat, typing as few characters as possible.
+# Run head seasonal/autumn.csv, typing as few characters as possible.
 
 
-# Run head seasonal/spring.dat, typing as few characters as possible.
+# Run head seasonal/spring.csv, typing as few characters as possible.
 
 ```
 
 *** =solution
 ```{shell}
-head seasonal/autumn.dat
-head seasonal/spring.dat
+head seasonal/autumn.csv
+head seasonal/spring.csv
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/autumn.dat\s*', msg='Type `head s`, a tab, `a`, and a tab.')
-Ex().test_student_typed(r'\s*head\s+seasonal/spring.dat\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*', msg='Type `head s`, a tab, `a`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:1e207b45b3
@@ -382,24 +377,22 @@ Ex().test_student_typed(r'\s*head\s+seasonal/spring.dat\s*', msg='Type `head s`,
 
 `head` and `tail` select rows,
 `cut` selects columns,
-and the inelegantly-named command `grep` selects lines according to what they contain.
+and `grep` selects lines according to what they contain.
 In its simplest form,
-`grep` takes a piece of text as its first parameter,
-followed by one or more filenames,
-and prints all of the lines that contain that text.
+`grep` takes a piece of text followed by one or more filenames
+and prints all of the linesin those files that contain that text.
 For example,
 `grep bicuspid seasonal/winter.csv`
-will select all of the lines from the winter data file that contain the word "bicuspid".
+prints all of the lines from the winter data that contain "bicuspid".
 
-`grep` can actually search for patterns, not just specific pieces of text;
-we will explore those patterns in the second course in this sequence.
-What's more important right now is some of `grep`'s more common flags,
-including:
+`grep` can search for patterns as well;
+we will explore those in the next course.
+What's more important right now is some of `grep`'s more common flags:
 
 - `-c`: print a count of matching lines rather than the lines themselves
 - `-h`: do *not* print the names of files when searching multiple files
 - `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: only print the names of files that contain matches, not the matches themselves
+- `-l`: print the names of files that contain matches, not the matches
 - `-n`: print line numbers for matching lines
 - `-v`: invert the match, i.e., only show lines that *don't* match
 
