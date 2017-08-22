@@ -27,7 +27,7 @@ def main():
                    for r in range(random.randint(MIN_RECORDS, MAX_RECORDS))]
         records.sort()
         records.insert(0, HEADER)
-        csv.writer(open(path, 'w')).writerows(records)
+        csv.writer(open(path, 'w'), lineterminator='\n').writerows(records)
 
 if __name__ == '__main__':
     main()

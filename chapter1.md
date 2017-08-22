@@ -57,7 +57,6 @@ Remember that a user can only interact with an operating system through a progra
 - Graphical file explorers and the shell both call the same underlying operating system functions.
 - The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
 - Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
-```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
 ## Where am I?
@@ -171,7 +170,10 @@ it is relative.
 *** =instructions
 
 You are in the directory `/home/repl`.
-Use `ls some/relative/path` to list the files identified by each of the absolute paths in the sample code one by one.
+Use `ls some/relative/path` to list the files identified by each of the following absolute paths:
+
+- `/home/repl/course.txt`
+- `/home/repl/people/agarwal.txt`
 
 *** =hint
 You can often construct the relative path to a file or directory below your current location
@@ -185,7 +187,7 @@ from the absolute path of the thing you want.
 
 *** =sample_code
 ```{shell}
-# /home/repl/instructions.txt
+# /home/repl/course.txt
 
 
 # /home/repl/people/agarwal.txt
@@ -194,16 +196,16 @@ from the absolute path of the thing you want.
 
 *** =solution
 ```{shell}
-# /home/repl/instructions.txt
-ls instructions.txt
+# /home/repl/course.txt
+ls course.txt
 
 # /home/repl/people/agarwal.txt
 ls people/agarwal.txt
 ```
 
 *** =sct
-```{shell}
-Ex().test_student_typed(r'\s*ls\s+instructions.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
+```{python}
+Ex().test_student_typed(r'\s*ls\s+course.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
 Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
@@ -216,8 +218,8 @@ you can move around in the shell using the command `cd`
 
 If you type `cd seasonal` and then type `pwd`,
 the shell will tell you that you are now in `/home/repl/seasonal`.
-If you run `ls` on its own,
-it now shows you the contents of `/home/repl/seasonal`,
+If you then run `ls` on its own,
+it shows you the contents of `/home/repl/seasonal`,
 because that's where you are.
 If you want to get back to your home directory `/home/repl`,
 you can use the command `cd /home/repl`.
@@ -260,7 +262,7 @@ ls
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` followed by a path.')
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory".')
 Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will show the contents of the current directory.')
@@ -269,6 +271,9 @@ Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## Special paths
 
+The *parent* of a directory is the directory above it.
+For example, `/home` is the parent of `/home/repl`,
+and `/home/repl` is the parent of `/home/repl/seasonal`.
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
 More often,
 though,
@@ -285,9 +290,6 @@ A single dot on its own, `.`, always means "the current directory",
 so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
-This may not seem particularly useful,
-but `.` is to paths what zero is to arithmetic;
-you will see situations later where it's very handy.
 
 One final special path is `~`
 (the tilde character, pronounced *til-duh*),
@@ -318,9 +320,13 @@ Ex().test_mc(2, [err1, correct, err3])
 --- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
 ## Editing files
 
-FIXME: fill this in once we know how learners will edit files in the campus app.
+FIXME: fill this in once we know how learners will edit files.
 
 *** =instructions
+
+FIXME: have learners edit `thesis.txt`.
+
+For now, please just type the word `FIXME` in all caps.
 
 *** =hint
 
@@ -340,11 +346,12 @@ FIXME: fill this in once we know how learners will edit files in the campus app.
 ```
 
 *** =sct
-```{shell}
-
+```{python}
+Ex().test_student_typed(r'\s*FIXME\s*', fixed=False, msg='Type `FIXME` in all caps.')
 ```
+
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
-## Copying files
+## Copying single files
 
 Once you have some files,
 you will often want to make copies,
@@ -363,7 +370,40 @@ creates a copy of `original.txt` called `duplicate.txt`.
 If there already was a file called `duplicate.txt`,
 it is overwritten.
 
-But `cp` can do more than this.
+*** =instructions
+
+Make a copy of `seasonal/summer.csv` in the `backup` directory,
+calling the new file `summer.bck`.
+
+*** =hint
+
+Combine the name of the destination directory and the name of the copied file
+to create a relative path for the new file.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+cp seasonal/summer.csv backup/summer.bck
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b055c990e7
+## Copying multiple files
+
+`cp` can do more than copy one file at a time.
 If the second parameter is an existing directory such as `backup`,
 then the command:
 
@@ -386,15 +426,9 @@ will copy two files from the `seasonal` directory into your home directory.
 
 *** =instructions
 
-Using a single command,
-make a copy of `seasonal/summer.csv` in the `backup` directory,
-changing the name to `summer.bck`.
+Copy the spring and summer data files into the `backup` directory.
 
 *** =hint
-
-Since you are changing the name,
-you need to provide a path for the destination
-rather than just a directory.
 
 *** =pre_exercise_code
 ```{shell}
@@ -408,16 +442,16 @@ rather than just a directory.
 
 *** =solution
 ```{shell}
-cp seasonal/summer.csv backup/summer.bck
+cp seasonal/spring.csv seasonal/summer.csv backup
 ```
 
 *** =sct
-```{shell}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+```{python}
+Ex().test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Provide two filenames and a directory name to `cp`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
-## Moving and renaming files
+## Moving files
 
 While `cp` gives you a way to copy a file,
 `mv` lets you move it from one directory to another,
@@ -432,6 +466,38 @@ mv autumn.csv winter.csv ..
 moves the files `autumn.csv` and `winter.csv` from the current working directory
 up one level to its parent directory
 (because `..` always refers to the directory above your current location).
+
+*** =instructions
+
+Using a single command,
+move the spring and summer data files to the `backup` directory.
+
+*** =hint
+
+Use two filenames and a directory name as parameters.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+mv seasonal/spring.csv seasonal/summer.csv backup
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:8cbc17793f
+## Renaming files
 
 `mv` can also be used to rename files.
 If you run:
@@ -492,7 +558,7 @@ ls
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
 Ex().test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
 Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
@@ -568,15 +634,15 @@ rm seasonal/summer.csv
 ```
 
 *** =sct
-```{shell}
+```{python}
 Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
 Ex().test_student_typed(r'\s*rm\s+autumn.csv\s*', fixed=False, msg='Use `rm` to remove a single file.')
 Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
 Ex().test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*', fixed=False, msg='`rm` works with paths.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
-## Creating and deleting directories
+--- type:NormalExercise lang:shell xp:100 skills:1 key:63e8fbd0c2
+## Deleting directories
 
 `mv` treats directories the same way it treats files:
 if you are in your home directory and run `mv seasonal by-season`,
@@ -589,13 +655,50 @@ If you try to `rm` a directory,
 the shell will print an error message telling you that it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
 Instead,
-you must use a separate command called `rmdir` to remove a directory.
+you must use a separate command called `rmdir`.
 For added safety,
 it only works when the directory is empty,
 so you must delete all the files in a directory *before* you delete the directory.
 
-To create a new directory,
-you must use another command called `mkdir`
+*** =instructions
+
+Without changing directory,
+use two commands to delete the `people` directory.
+
+*** =hint
+
+Remove the directory's contents first,
+then remove the directory.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+rm people/agarwal.txt
+rmdir people
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*rm\s+people/agarwal.txt\s*', fixed=False, msg='Remove the file inside `people`.')
+Ex().test_student_typed(r'\s*rmdir\s+people\s*', fixed=False, msg='Remove the directory `people`.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
+## Creating directories
+
+A directory is a different kind of thing than a text file,
+so you cannot create directories using a text editor.
+Instead,
+you must use the command `mkdir`
 (which stands for "make directory").
 For example,
 if you want to store a copy of `course.txt` in a directory called `info`,
@@ -609,7 +712,8 @@ cp course.txt info
 
 *** =instructions
 
-Create a new directory called `2017` inside a new directory called `backup`.
+Using two commands,
+create a new directory called `2017` inside a new directory called `yearly`.
 Do not change directory while doing this.
 
 *** =hint
@@ -629,12 +733,122 @@ then create the lower directory inside it.
 
 *** =solution
 ```{shell}
-mkdir backup
-mkdir backup/2017
+mkdir yearly
+mkdir yearly/2017
 ```
 
 *** =sct
+```{python}
+Ex().test_student_typed(r'\s*mkdir\s+yearly\s*', fixed=False, msg='Make the upper directory.')
+Ex().test_student_typed(r'\s*mkdir\s+yearly/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
+```
+
+--- type:BulletConsoleExercise key:b1990e9a42
+## Wrapping up
+
+You will often create intermediate files when analyzing data.
+Rather than storing them in your home directory,
+you can put them in `/tmp`,
+which is where Unix programs typically keep files that they only need briefly.
+This wrap-up exercise will show you how to do that.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1: 59781bc43b
+
+*** =xp1: 10
+
+*** =instructions1
+- Go into the `/tmp` directory.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
-Ex().test_student_typed(r'\s*mkdir\s+backup\s*', fixed=False, msg='Make the upper directory.')
-Ex().test_student_typed(r'\s*cd\s+backup/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
+```
+
+*** =solution1
+```{shell}
+cd /tmp
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your directory to `/tmp`.')
+```
+
+
+*** =type1: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+- List the contents of `/tmp` *without* typing a directory name.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+ls
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what files and directories you have.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3: edaf1bcf96
+
+*** =xp3: 20
+
+*** =instructions3
+Make a new directory called `scratch`.
+
+*** =hint3
+Use `mkdir` to make directories.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+mkdir scratch
+```
+
+*** =sct3
+```{python}
+Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+```
+
+*** =type4: ConsoleExercise
+*** =key4: a904a3a719
+
+*** =xp4: 30
+
+*** =instructions4
+Move `/home/repl/people/agarwal.txt` into `/tmp/scratch` using the `~` shortcut for your home directory
+and a relative path for the target directory.
+
+*** =sample_code4
+```{shell}
+```
+
+*** =solution4
+```{shell}
+mv ~/people/agarwal.txt scratch
+```
+
+*** =sct4
+```{python}
+Ex().test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*', fixed=False, msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
 ```
