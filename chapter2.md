@@ -382,24 +382,22 @@ Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`,
 
 `head` and `tail` select rows,
 `cut` selects columns,
-and the inelegantly-named command `grep` selects lines according to what they contain.
+and `grep` selects lines according to what they contain.
 In its simplest form,
-`grep` takes a piece of text as its first parameter,
-followed by one or more filenames,
-and prints all of the lines that contain that text.
+`grep` takes a piece of text followed by one or more filenames
+and prints all of the linesin those files that contain that text.
 For example,
 `grep bicuspid seasonal/winter.csv`
-will select all of the lines from the winter data file that contain the word "bicuspid".
+prints all of the lines from the winter data that contain "bicuspid".
 
-`grep` can actually search for patterns, not just specific pieces of text;
-we will explore those patterns in the second course in this sequence.
-What's more important right now is some of `grep`'s more common flags,
-including:
+`grep` can search for patterns as well;
+we will explore those in the next course.
+What's more important right now is some of `grep`'s more common flags:
 
 - `-c`: print a count of matching lines rather than the lines themselves
 - `-h`: do *not* print the names of files when searching multiple files
 - `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: only print the names of files that contain matches, not the matches themselves
+- `-l`: print the names of files that contain matches, not the matches
 - `-n`: print line numbers for matching lines
 - `-v`: invert the match, i.e., only show lines that *don't* match
 
