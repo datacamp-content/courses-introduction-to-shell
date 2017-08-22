@@ -372,7 +372,7 @@ Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*', msg='Type `head s`,
 Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
---- type:NormalExercise lang:shell xp:50 skills:1 key:1e207b45b3
+--- type:BulletConsoleExercise key:
 ## Selecting by value
 
 `head` and `tail` select rows,
@@ -396,34 +396,86 @@ What's more important right now is some of `grep`'s more common flags:
 - `-n`: print line numbers for matching lines
 - `-v`: invert the match, i.e., only show lines that *don't* match
 
-*** =instructions
-
-- Find all of the lines containing the word `molar` in the autumn data.
-- Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
-- Count how many lines contain the word `incisor` in all four of the seasonal data files using a single command.
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Find all of the lines containing the word `molar` in the autumn data.
+
+*** =hint1
+
+Use `grep` with the word you are searching for and the name of the file(s) to search in.
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 grep molar seasonal/autumn.csv
-grep -v -n molar seasonal/spring.csv
-grep -c incisor seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-*** =sct
+*** =sct1
 ```{python}
+Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*', fixed=False, msg='Use the relative path to the file to search.')
+```
 
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 20
+
+*** =instructions2
+
+Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
+
+*** =hint3
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+grep -v -n molar seasonal/spring.csv
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring.csv\s*', fixed=False, msg='Use `-v` or `-n` in either order.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 30
+
+*** =instructions3
+
+Count how many lines contain the word `incisor` in the autumn and winter data combined.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+
+```
+
+*** =solution3
+```{shell}
+grep -c incisor autumn.csv winter.csv
+```
+
+*** =sct3
+```{python}
+Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*', fixed=False, msg='Use `-c` to get a count.')
 ```
 
 --- type:BulletConsoleExercise key:2054e64e49
