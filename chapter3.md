@@ -69,7 +69,7 @@ tail -n 5 seasonal/winter.csv > last.csv
 Ex().test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s+>\s+last.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:f47d337593
 ## Using output as input
 
 Suppose you want to get lines from the middle of a file.
@@ -186,7 +186,7 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s+|\s+grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
 ## Counting records
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
@@ -280,7 +280,7 @@ Ex().test_student_typed(r'\s*head\s+seasonal\s\*\.csv\s*', fixed=False, msg='Rem
 ```
 
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
 ## More wildcards
 
 The shell has other wildcards as well,
@@ -310,7 +310,7 @@ Match each expression against each filename in turn.
 - No: the expression in square brackets matches only one character, not entire words.
 - Correct!
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:f06d9e310e
 ## Sorting
 
 As its name suggests,
