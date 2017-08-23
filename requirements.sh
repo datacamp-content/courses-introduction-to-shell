@@ -1,17 +1,33 @@
-# Base name for course.
-COURSE=courses-intro-to-unix-shell
+# Report start.
+echo '----------------------------------------'
+echo 'STARTING requirements.sh'
 
-# Go into home directory (should be `/home/repl`).
-cd
+# Make sure we're in the home directory.
+cd /home/repl
 
-# Clone the GitHub repo for the course.
-git clone git@github.com:datacamp/$(COURSE).git
+# Get the zip file.
+wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
 
-# Make sure it's on the master branch.
-git -C $(COURSE) checkout master
+# Make sure we have the unzip command.
+apt-get update
+apt-get -y install unzip
 
-# Get everything out of the `filesys` directory here.
-mv $(COURSE)/filesys/* .
+# Unpack.
+unzip ./filesys.zip
 
-# Get rid of the cloned repo.
-rm -rf $(COURSE)
+# Remove the zip file.
+rm -f ./filesys.zip
+
+# Make the `backup` and `bin` directories (which start off empty).
+mkdir ./backup
+
+# Change ownership.
+chown -R repl:repl .
+
+# Show what's been installed where.
+echo 'Installed files'
+ls -R $(pwd)/*
+
+# Report end.
+echo 'ENDING requirements.sh'
+echo '----------------------------------------'
