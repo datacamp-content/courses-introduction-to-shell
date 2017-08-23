@@ -315,7 +315,7 @@ Use the same command shown in the lesson.
 - No - you are looking at the wrong column.
 - Yes.
 
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:934eccc0a9
+--- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:934eccc0a9
 ## File permissions
 
 Unix keeps track of what it is allowed to do with files and directories
