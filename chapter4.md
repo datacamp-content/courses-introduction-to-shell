@@ -5,9 +5,9 @@ description : >-
   and pipes let you combine existing commands to create new ones.
   In this chapter, you will see how to go one step further
   and create new commands of your own.
-  
+
 --- type:NormalExercise lang:shell xp:100 skills:1 key:864f978f0d
-## Shell scripts
+## Saving commands
 
 You have been using the shell interactively so far:
 each time you want to do something,
@@ -15,39 +15,62 @@ you enter a command
 and the shell runs it right away.
 But since the commands you type in are just text,
 the shell lets you store them in files to use over and over again.
-
 To start exploring this powerful capability,
-put the following command in a file called `dates.sh`:
+put the following command in a file called `headers.sh`:
 
 ```{shell}
-cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
+head -n 1 seasonal/*.csv
 ```
 
-Reading from left to right,
-this selects the first column from all of the CSV files in the `seasonal` directory,
-removes lines with the word "Date",
-sorts the result,
-and removes duplicates.
-In short,
-this pipeline produces a list of the unique dates in the seasonal date.
-
+This selects the first row from each of the CSV files in the `seasonal` directory.
 Once you have created this file,
-run the following command:
+you can run it with:
 
 ```{shell}
-bash dates.sh
+bash headers.sh
 ```
 
 This tells Bash (which is the shell we are using)
 to run the commands contained in the file `dates.sh`.
 Sure enough,
-it produces the same list of dates that would have been produced
+it produces the same output you would have got
 if you had typed the commands directly into the shell.
-By putting those commands in a file,
-though,
-you have saved yourself having to remember the steps a second, third, or hundredth time,
-and you can be sure that you are doing exactly the same thing
-each time you get the files' unique dates.
+
+*** =instructions
+
+Create another shell script called `dates.sh`
+that extracts the date column (including header)
+from all of the seasonal data files.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+# FIXME: how to trigger comparison.
+```
+
+*** =sct
+```{python}
+# @dates.sh
+# cut -d , -f 1 seasonal/*.csv
+script = 'dates.sh'
+Ex().test_file_exists_and_equal(f'$HOME/{script}', f'Put your solution in `{script}`.',
+                                f'$ANSWERS/chapter4/{script}', f'`{script}` does not contain expected contents.',
+                                ignore_whitespace=True)
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Shell scripts
 
 A file full of shell commands is called a *shell script*,
 or sometimes just a "script" for short.
@@ -55,10 +78,27 @@ Shell scripts don't have to have names ending in `.sh`,
 but this lesson will use that convention
 to help you keep track of which files are scripts and which are not.
 
+Most shell scripts contain more than a single command.
+For example,
+create a script called `alldates.sh` that contains this:
+
+```{shell}
+cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
+```
+
+This pipeline produces a list of the unique dates in the seasonal date.
+You can then run it with `bash alldates.sh`
+or save its output using redirection:
+
+```{shell}
+bash alldates.sh > dates.out
+```
+
 *** =instructions
 
-Create another shell script called `teeth.sh`
+Create a shell script called `teeth.sh`
 that prints a count of the number of times each tooth name appears in the seasonal data.
+Run it and save its output in `teeth.out`.
 
 *** =hint
 
@@ -69,69 +109,76 @@ that prints a count of the number of times each tooth name appears in the season
 
 *** =sample_code
 ```{shell}
-
 ```
 
 *** =solution
 ```{shell}
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
+Ex().test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
+                        fixed=False,
+                        msg='Run the script with `bash` and use `>` to redirect its output.')
 ```
 
 *** =sct
 ```{python}
-# FIXME check
+# @teeth.sh
+# cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
+# @teeth.out
+#  15 bicuspid
+#  31 canine
+#  18 incisor
+#  11 molar
+#  17 wisdom
+script = 'teeth.sh'
+output = 'teeth.out'
+Ex().test_file_exists_and_equal(f'$HOME/{script}', f'Put your solution in `{script}`.',
+                                f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+                                ignore_whitespace=True)
+Ex().test_file_exists_and_equal(f'$HOME/{output}', f'Redirect output to `{output}`.',
+                                f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
+                                ignore_whitespace=True)
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:1b0da86491
 ## Passing filenames to scripts
 
-A script that re-runs exactly the same commands on exactly the same files is useful
-as a record of what you did,
-but one that allows you specify what files you want to process is usually more useful.
+A script that runs commands on specific files is a useful record of what you did,
+but one that allows you process any files you want is a more useful tool.
 To help you do this,
 the shell has a special expression `$@` (dollar sign immediately followed by ampersand)
 that means "all of the command-line parameters given by the user when the script was run".
-To see how this works,
-edit `dates.sh` and replace `seasonal/*.csv` with `$@`
-so that the file contains the line:
+To try this out,
+put the following in `alldates.sh`:
 
 ```{shell}
 cut -d , -f 1 $@ | grep -v Date | sort | uniq
 ```
 
-If you run the command with:
+When you run it like this:
 
 ```{shell}
-bash dates.sh seasonal/summer.csv`
+bash alldates.sh seasonal/summer.csv`
 ```
 
-then the shell replaces `$@` with `seasonal.summer.csv`
-and the pipeline processes only that file.
+the shell replaces `$@` with `seasonal/summer.csv` and processes only that file.
 If you run it like this:
 
 ```{shell}
-bash dates.sh seasonal/autumn.csv seasonal/winter.csv
+bash alldates.sh seasonal/*.csv
 ```
 
-it processes those two files,
-while:
-
-```{shell}
-bash dates.sh seasonal/*.csv
-```
-
-processes all four files,
-just like the original script.
+it processes all four data files.
 
 *** =instructions
 
-Along with `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-Use this to write a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+- Write a script called `count-data.sh`
+  that counts the number of lines in one or more files,
+  excluding the first line of each.
+  Use the `-q` flag to `tail` to stop it from printing title lines.
+- Run it on all of the seasonal data files
+  and save the output in `line-count.out`.
 
 ```{shell}
-bash column.sh seasonal/autumn.dat 1
+bash count-data.sh seasonal/*.csv > line-count.out
 ```
 
 *** =hint
@@ -148,12 +195,87 @@ bash column.sh seasonal/autumn.dat 1
 
 *** =solution
 ```{shell}
-cut -d , -f $2 $1
 ```
 
 *** =sct
 ```{python}
-# FIXME check
+# @count-data.sh
+# tail -q -n +2 $@ | wc -l
+# @line-count.out
+#       92
+script = 'count-data.sh'
+output = 'line-count.out'
+Ex().test_file_exists_and_equal(f'$HOME/{script}', f'Put your solution in `{script}`.',
+                                f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+                                ignore_whitespace=True)
+Ex().test_file_exists_and_equal(f'$HOME/{output}', f'Redirect output to `{output}`.',
+                                f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
+                                ignore_whitespace=True)
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Working with single filenames
+
+Along with `$@`,
+the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
+You can use this to write commands that feel simpler or more natural than the shell's.
+For example,
+you can create a script called `column.sh` that selects a single column from a CSV file
+when the user provides the filename as the first parameter and the column as the second:
+
+```{shell}
+cut -d , -f $2 $1
+```
+
+and then run it using:
+
+```{shell}
+bash column.sh seasonal/autumn.csv 1
+```
+
+Notice how the script uses the two parameters in reverse order.
+
+*** =instructions
+
+Write a shell script called `count-dates.sh`
+that takes the name of a single file and a year-month pair like `2017-08` as parameters
+and uses `grep` to count how many lines in the file contain that date.
+For example:
+
+```{shell}
+bash count-dates.sh seasonal/autumn.csv 2017-08
+```
+
+should print `2`,
+because there are two records in the file with `2017-08` in their date.
+
+*** =hint
+
+Use `grep -c` to select and count records.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{python}
+# @count-dates.sh
+# grep -c $2 $1
+script = 'count-dates.sh'
+Ex().test_file_exists_and_equal(f'$HOME/{script}', f'Put your solution in `{script}`.',
+                                f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+                                ignore_whitespace=True)
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:4cfeef4849
