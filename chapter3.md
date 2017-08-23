@@ -143,28 +143,15 @@ head -n 5 seasonal/summer.csv | tail -n 3
 
 The pipe symbol tells the shell to use the output of the command on the left
 as the input to the command on the right.
-You can chain any number of commands together.
-For example,
-this command:
-
-```{shell}
-cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
-```
-
-will:
-
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
 
 *** =instructions
 
-Write a pipeline that combines two commands to select all of the tooth names from `seasonal/summer.csv`
+Write a pipeline that uses `cut` and `grep` to select all of the tooth names from `seasonal/summer.csv`
 *without* including the header "Tooth".
 
 *** =hint
 
-Copy the example, remove the `head` command, and change the parameters of `cut` and `grep`.
+Use `grep -v` to exclude lines.
 
 *** =pre_exercise_code
 ```{shell}
@@ -184,6 +171,54 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s+|\s+grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Longer pipes
+
+You can chain any number of commands together.
+For example,
+this command:
+
+```{shell}
+cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
+```
+
+will:
+
+1. select the first column from the spring data;
+2. remove the header line containing the word "Date"; and
+3. select the first 10 lines of actual data.
+
+*** =instructions
+
+Write a pipeline that selects the first value in the "Tooth" column of `seasonal/autumn.csv`
+after the header "Tooth".
+
+*** =hint
+
+Copy the example and change the parameters to each command.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s+|\s+grep\s+-v\s+Tooth\s+|\s+head\s+-n\s+1\s*',
+                        fixed=False,
+                        msg='Use `cut`, `grep`, and `head`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
