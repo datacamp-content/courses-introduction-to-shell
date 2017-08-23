@@ -12,7 +12,9 @@ description : >-
 Placeholder.
 
 *** =possible_answers
+- [correct]
 
 *** =hint
 
 *** =feedbacks
+- Correct
