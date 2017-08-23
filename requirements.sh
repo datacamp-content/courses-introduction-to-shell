@@ -1,17 +1,41 @@
-# Base name for course.
-COURSE=courses-intro-to-unix-shell
+# Report start.
+echo 'STARTING requirements.sh'
 
-# Go into home directory (should be `/home/repl`).
-cd
+# Make sure we're in the home directory.
+cd /home/repl
+echo 'After changing directory, in' $(pwd)
 
-# Clone the GitHub repo for the course.
-git clone git@github.com:datacamp/$(COURSE).git
+# Get the zip file.
+wget https://s3.amazonaws.com/assets.datacamp.com/production/course_5160/datasets/filesys.zip
+echo 'after wget doing recursive ls of everything'
+ls -R $(pwd)/*
 
-# Make sure it's on the master branch.
-git -C $(COURSE) checkout master
+# Make sure we have the unzip command.
+apt-get update
+apt-get -y install unzip
 
-# Get everything out of the `filesys` directory here.
-mv $(COURSE)/filesys/* .
+# Reporting
+echo 'About to unzip in' $(pwd)
 
-# Get rid of the cloned repo.
-rm -rf $(COURSE)
+# Unpack.
+unzip ./filesys.zip
+
+# Remove the zip file.
+# rm -f ./filesys.zip
+echo 'not removing filesys.zip in order to test that its download worked and touching test.txt instead'
+touch test.txt
+echo 'recursive ls after touching test.txt'
+ls -R $(pwd)/*
+
+# Make the `backup` directory (which starts empty).
+mkdir ./backup
+
+# Change ownership.
+chown -R repl:repl .
+
+# Show what's been installed where.
+echo 'About to recursive ls'
+ls -R $(pwd)/*
+
+# Report end.
+echo 'ENDING requirements.sh'
