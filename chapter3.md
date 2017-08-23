@@ -173,7 +173,7 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s+|\s+grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:b8753881d6
 ## Longer pipes
 
 You can chain any number of commands together.
