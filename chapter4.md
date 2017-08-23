@@ -414,7 +414,7 @@ chmod g=rw people/agarwal.txt
 Ex().test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*', fixed=False, msg='Use `chmod` with `g=rw` and the filename.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:bce73f3fec
 ## Adding and subtracting permissions
 
 As well as specifying absolute permissions using an expression like `u=rwx`,
@@ -456,7 +456,7 @@ Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
                        ignore_whitespace=True)
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:64d04c6bc7
 ## Creating first-class commands
 
 FIXME: check that `~/bin` is in `PATH`.
@@ -623,7 +623,7 @@ Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: 7ef95165b6
 
 *** =xp4: 30
 
@@ -650,7 +650,7 @@ Ex().test_student_typed(r'\s*chmod\s+u+x\s+bin/range.sh\s*', fixed=False, msg='U
 ```
 
 *** =type5: ConsoleExercise
-*** =key5:
+*** =key5: 7ad3b76529
 
 *** =xp5: 30
 
