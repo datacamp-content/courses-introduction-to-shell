@@ -66,7 +66,7 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s+>\s+last.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f47d337593
@@ -114,7 +114,7 @@ head -n 1 bottom.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s+>\s+bottom.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s*>\s*bottom.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
 Ex().test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*', fixed=False, msg='Use `head` on the temporary file.')
 ```
 
@@ -170,7 +170,7 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s+|\s+grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s*|\s*grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:
@@ -216,7 +216,7 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s+|\s+grep\s+-v\s+Tooth\s+|\s+head\s+-n\s+1\s*',
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
                         fixed=False,
                         msg='Use `cut`, `grep`, and `head`.')
 ```
@@ -229,7 +229,7 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
 *** =instructions
 
-Use `wc` and other commands in a pipe to count how many records there are in `seasonal/spring.csv`
+Use `grep` and `wc` in a pipe to count how many records there are in `seasonal/spring.csv`
 from July 2017.
 
 *** =hint
@@ -253,7 +253,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s+|\s+wc\s+-l\s*', fixed=False, msg='Use `grep` and `wc`.')
+Ex().test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\s*', fixed=False, msg='Use `grep` and `wc`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:602d47e70c
@@ -311,7 +311,7 @@ head seasonal/s*.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal\s\*\.csv\s*', fixed=False, msg='Remember that "spring" and "summer" both start with "s".')
+Ex().test_student_typed(r'\s*head\s+seasonal/s\*\.csv\s*', fixed=False, msg='Remember that "spring" and "summer" both start with "s".')
 ```
 
 
@@ -382,7 +382,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+|\s+grep\s+-v\s+Tooth\s+|\s+sort\s+-r\s*',
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
                         fixed=False,
                         msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
@@ -462,9 +462,9 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*', fixed=False, msg='Use `cut` on its own.')
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s+|\s+grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep -v`.')
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s+|\s+grep\s+-v\s+Tooth\s+|\s+sort\s*', fixed=False, msg='Use `cut`, `grep -v`, and `sort`.')
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s+|\s+grep\s+-v\s+Tooth\s+|\s+sort\s+|\s+uniq\s+-c\s*', fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep -v`.')
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*', fixed=False, msg='Use `cut`, `grep -v`, and `sort`.')
+Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*', fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
