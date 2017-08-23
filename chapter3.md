@@ -114,8 +114,8 @@ head -n 1 bottom.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+-n\s+2\s+seasonal/winter.csv\s+>\s+bottom.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
-Ex().test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s+\s*', fixed=False, msg='Use `head` on the temporary file.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s+>\s+bottom.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
+Ex().test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*', fixed=False, msg='Use `head` on the temporary file.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b36aea9a1e
