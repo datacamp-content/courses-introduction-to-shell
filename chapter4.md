@@ -69,7 +69,7 @@ Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
                        ignore_whitespace=True)
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:93385e77dd
 ## Shell scripts
 
 A file full of shell commands is called a *shell script*,
@@ -213,7 +213,7 @@ Ex().test_file_compare(f'$HOME/{output}', f'Redirect output to `{output}`.',
                        ignore_whitespace=True)
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:8b14252869
 ## Working with single filenames
 
 Along with `$@`,
