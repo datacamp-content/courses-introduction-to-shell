@@ -352,7 +352,8 @@ As its name suggests,
 `sort` puts data in order.
 By default it does this in ascending alphabetical order,
 but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while other flags like `-b` and `-f` will tell it to ignore leading blanks or upper and lower case.
+while `-b` tells it to ignore leading blanks
+and `-f` tells it to **f**old case (i.e., be case-insensitive).
 Pipelines often use `grep` to get rid of unwanted records
 and then `sort` to put the remaining records in order.
 
@@ -430,12 +431,12 @@ it only has to keep the most recent unique line in memory.
 
 *** =instructions
 
-Write a pipeline to do each of the following tasks in order:
+Write a pipeline to:
 
-- Get the second column from all of the data files in `seasonal`.
-- As above, and remove the word "Tooth" from the output so that only tooth names are displayed.
-- As above, and sort the output so that all occurrences of a particular tooth name are adjacent
-- As above, and display each tooth name once along with a count of how often it occurs.
+- get the second column from all of the data files in `seasonal`,
+- remove the word "Tooth" from the output so that only tooth names are displayed,
+- sort the output so that all occurrences of a particular tooth name are adjacent; and
+- display each tooth name once along with a count of how often it occurs.
 
 Use `uniq -c` to display unique lines with a count of how often each occurs.
 
@@ -453,17 +454,11 @@ Use `uniq -c` to display unique lines with a count of how often each occurs.
 
 *** =solution
 ```{shell}
-cut -d , -f 2 seasonal/*.csv
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*', fixed=False, msg='Use `cut` on its own.')
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep -v`.')
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*', fixed=False, msg='Use `cut`, `grep -v`, and `sort`.')
 Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*', fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
