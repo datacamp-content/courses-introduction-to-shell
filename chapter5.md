@@ -5,7 +5,7 @@ description : >-
   This chapter will show you how to make your own pipelines do that.
   Along the way, you will see how the shell uses variables to store information.
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:e4d5f4adea
 ## Environment variables
 
 Like other programs, the shell stores information in variables.
@@ -51,7 +51,7 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 # FIXME
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
 ## Using echo
 
 The `echo` command prints its arguments:
