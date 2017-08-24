@@ -228,7 +228,7 @@ The value of an undefined variable is an empty string.
 - No: `priors` is an environment variable but `tests` is not.
 - No: `priors` is an environment variable.
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:cea10c99b8
 ## Loops
 
 Shell variables are also used in *loops*,
@@ -281,7 +281,7 @@ for suffix in docx odt pdf; do echo $suffix; done
 # FIXME
 ```
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:8468b70a71
 ## Loops and wildcards
 
 If you want to loop over a set of files,
@@ -320,7 +320,7 @@ for filename in seasonal/s*.csv; do echo $filename; done
 # FIXME
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
 ## Using variables for sets of files
 
 It's very common to define a variable using a wildcard
