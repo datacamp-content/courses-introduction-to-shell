@@ -366,3 +366,93 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
 - No: this example defines and uses the variable `files` in the same shell.
+
+--- type:ConsoleExercise xp:100 key:
+## Pipes in loops
+
+Printing filenames is sometimes useful for debugging,
+but the main purpose of loops is to run commands independently on multiple files.
+For example,
+this loop:
+
+```{shell}
+for file in seasonal/*.csv; do cut -d , -f 1 $file | grep -v Date | sort | head -n 1; done
+```
+
+will print the first date in each data file separately.
+The loop has the same structure as the others you have already seen:
+all that's different is that its body is a pipeline of several commands instead of a single command.
+
+*** =instructions
+
+Write a loop that produces the same output as
+
+```{shell}
+grep -h 2017-07 seasonal/*.csv
+```
+
+but uses a loop to process each file separately.
+(The `-h` flag tells `grep` *not* to print filenames in the output.)
+
+*** =solution
+```{bash}
+for file in seasonal/*.csv; do grep 2017-07 $file; done
+```
+
+*** =sct
+```{python}
+# FIXME
+```
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+## Title
+
+When you are interacting with the computer through a graphical file explorer,
+it's easy and sensible to give files multi-word names like `July 2017.csv`.
+However,
+doing this causes problems when you are working in the shell.
+For example,
+suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
+It would be natural to type:
+
+```{shell}
+mv July 2017.csv 2017 July data.csv
+```
+
+but this doesn't work,
+because it looks to the shell as though you are trying to move
+four files called `July`, `2017.csv`, `2017`, and `July` (again)
+into a directory called `data.csv`.
+Instead,
+you have to put quotes around the files' names
+so that the shell treats each one as a single character string:
+
+```{shell}
+mv 'July 2017.csv' '2017 July data.csv'
+```
+
+Rather than quoting,
+it's simpler not to use spaces in filenames in the first place.
+
+<hr>
+
+Suppose the directory `samples` contains files called `march 2017.csv` and `october 2017.csv`.
+How many lines of output will this loop produce?
+
+```{shell}
+for f in samples/*.csv; do echo $f; done
+```
+
+*** =possible_answers
+- One: `samples/*.csv`.
+- [Two: `samples/march 2017.csv` and `samples/october 2017.csv`]
+- Four: `samples/march`, `2017.csv`, `samples/october`, and `2017.csv` again.
+- Three: `samples/march`, `2017.csv`, and `samples/october` (without repeating `2017.csv`).
+
+*** =hint
+
+*** =feedbacks
+- No: the shell expands the wildcard.
+- Yes: the shell automatically quotes wildcard expansions for you.
+- No: the shell automatically quotes wildcard expansions for you.
+- No: the shell doesn't remove duplicates from lists.
