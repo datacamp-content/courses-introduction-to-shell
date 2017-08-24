@@ -405,7 +405,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:
-## Title
+## Spaces in filenames
 
 When you are interacting with the computer through a graphical file explorer,
 it's easy and sensible to give files multi-word names like `July 2017.csv`.
