@@ -367,7 +367,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
 - No: this example defines and uses the variable `files` in the same shell.
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:39b5dcf81a
 ## Pipes in loops
 
 Printing filenames is sometimes useful for debugging,
@@ -404,7 +404,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 # FIXME
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
 ## Spaces in filenames
 
 When you are interacting with the computer through a graphical file explorer,
