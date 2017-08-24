@@ -227,3 +227,142 @@ The value of an undefined variable is an empty string.
 - Correct!
 - No: `priors` is an environment variable but `tests` is not.
 - No: `priors` is an environment variable.
+
+--- type:ConsoleExercise xp:100 key:
+## Loops
+
+Shell variables are also used in *loops*,
+which repeat commands many times.
+Copy and paste the following command into the shell prompt:
+
+```{shell}
+for suffix in gif jpg png; do echo $suffix; done
+```
+
+When you run it by pressing enter,
+it produces:
+
+```
+gif
+jpg
+png
+```
+
+The loop's parts are:
+
+1. The skeleton `for ...variable... in ...list...; ...body...; done
+2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
+3. The variable that keeps track of which thing the loop is currently processing (in our case, `suffix`).
+4. The body of the loop that does the processing (in our case, `echo $suffix`).
+
+Notice that the body uses `$suffix` to get the variable's value instead of just `suffix`,
+just like it does with any other shell variable.
+Also notice where the semi-colons go:
+the first one comes between the list and the keyword `do`,
+and the second comes between the body and the keyword `done`.
+
+*** =instructions
+
+Modify the loop so that it prints:
+
+```
+docx
+odt
+pdf
+```
+
+*** =solution
+```{bash}
+for suffix in docx odt pdf; do echo $suffix; done
+```
+
+*** =sct
+```{python}
+# FIXME
+```
+
+--- type:ConsoleExercise xp:100 key:
+## Loops and wildcards
+
+If you want to loop over a set of files,
+you can type in the names of those files by hand when writing the loop.
+Alternatively,
+you can rely the shell's expansion of wildcards.
+Try running this loop in the console:
+
+```{shell}
+for filename in seasonal/*.csv; do echo $filename; done
+```
+
+It prints:
+
+```
+seasonal/autumn.csv
+seasonal/spring.csv
+seasonal/summer.csv
+seasonal/winter.csv
+```
+
+because the shell expands `seasonal/*.csv` to be a list of four filenames
+*before* it runs the loop.
+
+*** =instructions
+
+Modify the wildcard expression so that the loop only prints the names of the spring and summer data files.
+
+*** =solution
+```{bash}
+for filename in seasonal/s*.csv; do echo $filename; done
+```
+
+*** =sct
+```{python}
+# FIXME
+```
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+## Using variables for sets of files
+
+It's very common to define a variable using a wildcard
+in order to store the names of a set of files,
+and then use that variable later.
+For example,
+you could define a variable like this:
+
+```{shell}
+datasets=seasonal/*.csv
+```
+
+and then display the files' names using:
+
+```{shell}
+for filename in $datasets; do echo $filename; done
+```
+
+<hr>
+
+If you run these two commands in your home directory,
+how many lines of output will they print?
+
+```{shell}
+files=seasonal/*.csv
+for f in files; do echo $f; done
+```
+
+(Read the first part of the loop carefully before answering.)
+
+*** =possible_answers
+- None: since the first line doesn't say `export files`, that variable has no value in the second line.
+- [One: the word "files".]
+- Four: the names of all four seasonal data files.
+- The shell will display an error message saying that `files` is not defined in the second line.
+
+*** =hint
+
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+
+*** =feedbacks
+- No: this example defines and uses the variable `files` in the same shell.
+- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
+- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+- No: this example defines and uses the variable `files` in the same shell.
