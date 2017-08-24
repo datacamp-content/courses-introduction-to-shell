@@ -116,3 +116,114 @@ echo Home is $HOME.
 ```{python}
 # FIXME
 ```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Shell variables
+
+The other kind of variable available to you is called a *shell variable*.
+It's like a local variable in a regular programming language,
+in that it only has a value in the shell,
+not in any programs you run from the shell.
+
+To create a shell variable,
+you simply assign a value to a name:
+
+```{shell}
+training=seasonal/summer.csv
+```
+
+Any time you use `$training` after that,
+the shell will replace it with `seasonal/summer.csv`.
+
+*** =instructions
+
+Define a shell variable called `testing` with the value `seasonal/winter.csv`,
+and then run the command `head -n 1 $testing` to check its value.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+testing=seasonal/winter.csv
+head -n $1 $testing
+```
+
+*** =sct
+```{python}
+# FIXME
+```
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+## Creating environment variables
+
+You create a normal shell variable by assigning a name to a value.
+To create an environment variable,
+you must also use the keyword `export`:
+
+```{shell}
+export testing=seasonal/winter.csv
+```
+
+To see the difference between the two kinds of variables,
+you can define `training` to be `seasonal/summer.csv`
+and `testing` to be `seasonal/winter.csv`
+and then run the shell script `bin/show-data-sets.sh`,
+which contains these two lines:
+
+```{shell}
+echo training is $training
+echo testing is $testing
+```
+
+It prints:
+
+```
+training is
+testing is seasonal/winter.csv
+```
+
+because the shell variable `training` *isn't* set in the script,
+while the environment variable `testing` *is*.
+
+<hr>
+
+If you define two variables like this:
+
+```{shell}
+export priors=/tmp/training-set.csv
+tests=/tmp/user-data.csv
+```
+
+and then run this shell script:
+
+```{shell}
+echo Priors and testing data are $priors and $tests
+```
+
+what is its output?
+
+*** =possible_answers
+- Priors and testing data are /tmp/training-set.csv and /tmp/user-data.csv
+- [Priors and testing data are /tmp/training-set.csv and ]
+- Priors and testing data are  and /tmp/user-data.csv
+- Priors and testing data are  and 
+
+*** =hint
+
+The value of an undefined variable is an empty string.
+
+*** =feedbacks
+- No: `tests` is not an environment variable.
+- Correct!
+- No: `priors` is an environment variable but `tests` is not.
+- No: `priors` is an environment variable.
