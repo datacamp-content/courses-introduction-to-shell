@@ -117,7 +117,7 @@ echo Home is $HOME.
 # FIXME
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
 ## Shell variables
 
 The other kind of variable available to you is called a *shell variable*.
@@ -163,7 +163,7 @@ head -n $1 $testing
 # FIXME
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:ed34d567c3
 ## Creating environment variables
 
 You create a normal shell variable by assigning a name to a value.
