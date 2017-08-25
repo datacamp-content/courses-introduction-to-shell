@@ -6,7 +6,7 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
---- type:TabConsoleExercise key:
+--- type:TabConsoleExercise key:7371cb72b9
 ## Test exercise
 
 You have been using the shell interactively so far:
@@ -44,7 +44,8 @@ chmod u+x /home/repl/bin/dates.sh
 ```
 
 *** =type1: NormalExercise
-*** =key1: 
+*** =key1: 684c33b0d3
+
 *** =xp1: 10
 
 *** =instructions1
@@ -71,7 +72,8 @@ Ex().success_msg('Should be testing the script that the user has entered.')
 ```
 
 *** =type2: ConsoleExercise
-*** =key2: 
+*** =key2: 32d2c3de6d
+
 *** =xp2: 10
 
 *** =instructions2
