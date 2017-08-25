@@ -2,7 +2,7 @@
 HOME_DIR=/home/repl
 SOLUTIONS_DIR=/tmp/solutions
 USER_GROUP=repl:repl
-COURSE_ID=course_5160
+COURSE_ID=course_5218
 ARCHIVE=filesys.zip
 
 # Report start.
