@@ -36,6 +36,7 @@ What is its value?
 - 100
 - [500]
 - The variable is not there.
+- None of the above.
 
 *** =hint
 
@@ -43,12 +44,13 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 *** =pre_exercise_code
 ```{shell}
-
 ```
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*set\s*grep\s+HISTFILESIZE\s*',
+                        fixed=False,
+                        msg='Pipe the output of `set` to `grep`.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
@@ -58,6 +60,8 @@ The `echo` command prints its arguments:
 
 ```{shell}
 echo hello DataCamp!
+```
+```
 hello DataCamp!
 ```
 
@@ -65,6 +69,8 @@ If you try to use it to print a variable's value like this:
 
 ```{shell}
 echo HOME
+```
+```
 HOME
 ```
 
@@ -74,6 +80,8 @@ you must put a dollar sign `$` in front of it:
 
 ```{shell}
 echo $HOME
+```
+```
 /home/repl
 ```
 
@@ -91,7 +99,7 @@ Use `echo` to display the message:
 Home is /home/repl.
 ```
 
-but using the variable `HOME` instead of typing `/home/repl` in directly.
+but use the variable `HOME` instead of typing `/home/repl` in directly.
 
 *** =hint
 
@@ -99,7 +107,6 @@ Remember to use `$HOME` to get the variable's value.
 
 *** =pre_exercise_code
 ```{shell}
-
 ```
 
 *** =sample_code
@@ -114,7 +121,9 @@ echo Home is $HOME.
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*echo\s+Home\s+is\s+$HOME\s*',
+                        fixed=False,
+                        msg='Remember to put `$` in front of the variable name')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
@@ -130,6 +139,15 @@ you simply assign a value to a name:
 
 ```{shell}
 training=seasonal/summer.csv
+```
+
+and test its value with `echo`:
+
+```{shell}
+echo $training
+```
+```
+seasonal/summer.csv
 ```
 
 Any time you use `$training` after that,
@@ -155,12 +173,17 @@ and then run the command `head -n 1 $testing` to check its value.
 *** =solution
 ```{shell}
 testing=seasonal/winter.csv
-head -n $1 $testing
+head -n 1 $testing
 ```
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s*',
+                        fixed=False,
+                        msg='Set a variable using `variable=value`.')
+Ex().test_student_typed(r'\s*head\s+-n\s+1\s+$testing\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:ed34d567c3
@@ -168,7 +191,7 @@ head -n $1 $testing
 
 You create a normal shell variable by assigning a name to a value.
 To create an environment variable,
-you must also use the keyword `export`:
+you must prefix the assignment with the keyword `export`:
 
 ```{shell}
 export testing=seasonal/winter.csv
@@ -177,15 +200,14 @@ export testing=seasonal/winter.csv
 To see the difference between the two kinds of variables,
 you can define `training` to be `seasonal/summer.csv`
 and `testing` to be `seasonal/winter.csv`
-and then run the shell script `bin/show-data-sets.sh`,
-which contains these two lines:
+and then run a shell script that contains these two lines:
 
 ```{shell}
 echo training is $training
 echo testing is $testing
 ```
 
-It prints:
+it prints:
 
 ```
 training is
@@ -194,6 +216,8 @@ testing is seasonal/winter.csv
 
 because the shell variable `training` *isn't* set in the script,
 while the environment variable `testing` *is*.
+(Note that if a variable doesn't have a value,
+the shell replaces it with an empty string.)
 
 <hr>
 
@@ -233,14 +257,14 @@ The value of an undefined variable is an empty string.
 
 Shell variables are also used in *loops*,
 which repeat commands many times.
-Copy and paste the following command into the shell prompt:
+Copy and paste this command into the shell:
 
 ```{shell}
 for suffix in gif jpg png; do echo $suffix; done
 ```
 
-When you run it by pressing enter,
-it produces:
+and run it by pressing enter.
+It produces:
 
 ```
 gif
@@ -278,16 +302,16 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+$suffix;\s+done\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
 ## Loops and wildcards
 
-If you want to loop over a set of files,
-you can type in the names of those files by hand when writing the loop.
-Alternatively,
-you can rely the shell's expansion of wildcards.
+You can always type in the names of the files you want to process when writing the loop,
+but it's usually better to use wildcards.
 Try running this loop in the console:
 
 ```{shell}
@@ -304,7 +328,7 @@ seasonal/winter.csv
 ```
 
 because the shell expands `seasonal/*.csv` to be a list of four filenames
-*before* it runs the loop.
+before it runs the loop.
 
 *** =instructions
 
@@ -317,7 +341,9 @@ for filename in seasonal/s*.csv; do echo $filename; done
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\s+$filename;\s+done\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
