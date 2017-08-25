@@ -317,39 +317,6 @@ Trace the path one directory at a time.
 
 Ex().test_mc(2, [err1, correct, err3])
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
-## Editing files
-
-FIXME: fill this in once we know how learners will edit files.
-
-*** =instructions
-
-FIXME: have learners edit `thesis.txt`.
-
-For now, please just type the word `FIXME` in all caps.
-
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-
-```
-
-*** =sct
-```{python}
-Ex().test_student_typed(r'\s*FIXME\s*', fixed=False, msg='Type `FIXME` in all caps.')
-```
-
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
 ## Copying single files
 
