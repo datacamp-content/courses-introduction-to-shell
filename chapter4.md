@@ -6,6 +6,100 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
+--- type:TabConsoleExercise key:
+## Test exercise
+
+You have been using the shell interactively so far:
+each time you want to do something,
+you enter a command
+and the shell runs it right away.
+But since the commands you type in are just text,
+the shell lets you store them in files to use over and over again.
+To start exploring this powerful capability,
+put the following command in a file called `headers.sh`:
+
+```{shell}
+head -n 1 seasonal/*.csv
+```
+
+This selects the first row from each of the CSV files in the `seasonal` directory.
+Once you have created this file,
+you can run it with:
+
+```{shell}
+bash headers.sh
+```
+
+This tells Bash (which is the shell we are using)
+to run the commands contained in the file `dates.sh`.
+Sure enough,
+it produces the same output you would have got
+if you had typed the commands directly into the shell.
+
+*** =pre_exercise_code
+```{shell}
+mkdir -p /home/repl/bin
+cp /usr/local/share/chapter4/dates.sh /home/repl/bin/dates.sh
+chmod u+x /home/repl/bin/dates.sh
+```
+
+*** =type1: NormalExercise
+*** =key1: 
+*** =xp1: 10
+
+*** =instructions1
+
+Write a shell script that extracts the date column (including header)
+from all of the seasonal data files.
+Assume that you are running the script in your home directory.
+
+*** =hint1
+
+*** =sample_code1
+```{bash}
+
+```
+
+*** =solution1
+```{bash}
+cut -d , -f 1 seasonal/*.csv
+```
+
+*** =sct1
+```{python}
+Ex().success_msg('Should be testing the script that the user has entered.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2: 
+*** =xp2: 10
+
+*** =instructions2
+
+A copy of the correct solution has been put in `~/bin/dates.sh`.
+Run it from your home directory.
+
+*** =hint2
+
+Use `bash` with the path to the script.
+
+*** =sample_code2
+```{bash}
+
+```
+
+*** =solution2
+```{bash}
+bash bin/dates.sh
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*bash\s+bin/dates.sh\s*',
+                        fixed=False,
+                        msg='Run `bash` with the relative path to the script file as its only parameter.')
+```
+
 --- type:NormalExercise lang:shell xp:100 skills:1 key:864f978f0d
 ## Saving commands
 
@@ -38,7 +132,7 @@ if you had typed the commands directly into the shell.
 
 *** =instructions
 
-Create another shell script called `dates.sh`
+Write a shell script called `dates.sh`
 that extracts the date column (including header)
 from all of the seasonal data files.
 
@@ -63,10 +157,11 @@ from all of the seasonal data files.
 ```{python}
 # @dates.sh
 # cut -d , -f 1 seasonal/*.csv
-script = 'dates.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/chapter4/{script}', f'`{script}` does not contain expected contents.',
-                       ignore_whitespace=True)
+# script = 'dates.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/chapter4/{script}', f'`{script}` does not contain expected contents.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:93385e77dd
@@ -128,14 +223,15 @@ Ex().test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
 #  18 incisor
 #  11 molar
 #  17 wisdom
-script = 'teeth.sh'
-output = 'teeth.out'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
-Ex().test_file_compare(f'$HOME/{output}', f'Redirect output to `{output}`.',
-                       f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
-                       ignore_whitespace=True)
+# script = 'teeth.sh'
+# output = 'teeth.out'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+# Ex().test_file_compare(f'$HOME/{output}', f'Redirect output to `{output}`.',
+#                        f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:1b0da86491
@@ -203,14 +299,15 @@ bash count-data.sh seasonal/*.csv > line-count.out
 # tail -q -n +2 $@ | wc -l
 # @line-count.out
 #       92
-script = 'count-data.sh'
-output = 'line-count.out'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
-Ex().test_file_compare(f'$HOME/{output}', f'Redirect output to `{output}`.',
-                       f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
-                       ignore_whitespace=True)
+# script = 'count-data.sh'
+# output = 'line-count.out'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+# Ex().test_file_compare(f'$HOME/{output}', f'Redirect output to `{output}`.',
+#                        f'$ANSWERS/chapter4/{output}', f'`{output}` does not contain expected lines.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:8b14252869
@@ -272,10 +369,11 @@ Use `grep -c` to select and count records.
 ```{python}
 # @count-dates.sh
 # grep -c $2 $1
-script = 'count-dates.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
+# script = 'count-dates.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:4cfeef4849
@@ -450,16 +548,15 @@ Use `o-x` as the permission.
 ```{shell}
 # @safe.sh
 # chmod o-x $@
-script = 'safe.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
+# script = 'safe.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:64d04c6bc7
 ## Creating first-class commands
-
-FIXME: check that `~/bin` is in `PATH`.
 
 As you use the shell to work with data,
 you will build up your own toolbox of useful scripts.
@@ -499,12 +596,13 @@ lines.sh seasonal/*.csv
 ```{shell}
 # @bin/lines.sh
 # wc -l $@ | grep -v total
-import os
-script = 'bin/lines.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
-Ex().test(os.access(f'$HOME/{script}', os.X_OK), f'{script} is not executable (did you forget `chmod`?).')
+# import os
+# script = 'bin/lines.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+# Ex().test(os.access(f'$HOME/{script}', os.X_OK), f'{script} is not executable (did you forget `chmod`?).')
+Ex().success_msg('Should be testing')
 ```
 
 --- type:BulletConsoleExercise key:99eae18d67
@@ -547,11 +645,12 @@ You solved this problem when we first introduced pipes.
 ```{python}
 # @bin/range.sh
 # wc -l $@ | grep -v total
-import os
-script = 'bin/range.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
+# import os
+# script = 'bin/range.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 *** =type2: ConsoleExercise
@@ -580,11 +679,12 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 ```{python}
 # @bin/range.sh
 # wc -l $@ | grep -v total | sort -n | head -n 1
-import os
-script = 'bin/range.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
+# import os
+# script = 'bin/range.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 *** =type3: ConsoleExercise
@@ -615,11 +715,12 @@ A shell script can contain any number of commands.
 # @bin/range.sh
 # wc -l $@ | grep -v total | sort -n | head -n 1
 # wc -l $@ | grep -v total | sort -n -r | head -n 1
-import os
-script = 'bin/range.sh'
-Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
-                       f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
-                       ignore_whitespace=True)
+# import os
+# script = 'bin/range.sh'
+# Ex().test_file_compare(f'$HOME/{script}', f'Put your solution in `{script}`.',
+#                        f'$ANSWERS/{script}', f'`{script}` does not contain expected commands.',
+#                        ignore_whitespace=True)
+Ex().success_msg('Should be testing')
 ```
 
 *** =type4: ConsoleExercise
