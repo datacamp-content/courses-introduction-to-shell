@@ -602,74 +602,38 @@ Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seaso
                         msg='Use `-c` to get a count.')
 ```
 
---- type:BulletConsoleExercise key:2054e64e49
-## Wrapping up
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## You cannot always treat data as text
 
-To pull together everything we have done in this chapter,
-you will find and use a command that stitches data files together in columns.
+The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
+that can be used to combine data files instead of cutting them up.
 
-FIXME: this exercise doesn't work right now because of platform limitations.
+<hr>
 
-*** =type1: ConsoleExercise
-*** =key1: 8ad337a04f
-
-*** =xp1: 20
-
-*** =instructions1
-
-The `SEE ALSO` section of the manual page for `cut` refers to `colrm` and `paste`.
 Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table.
+and then run `paste` to combine the autumn and winter data files in a single table
+using a comma as a separator.
+What's wrong with the output from a data analysis point of view?
 
-*** =hint1
+*** =instructions
+- The column headers are repeated.
+- The last few rows have the wrong number of columns.
+- Some of the data from `winter.csv` is missing.
 
-Like many commands, `paste` takes any number of filenames as parameters.
+*** =hint
 
-*** =sample_code1
+If you `cut` the output of `paste` using commas as a separator,
+would it produce the right answer?
+
+*** =pre_exercise_code
 ```{shell}
+
 ```
 
-*** =solution1
-```{shell}
-paste seasonal/autumn.csv seasonal/winter.csv
-```
-
-*** =sct1
+*** =sct
 ```{python}
-Ex().test_student_typed(r'\s*paste\s+seasonal/autumn.csv\s+seasonal/winter.csv\s*',
-                        fixed=False,
-                        msg='Use `paste` with the names of both files.')
-```
-
-*** =type2: ConsoleExercise
-*** =key2: a45f125925
-
-*** =xp2: 30
-
-*** =instructions2
-
-Modify your previous command so that it joins the two files with a comma instead of a tab.
-That that the output of the answer to this question
-is incorrect from a data analysis point of view
-because joining the lines has produced rows with different numbers of columns:
-there's a missing `,` whenever the second file overflows.
-
-*** =hint2
-
-Re-read the manual page if necessary to find out what flag you need to use.
-
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
-```{shell}
-paste -d , seasonal/autumn.csv seasonal/winter.csv
-```
-
-*** =sct2
-```{python}
-Ex().test_student_typed(r'\s*paste\s+-d\s*,s+seasonal/autumn.csv\s+seasonal/winter.csv\s*',
-                        fixed=False,
-                        msg='Use `paste -d ,` with the names of both files.')
+err1 = 'True, but it is not necessarily an error.'
+correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
+err3 = 'No, all of the winter data is there.'
+Ex().test_mc(2, [err1, correct2, err3])
 ```
