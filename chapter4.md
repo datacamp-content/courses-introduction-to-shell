@@ -391,7 +391,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
 ## Names and values
 
 A common mistake is to forget to use `$` before the name of a variable.
@@ -534,7 +534,7 @@ what will happen:
 - Correct.
 - Unfortunately not.
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f6d0530991
 ## Multiple commands in loops
 
 The loops you have seen so far all have a single command or pipeline in their body,
