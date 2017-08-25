@@ -1,306 +1,162 @@
 ---
-title       : Creating new tools
+title       : Batch processing
 description : >-
-  History lets you repeat things with just a few keystrokes,
-  and pipes let you combine existing commands to create new ones.
-  In this chapter, you will see how to go one step further
-  and create new commands of your own.
-  
---- type:NormalExercise lang:shell xp:100 skills:1 key:864f978f0d
-## Shell scripts
+  Most Unix commands will process many files at once.
+  This chapter will show you how to make your own pipelines do that.
+  Along the way, you will see how the shell uses variables to store information.
 
-You have been using the shell interactively so far:
-each time you want to do something,
-you enter a command
-and the shell runs it right away.
-But since the commands you type in are just text,
-the shell lets you store them in files to use over and over again.
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:e4d5f4adea
+## Environment variables
 
-To start exploring this powerful capability,
-put the following command in a file called `dates.sh`:
+Like other programs, the shell stores information in variables.
+Soem of these,
+called *environment variables*,
+are created by the operating system and available all the time.
+Environment variables' names are conventionally written in upper case,
+and a few of the more commonly-used ones are shown below.
 
-```{shell}
-cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
-```
+| Variable | Purpose                           | Value                 |
+|----------|-----------------------------------|-----------------------|
+| `HOME`   | User's home directory             | `/home/repl`          |
+| `PWD `   | Present working directory         | Same as `pwd` command |
+| `SHELL`  | Which shell program is being used | `/bin/bash`           |
+| `USER`   | User's ID                         | `repl`                |
 
-Reading from left to right,
-this selects the first column from all of the CSV files in the `seasonal` directory,
-removes lines with the word "Date",
-sorts the result,
-and removes duplicates.
-In short,
-this pipeline produces a list of the unique dates in the seasonal date.
-
-Once you have created this file,
-run the following command:
-
-```{shell}
-bash dates.sh
-```
-
-This tells Bash (which is the shell we are using)
-to run the commands contained in the file `dates.sh`.
-Sure enough,
-it produces the same list of dates that would have been produced
-if you had typed the commands directly into the shell.
-By putting those commands in a file,
-though,
-you have saved yourself having to remember the steps a second, third, or hundredth time,
-and you can be sure that you are doing exactly the same thing
-each time you get the files' unique dates.
-
-A file full of shell commands is called a *shell script*,
-or sometimes just a "script" for short.
-Shell scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts and which are not.
-
-*** =instructions
-
-Create another shell script called `teeth.sh`
-that prints a count of the number of times each tooth name appears in the seasonal data.
-
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
-```
-
-*** =sct
-```{python}
-# FIXME check
-```
-
---- type:NormalExercise lang:shell xp:100 skills:1 key:1b0da86491
-## Passing filenames to scripts
-
-A script that re-runs exactly the same commands on exactly the same files is useful
-as a record of what you did,
-but one that allows you specify what files you want to process is usually more useful.
-To help you do this,
-the shell has a special expression `$@` (dollar sign immediately followed by ampersand)
-that means "all of the command-line parameters given by the user when the script was run".
-To see how this works,
-edit `dates.sh` and replace `seasonal/*.csv` with `$@`
-so that the file contains the line:
-
-```{shell}
-cut -d , -f 1 $@ | grep -v Date | sort | uniq
-```
-
-If you run the command with:
-
-```{shell}
-bash dates.sh seasonal/summer.csv`
-```
-
-then the shell replaces `$@` with `seasonal.summer.csv`
-and the pipeline processes only that file.
-If you run it like this:
-
-```{shell}
-bash dates.sh seasonal/autumn.csv seasonal/winter.csv
-```
-
-it processes those two files,
-while:
-
-```{shell}
-bash dates.sh seasonal/*.csv
-```
-
-processes all four files,
-just like the original script.
-
-*** =instructions
-
-Along with `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-Use this to write a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
-
-```{shell}
-bash column.sh seasonal/autumn.dat 1
-```
-
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-cut -d , -f $2 $1
-```
-
-*** =sct
-```{python}
-# FIXME check
-```
-
---- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:4cfeef4849
-## File details
-
-Unix stores a set of properties for each file along with its contents.
-You can use `ls` with the `-l` option to view these.
-For example,
-`ls -l` in the `seasonal` directory displays something like this:
-
-```
--rw-r--r--  1 repl  staff  399 18 Aug 09:27 autumn.csv
--rw-r--r--  1 repl  staff  458 18 Aug 09:27 spring.csv
--rw-r--r--  1 repl  staff  479 18 Aug 09:27 summer.csv
--rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
-```
-
-This listing shows that the files are owned by a user named `repl`
-who belongs to a group named `staff`,
-that they range in size from 399 to 497 bytes,
-that they were last modified on August 18 at 9:27 in the morning.
-(The next exercise will look at the cryptic `rw-` strings in the first column.)
+To get a complete list (which is quite long),
+you can type `set` in the shell.
 
 <hr>
-How many bytes are in the file `course.txt`?
 
-*** =possible_answers
-- 18
-- 102
-- [485]
-
-*** =hint
-Use the same command shown in the lesson.
-
-*** =feedbacks
-- No - you are looking at the wrong row.
-- No - you are looking at the wrong row.
-- Yes.
-
---- type:PlainMultipleChoiceExercise lang:shell xp:50 skills:1 key:934eccc0a9
-## File permissions
-
-Unix keeps track of what it is and isn't allowed to do with particular files and directories
-by storing a set of *permissions* for each one.
-The three basic permissions are read, write, and execute,
-which (as their names suggest) mean "read the contents",
-"modify the contents",
-and "run the contents".
-Each permission is stored independently:
-you can,
-for example,
-have read and execute for a file but not write,
-or read and write but not execute,
-and so on.
-These permissions are often written `rwx`,
-with dashes for permissions that are missing,
-so the two examples just given would be `r-x` (read and execute)
-and `rw-` (read and write).
-
-Since Unix was designed as a multi-user operating system,
-it actually stores three sets of permissions for each file or directory.
-One set specifies what the owner of that file or directory can do;
-the second specifies what people in the owner's group can do,
-and the third specifies what everyone else is allowed to do.
-For example,
-`ls -l` in the `seasonal` directory displays something like:
-
-```
--rw-r--r--  1 repl  staff  399 18 Aug 09:27 autumn.csv
--rw-r--r--  1 repl  staff  458 18 Aug 09:27 spring.csv
--rw-r--r--  1 repl  staff  479 18 Aug 09:27 summer.csv
--rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
-```
-
-which shows that each file can be read and written by their owner (the first `rw-`),
-read by other people in the `staff` group (`r--`),
-and also read by everyone else on the machine (`r--`).
+Use `set` and `grep` to display the value of `HISTFILESIZE`,
+which determines how many old commands are stored in your command history.
+What is its value?
 
 *** =instructions
-
-What can other users who *aren't* members of your group do with the file `course.txt`?
-
-*** =possible_answers
-- [Read.]
-- Read and write.
-- Read and execute.
+- 50
+- 100
+- [500]
+- The variable is not there.
 - None of the above.
 
 *** =hint
 
-Use `ls -l` and read the permissions in groups of three characters.
+Use `set | grep HISTFILESIZE` to get the line you need.
 
-*** =feedbacks
-- Correct.
-- No - the third group of characters does not contain a "w".
-- No - the third group of characters does not contain an "x".
-- No - the third group of characters contains an "r".
-
---- type:NormalExercise lang:shell xp:100 skills:1 key:b1d307aae6
-## Making scripts runnable
-
-You can always run a script by typing `bash script.sh`,
-but it's easier on the eyes and fingers to run it directly by typing `script.sh`.
-If you try doing this now,
-though,
-the shell will print an error message
-because you haven't told it that it's allowed to run the contents of that file.
-
-The solution is to change the permissions of the file using `chmod`
-(which stands for "change mode").
-The first parameter to `chmod` describes what permissions you want the file to have;
-all the other parameters should be the names of the files whose permissions you are changing.
-
-To describe permissions,
-you write an expression like `u=rw` or `g=rwx`.
-The first letter is one of "u", "g", or "o",
-meaning "user" (you),
-"group" (other people in your group),
-or "other" (for everyone else).
-The letters after the equals sign specify the permissions you want to give the file.
-Thus,
-to make your `dates.sh` script runnable,
-and to prevent yourself from accidentally overwriting its contents,
-you would write:
-
+*** =pre_exercise_code
 ```{shell}
-chmod u=rx dates.sh
 ```
 
-You can also add or subtract permissions by using "+" or "-" instead of "=".
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*set\s*grep\s+HISTFILESIZE\s*',
+                        fixed=False,
+                        msg='Pipe the output of `set` to `grep`.')
+```
 
-Unix's model of permissions dates from an earlier and more innocent time.
-Today,
-you will usually not care about group permissions unless you are working on a cluster
-(since you're probably the only person working on your laptop).
-You should probably also not change the permissions of directories without first doing a bit of reading:
-Unix is consistent in how it treats these,
-but not entirely intuitive…
+--- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
+## Using echo
+
+The `echo` command prints its arguments:
+
+```{shell}
+echo hello DataCamp!
+```
+```
+hello DataCamp!
+```
+
+If you try to use it to print a variable's value like this:
+
+```{shell}
+echo HOME
+```
+```
+HOME
+```
+
+it will print the variable's name.
+To get the variable's value,
+you must put a dollar sign `$` in front of it:
+
+```{shell}
+echo $HOME
+```
+```
+/home/repl
+```
+
+This is true elsewhere as well:
+to get the value of a variable called `X`,
+you must write `$X`.
+(This is so that the shell can tell whether you mean "a file named X"
+or "the value of a variable named X".)
 
 *** =instructions
 
-The directory `scripts` contains two shell scripts called `dates.sh` and `teeth.sh`.
-Using a single command,
-set their permissions so that everyone can read and execute them directly
-(i.e., without typing `bash` in front of their names).
-Run each script in order on all of the files in the `seasonal` directory
-to test that your changes have worked.
+Use `echo` to display the message:
+
+```{shell}
+Home is /home/repl.
+```
+
+but use the variable `HOME` instead of typing `/home/repl` in directly.
+
+*** =hint
+
+Remember to use `$HOME` to get the variable's value.
+
+*** =pre_exercise_code
+```{shell}
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+echo Home is $HOME.
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*echo\s+Home\s+is\s+$HOME\s*',
+                        fixed=False,
+                        msg='Remember to put `$` in front of the variable name')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
+## Shell variables
+
+The other kind of variable available to you is called a *shell variable*.
+It's like a local variable in a regular programming language,
+in that it only has a value in the shell,
+not in any programs you run from the shell.
+
+To create a shell variable,
+you simply assign a value to a name:
+
+```{shell}
+training=seasonal/summer.csv
+```
+
+and test its value with `echo`:
+
+```{shell}
+echo $training
+```
+```
+seasonal/summer.csv
+```
+
+Any time you use `$training` after that,
+the shell will replace it with `seasonal/summer.csv`.
+
+*** =instructions
+
+Define a shell variable called `testing` with the value `seasonal/winter.csv`,
+and then run the command `head -n 1 $testing` to check its value.
 
 *** =hint
 
@@ -316,110 +172,422 @@ to test that your changes have worked.
 
 *** =solution
 ```{shell}
-chmod o=rx scripts/*.sh
-scripts/dates.sh seasonal/*.csv
-scripts/teeth.sh seasonal/*.csv
+testing=seasonal/winter.csv
+head -n 1 $testing
 ```
 
 *** =sct
-```{shell}
-# FIXME: check file permissions
+```{python}
+Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s*',
+                        fixed=False,
+                        msg='Set a variable using `variable=value`.')
+Ex().test_student_typed(r'\s*head\s+-n\s+1\s+$testing\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
 ```
 
---- type:BulletConsoleExercise key:99eae18d67
-## BulletConsoleExercise Example
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:ed34d567c3
+## Creating environment variables
 
-To wrap up this course,
-you will create a script that tells you how many records are in the shortest and longest of your data files.
+You create a normal shell variable by assigning a name to a value.
+To create an environment variable,
+you must prefix the assignment with the keyword `export`:
+
+```{shell}
+export testing=seasonal/winter.csv
+```
+
+To see the difference between the two kinds of variables,
+you can define `training` to be `seasonal/summer.csv`
+and `testing` to be `seasonal/winter.csv`
+and then run a shell script that contains these two lines:
+
+```{shell}
+echo training is $training
+echo testing is $testing
+```
+
+it prints:
+
+```
+training is
+testing is seasonal/winter.csv
+```
+
+because the shell variable `training` *isn't* set in the script,
+while the environment variable `testing` *is*.
+(Note that if a variable doesn't have a value,
+the shell replaces it with an empty string.)
+
+<hr>
+
+If you define two variables like this:
+
+```{shell}
+export priors=/tmp/training-set.csv
+tests=/tmp/user-data.csv
+```
+
+and then run this shell script:
+
+```{shell}
+echo Priors and testing data are $priors and $tests
+```
+
+what is its output?
+
+*** =possible_answers
+- Priors and testing data are /tmp/training-set.csv and /tmp/user-data.csv
+- [Priors and testing data are /tmp/training-set.csv and ]
+- Priors and testing data are  and /tmp/user-data.csv
+- Priors and testing data are  and 
+
+*** =hint
+
+The value of an undefined variable is an empty string.
+
+*** =feedbacks
+- No: `tests` is not an environment variable.
+- Correct!
+- No: `priors` is an environment variable but `tests` is not.
+- No: `priors` is an environment variable.
+
+--- type:ConsoleExercise xp:100 key:cea10c99b8
+## Loops
+
+Shell variables are also used in *loops*,
+which repeat commands many times.
+Copy and paste this command into the shell:
+
+```{shell}
+for suffix in gif jpg png; do echo $suffix; done
+```
+
+and run it by pressing enter.
+It produces:
+
+```
+gif
+jpg
+png
+```
+
+The loop's parts are:
+
+1. The skeleton `for ...variable... in ...list...; ...body...; done
+2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
+3. The variable that keeps track of which thing the loop is currently processing (in our case, `suffix`).
+4. The body of the loop that does the processing (in our case, `echo $suffix`).
+
+Notice that the body uses `$suffix` to get the variable's value instead of just `suffix`,
+just like it does with any other shell variable.
+Also notice where the semi-colons go:
+the first one comes between the list and the keyword `do`,
+and the second comes between the body and the keyword `done`.
+
+*** =instructions
+
+Modify the loop so that it prints:
+
+```
+docx
+odt
+pdf
+```
+
+*** =solution
+```{bash}
+for suffix in docx odt pdf; do echo $suffix; done
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+$suffix;\s+done\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
+```
+
+--- type:ConsoleExercise xp:100 key:8468b70a71
+## Loops and wildcards
+
+You can always type in the names of the files you want to process when writing the loop,
+but it's usually better to use wildcards.
+Try running this loop in the console:
+
+```{shell}
+for filename in seasonal/*.csv; do echo $filename; done
+```
+
+It prints:
+
+```
+seasonal/autumn.csv
+seasonal/spring.csv
+seasonal/summer.csv
+seasonal/winter.csv
+```
+
+because the shell expands `seasonal/*.csv` to be a list of four filenames
+before it runs the loop.
+
+*** =instructions
+
+Modify the wildcard expression so that the loop only prints the names of the spring and summer data files.
+
+*** =solution
+```{bash}
+for filename in seasonal/s*.csv; do echo $filename; done
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\s+$filename;\s+done\s*',
+                        fixed=False,
+                        msg='Use `head -n 1` and the *value* of the variable.')
+```
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
+## Using variables for sets of files
+
+People often set a variable using a wildcard expression to record a list of filenames.
+For example,
+if you define `datasets` like this:
+
+```{shell}
+datasets=seasonal/*.csv
+```
+
+you can display the files' names later using:
+
+```{shell}
+for filename in $datasets; do echo $filename; done
+```
+
+This saves typing and makes errors less likely.
+
+<hr>
+
+If you run these two commands in your home directory,
+how many lines of output will they print?
+
+```{shell}
+files=seasonal/*.csv
+for f in $files; do echo $f; done
+```
+
+(Read the first part of the loop carefully before answering.)
+
+*** =possible_answers
+- None: since the first line doesn't say `export files`, that variable has no value in the second line.
+- One: the word "files".
+- [Four: the names of all four seasonal data files.]
+
+*** =hint
+
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+
+*** =feedbacks
+- No: this example defines and uses the variable `files` in the same shell.
+- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
+- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
+## Names and values
+
+A common mistake is to forget to use `$` before the name of a variable.
+When you do this,
+the shell uses the name you have typed
+rather than the value of that variable.
+
+Another common mistake is to mis-type the variable's name.
+For example,
+if you define `datasets` like this:
+
+```{shell}
+datasets=seasonal/*.csv
+```
+
+and then type:
+
+```{shell}
+echo $datsets
+```
+
+the shell doesn't print anything,
+because `datsets` (without the second "a") isn't defined.
+
+<hr>
+
+If you run these two commands in your home directory,
+how many lines of output will they print?
+
+```{shell}
+files=seasonal/*.csv
+for f in files; do echo $f; done
+```
+
+(Read the first part of the loop carefully before answering.)
+
+*** =possible_answers
+- None: since the first line doesn't say `export files`, that variable has no value in the second line.
+- [One: the word "files".]
+- Four: the names of all four seasonal data files.
+
+*** =hint
+
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+
+*** =feedbacks
+- No: this example defines and uses the variable `files` in the same shell.
+- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
+- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+
+--- type:ConsoleExercise xp:100 key:39b5dcf81a
+## Pipes in loops
+
+Printing filenames is useful for debugging,
+but the real purpose of loops is to do things with multiple files.
+This loop:
+
+```{shell}
+for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
+```
+
+prints the second line of each data file.
+It has the same structure as the others you have already seen:
+all that's different is that its body is a pipeline of two commands instead of a single command.
+
+*** =instructions
+
+Write a loop that produces the same output as
+
+```{shell}
+grep -h 2017-07 seasonal/*.csv
+```
+
+but uses a loop to process each file separately.
+(Remember that the `-h` flag tells `grep` *not* to print filenames in the output.)
+Use `file` as the name of the loop variable.
+
+*** =solution
+```{bash}
+for file in seasonal/*.csv; do grep 2017-07 $file; done
+```
+
+*** =sct
+```{python}
+Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/*.csv;\s+do\s+grep\s+2017-07\s+$\1;\s+done\s*',
+                        fixed=False,
+                        msg='Use `grep 2017-07 $file` as the body of the loop.')
+```
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
+## Spaces in filenames
+
+It's easy and sensible to give files multi-word names like `July 2017.csv`
+when you are using a graphical file explorer.
+However,
+this causes problems when you are working in the shell.
+For example,
+suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
+You cannot type:
+
+```{shell}
+mv July 2017.csv 2017 July data.csv
+```
+
+because it looks to the shell as though you are trying to move
+four files called `July`, `2017.csv`, `2017`, and `July` (again)
+into a directory called `data.csv`.
+
+Instead,
+you have quote the files' names
+so that the shell treats each one as a single parameter:
+
+```{shell}
+mv 'July 2017.csv' '2017 July data.csv'
+```
+
+<hr>
+
+If you have two files called `current.csv` and `last year.csv`
+(with a space in its name)
+and you type:
+
+```{shell}
+rm current.csv last year.csv
+```
+
+what will happen:
+
+*** =possible_answers
+- The shell will print an error message because `last` and `year.csv` do not exist.
+- The shell will delete `current.csv`.
+- [Both of the above.]
+- Nothing.
+
+*** =hint
+
+*** =feedbacks
+- Yes, but that's not all.
+- Yes, but that's not all.
+- Correct.
+- Unfortunately not.
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f6d0530991
+## Multiple commands in loops
+
+The loops you have seen so far all have a single command or pipeline in their body,
+but a loop can contain any number of commands.
+To tell the shell where one ends and the next begins,
+you must separate them with semi-colons:
+
+```{shell}
+for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
+```
+```
+seasonal/autumn.csv
+2017-01-05,canine
+seasonal/spring.csv
+2017-01-25,wisdom
+seasonal/summer.csv
+2017-01-11,canine
+seasonal/winter.csv
+2017-01-03,bicuspid
+```
+
+<hr>
+
+Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
+so that you ask the shell to run:
+
+```{shell}
+for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
+```
+
+What will the shell do?
+
+*** =instructions
+- Print an error message.
+- Print one line for each of the four files.
+- Print one line for `autumn.csv` (the first file).
+- Print the last line of each file.
+
+*** =hint
+
+You can pipe the output of `echo` to `tail`.
 
 *** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
 ```{python}
-```
+err1 = "No: the loop will run, it just won't do something sensible."
+correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
+err3 = "No: the loop runs one for each of the four filenames."
+err4 = "No: the input of `tail` is the output of `echo` for each filename."
 
-*** =type1: ConsoleExercise
-*** =key1: a1e55487fb
-
-*** =xp1: 10
-
-*** =instructions1
-
-Create a script called `range.sh`
-that uses `wc -l`, `grep`, `sort`, and `head` in a pipeline in that order
-to get the name of, and number of records in,
-the shortest data file in the `seasonal` directory.
-
-*** =hint1
-
-You solved this problem when we first introduced pipes.
-
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
-```{shell}
-wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
-```
-
-*** =sct1
-```{python}
-# FIXME: test file contents and permissions.
-```
-
-*** =type2: ConsoleExercise
-*** =key2: e8ece27fe7
-
-*** =xp2: 20
-
-*** =instructions2
-
-Modify `range.sh` so that it takes the name of a single directory as a command-line parameter
-and displays the name and record count of the shortest CSV file in that directory.
-
-*** =hint3
-
-The expression `$1` refers to the first command-line parameter given to a script.
-
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
-```{shell}
-wc -l $1/*.csv | grep -v total | sort -n | head -n 1
-```
-
-*** =sct2
-```{python}
-# FIXME: test file contents and permissions.
-```
-
-*** =type3: ConsoleExercise
-*** =key3: a3b36a746e
-
-*** =xp3: 30
-
-*** =instructions3
-
-Add another line to `range.sh` to print the name and record count of the *longest* file in the directory
-as well as the shortest.
-
-*** =hint3
-
-- A shell script can contain any number of commands.
-- `sort -n -r` sorts in reverse order.
-
-*** =sample_code3
-```{shell}
-```
-
-*** =solution3
-```{shell}
-wc -l $1/*.csv | grep -v total | sort -n | head -n 1
-wc -l $1/*.csv | grep -v total | sort -n -r | head -n 1
-```
-
-*** =sct3
-```{python}
-# FIXME: test file contents and permissions.
+Ex().test_mc(2, [err1, correct2, err3, err4])
 ```

@@ -317,39 +317,6 @@ Trace the path one directory at a time.
 
 Ex().test_mc(2, [err1, correct, err3])
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:3493f8c02f
-## Editing files
-
-FIXME: fill this in once we know how learners will edit files.
-
-*** =instructions
-
-FIXME: have learners edit `thesis.txt`.
-
-For now, please just type the word `FIXME` in all caps.
-
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-
-```
-
-*** =sct
-```{python}
-Ex().test_student_typed(r'\s*FIXME\s*', fixed=False, msg='Type `FIXME` in all caps.')
-```
-
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
 ## Copying single files
 
@@ -777,12 +744,14 @@ cd /tmp
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+/tmp\s*', fixed=False, msg='Change your directory to `/tmp`.')
+Ex().test_student_typed(r'\s*cd\s+/tmp\s*',
+                        fixed=False,
+                        msg='Change your directory to `/tmp`.')
 ```
 
 
-*** =type1: ConsoleExercise
-*** =key2:
+*** =type2: ConsoleExercise
+*** =key2: 7e6ada440d
 
 *** =xp2: 10
 
@@ -802,7 +771,9 @@ ls
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what files and directories you have.')
+Ex().test_student_typed(r'\s*ls\s*',
+                        fixed=False,
+                        msg='Use `ls` to see what files and directories you have.')
 ```
 
 *** =type3: ConsoleExercise
@@ -814,6 +785,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to see what file
 Make a new directory called `scratch`.
 
 *** =hint3
+
 Use `mkdir` to make directories.
 
 *** =sample_code3
@@ -827,7 +799,9 @@ mkdir scratch
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+Ex().test_student_typed(r'\s*mkdir\s+scratch\s*',
+                        fixed=False,
+                        msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
 *** =type4: ConsoleExercise
@@ -836,7 +810,9 @@ Ex().test_student_typed(r'\s*mkdir\s+scratch\s*', fixed=False, msg='Use `mkdir` 
 *** =xp4: 30
 
 *** =instructions4
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch` using the `~` shortcut for your home directory
+
+Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`
+using the `~` shortcut for your home directory
 and a relative path for the target directory.
 
 *** =sample_code4
@@ -850,5 +826,7 @@ mv ~/people/agarwal.txt scratch
 
 *** =sct4
 ```{python}
-Ex().test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*', fixed=False, msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
+Ex().test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*',
+                        fixed=False,
+                        msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
 ```

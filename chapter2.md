@@ -19,9 +19,8 @@ A quick way to figure out what it contains is to look at the first few rows.
 We can do this in the shell using a command called `head`.
 As its name suggests,
 it prints the first few lines of a file
-(where "a few" means 10).
-Thus,
-the command:
+(where "a few" means 10),
+so the command:
 
 ```{shell}
 head seasonal/summer.csv
@@ -43,6 +42,7 @@ Date,Tooth
 ```
 
 <hr>
+
 What does `head` do if there aren't 10 lines in the file?
 (To find out, use it to look at the top of `people/agarwal.txt`.)
 
@@ -60,7 +60,7 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*', fixed=False, msg='Use `head` on a short file.').test_mc(2, ['no', 'yes', 'no'])
+Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -110,17 +110,21 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*', fixed=False, msg='Use `head` with `-n` and the number of lines you want.')
+Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
+                        fixed=False,
+                        msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
 ## Getting help
 
-In order to find out what a command does and how to get it to do what you want,
-you can use `man` (which stands for "manual").
+To find out what commands do,
+people used to use the `man` command.
+These days,
+you can get the same information by searching for `unix man command` online.
 For example,
-the command `man head` produces something like this:
+the search `unix man head` brings up this information:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -155,11 +159,9 @@ and that you can give it any number of filenames.
 
 The problem with the Unix manual is that you have to know what you're looking for.
 If you don't,
-you can search on [Stack Overflow](https://stackoverflow.com/),
+you can search [Stack Overflow](https://stackoverflow.com/),
 ask a question on DataCamp's Slack channels,
 or look at the `SEE ALSO` sections of the commands you already know.
-
-FIXME: is there a way to introduce the `less` pager here?  If not, introduce another exercise to teach it explicitly.
 
 *** =instructions
 
@@ -185,8 +187,9 @@ tail -n +6 seasonal/spring.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail\s*', fixed=False, msg='Use `man` followed by the name of a command.')
-Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*', fixed=False, msg='Use `+NUMBER` to display lines after the first NUMBER.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*',
+                        fixed=False,
+                        msg='Use `+NUMBER` to display lines after the first NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -264,8 +267,17 @@ The order of the flags doesn't matter.
 Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:03a4873a16
+--- type:TabConsoleExercise key:32c0d30049
 ## Repeating commands
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1: 188a2fab38
+
+*** =xp1: 10
 
 One of the biggest advantages of using the shell is that
 it makes it easy for you to do things over again.
@@ -274,8 +286,6 @@ you can then press the up-arrow key to cycle back through them.
 You can also use the left and right arrow keys and the delete key to edit them.
 Pressing return will then run the modified command.
 
-FIXME: insert short clip here of running commands, cycling back through them, and re-running.
-
 Even better, `history` will print a list of commands you have run recently.
 Each one is preceded by a serial number to make it easy to re-run particular commands:
 just type `!55` to re-run the 55th command in your history.
@@ -283,44 +293,146 @@ You can also re-run a command by typing an exclamation mark followed by the comm
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
 
-FIXME: this exercise doesn't work because `history` doesn't run interactively.  Turn it into a ConsoleExercise?
+*** =instructions1
 
-*** =instructions
+Run `head summer.csv` in your home directory (which should fail).
 
-- Run `head summer.csv` in your home directory (which should fail).
-- Change directory to `seasonal`.
-- Re-run the `head` command using `!` followed by the command name.
-- Use `history` to look at what you have done.
-- Re-run `head` again using `!` followed by a command number.
+*** =hint1
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
+*** =sample_code1
+```{bash}
 
 ```
 
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
+*** =solution1
+```{bash}
 head summer.csv
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*head\s+summer.csv\s*',
+                        fixed=False,
+                        msg='Use `head` and a filename.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2: cba6bf99a5
+
+*** =xp2: 10
+
+To make the previous command work,
+you need to be in the `seasonal` directory.
+
+*** =instructions2
+
+Change directory to `seasonal`.
+
+*** =hint2
+
+*** =sample_code2
+```{bash}
+
+```
+
+*** =solution2
+```{bash}
 cd seasonal
+```
+
+*** =sct2
+```{python}
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*',
+                        fixed=False,
+                        msg='Use `cd` and a directory name.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3: 74f5c8d2fc
+
+*** =xp3: 10
+
+You can now repeat your previous `head` command without retyping it.
+
+*** =instructions3
+
+Re-run the `head` command using `!` followed by the command name.
+
+*** =hint3
+
+*** =sample_code3
+```{bash}
+```
+
+*** =solution3
+```{bash}
 !head
+```
+
+*** =sct3
+```{python}
+Ex().test_student_typed(r'\s*!head\s*',
+                        fixed=False,
+                        msg='Use `!` followed by the name of the command.')
+```
+
+*** =type4: ConsoleExercise
+*** =key4: a28555575a
+
+*** =xp4: 10
+
+To find out how to repeat the command by number,
+you must take a look at what you've done.
+
+*** =instructions4
+
+Use `history` to look at what you have done.
+
+*** =hint4
+
+*** =sample_code4
+```{bash}
+```
+
+*** =solution4
+```{bash}
 history
+```
+
+*** =sct4
+```{python}
+Ex().test_student_typed(r'\s*history\s*',
+                        fixed=False,
+                        msg='Use `history` to get a list.')
+```
+
+*** =type5: ConsoleExercise
+*** =key5: 0629b2adf3
+
+*** =xp5: 10
+
+You can now repeat your earlier `head` command using its serial number.
+
+*** =instructions5
+
+Re-run `head` again using `!` followed by a command number.
+
+*** =hint5
+
+*** =sample_code5
+```{bash}
+```
+
+*** =solution5
+```{bash}
 !3
 ```
 
-*** =sct
+*** =sct5
 ```{python}
-Ex().test_student_typed(r'\s*head\s+summer.csv\s*', msg='Use `head` and a filename.')
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', msg='Use `cd` and a directory name.')
-Ex().test_student_typed(r'\s*!head\s*', msg='Use `!` followed by the name of the command.')
-Ex().test_student_typed(r'\s*history\s*', msg='Use `history` to get a list.')
-Ex().test_student_typed(r'\s*!3\s*', msg='Use `!` followed by a number.')
+Ex().test_student_typed(r'\s*!3\s*',
+                        fixed=False,
+                        msg='Use `!` followed by a number.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b887e95637
@@ -370,8 +482,12 @@ head seasonal/spring.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*', msg='Type `head s`, a tab, `a`, and a tab.')
-Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*', msg='Type `head s`, a tab, `sp`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*',
+                        fixed=False,
+                        msg='Type `head s`, a tab, `a`, and a tab.')
+Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
+                        fixed=False,
+                        msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
@@ -426,7 +542,9 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*', fixed=False, msg='Use the relative path to the file to search.')
+Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*',
+                        fixed=False,
+                        msg='Use the relative path to the file to search.')
 ```
 
 *** =type2: ConsoleExercise
@@ -451,7 +569,9 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring.csv\s*', fixed=False, msg='Use `-v` or `-n` in either order.')
+Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring.csv\s*',
+                        fixed=False,
+                        msg='Use `-v` or `-n` in either order.')
 ```
 
 *** =type3: ConsoleExercise
@@ -472,109 +592,48 @@ Count how many lines contain the word `incisor` in the autumn and winter data co
 
 *** =solution3
 ```{shell}
-grep -c incisor autumn.csv winter.csv
+grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*', fixed=False, msg='Use `-c` to get a count.')
+Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*',
+                        fixed=False,
+                        msg='Use `-c` to get a count.')
 ```
 
---- type:BulletConsoleExercise key:2054e64e49
-## Wrapping up
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:18df8e7099
+## You cannot always treat data as text
 
-To pull together everything we have done in this chapter,
-you will find and use a command that stitches data files together in columns.
+The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
+that can be used to combine data files instead of cutting them up.
 
-FIXME: this exercise doesn't work right now because of platform limitations.
-
-*** =pre_exercise_code
-```{python}
-```
-
-*** =type1: ConsoleExercise
-*** =key1: 98a32c7a4d
-
-*** =xp1: 10
-
-*** =instructions1
-
-Read the `SEE ALSO` section of the manual page for `cut`.
-One of the commands listed there is `colrm`.
-Type in the name of the other without any parameters
-to get a one-line summary of its usage.
-
-*** =hint1
-
-We often say "cut and something" when editing text, where "something" is the name of this command.
-
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
-```{shell}
-paste
-```
-
-*** =sct1
-```{python}
-Ex().test_student_typed(r'\s*paste\s*', fixed=False, msg='Use `paste` on a line by itself to get a short usage summary.')
-```
-
-*** =type2: ConsoleExercise
-*** =key2: 8ad337a04f
-
-*** =xp2: 20
-
-*** =instructions2
+<hr>
 
 Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table.
+and then run `paste` to combine the autumn and winter data files in a single table
+using a comma as a separator.
+What's wrong with the output from a data analysis point of view?
 
-*** =hint3
+*** =instructions
+- The column headers are repeated.
+- The last few rows have the wrong number of columns.
+- Some of the data from `winter.csv` is missing.
 
-Like many commands, `paste` takes any number of filenames as parameters.
+*** =hint
 
-*** =sample_code2
+If you `cut` the output of `paste` using commas as a separator,
+would it produce the right answer?
+
+*** =pre_exercise_code
 ```{shell}
+
 ```
 
-*** =solution2
-```{shell}
-paste seasonal/autumn.csv seasonal/winter.csv
-```
-
-*** =sct2
+*** =sct
 ```{python}
-Ex().test_student_typed(r'\s*paste\s+seasonal/autumn.csv\s+seasonal/winter.csv\s*', fixed=False, msg='Use `paste` with the names of both files.')
-```
-
-*** =type3: ConsoleExercise
-*** =key3: a45f125925
-
-*** =xp3: 30
-
-*** =instructions3
-
-Modify your previous command so that it joins the two files with a comma instead of a tab.
-
-*** =hint3
-
-Re-read the manual page if necessary to find out what flag you need to use.
-
-FIXME: need to comment here about the fact that the output file isn't usable because lines have been joined, not columns - there's a missing `,` to make two-column space whenever the second file overflows.
-
-*** =sample_code3
-```{shell}
-```
-
-*** =solution3
-```{shell}
-paste -d , seasonal/autumn.csv seasonal/winter.csv
-```
-
-*** =sct3
-```{python}
-Ex().test_student_typed(r'\s*paste\s+-d\s*,\s+seasonal/autumn.csv\s+seasonal/winter.csv\s*', fixed=False, msg='Use `paste -d ,` with the names of both files.')
+err1 = 'True, but it is not necessarily an error.'
+correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
+err3 = 'No, all of the winter data is there.'
+Ex().test_mc(2, [err1, correct2, err3])
 ```
