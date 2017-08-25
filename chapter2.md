@@ -60,7 +60,10 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*', fixed=False, msg='Use `head` on a short file.').test_mc(2, ['no', 'yes', 'no'])
+Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*',
+                        fixed=False,
+                        msg='Use `head` on a short file.')
+Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -110,7 +113,9 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*', fixed=False, msg='Use `head` with `-n` and the number of lines you want.')
+Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
+                        fixed=False,
+                        msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
 
@@ -159,8 +164,6 @@ you can search on [Stack Overflow](https://stackoverflow.com/),
 ask a question on DataCamp's Slack channels,
 or look at the `SEE ALSO` sections of the commands you already know.
 
-FIXME: is there a way to introduce the `less` pager here?  If not, introduce another exercise to teach it explicitly.
-
 *** =instructions
 
 Look at the manual page for `tail`,
@@ -185,8 +188,12 @@ tail -n +6 seasonal/spring.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail\s*', fixed=False, msg='Use `man` followed by the name of a command.')
-Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*', fixed=False, msg='Use `+NUMBER` to display lines after the first NUMBER.')
+Ex().test_student_typed(r'\s*man\s+tail\s*',
+                        fixed=False,
+                        msg='Use `man` followed by the name of a command.')
+Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*',
+                        fixed=False,
+                        msg='Use `+NUMBER` to display lines after the first NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -274,16 +281,12 @@ you can then press the up-arrow key to cycle back through them.
 You can also use the left and right arrow keys and the delete key to edit them.
 Pressing return will then run the modified command.
 
-FIXME: insert short clip here of running commands, cycling back through them, and re-running.
-
 Even better, `history` will print a list of commands you have run recently.
 Each one is preceded by a serial number to make it easy to re-run particular commands:
 just type `!55` to re-run the 55th command in your history.
 You can also re-run a command by typing an exclamation mark followed by the command's name,
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
-
-FIXME: this exercise doesn't work because `history` doesn't run interactively.  Turn it into a ConsoleExercise?
 
 *** =instructions
 
@@ -316,11 +319,21 @@ history
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+summer.csv\s*', msg='Use `head` and a filename.')
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', msg='Use `cd` and a directory name.')
-Ex().test_student_typed(r'\s*!head\s*', msg='Use `!` followed by the name of the command.')
-Ex().test_student_typed(r'\s*history\s*', msg='Use `history` to get a list.')
-Ex().test_student_typed(r'\s*!3\s*', msg='Use `!` followed by a number.')
+Ex().test_student_typed(r'\s*head\s+summer.csv\s*',
+                        fixed=False,
+                        msg='Use `head` and a filename.')
+Ex().test_student_typed(r'\s*cd\s+seasonal\s*',
+                        fixed=False,
+                        msg='Use `cd` and a directory name.')
+Ex().test_student_typed(r'\s*!head\s*',
+                        fixed=False,
+                        msg='Use `!` followed by the name of the command.')
+Ex().test_student_typed(r'\s*history\s*',
+                        fixed=False,
+                        msg='Use `history` to get a list.')
+Ex().test_student_typed(r'\s*!3\s*',
+                        fixed=False,
+                        msg='Use `!` followed by a number.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b887e95637
@@ -472,12 +485,14 @@ Count how many lines contain the word `incisor` in the autumn and winter data co
 
 *** =solution3
 ```{shell}
-grep -c incisor autumn.csv winter.csv
+grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*', fixed=False, msg='Use `-c` to get a count.')
+Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*',
+                        fixed=False,
+                        msg='Use `-c` to get a count.')
 ```
 
 --- type:BulletConsoleExercise key:2054e64e49
