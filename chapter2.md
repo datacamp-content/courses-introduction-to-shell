@@ -271,7 +271,7 @@ The order of the flags doesn't matter.
 Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
---- type:TabConsoleExercise key:
+--- type:TabConsoleExercise key:32c0d30049
 ## Repeating commands
 
 *** =pre_exercise_code
@@ -279,7 +279,8 @@ Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correc
 ```
 
 *** =type1: ConsoleExercise
-*** =key1: 
+*** =key1: 188a2fab38
+
 *** =xp1: 10
 
 One of the biggest advantages of using the shell is that
@@ -320,7 +321,8 @@ Ex().test_student_typed(r'\s*head\s+summer.csv\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2: 
+*** =key2: cba6bf99a5
+
 *** =xp2: 10
 
 To make the previous command work,
@@ -350,7 +352,8 @@ Ex().test_student_typed(r'\s*cd\s+seasonal\s*',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3: 
+*** =key3: 74f5c8d2fc
+
 *** =xp3: 10
 
 You can now repeat your previous `head` command without retyping it.
@@ -378,7 +381,8 @@ Ex().test_student_typed(r'\s*!head\s*',
 ```
 
 *** =type4: ConsoleExercise
-*** =key4: 
+*** =key4: a28555575a
+
 *** =xp4: 10
 
 To find out how to repeat the command by number,
@@ -407,7 +411,8 @@ Ex().test_student_typed(r'\s*history\s*',
 ```
 
 *** =type5: ConsoleExercise
-*** =key5: 
+*** =key5: 0629b2adf3
+
 *** =xp5: 10
 
 You can now repeat your earlier `head` command using its serial number.
