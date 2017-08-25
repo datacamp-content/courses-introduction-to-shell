@@ -751,7 +751,7 @@ Ex().test_student_typed(r'\s*cd\s+/tmp\s*',
 
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 7e6ada440d
 
 *** =xp2: 10
 
