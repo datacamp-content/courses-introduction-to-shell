@@ -1,6 +1,6 @@
 # Definitions.
 HOME_DIR=/home/repl
-SOLUTIONS_DIR=/usr/local/share/solutions
+SOLUTIONS_DIR=/tmp/solutions
 USER_GROUP=repl:repl
 COURSE_ID=course_5160
 ARCHIVE=filesys.zip
