@@ -19,9 +19,8 @@ A quick way to figure out what it contains is to look at the first few rows.
 We can do this in the shell using a command called `head`.
 As its name suggests,
 it prints the first few lines of a file
-(where "a few" means 10).
-Thus,
-the command:
+(where "a few" means 10),
+so the command:
 
 ```{shell}
 head seasonal/summer.csv
@@ -43,6 +42,7 @@ Date,Tooth
 ```
 
 <hr>
+
 What does `head` do if there aren't 10 lines in the file?
 (To find out, use it to look at the top of `people/agarwal.txt`.)
 
@@ -60,9 +60,6 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*head\s+people/agarwal.txt\s*',
-                        fixed=False,
-                        msg='Use `head` on a short file.')
 Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
