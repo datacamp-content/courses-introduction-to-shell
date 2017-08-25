@@ -119,10 +119,12 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
 --- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
 ## Getting help
 
-In order to find out what a command does and how to get it to do what you want,
-you can use `man` (which stands for "manual").
+To find out what commands do,
+people used to use the `man` command.
+These days,
+you can get the same information by searching for `unix man command` online.
 For example,
-the command `man head` produces something like this:
+the search `unix man head` brings up this information:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -157,7 +159,7 @@ and that you can give it any number of filenames.
 
 The problem with the Unix manual is that you have to know what you're looking for.
 If you don't,
-you can search on [Stack Overflow](https://stackoverflow.com/),
+you can search [Stack Overflow](https://stackoverflow.com/),
 ask a question on DataCamp's Slack channels,
 or look at the `SEE ALSO` sections of the commands you already know.
 
@@ -185,9 +187,6 @@ tail -n +6 seasonal/spring.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail\s*',
-                        fixed=False,
-                        msg='Use `man` followed by the name of a command.')
 Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*',
                         fixed=False,
                         msg='Use `+NUMBER` to display lines after the first NUMBER.')
