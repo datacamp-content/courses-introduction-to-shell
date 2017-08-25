@@ -349,21 +349,72 @@ Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
 ## Using variables for sets of files
 
-It's very common to define a variable using a wildcard
-in order to store the names of a set of files,
-and then use that variable later.
+People often set a variable using a wildcard expression to record a list of filenames.
 For example,
-you could define a variable like this:
+if you define `datasets` like this:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then display the files' names using:
+you can display the files' names later using:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
+
+This saves typing and makes errors less likely.
+
+<hr>
+
+If you run these two commands in your home directory,
+how many lines of output will they print?
+
+```{shell}
+files=seasonal/*.csv
+for f in $files; do echo $f; done
+```
+
+(Read the first part of the loop carefully before answering.)
+
+*** =possible_answers
+- None: since the first line doesn't say `export files`, that variable has no value in the second line.
+- One: the word "files".
+- [Four: the names of all four seasonal data files.]
+
+*** =hint
+
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+
+*** =feedbacks
+- No: this example defines and uses the variable `files` in the same shell.
+- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
+- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+## Names and values
+
+A common mistake is to forget to use `$` before the name of a variable.
+When you do this,
+the shell uses the name you have typed
+rather than the value of that variable.
+
+Another common mistake is to mis-type the variable's name.
+For example,
+if you define `datasets` like this:
+
+```{shell}
+datasets=seasonal/*.csv
+```
+
+and then type:
+
+```{shell}
+echo $datsets
+```
+
+the shell doesn't print anything,
+because `datsets` (without the second "a") isn't defined.
 
 <hr>
 
@@ -381,7 +432,6 @@ for f in files; do echo $f; done
 - None: since the first line doesn't say `export files`, that variable has no value in the second line.
 - [One: the word "files".]
 - Four: the names of all four seasonal data files.
-- The shell will display an error message saying that `files` is not defined in the second line.
 
 *** =hint
 
@@ -391,23 +441,21 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 - No: this example defines and uses the variable `files` in the same shell.
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: this example defines and uses the variable `files` in the same shell.
 
 --- type:ConsoleExercise xp:100 key:39b5dcf81a
 ## Pipes in loops
 
-Printing filenames is sometimes useful for debugging,
-but the main purpose of loops is to run commands independently on multiple files.
-For example,
-this loop:
+Printing filenames is useful for debugging,
+but the real purpose of loops is to do things with multiple files.
+This loop:
 
 ```{shell}
-for file in seasonal/*.csv; do cut -d , -f 1 $file | grep -v Date | sort | head -n 1; done
+for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-will print the first date in each data file separately.
-The loop has the same structure as the others you have already seen:
-all that's different is that its body is a pipeline of several commands instead of a single command.
+prints the second line of each data file.
+It has the same structure as the others you have already seen:
+all that's different is that its body is a pipeline of two commands instead of a single command.
 
 *** =instructions
 
@@ -418,7 +466,8 @@ grep -h 2017-07 seasonal/*.csv
 ```
 
 but uses a loop to process each file separately.
-(The `-h` flag tells `grep` *not* to print filenames in the output.)
+(Remember that the `-h` flag tells `grep` *not* to print filenames in the output.)
+Use `file` as the name of the loop variable.
 
 *** =solution
 ```{bash}
@@ -427,58 +476,118 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-# FIXME
+Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/*.csv;\s+do\s+grep\s+2017-07\s+$\1;\s+done\s*',
+                        fixed=False,
+                        msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
 ## Spaces in filenames
 
-When you are interacting with the computer through a graphical file explorer,
-it's easy and sensible to give files multi-word names like `July 2017.csv`.
+It's easy and sensible to give files multi-word names like `July 2017.csv`
+when you are using a graphical file explorer.
 However,
-doing this causes problems when you are working in the shell.
+this causes problems when you are working in the shell.
 For example,
 suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-It would be natural to type:
+You cannot type:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-but this doesn't work,
 because it looks to the shell as though you are trying to move
 four files called `July`, `2017.csv`, `2017`, and `July` (again)
 into a directory called `data.csv`.
+
 Instead,
-you have to put quotes around the files' names
-so that the shell treats each one as a single character string:
+you have quote the files' names
+so that the shell treats each one as a single parameter:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
 ```
 
-Rather than quoting,
-it's simpler not to use spaces in filenames in the first place.
-
 <hr>
 
-Suppose the directory `samples` contains files called `march 2017.csv` and `october 2017.csv`.
-How many lines of output will this loop produce?
+If you have two files called `current.csv` and `last year.csv`
+(with a space in its name)
+and you type:
 
 ```{shell}
-for f in samples/*.csv; do echo $f; done
+rm current.csv last year.csv
 ```
 
+what will happen:
+
 *** =possible_answers
-- One: `samples/*.csv`.
-- [Two: `samples/march 2017.csv` and `samples/october 2017.csv`]
-- Four: `samples/march`, `2017.csv`, `samples/october`, and `2017.csv` again.
-- Three: `samples/march`, `2017.csv`, and `samples/october` (without repeating `2017.csv`).
+- The shell will print an error message because `last` and `year.csv` do not exist.
+- The shell will delete `current.csv`.
+- [Both of the above.]
+- Nothing.
 
 *** =hint
 
 *** =feedbacks
-- No: the shell expands the wildcard.
-- Yes: the shell automatically quotes wildcard expansions for you.
-- No: the shell automatically quotes wildcard expansions for you.
-- No: the shell doesn't remove duplicates from lists.
+- Yes, but that's not all.
+- Yes, but that's not all.
+- Correct.
+- Unfortunately not.
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## Multiple commands in loops
+
+The loops you have seen so far all have a single command or pipeline in their body,
+but a loop can contain any number of commands.
+To tell the shell where one ends and the next begins,
+you must separate them with semi-colons:
+
+```{shell}
+for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
+```
+```
+seasonal/autumn.csv
+2017-01-05,canine
+seasonal/spring.csv
+2017-01-25,wisdom
+seasonal/summer.csv
+2017-01-11,canine
+seasonal/winter.csv
+2017-01-03,bicuspid
+```
+
+<hr>
+
+Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
+so that you ask the shell to run:
+
+```{shell}
+for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
+```
+
+What will the shell do?
+
+*** =instructions
+- Print an error message.
+- Print one line for each of the four files.
+- Print one line for `autumn.csv` (the first file).
+- Print the last line of each file.
+
+*** =hint
+
+You can pipe the output of `echo` to `tail`.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+err1 = "No: the loop will run, it just won't do something sensible."
+correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
+err3 = "No: the loop runs one for each of the four filenames."
+err4 = "No: the input of `tail` is the output of `echo` for each filename."
+
+Ex().test_mc(2, [err1, correct2, err3, err4])
+```
