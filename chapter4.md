@@ -34,9 +34,8 @@ What is its value?
 *** =instructions
 - 10
 - 64
-- 500
+- [500]
 - The variable is not there.
-- [None of the above.]
 
 *** =hint
 
@@ -50,10 +49,9 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 ```{python}
 err1 = "No: the shell records more history than that."
 err2 = "No: the shell records more history than that."
-err3 = "No: the shell doesn't record that much history."
+correct3 = "Correct: the shell saves 500 old commands by default on this system."
 err4 = "No: the variable `HISTFILESIZE` is there."
-correct5 = "Correct: `set | grep HISTFILESIZE` shows the value."
-Ex().test_mc(5, [err1, err2, err3, err4, correct5])
+Ex().test_mc(3, [err1, err2, correct3, err4])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
