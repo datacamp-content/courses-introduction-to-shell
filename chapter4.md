@@ -303,9 +303,15 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-state = Ex.root_state
 
+# state attributes include
+#   student/solution_code
+#   student/solution_result
+#   student/solution_ast
+# NOTE: I am updating sqlwhat-viewer.herokuapp.com to graph ASTs today
+state = Ex.root_state
 state.do_test("`{}`".format(state.student_code))
+#state.do_test("`{}`".format(repr(state.student_ast)))
 
 Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+$suffix;\s+done\s*',
                         fixed=False,
