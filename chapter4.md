@@ -119,9 +119,9 @@ echo $OSTYPE
 
 *** =sct
 ```{python}
-state = Ex.root_state
-state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
-or \
+# state = Ex.root_state
+# state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
+# or \
 Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
@@ -179,9 +179,9 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
-state = Ex.root_state
-state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
-or \
+# state = Ex.root_state
+# state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
+# or \
 Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
                         fixed=False,
                         msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
@@ -307,9 +307,9 @@ for suffix in docx odt pdf; do echo $suffix; done
 #   student/solution_code
 #   student/solution_result
 #   student/solution_ast
-state = Ex.root_state
-state.do_test("`{}`".format(state.student_code)) \
-or \
+# state = Ex.root_state
+# state.do_test("`{}`".format(state.student_code)) \
+# or \
 Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
                         fixed=False,
                         msg='Change the list of suffix names that the loop operatores on.')
