@@ -398,9 +398,9 @@ while `$X` is the value of the variable `X`.
 
 *** =sct
 ```{python}
-correct1 = "Correct: the loop uses `files` instead of `$files`, so the list consists of the word \"files\"."
+err1 = "No: you do not have to export a shell variable to use it in the same shell."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
-err3 = "No: the loop uses `files` instead of `$files`, so the list consists of the word \"files\" rather than the expansion of `files`."
+correct3 = "Correct."
 Ex().test_mc(1, [correct1, err2, err3])
 ```
 
