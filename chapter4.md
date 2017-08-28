@@ -245,7 +245,7 @@ The value of an undefined variable is an empty string.
 - No: `priors` is an environment variable but `tests` is not.
 - No: `priors` is an environment variable.
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:920d1887e3
 ## Loops
 
 Shell variables are also used in *loops*,
@@ -352,7 +352,7 @@ Ex().test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$fi
                         msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
 ## Using variables for sets of files
 
 People often set a variable using a wildcard expression to record a list of filenames.
