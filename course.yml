@@ -7,4 +7,4 @@ description: >-
   and clouds that may be halfway around the world. This lesson will introduce
   its key elements and show you how to use them efficiently.
 programming_language : shell
-from                 : 'shell-base-prod:10'
+from                 : 'shell-base-prod:13'
