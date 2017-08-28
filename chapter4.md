@@ -124,6 +124,7 @@ echo Home: $HOME
 
 *** =sct
 ```{python}
+Ex.root_state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
 Ex().test_student_typed(r'\s*echo\s+Home:\s+$HOME\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
@@ -181,6 +182,7 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
+Ex.root_state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
 # Note: regexp matches multiple lines.
 Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+$testing\s*',
                         fixed=False,
