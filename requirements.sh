@@ -43,11 +43,6 @@ chown -R ${USER_GROUP} .
 echo 'Installed in home directory:'
 ls -R ${HOME_DIR}/*
 
-# Make sure that HOME points to this directory.
-echo "export HOME=${HOME_DIR}" >> ${PROFILE}
-echo "Last 10 lines of ${PROFILE}"
-tail -n 10 ${PROFILE}
-
 # Report end.
 echo 'ENDING requirements.sh'
 echo '----------------------------------------'
