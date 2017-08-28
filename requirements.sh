@@ -1,5 +1,6 @@
 # Definitions.
 HOME_DIR=/home/repl
+PROFILE=${HOME_DIR}/.profile
 USER_GROUP=repl:repl
 COURSE_ID=course_5160
 ARCHIVE=filesys.zip
@@ -41,6 +42,11 @@ chown -R ${USER_GROUP} .
 # Show what's been installed where.
 echo 'Installed in home directory:'
 ls -R ${HOME_DIR}/*
+
+# Make sure that HOME points to this directory.
+echo "export HOME=${HOME_DIR}" >> ${PROFILE}
+echo "Last 10 lines of ${PROFILE}"
+tail -n 10 ${PROFILE}
 
 # Report end.
 echo 'ENDING requirements.sh'
