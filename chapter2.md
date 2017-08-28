@@ -115,7 +115,7 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
                         msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:f830d46419
 ## Deep listing
 
 The previous chapter showed you a command called `tree`
