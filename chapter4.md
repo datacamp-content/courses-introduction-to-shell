@@ -245,7 +245,7 @@ The value of an undefined variable is an empty string.
 - No: `priors` is an environment variable but `tests` is not.
 - No: `priors` is an environment variable.
 
---- type:ConsoleExercise xp:100 key:cea10c99b8
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
 ## Loops
 
 Shell variables are also used in *loops*,
@@ -288,8 +288,20 @@ odt
 pdf
 ```
 
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
 *** =solution
-```{bash}
+```{shell}
 for suffix in docx odt pdf; do echo $suffix; done
 ```
 
@@ -340,7 +352,7 @@ Ex().test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$fi
                         msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
 ## Using variables for sets of files
 
 People often set a variable using a wildcard expression to record a list of filenames.
@@ -369,21 +381,28 @@ files=seasonal/*.csv
 for f in $files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
-
-*** =possible_answers
+*** =instructions
 - None: since the first line doesn't say `export files`, that variable has no value in the second line.
 - One: the word "files".
-- [Four: the names of all four seasonal data files.]
+- Four: the names of all four seasonal data files.
 
 *** =hint
 
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Remember that `X` on its own is just "X",
+while `$X` is the value of the variable `X`.
 
-*** =feedbacks
-- No: this example defines and uses the variable `files` in the same shell.
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+correct1 = "Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files"."
+err2 = "No: this example defines and uses the variable `files` in the same shell."
+err3 = "No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`."
+Ex().test_mc(1, [correct1, err2, err3])
+```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
 ## Names and values
