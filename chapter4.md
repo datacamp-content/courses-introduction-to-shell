@@ -99,7 +99,7 @@ or "the value of a variable named X".)
 Use `echo` to display the message:
 
 ```{shell}
-Home is /home/repl.
+Home: /home/repl
 ```
 
 but use the variable `HOME` instead of typing `/home/repl` in directly.
@@ -119,12 +119,12 @@ Remember to use `$HOME` to get the variable's value.
 
 *** =solution
 ```{shell}
-echo Home is $HOME.
+echo Home: $HOME
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*echo\s+Home\s+is\s+$HOME\.\s*',
+Ex().test_student_typed(r'\s*echo\s+Home:\s+$HOME\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
 ```
@@ -159,7 +159,7 @@ the shell will replace it with `seasonal/summer.csv`.
 *** =instructions
 
 Define a shell variable called `testing` with the value `seasonal/winter.csv`,
-and then run the command `head -n 1 $testing` to check its value.
+and then use `head -n 1 $testing` to check its value.
 
 *** =hint
 
@@ -181,8 +181,8 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
-# Note: multiline regexp.
-Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s*\n\s*head\s+-n\s+1\s+$testing\s*',
+# Note: regexp matches multiple lines.
+Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+$testing\s*',
                         fixed=False,
                         msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
