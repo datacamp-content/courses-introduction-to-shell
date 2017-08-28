@@ -99,10 +99,6 @@ or "the value of a variable named X".)
 The variable `OSTYPE` holds the name of the kind of operating system you are using.
 Display its value using `echo`.
 
-```{shell}
-echo $OSTYPE
-```
-
 *** =hint
 
 Remember to use `$OSTYPE` to get the variable's value.
@@ -124,7 +120,8 @@ echo $OSTYPE
 *** =sct
 ```{python}
 state = Ex.root_state
-state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
+state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
+or \
 Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
@@ -183,8 +180,8 @@ head -n 1 $testing
 *** =sct
 ```{python}
 state = Ex.root_state
-state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
-# Note: regexp matches multiple lines.
+state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result)) \
+or \
 Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
                         fixed=False,
                         msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
@@ -311,10 +308,11 @@ for suffix in docx odt pdf; do echo $suffix; done
 #   student/solution_result
 #   student/solution_ast
 state = Ex.root_state
-state.do_test("`{}`".format(state.student_code))
+state.do_test("`{}`".format(state.student_code)) \
+or \
 Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
                         fixed=False,
-                        msg='Use `head -n 1` and the *value* of the variable.')
+                        msg='Change the list of suffix names that the loop operatores on.')
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
@@ -342,18 +340,19 @@ before it runs the loop.
 
 *** =instructions
 
-Modify the wildcard expression so that the loop only prints the names of the spring and summer data files.
+Modify the wildcard expression so that the loop prints the names of all the files in the `people` directory
+(regardless of what suffix they do or don't have).
 
 *** =solution
 ```{bash}
-for filename in seasonal/s*.csv; do echo $filename; done
+for filename in people/*; do echo $filename; done
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\s+\$filename;\s+done\s*',
+Ex().test_student_typed(r'\s*for\s+filename\s+in\s+people/*;\s+do\s+echo\s+\$filename;\s+done\s*',
                         fixed=False,
-                        msg='Use `head -n 1` and the *value* of the variable.')
+                        msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:fc218bad02
