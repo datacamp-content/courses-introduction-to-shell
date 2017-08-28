@@ -48,7 +48,7 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*set\s*grep\s+HISTFILESIZE\s*',
+Ex().test_student_typed(r'\s*set\s*|\s*grep\s+HISTFILESIZE\s*',
                         fixed=False,
                         msg='Pipe the output of `set` to `grep`.')
 ```
