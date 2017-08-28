@@ -317,7 +317,7 @@ Trace the path one directory at a time.
 
 Ex().test_mc(2, [err1, correct, err3])
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:89ac1f57de
 ## Displaying the file system
 
 If the command `tree` has been installed on your computer,
