@@ -8,16 +8,16 @@ ARCHIVE=filesys.zip
 echo ''
 echo '----------------------------------------'
 echo 'STARTING requirements.sh'
-echo 'HOME_DIR: ' $(HOME_DIR)
-echo 'USER_GROUP: ' $(USER_GROUP)
-echo 'COURSE_ID: ' $(COURSE_ID)
-echo 'ARCHIVE: ' $(ARCHIVE)
+echo 'HOME_DIR: ' ${HOME_DIR}
+echo 'USER_GROUP: ' ${USER_GROUP}
+echo 'COURSE_ID: ' ${COURSE_ID}
+echo 'ARCHIVE: ' ${ARCHIVE}
 
 # Make sure we're in the home directory.
-cd $(HOME_DIR)
+cd ${HOME_DIR}
 
 # Get the zip file.
-wget https://s3.amazonaws.com/assets.datacamp.com/production/$(COURSE_ID)/datasets/$(ARCHIVE)
+wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${ARCHIVE}
 
 # Make sure we have the following commands:
 # - unzip (for installation)
@@ -27,20 +27,20 @@ apt-get -y install unzip
 apt-get -y install tree
 
 # Unpack to the local directory.
-unzip ./$(ARCHIVE)
+unzip ./${ARCHIVE}
 
 # Remove the zip file.
-rm -f ./$(ARCHIVE)
+rm -f ./${ARCHIVE}
 
 # Make the `backup` and `bin` directories (which start off empty).
 mkdir ./backup
 
 # Change ownership.
-chown -R $(USER_GROUP) .
+chown -R ${USER_GROUP} .
 
 # Show what's been installed where.
 echo 'Installed in home directory:'
-ls -R $(HOME_DIR)/*
+ls -R ${HOME_DIR}/*
 
 # Report end.
 echo 'ENDING requirements.sh'
