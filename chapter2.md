@@ -663,7 +663,7 @@ Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seaso
                         msg='Use `-c` to get a count.')
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
 ## You cannot always treat data as text
 
 The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
