@@ -115,6 +115,67 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
                         msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## Deep listing
+
+The previous chapter showed you a command called `tree`
+that draws pictures of your filesystem.
+It isn't installed on computers by default,
+but you can get the same information by giving `ls` the flag `-R`,
+which means "recursive".
+If you use `ls -R` in your home directory,
+you will see something like this:
+
+```
+backup          course.txt      people          seasonal
+
+./backup:
+
+./people:
+agarwal.txt
+
+./seasonal:
+autumn.csv      spring.csv      summer.csv      winter.csv
+```
+
+This shows every file and directory in the current level,
+then everything in each sub-directory,
+and so on.
+
+*** =instructions
+
+To help you know what is what,
+`ls` has another flag `-F` that prints a `/` after the name of every directory
+and a `*` after the name of every runnable program.
+Run `ls` with `-R`, `-F`, *and* the absolute path to your home directory
+to see everything it contains.
+
+*** =hint
+
+The order of the flags doesn't matter, but the directory name must come last.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+ls -R -F /home/repl
+```
+
+*** =sct
+```{python}
+pattern = r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*'
+Ex().test_student_typed(pattern,
+                        fixed=False,
+                        msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+```
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
 ## Getting help
