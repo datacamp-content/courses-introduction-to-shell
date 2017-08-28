@@ -303,6 +303,10 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
+state = Ex.root_state
+
+state.do_test("`{}`".format(state.student_code))
+
 Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+$suffix;\s+done\s*',
                         fixed=False,
                         msg='Use `head -n 1` and the *value* of the variable.')
