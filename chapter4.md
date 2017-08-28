@@ -124,7 +124,7 @@ echo Home is $HOME.
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*echo\s+Home\s+is\s+$HOME\s*',
+Ex().test_student_typed(r'\s*echo\s+Home\s+is\s+$HOME\.\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
 ```
@@ -181,12 +181,10 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s*',
+# Note: multiline regexp.
+Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s*\n\s*head\s+-n\s+1\s+$testing\s*',
                         fixed=False,
-                        msg='Set a variable using `variable=value`.')
-Ex().test_student_typed(r'\s*head\s+-n\s+1\s+$testing\s*',
-                        fixed=False,
-                        msg='Use `head -n 1` and the *value* of the variable.')
+                        msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:ed34d567c3
