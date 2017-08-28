@@ -71,10 +71,10 @@ hello DataCamp!
 If you try to use it to print a variable's value like this:
 
 ```{shell}
-echo HOME
+echo USER
 ```
 ```
-HOME
+USER
 ```
 
 it will print the variable's name.
@@ -82,10 +82,10 @@ To get the variable's value,
 you must put a dollar sign `$` in front of it:
 
 ```{shell}
-echo $HOME
+echo $USER
 ```
 ```
-/home/repl
+repl
 ```
 
 This is true elsewhere as well:
@@ -96,17 +96,16 @@ or "the value of a variable named X".)
 
 *** =instructions
 
-Use `echo` to display the message:
+The variable `OSTYPE` holds the name of the kind of operating system you are using.
+Display its value using `echo`.
 
 ```{shell}
-Home: /home/repl
+echo $OSTYPE
 ```
-
-but use the variable `HOME` instead of typing `/home/repl` in directly.
 
 *** =hint
 
-Remember to use `$HOME` to get the variable's value.
+Remember to use `$OSTYPE` to get the variable's value.
 
 *** =pre_exercise_code
 ```{shell}
@@ -119,14 +118,14 @@ Remember to use `$HOME` to get the variable's value.
 
 *** =solution
 ```{shell}
-echo Home: $HOME
+echo $OSTYPE
 ```
 
 *** =sct
 ```{python}
 state = Ex.root_state
 state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
-Ex().test_student_typed(r'\s*echo\s+Home:\s+$HOME\s*',
+Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
                         fixed=False,
                         msg='Remember to put `$` in front of the variable name')
 ```
@@ -186,7 +185,7 @@ head -n 1 $testing
 state = Ex.root_state
 state.do_test("student code:\n`{}`\nstudent result:\n`{}`".format(state.student_code, state.student_result))
 # Note: regexp matches multiple lines.
-Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+$testing\s*',
+Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
                         fixed=False,
                         msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
@@ -307,17 +306,13 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-
 # state attributes include
 #   student/solution_code
 #   student/solution_result
 #   student/solution_ast
-# NOTE: I am updating sqlwhat-viewer.herokuapp.com to graph ASTs today
 state = Ex.root_state
 state.do_test("`{}`".format(state.student_code))
-#state.do_test("`{}`".format(repr(state.student_ast)))
-
-Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+$suffix;\s+done\s*',
+Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
                         fixed=False,
                         msg='Use `head -n 1` and the *value* of the variable.')
 ```
@@ -356,7 +351,7 @@ for filename in seasonal/s*.csv; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\s+$filename;\s+done\s*',
+Ex().test_student_typed(r'\s*for\s+filename\s+in\s+seasonal/s*.csv;\s+do\s+echo\s+\$filename;\s+done\s*',
                         fixed=False,
                         msg='Use `head -n 1` and the *value* of the variable.')
 ```
@@ -491,7 +486,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/*.csv;\s+do\s+grep\s+2017-07\s+$\1;\s+done\s*',
+Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/*.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
                         fixed=False,
                         msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
