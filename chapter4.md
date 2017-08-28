@@ -32,11 +32,11 @@ which determines how many old commands are stored in your command history.
 What is its value?
 
 *** =instructions
-- 50
-- 100
-- [500]
+- 10
+- 64
+- 500
 - The variable is not there.
-- None of the above.
+- [None of the above.]
 
 *** =hint
 
@@ -48,9 +48,12 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*set\s*|\s*grep\s+HISTFILESIZE\s*',
-                        fixed=False,
-                        msg='Pipe the output of `set` to `grep`.')
+err1 = "No: the shell records more history than that."
+err2 = "No: the shell records more history than that."
+err3 = "No: the shell doesn't record that much history."
+err4 = "No: the variable `HISTFILESIZE` is there."
+correct5 = "Correct: `set | grep HISTFILESIZE` shows the value."
+Ex().test_mc(5, [err1, err2, err3, err4, correct5])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
@@ -588,6 +591,5 @@ err1 = "No: the loop will run, it just won't do something sensible."
 correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
 err3 = "No: the loop runs one for each of the four filenames."
 err4 = "No: the input of `tail` is the output of `echo` for each filename."
-
 Ex().test_mc(2, [err1, correct2, err3, err4])
 ```
