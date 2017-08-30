@@ -401,7 +401,7 @@ while `$X` is the value of the variable `X`.
 err1 = "No: you do not have to export a shell variable to use it in the same shell."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
 correct3 = "Correct."
-Ex().test_mc(1, [correct1, err2, err3])
+Ex().test_mc(3, [err1, err2, correct3])
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
