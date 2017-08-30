@@ -127,7 +127,8 @@ If you use `ls -R` in your home directory,
 you will see something like this:
 
 ```
-backup          course.txt      people          seasonal
+.:
+backup  course.txt  people  seasonal
 
 ./backup:
 
@@ -135,7 +136,7 @@ backup          course.txt      people          seasonal
 agarwal.txt
 
 ./seasonal:
-autumn.csv      spring.csv      summer.csv      winter.csv
+autumn.csv  spring.csv  summer.csv  winter.csv
 ```
 
 This shows every file and directory in the current level,
@@ -188,7 +189,7 @@ For example,
 the search `unix man head` brings up this information:
 
 ```
-HEAD(1)               BSD General Commands Manual              HEAD(1)
+HEAD(1)     BSD General Commands Manual       HEAD(1)
 
 NAME
      head -- display first lines of a file
@@ -197,16 +198,23 @@ SYNOPSIS
      head [-n count | -c bytes] [file ...]
 
 DESCRIPTION
-     This filter displays the first count lines or bytes of each of
-     the specified files, or of the standard input if no files are
-     specified.  If count is omitted it defaults to 10.
+     This filter displays the first count lines or
+     bytes of each of the specified files, or of the
+     standard input if no files are specified.  If
+     count is omitted it defaults to 10.
 
-     If more than a single file is specified, each file is preceded by
-     a header consisting of the string ``==> XXX <=='' where ``XXX''
-     is the name of the file.
+     If more than a single file is specified, each
+     file is preceded by a header consisting of the
+     string ``==> XXX <=='' where ``XXX'' is the name
+     of the file.
+
+EXIT STATUS
+     The head utility exits 0 on success, and >0 if an
+     error occurs.
 
 SEE ALSO
      tail(1)
+
 ```
 
 The one-line description under `NAME` tells you briefly what the command does,
@@ -528,16 +536,19 @@ will fill in the rest of the name.
 
 *** =sample_code
 ```{shell}
-# Run head seasonal/autumn.csv, typing as few characters as possible.
+# Run head seasonal/autumn.csv, typing as few characters as possible
 
 
-# Run head seasonal/spring.csv, typing as few characters as possible.
+# Run head seasonal/spring.csv, typing as few characters as possible
 
 ```
 
 *** =solution
 ```{shell}
+# Run head seasonal/autumn.csv, typing as few characters as possible
 head seasonal/autumn.csv
+
+# Run head seasonal/spring.csv, typing as few characters as possible
 head seasonal/spring.csv
 ```
 
