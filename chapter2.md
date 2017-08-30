@@ -189,7 +189,7 @@ For example,
 the search `unix man head` brings up this information:
 
 ```
-HEAD(1)               BSD General Commands Manual              HEAD(1)
+HEAD(1)     BSD General Commands Manual       HEAD(1)
 
 NAME
      head -- display first lines of a file
@@ -198,16 +198,23 @@ SYNOPSIS
      head [-n count | -c bytes] [file ...]
 
 DESCRIPTION
-     This filter displays the first count lines or bytes of each of
-     the specified files, or of the standard input if no files are
-     specified.  If count is omitted it defaults to 10.
+     This filter displays the first count lines or
+     bytes of each of the specified files, or of the
+     standard input if no files are specified.  If
+     count is omitted it defaults to 10.
 
-     If more than a single file is specified, each file is preceded by
-     a header consisting of the string ``==> XXX <=='' where ``XXX''
-     is the name of the file.
+     If more than a single file is specified, each
+     file is preceded by a header consisting of the
+     string ``==> XXX <=='' where ``XXX'' is the name
+     of the file.
+
+EXIT STATUS
+     The head utility exits 0 on success, and >0 if an
+     error occurs.
 
 SEE ALSO
      tail(1)
+
 ```
 
 The one-line description under `NAME` tells you briefly what the command does,
