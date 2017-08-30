@@ -786,8 +786,6 @@ This wrap-up exercise will show you how to do that.
 *** =instructions1
 Go into the `/tmp` directory.
 
-*** =hint1
-
 *** =sample_code1
 ```{shell}
 ```
@@ -813,8 +811,6 @@ Ex().test_student_typed(r'\s*cd\s+/tmp\s*',
 *** =instructions2
 List the contents of `/tmp` *without* typing a directory name.
 
-*** =hint2
-
 *** =sample_code2
 ```{shell}
 ```
@@ -838,10 +834,6 @@ Ex().test_student_typed(r'\s*ls\s*',
 
 *** =instructions3
 Make a new directory called `scratch`.
-
-*** =hint3
-
-Use `mkdir` to make directories.
 
 *** =sample_code3
 ```{shell}
