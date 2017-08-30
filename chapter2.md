@@ -536,16 +536,19 @@ will fill in the rest of the name.
 
 *** =sample_code
 ```{shell}
-# Run head seasonal/autumn.csv, typing as few characters as possible.
+# Run head seasonal/autumn.csv, typing as few characters as possible
 
 
-# Run head seasonal/spring.csv, typing as few characters as possible.
+# Run head seasonal/spring.csv, typing as few characters as possible
 
 ```
 
 *** =solution
 ```{shell}
+# Run head seasonal/autumn.csv, typing as few characters as possible
 head seasonal/autumn.csv
+
+# Run head seasonal/spring.csv, typing as few characters as possible
 head seasonal/spring.csv
 ```
 
