@@ -127,7 +127,8 @@ If you use `ls -R` in your home directory,
 you will see something like this:
 
 ```
-backup          course.txt      people          seasonal
+.:
+backup  course.txt  people  seasonal
 
 ./backup:
 
@@ -135,7 +136,7 @@ backup          course.txt      people          seasonal
 agarwal.txt
 
 ./seasonal:
-autumn.csv      spring.csv      summer.csv      winter.csv
+autumn.csv  spring.csv  summer.csv  winter.csv
 ```
 
 This shows every file and directory in the current level,
