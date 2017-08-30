@@ -8,7 +8,7 @@ ARCHIVE=filesys.zip
 # Report start.
 echo ''
 echo '----------------------------------------'
-echo 'STARTING requirements.sh'
+echo 'STARTING requirements.sh at ' $(date)
 echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
