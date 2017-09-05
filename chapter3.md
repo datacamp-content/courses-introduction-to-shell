@@ -314,7 +314,9 @@ head seasonal/s*.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/s\*\.csv\s*', fixed=False, msg='Remember that "spring" and "summer" both start with "s".')
+Ex().test_student_typed(r'\s*head\s+seasonal/s\*(\.csv)?\s*',
+                        fixed=False,
+                        msg='Remember that "spring" and "summer" both start with "s".')
 ```
 
 
