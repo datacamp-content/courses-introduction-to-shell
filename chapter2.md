@@ -182,7 +182,8 @@ Ex().test_student_typed(pattern,
 To find out what commands do,
 people used to use the `man` command.
 These days,
-you can get the same information by searching for `unix man command` online.
+it's more common to search online for `unix man` and the name of a command,
+so we have not installed `man` in our platform.
 For example,
 the search `unix man head` brings up this information:
 
@@ -258,7 +259,7 @@ Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*',
 `head` and `tail` let you select rows from a text file.
 If you want to select columns,
 you can use the command `cut`.
-It has several options (use `man cut` to explore them),
+It has several options (search for `unix man cut` to explore them),
 but the most common is something like:
 
 ```{shell}
@@ -670,7 +671,7 @@ that can be used to combine data files instead of cutting them up.
 
 <hr>
 
-Read the manual page for `paste`,
+Search online for `unix man paste`,
 and then run `paste` to combine the autumn and winter data files in a single table
 using a comma as a separator.
 What's wrong with the output from a data analysis point of view?
