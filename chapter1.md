@@ -219,7 +219,7 @@ Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use 
 ## Changing directories
 
 Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the shell using the command `cd`
+you can move around in the filesystem using the command `cd`
 (which stands for "change directory").
 
 If you type `cd seasonal` and then type `pwd`,
