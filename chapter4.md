@@ -11,7 +11,7 @@ description : >-
 Like other programs, the shell stores information in variables.
 Some of these,
 called *environment variables*,
-are created by the operating system and available all the time.
+are available all the time.
 Environment variables' names are conventionally written in upper case,
 and a few of the more commonly-used ones are shown below.
 
@@ -57,7 +57,8 @@ Ex().test_mc(3, [err1, err2, correct3, err4])
 --- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
 ## Using echo
 
-The `echo` command prints its arguments:
+A simpler way to find a variable's value is to use a command called `echo,
+which prints its arguments:
 
 ```{shell}
 echo hello DataCamp!
@@ -86,7 +87,7 @@ echo $USER
 repl
 ```
 
-This is true elsewhere as well:
+This is true everywhere:
 to get the value of a variable called `X`,
 you must write `$X`.
 (This is so that the shell can tell whether you mean "a file named X"
@@ -125,10 +126,8 @@ Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
 --- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
 ## Shell variables
 
-The other kind of variable available to you is called a *shell variable*.
-It's like a local variable in a regular programming language,
-in that it only has a value in the shell,
-not in any programs you run from the shell.
+The other kind of variable is called a *shell variable*,
+which is like a local variable in a programming language.
 
 To create a shell variable,
 you simply assign a value to a name:
@@ -137,7 +136,9 @@ you simply assign a value to a name:
 training=seasonal/summer.csv
 ```
 
-and test its value with `echo`:
+*without* any spaces before or after the `=` sign.
+Once you have done this,
+you can check the variable's value with:
 
 ```{shell}
 echo $training
@@ -146,12 +147,9 @@ echo $training
 seasonal/summer.csv
 ```
 
-Any time you use `$training` after that,
-the shell will replace it with `seasonal/summer.csv`.
-
 *** =instructions
 
-Define a shell variable called `testing` with the value `seasonal/winter.csv`,
+Define a variable called `testing` with the value `seasonal/winter.csv`,
 and then use `head -n 1 $testing` to check its value.
 
 *** =hint
@@ -178,72 +176,6 @@ Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$tes
                         fixed=False,
                         msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
-
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:ed34d567c3
-## Creating environment variables
-
-You create a normal shell variable by assigning a name to a value.
-To create an environment variable,
-you must prefix the assignment with the keyword `export`:
-
-```{shell}
-export testing=seasonal/winter.csv
-```
-
-To see the difference between the two kinds of variables,
-you can define `training` to be `seasonal/summer.csv`
-and `testing` to be `seasonal/winter.csv`
-and then run a shell script that contains these two lines:
-
-```{shell}
-echo training is $training
-echo testing is $testing
-```
-
-it prints:
-
-```
-training is
-testing is seasonal/winter.csv
-```
-
-because the shell variable `training` *isn't* set in the script,
-while the environment variable `testing` *is*.
-(Note that if a variable doesn't have a value,
-the shell replaces it with an empty string.)
-
-<hr>
-
-If you define two variables like this:
-
-```{shell}
-export priors=/tmp/training-set.csv
-tests=/tmp/user-data.csv
-```
-
-and then run this shell script:
-
-```{shell}
-echo Priors and testing data are $priors and $tests
-```
-
-what is its output?
-
-*** =possible_answers
-- Priors and testing data are /tmp/training-set.csv and /tmp/user-data.csv
-- [Priors and testing data are /tmp/training-set.csv and ]
-- Priors and testing data are  and /tmp/user-data.csv
-- Priors and testing data are  and 
-
-*** =hint
-
-The value of an undefined variable is an empty string.
-
-*** =feedbacks
-- No: `tests` is not an environment variable.
-- Correct!
-- No: `priors` is an environment variable but `tests` is not.
-- No: `priors` is an environment variable.
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:920d1887e3
 ## Loops
@@ -382,7 +314,7 @@ for f in $files; do echo $f; done
 ```
 
 *** =instructions
-- None: since the first line doesn't say `export files`, that variable has no value in the second line.
+- None: since `files` is defined on a separate line, it has no value in the second line.
 - One: the word "files".
 - Four: the names of all four seasonal data files.
 
@@ -398,7 +330,7 @@ while `$X` is the value of the variable `X`.
 
 *** =sct
 ```{python}
-err1 = "No: you do not have to export a shell variable to use it in the same shell."
+err1 = "No: you do not have to define a variable on the same line you use it."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
 correct3 = "Correct."
 Ex().test_mc(3, [err1, err2, correct3])
@@ -432,7 +364,7 @@ because `datsets` (without the second "a") isn't defined.
 <hr>
 
 If you run these two commands in your home directory,
-how many lines of output will they print?
+what output is printed?
 
 ```{shell}
 files=seasonal/*.csv
@@ -442,18 +374,18 @@ for f in files; do echo $f; done
 (Read the first part of the loop carefully before answering.)
 
 *** =possible_answers
-- None: since the first line doesn't say `export files`, that variable has no value in the second line.
-- [One: the word "files".]
-- Four: the names of all four seasonal data files.
+- [One line: the word "files".]
+- Four lines: the names of all four seasonal data files.
+- Four blank lines: the variable `f` isn't assigned a value.
 
 *** =hint
 
 Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
 
 *** =feedbacks
-- No: this example defines and uses the variable `files` in the same shell.
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
+- No: the variable `f` is defined automatically by the `for` loop.
 
 --- type:ConsoleExercise xp:100 key:39b5dcf81a
 ## Pipes in loops
