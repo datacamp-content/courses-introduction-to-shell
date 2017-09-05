@@ -579,9 +579,9 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring.csv\s*',
+Ex().test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring.csv\s*',
                         fixed=False,
-                        msg='Use `-v` or `-n` in either order.')
+                        msg='Use `-v` or `-n molar` in either order.')
 ```
 
 *** =type3: ConsoleExercise
