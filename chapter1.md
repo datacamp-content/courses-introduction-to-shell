@@ -109,11 +109,13 @@ you can use the command `ls` (which is short for "listing").
 Entered on its own,
 it lists the contents of your current working directory
 (the one displayed by `pwd`).
-If you add the names of one or more files or directories to the line,
-`ls` will list those files and the contents of those directories.
+If you add the names of one or more files,
+`ls` will list those files,
+and if you add the names of directories,
+it will list the contents of those directories.
 For example,
-`ls /home/repl` will show you the contents of your home directory
-(which is the same as what it shows you if you are in that directory and type `ls` on its own).
+`ls /home/repl` will show you the contents of your home directory,
+which is the same as what it shows you if you are in that directory and type `ls` on its own.
 
 <hr>
 Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`.
@@ -153,9 +155,8 @@ it's like saying "20 kilometers north".
 
 For example,
 if you are in the directory `/home/repl`,
-the relative path `course.txt` specifies the same file as `/home/repl/course.txt`,
+the relative path `seasonal` specifies the same directory as `/home/repl/seasonal`,
 and the relative path `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
-
 The shell can tell whether a path is absolute or relative by looking at its first character.
 If the path begins with `/`, it is absolute;
 if it doesn't,
@@ -163,11 +164,12 @@ it is relative.
 
 *** =instructions
 
-You are in the directory `/home/repl`.
-Use `ls some/relative/path` to list the files identified by each of the following absolute paths:
+You are in `/home/repl`.
+Use `ls some/relative/path` to list:
 
-- `/home/repl/course.txt`
-- `/home/repl/people/agarwal.txt`
+- The file `/home/repl/course.txt` (and only that file).
+- The file `/home/repl/seasonal/summer.csv` (and only that file).
+- The contents of the directory `/home/repl/people`.
 
 *** =hint
 You can often construct the relative path to a file or directory below your current location
@@ -184,7 +186,10 @@ from the absolute path of the thing you want.
 # /home/repl/course.txt
 
 
-# /home/repl/people/agarwal.txt
+# /home/repl/seasonal/summer.csv
+
+
+# /home/repl/people
 
 ```
 
@@ -193,13 +198,17 @@ from the absolute path of the thing you want.
 # /home/repl/course.txt
 ls course.txt
 
-# /home/repl/people/agarwal.txt
-ls people/agarwal.txt
+# /home/repl/seasonal/summer.csv
+ls seasonal/summer.csv
+
+# /home/repl/people
+ls people
 ```
 
 *** =sct
 ```{python}
 Ex().test_student_typed(r'\s*ls\s+course.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
+Ex().test_student_typed(r'\s*ls\s+seasonal/summer.csv\s*', fixed=False, msg='Use `ls` followed by a path.')
 Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
