@@ -1,6 +1,5 @@
 # Definitions.
 HOME_DIR=/home/repl
-PROFILE=${HOME_DIR}/.profile
 USER_GROUP=repl:repl
 COURSE_ID=course_5160
 ARCHIVE=filesys.zip
@@ -13,6 +12,7 @@ echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
 echo 'ARCHIVE: ' ${ARCHIVE}
+echo
 
 # Make sure we're in the home directory.
 cd ${HOME_DIR}
@@ -39,11 +39,18 @@ mkdir ./backup
 # Change ownership.
 chown -R ${USER_GROUP} .
 
-# Show what's been installed where.
+# Change prompt.
+echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
+
+# Show what's been done where.
 echo 'Installed in home directory:'
 ls -R ${HOME_DIR}/*
+echo
+echo 'Last 10 lines of .bashrc'
+tail -n 10 ${HOME_DIR}/.bashrc
 
 # Report end.
+echo
 echo 'ENDING requirements.sh'
 echo '----------------------------------------'
 echo ''
