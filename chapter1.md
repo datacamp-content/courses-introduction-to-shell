@@ -56,19 +56,19 @@ Remember that a user can only interact with an operating system through a progra
 ## Where am I?
 
 The part of the operating system responsible for managing files and directories
-is called the *file system*.
+is called the *filesystem*.
 It organizes data into files,
 which hold information,
 and directories (also called "folders"),
 which hold files or other directories.
 
 Every file or directory is identified by an *absolute path*
-that specifies how to get to it from the top (or *root*) of the file system.
+that specifies how to get to it from the top (or *root*) of the filesystem.
 For example,
 the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
 while the path `/home/repl/course.txt` identifies a file called `course.txt` inside that directory.
 
-To find out where you are in the file system,
+To find out where you are in the filesystem,
 type the command `pwd`
 (which stands for "print working directory").
 This tells you the absolute path of the directory where the shell will run commands and look for files
@@ -290,7 +290,7 @@ then `cd ..` moves you up to `/home/repl`.
 If you use `cd ..` once again,
 it puts you in `/home`.
 One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the file system.
+which is the very top of the filesystem.
 
 A single dot on its own, `.`, always means "the current directory",
 so `ls` on its own and `ls .` do the same thing,

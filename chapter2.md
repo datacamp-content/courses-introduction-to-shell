@@ -1,7 +1,7 @@
 ---
 title       : Manipulating data
 description : >-
-  The commands you saw in the previous chapter let you move things around in the file system.
+  The commands you saw in the previous chapter let you move things around in the filesystem.
   This chapter will show you how to work with the data that's in those files.
   The tools we will look at are fairly simple,
   but are the model for everything that's more powerful.
