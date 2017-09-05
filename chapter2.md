@@ -418,6 +418,7 @@ You can now repeat your previous `head` command without retyping it.
 *** =instructions3
 
 Re-run the `head` command using `!` followed by the command name.
+Do *not* type any spaces between `!` and what follows.
 
 *** =hint3
 
@@ -477,6 +478,7 @@ You can now repeat your earlier `head` command using its serial number.
 *** =instructions5
 
 Re-run `head` again using `!` followed by a command number.
+Do *not* type any spaces between `!` and what follows.
 
 *** =hint5
 
