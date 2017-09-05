@@ -395,7 +395,9 @@ will copy two files from the `seasonal` directory into your home directory.
 
 *** =instructions
 
-Copy the spring and summer data files into the `backup` directory.
+Copy the spring and summer data files into the `backup` directory
+*without* changing directory
+(i.e., run a single command from your home directory).
 
 *** =hint
 
