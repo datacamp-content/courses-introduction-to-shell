@@ -500,7 +500,7 @@ wc -l seasonal/*.csv
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*', fixed=False, msg='Use `wc -l` and `seasonal/*.csv`.')
+Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/\*(\.csv)?\s*', fixed=False, msg='Use `wc -l` and `seasonal/*.csv`.')
 ```
 
 *** =type2: ConsoleExercise
