@@ -290,7 +290,9 @@ cut -d , -f 1 seasonal/*.csv
 
 *** =instructions
 
-Write a single command to get the first three lines from the spring and summer data files but *not* the autumn or winter data files.
+Write a single command to get the first three lines from both the spring and summer data files
+(a total of six lines of data)
+but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
 *** =hint
