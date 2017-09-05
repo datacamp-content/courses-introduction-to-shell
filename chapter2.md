@@ -331,15 +331,6 @@ Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correc
 --- type:TabConsoleExercise key:32c0d30049
 ## Repeating commands
 
-*** =pre_exercise_code
-```{python}
-```
-
-*** =type1: ConsoleExercise
-*** =key1: 188a2fab38
-
-*** =xp1: 10
-
 One of the biggest advantages of using the shell is that
 it makes it easy for you to do things over again.
 If you run some commands,
@@ -353,6 +344,15 @@ just type `!55` to re-run the 55th command in your history.
 You can also re-run a command by typing an exclamation mark followed by the command's name,
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1: 188a2fab38
+
+*** =xp1: 10
 
 *** =instructions1
 
