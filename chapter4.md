@@ -9,7 +9,7 @@ description : >-
 ## Environment variables
 
 Like other programs, the shell stores information in variables.
-Soem of these,
+Some of these,
 called *environment variables*,
 are created by the operating system and available all the time.
 Environment variables' names are conventionally written in upper case,
@@ -33,8 +33,8 @@ What is its value?
 
 *** =instructions
 - 10
-- 64
-- [500]
+- 500
+- [2000]
 - The variable is not there.
 
 *** =hint
