@@ -115,7 +115,8 @@ If you add the names of one or more files,
 and if you add the names of directories,
 it will list the contents of those directories.
 For example,
-`ls /home/repl` will show you the contents of your home directory,
+`ls /home/repl` will show you the contents of your starting directory
+(usually called your *home directory*),
 which is the same as what it shows you if you are in that directory and type `ls` on its own.
 
 <hr>

@@ -226,7 +226,7 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =instructions
 
-Look at the manual page for `tail`,
+Search for `unix man tail` to find the manual page for `tail`,
 and then use it to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint
@@ -243,14 +243,14 @@ and then use it to display all *but* the first six lines of `seasonal/spring.csv
 
 *** =solution
 ```{shell}
-tail -n +6 seasonal/spring.csv
+tail -n +7 seasonal/spring.csv
 ```
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+\+6\s+seasonal/spring.csv\s*',
+Ex().test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
                         fixed=False,
-                        msg='Use `+NUMBER` to display lines after the first NUMBER.')
+                        msg='Use `+NUMBER` to display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
