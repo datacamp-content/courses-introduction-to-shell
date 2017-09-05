@@ -57,7 +57,7 @@ Remember that a user can only interact with an operating system through a progra
 
 The part of the operating system responsible for managing files and directories
 is called the *file system*.
-It organizes our data into files,
+It organizes data into files,
 which hold information,
 and directories (also called "folders"),
 which hold files or other directories.
@@ -73,6 +73,7 @@ type the command `pwd`
 (which stands for "print working directory").
 This tells you the absolute path of the directory where the shell will run commands and look for files
 unless and until you tell it to do so elsewhere.
+You can also use the command `whoami` to find out who the computer thinks you are.
 
 <hr>
 Run `pwd` in the shell window to the right.
