@@ -269,7 +269,7 @@ before it runs the loop.
 
 *** =instructions
 
-Modify the wildcard expression so that the loop prints the names of all the files in the `people` directory
+Modify the wildcard expression so that the loop prints the names of the files in the `people` directory
 (regardless of what suffix they do or don't have).
 
 *** =solution
