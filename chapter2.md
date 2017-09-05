@@ -118,11 +118,10 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f830d46419
 ## Deep listing
 
-The previous chapter showed you a command called `tree`
-that draws pictures of your filesystem.
-It isn't installed on computers by default,
-but you can get the same information by giving `ls` the flag `-R`,
-which means "recursive".
+In order to see everything underneath a directory,
+no matter how deeply nested it is,
+you can give `ls` the flag `-R`
+(which means "recursive").
 If you use `ls -R` in your home directory,
 you will see something like this:
 
