@@ -52,4 +52,3 @@ tree /tmp
 ```{python}
 Ex().test_student_typed(r'\s*tree\s+/tmp\s*', fixed=False, msg='Use `tree` with `/tmp` as a parameter.')
 ```
-
