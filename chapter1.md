@@ -12,26 +12,20 @@ description : >-
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
 It controls the computer's processor, hard drive, and network connection,
-and can run (and stop) other programs.
-Each operating system provides a set of functions
-that other programs can call to create and delete files,
-fetch data from the network,
-and so on.
-The differences between these functions are what give each operating system its unique personality.
+but its most important job is to run other programs.
 
 Since human beings aren't digital,
-they need some sort of interface to interact with the functions the operating system provides.
-The most common interface these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs,
-and understands that dragging an icon into the trash can means "delete this thing".
+they need an interface to interact with the operating system.
+The most common one these days is a graphical file explorer,
+which translates clicks and double-clicks into commands to open files and run programs.
 Before computers had graphical displays,
 though,
-people typed instructions into a program called a *command-line shell*,
-or just "shell" for short.
+people typed instructions into a program called a *command-line shell*.
 Each time a command is entered,
-the shell calls one or more operating system functions,
+the shell runs some other programs,
 prints their output in human-readable form,
 and then displays a *prompt* to signal that it's ready to accept the next command.
+(Its name comes from the notion that it's the "outer shell" of the computer.)
 
 Typing commands instead of clicking and dragging may seem clumsy at first,
 but as you will see,
