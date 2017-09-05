@@ -271,7 +271,7 @@ which means
 using comma as the separator".
 `cut` uses `-f` (meaning "fields") to specify columns
 and `-d` (meaning "delimiter") to specify the separator.
-You need to specify thelatter because some files may use spaces, tabs, or colons to separate columns.
+You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
 
 `cut` is a simple-minded command.
 In particular,
