@@ -192,8 +192,9 @@ will:
 
 *** =instructions
 
-Write a pipeline that selects the first value in the "Tooth" column of `seasonal/autumn.csv`
-after the header "Tooth".
+Write a pipeline that uses `cut`, `grep`, and `head`
+to select the first value in the "Tooth" column of `seasonal/autumn.csv`
+*after* the header "Tooth".
 
 *** =hint
 
