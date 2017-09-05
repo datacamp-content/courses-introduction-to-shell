@@ -259,7 +259,7 @@ Ex().test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\
 --- type:NormalExercise lang:shell xp:100 skills:1 key:602d47e70c
 ## Wildcards
 
-Most Unix commands will work on multiple files if you give them multiple filenames.
+Most shell commands will work on multiple files if you give them multiple filenames.
 For example,
 you can get the first column from all of the seasonal data files at once like this:
 

@@ -327,8 +327,7 @@ Once you have some files,
 you will often want to make copies,
 move them into other directories in order to organize them,
 or rename them.
-Unix provides several tools to do this.
-The first is `cp`, which is short for "copy".
+One command to do this is `cp`, which is short for "copy".
 If `original.txt` is an existing file,
 then the command:
 
@@ -719,7 +718,7 @@ Ex().test_student_typed(r'\s*mkdir\s+yearly/2017\s*', fixed=False, msg='Make the
 You will often create intermediate files when analyzing data.
 Rather than storing them in your home directory,
 you can put them in `/tmp`,
-which is where Unix programs typically keep files that they only need briefly.
+which is where programs typically keep files that they only need briefly.
 This wrap-up exercise will show you how to do that.
 
 *** =pre_exercise_code
