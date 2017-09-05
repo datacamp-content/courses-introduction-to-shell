@@ -119,7 +119,8 @@ For example,
 which is the same as what it shows you if you are in that directory and type `ls` on its own.
 
 <hr>
-Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`.
+Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`
+(which holds information on dental surgeries by date, broken down by season).
 Which of the following files is *not* in that directory?
 
 *** =instructions
