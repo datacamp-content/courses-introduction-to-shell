@@ -533,7 +533,8 @@ What's more important right now is some of `grep`'s more common flags:
 
 *** =instructions1
 
-Find all of the lines containing the word `molar` in the autumn data.
+Find all of the lines containing the word `molar` in the autumn data
+by running a single command from your home directory.
 
 *** =hint1
 
@@ -563,6 +564,7 @@ Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*',
 *** =instructions2
 
 Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
+(Again, run a single command from your home directory.)
 
 *** =hint3
 
@@ -590,6 +592,7 @@ Ex().test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spr
 *** =instructions3
 
 Count how many lines contain the word `incisor` in the autumn and winter data combined.
+(Again, run a single command from your home directory.)
 
 *** =hint3
 
