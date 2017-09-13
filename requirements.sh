@@ -30,7 +30,7 @@ unzip ./${ARCHIVE}
 # Remove the zip file.
 rm -f ./${ARCHIVE}
 
-# Make the `backup` and `bin` directories (which start off empty).
+# Make the `backup` directory (which starts off empty, so is not in Git).
 mkdir ./backup
 
 # Change ownership.
