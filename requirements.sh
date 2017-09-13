@@ -20,12 +20,9 @@ cd ${HOME_DIR}
 # Get the zip file.
 wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${ARCHIVE}
 
-# Make sure we have the following commands:
-# - unzip (for installation)
-# - tree (for displaying file system)
+# Make sure we have unzip.
 apt-get update
 apt-get -y install unzip
-apt-get -y install tree
 
 # Unpack to the local directory.
 unzip ./${ARCHIVE}
