@@ -2,7 +2,7 @@
 ---
 # License
 
-Copyright (c) Greg Wilson 2017.
+Copyright (c) DataCamp 2017.
 
 This work is made available under the terms of the Creative Common Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
 This summary is a human-readable summary of (and not a substitute for) the [full license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).
