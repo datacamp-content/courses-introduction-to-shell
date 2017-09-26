@@ -1,0 +1,49 @@
+digraph conda_concepts {
+    node [shape = rectangle];
+    history
+    pipe
+    loop
+    command
+    shell
+    program
+    script
+    file
+    directory
+    filesystem
+    path
+    wildcard
+
+    {
+      rank=same
+      rankdir=LR
+      pipe
+      loop
+      script
+      program
+      filesystem
+    }
+
+    i01 [shape=point, width=0, height=0]
+    i02 [shape=point, width=0, height=0]
+
+    loop -> script [style="invis"]
+
+    shell -> command [label="runs"]
+    shell -> program [label="runs"]
+    shell -> history [label="records"]
+    shell -> wildcard [label="expands"]
+    wildcard -> path [label="matches"]
+    history -> command [label="records"]
+    command -> pipe [label="combined\nusing"]
+    command -> loop [label="repeated\nusing"]
+    command -> history [label="repeated\nusing"]
+    command -> script [label="stored\nin"]
+    script -> program [label="is a"]
+    program -> i01 [dir="none", label="manipulates"]
+      i01 -> file
+      i01 -> directory
+    filesystem -> i02 [dir="none", label="contains"]
+      i02 -> file
+      i02 -> directory
+    path -> filesystem [label="identifies\nparts\nof"]
+}
