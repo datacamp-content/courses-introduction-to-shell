@@ -8,12 +8,12 @@ description : >-
 
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
-## Looking at file headers
+## How can I look at the start of a file?
 
 The first thing most data scientists do when given a new dataset to analyze is
 figure out what fields it contains and what values those fields have.
 If the dataset has been exported from a database or spreadsheet,
-it will often be stored as *comma-separated values* (CSV).
+it will often be stored as **comma-separated values** (CSV).
 A quick way to figure out what it contains is to look at the first few rows.
 
 We can do this in the shell using a command called `head`.
@@ -64,11 +64,11 @@ Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
-## Modifying commands
+## How can I control what commands do?
 
 You won't always want to look at the first 10 lines of a file,
 so the shell lets you change `head`'s behavior
-by giving it a *command-line flag* (or just "flag" for short).
+by giving it a **command-line flag** (or just "flag" for short).
 If you run the command:
 
 ```{shell}
@@ -116,7 +116,7 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f830d46419
-## Deep listing
+## How can I list everything below a directory?
 
 In order to see everything underneath a directory,
 no matter how deeply nested it is,
@@ -177,7 +177,7 @@ Ex().test_student_typed(pattern,
 ```
 
 --- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
-## Getting help
+## How can I get help for a command?
 
 To find out what commands do,
 people used to use the `man` command.
@@ -254,7 +254,7 @@ Ex().test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
-## Selecting columns
+## How can I select columns from a file?
 
 `head` and `tail` let you select rows from a text file.
 If you want to select columns,
@@ -329,7 +329,7 @@ Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correc
 ```
 
 --- type:TabConsoleExercise key:32c0d30049
-## Repeating commands
+## How can I repeat commands?
 
 One of the biggest advantages of using the shell is that
 it makes it easy for you to do things over again.
@@ -499,7 +499,7 @@ Ex().test_student_typed(r'\s*!3\s*',
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
-## Selecting by value
+## How can I select lines containing particular values?
 
 `head` and `tail` select rows,
 `cut` selects columns,
@@ -614,7 +614,7 @@ Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seaso
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
-## You cannot always treat data as text
+## Why isn't it always safe to treat data as text?
 
 The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
 that can be used to combine data files instead of cutting them up.

@@ -6,11 +6,11 @@ description : >-
   Along the way, you will see how the shell uses variables to store information.
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:e4d5f4adea
-## Environment variables
+## How does the shell store information?
 
 Like other programs, the shell stores information in variables.
 Some of these,
-called *environment variables*,
+called **environment variables**,
 are available all the time.
 Environment variables' names are conventionally written in upper case,
 and a few of the more commonly-used ones are shown below.
@@ -55,7 +55,7 @@ Ex().test_mc(3, [err1, err2, correct3, err4])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
-## Using echo
+## How can I print a variable's value?
 
 A simpler way to find a variable's value is to use a command called `echo,
 which prints its arguments:
@@ -124,9 +124,9 @@ Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
-## Shell variables
+## How else does the shell store information?
 
-The other kind of variable is called a *shell variable*,
+The other kind of variable is called a **shell variable**,
 which is like a local variable in a programming language.
 
 To create a shell variable,
@@ -178,9 +178,9 @@ Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$tes
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:920d1887e3
-## Loops
+## How can I repeat a command many times?
 
-Shell variables are also used in *loops*,
+Shell variables are also used in **loops**,
 which repeat commands many times.
 Copy and paste this command into the shell:
 
@@ -245,7 +245,7 @@ Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
-## Loops and wildcards
+## How can I repeat a command once for each file?
 
 You can always type in the names of the files you want to process when writing the loop,
 but it's usually better to use wildcards.
@@ -285,7 +285,7 @@ Ex().test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$fi
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
-## Using variables for sets of files
+## How can I record the names of a set of files?
 
 People often set a variable using a wildcard expression to record a list of filenames.
 For example,
@@ -337,7 +337,7 @@ Ex().test_mc(3, [err1, err2, correct3])
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
-## Names and values
+## What's the difference between a variable's name and its value?
 
 A common mistake is to forget to use `$` before the name of a variable.
 When you do this,
@@ -388,7 +388,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 - No: the variable `f` is defined automatically by the `for` loop.
 
 --- type:ConsoleExercise xp:100 key:39b5dcf81a
-## Pipes in loops
+## How can I run many commands in a single loop?
 
 Printing filenames is useful for debugging,
 but the real purpose of loops is to do things with multiple files.
@@ -427,7 +427,7 @@ Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*.csv;\s+do\s+grep\s+
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
-## Spaces in filenames
+## Why shouldn't I use spaces in filenames?
 
 It's easy and sensible to give files multi-word names like `July 2017.csv`
 when you are using a graphical file explorer.
@@ -480,7 +480,7 @@ what will happen:
 - Unfortunately not.
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f6d0530991
-## Multiple commands in loops
+## How can I do many things in a single loop?
 
 The loops you have seen so far all have a single command or pipeline in their body,
 but a loop can contain any number of commands.

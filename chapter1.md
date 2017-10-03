@@ -8,7 +8,7 @@ description : >-
 
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
-## The shell and your file explorer
+## How does the shell compare to a graphical user interface?
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
 It controls the computer's processor, hard drive, and network connection,
@@ -20,7 +20,7 @@ The most common one these days is a graphical file explorer,
 which translates clicks and double-clicks into commands to open files and run programs.
 Before computers had graphical displays,
 though,
-people typed instructions into a program called a *command-line shell*.
+people typed instructions into a program called a **command-line shell**.
 Each time a command is entered,
 the shell runs some other programs,
 prints their output in human-readable form,
@@ -56,14 +56,14 @@ Remember that a user can only interact with an operating system through a progra
 ## Where am I?
 
 The part of the operating system responsible for managing files and directories
-is called the *filesystem*.
+is called the **filesystem**.
 It organizes data into files,
 which hold information,
 and directories (also called "folders"),
 which hold files or other directories.
 
-Every file or directory is identified by an *absolute path*
-that specifies how to get to it from the top (or *root*) of the filesystem.
+Every file or directory is identified by an **absolute path**
+that specifies how to get to it from the top (or **root**) of the filesystem.
 For example,
 the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
 while the path `/home/repl/course.txt` identifies a file called `course.txt` inside that directory.
@@ -71,7 +71,8 @@ while the path `/home/repl/course.txt` identifies a file called `course.txt` ins
 To find out where you are in the filesystem,
 type the command `pwd`
 (which stands for "print working directory").
-This tells you the absolute path of the directory where the shell will run commands and look for files
+This tells you the absolute path of your **current working directory**,
+which is where the shell will run commands and look for files
 unless and until you tell it to do so elsewhere.
 You can also use the command `whoami` to find out who the computer thinks you are.
 
@@ -101,7 +102,7 @@ Ex().test_mc(3, [err, err, correct])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
-## What's where?
+## How can I identify files and directories?
 
 `pwd` tells you where you are,
 but doesn't tell you what files and directories are there.
@@ -116,7 +117,7 @@ and if you add the names of directories,
 it will list the contents of those directories.
 For example,
 `ls /home/repl` will show you the contents of your starting directory
-(usually called your *home directory*),
+(usually called your **home directory**),
 which is the same as what it shows you if you are in that directory and type `ls` on its own.
 
 <hr>
@@ -147,11 +148,11 @@ Ex().test_mc(2, [err, correct, err, err])
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:a766184b59
-## Relative paths
+## How else can I identify files and directories?
 
 An absolute path is like the latitude and longitude of a point on a map:
 it specifies the same thing no matter where you are.
-A *relative path*,
+A **relative path**,
 on the other hand,
 specifies a location starting from where you are:
 it's like saying "20 kilometers north".
@@ -216,7 +217,7 @@ Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use 
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
-## Changing directories
+## How can I move to another directory?
 
 Just as you can move around in a file browser by double-clicking on folders,
 you can move around in the filesystem using the command `cd`
@@ -275,9 +276,9 @@ Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will 
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
-## Special paths
+## How can I move up a directory?
 
-The *parent* of a directory is the directory above it.
+The **parent** of a directory is the directory above it.
 For example, `/home` is the parent of `/home/repl`,
 and `/home/repl` is the parent of `/home/repl/seasonal`.
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
@@ -324,7 +325,7 @@ Trace the path one directory at a time.
 Ex().test_mc(2, [err1, correct, err3])
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
-## Copying single files
+## How can I copy a file?
 
 Once you have some files,
 you will often want to make copies,
@@ -373,7 +374,7 @@ Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', f
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b055c990e7
-## Copying multiple files
+## How can I copy multiple files?
 
 `cp` can do more than copy one file at a time.
 If the second parameter is an existing directory such as `backup`,
@@ -425,7 +426,7 @@ Ex().test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+ba
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
-## Moving files
+## How can I move a file?
 
 While `cp` gives you a way to copy a file,
 `mv` lets you move it from one directory to another,
@@ -471,7 +472,7 @@ Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+ba
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:8cbc17793f
-## Renaming files
+## How can I rename fils?
 
 `mv` can also be used to rename files.
 If you run:
@@ -539,7 +540,7 @@ Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the dire
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
-## Deleting files
+## How can I delete files?
 
 We can create files,
 copy them,
@@ -616,7 +617,7 @@ Ex().test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*', fixed=False, msg='`rm
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:63e8fbd0c2
-## Deleting directories
+## How can I delete directories?
 
 `mv` treats directories the same way it treats files:
 if you are in your home directory and run `mv seasonal by-season`,
@@ -667,7 +668,7 @@ Ex().test_student_typed(r'\s*rmdir\s+people\s*', fixed=False, msg='Remove the di
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
-## Creating directories
+## How can I create directories?
 
 A directory is a different kind of thing than a text file,
 so you cannot create directories using a text editor.

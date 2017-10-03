@@ -7,12 +7,12 @@ description : >-
   and introduce commands for sorting values and removing duplicates.
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:07a427d50c
-## Redirection
+## How can I store a command's output in a file?
 
 All of the tools you have seen so far let you name input files.
 Most don't have an option for naming an output file because they don't need one.
 Instead,
-you can use *redirection* to save any command's output anywhere you want.
+you can use **redirection** to save any command's output anywhere you want.
 If you run this command:
 
 ```{shell}
@@ -70,7 +70,7 @@ Ex().test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.csv\
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f47d337593
-## Using output as input
+## How can I use one command's output as the input to another command?
 
 Suppose you want to get lines from the middle of a file.
 More specifically,
@@ -119,14 +119,14 @@ Ex().test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*', fixed=False, msg='U
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b36aea9a1e
-## Pipes
+## What's a better way to use one command's output as another command's input?
 
 Using redirection to combine commands has two drawbacks:
 
 1. It leaves a lot of intermediate files lying around (like `top.csv`).
 2. The commands to produce your final result are scattered across several lines of history.
 
-The shell provides another tool that solves both of these problems at once called a *pipe*.
+The shell provides another tool that solves both of these problems at once called a **pipe**.
 Once again,
 start by running `head`:
 
@@ -174,7 +174,7 @@ Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s*|\s*g
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:b8753881d6
-## Longer pipes
+## How can I combine many commands?
 
 You can chain any number of commands together.
 For example,
@@ -223,7 +223,7 @@ Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\s*g
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
-## Counting records
+## How can I count the records in a file?
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
 You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
@@ -258,7 +258,7 @@ Ex().test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:602d47e70c
-## Wildcards
+## How can I specify many files with a single command?
 
 Most shell commands will work on multiple files if you give them multiple filenames.
 For example,
@@ -272,7 +272,7 @@ But typing the names of many files over and over is a bad idea:
 it wastes time,
 and sooner or later you will either leave a file out or repeat a file's name.
 To make your life better,
-the shell allows you to use *wildcards* to specify a list of files with a single expression.
+the shell allows you to use **wildcards** to specify a list of files with a single expression.
 The most common wildcard is `*`,
 which means "match zero or more characters".
 Using it,
@@ -321,7 +321,7 @@ Ex().test_student_typed(r'\s*head\s+seasonal/s\*(\.csv)?\s*',
 
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
-## More wildcards
+## What other wildcards can I use?
 
 The shell has other wildcards as well,
 though they are less commonly used:
@@ -351,7 +351,7 @@ Match each expression against each filename in turn.
 - Correct!
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f06d9e310e
-## Sorting
+## How can I sort lines of text?
 
 As its name suggests,
 `sort` puts data in order.
@@ -394,7 +394,7 @@ Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\s*g
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:ed77aed337
-## Removing duplicates
+## How can I remove duplicates lines?
 
 Another command that is often used with `sort` is `uniq`,
 whose job is to remove duplicated lines.
