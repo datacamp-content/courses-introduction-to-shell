@@ -2,7 +2,8 @@
 HOME_DIR=/home/repl
 USER_GROUP=repl:repl
 COURSE_ID=course_5160
-ARCHIVE=filesys.zip
+FILESYS=filesys.zip
+SOLUTIONS=solutions.zip
 
 # Report start.
 echo ''
@@ -11,14 +12,15 @@ echo 'STARTING requirements.sh at ' $(date)
 echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
-echo 'ARCHIVE: ' ${ARCHIVE}
+echo 'FILESYS: ' ${FILESYS}
 echo
 
 # Make sure we're in the home directory.
 cd ${HOME_DIR}
 
-# Get the zip file.
-wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${ARCHIVE}
+# Get the zip files.
+wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${FILESYS}
+wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${SOLUTIONS}
 
 # Make sure we have unzip.
 apt-get update
@@ -29,10 +31,10 @@ pip3 install git+https://github.com/gvwilson/shellwhat_ext.git
 python3 -c "import sys; print('sys.version:', sys.version); import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 
 # Unpack to the local directory.
-unzip ./${ARCHIVE}
+unzip ./${FILESYS}
 
 # Remove the zip file.
-rm -f ./${ARCHIVE}
+rm -f ./${FILESYS}
 
 # Make the `backup` and `bin` directories (which start off empty, so are not in Git).
 mkdir ./backup
@@ -40,6 +42,10 @@ mkdir ./bin
 
 # Change ownership.
 chown -R ${USER_GROUP} .
+
+# Unpack the solutions (used for file comparison in SCTs).
+unzip -d /tmp ./${SOLUTIONS}
+rm -f ./${SOLUTIONS}
 
 # Change prompt.
 echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
