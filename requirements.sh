@@ -24,6 +24,9 @@ wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datase
 apt-get update
 apt-get -y install unzip
 
+# Make sure we have the shellwhat_ext extensions.
+pip install git+https://github.com/gvwilson/shellwhat_ext.git
+
 # Unpack to the local directory.
 unzip ./${ARCHIVE}
 
