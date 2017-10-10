@@ -120,9 +120,9 @@ which produces the same output as running the commands directly.
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('dates.sh', '/tmp/solutions/dates.sh')
-     >> test_student_typed(r'\s*bash\s+dates.sh\s*',
-                           fixed=False,
+Ex() >> test_compare_file_to_file('dates.sh', '/tmp/solutions/dates.sh') \
+     >> test_student_typed(r'\s*bash\s+dates.sh\s*', \
+                           fixed=False, \
                            msg='Use `bash` and the name of the file to run.')
 ```
 
@@ -175,10 +175,10 @@ and save them in `dates.out`.
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('teeth.sh', '/tmp/solutions/teeth.sh')
-     >> test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
-                           fixed=False,
-                           msg='Run the script with `bash` and use `>` to redirect its output.')
+Ex() >> test_compare_file_to_file('teeth.sh', '/tmp/solutions/teeth.sh') \
+     >> test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*', \
+                           fixed=False, \
+                           msg='Run the script with `bash` and use `>` to redirect its output.') \
      >> test_compare_file_to_file('teeth.out', '/tmp/solutions/teeth.out')
 ```
 
@@ -244,10 +244,10 @@ bash count-records.sh seasonal/*.csv > num-records.out
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('count-records.sh', '/tmp/solutions/count-records.sh')
-     >> test_student_typed(r'\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*',
-                           fixed=False,
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
+Ex() >> test_compare_file_to_file('count-records.sh', '/tmp/solutions/count-records.sh') \
+     >> test_student_typed(r'\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*', \
+                           fixed=False, \
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/tmp/solutions/num-records.out')
 ```
 
@@ -619,10 +619,10 @@ chmod u+x bin/range.sh
 *** =sct4
 ```{python}
 import os
-Ex() >> test_student_typed(r'\s*chmod\s+u=rwx\s+bin/range.sh\s*',
-                           fixed=False,
-                           msg='Use `chmod u+x` and the path to the script.')
-     >> test(os.access('bin/range.sh', os.X_OK),
+Ex() >> test_student_typed(r'\s*chmod\s+u=rwx\s+bin/range.sh\s*', \
+                           fixed=False, \
+                           msg='Use `chmod u+x` and the path to the script.') \
+     >> test(os.access('bin/range.sh', os.X_OK), \
              'bin/range.sh is not executable (use `chmod`).')
 ```
 
