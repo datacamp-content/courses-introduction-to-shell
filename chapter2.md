@@ -296,6 +296,7 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =solution
 ```{shell}
+man tail
 tail -n +7 seasonal/spring.csv
 ```
 
@@ -303,7 +304,7 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().test_student_typed(r'\s*man\s+tail\s+tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
                         fixed=False,
-                        msg='Use `+NUMBER` to display lines starting from NUMBER.')
+                        msg='`man` will tell you that `+NUMBER` will display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a

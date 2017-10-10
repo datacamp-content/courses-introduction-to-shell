@@ -1,7 +1,7 @@
 # Definitions.
 HOME_DIR=/home/repl
 USER_GROUP=repl:repl
-COURSE_ID=course_5160
+COURSE_ID=course_5065
 FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
 
