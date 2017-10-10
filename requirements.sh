@@ -25,7 +25,8 @@ apt-get update
 apt-get -y install unzip
 
 # Make sure we have the shellwhat_ext extensions.
-pip install git+https://github.com/gvwilson/shellwhat_ext.git
+pip3 install git+https://github.com/gvwilson/shellwhat_ext.git
+python3 -c "import sys; print('sys.version:', sys.version); import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 
 # Unpack to the local directory.
 unzip ./${ARCHIVE}
@@ -33,8 +34,9 @@ unzip ./${ARCHIVE}
 # Remove the zip file.
 rm -f ./${ARCHIVE}
 
-# Make the `backup` directory (which starts off empty, so is not in Git).
+# Make the `backup` and `bin` directories (which start off empty, so are not in Git).
 mkdir ./backup
+mkdir ./bin
 
 # Change ownership.
 chown -R ${USER_GROUP} .
@@ -45,7 +47,8 @@ echo 'export PATH=$PATH:$HOME/bin' >> ${HOME_DIR}/.bashrc
 
 # Copy to /.course_home, for resetting exercises
 # files there will replace /home/repl each exercise
-sudo -u repl rsync -a /home/repl/ /.course_home/
+rsync -a /home/repl/ /.course_home/
+chown -R ${USER_GROUP} /.course_home/
 
 # Show what's been done where.
 echo 'Installed in home directory:'
@@ -54,8 +57,8 @@ echo
 echo 'Last 10 lines of .bashrc'
 tail -n 10 ${HOME_DIR}/.bashrc
 
-echo '/.course_home dir:'
-ls '/.course_home'
+echo '/.course_home directory:'
+ls -R /.course_home
 
 # Report end.
 echo
