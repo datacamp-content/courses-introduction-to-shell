@@ -39,12 +39,19 @@ chown -R ${USER_GROUP} .
 # Change prompt.
 echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
 
+# Copy to /.course_home, for resetting exercises
+# files there will replace /home/repl each exercise
+sudo -u repl rsync -a /home/repl/ /.course_home/
+
 # Show what's been done where.
 echo 'Installed in home directory:'
 ls -R ${HOME_DIR}/*
 echo
 echo 'Last 10 lines of .bashrc'
 tail -n 10 ${HOME_DIR}/.bashrc
+
+echo '/.course_home dir:'
+ls '/.course_home'
 
 # Report end.
 echo

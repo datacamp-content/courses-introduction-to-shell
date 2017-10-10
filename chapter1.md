@@ -206,7 +206,7 @@ ls course.txt
 ls seasonal/summer.csv
 
 # /home/repl/people
-ls people
+ls people/agarwal.txt
 ```
 
 *** =sct
