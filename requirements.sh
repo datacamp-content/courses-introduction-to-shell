@@ -38,6 +38,7 @@ chown -R ${USER_GROUP} .
 
 # Change prompt.
 echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
+echo 'export PATH=$PATH:$HOME/bin' >> ${HOME_DIR}/.bashrc
 
 # Copy to /.course_home, for resetting exercises
 # files there will replace /home/repl each exercise

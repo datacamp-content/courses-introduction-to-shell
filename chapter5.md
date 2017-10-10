@@ -1,0 +1,575 @@
+---
+title       : Creating new tools
+description : >-
+  History lets you repeat things with just a few keystrokes,
+  and pipes let you combine existing commands to create new ones.
+  In this chapter, you will see how to go one step further
+  and create new commands of your own.
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I save commands to re-run later?
+
+You have been using the shell interactively so far.
+But since the commands you type in are just text,
+you can store them in files for the shell to run over and over again.
+To start exploring this powerful capability,
+put the following command in a file called `headers.sh`:
+
+```{shell}
+head -n 1 seasonal/*.csv
+```
+
+This command selects the first row from each of the CSV files in the `seasonal` directory.
+Once you have created this file,
+you can run it by typing:
+
+```{shell}
+bash headers.sh
+```
+
+This tells the shell (which is just a program called `bash`)
+to run the commands contained in the file `headers.sh`,
+which produces the same output as running the commands directly.
+
+*** =instructions
+
+- Create another file called `dates.sh`
+  that uses the `cut` command to extract the first column
+  from all of the CSV files in `seasonal`.
+- Run this file. 
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+# FIXME: how to trigger comparison.
+```
+
+*** =sct
+```{python}
+# FIXME: filesys/.hidden/dates.sh
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I re-use pipes?
+
+A file full of shell commands is called a *shell script*,
+or sometimes just a "script" for short.
+Scripts don't have to have names ending in `.sh`,
+but this lesson will use that convention
+to help you keep track of which files are scripts.
+
+Scripts may contain pipes.
+For example,
+if `all-dates.sh` contains this line:
+
+```{shell}
+cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
+```
+
+then:
+
+```{shell}
+bash all-dates.sh > dates.out
+```
+
+will extract the unique dates from the seasonal data files
+and save them in `dates.out`.
+
+*** =instructions
+
+- Create a shell script called `teeth.sh`
+  that prints a count of the number of times each tooth name appears in the seasonal data.
+- Run it and use redirection to save its output in `teeth.out`.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+```
+
+*** =solution
+```{shell}
+Ex().test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
+                        fixed=False,
+                        msg='Run the script with `bash` and use `>` to redirect its output.')
+```
+
+*** =sct
+```{python}
+# FIXME: compare filesys/.hidden/teeth.sh and filesys/.hidden/teeth.out
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I pass filenames to scripts?
+
+A script that processes specific files is useful as a record of what you did,
+but one that allows you process any files you want is more useful.
+To support this,
+you can use the special expression `$@` (dollar sign immediately followed by ampersand)
+to mean "all of the command-line parameters given to the script".
+For example,
+if `some-dates.sh` contains this:
+
+```{shell}
+cut -d , -f 1 $@ | grep -v Date | sort | uniq
+```
+
+then when you run:
+
+```{shell}
+bash some-dates.sh seasonal/summer.csv`
+```
+
+the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
+If you run this:
+
+```{shell}
+bash some-dates.sh seasonal/*.csv
+```
+
+it processes all four data files.
+
+*** =instructions
+
+- Write a script called `count-records.sh`
+  that counts the number of lines in one or more files,
+  excluding the first line of each.
+  Use the `-q` flag to `tail` to stop it from printing title lines.
+- Run it on all of the seasonal data files
+  and save the output in `num-records.out`.
+
+```{shell}
+bash count-records.sh seasonal/*.csv > num-records.out
+```
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+# FIXME
+```
+
+*** =sct
+```{python}
+# FIXME: filesys/.hidden/count-records.sh and filesys/.hidden/num-records.out
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I process a single argument?
+
+As well as `$@`,
+the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
+You can use this to write commands that feel simpler or more natural than the shell's.
+For example,
+you can create a script called `column.sh` that selects a single column from a CSV file
+when the user provides the filename as the first parameter and the column as the second:
+
+```{shell}
+cut -d , -f $2 $1
+```
+
+and then run it using:
+
+```{shell}
+bash column.sh seasonal/autumn.csv 1
+```
+
+Notice how the script uses the two parameters in reverse order.
+
+*** =instructions
+
+The script `get-lines.sh` is supposed to take
+a start line,
+and an end line as arguments,
+and select that range of lines from that file.
+For example:
+
+```
+bash get-lines.sh seasonal/summer.csv 5 8
+```
+
+should select lines 5-8 from `seasonal/summer.csv`.
+Edit the file `get-lines.sh` and replace the `____` placeholders
+so that it does this.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+# FIXME: copy filesys/.hidden/get-lines.sh to the root directory.
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+# FIXME: compare filesys/.hidden/get-lines.sh to filesys/.hidden/get-lines-solution.sh 
+```
+
+*** =sct
+```{python}
+# FIXME: write SCT
+```
+
+--- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:
+## How can I get detailed information about a file?
+
+In order to take the next step with scripting,
+you need to know more about how Unix manages files.
+First,
+Unix stores a set of properties for each file along with its contents.
+`ls` with the `-l` flag will display these.
+For example,
+`ls -l seasonal` displays something like this:
+
+```
+-rw-r--r--  1 repl  staff  399 18 Aug 09:27 autumn.csv
+-rw-r--r--  1 repl  staff  458 18 Aug 09:27 spring.csv
+-rw-r--r--  1 repl  staff  479 18 Aug 09:27 summer.csv
+-rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
+```
+
+Ignoring the first two columns for now,
+this listing shows that the files are owned by a user named `repl`
+who belongs to a group named `staff`,
+that they range in size from 399 to 497 bytes,
+and that they were last modified on August 18 at 9:27 in the morning.
+
+<hr>
+How many bytes are in the file `course.txt`?
+
+*** =possible_answers
+- 1
+- 18
+- [485]
+
+*** =hint
+Use the same command shown in the lesson.
+
+*** =feedbacks
+- No - you are looking at the wrong column.
+- No - you are looking at the wrong column.
+- Yes.
+
+--- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## How does Unix control who can do what with a file?
+
+Unix keeps track of who can do what to files and directories
+by storing a set of **permissions** for each one.
+The three permissions are *read*, *write*, and *execute* (i.e., run as a program).
+These are often written `rwx` with dashes for permissions that are missing,
+so `rw-` means "can read and write but not execute"
+and `r-x` means "can read and execute but not modify".
+
+Unix is a multi-user operating system,
+so it stores three sets of permissions for each file or directory:
+one for the owner,
+a second for other people in the owner's group,
+and a third for everyone else.
+When `ls -l seasonal` displays this:
+
+```
+-rw-r--r--  1 repl  staff  399 18 Aug 09:27 autumn.csv
+-rw-r--r--  1 repl  staff  458 18 Aug 09:27 spring.csv
+-rw-r--r--  1 repl  staff  479 18 Aug 09:27 summer.csv
+-rw-r--r--  1 repl  staff  497 18 Aug 09:27 winter.csv
+```
+
+it means that each file can be read and written by their owner (the first `rw-`),
+read by other people in the `staff` group (`r--`),
+and also read by everyone else on the machine (`r--`).
+(The first character is "-" for files and "d" for directories.)
+
+*** =instructions
+
+What can other users who *aren't* members of your group do with the file `course.txt`?
+
+*** =possible_answers
+- [Read.]
+- Read and write.
+- Read and execute.
+- None of the above.
+
+*** =hint
+
+Use `ls -l` and read the permissions in groups of three characters.
+
+*** =feedbacks
+- Correct.
+- No - the third group of characters does not contain a "w".
+- No - the third group of characters does not contain an "x".
+- No - the third group of characters contains an "r".
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I change a file's permissions?
+
+You can change a file's permissions using `chmod`
+(which stands for "change mode").
+Its first parameter describes what permissions you want the file to have;
+the other parameters should be the names of files.
+
+To describe permissions,
+you write an expression like `u=rw` or `g=rwx`.
+The first is "u" for "user" (i.e., you),
+"g" for "group" (other people in your group),
+or "o" for "other" (everyone else).
+The letters after the equals sign specify the permissions you want to give the file.
+Thus,
+to stop yourself from accidentally editing `course.txt`
+you would write:
+
+```{shell}
+chmod u=r course.txt
+```
+
+*** =instructions
+
+Change the permissions on `people/agarwal.txt` so that everyone in your group can read and write it.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+chmod g=rw people/agarwal.txt
+```
+
+*** =sct
+```{shell}
+Ex().test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*', fixed=False, msg='Use `chmod` with `g=rw` and the filename.')
+```
+
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I use my scripts like other commands?
+
+As you use the shell to work with data,
+you will build up your own toolbox of useful scripts.
+Most users put these in a directory called `bin` under their home directory.
+If a script is there,
+and if it has execute permission,
+the shell will run it when you type its name *without* saying "bash" first.
+
+*** =instructions
+
+The script `lines.sh` reports the number of lines in one or more files
+without reporting the total number of lines.
+
+- Move the script to `~/bin`.
+- Use `chmod` to change its permissions so that you can read, write, and execute it.
+- Run the script by typing `lines.sh seasonal/*.csv` *without* typing the command `bash`.
+
+*** =hint
+
+Use `o=rwx` as the permission.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+lines.sh seasonal/*.csv
+```
+
+*** =sct
+```{shell}
+# FIXME
+Ex().test(os.access(f'$HOME/bin/lines.sh', os.X_OK), f'bin/lines.sh is not executable (did you forget `chmod`?).')
+```
+
+--- type:BulletConsoleExercise key:
+## BulletConsoleExercise Example
+
+All of the shell scripts you have seen so far contain a single command,
+but a script can contain any number of commands.
+To wrap up this course,
+you will create one that tells you how many records are in the shortest and longest of your data files.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1: a1e55487fb
+
+*** =xp1: 10
+
+*** =instructions1
+
+Create a script called `bin/range.sh`
+that uses `wc -l`, `grep`, `sort`, and `head` in a pipeline in that order
+to list the names and number of lines in all of the files given on the command line.
+(Do not try to subtract the header lines from the files.)
+
+*** =hint1
+
+You solved this problem when we first introduced pipes.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+```
+
+*** =sct1
+```{python}
+# FIXME: filesys/.hidden/range-1.sh
+```
+
+*** =type2: ConsoleExercise
+*** =key2: e8ece27fe7
+
+*** =xp2: 20
+
+*** =instructions2
+
+Rewrite `bin/range.sh` so that it uses `sort -n` and `head -n 1` to display
+the name and line count of the shortest file given to it.
+
+*** =hint3
+
+Use `sort -n` and `head -n 1` to select the shortest line.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+
+```
+
+*** =sct2
+```{python}
+# FIXME filesys/.hidden/range-2.sh
+```
+
+*** =type3: ConsoleExercise
+*** =key3: a3b36a746e
+
+*** =xp3: 30
+
+*** =instructions3
+
+Add a second line to `bin/range.sh` to print the name and record count of
+the *longest* file in the directory *as well as* the shortest.
+(Use `sort -n -r` and `head` rather than `sort -n` and `tail`.)
+
+*** =hint3
+
+Remember that a shell script can contain any number of commands.
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+```
+
+*** =sct3
+```{python}
+# FIXME: filesys/.hidden/range-3.sh
+```
+
+*** =type4: ConsoleExercise
+*** =key4: 7ef95165b6
+
+*** =xp4: 30
+
+*** =instructions4
+
+Give yourself read, write, and execute permission on `bin/range.sh`.
+
+*** =hint4
+
+Use `chmod` and `u=rwx`.
+
+*** =sample_code4
+```{shell}
+```
+
+*** =solution4
+```{shell}
+chmod u+x bin/range.sh
+```
+
+*** =sct4
+```{python}
+Ex().test_student_typed(r'\s*chmod\s+u+x\s+bin/range.sh\s*', fixed=False, msg='Use `chmod u+x` and the path to the script.')
+```
+
+*** =type5: ConsoleExercise
+*** =key5: 7ad3b76529
+
+*** =xp5: 30
+
+*** =instructions5
+
+Run the script on the files in the `seasonal` directory
+by typing the name of the script and a wildcard expression to match all of the files,
+*without* typing `bin/`.
+
+*** =hint5
+
+Remember, if the script is executable and in `bin`, you can just type its name.
+
+*** =sample_code5
+```{shell}
+```
+
+*** =solution5
+```{shell}
+range.sh seasonal/*.csv
+```
+
+*** =sct5
+```{python}
+Ex().test_student_typed(r'\s*range.sh seasonal/*.csv\s*', fixed=False, msg='Use `range.sh` and `seasonal/*.csv`.')
+```
