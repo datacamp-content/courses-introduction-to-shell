@@ -737,7 +737,7 @@ This wrap-up exercise will show you how to do that.
 *** =xp1: 10
 
 *** =instructions1
-- Go into the `/tmp` directory.
+Go into the `/tmp` directory.
 
 *** =hint1
 
@@ -764,7 +764,7 @@ Ex().test_student_typed(r'\s*cd\s+/tmp\s*',
 *** =xp2: 10
 
 *** =instructions2
-- List the contents of `/tmp` *without* typing a directory name.
+List the contents of `/tmp` *without* typing a directory name.
 
 *** =hint2
 
@@ -793,7 +793,6 @@ Ex().test_student_typed(r'\s*ls\s*',
 Make a new directory called `scratch`.
 
 *** =hint3
-
 Use `mkdir` to make directories.
 
 *** =sample_code3
@@ -818,7 +817,6 @@ Ex().test_student_typed(r'\s*mkdir\s+scratch\s*',
 *** =xp4: 30
 
 *** =instructions4
-
 Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`
 using the `~` shortcut for your home directory
 and a relative path for the target directory.
