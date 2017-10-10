@@ -6,6 +6,69 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
+--- type:NormalExercise lang:shell xp:100 skills:1 key:
+## How can I edit a file?
+
+Unix has a bewildering variety of text editors,
+some of which combine the power of a full-blown IDE
+with the readability of Egyptian hieroglyphics.
+For this course,
+we will use a very simple editor called Nano.
+If you type `nano filename`,
+it will open `filename` for editing
+(or create it if it doesn't already exist).
+You can then move around with the arrow keys,
+delete characters with the backspace key,
+and so on.
+You can also do a few other operations with control-key combinations:
+
+| Key    | Effect |
+| ------ | ------ |
+| Ctrl-K | delete a line |
+| Ctrl-U | un-delete a line |
+| Ctrl-O | save the file ('O' stands for 'output') |
+| Ctrl-X | exit the editor |
+
+*** =instructions
+
+Use Nano to create a file in your home directory called `names.txt`
+that contains the following four lines:
+
+```
+Lovelace
+Hopper
+Johnson
+Wilson
+```
+
+Make sure there are no blank lines before or after these four lines.
+
+*** =hint
+
+Use the down-arrow to go to the bottom of the file to check for blank lines.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sample_code
+```{shell}
+
+```
+
+*** =solution
+```{shell}
+
+```
+
+*** =sct
+```{python}
+from shellwhat_ext import test_compare_file_to_lines
+lines = ['Lovelace', 'Hopper', 'Johnson', 'Wilson']
+Ex() >> test_compare_file_to_lines('temp.txt', lines)
+```
+
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
 ## How can I save commands to re-run later?
 
@@ -52,12 +115,15 @@ which produces the same output as running the commands directly.
 
 *** =solution
 ```{shell}
-# FIXME: how to trigger comparison.
 ```
 
 *** =sct
 ```{python}
-# FIXME: filesys/.hidden/dates.sh
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('dates.sh', '/tmp/solutions/dates.sh')
+     >> test_student_typed(r'\s*bash\s+dates.sh\s*',
+                           fixed=False,
+                           msg='Use `bash` and the name of the file to run.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:da13667750
@@ -96,7 +162,6 @@ and save them in `dates.out`.
 
 *** =pre_exercise_code
 ```{shell}
-
 ```
 
 *** =sample_code
@@ -105,14 +170,16 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
-Ex().test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
-                        fixed=False,
-                        msg='Run the script with `bash` and use `>` to redirect its output.')
 ```
 
 *** =sct
 ```{python}
-# FIXME: compare filesys/.hidden/teeth.sh and filesys/.hidden/teeth.out
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('teeth.sh', '/tmp/solutions/teeth.sh')
+     >> test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
+                           fixed=False,
+                           msg='Run the script with `bash` and use `>` to redirect its output.')
+     >> test_compare_file_to_file('teeth.out', '/tmp/solutions/teeth.out')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c2623b9c14
@@ -172,12 +239,16 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =solution
 ```{shell}
-# FIXME
 ```
 
 *** =sct
 ```{python}
-# FIXME: filesys/.hidden/count-records.sh and filesys/.hidden/num-records.out
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('count-records.sh', '/tmp/solutions/count-records.sh')
+     >> test_student_typed(r'\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*',
+                           fixed=False,
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
+     >> test_compare_file_to_file('num-records.out', '/tmp/solutions/num-records.out')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4092cb4cda
@@ -222,7 +293,6 @@ so that it does this.
 
 *** =pre_exercise_code
 ```{shell}
-# FIXME: copy filesys/.hidden/get-lines.sh to the root directory.
 ```
 
 *** =sample_code
@@ -232,13 +302,14 @@ so that it does this.
 
 *** =solution
 ```{shell}
-# FIXME: compare filesys/.hidden/get-lines.sh to filesys/.hidden/get-lines-solution.sh 
 ```
 
 *** =sct
 ```{python}
-# FIXME: write SCT
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('get-lines.sh', '/tmp/solutions/get-lines.sh')
 ```
+
 
 --- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:59f0e1cf33
 ## How can I get detailed information about a file?
@@ -369,12 +440,13 @@ Change the permissions on `people/agarwal.txt` so that everyone in your group ca
 
 *** =solution
 ```{shell}
-chmod g=rw people/agarwal.txt
 ```
 
 *** =sct
 ```{shell}
-Ex().test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*', fixed=False, msg='Use `chmod` with `g=rw` and the filename.')
+Ex() >> test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*',
+                           fixed=False,
+                           msg='Use `chmod` with `g=rw` and the filename.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
@@ -417,8 +489,9 @@ lines.sh seasonal/*.csv
 
 *** =sct
 ```{shell}
-# FIXME
-Ex().test(os.access(f'$HOME/bin/lines.sh', os.X_OK), f'bin/lines.sh is not executable (did you forget `chmod`?).')
+import os
+Ex() >> test(os.access('bin/lines.sh', os.X_OK),
+             'bin/lines.sh is not executable (did you forget `chmod`?).')
 ```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
@@ -459,7 +532,8 @@ You solved this problem when we first introduced pipes.
 
 *** =sct1
 ```{python}
-# FIXME: filesys/.hidden/range-1.sh
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-1.sh')
 ```
 
 *** =type2: ConsoleExercise
@@ -487,7 +561,8 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 
 *** =sct2
 ```{python}
-# FIXME filesys/.hidden/range-2.sh
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-2.sh')
 ```
 
 *** =type3: ConsoleExercise
@@ -515,7 +590,8 @@ Remember that a shell script can contain any number of commands.
 
 *** =sct3
 ```{python}
-# FIXME: filesys/.hidden/range-3.sh
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-3.sh')
 ```
 
 *** =type4: ConsoleExercise
@@ -542,7 +618,12 @@ chmod u+x bin/range.sh
 
 *** =sct4
 ```{python}
-Ex().test_student_typed(r'\s*chmod\s+u+x\s+bin/range.sh\s*', fixed=False, msg='Use `chmod u+x` and the path to the script.')
+import os
+Ex() >> test_student_typed(r'\s*chmod\s+u=rwx\s+bin/range.sh\s*',
+                           fixed=False,
+                           msg='Use `chmod u+x` and the path to the script.')
+     >> test(os.access('bin/range.sh', os.X_OK),
+             'bin/range.sh is not executable (use `chmod`).')
 ```
 
 *** =type5: ConsoleExercise
@@ -555,6 +636,7 @@ Ex().test_student_typed(r'\s*chmod\s+u+x\s+bin/range.sh\s*', fixed=False, msg='U
 Run the script on the files in the `seasonal` directory
 by typing the name of the script and a wildcard expression to match all of the files,
 *without* typing `bin/`.
+Save the output in a file called `range.out` in your home directory.
 
 *** =hint5
 
@@ -566,10 +648,12 @@ Remember, if the script is executable and in `bin`, you can just type its name.
 
 *** =solution5
 ```{shell}
-range.sh seasonal/*.csv
+range.sh seasonal/*.csv > range.out
 ```
 
 *** =sct5
 ```{python}
-Ex().test_student_typed(r'\s*range.sh seasonal/*.csv\s*', fixed=False, msg='Use `range.sh` and `seasonal/*.csv`.')
+Ex() >> test_student_typed(r'\s*range.sh seasonal/*.csv\s*>\s*range.out\s*',
+                           fixed=False,
+                           msg='Use `range.sh` and `seasonal/*.csv`.')
 ```
