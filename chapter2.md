@@ -63,7 +63,7 @@ What does `head` do if there aren't 10 lines in the file?
 Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:0b7b8ca8f7
 ## How can I type less?
 
 One of the shell's power tools is **tab completion**.
