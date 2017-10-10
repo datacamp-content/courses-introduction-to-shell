@@ -6,7 +6,7 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
 ## How can I save commands to re-run later?
 
 You have been using the shell interactively so far.
@@ -60,7 +60,7 @@ which produces the same output as running the commands directly.
 # FIXME: filesys/.hidden/dates.sh
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:da13667750
 ## How can I re-use pipes?
 
 A file full of shell commands is called a *shell script*,
@@ -115,7 +115,7 @@ Ex().test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*',
 # FIXME: compare filesys/.hidden/teeth.sh and filesys/.hidden/teeth.out
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:c2623b9c14
 ## How can I pass filenames to scripts?
 
 A script that processes specific files is useful as a record of what you did,
@@ -180,7 +180,7 @@ bash count-records.sh seasonal/*.csv > num-records.out
 # FIXME: filesys/.hidden/count-records.sh and filesys/.hidden/num-records.out
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:4092cb4cda
 ## How can I process a single argument?
 
 As well as `$@`,
@@ -240,7 +240,7 @@ so that it does this.
 # FIXME: write SCT
 ```
 
---- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:
+--- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:59f0e1cf33
 ## How can I get detailed information about a file?
 
 In order to take the next step with scripting,
@@ -280,7 +280,7 @@ Use the same command shown in the lesson.
 - No - you are looking at the wrong column.
 - Yes.
 
---- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
 ## How does Unix control who can do what with a file?
 
 Unix keeps track of who can do what to files and directories
@@ -329,7 +329,7 @@ Use `ls -l` and read the permissions in groups of three characters.
 - No - the third group of characters does not contain an "x".
 - No - the third group of characters contains an "r".
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:f1988ccaf6
 ## How can I change a file's permissions?
 
 You can change a file's permissions using `chmod`
@@ -377,7 +377,7 @@ chmod g=rw people/agarwal.txt
 Ex().test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*', fixed=False, msg='Use `chmod` with `g=rw` and the filename.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:
+--- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
 ## How can I use my scripts like other commands?
 
 As you use the shell to work with data,
@@ -421,7 +421,7 @@ lines.sh seasonal/*.csv
 Ex().test(os.access(f'$HOME/bin/lines.sh', os.X_OK), f'bin/lines.sh is not executable (did you forget `chmod`?).')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:6a3eb1d64d
 ## BulletConsoleExercise Example
 
 All of the shell scripts you have seen so far contain a single command,
