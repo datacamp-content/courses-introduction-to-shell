@@ -5,6 +5,9 @@ USER_GROUP=repl:repl
 COURSE_ID=course_5065
 FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
+PYTHON=python3
+PIP=pip3
+SHELLWHAT_EXT=git+https://github.com/gvwilson/shellwhat_ext.git
 
 # Report start.
 echo ''
@@ -28,9 +31,10 @@ apt-get update
 apt-get -y install nano
 apt-get -y install unzip
 
-# Make sure we have the shellwhat_ext extensions.
-pip3 install git+https://github.com/gvwilson/shellwhat_ext.git
-python3 -c "import sys; print('sys.version:', sys.version); import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
+# Install the shellwhat_ext extensions.
+${PIP} install {SHELLWHAT_EXT}
+${PYTHON} -c "import sys; print('sys.version:', sys.version)"
+${PYTHON} -c "import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 
 # Unpack to the local directory.
 unzip ./${FILESYS}
