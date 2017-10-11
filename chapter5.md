@@ -58,13 +58,13 @@ and Ctrl-K to delete them.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/names.txt /home/repl
+cp /solutions/names.txt /home/repl
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('names.txt', '/tmp/solutions/names.txt')
+Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
@@ -112,14 +112,14 @@ which produces the same output as running the commands directly.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/dates.sh /home/repl
+cp /solutions/dates.sh /home/repl
 bash dates.sh
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('dates.sh', '/tmp/solutions/dates.sh') \
+Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh') \
      >> test_student_typed(r'.+\s*bash\s+dates.sh\s*', \
                            fixed=False, \
                            msg='Use `bash` and the name of the file to run.')
@@ -169,18 +169,18 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/teeth.* /home/repl
+cp /solutions/teeth.* /home/repl
 bash teeth.sh > teeth.out
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('teeth.sh', '/tmp/solutions/teeth.sh') \
+Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
      >> test_student_typed(r'.+\s*bash\s+teeth.sh\s*>\s*teeth.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('teeth.out', '/tmp/solutions/teeth.out')
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c2623b9c14
@@ -240,18 +240,18 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/count-records.sh /home/repl
-cp /tmp/solutions/num-records.out /home/repl
+cp /solutions/count-records.sh /home/repl
+cp /solutions/num-records.out /home/repl
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('count-records.sh', '/tmp/solutions/count-records.sh') \
+Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
      >> test_student_typed(r'\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('num-records.out', '/tmp/solutions/num-records.out')
+     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4092cb4cda
@@ -305,13 +305,13 @@ so that it does this.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/get-lines.sh /home/repl
+cp /solutions/get-lines.sh /home/repl
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('get-lines.sh', '/tmp/solutions/get-lines.sh')
+Ex() >> test_compare_file_to_file('get-lines.sh', '/solutions/get-lines.sh')
 ```
 
 
@@ -536,13 +536,13 @@ You solved this problem when we first introduced pipes.
 
 *** =solution1
 ```{shell}
-cp /tmp/solutions/range-1.sh range.sh
+cp /solutions/range-1.sh range.sh
 ```
 
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-1.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh')
 ```
 
 *** =type2: ConsoleExercise
@@ -565,13 +565,13 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-cp /tmp/solutions/range-2.sh range.sh
+cp /solutions/range-2.sh range.sh
 ```
 
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-2.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh')
 ```
 
 *** =type3: ConsoleExercise
@@ -595,13 +595,13 @@ Remember that a shell script can contain any number of commands.
 
 *** =solution3
 ```{shell}
-cp /tmp/solutions/range-3.sh range.sh
+cp /solutions/range-3.sh range.sh
 ```
 
 *** =sct3
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/tmp/solutions/range-3.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh')
 ```
 
 *** =type4: ConsoleExercise

@@ -50,7 +50,7 @@ mkdir ./bin
 chown -R ${USER_GROUP} .
 
 # Unpack the solutions (used for file comparison in SCTs).
-unzip -d /tmp ./${SOLUTIONS}
+unzip -d / ./${SOLUTIONS}
 rm -f ./${SOLUTIONS}
 
 # Change prompt.
