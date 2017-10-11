@@ -58,7 +58,7 @@ and Ctrl-K to delete them.
 
 *** =solution
 ```{shell}
-cp /solutions/names.txt /home/repl
+cp /solutions/names.txt .
 ```
 
 *** =sct
@@ -112,7 +112,7 @@ which produces the same output as running the commands directly.
 
 *** =solution
 ```{shell}
-cp /solutions/dates.sh /home/repl
+cp /solutions/dates.sh .
 bash dates.sh
 ```
 
@@ -169,8 +169,7 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
-cp /solutions/teeth.* /home/repl
-bash teeth.sh > teeth.out
+cp /solutions/teeth.* .
 ```
 
 *** =sct
@@ -240,8 +239,8 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =solution
 ```{shell}
-cp /solutions/count-records.sh /home/repl
-cp /solutions/num-records.out /home/repl
+cp /solutions/count-records.sh .
+cp /solutions/num-records.out .
 ```
 
 *** =sct
@@ -305,7 +304,7 @@ so that it does this.
 
 *** =solution
 ```{shell}
-cp /solutions/get-lines.sh /home/repl
+cp /solutions/get-lines.sh .
 ```
 
 *** =sct
