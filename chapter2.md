@@ -262,6 +262,7 @@ SEE ALSO
      tail(1)
 ```
 
+(You may need to press the space bar to page down a few times to see it all.)
 The one-line description under `NAME` tells you briefly what the command does,
 and the summary under `SYNOPSIS` lists all of the options.
 Anything that is optional is shown in square brackets `[...]`,
@@ -296,7 +297,7 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =solution
 ```{shell}
-man tail
+man tail | cat
 tail -n +7 seasonal/spring.csv
 ```
 

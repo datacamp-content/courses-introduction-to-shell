@@ -59,14 +59,14 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =solution
 ```{shell}
-
+cp /tmp/solutions/names.txt names.txt
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_lines
 lines = ['Lovelace', 'Hopper', 'Johnson', 'Wilson']
-Ex() >> test_compare_file_to_lines('temp.txt', lines)
+Ex() >> test_compare_file_to_lines('names.txt', lines)
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
