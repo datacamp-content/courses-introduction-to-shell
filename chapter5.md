@@ -45,7 +45,8 @@ Make sure there are no blank lines before or after these four lines.
 
 *** =hint
 
-Use the down-arrow to go to the bottom of the file to check for blank lines.
+Use the down-arrow to go to the bottom of the file to check for blank lines
+and Ctrl-K to delete them.
 
 *** =pre_exercise_code
 ```{shell}
@@ -53,19 +54,17 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =sample_code
 ```{shell}
-
 ```
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/names.txt .
+cp /tmp/solutions/names.txt /home/repl
 ```
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_compare_file_to_lines
-lines = ['Lovelace', 'Hopper', 'Johnson', 'Wilson']
-Ex() >> test_compare_file_to_lines('names.txt', lines)
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('names.txt', '/tmp/solutions/names.txt')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
@@ -113,7 +112,7 @@ which produces the same output as running the commands directly.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/dates.sh .
+cp /tmp/solutions/dates.sh /home/repl
 bash dates.sh
 ```
 
@@ -170,7 +169,7 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/teeth.* .
+cp /tmp/solutions/teeth.* /home/repl
 bash teeth.sh > teeth.out
 ```
 
@@ -241,8 +240,8 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/count-records.sh .
-cp /tmp/solutions/num-records.out .
+cp /tmp/solutions/count-records.sh /home/repl
+cp /tmp/solutions/num-records.out /home/repl
 ```
 
 *** =sct
@@ -306,7 +305,7 @@ so that it does this.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/get-lines.sh .
+cp /tmp/solutions/get-lines.sh /home/repl
 ```
 
 *** =sct
