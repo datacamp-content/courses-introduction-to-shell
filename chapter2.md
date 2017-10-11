@@ -303,7 +303,7 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail\s+tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
+Ex().test_student_typed(r'\s*man\s+tail.+\s+tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
                         fixed=False,
                         msg='`man` will tell you that `+NUMBER` will display lines starting from NUMBER.')
 ```
