@@ -58,7 +58,7 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/names.txt names.txt
+cp /tmp/solutions/names.txt .
 ```
 
 *** =sct
@@ -109,12 +109,11 @@ which produces the same output as running the commands directly.
 
 *** =sample_code
 ```{shell}
-
 ```
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/dates.sh dates.sh
+cp /tmp/solutions/dates.sh .
 ```
 
 *** =sct
@@ -170,6 +169,7 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
+cp /tmp/solutions/teeth.* .
 ```
 
 *** =sct
@@ -239,6 +239,8 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =solution
 ```{shell}
+cp /tmp/solutions/count-records.sh .
+cp /tmp/solutions/num-records.out .
 ```
 
 *** =sct
@@ -302,6 +304,7 @@ so that it does this.
 
 *** =solution
 ```{shell}
+cp /tmp/solutions/get-lines.sh .
 ```
 
 *** =sct
@@ -445,9 +448,7 @@ chmod g=rw people/agarwal.txt
 
 *** =sct
 ```{shell}
-Ex() >> test_student_typed(r'\s*chmod\s+g=rw\s+people/agarwal.txt\s*',
-                           fixed=False,
-                           msg='Use `chmod` with `g=rw` and the filename.')
+Ex() >> test_file_perms('people/agarwal.txt', 'rw', 'is not readable/writeable.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
@@ -485,7 +486,7 @@ Use `o=rwx` as the permission.
 
 *** =solution
 ```{shell}
-lines.sh seasonal/*.csv
+Ex() >> test_file_perms('bin/lines.sh', 'rwx', 'is not readable/writeable/executable.')
 ```
 
 *** =sct
@@ -493,6 +494,9 @@ lines.sh seasonal/*.csv
 from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('bin/lines.sh', 'x',
                         'is not executable (did you forget `chmod`?).')
+     >> test_student_typed(r'\s*lines.sh\s+seasonal/*.csv\s*', \
+                           fixed=False, \
+                           msg='Type the name of the script and the wildcard pattern for the files.') \
 ```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
@@ -529,6 +533,7 @@ You solved this problem when we first introduced pipes.
 
 *** =solution1
 ```{shell}
+cp /tmp/solutions/range-1.sh range.sh
 ```
 
 *** =sct1
@@ -557,7 +562,7 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-
+cp /tmp/solutions/range-2.sh range.sh
 ```
 
 *** =sct2
@@ -587,6 +592,7 @@ Remember that a shell script can contain any number of commands.
 
 *** =solution3
 ```{shell}
+cp /tmp/solutions/range-3.sh range.sh
 ```
 
 *** =sct3
@@ -614,7 +620,7 @@ Use `chmod` and `u=rwx`.
 
 *** =solution4
 ```{shell}
-chmod u+x bin/range.sh
+chmod u=rwx bin/range.sh
 ```
 
 *** =sct4
@@ -649,7 +655,7 @@ Remember, if the script is executable and in `bin`, you can just type its name.
 
 *** =solution5
 ```{shell}
-range.sh seasonal/*.csv > range.out
+bin/range.sh seasonal/*.csv > range.out
 ```
 
 *** =sct5
