@@ -58,6 +58,7 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =solution
 ```{shell}
+cp /tmp/solutions/names.txt names.txt
 ```
 
 *** =sct
