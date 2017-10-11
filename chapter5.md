@@ -179,9 +179,9 @@ from shellwhat_ext import test_compare_file_to_file
 import os
 with open('teeth.out', 'r') as reader:
      content = reader.read()
-debug = 'curdir is {} content of teeth.out is {}'.format(os.getcwd(), str(content))
+debug = 'curdir is {} contents are {} teeth.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug)
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug)
 
 # FIXME: SCT doesn't pass.
 #     test_student_typed(r'.+bash\s+teeth.sh\s*>\s*teeth.out\s*',
@@ -252,9 +252,9 @@ from shellwhat_ext import test_compare_file_to_file
 import os
 with open('num-records.out', 'r') as reader:
      content = reader.read()
-debug = 'curdir is {} content of num-records.out is {}'.format(os.getcwd(), str(content))
+debug = 'curdir is {} contents are {} num-records.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
-     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out', debug)
+     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out', debug=debug)
 
 # FIXME: SCT doesn't pass.
 #     test_student_typed(r'.+\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*',
@@ -459,7 +459,10 @@ chmod u=r people/agarwal.txt
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
-Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
+import os
+debug = 'contents of {}: {}'.format(os.getcwd(), os.listdir(os.curdir))
+debug += '\nand contents of people: {}'.format(os.listdir('people'))
+Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.', debug=debug)
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
@@ -505,8 +508,10 @@ lines.sh seasonal/*.csv
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
+import os
+debug = 'contents of bin: {}'.format(os.getcwd(), os.listdir('bin'))
 Ex() >> test_file_perms('bin/lines.sh', 'x',
-                        'is not executable (did you forget `chmod`?).')
+                        'is not executable (did you forget `chmod`?).', debug=debug)
 
 # FIXME: SCT is not passing.
 #     test_student_typed(r'.+\s*lines.sh\s+seasonal/*.csv\s*',
@@ -554,7 +559,7 @@ cp /solutions/range-1.sh bin/range.sh
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh', debug='range-1')
 ```
 
 *** =type2: ConsoleExercise
@@ -583,7 +588,7 @@ cp /solutions/range-2.sh bin/range.sh
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh', debug='range-2')
 ```
 
 *** =type3: ConsoleExercise
@@ -613,7 +618,7 @@ cp /solutions/range-3.sh bin/range.sh
 *** =sct3
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh', debug='range-3')
 ```
 
 *** =type4: ConsoleExercise
