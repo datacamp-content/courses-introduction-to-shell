@@ -32,7 +32,7 @@ apt-get -y install nano
 apt-get -y install unzip
 
 # Install the shellwhat_ext extensions.
-${PIP} install {SHELLWHAT_EXT}
+${PIP} install ${SHELLWHAT_EXT}
 ${PYTHON} -c "import sys; print('sys.version:', sys.version)"
 ${PYTHON} -c "import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 
