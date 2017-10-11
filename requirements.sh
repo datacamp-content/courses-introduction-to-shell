@@ -23,8 +23,9 @@ cd ${HOME_DIR}
 wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${FILESYS}
 wget https://s3.amazonaws.com/assets.datacamp.com/production/${COURSE_ID}/datasets/${SOLUTIONS}
 
-# Make sure we have unzip.
+# Make sure we have nano and unzip.
 apt-get update
+apt-get -y install nano
 apt-get -y install unzip
 
 # Make sure we have the shellwhat_ext extensions.
