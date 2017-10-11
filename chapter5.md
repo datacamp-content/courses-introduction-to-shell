@@ -428,7 +428,8 @@ chmod u=r course.txt
 
 *** =instructions
 
-Set the permissions on `people/agarwal.txt` so that everyone in your group can read and write it.
+Set the permissions on `people/agarwal.txt` so that you can read it
+but not write to it or execute it.
 
 *** =hint
 
@@ -444,13 +445,13 @@ Set the permissions on `people/agarwal.txt` so that everyone in your group can r
 
 *** =solution
 ```{shell}
-chmod g=rw people/agarwal.txt
+chmod u=r people/agarwal.txt
 ```
 
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
-Ex() >> test_file_perms('people/agarwal.txt', 'rw', 'is not readable/writeable.')
+Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
