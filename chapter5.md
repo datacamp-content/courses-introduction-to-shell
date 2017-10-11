@@ -49,7 +49,6 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =pre_exercise_code
 ```{shell}
-
 ```
 
 *** =sample_code
@@ -59,7 +58,6 @@ Use the down-arrow to go to the bottom of the file to check for blank lines.
 
 *** =solution
 ```{shell}
-cp /tmp/solutions/names.txt names.txt
 ```
 
 *** =sct
@@ -115,6 +113,7 @@ which produces the same output as running the commands directly.
 
 *** =solution
 ```{shell}
+cp /tmp/solutions/dates.sh dates.sh
 ```
 
 *** =sct
