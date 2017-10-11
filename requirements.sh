@@ -1,5 +1,6 @@
 # Definitions.
 HOME_DIR=/home/repl
+HOME_COPY=/.course_home
 USER_GROUP=repl:repl
 COURSE_ID=course_5065
 FILESYS=filesys.zip
@@ -51,10 +52,10 @@ rm -f ./${SOLUTIONS}
 echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
 echo 'export PATH=$PATH:$HOME/bin' >> ${HOME_DIR}/.bashrc
 
-# Copy to /.course_home, for resetting exercises
-# files there will replace /home/repl each exercise
-rsync -a /home/repl/ /.course_home/
-chown -R ${USER_GROUP} /.course_home/
+# Make copy for resetting exercises.
+# Files there will replace /home/repl each exercise.
+rsync -a ${HOME_DIR} ${HOME_COPY}
+chown -R ${USER_GROUP} ${HOME_COPY}
 
 # Show what's been done where.
 echo 'Installed in home directory:'
@@ -63,8 +64,8 @@ echo
 echo 'Last 10 lines of .bashrc'
 tail -n 10 ${HOME_DIR}/.bashrc
 
-echo '/.course_home directory:'
-ls -R /.course_home
+echo 'home backup directory:'
+ls -R ${HOME_COPY}
 
 # Report end.
 echo
