@@ -169,14 +169,15 @@ and save them in `dates.out`.
 
 *** =solution
 ```{shell}
-cp /solutions/teeth.* .
+cp /solutions/teeth.sh .
+bash teeth.sh > teeth.out
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
-     >> test_student_typed(r'.+\s*bash\s+teeth.sh\s*>\s*teeth.out\s*', \
+     >> test_student_typed(r'.+bash\s+teeth.sh\s*>\s*teeth.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
      >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
@@ -221,10 +222,6 @@ it processes all four data files.
 - Run it on all of the seasonal data files
   and save the output in `num-records.out`.
 
-```{shell}
-bash count-records.sh seasonal/*.csv > num-records.out
-```
-
 *** =hint
 
 *** =pre_exercise_code
@@ -240,14 +237,14 @@ bash count-records.sh seasonal/*.csv > num-records.out
 *** =solution
 ```{shell}
 cp /solutions/count-records.sh .
-cp /solutions/num-records.out .
+bash count-records.sh seasonal/*.csv > num-records.out
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
-     >> test_student_typed(r'\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*', \
+     >> test_student_typed(r'.+\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
@@ -488,6 +485,8 @@ Use `o=rwx` as the permission.
 
 *** =solution
 ```{shell}
+cp /solutions/lines.sh bin
+chmod u=rwx bin/lines.sh
 lines.sh seasonal/*.csv
 ```
 
@@ -535,7 +534,7 @@ You solved this problem when we first introduced pipes.
 
 *** =solution1
 ```{shell}
-cp /solutions/range-1.sh range.sh
+cp /solutions/range-1.sh bin/range.sh
 ```
 
 *** =sct1
@@ -564,7 +563,7 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-cp /solutions/range-2.sh range.sh
+cp /solutions/range-2.sh bin/range.sh
 ```
 
 *** =sct2
@@ -594,7 +593,7 @@ Remember that a shell script can contain any number of commands.
 
 *** =solution3
 ```{shell}
-cp /solutions/range-3.sh range.sh
+cp /solutions/range-3.sh bin/range.sh
 ```
 
 *** =sct3
@@ -622,13 +621,14 @@ Use `chmod` and `u=rwx`.
 
 *** =solution4
 ```{shell}
+cp /solutions/range-3.sh bin/range.sh
 chmod u=rwx bin/range.sh
 ```
 
 *** =sct4
 ```{python}
 from shellwhat_ext import test_file_perms
-Ex() >> test_student_typed(r'\s*chmod\s+u=rwx\s+bin/range.sh\s*', \
+Ex() >> test_student_typed(r'.+\s*chmod\s+u=rwx\s+bin/range.sh\s*', \
                            fixed=False, \
                            msg='Use `chmod u+x` and the path to the script.') \
      >> test_file_perms('bin/range.sh', 'x', \
@@ -657,12 +657,14 @@ Remember, if the script is executable and in `bin`, you can just type its name.
 
 *** =solution5
 ```{shell}
-bin/range.sh seasonal/*.csv > range.out
+cp /solutions/range-3.sh bin/range.sh
+chmod u=rwx bin/range.sh
+range.sh seasonal/*.csv > range.out
 ```
 
 *** =sct5
 ```{python}
-Ex() >> test_student_typed(r'\s*range.sh seasonal/*.csv\s*>\s*range.out\s*',
+Ex() >> test_student_typed(r'.+\s*range.sh seasonal/*.csv\s*>\s*range.out\s*',
                            fixed=False,
                            msg='Use `range.sh` and `seasonal/*.csv`.')
 ```
