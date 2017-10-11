@@ -114,13 +114,14 @@ which produces the same output as running the commands directly.
 *** =solution
 ```{shell}
 cp /tmp/solutions/dates.sh .
+bash dates.sh
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('dates.sh', '/tmp/solutions/dates.sh') \
-     >> test_student_typed(r'\s*bash\s+dates.sh\s*', \
+     >> test_student_typed(r'.+\s*bash\s+dates.sh\s*', \
                            fixed=False, \
                            msg='Use `bash` and the name of the file to run.')
 ```
@@ -170,13 +171,14 @@ and save them in `dates.out`.
 *** =solution
 ```{shell}
 cp /tmp/solutions/teeth.* .
+bash teeth.sh > teeth.out
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('teeth.sh', '/tmp/solutions/teeth.sh') \
-     >> test_student_typed(r'\s*bash\s+teeth.sh\s*>\s*teeth.out\s*', \
+     >> test_student_typed(r'.+\s*bash\s+teeth.sh\s*>\s*teeth.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
      >> test_compare_file_to_file('teeth.out', '/tmp/solutions/teeth.out')
@@ -448,6 +450,7 @@ chmod g=rw people/agarwal.txt
 
 *** =sct
 ```{shell}
+from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'rw', 'is not readable/writeable.')
 ```
 
@@ -486,15 +489,15 @@ Use `o=rwx` as the permission.
 
 *** =solution
 ```{shell}
-Ex() >> test_file_perms('bin/lines.sh', 'rwx', 'is not readable/writeable/executable.')
+lines.sh seasonal/*.csv
 ```
 
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
-Ex() >> test_file_perms('bin/lines.sh', 'x',
-                        'is not executable (did you forget `chmod`?).')
-     >> test_student_typed(r'\s*lines.sh\s+seasonal/*.csv\s*', \
+Ex() >> test_file_perms('bin/lines.sh', 'x', \
+                        'is not executable (did you forget `chmod`?).') \
+     >> test_student_typed(r'.+\s*lines.sh\s+seasonal/*.csv\s*', \
                            fixed=False, \
                            msg='Type the name of the script and the wildcard pattern for the files.') \
 ```
