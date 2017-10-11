@@ -12,7 +12,7 @@ SHELLWHAT_EXT=git+https://github.com/gvwilson/shellwhat_ext.git
 # Report start.
 echo ''
 echo '----------------------------------------'
-echo 'STARTING requirements.sh at ' $(date)
+echo 'START TIME:' $(date)
 echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
