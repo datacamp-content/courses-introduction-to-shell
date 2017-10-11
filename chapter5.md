@@ -461,7 +461,10 @@ chmod u=r people/agarwal.txt
 from shellwhat_ext import test_file_perms
 import os
 debug = 'contents of {}: {}'.format(os.getcwd(), os.listdir(os.curdir))
-debug += '\nand contents of people: {}'.format(os.listdir('people'))
+if os.path.exists('people'):
+    debug += '\nand contents of people: {}'.format(os.listdir('people'))
+else:
+    debug += '\npeople directory is missing!!'
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.', debug=debug)
 ```
 
@@ -509,7 +512,10 @@ lines.sh seasonal/*.csv
 ```{shell}
 from shellwhat_ext import test_file_perms
 import os
-debug = 'contents of bin: {}'.format(os.getcwd(), os.listdir('bin'))
+if os.path.exists('bin'):
+    debug = 'contents of bin: {}'.format(os.getcwd(), os.listdir('bin'))
+else:
+    debug = 'bin directory is missing!!'
 Ex() >> test_file_perms('bin/lines.sh', 'x',
                         'is not executable (did you forget `chmod`?).', debug=debug)
 
