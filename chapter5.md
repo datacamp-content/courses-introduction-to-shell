@@ -424,7 +424,7 @@ chmod u=r course.txt
 
 *** =instructions
 
-Change the permissions on `people/agarwal.txt` so that everyone in your group can read and write it.
+Set the permissions on `people/agarwal.txt` so that everyone in your group can read and write it.
 
 *** =hint
 
@@ -440,6 +440,7 @@ Change the permissions on `people/agarwal.txt` so that everyone in your group ca
 
 *** =solution
 ```{shell}
+chmod g=rw people/agarwal.txt
 ```
 
 *** =sct
@@ -489,9 +490,9 @@ lines.sh seasonal/*.csv
 
 *** =sct
 ```{shell}
-import os
-Ex() >> test(os.access('bin/lines.sh', os.X_OK),
-             'bin/lines.sh is not executable (did you forget `chmod`?).')
+from shellwhat_ext import test_file_perms
+Ex() >> test_file_perms('bin/lines.sh', 'x',
+                        'is not executable (did you forget `chmod`?).')
 ```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
@@ -618,12 +619,12 @@ chmod u+x bin/range.sh
 
 *** =sct4
 ```{python}
-import os
+from shellwhat_ext import test_file_perms
 Ex() >> test_student_typed(r'\s*chmod\s+u=rwx\s+bin/range.sh\s*', \
                            fixed=False, \
                            msg='Use `chmod u+x` and the path to the script.') \
-     >> test(os.access('bin/range.sh', os.X_OK), \
-             'bin/range.sh is not executable (use `chmod`).')
+     >> test_file_perms('bin/range.sh', 'x', \
+                        'is not executable (use `chmod`).')
 ```
 
 *** =type5: ConsoleExercise
