@@ -147,7 +147,7 @@ correct = "Correct - that file is *not* in the `seasonal` directory."
 Ex().test_mc(2, [err, correct, err, err])
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:a766184b59
+--- type:BulletConsoleExercise key:
 ## How else can I identify files and directories?
 
 An absolute path is like the latitude and longitude of a point on a map:
@@ -166,54 +166,99 @@ If the path begins with `/`, it is absolute;
 if it doesn't,
 it is relative.
 
-*** =instructions
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
 
 You are in `/home/repl`.
-Use `ls some/relative/path` to list:
+Use `ls some/relative/path` to list
+the file `/home/repl/course.txt` (and only that file).
 
-- The file `/home/repl/course.txt` (and only that file).
-- The file `/home/repl/seasonal/summer.csv` (and only that file).
-- The contents of the directory `/home/repl/people`.
+*** =hint1
 
-*** =hint
 You can often construct the relative path to a file or directory below your current location
 by subtracting the absolute path of your current location
 from the absolute path of the thing you want.
 
-*** =pre_exercise_code
+*** =sample_code1
 ```{shell}
-
 ```
 
-*** =sample_code
+*** =solution1
 ```{shell}
-# /home/repl/course.txt
-
-
-# /home/repl/seasonal/summer.csv
-
-
-# /home/repl/people
-
-```
-
-*** =solution
-```{shell}
-# /home/repl/course.txt
 ls course.txt
-
-# /home/repl/seasonal/summer.csv
-ls seasonal/summer.csv
-
-# /home/repl/people
-ls people/agarwal.txt
 ```
 
-*** =sct
+*** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*ls\s+course.txt\s*', fixed=False, msg='Use `ls` followed by a path.')
-Ex().test_student_typed(r'\s*ls\s+seasonal/summer.csv\s*', fixed=False, msg='Use `ls` followed by a path.')
-Ex().test_student_typed(r'\s*ls\s+people/agarwal.txt\s*', fixed=False, msg='Use `ls` followed by a path, but do not put spaces inside the path.')
+Ex() >> test_student_typed(r'\s*ls\s+course.txt\s*',
+                           fixed=False,
+                           msg='Use `ls` followed by a path.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+You are in `/home/repl`.
+Use `ls some/relative/path` to list
+the file `/home/repl/seasonal/summer.csv` (and only that file).
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+ls seasonal/summer.csv
+```
+
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer.csv\s*',
+                           fixed=False,
+                           msg='Use `ls` followed by a path.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+You are in `/home/repl`.
+Use `ls some/relative/path` to list
+the contents of the directory `/home/repl/people`.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+ls people
+```
+
+*** =sct3
+```{python}
+Ex() >> test_student_typed(r'\s*ls\s+people/agarwal.txt\s*',
+                           fixed=False,
+                           msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
