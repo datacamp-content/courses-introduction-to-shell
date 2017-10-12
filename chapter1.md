@@ -147,7 +147,7 @@ correct = "Correct - that file is *not* in the `seasonal` directory."
 Ex().test_mc(2, [err, correct, err, err])
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:a766184b59
 ## How else can I identify files and directories?
 
 An absolute path is like the latitude and longitude of a point on a map:
@@ -171,7 +171,7 @@ it is relative.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 9db1ed7afd
 
 *** =xp1: 10
 
@@ -204,7 +204,7 @@ Ex() >> test_student_typed(r'\s*ls\s+course.txt\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 4165425bf6
 
 *** =xp2: 10
 
@@ -233,7 +233,7 @@ Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer.csv\s*',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: b5e66d3741
 
 *** =xp3: 10
 
