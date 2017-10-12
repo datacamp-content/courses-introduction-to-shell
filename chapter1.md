@@ -261,7 +261,7 @@ Ex() >> test_student_typed(r'\s*ls\s+people/agarwal.txt\s*',
                            msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:dbdaec5610
 ## How can I move to another directory?
 
 Just as you can move around in a file browser by double-clicking on folders,
@@ -281,7 +281,7 @@ you can use the command `cd /home/repl`.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 3d0bfdd77d
 
 *** =xp1: 10
 
@@ -308,7 +308,7 @@ Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: e69c8eac15
 
 *** =xp2: 10
 
@@ -335,7 +335,7 @@ Ex() >> test_student_typed(r'\s*pwd\s*',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: f6b265bd7f
 
 *** =xp3: 10
 
@@ -362,7 +362,7 @@ Ex() >> test_student_typed(r'\s*pwd\s*',
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: f0c51d58e1
 
 *** =xp4: 10
 
