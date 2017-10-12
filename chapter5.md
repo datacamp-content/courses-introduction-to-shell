@@ -181,12 +181,10 @@ with open('teeth.out', 'r') as reader:
      content = reader.read()
 debug = 'curdir is {} contents are {} teeth.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug)
-
-# FIXME: SCT doesn't pass.
-#     test_student_typed(r'.+bash\s+teeth.sh\s*>\s*teeth.out\s*',
-#                        fixed=False,
-#                        msg='Run the script with `bash` and use `>` to redirect its output.')
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug) \
+     >> test_student_typed(r'.+bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
+                           fixed=False, \
+                           msg='Run the script with `bash` and use `>` to redirect its output.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:c2623b9c14
@@ -254,12 +252,10 @@ with open('num-records.out', 'r') as reader:
      content = reader.read()
 debug = 'curdir is {} contents are {} num-records.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
-     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out', debug=debug)
-
-# FIXME: SCT doesn't pass.
-#     test_student_typed(r'.+\s*bash\s+count-records.sh\s+seasonal/*.csv\s*>\s*num-records.out\s*',
-#                        fixed=False,
-#                        msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
+     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out', debug=debug) \
+     >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
+                           fixed=False, \
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:4092cb4cda
@@ -516,13 +512,11 @@ if os.path.exists('bin'):
     debug = 'contents of bin: {}'.format(os.getcwd(), os.listdir('bin'))
 else:
     debug = 'bin directory is missing!!'
-Ex() >> test_file_perms('bin/lines.sh', 'x',
-                        'is not executable (did you forget `chmod`?).', debug=debug)
-
-# FIXME: SCT is not passing.
-#     test_student_typed(r'.+\s*lines.sh\s+seasonal/*.csv\s*',
-#                        fixed=False,
-#                        msg='Type the name of the script and the wildcard pattern for the files.')
+Ex() >> test_file_perms('bin/lines.sh', 'x', \
+                        'is not executable (did you forget `chmod`?).', debug=debug) \
+     >> test_student_typed(r'.+\s*lines\.sh\s+seasonal/\*\.csv\s*', \
+                           fixed=False, \
+                           msg='Type the name of the script and the wildcard pattern for the files.')
 ```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
