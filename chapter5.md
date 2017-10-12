@@ -691,8 +691,10 @@ range.sh seasonal/*.csv > range.out
 ```{python}
 import os
 debug = 'solution5: contents of home directory "{}" and of bin "{}"'.format(os.listdir('.'), os.listdir('bin'))
-Ex() >> test_student_typed(r'.+\s*range.sh\s+seasonal/*.csv\s*>\s*range.out\s*',
+Ex() >> test_file_perms('bin/range.sh', 'x', \
+                        'is not executable (use `chmod`).',
+                         debug=debug) \
+     >> test_student_typed(r'.+\s*range.sh\s+seasonal/*.csv\s*>\s*range.out\s*',
                            fixed=False,
-                           msg='Use `range.sh` and `seasonal/*.csv`.',
-                           debug=debug)
+                           msg='Use `range.sh` and `seasonal/*.csv`.')
 ```
