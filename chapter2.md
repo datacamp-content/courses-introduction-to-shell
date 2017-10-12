@@ -231,9 +231,8 @@ Ex().test_student_typed(pattern,
                         msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
 
---- type:NormalExercise lang:shell xp:50 skills:1 key:7b90b8a7cd
+--- type:BulletConsoleExercise key:
 ## How can I get help for a command?
-
 To find out what commands do,
 people used to use the `man` command
 (short for "manual").
@@ -278,34 +277,62 @@ you can search [Stack Overflow](https://stackoverflow.com/),
 ask a question on DataCamp's Slack channels,
 or look at the `SEE ALSO` sections of the commands you already know.
 
-*** =instructions
-
-1. Read the manual page for the `tail` command.
-2. Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Read the manual page for the `tail` command.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 man tail | cat
+```
+
+*** =sct1
+```{python}
+Ex().test_student_typed(r'\s*man\s+tail.+\s*',
+                        fixed=False,
+                        msg='Use `man` and the command name.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+ Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 tail -n +7 seasonal/spring.csv
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail.+\s+tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
+Ex().test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
                         fixed=False,
-                        msg='`man` will tell you that `+NUMBER` will display lines starting from NUMBER.')
+                        msg='`man` told you that `+NUMBER` will display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
