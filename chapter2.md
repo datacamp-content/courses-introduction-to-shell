@@ -473,7 +473,7 @@ You can now repeat your previous `head` command without retyping it.
 *** =instructions3
 
 Re-run the `head` command using `!` followed by the command name.
-Do *not* type any spaces between `!` and what follows.
+Do not type any spaces between `!` and what follows.
 
 *** =hint3
 
@@ -488,7 +488,7 @@ Do *not* type any spaces between `!` and what follows.
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*!head\s*',
+Ex().test_student_typed(r'\s*head\s+summer\.csv\s*',
                         fixed=False,
                         msg='Use `!` followed by the name of the command.')
 ```
@@ -548,7 +548,7 @@ Do *not* type any spaces between `!` and what follows.
 
 *** =sct5
 ```{python}
-Ex().test_student_typed(r'\s*!3\s*',
+Ex().test_student_typed(r'\s*head\s+summer\.csv\s*',
                         fixed=False,
                         msg='Use `!` followed by a number.')
 ```
