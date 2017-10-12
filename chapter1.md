@@ -685,7 +685,7 @@ Ex() >> test_student_typed(r'\s*ls\s*',
                            msg='Use `ls` to list the directory contents.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
+--- type:BulletConsoleExercise key:
 ## How can I delete files?
 
 We can create files,
@@ -710,56 +710,116 @@ the shell doesn't have a trash can,
 so when you type the command above,
 your thesis is gone for good.
 
-*** =instructions
-
-- Go into the `seasonal` directory and remove `autumn.csv`
-- Go back to your home directory and remove `summer.csv` from there.
-
-*** =hint
-
-Remember, `cd ..` moves you up one level, and `cd ~` moves you to your home directory.
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Go into the `seasonal` directory.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
-# Change directory to seasonal
-
-
-# Remove autumn.csv
-
-
-# Return to your home directory
-
-
-# Remove summer.csv from the seasonal directory
-
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
-# Change directory to seasonal
 cd seasonal
+```
 
-# Remove autumn.csv
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
+                           fixed=False,
+                           msg='Use `cd` to change directory.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Remove `autumn.csv`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 rm autumn.csv
+```
 
-# Return to your home directory
-cd .. # or cd ~
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*rm\s+autumn.csv\s*',
+                           fixed=False,
+                           msg='Use `rm` to remove a single file.')
+```
 
-# Remove summer.csv from the seasonal directory
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Go back to your home directory.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+cd
+```
+
+*** =sct3
+```{python}
+Ex() >> test_student_typed(r'\s*cd\s+(|\.\.|\~)\s*',
+                           fixed=False,
+                           msg='Use `cd ..` to go up a level or `cd ~` to return home.')
+```
+
+*** =type4: ConsoleExercise
+*** =key4:
+
+*** =xp4: 10
+
+*** =instructions4
+
+Remove `seasonal/summer.csv` without changing directories again.
+
+*** =hint4
+
+*** =sample_code4
+```{shell}
+```
+
+*** =solution4
+```{shell}
 rm seasonal/summer.csv
 ```
 
-*** =sct
+*** =sct4
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
-Ex().test_student_typed(r'\s*rm\s+autumn.csv\s*', fixed=False, msg='Use `rm` to remove a single file.')
-Ex().test_student_typed(r'\s*cd\s+(\.\.|\~)\s*', fixed=False, msg='Use `cd ..` to go up a level or `cd ~` to return home.')
-Ex().test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*', fixed=False, msg='`rm` works with paths.')
+Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*',
+                           fixed=False,
+                           msg='`rm` works with paths.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:63e8fbd0c2
