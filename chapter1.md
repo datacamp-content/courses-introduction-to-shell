@@ -256,9 +256,9 @@ ls people
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+people/agarwal.txt\s*',
+Ex() >> test_student_typed(r'\s*ls\s+people\s*',
                            fixed=False,
-                           msg='Use `ls` followed by a path, but do not put spaces inside the path.')
+                           msg='Use `ls` followed by a path.')
 ```
 
 --- type:BulletConsoleExercise key:dbdaec5610
@@ -356,7 +356,7 @@ ls
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*pwd\s*',
+Ex() >> test_student_typed(r'\s*ls\s*',
                            fixed=False,
                            msg='`ls` with no paths will show the contents of the current directory.')
 ```
@@ -790,7 +790,7 @@ cd
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+(|\.\.|\~)\s*',
+Ex() >> test_student_typed(r'\s*cd(\s+(\.\.|\~))?\s*',
                            fixed=False,
                            msg='Use `cd ..` to go up a level or `cd ~` to return home.')
 ```
