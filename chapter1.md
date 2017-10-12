@@ -578,7 +578,7 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:001801a652
 ## How can I rename files?
 
 `mv` can also be used to rename files.
@@ -605,7 +605,7 @@ then the command shown above will replace it with whatever is in `course.txt`.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 710187c8c7
 
 *** =xp1: 10
 
@@ -632,7 +632,7 @@ Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: ed5fe1df23
 
 *** =xp2: 10
 
@@ -659,7 +659,7 @@ Ex() >> test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: 1deee4c768
 
 *** =xp3: 10
 
