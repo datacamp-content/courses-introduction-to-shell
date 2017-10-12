@@ -182,7 +182,7 @@ with open('teeth.out', 'r') as reader:
 debug = 'curdir is {} contents are {} teeth.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
      >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug) \
-     >> test_student_typed(r'.+bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
+     >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.')
 ```
