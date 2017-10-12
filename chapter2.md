@@ -303,7 +303,7 @@ man tail | cat
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail.+\s*',
+Ex().test_student_typed(r'\s*man\s+tail.*',
                         fixed=False,
                         msg='Use `man` and the command name.')
 ```
