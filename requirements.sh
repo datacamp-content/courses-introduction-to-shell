@@ -60,7 +60,8 @@ echo 'export PATH=$PATH:$HOME/bin' >> ${HOME_DIR}/.bashrc
 
 # Make copy for resetting exercises.
 # Files there will replace /home/repl each exercise.
-rsync -a ${HOME_DIR} ${HOME_COPY}
+# IMPORTANT: Trailing slashes after directory names force rsync to do the right thing.
+rsync -a ${HOME_DIR}/ ${HOME_COPY}/
 chown -R ${USER_GROUP} ${HOME_COPY}
 
 # Show what's been done where.
