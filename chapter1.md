@@ -361,27 +361,6 @@ Ex() >> test_student_typed(r'\s*ls\s*',
                            msg='`ls` with no paths will show the contents of the current directory.')
 ```
 
-*** =type4: ConsoleExercise
-*** =key4: f0c51d58e1
-
-*** =xp4: 10
-
-*** =instructions4
-
-*** =hint4
-
-*** =sample_code4
-```{shell}
-```
-
-*** =solution4
-```{shell}
-```
-
-*** =sct4
-```{python}
-```
-
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## How can I move up a directory?
 
