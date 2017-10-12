@@ -120,7 +120,7 @@ bash dates.sh
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh') \
-     >> test_student_typed(r'.+\s*bash\s+dates.sh\s*', \
+     >> test_student_typed(r'.+\s*bash\s+dates\.sh\s*', \
                            fixed=False, \
                            msg='Use `bash` and the name of the file to run.')
 ```
@@ -653,7 +653,7 @@ chmod u=rwx bin/range.sh
 *** =sct4
 ```{python}
 from shellwhat_ext import test_file_perms
-Ex() >> test_student_typed(r'.+\s*chmod\s+u=rwx\s+bin/range.sh\s*', \
+Ex() >> test_student_typed(r'.+\s*chmod\s+u=rwx\s+bin/range\.sh\s*', \
                            fixed=False, \
                            msg='Use `chmod u+x` and the path to the script.') \
      >> test_file_perms('bin/range.sh', 'x', \
@@ -694,7 +694,7 @@ debug = 'solution5: contents of home directory "{}" and of bin "{}"'.format(os.l
 Ex() >> test_file_perms('bin/range.sh', 'x', \
                         'is not executable (use `chmod`).',
                          debug=debug) \
-     >> test_student_typed(r'.+\s*range.sh\s+seasonal/*.csv\s*>\s*range.out\s*',
+     >> test_student_typed(r'.+\s*range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
                            fixed=False,
                            msg='Use `range.sh` and `seasonal/*.csv`.')
 ```
