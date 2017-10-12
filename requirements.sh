@@ -56,6 +56,8 @@ rm -f ./${SOLUTIONS}
 
 # Change prompt.
 echo "export PS1='\$ '" >> ${HOME_DIR}/.bashrc
+
+# Ensure ~/bin is on the user's path.
 echo 'export PATH=$PATH:$HOME/bin' >> ${HOME_DIR}/.bashrc
 
 # Make copy for resetting exercises.
