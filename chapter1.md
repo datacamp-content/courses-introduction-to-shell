@@ -578,8 +578,8 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:8cbc17793f
-## How can I rename fils?
+--- type:BulletConsoleExercise key:
+## How can I rename files?
 
 `mv` can also be used to rename files.
 If you run:
@@ -600,50 +600,89 @@ for example,
 you already have a file called `old-course.txt`,
 then the command shown above will replace it with whatever is in `course.txt`.
 
-*** =instructions
-
-Go into the `seasonal` directory
-and rename the file `winter.csv` to be `winter.csv.bck`,
-then run `ls` to check that everything has worked.
-
-*** =hint
-
-You will need to use three commands.
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Go into the `seasonal` directory.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
-# Change directory to seasonal
-
-
-# Rename winter.csv to winter.csv.bck
-
-
-# List the directory's contents to check
-
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
-# Change directory to seasonal
 cd seasonal
+```
 
-# Rename winter.csv to winter.csv.bck
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
+                           fixed=False,
+                           msg='Use `cd` to change directory.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Rename the file `winter.csv` to be `winter.csv.bck`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 mv winter.csv winter.csv.bck
+```
 
-# List the directory's contents to check
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*',
+                           fixed=False,
+                           msg='Use `mv` to rename a file.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Run `ls` to check that everything has worked.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
 ls
 ```
 
-*** =sct
+*** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` to change directory.')
-Ex().test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*', fixed=False, msg='Use `mv` to rename a file.')
-Ex().test_student_typed(r'\s*ls\s*', fixed=False, msg='Use `ls` to list the directory contents.')
+Ex() >> test_student_typed(r'\s*ls\s*',
+                           fixed=False,
+                           msg='Use `ls` to list the directory contents.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:2734680614
