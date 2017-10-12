@@ -261,7 +261,7 @@ Ex() >> test_student_typed(r'\s*ls\s+people/agarwal.txt\s*',
                            msg='Use `ls` followed by a path, but do not put spaces inside the path.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:dbdaec5610
+--- type:BulletConsoleExercise key:
 ## How can I move to another directory?
 
 Just as you can move around in a file browser by double-clicking on folders,
@@ -276,48 +276,110 @@ because that's where you are.
 If you want to get back to your home directory `/home/repl`,
 you can use the command `cd /home/repl`.
 
-*** =instructions
-
-- Go into `/home/repl/seasonal` using a relative path.
-- Use `pwd` to check that you're there.
-- Use `ls` without any paths to see what's in that directory.
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Go into `/home/repl/seasonal` using a relative path.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
-# Go into `/home/repl/seasonal` using a relative path
-
-
-# Check where you are
-
-
-# List the contents of this directory
-
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
-# Go into `/home/repl/seasonal` using a relative path
 cd seasonal
+```
 
-# Check where you are
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
+                           fixed=False,
+                           msg='Use `cd` followed by a path.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Use `pwd` to check that you're there.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 pwd
+```
 
-# List the contents of this directory
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*pwd\s*',
+                           fixed=False,
+                           msg='Remember: "print working directory".')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Use `ls` without any paths to see what's in that directory.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
 ls
 ```
 
-*** =sct
+*** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*', fixed=False, msg='Use `cd` followed by a path.')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='Remember: "print working directory".')
-Ex().test_student_typed(r'\s*pwd\s*', fixed=False, msg='`ls` with no paths will show the contents of the current directory.')
+Ex() >> test_student_typed(r'\s*pwd\s*',
+                           fixed=False,
+                           msg='`ls` with no paths will show the contents of the current directory.')
+```
+
+*** =type4: ConsoleExercise
+*** =key4:
+
+*** =xp4: 10
+
+*** =instructions4
+
+*** =hint4
+
+*** =sample_code4
+```{shell}
+```
+
+*** =solution4
+```{shell}
+```
+
+*** =sct4
+```{python}
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
