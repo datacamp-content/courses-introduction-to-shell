@@ -231,7 +231,7 @@ Ex().test_student_typed(pattern,
                         msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:7b90b8a7cd
 ## How can I get help for a command?
 To find out what commands do,
 people used to use the `man` command
@@ -282,7 +282,7 @@ or look at the `SEE ALSO` sections of the commands you already know.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 52d629048a
 
 *** =xp1: 10
 
@@ -309,7 +309,7 @@ Ex().test_student_typed(r'\s*man\s+tail.+\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 6a07958ae0
 
 *** =xp2: 10
 
