@@ -63,7 +63,7 @@ What does `head` do if there aren't 10 lines in the file?
 Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:0b7b8ca8f7
 ## How can I type less?
 
 One of the shell's power tools is **tab completion**.
@@ -86,7 +86,7 @@ will fill in the rest of the name.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 4e30296c27
 
 *** =xp1: 10
 
@@ -113,7 +113,7 @@ Ex() >> test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: e249266733
 
 *** =xp2: 10
 

@@ -685,7 +685,7 @@ Ex() >> test_student_typed(r'\s*ls\s*',
                            msg='Use `ls` to list the directory contents.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:2734680614
 ## How can I delete files?
 
 We can create files,
@@ -715,7 +715,7 @@ your thesis is gone for good.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: d7580f7bd4
 
 *** =xp1: 10
 
@@ -742,7 +742,7 @@ Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 1c21cc7039
 
 *** =xp2: 10
 
@@ -769,7 +769,7 @@ Ex() >> test_student_typed(r'\s*rm\s+autumn.csv\s*',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: 09f2d105cd
 
 *** =xp3: 10
 
@@ -796,7 +796,7 @@ Ex() >> test_student_typed(r'\s*cd(\s+(\.\.|\~))?\s*',
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: 9eaf49744c
 
 *** =xp4: 10
 
