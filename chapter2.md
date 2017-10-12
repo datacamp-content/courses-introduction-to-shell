@@ -63,7 +63,7 @@ What does `head` do if there aren't 10 lines in the file?
 Ex().test_mc(2, ['no', 'yes', 'no'])
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:0b7b8ca8f7
+--- type:BulletConsoleExercise key:
 ## How can I type less?
 
 One of the shell's power tools is **tab completion**.
@@ -81,41 +81,62 @@ Typing another character or two to make your path more specific
 and then pressing tab
 will fill in the rest of the name.
 
-*** =instructions
-
-- Run `head seasonal/autumn.csv` without typing the full filename.
-- Run `head seasonal/spring.csv` without typing the full filename.
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Run `head seasonal/autumn.csv` without typing the full filename.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
-# Run head seasonal/autumn.csv, typing as few characters as possible.
-
-
-# Run head seasonal/spring.csv, typing as few characters as possible.
-
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 head seasonal/autumn.csv
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*',
+                           fixed=False,
+                           msg='Type `head s`, a tab, `a`, and a tab.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run `head seasonal/spring.csv` without typing the full filename.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 head seasonal/spring.csv
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*',
-                        fixed=False,
-                        msg='Type `head s`, a tab, `a`, and a tab.')
-Ex().test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
-                        fixed=False,
-                        msg='Type `head s`, a tab, `sp`, and a tab.')
+Ex() >> test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
+                           fixed=False,
+                           msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
