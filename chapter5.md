@@ -437,7 +437,7 @@ read by other people in the `staff` group (`r--`),
 and also read by everyone else on the machine (`r--`).
 (The first character is "-" for files and "d" for directories.)
 
-*** =instructions
+<hr>
 
 What can other users who *aren't* members of your group do with the file `course.txt`?
 
