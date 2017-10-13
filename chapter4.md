@@ -54,7 +54,7 @@ err4 = "No: the variable `HISTFILESIZE` is there."
 Ex() >> test_mc(3, [err1, err2, correct3, err4])
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:afae0f33a7
 ## How can I print a variable's value?
 
 A simpler way to find a variable's value is to use a command called `echo,
@@ -152,7 +152,7 @@ Ex() >> test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$
                            msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3
 ## How can I repeat a command many times?
 
 Shell variables are also used in **loops**,
