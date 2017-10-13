@@ -198,14 +198,13 @@ Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+\$testing\s*',
 
 Shell variables are also used in **loops**,
 which repeat commands many times.
-Copy and paste this command into the shell:
+If we run this command:
 
 ```{shell}
 for suffix in gif jpg png; do echo $suffix; done
 ```
 
-and run it by pressing enter.
-It produces:
+it produces:
 
 ```
 gif
