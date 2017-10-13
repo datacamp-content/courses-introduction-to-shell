@@ -507,7 +507,7 @@ from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:6445630844
 ## How can I use my scripts like other commands?
 
 As you use the shell to work with data,
@@ -522,7 +522,7 @@ the shell will run it when you type its name *without* also typing `bash`.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: d0173a85f4
 
 *** =xp1: 10
 
@@ -556,7 +556,7 @@ Ex() >> test_file_perms('bin/lines.sh', 'x',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 4925a72bc2
 
 *** =xp2: 10
 
