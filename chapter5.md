@@ -211,6 +211,7 @@ Use `bash` to run `teeth.sh` with redirection to save its output in `teeth.out`.
 
 *** =solution2
 ```{shell}
+cp /solutions/teeth.sh .
 bash teeth.sh > teeth.out
 ```
 
