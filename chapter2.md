@@ -139,7 +139,7 @@ Ex() >> test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
                            msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
 ## How can I control what commands do?
 
 You won't always want to look at the first 10 lines of a file,
@@ -179,7 +179,7 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
                         msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
 ## How can I list everything below a directory?
 
 In order to see everything underneath a directory,
