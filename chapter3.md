@@ -6,7 +6,7 @@ description : >-
   This chapter will show you how to use this power to select the data you want,
   and introduce commands for sorting values and removing duplicates.
 
---- type:Exercise lang:shell xp:100 skills:1 key:
+--- type:Exercise lang:shell xp:100 skills:1 key:07a427d50c
 ## How can I store a command's output in a file?
 
 All of the tools you have seen so far let you name input files.
@@ -58,7 +58,7 @@ Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.c
                            msg='Use `tail` and `>` together.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:f47d337593
 ## How can I use one command's output as the input to another command?
 
 Suppose you want to get lines from the middle of a file.
@@ -81,7 +81,7 @@ because it is the last 3 lines of the first 5.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 35bbb5520e
 
 *** =xp1: 10
 
@@ -109,7 +109,7 @@ Ex() >> test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s*>\s*bottom
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: c94d3936a7
 
 *** =xp2: 10
 
@@ -136,7 +136,7 @@ Ex()>> test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*',
                            msg='Use `head` on the temporary file.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:b36aea9a1e
 ## What's a better way to use one command's output as another command's input?
 
 Using redirection to combine commands has two drawbacks:
@@ -180,7 +180,7 @@ Ex() >> test_student_typed(r'\s*cut\s+-d\s+,
                            fixed=False, msg='Use `cut` and `grep`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
 ## How can I combine many commands?
 
 You can chain any number of commands together.
@@ -215,7 +215,7 @@ Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\
                            msg='Use `cut`, `grep`, and `head`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
 ## How can I count the records in a file?
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
@@ -319,7 +319,7 @@ Match each expression against each filename in turn.
 - No: the expression in square brackets matches only one character, not entire words.
 - Correct!
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:f06d9e310e
 ## How can I sort lines of text?
 
 As its name suggests,
@@ -349,7 +349,7 @@ Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\
                            msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
 ## How can I remove duplicates lines?
 
 Another command that is often used with `sort` is `uniq`,
