@@ -218,16 +218,10 @@ bash teeth.sh > teeth.out
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-import os
-home = os.listdir('.')
-seasonal = os.listdir('seasonal')
-with open('teeth.out', 'r') as reader:
-    data = reader.read()
-debug = 'contents of home dir "{}" and contents of seasonal "{}" and contents of teeth.out: "{}"'.format(str(home), str(seasonal), data)
 Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug)
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
 --- type:BulletConsoleExercise key:c2623b9c14
@@ -311,6 +305,7 @@ and use redirection to save the output in `num-records.out`.
 
 *** =solution2
 ```{shell}
+cp /solutions/count-records.sh .
 bash count-records.sh seasonal/*.csv > num-records.out
 ```
 
