@@ -6,7 +6,7 @@ description : >-
   This chapter will show you how to use this power to select the data you want,
   and introduce commands for sorting values and removing duplicates.
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:07a427d50c
+--- type:Exercise lang:shell xp:100 skills:1 key:
 ## How can I store a command's output in a file?
 
 All of the tools you have seen so far let you name input files.
@@ -44,20 +44,7 @@ it works with every shell command that produces output.
 *** =instructions
 
 Save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
-
-*** =hint
-
-Use `tail` to get the last 5 lines.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
+(Use `tail` to get the last 5 lines.)
 
 *** =solution
 ```{shell}
@@ -66,10 +53,12 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.csv\s*',
+                           fixed=False,
+                           msg='Use `tail` and `>` together.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:f47d337593
+--- type:BulletConsoleExercise key:
 ## How can I use one command's output as the input to another command?
 
 Suppose you want to get lines from the middle of a file.
@@ -87,38 +76,67 @@ tail -n 3 top.csv
 A quick check confirms that this is lines 3-5 of our original file,
 because it is the last 3 lines of the first 5.
 
-*** =instructions
-
-Use two commands to select the second-to-last line from `seasonal/winter.csv`.
-Call your intermediate file `bottom.csv`.
-
-*** =hint
-
-The second-to-last line is the first line of the last two lines of the file.
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Select the last two lines from `seasonal/winter.csv`
+and save them in a file called `bottom.csv`.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 tail -n 2 seasonal/winter.csv > bottom.csv
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s*>\s*bottom.csv\s*',
+                           fixed=False,
+                           msg='Use `tail` and `>` together.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Select the first line from `bottom.csv`
+in order to get the second-to-last line of the original file.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 head -n 1 bottom.csv
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s*>\s*bottom.csv\s*', fixed=False, msg='Use `tail` and `>` together.')
-Ex().test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*', fixed=False, msg='Use `head` on the temporary file.')
+Ex()>> test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*',
+                           fixed=False,
+                           msg='Use `head` on the temporary file.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:b36aea9a1e
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## What's a better way to use one command's output as another command's input?
 
 Using redirection to combine commands has two drawbacks:
@@ -148,20 +166,7 @@ as the input to the command on the right.
 
 Write a pipeline that uses `cut` and `grep` to select all of the tooth names from `seasonal/summer.csv`
 *without* including the header "Tooth".
-
-*** =hint
-
-Use `grep -v` to exclude lines.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
+(Use `grep -v` to exclude lines.)
 
 *** =solution
 ```{shell}
@@ -170,10 +175,12 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring.csv\s*|\s*grep\s+-v\s+Tooth\s*', fixed=False, msg='Use `cut` and `grep`.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,
+                           s+-f\s+2\s+seasonal/spring.csv\s*|\s*grep\s+-v\s+Tooth\s*',
+                           fixed=False, msg='Use `cut` and `grep`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:b8753881d6
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I combine many commands?
 
 You can chain any number of commands together.
@@ -196,20 +203,6 @@ Write a pipeline that uses `cut`, `grep`, and `head`
 to select the first value in the "Tooth" column of `seasonal/autumn.csv`
 *after* the header "Tooth".
 
-*** =hint
-
-Copy the example and change the parameters to each command.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
@@ -217,12 +210,12 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
-                        fixed=False,
-                        msg='Use `cut`, `grep`, and `head`.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
+                           fixed=False,
+                           msg='Use `cut`, `grep`, and `head`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I count the records in a file?
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
@@ -232,20 +225,7 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
 Use `grep` and `wc` in a pipe to count how many records there are in `seasonal/spring.csv`
 from July 2017.
-
-*** =hint
-
-Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
+(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
 
 *** =solution
 ```{shell}
@@ -254,10 +234,12 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\s*', fixed=False, msg='Use `grep` and `wc`.')
+Ex() >> test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\s*',
+                           fixed=False,
+                           msg='Use `grep` and `wc`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:602d47e70c
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
 ## How can I specify many files with a single command?
 
 Most shell commands will work on multiple files if you give them multiple filenames.
@@ -295,18 +277,6 @@ Write a single command to get the first three lines from both the spring and sum
 but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 head seasonal/s*.csv
@@ -314,11 +284,10 @@ head seasonal/s*.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+seasonal/s\*(\.csv)?\s*',
-                        fixed=False,
-                        msg='Remember that "spring" and "summer" both start with "s".')
+Ex() >> test_student_typed(r'\s*head\s+seasonal/s\*(\.csv)?\s*',
+                           fixed=False,
+                           msg='Remember that "spring" and "summer" both start with "s".')
 ```
-
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
 ## What other wildcards can I use?
@@ -350,7 +319,7 @@ Match each expression against each filename in turn.
 - No: the expression in square brackets matches only one character, not entire words.
 - Correct!
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:f06d9e310e
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I sort lines of text?
 
 As its name suggests,
@@ -366,20 +335,7 @@ and then `sort` to put the remaining records in order.
 
 Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in descending alphabetical order
 *without* including the header "Tooth".
-
-*** =hint
-
-Use `cut`, `grep`, and `sort` in that order.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
+(Use `cut`, `grep`, and `sort` in that order.)
 
 *** =solution
 ```{shell}
@@ -388,12 +344,12 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
-                        fixed=False,
-                        msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
+                           fixed=False,
+                           msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:ed77aed337
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I remove duplicates lines?
 
 Another command that is often used with `sort` is `uniq`,
@@ -445,18 +401,6 @@ Write a pipeline to:
 
 Use `uniq -c` to display unique lines with a count of how often each occurs.
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
@@ -464,7 +408,9 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*', fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,
+                           s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*',
+                           fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
@@ -502,7 +448,9 @@ wc -l seasonal/*.csv
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/\*(\.csv)?\s*', fixed=False, msg='Use `wc -l` and `seasonal/*.csv`.')
+Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*(\.csv)?\s*',
+                           fixed=False,
+                           msg='Use `wc -l` and `seasonal/*.csv`.')
 ```
 
 *** =type2: ConsoleExercise
@@ -529,7 +477,9 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*', fixed=False, msg='Use `grep -v total` as the second stage of the pipe.')
+Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*',
+                           fixed=False,
+                           msg='Use `grep -v total` as the second stage of the pipe.')
 ```
 
 *** =type3: ConsoleExercise
@@ -556,5 +506,7 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*|\s*sort\s+-n\s*|\s*head\s+-n\s+1\s*', fixed=False, msg='Use `sort -n` and `head -n 1`.')
+Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*|\s*sort\s+-n\s*|\s*head\s+-n\s+1\s*',
+                           fixed=False,
+                           msg='Use `sort -n` and `head -n 1`.')
 ```
