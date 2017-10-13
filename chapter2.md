@@ -60,7 +60,7 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =sct
 ```{shell}
-Ex().test_mc(2, ['no', 'yes', 'no'])
+Ex() >> test_mc(2, ['no', 'yes', 'no'])
 ```
 
 --- type:BulletConsoleExercise key:0b7b8ca8f7
@@ -174,9 +174,9 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
-                        fixed=False,
-                        msg='Use `head` with `-n` and the number of lines you want.')
+Ex() >> test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
+                           fixed=False,
+                           msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:
@@ -221,9 +221,9 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*',
-                        fixed=False,
-                        msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+Ex() >> test_student_typed(r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*',
+                           fixed=False,
+                           msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
@@ -298,9 +298,9 @@ man tail | cat
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*man\s+tail.*',
-                        fixed=False,
-                        msg='Use `man` and the command name.')
+Ex() >> test_student_typed(r'\s*man\s+tail.*',
+                           fixed=False,
+                           msg='Use `man` and the command name.')
 ```
 
 *** =type2: ConsoleExercise
@@ -325,9 +325,9 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
-                        fixed=False,
-                        msg='`man` told you that `+NUMBER` will display lines starting from NUMBER.')
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
+                           fixed=False,
+                           msg='`man` told you that `+NUMBER` will display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -402,7 +402,7 @@ The order of the flags doesn't matter.
 
 *** =sct
 ```{python}
-Ex().test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
+Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
 --- type:TabConsoleExercise key:32c0d30049
@@ -449,9 +449,9 @@ head summer.csv
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*head\s+summer.csv\s*',
-                        fixed=False,
-                        msg='Use `head` and a filename.')
+Ex() >> test_student_typed(r'\s*head\s+summer.csv\s*',
+                           fixed=False,
+                           msg='Use `head` and a filename.')
 ```
 
 *** =type2: ConsoleExercise
@@ -480,9 +480,9 @@ cd seasonal
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+seasonal\s*',
-                        fixed=False,
-                        msg='Use `cd` and a directory name.')
+Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
+                           fixed=False,
+                           msg='Use `cd` and a directory name.')
 ```
 
 *** =type3: ConsoleExercise
@@ -511,9 +511,9 @@ Do not type any spaces between `!` and what follows.
 *** =sct3
 ```{python}
 # FIXME: bodging the SCT to get a pass.
-Ex().test_student_typed(r'\s*.+\s*',
-                        fixed=False,
-                        msg='Use `!` followed by the name of the command.')
+Ex() >> test_student_typed(r'\s*.+\s*',
+                           fixed=False,
+                           msg='Use `!` followed by the name of the command.')
 ```
 
 *** =type4: ConsoleExercise
@@ -541,9 +541,9 @@ history
 
 *** =sct4
 ```{python}
-Ex().test_student_typed(r'\s*history\s*',
-                        fixed=False,
-                        msg='Use `history` to get a list.')
+Ex() >> test_student_typed(r'\s*history\s*',
+                           fixed=False,
+                           msg='Use `history` to get a list.')
 ```
 
 *** =type5: ConsoleExercise
@@ -572,9 +572,9 @@ Do *not* type any spaces between `!` and what follows.
 *** =sct5
 ```{python}
 # FIXME: bodging the SCT to get a pass.
-Ex().test_student_typed(r'\s*.+\s*',
-                        fixed=False,
-                        msg='Use `!` followed by a number.')
+Ex() >> test_student_typed(r'\s*.+\s*',
+                           fixed=False,
+                           msg='Use `!` followed by a number.')
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
@@ -630,9 +630,9 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*',
-                        fixed=False,
-                        msg='Use the relative path to the file to search.')
+Ex() >> test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*',
+                           fixed=False,
+                           msg='Use the relative path to the file to search.')
 ```
 
 *** =type2: ConsoleExercise
@@ -658,9 +658,9 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring.csv\s*',
-                        fixed=False,
-                        msg='Use `-v` or `-n molar` in either order.')
+Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring.csv\s*',
+                           fixed=False,
+                           msg='Use `-v` or `-n molar` in either order.')
 ```
 
 *** =type3: ConsoleExercise
@@ -687,9 +687,9 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*',
-                        fixed=False,
-                        msg='Use `-c` to get a count.')
+Ex() >> test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*',
+                           fixed=False,
+                           msg='Use `-c` to get a count.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
@@ -725,5 +725,5 @@ would it produce the right answer?
 err1 = 'True, but it is not necessarily an error.'
 correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
 err3 = 'No, all of the winter data is there.'
-Ex().test_mc(2, [err1, correct2, err3])
+Ex() >> test_mc(2, [err1, correct2, err3])
 ```
