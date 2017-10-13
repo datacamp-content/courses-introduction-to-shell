@@ -515,7 +515,7 @@ you will build up your own toolbox of useful scripts.
 Most users put these in a directory called `bin` under their home directory.
 If a script is there,
 and if it has execute permission,
-the shell will run it when you type its name *without* saying "bash" first.
+the shell will run it when you type its name *without* also typing `bash`.
 
 *** =pre_exercise_code
 ```{python}
@@ -548,7 +548,7 @@ mv lines.sh bin
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+lines\.sh\s+bin.*',
+Ex() >> test_student_typed(r'.*',
                            fixed=False,
                            msg='Use `mv` with a filename and a directory name.')
 ```
