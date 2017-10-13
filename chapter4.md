@@ -57,7 +57,7 @@ Ex() >> test_mc(3, [err1, err2, correct3, err4])
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:afae0f33a7
 ## How can I print a variable's value?
 
-A simpler way to find a variable's value is to use a command called `echo,
+A simpler way to find a variable's value is to use a command called `echo`,
 which prints its arguments:
 
 ```{shell}
@@ -110,7 +110,7 @@ Ex() >> test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
                            msg='Remember to put `$` in front of the variable name')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:e925da48e4
+--- type:BulletConsoleExercise key:
 ## How else does the shell store information?
 
 The other kind of variable is called a **shell variable**,
@@ -134,22 +134,63 @@ echo $training
 seasonal/summer.csv
 ```
 
-*** =instructions
+*** =pre_exercise_code
+```{python}
+```
 
-Define a variable called `testing` with the value `seasonal/winter.csv`,
-and then use `head -n 1 $testing` to check its value.
+*** =type1: ConsoleExercise
+*** =key1:
 
-*** =solution
+*** =xp1: 10
+
+*** =instructions1
+
+Define a variable called `testing` with the value `seasonal/winter.csv`.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
 ```{shell}
 testing=seasonal/winter.csv
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s*',
+                           fixed=False,
+                           msg='Set `testing` with `variable=value`.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Use `head` to get the first line from `seasonal/winter.csv`
+using the variable `testing` instead of the name of the file.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 head -n 1 $testing
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s+head\s+-n\s+1\s+\$testing\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+\$testing\s*',
                            fixed=False,
-                           msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
+                           msg='Use `head` with `$testing` as an argument.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3

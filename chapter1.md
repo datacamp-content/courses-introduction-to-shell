@@ -802,7 +802,7 @@ so you must delete all the files in a directory *before* you delete the director
 *** =instructions1
 
 Without changing directories,
-delete the file in the `people` directory.
+delete the file `agarwal.txt` in the `people` directory.
 
 *** =hint1
 

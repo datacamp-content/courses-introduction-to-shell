@@ -272,7 +272,7 @@ cut -d , -f 1 seasonal/*.csv
 
 *** =instructions
 
-Write a single command to get the first three lines from both the spring and summer data files
+Write a single command to get the first three lines from each of the spring and summer data files
 (a total of six lines of data)
 but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
@@ -284,7 +284,7 @@ head seasonal/s*.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+seasonal/s\*(\.csv)?\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+seasonal/s\*(\.csv)?\s*',
                            fixed=False,
                            msg='Remember that "spring" and "summer" both start with "s".')
 ```
@@ -335,7 +335,8 @@ and then `sort` to put the remaining records in order.
 
 Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in descending alphabetical order
 *without* including the header "Tooth".
-(Use `cut`, `grep`, and `sort` in that order.)
+Use `cut`, `grep`, and `sort` in that order,
+and remember that the names are in column 2.
 
 *** =solution
 ```{shell}

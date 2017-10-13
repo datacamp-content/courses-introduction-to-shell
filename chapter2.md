@@ -381,8 +381,7 @@ We will meet more intelligent commands that understand quoting and much else lat
 
 <hr>
 
-What command will select the first column (containing dates) from the spring data?
-starting with `spring.csv`?
+What command will select the first column (containing dates) from the  file `spring.csv`?
 
 *** =instructions
 
@@ -658,9 +657,9 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring\.csv\s*',
+Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring\.csv\s*',
                            fixed=False,
-                           msg='Use `-v` or `-n molar` in either order.')
+                           msg='Use `-v` and `-n` in either order.')
 ```
 
 *** =type3: ConsoleExercise
@@ -670,7 +669,7 @@ Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+s
 
 *** =instructions3
 
-Count how many lines contain the word `incisor` in the autumn and winter data combined.
+Count how many lines contain the word `incisor` in the autumn and winter data files.
 (Again, run a single command from your home directory.)
 
 *** =hint3
@@ -700,7 +699,7 @@ that can be used to combine data files instead of cutting them up.
 
 <hr>
 
-Search online for `unix man paste`,
+Read the manual page for `paste`,
 and then run `paste` to combine the autumn and winter data files in a single table
 using a comma as a separator.
 What's wrong with the output from a data analysis point of view?
