@@ -22,12 +22,10 @@ delete characters with the backspace key,
 and so on.
 You can also do a few other operations with control-key combinations:
 
-| Key    | Effect |
-| ------ | ------ |
-| Ctrl-K | delete a line |
-| Ctrl-U | un-delete a line |
-| Ctrl-O | save the file ('O' stands for 'output') |
-| Ctrl-X | exit the editor |
+- Ctrl-K: delete a line
+- Ctrl-U: un-delete a line
+- Ctrl-O: save the file ('O' stands for 'output')
+- Ctrl-X: exit the editor
 
 *** =instructions
 
@@ -176,7 +174,7 @@ and save them in `dates.out`.
 
 *** =instructions1
 
-Create a shell script called `teeth.sh`
+Use Nano to create a shell script called `teeth.sh`
 that prints a count of the number of times each tooth name appears in the seasonal data.
 
 *** =hint1
@@ -203,7 +201,7 @@ Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
 
 *** =instructions2
 
-Run `teeth.sh` and use redirection to save its output in `teeth.out`.
+Use `bash` to run `teeth.sh` with redirection to save its output in `teeth.out`.
 
 *** =hint2
 
@@ -219,9 +217,12 @@ bash teeth.sh > teeth.out
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
+import os
+home = os.listdir('.')
+seasonal = os.listdir('seasonal')
 with open('teeth.out', 'r') as reader:
     data = reader.read()
-debug = 'contents of teeth.out: "{}"'.format(data)
+debug = 'contents of home dir "{}" and contents of seasonal "{}" and contents of teeth.out: "{}"'.format(str(home), str(seasonal), data)
 Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
