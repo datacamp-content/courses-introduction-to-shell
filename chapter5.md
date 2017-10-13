@@ -218,10 +218,14 @@ bash teeth.sh > teeth.out
 
 *** =sct2
 ```{python}
+from shellwhat_ext import test_compare_file_to_file
+with open('teeth.out', 'r') as reader:
+    data = reader.read()
+debug = 'contents of teeth.out: "{}"'.format(data)
 Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug)
 ```
 
 --- type:BulletConsoleExercise key:c2623b9c14
@@ -546,7 +550,7 @@ mv lines.sh bin
 
 *** =sct1
 ```{python}
-Ex() >> test_student_types(r'\s*mv\s+lines\.sh\s+bin.*',
+Ex() >> test_student_typed(r'\s*mv\s+lines\.sh\s+bin.*',
                            fixed=False,
                            msg='Use `mv` with a filename and a directory name.')
 ```
