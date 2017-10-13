@@ -628,7 +628,7 @@ chmod u=rwx bin/range.sh
 *** =sct4
 ```{python}
 from shellwhat_ext import test_file_perms
-Ex() >> test_student_typed(r'.+\s*chmod\s+u=rwx\s+bin/range\.sh\s*', \
+Ex() >> test_student_typed(r'.*\s*chmod\s+u=rwx\s+bin/range\.sh\s*', \
                            fixed=False, \
                            msg='Use `chmod u+x` and the path to the script.') \
      >> test_file_perms('bin/range.sh', 'x', \
