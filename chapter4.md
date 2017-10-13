@@ -51,10 +51,10 @@ err1 = "No: the shell records more history than that."
 err2 = "No: the shell records more history than that."
 correct3 = "Correct: the shell saves 500 old commands by default on this system."
 err4 = "No: the variable `HISTFILESIZE` is there."
-Ex().test_mc(3, [err1, err2, correct3, err4])
+Ex() >> test_mc(3, [err1, err2, correct3, err4])
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:afae0f33a7
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I print a variable's value?
 
 A simpler way to find a variable's value is to use a command called `echo,
@@ -98,19 +98,6 @@ or "the value of a variable named X".)
 The variable `OSTYPE` holds the name of the kind of operating system you are using.
 Display its value using `echo`.
 
-*** =hint
-
-Remember to use `$OSTYPE` to get the variable's value.
-
-*** =pre_exercise_code
-```{shell}
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 echo $OSTYPE
@@ -118,12 +105,12 @@ echo $OSTYPE
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
-                        fixed=False,
-                        msg='Remember to put `$` in front of the variable name')
+Ex() >> test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
+                           fixed=False,
+                           msg='Remember to put `$` in front of the variable name')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:e925da48e4
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:e925da48e4
 ## How else does the shell store information?
 
 The other kind of variable is called a **shell variable**,
@@ -152,18 +139,6 @@ seasonal/summer.csv
 Define a variable called `testing` with the value `seasonal/winter.csv`,
 and then use `head -n 1 $testing` to check its value.
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 testing=seasonal/winter.csv
@@ -172,12 +147,12 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
-                        fixed=False,
-                        msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
+Ex() >> test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
+                           fixed=False,
+                           msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:920d1887e3
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I repeat a command many times?
 
 Shell variables are also used in **loops**,
@@ -220,18 +195,6 @@ odt
 pdf
 ```
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 for suffix in docx odt pdf; do echo $suffix; done
@@ -239,9 +202,9 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
-                        fixed=False,
-                        msg='Change the list of suffix names that the loop operatores on.')
+Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
+                           fixed=False,
+                           msg='Change the list of suffix names that the loop operatores on.')
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
@@ -279,9 +242,9 @@ for filename in people/*; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$filename;\s+done\s*',
-                        fixed=False,
-                        msg='Use `people/*` to get the name of all the files in the `people` directory.')
+Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$filename;\s+done\s*',
+                           fixed=False,
+                           msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
@@ -333,7 +296,7 @@ while `$X` is the value of the variable `X`.
 err1 = "No: you do not have to define a variable on the same line you use it."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
 correct3 = "Correct."
-Ex().test_mc(3, [err1, err2, correct3])
+Ex() >> test_mc(3, [err1, err2, correct3])
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
@@ -421,9 +384,9 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
-                        fixed=False,
-                        msg='Use `grep 2017-07 $file` as the body of the loop.')
+Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
+                           fixed=False,
+                           msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
@@ -533,5 +496,5 @@ err1 = "No: the loop will run, it just won't do something sensible."
 correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
 err3 = "No: the loop runs one for each of the four filenames."
 err4 = "No: the input of `tail` is the output of `echo` for each filename."
-Ex().test_mc(2, [err1, correct2, err3, err4])
+Ex() >> test_mc(2, [err1, correct2, err3, err4])
 ```

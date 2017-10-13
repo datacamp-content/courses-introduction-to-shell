@@ -404,9 +404,9 @@ Use `ls -l` and read the permissions in groups of three characters.
 
 *** =feedbacks
 - Correct.
-- No - the third group of characters does not contain a "w".
-- No - the third group of characters does not contain an "x".
-- No - the third group of characters contains an "r".
+- No: the third group of characters does not contain a "w".
+- No: the third group of characters does not contain an "x".
+- No: the third group of characters contains an "r".
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:f1988ccaf6
 ## How can I change a file's permissions?
