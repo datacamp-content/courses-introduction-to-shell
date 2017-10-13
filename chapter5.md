@@ -519,6 +519,8 @@ the shell will run it when you type its name *without* also typing `bash`.
 
 *** =pre_exercise_code
 ```{python}
+import shutil
+shutil.copyfile('/solutions/lines.sh', 'bin/lines.sh')
 ```
 
 *** =type1: ConsoleExercise
