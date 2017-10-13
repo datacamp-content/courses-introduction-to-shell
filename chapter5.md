@@ -6,7 +6,7 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:39eee3cfc0
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I edit a file?
 
 Unix has a bewildering variety of text editors,
@@ -42,19 +42,6 @@ Wilson
 ```
 
 Make sure there are no blank lines before or after these four lines.
-
-*** =hint
-
-Use the down-arrow to go to the bottom of the file to check for blank lines
-and Ctrl-K to delete them.
-
-*** =pre_exercise_code
-```{shell}
-```
-
-*** =sample_code
-```{shell}
-```
 
 *** =solution
 ```{shell}
