@@ -542,13 +542,13 @@ Move the script to `~/bin`.
 
 *** =solution1
 ```{shell}
-cp /solutions/lines.sh .
+cp /solutions/lines.sh bin
 mv lines.sh bin
 ```
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'.*',
+Ex() >> test_student_typed(r'',
                            fixed=False,
                            msg='Use `mv` with a filename and a directory name.')
 ```
