@@ -6,7 +6,7 @@ description : >-
   In this chapter, you will see how to go one step further
   and create new commands of your own.
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:39eee3cfc0
 ## How can I edit a file?
 
 Unix has a bewildering variety of text editors,
