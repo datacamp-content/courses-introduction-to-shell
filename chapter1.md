@@ -410,7 +410,7 @@ Trace the path one directory at a time.
 
 Ex() >> test_mc(2, [err1, correct, err3])
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:c749675192
 ## How can I copy a file?
 
 Once you have some files,
@@ -451,7 +451,7 @@ Ex() >> test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*'
                            msg='Provide two paths to `cp`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:b055c990e7
 ## How can I copy multiple files?
 
 `cp` can do more than copy one file at a time.
@@ -493,7 +493,7 @@ Ex() >> test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s
                            msg='Provide two filenames and a directory name to `cp`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:663a083a3c
 ## How can I move a file?
 
 While `cp` gives you a way to copy a file,
@@ -771,7 +771,7 @@ Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*',
                            msg='`rm` works with paths.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:63e8fbd0c2
 ## How can I delete directories?
 
 `mv` treats directories the same way it treats files:
@@ -795,7 +795,7 @@ so you must delete all the files in a directory *before* you delete the director
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 5a81bb8589
 
 *** =xp1: 10
 
@@ -823,7 +823,7 @@ Ex() >> test_student_typed(r'\s*rm\s+people/agarwal.txt\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 661633e531
 
 *** =xp2: 10
 
@@ -850,7 +850,7 @@ Ex() >> test_student_typed(r'\s*rmdir\s+people\s*',
                            msg='Remove the directory `people`.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:9b157134df
 ## How can I create directories?
 
 A directory is a different kind of thing than a text file,
@@ -873,7 +873,7 @@ cp course.txt info
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: b68e505835
 
 *** =xp1: 10
 
@@ -900,7 +900,7 @@ Ex() >> test_student_typed(r'\s*mkdir\s+yearly\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: a663029bc6
 
 *** =xp2: 10
 
