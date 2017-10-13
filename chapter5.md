@@ -507,7 +507,7 @@ from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
---- type:BulletConsoleExercise key:6445630844
+--- type:BulletConsoleExercise key:
 ## How can I use my scripts like other commands?
 
 As you use the shell to work with data,
@@ -519,22 +519,24 @@ the shell will run it when you type its name *without* also typing `bash`.
 
 *** =pre_exercise_code
 ```{python}
-cp /solutions/lines.sh .
 ```
 
 *** =type1: ConsoleExercise
-*** =key1: 86d6d01c61
+*** =key1:
 
 *** =xp1: 10
 
 *** =instructions1
 
-The script `lines.sh` in your home directory
+The script `bin/lines.sh`
 reports the number of lines in one or more files
 without reporting the total number of lines.
-Move the script to `~/bin`.
+Use `chmod` to change its permissions
+so that you can read, write, and execute it.
 
 *** =hint1
+
+Use `o=rwx` as the permission.
 
 *** =sample_code1
 ```{shell}
@@ -543,14 +545,44 @@ Move the script to `~/bin`.
 *** =solution1
 ```{shell}
 cp /solutions/lines.sh bin
-mv lines.sh bin
+chmod u=rwx bin/lines.sh
 ```
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'',
-                           fixed=False,
-                           msg='Use `mv` with a filename and a directory name.')
+from shellwhat_ext import test_file_perms
+Ex() >> test_file_perms('bin/lines.sh', 'x',
+                        'is not executable (did you forget `chmod`?).')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run the script on `seasonal/*.csv` *without* typing the command `bash`
+*or* the word `bin`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+cp /solutions/lines.sh bin
+chmod u=rwx bin/lines.sh
+lines.sh seasonal/*.csv
+```
+
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*lines\.sh\s+seasonal/\*\.csv\s*', \
+                           fixed=False, \
+                           msg='Type the name of the script and the wildcard pattern for the files.')
 ```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
