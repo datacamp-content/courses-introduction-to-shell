@@ -1027,9 +1027,8 @@ Ex() >> test_student_typed(r'\s*mkdir\s+scratch\s*',
 *** =xp4: 30
 
 *** =instructions4
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`
-using the `~` shortcut for your home directory
-and a relative path for the target directory.
+Move `/home/repl/people/agarwal.txt` into `/tmp`
+using the `~` shortcut for your home directory.
 
 *** =sample_code4
 ```{shell}
@@ -1037,12 +1036,12 @@ and a relative path for the target directory.
 
 *** =solution4
 ```{shell}
-mv ~/people/agarwal.txt scratch
+mv ~/people/agarwal.txt /tmp
 ```
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*',
+Ex() >> test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+/tmp\s*',
                            fixed=False,
-                           msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
+                           msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
 ```
