@@ -110,7 +110,7 @@ Ex() >> test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
                            msg='Remember to put `$` in front of the variable name')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:e925da48e4
 ## How else does the shell store information?
 
 The other kind of variable is called a **shell variable**,
@@ -139,7 +139,7 @@ seasonal/summer.csv
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 78f7fd446f
 
 *** =xp1: 10
 
@@ -166,7 +166,7 @@ Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: d5e7224f55
 
 *** =xp2: 10
 
