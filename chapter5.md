@@ -542,6 +542,7 @@ Move the script to `~/bin`.
 
 *** =solution1
 ```{shell}
+cp /solutions/lines.sh .
 mv lines.sh bin
 ```
 
@@ -572,6 +573,7 @@ Use `o=rwx` as the permission.
 
 *** =solution2
 ```{shell}
+cp /solutions/lines.sh bin
 chmod u=rwx bin/lines.sh
 ```
 
@@ -600,6 +602,8 @@ Run the script on `seasonal/*.csv` *without* typing the command `bash`
 
 *** =solution3
 ```{shell}
+cp /solutions/lines.sh bin
+chmod u=rwx bin/lines.sh
 lines.sh seasonal/*.csv
 ```
 
