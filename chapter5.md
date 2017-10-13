@@ -53,8 +53,7 @@ cp /solutions/names.txt .
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
 ```
-
---- type:NormalExercise lang:shell xp:100 skills:1 key:4507a0dbd8
+--- type:BulletConsoleExercise key:
 ## How can I save commands to re-run later?
 
 You have been using the shell interactively so far.
@@ -79,40 +78,68 @@ This tells the shell (which is just a program called `bash`)
 to run the commands contained in the file `headers.sh`,
 which produces the same output as running the commands directly.
 
-*** =instructions
-
-- Create another file called `dates.sh`
-  that uses the `cut` command to extract the first column
-  from all of the CSV files in `seasonal`.
-- Run this file. 
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Use Nano to create a file called `dates.sh`
+that uses the `cut` command to extract the first column
+from all of the CSV files in `seasonal`.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 cp /solutions/dates.sh .
+```
+
+*** =sct1
+```{python}
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run the file `dates.sh`.
+
+*** =hint2
+
+Use `bash filename` to run the file.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 bash dates.sh
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh') \
-     >> test_student_typed(r'.+\s*bash\s+dates\.sh\s*', \
-                           fixed=False, \
+Ex() >> test_student_typed(r'.+\s*bash\s+dates\.sh\s*',
+                           fixed=False,
                            msg='Use `bash` and the name of the file to run.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:da13667750
+--- type:BulletConsoleExercise key:
 ## How can I re-use pipes?
 
 A file full of shell commands is called a *shell script*,
@@ -138,39 +165,66 @@ bash all-dates.sh > dates.out
 will extract the unique dates from the seasonal data files
 and save them in `dates.out`.
 
-*** =instructions
-
-- Create a shell script called `teeth.sh`
-  that prints a count of the number of times each tooth name appears in the seasonal data.
-- Run it and use redirection to save its output in `teeth.out`.
-
-*** =hint
-
 *** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Create a shell script called `teeth.sh`
+that prints a count of the number of times each tooth name appears in the seasonal data.
+
+*** =hint1
+
+*** =sample_code1
 ```{shell}
 ```
 
-*** =sample_code
-```{shell}
-```
-
-*** =solution
+*** =solution1
 ```{shell}
 cp /solutions/teeth.sh .
+```
+
+*** =sct1
+```{python}
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run `teeth.sh` and use redirection to save its output in `teeth.out`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 bash teeth.sh > teeth.out
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out') \
-     >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
+Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
-                           msg='Run the script with `bash` and use `>` to redirect its output.')
+                           msg='Run the script with `bash` and use `>` to redirect its output.') \
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:c2623b9c14
+--- type:BulletConsoleExercise key:
 ## How can I pass filenames to scripts?
 
 A script that processes specific files is useful as a record of what you did,
@@ -200,44 +254,69 @@ bash some-dates.sh seasonal/*.csv
 
 it processes all four data files.
 
-*** =instructions
-
-- Write a script called `count-records.sh`
-  that counts the number of lines in one or more files,
-  excluding the first line of each.
-  Use the `-q` flag to `tail` to stop it from printing title lines.
-- Run it on all of the seasonal data files
-  and save the output in `num-records.out`.
-
-*** =hint
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Write a script called `count-records.sh`
+that counts the number of lines in one or more files,
+excluding the first line of each.
+Use the `-q` flag to `tail` to stop it from printing title lines.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 cp /solutions/count-records.sh .
+```
+
+*** =sct1
+```{python}
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run `count-records.sh` on all of the seasonal data files
+and use redirection to save the output in `num-records.out`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 bash count-records.sh seasonal/*.csv > num-records.out
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
-     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out') \
-     >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
+Ex() >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
                            fixed=False, \
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
+     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:4092cb4cda
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:
 ## How can I process a single argument?
 
 As well as `$@`,
@@ -259,7 +338,7 @@ bash column.sh seasonal/autumn.csv 1
 
 Notice how the script uses the two parameters in reverse order.
 
-*** =instructions
+<hr>
 
 The script `get-lines.sh` is supposed to take
 a start line,
@@ -272,31 +351,21 @@ bash get-lines.sh seasonal/summer.csv 5 8
 ```
 
 should select lines 5-8 from `seasonal/summer.csv`.
-Edit the file `get-lines.sh` and replace the `____` placeholders
-so that it does this.
+Which of the following commands should be put in `get-lines.sh` to do that?
+
+*** =possible_answers
+- `head -n $1 $2 | tail -n $3`
+- [`head -n $2 $1 | tail -n $3`]
+- `head -n $3 $2 | tail -n $1`
+- None of the above.
 
 *** =hint
 
-*** =pre_exercise_code
-```{shell}
-```
-
-*** =sample_code
-```{shell}
-
-```
-
-*** =solution
-```{shell}
-cp /solutions/get-lines.sh .
-```
-
-*** =sct
-```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('get-lines.sh', '/solutions/get-lines.sh')
-```
-
+*** =feedbacks
+- No: that will try to use the filename as the number of lines to select with `head`.
+- Correct!
+- No: that will try to use the end line number as the filename.
+- No: one of these will work.
 
 --- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:59f0e1cf33
 ## How can I get detailed information about a file?
@@ -437,7 +506,7 @@ from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
+--- type:BulletConsoleExercise key:
 ## How can I use my scripts like other commands?
 
 As you use the shell to work with data,
@@ -447,42 +516,95 @@ If a script is there,
 and if it has execute permission,
 the shell will run it when you type its name *without* saying "bash" first.
 
-*** =instructions
+*** =pre_exercise_code
+```{python}
+cp /solutions/lines.sh .
+```
 
-The script `lines.sh` reports the number of lines in one or more files
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+The script `lines.sh` in your home directory
+reports the number of lines in one or more files
 without reporting the total number of lines.
+Move the script to `~/bin`.
 
-- Move the script to `~/bin`.
-- Use `chmod` to change its permissions so that you can read, write, and execute it.
-- Run the script on `seasonal/*.csv` *without* typing the command `bash`.
+*** =hint1
 
-*** =hint
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+mv lines.sh bin
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_types(r'\s*mv\s+lines\.sh\s+bin.*',
+                           fixed=False,
+                           msg='Use `mv` with a filename and a directory name.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Use `chmod` to change the permissions of `bin/lines.sh`
+so that you can read, write, and execute it.
+
+*** =hint2
 
 Use `o=rwx` as the permission.
 
-*** =pre_exercise_code
+*** =sample_code2
 ```{shell}
-
 ```
 
-*** =sample_code
+*** =solution2
 ```{shell}
-
-```
-
-*** =solution
-```{shell}
-cp /solutions/lines.sh bin/lines.sh
 chmod u=rwx bin/lines.sh
+```
+
+*** =sct2
+```{python}
+from shellwhat_ext import test_file_perms
+Ex() >> test_file_perms('bin/lines.sh', 'x',
+                        'is not executable (did you forget `chmod`?).')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Run the script on `seasonal/*.csv` *without* typing the command `bash`
+*or* the word `bin`.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
 lines.sh seasonal/*.csv
 ```
 
-*** =sct
-```{shell}
-from shellwhat_ext import test_file_perms
-Ex() >> test_file_perms('bin/lines.sh', 'x', \
-                        'is not executable (did you forget `chmod`?).') \
-     >> test_student_typed(r'.+\s*lines\.sh\s+seasonal/\*\.csv\s*', \
+*** =sct3
+```{python}
+Ex() >> test_student_typed(r'.+\s*lines\.sh\s+seasonal/\*\.csv\s*', \
                            fixed=False, \
                            msg='Type the name of the script and the wildcard pattern for the files.')
 ```
