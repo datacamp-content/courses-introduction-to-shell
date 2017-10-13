@@ -457,7 +457,7 @@ Use `ls -l` and read the permissions in groups of three characters.
 - No: the third group of characters does not contain an "x".
 - No: the third group of characters contains an "r".
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:f1988ccaf6
 ## How can I change a file's permissions?
 
 You can change a file's permissions using `chmod`
