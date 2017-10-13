@@ -98,7 +98,7 @@ Where are you right now?
 err = "That is not the correct path."
 correct = "Correct - you are in `/home/repl`."
 
-Ex().test_mc(3, [err, err, correct])
+Ex() >> test_mc(3, [err, err, correct])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
@@ -144,7 +144,7 @@ If you give `ls` a path, it shows what's in that path.
 err = "That file is in the `seasonal` directory."
 correct = "Correct - that file is *not* in the `seasonal` directory."
 
-Ex().test_mc(2, [err, correct, err, err])
+Ex() >> test_mc(2, [err, correct, err, err])
 ```
 
 --- type:BulletConsoleExercise key:a766184b59
@@ -408,9 +408,9 @@ Trace the path one directory at a time.
 - Correct - the path means 'home directory', 'up a level', 'here'.
 - No, but `.` on its own would do that.
 
-Ex().test_mc(2, [err1, correct, err3])
+Ex() >> test_mc(2, [err1, correct, err3])
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:c749675192
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I copy a file?
 
 Once you have some files,
@@ -439,16 +439,6 @@ calling the new file `summer.bck`.
 Combine the name of the destination directory and the name of the copied file
 to create a relative path for the new file.
 
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 cp seasonal/summer.csv backup/summer.bck
@@ -456,10 +446,12 @@ cp seasonal/summer.csv backup/summer.bck
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*', fixed=False, msg='Provide two paths to `cp`.')
+Ex() >> test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*',
+                           fixed=False,
+                           msg='Provide two paths to `cp`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:b055c990e7
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I copy multiple files?
 
 `cp` can do more than copy one file at a time.
@@ -489,18 +481,6 @@ Copy the spring and summer data files into the `backup` directory
 *without* changing directory
 (i.e., run a single command from your home directory).
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 cp seasonal/spring.csv seasonal/summer.csv backup
@@ -508,10 +488,12 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Provide two filenames and a directory name to `cp`.')
+Ex() >> test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*',
+                           fixed=False,
+                           msg='Provide two filenames and a directory name to `cp`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:663a083a3c
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I move a file?
 
 While `cp` gives you a way to copy a file,
@@ -533,20 +515,6 @@ up one level to its parent directory
 Using a single command,
 move the spring and summer data files to the `backup` directory.
 
-*** =hint
-
-Use two filenames and a directory name as parameters.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 mv seasonal/spring.csv seasonal/summer.csv backup
@@ -554,7 +522,9 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex().test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*', fixed=False, msg='Use two filenames and a directory name as parameters.')
+Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*',
+                           fixed=False,
+                           msg='Use two filenames and a directory name as parameters.')
 ```
 
 --- type:BulletConsoleExercise key:001801a652
@@ -801,7 +771,7 @@ Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*',
                            msg='`rm` works with paths.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:63e8fbd0c2
+--- type:BulletConsoleExercise key:
 ## How can I delete directories?
 
 `mv` treats directories the same way it treats files:
@@ -820,39 +790,67 @@ For added safety,
 it only works when the directory is empty,
 so you must delete all the files in a directory *before* you delete the directory.
 
-*** =instructions
-
-Without changing directory,
-use two commands to delete the `people` directory.
-
-*** =hint
-
-Remove the directory's contents first,
-then remove the directory.
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Without changing directories,
+delete the file in the `people` directory.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 rm people/agarwal.txt
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*rm\s+people/agarwal.txt\s*',
+                           fixed=False,
+                           msg='Remove the file inside `people`.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Now that the `people` directory is empty,
+use a single command to delete it.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 rmdir people
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*rm\s+people/agarwal.txt\s*', fixed=False, msg='Remove the file inside `people`.')
-Ex().test_student_typed(r'\s*rmdir\s+people\s*', fixed=False, msg='Remove the directory `people`.')
+Ex() >> test_student_typed(r'\s*rmdir\s+people\s*',
+                           fixed=False,
+                           msg='Remove the directory `people`.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:9b157134df
+--- type:BulletConsoleExercise key:
 ## How can I create directories?
 
 A directory is a different kind of thing than a text file,
@@ -870,37 +868,64 @@ mkdir info
 cp course.txt info
 ```
 
-*** =instructions
-
-Using two commands,
-create a new directory called `2017` inside a new directory called `yearly`.
-Do not change directory while doing this.
-
-*** =hint
-
-Make the upper directory first,
-then create the lower directory inside it.
-
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
-*** =sample_code
-```{shell}
+*** =type1: ConsoleExercise
+*** =key1:
 
+*** =xp1: 10
+
+*** =instructions1
+
+Create a new directory called `yearly` below your home directory.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
 ```
 
-*** =solution
+*** =solution1
 ```{shell}
 mkdir yearly
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*mkdir\s+yearly\s*',
+                           fixed=False,
+                           msg='Make the upper directory.')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Now that `yearly` exists,
+create another directory called `2017` inside it
+*without* leaving your home directory.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
 mkdir yearly/2017
 ```
 
-*** =sct
+*** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*mkdir\s+yearly\s*', fixed=False, msg='Make the upper directory.')
-Ex().test_student_typed(r'\s*mkdir\s+yearly/2017\s*', fixed=False, msg='Make the lower directory using a relative path.')
+Ex() >> test_student_typed(r'\s*mkdir\s+yearly/2017\s*',
+                           fixed=False,
+                           msg='Make the lower directory using a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:b1990e9a42
@@ -937,9 +962,9 @@ cd /tmp
 
 *** =sct1
 ```{python}
-Ex().test_student_typed(r'\s*cd\s+/tmp\s*',
-                        fixed=False,
-                        msg='Change your directory to `/tmp`.')
+Ex() >> test_student_typed(r'\s*cd\s+/tmp\s*',
+                           fixed=False,
+                           msg='Change your directory to `/tmp`.')
 ```
 
 
@@ -964,9 +989,9 @@ ls
 
 *** =sct2
 ```{python}
-Ex().test_student_typed(r'\s*ls\s*',
-                        fixed=False,
-                        msg='Use `ls` to see what files and directories you have.')
+Ex() >> test_student_typed(r'\s*ls\s*',
+                           fixed=False,
+                           msg='Use `ls` to see what files and directories you have.')
 ```
 
 *** =type3: ConsoleExercise
@@ -991,9 +1016,9 @@ mkdir scratch
 
 *** =sct3
 ```{python}
-Ex().test_student_typed(r'\s*mkdir\s+scratch\s*',
-                        fixed=False,
-                        msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+Ex() >> test_student_typed(r'\s*mkdir\s+scratch\s*',
+                           fixed=False,
+                           msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
 *** =type4: ConsoleExercise
@@ -1017,7 +1042,7 @@ mv ~/people/agarwal.txt scratch
 
 *** =sct4
 ```{python}
-Ex().test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*',
-                        fixed=False,
-                        msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
+Ex() >> test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+scratch\s*',
+                           fixed=False,
+                           msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.')
 ```
