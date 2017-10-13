@@ -176,12 +176,8 @@ bash teeth.sh > teeth.out
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-import os
-with open('teeth.out', 'r') as reader:
-     content = reader.read()
-debug = 'curdir is {} contents are {} teeth.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out', debug=debug) \
+     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out') \
      >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and use `>` to redirect its output.')
@@ -247,12 +243,8 @@ bash count-records.sh seasonal/*.csv > num-records.out
 *** =sct
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-import os
-with open('num-records.out', 'r') as reader:
-     content = reader.read()
-debug = 'curdir is {} contents are {} num-records.out is "{}"'.format(os.getcwd(), str(os.listdir(os.curdir)), str(content))
 Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh') \
-     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out', debug=debug) \
+     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out') \
      >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
@@ -455,13 +447,7 @@ chmod u=r people/agarwal.txt
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
-import os
-debug = 'contents of {}: {}'.format(os.getcwd(), os.listdir(os.curdir))
-if os.path.exists('people'):
-    debug += '\nand contents of people: {}'.format(os.listdir('people'))
-else:
-    debug += '\npeople directory is missing!!'
-Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.', debug=debug)
+Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
 --- type:NormalExercise lang:shell xp:100 skills:1 key:6445630844
@@ -507,13 +493,8 @@ lines.sh seasonal/*.csv
 *** =sct
 ```{shell}
 from shellwhat_ext import test_file_perms
-import os
-if os.path.exists('bin'):
-    debug = 'contents of bin: {}'.format(os.getcwd(), os.listdir('bin'))
-else:
-    debug = 'bin directory is missing!!'
 Ex() >> test_file_perms('bin/lines.sh', 'x', \
-                        'is not executable (did you forget `chmod`?).', debug=debug) \
+                        'is not executable (did you forget `chmod`?).') \
      >> test_student_typed(r'.+\s*lines\.sh\s+seasonal/\*\.csv\s*', \
                            fixed=False, \
                            msg='Type the name of the script and the wildcard pattern for the files.')
@@ -559,7 +540,7 @@ cp /solutions/range-1.sh bin/range.sh
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh', debug='range-1')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh')
 ```
 
 *** =type2: ConsoleExercise
@@ -588,7 +569,7 @@ cp /solutions/range-2.sh bin/range.sh
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh', debug='range-2')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh')
 ```
 
 *** =type3: ConsoleExercise
@@ -618,7 +599,7 @@ cp /solutions/range-3.sh bin/range.sh
 *** =sct3
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh', debug='range-3')
+Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh')
 ```
 
 *** =type4: ConsoleExercise
@@ -683,11 +664,8 @@ range.sh seasonal/*.csv > range.out
 
 *** =sct5
 ```{python}
-import os
-debug = 'solution5: contents of home directory "{}" and of bin "{}"'.format(os.listdir('.'), os.listdir('bin'))
 Ex() >> test_file_perms('bin/range.sh', 'x', \
-                        'is not executable (use `chmod`).',
-                         debug=debug) \
+                        'is not executable (use `chmod`).') \
      >> test_student_typed(r'.+\s*range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
                            fixed=False,
                            msg='Use `range.sh` and `seasonal/*.csv`.')
