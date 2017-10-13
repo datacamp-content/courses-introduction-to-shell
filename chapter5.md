@@ -134,7 +134,7 @@ bash dates.sh
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'.+\s*bash\s+dates\.sh\s*',
+Ex() >> test_student_typed(r'\s*bash\s+dates\.sh\s*',
                            fixed=False,
                            msg='Use `bash` and the name of the file to run.')
 ```
@@ -310,7 +310,7 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
+Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
@@ -604,7 +604,7 @@ lines.sh seasonal/*.csv
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'.+\s*lines\.sh\s+seasonal/\*\.csv\s*', \
+Ex() >> test_student_typed(r'\s*lines\.sh\s+seasonal/\*\.csv\s*', \
                            fixed=False, \
                            msg='Type the name of the script and the wildcard pattern for the files.')
 ```
@@ -775,7 +775,7 @@ range.sh seasonal/*.csv > range.out
 ```{python}
 Ex() >> test_file_perms('bin/range.sh', 'x', \
                         'is not executable (use `chmod`).') \
-     >> test_student_typed(r'.+\s*range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
+     >> test_student_typed(r'.*\s*range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
                            fixed=False,
                            msg='Use `range.sh` and `seasonal/*.csv`.')
 ```
