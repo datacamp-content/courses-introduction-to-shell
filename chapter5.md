@@ -53,7 +53,7 @@ cp /solutions/names.txt .
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
 ```
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:4507a0dbd8
 ## How can I save commands to re-run later?
 
 You have been using the shell interactively so far.
@@ -83,7 +83,7 @@ which produces the same output as running the commands directly.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 316ad2fec6
 
 *** =xp1: 10
 
@@ -111,7 +111,7 @@ Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh')
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 30a8fa953e
 
 *** =xp2: 10
 
@@ -139,7 +139,7 @@ Ex() >> test_student_typed(r'.+\s*bash\s+dates\.sh\s*',
                            msg='Use `bash` and the name of the file to run.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:da13667750
 ## How can I re-use pipes?
 
 A file full of shell commands is called a *shell script*,
@@ -170,7 +170,7 @@ and save them in `dates.out`.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 6fae90f320
 
 *** =xp1: 10
 
@@ -197,7 +197,7 @@ Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: dcfccb51e2
 
 *** =xp2: 10
 
@@ -224,7 +224,7 @@ Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
      >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:c2623b9c14
 ## How can I pass filenames to scripts?
 
 A script that processes specific files is useful as a record of what you did,
@@ -259,7 +259,7 @@ it processes all four data files.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 7a893623af
 
 *** =xp1: 10
 
@@ -288,7 +288,7 @@ Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: d0da324516
 
 *** =xp2: 10
 
@@ -316,7 +316,7 @@ Ex() >> test_student_typed(r'.+\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:
+--- type:PureMultipleChoiceExercise lang:bash xp:50 key:4092cb4cda
 ## How can I process a single argument?
 
 As well as `$@`,
@@ -506,7 +506,7 @@ from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:6445630844
 ## How can I use my scripts like other commands?
 
 As you use the shell to work with data,
@@ -522,7 +522,7 @@ cp /solutions/lines.sh .
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 86d6d01c61
 
 *** =xp1: 10
 
@@ -552,7 +552,7 @@ Ex() >> test_student_types(r'\s*mv\s+lines\.sh\s+bin.*',
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: e821528d00
 
 *** =xp2: 10
 
@@ -582,7 +582,7 @@ Ex() >> test_file_perms('bin/lines.sh', 'x',
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: 377e40402d
 
 *** =xp3: 10
 
