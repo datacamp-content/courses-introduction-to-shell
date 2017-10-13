@@ -507,7 +507,51 @@ from shellwhat_ext import test_file_perms
 Ex() >> test_file_perms('people/agarwal.txt', 'r', 'is not readable.')
 ```
 
-FIXME
+--- type:BulletConsoleExercise key:6445630844
+## How can I use my scripts like other commands?
+
+As you use the shell to work with data,
+you will build up your own toolbox of useful scripts.
+Most users put these in a directory called `bin` under their home directory.
+If a script is there,
+and if it has execute permission,
+the shell will run it when you type its name *without* saying "bash" first.
+
+*** =pre_exercise_code
+```{python}
+cp /solutions/lines.sh .
+```
+
+*** =type1: ConsoleExercise
+*** =key1: 86d6d01c61
+
+*** =xp1: 10
+
+*** =instructions1
+
+The script `lines.sh` in your home directory
+reports the number of lines in one or more files
+without reporting the total number of lines.
+Move the script to `~/bin`.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+cp /solutions/lines.sh .
+mv lines.sh bin
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'\s*mv\s+lines\.sh\s+bin.*',
+                           fixed=False,
+                           msg='Use `mv` with a filename and a directory name.')
+```
 
 --- type:BulletConsoleExercise key:6a3eb1d64d
 ## BulletConsoleExercise Example
