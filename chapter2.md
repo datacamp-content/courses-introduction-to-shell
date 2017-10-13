@@ -139,7 +139,7 @@ Ex() >> test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
                            msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:9eb608f6c9
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I control what commands do?
 
 You won't always want to look at the first 10 lines of a file,
@@ -167,18 +167,6 @@ sometimes isn't obvious to everyone else.
 
 Display the first 5 lines of the winter data in the `seasonal` directory.
 
-*** =hint
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
-
 *** =solution
 ```{shell}
 head -n 5 seasonal/winter.csv
@@ -191,7 +179,7 @@ Ex().test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
                         msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
---- type:NormalExercise lang:shell xp:100 skills:1 key:f830d46419
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:
 ## How can I list everything below a directory?
 
 In order to see everything underneath a directory,
@@ -224,20 +212,7 @@ To help you know what is what,
 and a `*` after the name of every runnable program.
 Run `ls` with `-R`, `-F`, *and* the absolute path to your home directory
 to see everything it contains.
-
-*** =hint
-
-The order of the flags doesn't matter, but the directory name must come last.
-
-*** =pre_exercise_code
-```{shell}
-
-```
-
-*** =sample_code
-```{shell}
-
-```
+(The order of the flags doesn't matter, but the directory name must come last.)
 
 *** =solution
 ```{shell}
@@ -246,8 +221,7 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-pattern = r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*'
-Ex().test_student_typed(pattern,
+Ex().test_student_typed(r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*',
                         fixed=False,
                         msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
