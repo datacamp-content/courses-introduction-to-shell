@@ -107,7 +107,7 @@ head seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+seasonal/autumn.csv\s*',
+Ex() >> test_student_typed(r'\s*head\s+seasonal/autumn\.csv\s*',
                            fixed=False,
                            msg='Type `head s`, a tab, `a`, and a tab.')
 ```
@@ -134,7 +134,7 @@ head seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+seasonal/spring.csv\s*',
+Ex() >> test_student_typed(r'\s*head\s+seasonal/spring\.csv\s*',
                            fixed=False,
                            msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
@@ -174,7 +174,7 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter.csv\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter\.csv\s*',
                            fixed=False,
                            msg='Use `head` with `-n` and the number of lines you want.')
 ```
@@ -325,7 +325,7 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring.csv\s*',
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring\.csv\s*',
                            fixed=False,
                            msg='`man` told you that `+NUMBER` will display lines starting from NUMBER.')
 ```
@@ -449,7 +449,7 @@ head summer.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+summer.csv\s*',
+Ex() >> test_student_typed(r'\s*head\s+summer\.csv\s*',
                            fixed=False,
                            msg='Use `head` and a filename.')
 ```
@@ -630,7 +630,7 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn.csv\s*',
+Ex() >> test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn\.csv\s*',
                            fixed=False,
                            msg='Use the relative path to the file to search.')
 ```
@@ -658,7 +658,7 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring.csv\s*',
+Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n\s+molar)|(-n\s+molar\s+\v))\s+seasonal/spring\.csv\s*',
                            fixed=False,
                            msg='Use `-v` or `-n molar` in either order.')
 ```
@@ -687,7 +687,7 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn.csv\s+seasonal/winter.csv)|(seasonal/winter.csv\s+seaonal/autumn.csv))\s*',
+Ex() >> test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn\.csv\s+seasonal/winter\.csv)|(seasonal/winter\.csv\s+seaonal/autumn\.csv))\s*',
                            fixed=False,
                            msg='Use `-c` to get a count.')
 ```

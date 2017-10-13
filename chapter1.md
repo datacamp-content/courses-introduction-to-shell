@@ -227,7 +227,7 @@ ls seasonal/summer.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer.csv\s*',
+Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer\.csv\s*',
                            fixed=False,
                            msg='Use `ls` followed by a path.')
 ```
@@ -446,7 +446,7 @@ cp seasonal/summer.csv backup/summer.bck
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cp\s+seasonal/summer.csv\s+backup/summer.bck\s*',
+Ex() >> test_student_typed(r'\s*cp\s+seasonal/summer\.csv\s+backup/summer\.bck\s*',
                            fixed=False,
                            msg='Provide two paths to `cp`.')
 ```
@@ -488,7 +488,7 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cp\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*',
+Ex() >> test_student_typed(r'\s*cp\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup\s*',
                            fixed=False,
                            msg='Provide two filenames and a directory name to `cp`.')
 ```
@@ -522,7 +522,7 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring.csv\s+seasonal/summer.csv\s+backup\s*',
+Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup\s*',
                            fixed=False,
                            msg='Use two filenames and a directory name as parameters.')
 ```
@@ -602,7 +602,7 @@ mv winter.csv winter.csv.bck
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+winter.csv\s+winter.csv.bck\s*',
+Ex() >> test_student_typed(r'\s*mv\s+winter\.csv\s+winter\.csv\.bck\s*',
                            fixed=False,
                            msg='Use `mv` to rename a file.')
 ```
@@ -712,7 +712,7 @@ rm autumn.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*rm\s+autumn.csv\s*',
+Ex() >> test_student_typed(r'\s*rm\s+autumn\.csv\s*',
                            fixed=False,
                            msg='Use `rm` to remove a single file.')
 ```
@@ -766,7 +766,7 @@ rm seasonal/summer.csv
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer.csv\s*',
+Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer\.csv\s*',
                            fixed=False,
                            msg='`rm` works with paths.')
 ```

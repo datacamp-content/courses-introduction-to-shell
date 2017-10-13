@@ -147,7 +147,7 @@ head -n 1 $testing
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*testing=seasonal/winter.csv\s+head\s+-n\s+1\s+\$testing\s*',
+Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s+head\s+-n\s+1\s+\$testing\s*',
                            fixed=False,
                            msg='Set `testing` with `variable=value` then run `head` with `$testing`.')
 ```
@@ -384,7 +384,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*\.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
                            fixed=False,
                            msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```

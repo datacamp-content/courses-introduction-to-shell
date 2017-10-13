@@ -6,7 +6,7 @@ description : >-
   This chapter will show you how to use this power to select the data you want,
   and introduce commands for sorting values and removing duplicates.
 
---- type:Exercise lang:shell xp:100 skills:1 key:07a427d50c
+--- type:ConsoleExercise lang:shell xp:100 skills:1 key:07a427d50c
 ## How can I store a command's output in a file?
 
 All of the tools you have seen so far let you name input files.
@@ -53,7 +53,7 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter.csv\s*>\s*last.csv\s*',
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter\.csv\s*>\s*last\.csv\s*',
                            fixed=False,
                            msg='Use `tail` and `>` together.')
 ```
@@ -103,7 +103,7 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter.csv\s*>\s*bottom.csv\s*',
+Ex() >> test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter\.csv\s*>\s*bottom\.csv\s*',
                            fixed=False,
                            msg='Use `tail` and `>` together.')
 ```
@@ -131,7 +131,7 @@ head -n 1 bottom.csv
 
 *** =sct2
 ```{python}
-Ex()>> test_student_typed(r'\s*head\s+-n\s+1\s+bottom.csv\s*',
+Ex()>> test_student_typed(r'\s*head\s+-n\s+1\s+bottom\.csv\s*',
                            fixed=False,
                            msg='Use `head` on the temporary file.')
 ```
@@ -175,9 +175,9 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,
-                           s+-f\s+2\s+seasonal/spring.csv\s*|\s*grep\s+-v\s+Tooth\s*',
-                           fixed=False, msg='Use `cut` and `grep`.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring\.csv\s*|\s*grep\s+-v\s+Tooth\s*',
+                           fixed=False,
+                           msg='Use `cut` and `grep`.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -210,7 +210,7 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
                            fixed=False,
                            msg='Use `cut`, `grep`, and `head`.')
 ```
@@ -234,7 +234,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring.csv\s*|\s*wc\s+-l\s*',
+Ex() >> test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring\.csv\s*|\s*wc\s+-l\s*',
                            fixed=False,
                            msg='Use `grep` and `wc`.')
 ```
@@ -344,7 +344,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
                            fixed=False,
                            msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
@@ -408,9 +408,9 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,
-                           s+-f\s+2\s+seasonal/*.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*',
-                           fixed=False, msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*',
+                           fixed=False,
+                           msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
