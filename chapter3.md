@@ -279,7 +279,7 @@ Use a wildcard instead of spelling out the files' names in full.
 
 *** =solution
 ```{shell}
-head seasonal/s*.csv
+head -n 3 seasonal/s*.csv
 ```
 
 *** =sct
