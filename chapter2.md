@@ -60,7 +60,7 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =sct
 ```{shell}
-Ex() >> test_mc(2, ['no', 'yes', 'no'])
+Ex() >> test_mc(2, ['Incorrect, try again.', 'Correct!', 'Incorrect, try again.'])
 ```
 
 --- type:BulletConsoleExercise key:0b7b8ca8f7
@@ -283,7 +283,7 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =instructions1
 
-Read the manual page for the `tail` command.
+Read the manual page for the `tail` command. Press spacebar to read more or type `q` to quit.
 
 *** =hint1
 
@@ -327,7 +327,7 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring\.csv\s*',
                            fixed=False,
-                           msg='`man` told you that `+NUMBER` will display lines starting from NUMBER.')
+                           msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -336,7 +336,7 @@ Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring\.csv\s*',
 `head` and `tail` let you select rows from a text file.
 If you want to select columns,
 you can use the command `cut`.
-It has several options (search for `unix man cut` to explore them),
+It has several options (search online for `unix man cut` to explore them),
 but the most common is something like:
 
 ```{shell}
@@ -364,7 +364,7 @@ Name,Age
 then:
 
 ```{shell}
-cut -f 2 -d , everyone.csv`
+cut -f 2 -d , everyone.csv
 ```
 
 will produce:
@@ -416,7 +416,7 @@ Pressing return will then run the modified command.
 
 Even better, `history` will print a list of commands you have run recently.
 Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history.
+just type `!55` to re-run the 55th command in your history (if you have that many).
 You can also re-run a command by typing an exclamation mark followed by the command's name,
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
@@ -659,7 +659,7 @@ grep -v -n molar seasonal/spring.csv
 ```{python}
 Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring\.csv\s*',
                            fixed=False,
-                           msg='Use `-v` and `-n` in either order.')
+                           msg='Use `-v` and `-n` in either order. Don't forget to use the spring data.')
 ```
 
 *** =type3: ConsoleExercise
