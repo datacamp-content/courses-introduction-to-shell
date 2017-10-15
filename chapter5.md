@@ -176,6 +176,7 @@ and save them in `dates.out`.
 
 Use Nano to create a shell script called `teeth.sh`
 that prints a count of the number of times each tooth name appears in the seasonal data.
+You may want to experiment with commands at the prompt before jumping into the text editor.
 
 *** =hint1
 
@@ -228,7 +229,7 @@ Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
 ## How can I pass filenames to scripts?
 
 A script that processes specific files is useful as a record of what you did,
-but one that allows you process any files you want is more useful.
+but one that allows you to process any files you want is more useful.
 To support this,
 you can use the special expression `$@` (dollar sign immediately followed by ampersand)
 to mean "all of the command-line parameters given to the script".
@@ -242,7 +243,7 @@ cut -d , -f 1 $@ | grep -v Date | sort | uniq
 then when you run:
 
 ```{shell}
-bash some-dates.sh seasonal/summer.csv`
+bash some-dates.sh seasonal/summer.csv
 ```
 
 the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
@@ -406,7 +407,7 @@ Use the same command shown in the lesson.
 *** =feedbacks
 - No - you are looking at the wrong column.
 - No - you are looking at the wrong column.
-- Yes.
+- That's correct!
 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
 ## How does Unix control who can do what with a file?
@@ -435,7 +436,7 @@ When `ls -l seasonal` displays this:
 it means that each file can be read and written by their owner (the first `rw-`),
 read by other people in the `staff` group (`r--`),
 and also read by everyone else on the machine (`r--`).
-(The first character is "-" for files and "d" for directories.)
+(The first character on each line is "-" for files and "d" for directories.)
 
 <hr>
 
@@ -452,7 +453,7 @@ What can other users who *aren't* members of your group do with the file `course
 Use `ls -l` and read the permissions in groups of three characters.
 
 *** =feedbacks
-- Correct.
+- Correct!
 - No: the third group of characters does not contain a "w".
 - No: the third group of characters does not contain an "x".
 - No: the third group of characters contains an "r".
