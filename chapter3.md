@@ -55,7 +55,7 @@ tail -n 5 seasonal/winter.csv > last.csv
 ```{python}
 Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter\.csv\s*>\s*last\.csv\s*',
                            fixed=False,
-                           msg='Use `tail` and `>` together.')
+                           msg='Use `tail` (with the proper flag) and `>` together.')
 ```
 
 --- type:BulletConsoleExercise key:f47d337593
