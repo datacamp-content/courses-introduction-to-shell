@@ -27,7 +27,7 @@ you can type `set` in the shell.
 
 <hr>
 
-Use `set` and `grep` to display the value of `HISTFILESIZE`,
+Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
 which determines how many old commands are stored in your command history.
 What is its value?
 
@@ -49,7 +49,7 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 ```{python}
 err1 = "No: the shell records more history than that."
 err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 500 old commands by default on this system."
+correct3 = "Correct: the shell saves 2000 old commands by default on this system."
 err4 = "No: the variable `HISTFILESIZE` is there."
 Ex() >> test_mc(3, [err1, err2, correct3, err4])
 ```
@@ -366,8 +366,8 @@ because `datsets` (without the second "a") isn't defined.
 
 <hr>
 
-If you run these two commands in your home directory,
-what output is printed?
+If you were to run these two commands in your home directory,
+what output would be printed?
 
 ```{shell}
 files=seasonal/*.csv
@@ -395,14 +395,13 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 Printing filenames is useful for debugging,
 but the real purpose of loops is to do things with multiple files.
-This loop:
+This loop prints the second line of each data file:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-prints the second line of each data file.
-It has the same structure as the others you have already seen:
+It has the same structure as the other loops you have already seen:
 all that's different is that its body is a pipeline of two commands instead of a single command.
 
 *** =instructions
@@ -414,8 +413,9 @@ grep -h 2017-07 seasonal/*.csv
 ```
 
 but uses a loop to process each file separately.
-(Remember that the `-h` flag tells `grep` *not* to print filenames in the output.)
 Use `file` as the name of the loop variable.
+
+(Remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.)
 
 *** =solution
 ```{bash}
