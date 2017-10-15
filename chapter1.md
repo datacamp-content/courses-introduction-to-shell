@@ -200,7 +200,7 @@ ls course.txt
 ```{python}
 Ex() >> test_student_typed(r'\s*ls\s+course.txt\s*',
                            fixed=False,
-                           msg='Use `ls` followed by a path.')
+                           msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type2: ConsoleExercise
@@ -229,7 +229,7 @@ ls seasonal/summer.csv
 ```{python}
 Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer\.csv\s*',
                            fixed=False,
-                           msg='Use `ls` followed by a path.')
+                           msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type3: ConsoleExercise
@@ -258,7 +258,7 @@ ls people
 ```{python}
 Ex() >> test_student_typed(r'\s*ls\s+people\s*',
                            fixed=False,
-                           msg='Use `ls` followed by a path.')
+                           msg='Use `ls` followed by a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:dbdaec5610
