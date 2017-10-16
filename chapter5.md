@@ -22,10 +22,10 @@ delete characters with the backspace key,
 and so on.
 You can also do a few other operations with control-key combinations:
 
-- Ctrl-K: delete a line
-- Ctrl-U: un-delete a line
-- Ctrl-O: save the file ('O' stands for 'output')
-- Ctrl-X: exit the editor
+- Ctrl-K: delete a line.
+- Ctrl-U: un-delete a line.
+- Ctrl-O: save the file ('O' stands for 'output').
+- Ctrl-X: exit the editor.
 
 *** =instructions
 
@@ -53,6 +53,117 @@ cp /solutions/names.txt .
 from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
 ```
+
+--- type:BulletConsoleExercise key:
+## How can I record what I just did?
+
+When you are doing a complex analysis,
+you will often want to keep a record of the commands you used.
+You can do this with the tools you have already seen:
+
+1. Run `history`.
+2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
+3. Redirect that to a file called something like `figure-5.history`.
+
+This is better than writing things down in a lab notebook
+because it is guaranteed not to miss any steps.
+It also illustrates the central idea of the shell:
+simple tools that produce and consume lines of text
+can be combined in a wide variety of ways
+to solve a broad range of problems.
+
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+cp seasonal/s*.csv ~
+```
+
+*** =sct1
+```{python}
+import os
+Ex() >> test_compare_file_to_file('spring.csv', 'seasonal/spring.csv') \
+     >> test_compare_file_to_file('summer.csv', 'seasonal/summer.csv')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Use `grep` with the `-h` flag (to stop it from printing filenames)
+and `-v Tooth` (to select lines that *don't* match the header line)
+to select the data records from `spring.csv` and `summer.csv` in that order
+and redirect the output to `temp.csv`.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+grep -h -v Tooth spring.csv summer.csv > temp.csv
+```
+
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'\s*grep\s+((-h\s+-v\s+Tooth)|(-v\s+Tooth\s+-h))\s+spring\.csv\s+summer\.csv\s*>\s*temp\.csv\s*',
+                           fixed=False,
+                           msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
+```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Pipe `history` into `tail -n 3`
+and redirect the output to `steps.txt`
+to save the last three commands in a file.
+(You need to save three instead of just two
+because the `history` command itself will be in the list.)
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+history | tail -n 3 > steps.txt
+```
+
+*** =sct3
+```{python}
+Ex() >> test_student_typed(r'\s*history\s*|\s*tail\s+-n\s+3\s*>\s*steps\.txt\s*',
+                           fixed=False,
+                           msg='Remember to redirect the output to `steps.txt`.')
+```
+
 --- type:BulletConsoleExercise key:4507a0dbd8
 ## How can I save commands to re-run later?
 
@@ -122,7 +233,7 @@ Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh')
 
 *** =instructions2
 
-Run the file `dates.sh`.
+Use `bash` to run the file `dates.sh`.
 
 *** =hint2
 
@@ -172,6 +283,8 @@ and save them in `dates.out`.
 
 *** =pre_exercise_code
 ```{python}
+import shutil
+shutil.copyfile('/solutions/teeth-start.sh', 'teeth.sh')
 ```
 
 *** =type1: ConsoleExercise
@@ -181,10 +294,9 @@ and save them in `dates.out`.
 
 *** =instructions1
 
-Use Nano to create a shell script called `teeth.sh`
-that uses `cut`, `grep -v`, `sort`, and `uniq -c` in that order
-to print a count of the number of times each tooth name appears in the seasonal data.
-You may want to experiment with commands at the prompt before jumping into the text editor.
+Use Nano to edit the shell script `teeth.sh`
+and replace the `____` placeholders
+so that this script prints a count of the number of times each tooth name appears in the seasonal data.
 
 *** =hint1
 
@@ -210,9 +322,11 @@ Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
 
 *** =instructions2
 
-Use `bash` to run `teeth.sh` with redirection to save its output in `teeth.out`.
+Use `bash` to run `teeth.sh` and redirect its output to `teeth.out`.
 
 *** =hint2
+
+Use `>` to redirect the output.
 
 *** =sample_code2
 ```{shell}
@@ -270,26 +384,27 @@ To support this,
 you can use the special expression `$@` (dollar sign immediately followed by ampersand)
 to mean "all of the command-line parameters given to the script".
 For example,
-if `some-dates.sh` contains this:
+if `unique-lines.sh` contains this:
 
 ```{shell}
-cut -d , -f 1 $@ | grep -v Date | sort | uniq
+sort $@ | uniq
 ```
 
 then when you run:
 
 ```{shell}
-bash some-dates.sh seasonal/summer.csv
+bash unique-lines.sh seasonal/summer.csv
 ```
 
 the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
 If you run this:
 
 ```{shell}
-bash some-dates.sh seasonal/*.csv
+bash unique-lines.sh seasonal/*.csv
 ```
 
-it processes all four data files.
+it processes all four data files,
+and so on.
 
 *** =pre_exercise_code
 ```{python}
@@ -304,7 +419,7 @@ shutil.copyfile('/solutions/count-records-start.sh', 'count-records.sh')
 
 *** =instructions1
 
-Open the script `count-records.sh` in Nano and fill in the blanks
+Open the script `count-records.sh` in Nano and fill in the `____` placeholders
 so that it counts the number of lines in one or more files,
 excluding the first line of each.
 
@@ -332,10 +447,12 @@ Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.
 
 *** =instructions2
 
-Run `count-records.sh` on all of the seasonal data files,
-using redirection to save the output in `num-records.out`.
+Run `count-records.sh` on all of the seasonal data files
+and redirect the output to `num-records.out`.
 
 *** =hint2
+
+Use `>` to redirect the output.
 
 *** =sample_code2
 ```{shell}
@@ -416,6 +533,8 @@ you will create one that tells you how many records are in the shortest and long
 
 *** =pre_exercise_code
 ```{python}
+import shutil
+shutil.copyfile('/solutions/range-start-1.sh', 'range.sh')
 ```
 
 *** =type1: ConsoleExercise
@@ -425,9 +544,9 @@ you will create one that tells you how many records are in the shortest and long
 
 *** =instructions1
 
-Use Nano to write a script called `bin/range.sh`
-that uses `wc -l` and `grep -v` in that order
-to list the names and number of lines in all of the files given on the command line
+Use Nano to edit the script `range.sh`
+and replace the `____` placeholders so that it lists
+the names and number of lines in all of the files given on the command line
 *without* showing the total number of lines in all files.
 (Do not try to subtract the column header lines from the files.)
 
@@ -441,13 +560,13 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
-cp /solutions/range-1.sh bin/range.sh
+cp /solutions/range-1.sh range.sh
 ```
 
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh')
+Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-1.sh')
 ```
 
 *** =type2: ConsoleExercise
@@ -457,12 +576,14 @@ Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-1.sh')
 
 *** =instructions2
 
-Rewrite `bin/range.sh` so that it uses `sort -n` and `head -n 1` to display
-the name and line count of the shortest file given to it.
+Extend the pipeline in `range.sh`
+so that it uses `sort -n` and `head -n 1` in that order
+to display the name and line count of the shortest file given to it.
 
 *** =hint3
 
-Use `sort -n` and `head -n 1` to select the shortest line.
+Use `sort -n` to sort by the number of lines
+and then `head -n 1` to select the shortest line.
 
 *** =sample_code2
 ```{shell}
@@ -470,13 +591,13 @@ Use `sort -n` and `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-cp /solutions/range-2.sh bin/range.sh
+cp /solutions/range-2.sh range.sh
 ```
 
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh')
+Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
 ```
 
 *** =type3: ConsoleExercise
@@ -486,13 +607,13 @@ Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-2.sh')
 
 *** =instructions3
 
-Add a second line to `bin/range.sh` to print the name and record count of
+Add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
 (Use `sort -n -r` and `head` rather than `sort -n` and `tail`.)
 
 *** =hint3
 
-Remember that a shell script can contain any number of commands.
+Copy the first line and modify the sorting order.
 
 *** =sample_code3
 ```{shell}
@@ -500,27 +621,27 @@ Remember that a shell script can contain any number of commands.
 
 *** =solution3
 ```{shell}
-cp /solutions/range-3.sh bin/range.sh
+cp /solutions/range-3.sh range.sh
 ```
 
 *** =sct3
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('bin/range.sh', '/solutions/range-3.sh')
+Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-3.sh')
 ```
 
 *** =type4: ConsoleExercise
-*** =key4: 7ef95165b6
+*** =key4:
 
 *** =xp4: 30
 
 *** =instructions4
 
-Give yourself read, write, and execute permission on `bin/range.sh`.
+Run the script on the files in the `seasonal` directory
+using a wildcard expression to match all of the files
+and redirect the output to a file called `range.out` in your home directory.
 
 *** =hint4
-
-Use `chmod` and `u=rwx`.
 
 *** =sample_code4
 ```{shell}
@@ -528,52 +649,13 @@ Use `chmod` and `u=rwx`.
 
 *** =solution4
 ```{shell}
-cp /solutions/range-3.sh bin/range.sh
-chmod u=rwx bin/range.sh
+cp /solutions/range-3.sh range.sh
+bash range.sh seasonal/*.csv > range.out
 ```
 
 *** =sct4
 ```{python}
-from shellwhat_ext import test_file_perms
-Ex() >> test_student_typed(r'.*\s*chmod\s+u=rwx\s+bin/range\.sh\s*', \
-                           fixed=False, \
-                           msg='Use `chmod u+x` and the path to the script.') \
-     >> test_file_perms('bin/range.sh', 'x', \
-                        'is not executable (use `chmod`).')
-```
-
-*** =type5: ConsoleExercise
-*** =key5: 7ad3b76529
-
-*** =xp5: 30
-
-*** =instructions5
-
-Run the script on the files in the `seasonal` directory
-by typing the name of the script and a wildcard expression to match all of the files,
-*without* typing `bin/`.
-Save the output in a file called `range.out` in your home directory.
-
-*** =hint5
-
-Remember, if the script is executable and in `bin`, you can just type its name.
-
-*** =sample_code5
-```{shell}
-```
-
-*** =solution5
-```{shell}
-cp /solutions/range-3.sh bin/range.sh
-chmod u=rwx bin/range.sh
-range.sh seasonal/*.csv > range.out
-```
-
-*** =sct5
-```{python}
-Ex() >> test_file_perms('bin/range.sh', 'x', \
-                        'is not executable (use `chmod`).') \
-     >> test_student_typed(r'.*\s*range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
+Ex() >> test_student_typed(r'.*\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
                            fixed=False,
-                           msg='Use `range.sh` and `seasonal/*.csv`.')
+                           msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.')
 ```
