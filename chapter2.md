@@ -7,7 +7,7 @@ description : >-
   but are the model for everything that's more powerful.
 
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:8acc09ede3
 ## How can I view a file's contents?
 
 Before you rename or delete files,
@@ -43,7 +43,7 @@ Ex() >> test_student_typed(r'\s*cat\s+course\.txt\s*',
                            msg='Type `cat` followed by the name of the file.')
 ```
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:d8a30a3f81
 ## How can I view a file's contents piece by piece?
 
 While you can print large files with `cat` and then scroll through the output,
