@@ -661,3 +661,93 @@ Ex() >> test_student_typed(r'.*\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*rang
                            fixed=False,
                            msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.')
 ```
+
+--- type:BulletConsoleExercise key:
+## How can I write loops in a shell script?
+
+Shell scripts can contain loops as well as pipes and multiple command lines.
+You can write these loops using semi-colons,
+or to make them more readable,
+you can split them across multiple lines like this:
+
+```{shell}
+# Print the first and last data records of each file.
+for filename in $@
+do
+    head -n 2 $filename | tail -n 1
+    tail -n 1 $filename
+done
+```
+
+You don't have to indent the commands inside the loop,
+but it make scripts more readable.
+
+The first line of this script is a **comment**
+to tell readers what the script does.
+Comments start with the `#` character and run to the end of the line.
+Your future self will thank you for adding brief explanations like the one shown here
+to every script you write.
+
+*** =pre_exercise_code
+```{python}
+import shutil
+shutil.copyfile('/solutions/date-range-start.sh', 'date-range.sh')
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+Modify the script `date-range.sh`
+so that it prints the first and last date from one or more files.
+
+*** =hint1
+
+Remember to use `$filename` to get the current value of the loop variable.
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+import shutil
+shutil.copyfile('/solutions/date-range.sh', 'date-range.sh')
+```
+
+*** =sct1
+```{python}
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
+```
+
+*** =type2: ConsoleExercise
+*** =key2:
+
+*** =xp2: 10
+
+*** =instructions2
+
+Run `date-range.sh` on all four of the seasonal data files,
+using a wildcard expression for the files.
+
+*** =hint2
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
+```{shell}
+bash date-range.sh seasonal/*.csv
+```
+
+*** =sct2
+```{python}
+Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*',
+                           fixed=False,
+                           msg='Use `bash date-range.sh` on `seasonal/*.csv`.')
+```
