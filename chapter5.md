@@ -54,7 +54,7 @@ from shellwhat_ext import test_compare_file_to_file
 Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:80c3532985
 ## How can I record what I just did?
 
 When you are doing a complex analysis,
@@ -77,7 +77,7 @@ to solve a broad range of problems.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 144ca955ca
 
 *** =xp1: 10
 
@@ -104,7 +104,7 @@ Ex() >> test_compare_file_to_file('spring.csv', 'seasonal/spring.csv') \
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: 09a432e4df
 
 *** =xp2: 10
 
@@ -134,7 +134,7 @@ Ex() >> test_student_typed(r'\s*grep\s+((-h\s+-v\s+Tooth)|(-v\s+Tooth\s+-h))\s+s
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: c40348c1e5
 
 *** =xp3: 10
 
@@ -633,7 +633,7 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-3.sh')
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: cba93a77c3
 
 *** =xp4: 30
 
