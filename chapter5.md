@@ -721,7 +721,12 @@ shutil.copyfile('/solutions/date-range.sh', 'date-range.sh')
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
+with open('date-range.sh', 'r') as reader:
+    mine = reader.readlines()
+with open('/solutions/date-range.sh', 'r') as reader:
+    source = reader.readlines()
+debug = 'mine "{}" source "{}"'.format(str(mine), str(source))
+Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh', debug=debug)
 ```
 
 *** =type2: ConsoleExercise
