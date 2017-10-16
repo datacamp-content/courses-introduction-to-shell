@@ -662,7 +662,7 @@ Ex() >> test_student_typed(r'.*\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*rang
                            msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:6be8ca6009
 ## How can I write loops in a shell script?
 
 Shell scripts can contain loops as well as pipes and multiple command lines.
@@ -695,7 +695,7 @@ shutil.copyfile('/solutions/date-range-start.sh', 'date-range.sh')
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 8ca2adb6c4
 
 *** =xp1: 10
 
@@ -725,7 +725,7 @@ Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: ec1271356d
 
 *** =xp2: 10
 
