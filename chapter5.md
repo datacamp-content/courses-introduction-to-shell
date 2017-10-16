@@ -10,7 +10,7 @@ description : >-
 ## How can I edit a file?
 
 Unix has a bewildering variety of text editors,
-some of which combine the power of a full-blown IDE
+some of which combine the power of tools like RStudio or the Jupyter Notebook
 with the readability of Egyptian hieroglyphics.
 For this course,
 we will use a very simple editor called Nano.
@@ -29,8 +29,8 @@ You can also do a few other operations with control-key combinations:
 
 *** =instructions
 
-Use Nano to create a file in your home directory called `names.txt`
-that contains the following four lines:
+Run `nano names.txt` to edit a new file in your home directory
+and enter the following four lines:
 
 ```
 Lovelace
@@ -39,7 +39,9 @@ Johnson
 Wilson
 ```
 
-Make sure there are no blank lines before or after these four lines.
+To save what you have written,
+type Ctrl-O (to write the file out)
+and then Ctrl-X (to exit the editor).
 
 *** =solution
 ```{shell}
@@ -87,9 +89,14 @@ which produces the same output as running the commands directly.
 
 *** =instructions1
 
-Use Nano to create a file called `dates.sh`
-that uses the `cut` command to extract the first column
-from all of the CSV files in `seasonal`.
+Use `nano dates.sh` to create a file called `dates.sh`
+that uses this command:
+
+```{shell}
+cut -d , -f 1 seasonal/*.csv
+```
+
+to extract the first column from all of the CSV files in `seasonal`.
 
 *** =hint1
 
@@ -175,7 +182,8 @@ and save them in `dates.out`.
 *** =instructions1
 
 Use Nano to create a shell script called `teeth.sh`
-that prints a count of the number of times each tooth name appears in the seasonal data.
+that uses `cut`, `grep -v`, `sort`, and `uniq -c` in that order
+to print a count of the number of times each tooth name appears in the seasonal data.
 You may want to experiment with commands at the prompt before jumping into the text editor.
 
 *** =hint1
@@ -225,6 +233,34 @@ Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
      >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Use `cat teeth.out` to inspect your results.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+cat teeth.out
+```
+
+*** =sct3
+```{python}
+from shellwhat_ext import test_compare_file_to_file
+Ex() >> test_student_typed(r'.*cat\s+teeth\.out\s*', \
+                           fixed=False, \
+                           msg='Run the indicated command.')
+```
+
 --- type:BulletConsoleExercise key:c2623b9c14
 ## How can I pass filenames to scripts?
 
@@ -257,6 +293,8 @@ it processes all four data files.
 
 *** =pre_exercise_code
 ```{python}
+import shutil
+shutil.copyfile('/solutions/count-records-start.sh', 'count-records.sh')
 ```
 
 *** =type1: ConsoleExercise
@@ -266,10 +304,9 @@ it processes all four data files.
 
 *** =instructions1
 
-Write a script called `count-records.sh`
-that counts the number of lines in one or more files,
+Open the script `count-records.sh` in Nano and fill in the blanks
+so that it counts the number of lines in one or more files,
 excluding the first line of each.
-Use the `-q` flag to `tail` to stop it from printing title lines.
 
 *** =hint1
 
@@ -295,8 +332,8 @@ Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.
 
 *** =instructions2
 
-Run `count-records.sh` on all of the seasonal data files
-and use redirection to save the output in `num-records.out`.
+Run `count-records.sh` on all of the seasonal data files,
+using redirection to save the output in `num-records.out`.
 
 *** =hint2
 
@@ -312,7 +349,7 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+seasonal/\*\.csv\s*>\s*num-records\.out\s*', \
+Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+seasonal/\*(\.csv)?\s*>\s*num-records\.out\s*', \
                            fixed=False, \
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
@@ -357,19 +394,19 @@ Which of the following commands should be put in `get-lines.sh` to do that?
 
 *** =possible_answers
 - `head -n $1 $2 | tail -n $3`
-- [`head -n $2 $1 | tail -n $3`]
+- `head -n $2 $1 | tail -n $3`
 - `head -n $3 $2 | tail -n $1`
-- None of the above.
+- [`head -n $3 $1 | tail -n $2`]
 
 *** =hint
 
 *** =feedbacks
 - No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
 - No: that will try to use the end line number as the filename.
-- No: one of these will work.
+- No: that one uses the starting line number as the filename.
+- Correct!
 
---- type:PureMultipleChoiceExercise lang:shell xp:100 skills:1 key:59f0e1cf33
+--- type:MultipleChoiceExercise lang:shell xp:100 skills:1 key:
 ## How can I get detailed information about a file?
 
 In order to take the next step with scripting,
@@ -396,7 +433,7 @@ and that they were last modified on August 18 at 9:27 in the morning.
 <hr>
 How many bytes are in the file `course.txt`?
 
-*** =possible_answers
+*** =instructions
 - 1
 - 18
 - [485]
@@ -404,10 +441,12 @@ How many bytes are in the file `course.txt`?
 *** =hint
 Use the same command shown in the lesson.
 
-*** =feedbacks
-- No - you are looking at the wrong column.
-- No - you are looking at the wrong column.
-- That's correct!
+*** =sct
+```{python}
+err = "No - you are looking at the wrong column."
+correct = "That's correct!"
+Ex() >> test_mc(3, [err, err, correct])
+```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
 ## How does Unix control who can do what with a file?
