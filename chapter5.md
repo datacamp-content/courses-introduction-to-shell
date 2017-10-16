@@ -633,7 +633,7 @@ Ex() >> test_student_typed(r'\s*lines\.sh\s+seasonal/\*\.csv\s*', \
                            msg='Type the name of the script and the wildcard pattern for the files.')
 ```
 
---- type:TabConsoleExercise key:
+--- type:TabConsoleExercise key:846bc70e9d
 ## Wrapping up
 
 All of the shell scripts you have seen so far contain a single command,
