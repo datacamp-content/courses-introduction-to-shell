@@ -731,7 +731,7 @@ grep -v -n molar seasonal/spring.csv
 ```{python}
 Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring\.csv\s*',
                            fixed=False,
-                           msg='Use `-v` and `-n` in either order. Don't forget to use the spring data.')
+                           msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
 *** =type3: ConsoleExercise
