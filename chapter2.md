@@ -408,7 +408,7 @@ Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring\.csv\s*',
 `head` and `tail` let you select rows from a text file.
 If you want to select columns,
 you can use the command `cut`.
-It has several options (search online for `unix man cut` to explore them),
+It has several options (use `man cut` to explore them),
 but the most common is something like:
 
 ```{shell}
