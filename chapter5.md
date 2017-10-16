@@ -524,12 +524,14 @@ Which of the following commands should be put in `get-lines.sh` to do that?
 - Correct!
 
 --- type:TabConsoleExercise key:846bc70e9d
-## Wrapping up
+## How can one shell script do many things?
 
-All of the shell scripts you have seen so far contain a single command,
-but a script can contain any number of commands.
-To wrap up this course,
-you will create one that tells you how many records are in the shortest and longest of your data files.
+Our shells scripts so far have had a single command or pipe,
+but a script can contain many lines of commands.
+For example,
+you can create one that tells you how many records are in the shortest and longest of your data files,
+i.e.,
+the range of your datasets' lengths.
 
 *** =pre_exercise_code
 ```{python}
