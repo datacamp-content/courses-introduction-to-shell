@@ -163,9 +163,8 @@ as the input to the command on the right.
 
 *** =instructions
 
-Write a pipeline that uses `cut` and `grep` to select all of the tooth names from `seasonal/summer.csv`
-*without* including the header "Tooth".
-(Use `grep -v` to exclude lines.)
+Write a pipeline that uses `cut` to select all of the tooth names from column 2 of `seasonal/summer.csv`
+and then `grep -v` to exclude the header line containing the word "Tooth".
 
 *** =solution
 ```{shell}
@@ -198,8 +197,8 @@ will:
 
 *** =instructions
 
-Write a pipeline that uses `cut`, `grep`, and `head`
-to select the first value in the "Tooth" column of `seasonal/autumn.csv`
+Write a pipeline that uses `cut`, `grep`, and `head` in that order
+to select the first value in column 2 of `seasonal/autumn.csv`
 *after* the header "Tooth".
 
 *** =solution
