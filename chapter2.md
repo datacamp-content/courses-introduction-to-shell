@@ -7,6 +7,74 @@ description : >-
   but are the model for everything that's more powerful.
 
 
+--- type:ConsoleExercise xp:100 key:
+## How can I view a file's contents?
+
+Before you rename or delete files,
+you may want to have a look at their contents.
+The simplest way to do this is with `cat`,
+which just prints the contents of files onto the screen.
+(Its name is short for "concatenate",
+since it will print all the files whose names you give it).
+
+```{shell}
+cat agarwal.txt
+```
+```
+name: Agarwal, Jasmine
+position: RCT2
+start: 2017-04-01
+benefits: full
+```
+
+*** =instructions
+
+Print the contents of `course.txt` to the screen.
+
+*** =solution
+```{bash}
+cat course.txt
+```
+
+*** =sct
+```{python}
+Ex() >> test_student_typed(r'\s*cat\s+course\.txt\s*',
+                           fixed=False,
+                           msg='Type `cat` followed by the name of the file.')
+```
+
+--- type:ConsoleExercise xp:100 key:
+## How can I view a file's contents piece by piece?
+
+While you can print large files with `cat` and then scroll through the output,
+it is often more convenient to **page** the output.
+The original command for doing this was called `more`,
+but it has been superseded by a more powerful command called `less`.
+(This kind of naming is what passes for humor in the Unix world.)
+When you `less` a file,
+one page is displayed at a time;
+you can press spacebar to page down or type `q` to quit.
+If you have viewed multiple files,
+you can type `:n` (colon immediately followed by a lower-case 'n') to move to the next file,
+or `:p` to go back to the previous one.
+
+*** =instructions
+
+Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
+in that order.
+
+*** =solution
+```{bash}
+less seasonal/spring.csv seasonal/summer.csv
+```
+
+*** =sct
+```{python}
+Ex() >> test_student_typed(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
+                           fixed=False,
+                           msg='Use `less` and the filenames.  Remember that `:n` moves you to the next file.')
+```
+
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
 ## How can I look at the start of a file?
 
@@ -283,7 +351,8 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =instructions1
 
-Read the manual page for the `tail` command. Press spacebar to read more or type `q` to quit.
+Read the manual page for the `tail` command.
+(Remember to press spacebar to page down and/or type `q` to quit.)
 
 *** =hint1
 
