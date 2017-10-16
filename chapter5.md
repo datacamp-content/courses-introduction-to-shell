@@ -234,7 +234,7 @@ Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: c8c9a11e3c
 
 *** =xp3: 10
 
@@ -406,7 +406,7 @@ Which of the following commands should be put in `get-lines.sh` to do that?
 - No: that one uses the starting line number as the filename.
 - Correct!
 
---- type:MultipleChoiceExercise lang:shell xp:100 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:100 skills:1 key:59f0e1cf33
 ## How can I get detailed information about a file?
 
 In order to take the next step with scripting,
