@@ -532,8 +532,9 @@ but not write to it or execute it.
 *** =hint
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
+import os
+os.system('chmod 000 people/agarwal.txt')
 ```
 
 *** =sample_code
@@ -632,8 +633,8 @@ Ex() >> test_student_typed(r'\s*lines\.sh\s+seasonal/\*\.csv\s*', \
                            msg='Type the name of the script and the wildcard pattern for the files.')
 ```
 
---- type:BulletConsoleExercise key:6a3eb1d64d
-## BulletConsoleExercise Example
+--- type:TabConsoleExercise key:
+## Wrapping up
 
 All of the shell scripts you have seen so far contain a single command,
 but a script can contain any number of commands.
@@ -651,14 +652,15 @@ you will create one that tells you how many records are in the shortest and long
 
 *** =instructions1
 
-Create a script called `bin/range.sh`
-that uses `wc -l`, `grep`, `sort`, and `head` in a pipeline in that order
-to list the names and number of lines in all of the files given on the command line.
-(Do not try to subtract the header lines from the files.)
+Use Nano to write a script called `bin/range.sh`
+that uses `wc -l` and `grep -v` in that order
+to list the names and number of lines in all of the files given on the command line
+*without* showing the total number of lines in all files.
+(Do not try to subtract the column header lines from the files.)
 
 *** =hint1
 
-You solved this problem when we first introduced pipes.
+Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =sample_code1
 ```{shell}
