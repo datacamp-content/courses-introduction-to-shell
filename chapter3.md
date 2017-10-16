@@ -29,8 +29,7 @@ head -n 5 seasonal/summer.csv > top.csv
 nothing appears on the screen.
 Instead,
 `head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`,
-which just prints the contents of one or more files:
+You can take a look at that file's contents using `cat`:
 
 ```{shell}
 cat top.csv

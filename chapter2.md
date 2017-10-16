@@ -296,6 +296,7 @@ Ex() >> test_student_typed(r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*',
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
 ## How can I get help for a command?
+
 To find out what commands do,
 people used to use the `man` command
 (short for "manual").
@@ -324,7 +325,9 @@ SEE ALSO
      tail(1)
 ```
 
-(You may need to press the space bar to page down a few times to see it all.)
+`man` automatically invokes `less`,
+so you may need to press spacebar to page through the information.
+
 The one-line description under `NAME` tells you briefly what the command does,
 and the summary under `SYNOPSIS` lists all of the options.
 Anything that is optional is shown in square brackets `[...]`,
