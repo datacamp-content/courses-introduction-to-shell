@@ -431,14 +431,16 @@ that they range in size from 399 to 497 bytes,
 and that they were last modified on August 18 at 9:27 in the morning.
 
 <hr>
+
 How many bytes are in the file `course.txt`?
 
 *** =instructions
 - 1
 - 18
-- [485]
+- 485
 
 *** =hint
+
 Use the same command shown in the lesson.
 
 *** =sct
@@ -448,7 +450,7 @@ correct = "That's correct!"
 Ex() >> test_mc(3, [err, err, correct])
 ```
 
---- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
 ## How does Unix control who can do what with a file?
 
 Unix keeps track of who can do what to files and directories
@@ -479,10 +481,10 @@ and also read by everyone else on the machine (`r--`).
 
 <hr>
 
-What can other users who *aren't* members of your group do with the file `course.txt`?
+What can users who *aren't* members of your group do with the file `course.txt`?
 
-*** =possible_answers
-- [Read.]
+*** =instructions
+- Read.
 - Read and write.
 - Read and execute.
 - None of the above.
@@ -491,11 +493,14 @@ What can other users who *aren't* members of your group do with the file `course
 
 Use `ls -l` and read the permissions in groups of three characters.
 
-*** =feedbacks
-- Correct!
-- No: the third group of characters does not contain a "w".
-- No: the third group of characters does not contain an "x".
-- No: the third group of characters contains an "r".
+*** =sct
+```{python}
+a1 = 'Correct!'
+a2 = 'No: the third group of characters does not contain a "w".'
+a3 = 'No: the third group of characters does not contain an "x".'
+a4 = 'No: the third group of characters contains an "r".'
+Ex() >> test_mc(1, [a1, a2, a3, a4])
+```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f1988ccaf6
 ## How can I change a file's permissions?
