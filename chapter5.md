@@ -752,7 +752,7 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: 0323c7d68d
 
 *** =xp3: 10
 
@@ -781,7 +781,7 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
                            msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
 ```
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:c0b03ca7d1
 ## How can I stop a running program?
 
 The commands and scripts that you have run so far have all executed quickly,
@@ -797,7 +797,7 @@ cp /solutions/current-time.sh .
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 7cdb55125f
 
 *** =xp1: 10
 
@@ -825,7 +825,7 @@ Ex() >> test_student_typed(r'\s*bash\s+current-time\.sh\s*',
                            msg="Use the control key and 'c' at the same time to stop the script.")
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:8a162c4d54
 ## What happens when I don't provide filenames?
 
 We will end this chapter by looking at a common mistake.
