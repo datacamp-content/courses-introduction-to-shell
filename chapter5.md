@@ -776,7 +776,7 @@ bash date-range.sh seasonal/*.csv | sort
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*sort\s*',
+Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*|\s*sort\s*',
                            fixed=False,
                            msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
 ```
@@ -820,7 +820,7 @@ bash current-time.sh
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'.*\s*bash\s+current-time\.sh\s\s*',
+Ex() >> test_student_typed(r'\s*bash\s+current-time\.sh\s*',
                            fixed=False,
                            msg="Use the control key and 'c' at the same time to stop the script.")
 ```
@@ -869,7 +869,7 @@ head -n 5 | tail -n 3 somefile.txt
 *** =sct
 ```{python}
 a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
+a2 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a3 = 'No: `tail` does print the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a4 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
 Ex() >> test_mc(3, [a1, a2, a3, a4])
