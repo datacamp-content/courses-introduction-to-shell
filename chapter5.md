@@ -714,14 +714,13 @@ Remember to use `$filename` to get the current value of the loop variable.
 
 *** =solution1
 ```{shell}
-import shutil
-shutil.copyfile('/solutions/date-range.sh', 'date-range.sh')
+cp /solutions/date-range.sh date-range.sh
 ```
 
 *** =sct1
 ```{python}
 from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh', debug="COMPARE")
+Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
 ```
 
 *** =type2: ConsoleExercise
