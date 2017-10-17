@@ -793,7 +793,8 @@ note that the 'c' can be lower-case.
 
 *** =pre_exercise_code
 ```{python}
-cp /solutions/current-time.sh .
+import shutil
+shutil.copyfile('/solutions/current-time.sh', 'current-time.sh')
 ```
 
 *** =type1: ConsoleExercise
