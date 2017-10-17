@@ -750,3 +750,127 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
                            fixed=False,
                            msg='Use `bash date-range.sh` on `seasonal/*.csv`.')
 ```
+
+*** =type3: ConsoleExercise
+*** =key3:
+
+*** =xp3: 10
+
+*** =instructions3
+
+Run `date-range.sh` on all four of the seasonal data files,
+using a wildcard expression for the files,
+and pipe its output to `sort`
+to see how your scripts can be used just like Unix's built-in commands.
+
+*** =hint3
+
+*** =sample_code3
+```{shell}
+```
+
+*** =solution3
+```{shell}
+bash date-range.sh seasonal/*.csv | sort
+```
+
+*** =sct3
+```{python}
+Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*sort\s*',
+                           fixed=False,
+                           msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
+```
+
+--- type:BulletConsoleExercise key:
+## How can I stop a running program?
+
+The commands and scripts that you have run so far have all executed quickly,
+but some tasks will take minutes, hours, or even days to complete.
+If you decide that you don't want a program to keep running,
+you can type Ctrl-C to end it.
+This is often written `^C` in Unix documentation;
+note that the 'c' can be lower-case.
+
+*** =pre_exercise_code
+```{python}
+cp /solutions/current-time.sh .
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
+
+The script `current-time.sh` prints the current time at one-second intervals forever.
+Run it with `bash current-time.sh`
+and then use `^C` to stop it.
+
+*** =hint1
+
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
+```{shell}
+bash current-time.sh
+```
+
+*** =sct1
+```{python}
+Ex() >> test_student_typed(r'.*\s*bash\s+current-time\.sh\s\s*',
+                           fixed=False,
+                           msg="Use the control key and 'c' at the same time to stop the script.")
+```
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## What happens when I don't provide filenames?
+
+We will end this chapter by looking at a common mistake.
+If you type:
+
+```{shell}
+tail -n 3 somefile.txt
+```
+
+then `tail` prints the last three lines of the file.
+If, on the other hand, you type:
+
+```{shell}
+head -n 5 somefile.txt | tail -n 3
+```
+
+then since `tail` hasn't been given the names of any files to process,
+it waits for some other program (in this case, `head`) to send it data.
+
+<hr>
+
+What happens if you run the command:
+
+```{shell}
+head -n 5 | tail -n 3 somefile.txt
+```
+
+*** =instructions
+- It prints lines 3-5 of `somefile.txt` and halts.
+- It prints lines 3-5 of `somefile.txt` and waits for more input.
+- It prints the last 3 lines of `somefile.txt` and halts.
+- It prints the last 3 lines of `somefile.txt` and waits for more input.
+
+*** =hint
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
+a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
+a3 = 'No: `tail` does print the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
+a4 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
+Ex() >> test_mc(3, [a1, a2, a3, a4])
+```
