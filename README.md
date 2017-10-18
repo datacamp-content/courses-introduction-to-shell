@@ -2,6 +2,8 @@
 ---
 # Introduction to the Unix Shell for Data Science
 
+Teach: https://www.datacamp.com/teach/repositories/1395/branches/master
+
 ## Description
 
 The Unix command line has survived and thrived for almost fifty years because it lets people to do complex things with just a few keystrokes. It helps users combine existing programs in new ways, automate repetitive tasks, and run programs on clusters and clouds that may be halfway around the world. This lesson will introduce its key elements and show you how to use them efficiently.
