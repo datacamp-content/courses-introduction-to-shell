@@ -8,4 +8,5 @@ description: The Unix command line has survived and thrived for almost fifty yea
 programming_language: shell
 from: shell-base-prod:22
 datasets:
-  filesys.zip: Filesys
+  filesys.zip: learner file system
+  solutions.zip: sample solutions
