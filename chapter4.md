@@ -183,12 +183,13 @@ using the variable `testing` instead of the name of the file.
 
 *** =solution2
 ```{shell}
+testing=seasonal/winter.csv
 head -n 1 $testing
 ```
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+\$testing\s*',
+Ex() >> test_student_typed(r'.*head\s+-n\s+1\s+\$testing\s*',
                            fixed=False,
                            msg='Use `head` with `$testing` as an argument.')
 ```

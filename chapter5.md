@@ -816,7 +816,8 @@ and then use `^C` to stop it.
 
 *** =solution1
 ```{shell}
-bash current-time.sh
+# Use echo to prevent execution of never-ending script.
+echo bash current-time.sh
 ```
 
 *** =sct1

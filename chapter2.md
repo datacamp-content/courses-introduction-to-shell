@@ -65,7 +65,8 @@ in that order.
 
 *** =solution
 ```{bash}
-less seasonal/spring.csv seasonal/summer.csv
+# Using 'cat' to prevent hang-up during backend testing.
+less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
 *** =sct
