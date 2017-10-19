@@ -806,7 +806,7 @@ shutil.copyfile('/solutions/current-time.sh', 'current-time.sh')
 
 The script `current-time.sh` prints the current time at one-second intervals forever.
 Run it with `bash current-time.sh`
-and then use `^C` to stop it.
+and then use Ctrl-C to stop it.
 
 *** =hint1
 
