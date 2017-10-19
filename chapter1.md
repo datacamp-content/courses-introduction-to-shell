@@ -17,7 +17,7 @@ In exchange for early access to the course, we ask that you help us make some fi
 
 You'll report high-level feedback (2) in a separate feedback form after you've completed the entire course.
 
-Specific feedback (1) should be reported directly in the course using the *Report Issue* button, which looks like an **exclamation point (!) in the upper righthand corner of your screen**. This means you can report issues as soon as you encounter them in the exercises.
+Specific feedback (1) should be reported directly in the course using the *Report Issue* button, which looks like an **exclamation point (!) in the upper right hand corner of your screen**. This means you can report issues as soon as you encounter them in the exercises.
 
 <hr>
 
@@ -32,7 +32,7 @@ Once you've submitted the feedback, you'll get a message. What's the first sente
 - Thanks for providing feedback.
 
 *** =hint
-Click the *Report Issue* button in the upper righthand corner of your screen now and submit some feedback!
+Click the *Report Issue* button in the upper right hand corner of your screen now and submit some feedback!
 
 *** =feedbacks
 - Nope. Go ahead and report feedback on this exercise by clicking the *Report Issue* button now.
