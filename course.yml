@@ -6,4 +6,7 @@ description: The Unix command line has survived and thrived for almost fifty yea
   that may be halfway around the world. This course will introduce its key elements
   and show you how to use them efficiently.
 programming_language: shell
-from: 'shell-base-prod:22'
+from: shell-base-prod:22
+datasets:
+  filesys.zip: Filesys
+  solutions.zip: Solutions
