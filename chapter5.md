@@ -128,7 +128,7 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+((-h\s+-v\s+Tooth)|(-v\s+Tooth\s+-h))\s+spring\.csv\s+summer\.csv\s*>\s*temp\.csv\s*',
+Ex() >> test_student_typed(r'\s*grep\s+((-h\s+-v\s+Tooth)|(-v\s+Tooth\s+-h))(\s+s.*\.csv)+\s*>\s*temp\.csv\s*',
                            fixed=False,
                            msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
 ```

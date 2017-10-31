@@ -558,7 +558,7 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup\s*',
+Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup/?\s*',
                            fixed=False,
                            msg='Use two filenames and a directory name as parameters.')
 ```
