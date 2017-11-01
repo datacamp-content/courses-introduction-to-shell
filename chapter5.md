@@ -830,7 +830,7 @@ Ex() >> test_student_typed(r'\s*bash\s+current-time\.sh\s*',
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:8a162c4d54
 ## What happens when I don't provide filenames?
 
-We will end this chapter by looking at a common mistake.
+A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
 If you type:
 
 ```{shell}
