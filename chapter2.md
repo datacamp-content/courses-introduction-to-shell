@@ -54,8 +54,8 @@ but it has been superseded by a more powerful command called `less`.
 When you `less` a file,
 one page is displayed at a time;
 you can press spacebar to page down or type `q` to quit.
-If you have viewed multiple files,
-you can type `:n` (colon immediately followed by a lower-case 'n') to move to the next file,
+If you are viewing several files,
+type `:n` (colon and a lower-case 'n') to move to the next file,
 or `:p` to go back to the previous one.
 
 *** =instructions
