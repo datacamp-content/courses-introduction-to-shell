@@ -234,9 +234,9 @@ ls course.txt
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+course.txt\s*',
-                           fixed=False,
-                           msg='Use `ls` followed by a relative path.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls', '', {'course.txt'}]],
+                     msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type2: ConsoleExercise
@@ -263,9 +263,9 @@ ls seasonal/summer.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+seasonal/summer\.csv\s*',
-                           fixed=False,
-                           msg='Use `ls` followed by a relative path.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]]
+                     msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type3: ConsoleExercise
