@@ -236,7 +236,7 @@ ls course.txt
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', {'course.txt'}]],
-                     msg='Use `ls` followed by a relative path.', debug='Should be "ls course.txt"')
+                     msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type2: ConsoleExercise
@@ -265,7 +265,7 @@ ls seasonal/summer.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]],
-                     msg='Use `ls` followed by a relative path.', debug='Should be "ls seasonal/summer.csv"')
+                     msg='Use `ls` followed by a relative path.')
 ```
 
 *** =type3: ConsoleExercise
@@ -292,9 +292,9 @@ ls people
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+people\s*',
-                           fixed=False,
-                           msg='Use `ls` followed by a relative path.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls', '', 'people']],
+                     msg='Use `ls` followed by a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:dbdaec5610
@@ -338,9 +338,9 @@ cd seasonal
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
-                           fixed=False,
-                           msg='Use `cd` followed by a path.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cd', '', 'seasonal']],
+                     msg='Use `cd` followed by a path.')
 ```
 
 *** =type2: ConsoleExercise
@@ -365,9 +365,9 @@ pwd
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*pwd\s*',
-                           fixed=False,
-                           msg='Remember: "print working directory".')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['pwd']],
+                     msg='Remember: "print working directory".')
 ```
 
 *** =type3: ConsoleExercise
@@ -392,9 +392,9 @@ ls
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s*',
-                           fixed=False,
-                           msg='`ls` with no paths will show the contents of the current directory.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls']],
+                     msg='`ls` with no paths will show the contents of the current directory.')
 ```
 
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
@@ -482,9 +482,9 @@ cp seasonal/summer.csv backup/summer.bck
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cp\s+seasonal/summer\.csv\s+backup/summer\.bck\s*',
-                           fixed=False,
-                           msg='Provide two paths to `cp`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
+                     msg='Provide two paths to `cp`.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b055c990e7
@@ -524,9 +524,10 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cp\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup\s*',
-                           fixed=False,
-                           msg='Provide two filenames and a directory name to `cp`.')
+from shellwhat_ext import test_cmdline
+msg = 'Provide two filenames and a directory name to `cp`.'
+Ex() >> test_or(test_cmdline([['cp', '', ['seasonal/spring.csv', 'seasonal/summer.csv', 'backup']]], msg=msg),
+                test_cmdline([['cp', '', ['seasonal/summer.csv', 'seasonal/spring.csv', 'backup']]], msg=msg))
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:663a083a3c
@@ -558,9 +559,10 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s+backup/?\s*',
-                           fixed=False,
-                           msg='Use two filenames and a directory name as parameters.')
+from shellwhat_ext import test_cmdline
+msg = 'Use two filenames and a directory name as parameters.'
+Ex() >> test_or(test_cmdline([['mv', '', ['seasonal/spring.csv', 'seasonal/summer.csv', 'backup']]], msg=msg),
+                test_cmdline([['mv', '', ['seasonal/summer.csv', 'seasonal/spring.csv', 'backup']]], msg=msg))
 ```
 
 --- type:BulletConsoleExercise key:001801a652
@@ -611,9 +613,9 @@ cd seasonal
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
-                           fixed=False,
-                           msg='Use `cd` to change directory.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cd', '', 'seasonal']],
+                     msg='Use `cd` to change directory.')
 ```
 
 *** =type2: ConsoleExercise
@@ -638,9 +640,9 @@ mv winter.csv winter.csv.bck
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+winter\.csv\s+winter\.csv\.bck\s*',
-                           fixed=False,
-                           msg='Use `mv` to rename a file.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['mv', '', ['winter.csv', 'winter.csv.bck']]],
+                     msg='Use `mv` to rename a file.')
 ```
 
 *** =type3: ConsoleExercise
@@ -665,9 +667,9 @@ ls
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s*',
-                           fixed=False,
-                           msg='Use `ls` to list the directory contents.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls']],
+                     msg='Use `ls` to list the directory contents.')
 ```
 
 --- type:BulletConsoleExercise key:2734680614
@@ -721,9 +723,9 @@ cd seasonal
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
-                           fixed=False,
-                           msg='Use `cd` to change directory.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cd', '', 'seasonal']],
+                     msg='Use `cd` to change directory.')
 ```
 
 *** =type2: ConsoleExercise
@@ -748,9 +750,9 @@ rm autumn.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*rm\s+autumn\.csv\s*',
-                           fixed=False,
-                           msg='Use `rm` to remove a single file.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['rm', '', 'autumn.csv']],
+                     msg='Use `rm` to remove a single file.')
 ```
 
 *** =type3: ConsoleExercise
@@ -802,9 +804,9 @@ rm seasonal/summer.csv
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'\s*rm\s+seasonal/summer\.csv\s*',
-                           fixed=False,
-                           msg='`rm` works with paths.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['rm', '', 'seasonal/summer.csv']],
+                     msg='`rm` works with paths.')
 ```
 
 --- type:BulletConsoleExercise key:63e8fbd0c2
@@ -853,9 +855,9 @@ rm people/agarwal.txt
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*rm\s+people/agarwal.txt\s*',
-                           fixed=False,
-                           msg='Remove the file inside `people`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['rm', '', 'people/agarwal.txt']],
+                     msg='Remove the file inside `people`.')
 ```
 
 *** =type2: ConsoleExercise
@@ -881,9 +883,9 @@ rmdir people
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*rmdir\s+people\s*',
-                           fixed=False,
-                           msg='Remove the directory `people`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['rmdir', '', 'people']],
+                     msg='Remove the directory `people`.')
 ```
 
 --- type:BulletConsoleExercise key:9b157134df
@@ -930,9 +932,9 @@ mkdir yearly
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*mkdir\s+yearly\s*',
-                           fixed=False,
-                           msg='Make the upper directory.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['mkdir', '', 'yearly']],
+                     msg='Make the upper directory.')
 ```
 
 *** =type2: ConsoleExercise
@@ -959,9 +961,9 @@ mkdir yearly/2017
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*mkdir\s+yearly/2017\s*',
-                           fixed=False,
-                           msg='Make the lower directory using a relative path.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['mkdir', '', 'yearly/2017']],
+                     msg='Make the lower directory using a relative path.')
 ```
 
 --- type:BulletConsoleExercise key:b1990e9a42
@@ -998,9 +1000,9 @@ cd /tmp
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+/tmp\s*',
-                           fixed=False,
-                           msg='Change your directory to `/tmp`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cd', '', '/tmp']],
+                     msg='Change your directory to `/tmp`.')
 ```
 
 
@@ -1025,9 +1027,9 @@ ls
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s*',
-                           fixed=False,
-                           msg='Use `ls` to see what files and directories you have.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls']],
+                     msg='Use `ls` to see what files and directories you have.')
 ```
 
 *** =type3: ConsoleExercise
@@ -1052,9 +1054,9 @@ mkdir scratch
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*mkdir\s+scratch\s*',
-                           fixed=False,
-                           msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['mkdir', '', 'scratch']],
+                     msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
 *** =type4: ConsoleExercise
@@ -1077,7 +1079,7 @@ mv ~/people/agarwal.txt /tmp
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'\s*mv\s+~/people/agarwal.txt\s+/tmp\s*',
-                           fixed=False,
-                           msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', '/tmp']]],
+                     msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
 ```
