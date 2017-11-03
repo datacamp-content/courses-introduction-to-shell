@@ -236,7 +236,7 @@ ls course.txt
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', {'course.txt'}]],
-                     msg='Use `ls` followed by a relative path.', debug=True)
+                     msg='Use `ls` followed by a relative path.', debug='Should be "ls course.txt"')
 ```
 
 *** =type2: ConsoleExercise
@@ -265,7 +265,7 @@ ls seasonal/summer.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]]
-                     msg='Use `ls` followed by a relative path.', debug=True)
+                     msg='Use `ls` followed by a relative path.', debug='Should be "ls seasonal/summer.csv"')
 ```
 
 *** =type3: ConsoleExercise
