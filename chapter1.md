@@ -264,7 +264,7 @@ ls seasonal/summer.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]]
+Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]],
                      msg='Use `ls` followed by a relative path.', debug='Should be "ls seasonal/summer.csv"')
 ```
 
