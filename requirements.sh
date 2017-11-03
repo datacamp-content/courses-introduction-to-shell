@@ -17,7 +17,7 @@ echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
 echo 'FILESYS: ' ${FILESYS}
-echo 'This message is to force a rebuild 33.'
+echo 'This message is to force a rebuild 34.'
 echo
 
 # Make sure we're in the home directory.
