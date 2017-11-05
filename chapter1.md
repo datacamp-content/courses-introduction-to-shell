@@ -292,8 +292,9 @@ ls people
 
 *** =sct3
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', '', 'people']],
+Ex() >> test_cmdline([['ls', '', re.compile('people/?')]],
                      msg='Use `ls` followed by a relative path.')
 ```
 
@@ -339,7 +340,7 @@ cd seasonal
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', 'seasonal']],
+Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
                      msg='Use `cd` followed by a path.')
 ```
 
@@ -524,10 +525,11 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
 msg = 'Provide two filenames and a directory name to `cp`.'
-Ex() >> test_or(test_cmdline([['cp', '', ['seasonal/spring.csv', 'seasonal/summer.csv', 'backup']]], msg=msg),
-                test_cmdline([['cp', '', ['seasonal/summer.csv', 'seasonal/spring.csv', 'backup']]], msg=msg))
+Ex() >> test_or(test_cmdline([['cp', '', ['seasonal/spring.csv', 'seasonal/summer.csv', re.compile(r'backup/?')]]], msg=msg),
+                test_cmdline([['cp', '', ['seasonal/summer.csv', 'seasonal/spring.csv', re.compile(r'backup/?')]]], msg=msg))
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:663a083a3c
@@ -559,10 +561,11 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
 msg = 'Use two filenames and a directory name as parameters.'
-Ex() >> test_or(test_cmdline([['mv', '', ['seasonal/spring.csv', 'seasonal/summer.csv', 'backup']]], msg=msg),
-                test_cmdline([['mv', '', ['seasonal/summer.csv', 'seasonal/spring.csv', 'backup']]], msg=msg))
+Ex() >> test_or(test_cmdline([['mv', '', ['seasonal/spring.csv', 'seasonal/summer.csv', re.compile(r'backup/?')]]], msg=msg),
+                test_cmdline([['mv', '', ['seasonal/summer.csv', 'seasonal/spring.csv', re.compile(r'backup/?')]]], msg=msg))
 ```
 
 --- type:BulletConsoleExercise key:001801a652
@@ -613,8 +616,9 @@ cd seasonal
 
 *** =sct1
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', 'seasonal']],
+Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
                      msg='Use `cd` to change directory.')
 ```
 
@@ -723,8 +727,9 @@ cd seasonal
 
 *** =sct1
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', 'seasonal']],
+Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
                      msg='Use `cd` to change directory.')
 ```
 
@@ -883,8 +888,9 @@ rmdir people
 
 *** =sct2
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['rmdir', '', 'people']],
+Ex() >> test_cmdline([['rmdir', '', re.compile('people/?')]],
                      msg='Remove the directory `people`.')
 ```
 
@@ -1000,8 +1006,9 @@ cd /tmp
 
 *** =sct1
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', '/tmp']],
+Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
                      msg='Change your directory to `/tmp`.')
 ```
 
@@ -1079,7 +1086,8 @@ mv ~/people/agarwal.txt /tmp
 
 *** =sct4
 ```{python}
+import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', '/tmp']]],
+Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', re.compile(r'/tmp/?')]]],
                      msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
 ```
