@@ -191,6 +191,7 @@ head -n 1 $testing
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
+                     last_line=True,
                      msg='Use `head` with `$testing` as an argument.')
 ```
 
