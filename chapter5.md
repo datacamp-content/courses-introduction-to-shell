@@ -473,7 +473,7 @@ from shellwhat_ext import test_compare_file_to_file, test_cmdline
 # FIXME
 Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+.+>\s*num-records.out\s*',
                            fixed=False, 
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.', debug=True) \
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
@@ -665,7 +665,7 @@ bash range.sh seasonal/*.csv > range.out
 from shellwhat_ext import test_cmdline
 Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+.+>\s*range.out\s*',
                            fixed=False, 
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.', debug=True)
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
 ```
 
 --- type:BulletConsoleExercise key:6be8ca6009
