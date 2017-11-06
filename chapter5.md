@@ -471,10 +471,9 @@ bash count-records.sh seasonal/*.csv > num-records.out
 ```{python}
 from shellwhat_ext import test_compare_file_to_file, test_cmdline
 # FIXME
-Ex() >> test_cmdline([['bash', '', {'count-records.sh', 'seasonal/spring.csv', 'seasonal/summer.csv', 'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
-                     redirect='num-records.out',
-                     last_line=True,
-                     msg='Run the script with `bash` and some filenames and use `>` to redirect its output.', debug=True) \
+Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+.+>\s*num-records.out\s*',
+                           fixed=False, 
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.', debug=True) \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
@@ -664,10 +663,9 @@ bash range.sh seasonal/*.csv > range.out
 *** =sct4
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['bash', '', {'range.sh', 'seasonal/spring.csv', 'seasonal/summer.csv', 'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
-                     redirect='range.out',
-                     last_line=True,
-                     msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.', debug=True) # FIXME
+Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+.+>\s*range.out\s*',
+                           fixed=False, 
+                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.', debug=True)
 ```
 
 --- type:BulletConsoleExercise key:6be8ca6009
