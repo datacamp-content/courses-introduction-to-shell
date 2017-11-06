@@ -290,7 +290,8 @@ head -n 3 seasonal/s*.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', {'seasonal/spring.csv', 'seasonal/summer.csv'}, {'-n' : '3'}]],
-                     msg='Remember that "spring" and "summer" both start with "s".')
+                     msg='Remember that "spring" and "summer" both start with "s".',
+                     debug=True) # FIXME
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
@@ -416,7 +417,7 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth'],
                       ['sort', 'r'],
                       ['uniq', 'c']],

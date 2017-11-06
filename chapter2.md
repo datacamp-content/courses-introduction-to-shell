@@ -705,7 +705,7 @@ grep molar seasonal/autumn.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
-                     msg='Use the relative path to the file to search.')
+                     msg='Use the relative path to the file to search.', debug=True) # FIXME
 ```
 
 *** =type2: ConsoleExercise
