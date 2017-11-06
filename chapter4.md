@@ -105,9 +105,9 @@ echo $OSTYPE
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*echo\s+\$OSTYPE\s*',
-                           fixed=False,
-                           msg='Remember to put `$` in front of the variable name')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['echo', '', '+']],
+                     msg='Remember to put `$` in front of the variable name')
 ```
 
 --- type:BulletConsoleExercise key:e925da48e4
@@ -189,9 +189,9 @@ head -n 1 $testing
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'.*head\s+-n\s+1\s+\$testing\s*',
-                           fixed=False,
-                           msg='Use `head` with `$testing` as an argument.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
+                     msg='Use `head` with `$testing` as an argument.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3

@@ -128,9 +128,10 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+((-h\s+-v\s+Tooth)|(-v\s+Tooth\s+-h))(\s+s.*\.csv)+\s*>\s*temp\.csv\s*',
-                           fixed=False,
-                           msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', 'hv', ['Tooth', 'spring.csv', 'summer.csv']]],
+                     redirect='temp.csv',
+                     msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
 ```
 
 *** =type3: ConsoleExercise
@@ -159,9 +160,11 @@ history | tail -n 3 > steps.txt
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*history\s*|\s*tail\s+-n\s+3\s*>\s*steps\.txt\s*',
-                           fixed=False,
-                           msg='Remember to redirect the output to `steps.txt`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['history'],
+                      ['tail', 'n:', None, {'-n' : '3'}]],
+                     redirect='steps.txt',
+                     msg='Remember to redirect the output to `steps.txt`.')
 ```
 
 --- type:BulletConsoleExercise key:4507a0dbd8
@@ -250,9 +253,9 @@ bash dates.sh
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*bash\s+dates\.sh\s*',
-                           fixed=False,
-                           msg='Use `bash` and the name of the file to run.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['bash', '', 'dates.sh']],
+                     msg='Use `bash` and the name of the file to run.')
 ```
 
 --- type:BulletConsoleExercise key:da13667750
@@ -340,10 +343,11 @@ bash teeth.sh > teeth.out
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_student_typed(r'.*bash\s+teeth\.sh\s*>\s*teeth\.out\s*', \
-                           fixed=False, \
-                           msg='Run the script with `bash` and use `>` to redirect its output.') \
+from shellwhat_ext import test_compare_file_to_file, test_cmdline
+Ex() >> test_cmdline([['bash', '', 'teeth.sh']],
+                     redirect='teeth.out',
+                     last_line=True,
+                     msg='Run the script with `bash` and use `>` to redirect its output.') \
      >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
 ```
 
@@ -369,9 +373,9 @@ cat teeth.out
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'.*cat\s+teeth\.out\s*', \
-                           fixed=False, \
-                           msg='Run the indicated command.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cat', '', 'teeth.out']],
+                     msg='Run the indicated command.')
 ```
 
 --- type:BulletConsoleExercise key:c2623b9c14
@@ -465,10 +469,11 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+seasonal/\*(\.csv)?\s*>\s*num-records\.out\s*', \
-                           fixed=False, \
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
+from shellwhat_ext import test_compare_file_to_file, test_cmdline
+Ex() >> test_cmdline([['bash', '', {'count-records.sh', 'seasonal/spring.csv', 'seasonal/summer.csv', 'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
+                     redirect='num-records.out',
+                     last_line=True,
+                     msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
 
@@ -657,9 +662,11 @@ bash range.sh seasonal/*.csv > range.out
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'.*\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*range\.out\s*',
-                           fixed=False,
-                           msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['bash', '', {'range.sh', 'seasonal/spring.csv', 'seasonal/summer.csv', 'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
+                     redirect='range.out',
+                     last_line=True,
+                     msg='Use `bash range.sh` on `seasonal/*.csv` and redirect with `>` to `range.out`.')
 ```
 
 --- type:BulletConsoleExercise key:6be8ca6009
