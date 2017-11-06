@@ -52,9 +52,10 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+5\s+seasonal/winter\.csv\s*>\s*last\.csv\s*',
-                           fixed=False,
-                           msg='Use `tail` (with the proper flag) and `>` together.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
+                     redirect='last.csv',
+                     msg='Use `tail` (with the proper flag) and `>` together.')
 ```
 
 --- type:BulletConsoleExercise key:f47d337593
@@ -102,9 +103,10 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+2\s+seasonal/winter\.csv\s*>\s*bottom\.csv\s*',
-                           fixed=False,
-                           msg='Use `tail` and `>` together.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n' : '2'}]],
+                     redirect='bottom.csv',
+                     msg='Use `tail` and `>` together.')
 ```
 
 *** =type2: ConsoleExercise
@@ -130,9 +132,9 @@ head -n 1 bottom.csv
 
 *** =sct2
 ```{python}
-Ex()>> test_student_typed(r'\s*head\s+-n\s+1\s+bottom\.csv\s*',
-                           fixed=False,
-                           msg='Use `head` on the temporary file.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', 'n:', 'bottom.csv', {'-n' : '1'}]],
+                     msg='Use `head` on the temporary file.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b36aea9a1e
@@ -173,9 +175,10 @@ cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/spring\.csv\s*|\s*grep\s+-v\s+Tooth\s*',
-                           fixed=False,
-                           msg='Use `cut` and `grep`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/spring.csv', {'-d' : ',', '-f' : '2'}],
+                      ['grep', 'v', 'Tooth']],
+                     msg='Use `cut` and `grep`.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -208,9 +211,11 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/autumn\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*head\s+-n\s+1\s*',
-                           fixed=False,
-                           msg='Use `cut`, `grep`, and `head`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
+                      ['grep', 'v', 'Tooth'],
+                      ['head', 'n:', None, {'-n' : '1'}]],
+                     msg='Use `cut`, `grep`, and `head`.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
@@ -232,9 +237,10 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+2017-07\s+seasonal/spring\.csv\s*|\s*wc\s+-l\s*',
-                           fixed=False,
-                           msg='Use `grep` and `wc`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', '', ['2017-07', 'seasonal/spring.csv']],
+                      ['wc', 'l']],
+                     msg='Use `grep` and `wc`.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
@@ -282,9 +288,9 @@ head -n 3 seasonal/s*.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+seasonal/s\*(\.csv)?\s*',
-                           fixed=False,
-                           msg='Remember that "spring" and "summer" both start with "s".')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', 'n:', {'seasonal/spring.csv', 'seasonal/summer.csv'}, {'-n' : '3'}]],
+                     msg='Remember that "spring" and "summer" both start with "s".')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
@@ -343,9 +349,11 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s+-r\s*',
-                           fixed=False,
-                           msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
+                      ['grep', 'v', 'Tooth'],
+                      ['sort', 'r']],
+                     msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
@@ -407,9 +415,12 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+Tooth\s*|\s*sort\s*|\s*uniq\s+-c\s*',
-                           fixed=False,
-                           msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
+                      ['grep', 'v', 'Tooth'],
+                      ['sort', 'r'],
+                      ['uniq', 'c']],
+                     msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
@@ -447,9 +458,9 @@ wc -l seasonal/*.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*(\.csv)?\s*',
-                           fixed=False,
-                           msg='Use `wc -l` and `seasonal/*.csv`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['wc', 'l', '+']],
+                     msg='Use `wc -l` and `seasonal/*.csv`.')
 ```
 
 *** =type2: ConsoleExercise
@@ -476,9 +487,10 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*',
-                           fixed=False,
-                           msg='Use `grep -v total` as the second stage of the pipe.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['wc', 'l', '+'],
+                      ['grep' ,'v', 'total']],
+                     msg='Use `grep -v total` as the second stage of the pipe.')
 ```
 
 *** =type3: ConsoleExercise
@@ -505,7 +517,10 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*wc\s+-l\s+seasonal/\*\.csv\s*|\s*grep\s+-v\s+total\s*|\s*sort\s+-n\s*|\s*head\s+-n\s+1\s*',
-                           fixed=False,
-                           msg='Use `sort -n` and `head -n 1`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['wc', 'l', '+'],
+                      ['grep', 'v', 'total'],
+                      ['sort', 'n'],
+                      ['head', 'n:', None, {'-n' : '1'}]],
+                     msg='Use `sort -n` and `head -n 1`.')
 ```
