@@ -761,8 +761,9 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 *** =sct3
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'c', {'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
-                     msg='Use `-c` to get a count.')
+msg = 'Use `-c` to get a count.'
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']]], msg),
+                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']]], msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
