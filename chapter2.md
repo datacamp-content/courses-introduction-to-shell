@@ -38,9 +38,9 @@ cat course.txt
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*cat\s+course\.txt\s*',
-                           fixed=False,
-                           msg='Type `cat` followed by the name of the file.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cat', '', 'course.txt']],
+                     msg='Type `cat` followed by the name of the file.')
 ```
 
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
@@ -71,6 +71,7 @@ less seasonal/spring.csv seasonal/summer.csv | cat
 
 *** =sct
 ```{python}
+from shellwhat_ext import test_cmdline
 Ex() >> test_student_typed(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
                            fixed=False,
                            msg='Use `less` and the filenames.  Remember that `:n` moves you to the next file.')
@@ -176,9 +177,9 @@ head seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+seasonal/autumn\.csv\s*',
-                           fixed=False,
-                           msg='Type `head s`, a tab, `a`, and a tab.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
+                     msg='Type `head s`, a tab, `a`, and a tab.')
 ```
 
 *** =type2: ConsoleExercise
@@ -203,9 +204,9 @@ head seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+seasonal/spring\.csv\s*',
-                           fixed=False,
-                           msg='Type `head s`, a tab, `sp`, and a tab.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', '', 'seasonal/spring.csv']],
+                     msg='Type `head s`, a tab, `sp`, and a tab.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -243,9 +244,9 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+5\s+seasonal/winter\.csv\s*',
-                           fixed=False,
-                           msg='Use `head` with `-n` and the number of lines you want.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
+                     msg='Use `head` with `-n` and the number of lines you want.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
@@ -290,9 +291,9 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*ls\s+((-R\s+-F)|(-F\s+-R))\s+/home/repl\s*',
-                           fixed=False,
-                           msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['ls', 'RF', re.compile(r'/home/repl/?')]],
+                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
@@ -398,9 +399,9 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*tail\s+-n\s+\+7\s+seasonal/spring\.csv\s*',
-                           fixed=False,
-                           msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['tail', 'n:', 'seasonal/spring.csv', {'-n' : '+7'}]],
+                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -521,9 +522,9 @@ head summer.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+summer\.csv\s*',
-                           fixed=False,
-                           msg='Use `head` and a filename.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['head', '', 'summer.csv']],
+                     msg='Use `head` and a filename.')
 ```
 
 *** =type2: ConsoleExercise
@@ -552,9 +553,9 @@ cd seasonal
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*cd\s+seasonal\s*',
-                           fixed=False,
-                           msg='Use `cd` and a directory name.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cd', '', 'seasonal']],
+                     msg='Use `cd` and a directory name.')
 ```
 
 *** =type3: ConsoleExercise
@@ -613,9 +614,9 @@ history
 
 *** =sct4
 ```{python}
-Ex() >> test_student_typed(r'\s*history\s*',
-                           fixed=False,
-                           msg='Use `history` to get a list.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['history']],
+                     msg='Use `history` to get a list.')
 ```
 
 *** =type5: ConsoleExercise
@@ -702,9 +703,9 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+molar\s+seasonal/autumn\.csv\s*',
-                           fixed=False,
-                           msg='Use the relative path to the file to search.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
+                     msg='Use the relative path to the file to search.')
 ```
 
 *** =type2: ConsoleExercise
@@ -730,9 +731,9 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+((-v\s+-n)|(-n\s+\v))\s+molar\s+seasonal/spring\.csv\s*',
-                           fixed=False,
-                           msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv']]],
+                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
 *** =type3: ConsoleExercise
@@ -759,9 +760,9 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*grep\s+-c\s+incisor\s+((seasonal/autumn\.csv\s+seasonal/winter\.csv)|(seasonal/winter\.csv\s+seaonal/autumn\.csv))\s*',
-                           fixed=False,
-                           msg='Use `-c` to get a count.')
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', 'c', {'seasonal/autumn.csv', 'seasonal/winter.csv'}]],
+                     msg='Use `-c` to get a count.')
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
