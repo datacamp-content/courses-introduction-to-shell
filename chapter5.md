@@ -470,7 +470,6 @@ bash count-records.sh seasonal/*.csv > num-records.out
 *** =sct2
 ```{python}
 from shellwhat_ext import test_compare_file_to_file, test_cmdline
-# FIXME
 Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+.+>\s*num-records.out\s*',
                            fixed=False, 
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \

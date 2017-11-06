@@ -705,7 +705,7 @@ grep molar seasonal/autumn.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
-                     msg='Use the relative path to the file to search.', debug=True) # FIXME
+                     msg='Use the relative path to the file to search.')
 ```
 
 *** =type2: ConsoleExercise
@@ -733,7 +733,7 @@ grep -v -n molar seasonal/spring.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv']]],
-                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.', debug=True) # FIXME
+                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
 *** =type3: ConsoleExercise
@@ -762,8 +762,8 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']]], msg=msg, debug=True),
-                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']]], msg=msg, debug=True)) # FIXME
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']]], msg=msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
