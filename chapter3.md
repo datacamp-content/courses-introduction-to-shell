@@ -289,9 +289,9 @@ head -n 3 seasonal/s*.csv
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', {'seasonal/spring.csv', 'seasonal/summer.csv'}, {'-n' : '3'}]],
-                     msg='Remember that "spring" and "summer" both start with "s".',
-                     debug=True) # FIXME
+Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+.+\.csv\s*',
+                           fixed=False,
+                           msg='Remember that "spring" and "summer" both start with "s".')
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
