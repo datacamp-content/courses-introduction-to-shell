@@ -449,7 +449,7 @@ The order of the flags doesn't matter.
 Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:b9bb10ae87
 ## What *can't* `cut` do?
 
 `cut` is a simple-minded command.
