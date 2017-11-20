@@ -76,6 +76,9 @@ tail -n 10 ${HOME_DIR}/.bashrc
 echo 'home backup directory:'
 ls -R ${HOME_COPY}
 
+echo 'solutions directory'
+ls -lR /solutions
+
 # Report end of installation.
 echo
 echo 'ENDING requirements.sh'
