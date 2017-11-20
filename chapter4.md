@@ -172,8 +172,8 @@ Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s*',
 
 *** =instructions2
 
-Use `head` to get the first line from `seasonal/winter.csv`
-using the variable `testing` instead of the name of the file.
+Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
+using the value of the variable `testing` instead of the name of the file.
 
 *** =hint2
 
@@ -190,7 +190,7 @@ head -n 1 $testing
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
+Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n' : '1'}]],
                      last_line=True,
                      msg='Use `head` with `$testing` as an argument.')
 ```
