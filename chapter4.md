@@ -190,7 +190,7 @@ head -n 1 $testing
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n' : '1'}]],
+Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
                      last_line=True,
                      msg='Use `head` with `$testing` as an argument.')
 ```
