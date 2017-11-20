@@ -358,7 +358,7 @@ Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : 
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
-## How can I remove duplicates lines?
+## How can I remove duplicate lines?
 
 Another command that is often used with `sort` is `uniq`,
 whose job is to remove duplicated lines.
