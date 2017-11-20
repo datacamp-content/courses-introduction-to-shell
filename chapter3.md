@@ -170,13 +170,13 @@ and then `grep -v` to exclude the header line containing the word "Tooth".
 
 *** =solution
 ```{shell}
-cut -d , -f 2 seasonal/spring.csv | grep -v Tooth
+cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/spring.csv', {'-d' : ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth']],
                      msg='Use `cut` and `grep`.')
 ```
