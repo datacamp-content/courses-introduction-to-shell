@@ -424,6 +424,34 @@ using comma as the separator".
 and `-d` (meaning "delimiter") to specify the separator.
 You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
 
+<hr>
+
+What command will select the first column (containing dates) from the  file `spring.csv`?
+
+*** =instructions
+
+- `cut -d , -f 1 seasonal/spring.csv`
+- `cut -d, -f1 seasonal/spring.csv`
+- Either of the above.
+- Neither of the above, because `-f` must come before `-d`.
+
+*** =hint
+
+The order of the flags doesn't matter.
+
+*** =pre_exercise_code
+```{shell}
+
+```
+
+*** =sct
+```{python}
+Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
+```
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:e4d0cb8390
+## What *can't* `cut` do?
+
 `cut` is a simple-minded command.
 In particular,
 it doesn't understand quoted strings.
@@ -451,22 +479,27 @@ Rupinder"
 
 rather than everyone's age,
 because it will think the comma between last and first names is a column separator.
-We will meet more intelligent commands that understand quoting and much else later in this course.
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+What is the output of `cut -d : -f 2-4` on the line:
+
+```
+first:second:third:
+```
+
+(Note the trailing colon.)
 
 *** =instructions
 
-- `cut -d , -f 1 seasonal/spring.csv`
-- `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- `second`
+- `second:third`
+- `second:third:`
+- None of the above, because there aren't four fields.
 
 *** =hint
 
-The order of the flags doesn't matter.
+Pay attention to the trailing colon.
 
 *** =pre_exercise_code
 ```{shell}
@@ -475,7 +508,7 @@ The order of the flags doesn't matter.
 
 *** =sct
 ```{python}
-Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
+Ex() >> test_mc(3, ['No, there is more.', 'No, there is more.', 'Correct!', 'No, `cut` does the best it can.'])
 ```
 
 --- type:TabConsoleExercise key:32c0d30049
