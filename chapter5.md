@@ -40,8 +40,9 @@ Wilson
 ```
 
 To save what you have written,
-type Ctrl-O (to write the file out)
-and then Ctrl-X (to exit the editor).
+type Ctrl-O to write the file out,
+then Enter to confirm the filename,
+then Ctrl-X and Enter to exit the editor.
 
 *** =solution
 ```{shell}
