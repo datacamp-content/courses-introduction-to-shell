@@ -450,7 +450,7 @@ Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Cor
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:b9bb10ae87
-## What *can't* `cut` do?
+## What can't cut do?
 
 `cut` is a simple-minded command.
 In particular,
