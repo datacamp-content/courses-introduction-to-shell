@@ -658,7 +658,7 @@ Ex() >> test_student_typed(r'\s*.+\s*',
 and `grep` selects lines according to what they contain.
 In its simplest form,
 `grep` takes a piece of text followed by one or more filenames
-and prints all of the linesin those files that contain that text.
+and prints all of the lines in those files that contain that text.
 For example,
 `grep bicuspid seasonal/winter.csv`
 prints all of the lines from the winter data that contain "bicuspid".

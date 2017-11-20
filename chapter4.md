@@ -451,7 +451,7 @@ four files called `July`, `2017.csv`, `2017`, and `July` (again)
 into a directory called `data.csv`.
 
 Instead,
-you have quote the files' names
+you have to quote the files' names
 so that the shell treats each one as a single parameter:
 
 ```{shell}
