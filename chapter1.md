@@ -411,8 +411,8 @@ Trace the path one directory at a time.
 
 Ex() >> test_mc(2, [err1, correct, err3])
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:c749675192
-## How can I copy a file?
+--- type:BulletConsoleExercise key:
+## How can I copy files?
 
 Once you have some files,
 you will often want to make copies,
@@ -430,64 +430,76 @@ creates a copy of `original.txt` called `duplicate.txt`.
 If there already was a file called `duplicate.txt`,
 it is overwritten.
 
-*** =instructions
+*** =pre_exercise_code
+```{python}
+```
+
+*** =type1: ConsoleExercise
+*** =key1:
+
+*** =xp1: 10
+
+*** =instructions1
 
 Make a copy of `seasonal/summer.csv` in the `backup` directory,
 calling the new file `summer.bck`.
 
-*** =hint
+*** =hint1
 
 Combine the name of the destination directory and the name of the copied file
 to create a relative path for the new file.
 
-*** =solution
+*** =sample_code1
+```{shell}
+```
+
+*** =solution1
 ```{shell}
 cp seasonal/summer.csv backup/summer.bck
 ```
 
-*** =sct
+*** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
                      msg='Provide two paths to `cp`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:b055c990e7
-## How can I copy multiple files?
+*** =type2: ConsoleExercise
+*** =key2:
 
-`cp` can do more than copy one file at a time.
-If the second parameter is an existing directory such as `backup`,
-then the command:
+*** =xp2: 10
 
-```{shell}
-cp original.txt backup
-```
+*** =instructions2
 
-creates a new file called `backup/original.txt`.
-In fact,
-if the last parameter is a directory,
-and all the parameters before it are the names of files,
-then `cp` copies *all* of those files into that directory,
-which means that:
+If the last parameter to `cp` is an existing directory,
+then a command like:
 
 ```{shell}
-cp seasonal/autumn.csv seasonal/winter.csv ~
+cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-will copy two files from the `seasonal` directory into your home directory.
-
-*** =instructions
-
-Copy the spring and summer data files into the `backup` directory
+copies *all* of those files into that directory.
+Use this fact
+to copy the spring and summer data files into the `backup` directory
 *without* changing directory
 (i.e., run a single command from your home directory).
 
-*** =solution
+*** =hint2
+
+Use `cp` with the names of the files you want to copy
+and *then* the name of the directoyr to copy them to.
+
+*** =sample_code2
+```{shell}
+```
+
+*** =solution2
 ```{shell}
 cp seasonal/spring.csv seasonal/summer.csv backup
 ```
 
-*** =sct
+*** =sct2
 ```{python}
 import re
 from shellwhat_ext import test_cmdline
@@ -779,7 +791,7 @@ Ex() >> test_cmdline([['rm', '', 'seasonal/summer.csv']],
 ```
 
 --- type:BulletConsoleExercise key:63e8fbd0c2
-## How can I delete directories?
+## How can I create and delete directories?
 
 `mv` treats directories the same way it treats files:
 if you are in your home directory and run `mv seasonal by-season`,
@@ -858,78 +870,63 @@ Ex() >> test_cmdline([['rmdir', '', re.compile('people/?')]],
                      msg='Remove the directory `people`.')
 ```
 
---- type:BulletConsoleExercise key:9b157134df
-## How can I create directories?
+*** =type3: ConsoleExercise
+*** =key3:
 
-A directory is a different kind of thing than a text file,
-so you cannot create directories using a text editor.
-Instead,
-you must use the command `mkdir`
-(which stands for "make directory").
-For example,
-if you want to store a copy of `course.txt` in a directory called `info`,
-which doesn't yet exist,
-you could run:
+*** =xp3: 10
 
-```{shell}
-mkdir info
-cp course.txt info
-```
+*** =instructions3
 
-*** =pre_exercise_code
-```{python}
-```
+Since a directory is not a file,
+you must use the command `mkdir directory_name`
+to create a new (empty) directory.
+Use this command to create a new directory called `yearly` below your home directory.
 
-*** =type1: ConsoleExercise
-*** =key1: b68e505835
+*** =hint3
 
-*** =xp1: 10
+Run `mkdir` with the name of the directory you want to create.
 
-*** =instructions1
-
-Create a new directory called `yearly` below your home directory.
-
-*** =hint1
-
-*** =sample_code1
+*** =sample_code3
 ```{shell}
 ```
 
-*** =solution1
+*** =solution3
 ```{shell}
 mkdir yearly
 ```
 
-*** =sct1
+*** =sct3
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['mkdir', '', 'yearly']],
                      msg='Make the upper directory.')
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: a663029bc6
+*** =type4: ConsoleExercise
+*** =key4:
 
-*** =xp2: 10
+*** =xp4: 10
 
-*** =instructions2
+*** =instructions4
 
 Now that `yearly` exists,
 create another directory called `2017` inside it
 *without* leaving your home directory.
 
-*** =hint2
+*** =hint4
 
-*** =sample_code2
+Use a relative path for the sub-directory you want to create.
+
+*** =sample_code4
 ```{shell}
 ```
 
-*** =solution2
+*** =solution4
 ```{shell}
 mkdir yearly/2017
 ```
 
-*** =sct2
+*** =sct4
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['mkdir', '', 'yearly/2017']],
