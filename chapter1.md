@@ -481,14 +481,14 @@ cp seasonal/autumn.csv seasonal/winter.csv backup
 
 copies *all* of those files into that directory.
 Use this fact
-to copy the spring and summer data files into the `backup` directory
+to copy the spring and summer data files (located in the `seasonal` directory) into the `backup` directory
 *without* changing directory
 (i.e., run a single command from your home directory).
 
 *** =hint2
 
 Use `cp` with the names of the files you want to copy
-and *then* the name of the directoyr to copy them to.
+and *then* the name of the directory to copy them to.
 
 *** =sample_code2
 ```{shell}
