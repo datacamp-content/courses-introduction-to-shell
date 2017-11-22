@@ -411,7 +411,7 @@ Trace the path one directory at a time.
 
 Ex() >> test_mc(2, [err1, correct, err3])
 
---- type:BulletConsoleExercise key:
+--- type:BulletConsoleExercise key:832de9e74c
 ## How can I copy files?
 
 Once you have some files,
@@ -435,7 +435,7 @@ it is overwritten.
 ```
 
 *** =type1: ConsoleExercise
-*** =key1:
+*** =key1: 6ab3fb1e25
 
 *** =xp1: 10
 
@@ -466,7 +466,7 @@ Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
 ```
 
 *** =type2: ConsoleExercise
-*** =key2:
+*** =key2: d9e1214bb0
 
 *** =xp2: 10
 
@@ -871,7 +871,7 @@ Ex() >> test_cmdline([['rmdir', '', re.compile('people/?')]],
 ```
 
 *** =type3: ConsoleExercise
-*** =key3:
+*** =key3: 89f7ffc1da
 
 *** =xp3: 10
 
@@ -903,7 +903,7 @@ Ex() >> test_cmdline([['mkdir', '', 'yearly']],
 ```
 
 *** =type4: ConsoleExercise
-*** =key4:
+*** =key4: 013a5ff2dc
 
 *** =xp4: 10
 
