@@ -177,7 +177,7 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth']],
+                      ['grep', 'v', 'Tooth', {'-v': None}]],
                      msg='Use `cut` and `grep`.')
 ```
 
@@ -213,7 +213,7 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `cut`, `grep`, and `head`.')
 ```
@@ -352,7 +352,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
                      msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
@@ -418,7 +418,7 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r'],
                       ['uniq', 'c']],
                      msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
@@ -520,7 +520,7 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['wc', 'l', '+'],
-                      ['grep', 'v', 'total'],
+                      ['grep', 'v', 'total', {'-v': None}],
                       ['sort', 'n'],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `sort -n` and `head -n 1`.')
