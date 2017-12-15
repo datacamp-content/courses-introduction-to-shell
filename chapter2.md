@@ -46,8 +46,8 @@ Ex() >> test_cmdline([['cat', '', 'course.txt']],
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
 ## How can I view a file's contents piece by piece?
 
-While you can print large files with `cat` and then scroll through the output,
-it is often more convenient to **page** the output.
+You can cat` large files and then scroll through the output,
+but it is usually more convenient to **page** the output.
 The original command for doing this was called `more`,
 but it has been superseded by a more powerful command called `less`.
 (This kind of naming is what passes for humor in the Unix world.)
@@ -58,6 +58,10 @@ If you are viewing several files,
 type `:n` (colon and a lower-case 'n') to move to the next file,
 or `:p` to go back to the previous one.
 
+Note: if you view solutions to exercises that use `less`,
+you will see an extra command at the end that turns paging *off*
+so that our automated back end can test solutions automatically.
+
 *** =instructions
 
 Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
@@ -65,7 +69,7 @@ in that order.
 
 *** =solution
 ```{bash}
-# Using 'cat' to prevent hang-up during backend testing.
+# Run the following command *without* '| cat'.
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
@@ -369,6 +373,7 @@ Read the manual page for the `tail` command.
 
 *** =solution1
 ```{shell}
+# Run the following command *without* '| cat'.
 man tail | cat
 ```
 
