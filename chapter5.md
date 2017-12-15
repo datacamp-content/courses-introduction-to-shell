@@ -9,18 +9,15 @@ description : >-
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:39eee3cfc0
 ## How can I edit a file?
 
-Unix has a bewildering variety of text editors,
-some of which combine the power of tools like RStudio or the Jupyter Notebook
-with the readability of Egyptian hieroglyphics.
+Unix has a bewildering variety of text editors.
 For this course,
-we will use a very simple editor called Nano.
+we will use a simple one called Nano.
 If you type `nano filename`,
 it will open `filename` for editing
 (or create it if it doesn't already exist).
-You can then move around with the arrow keys,
-delete characters with the backspace key,
-and so on.
-You can also do a few other operations with control-key combinations:
+You can move around with the arrow keys,
+delete characters using backspace,
+and do other operations with control-key combinations:
 
 - Ctrl-K: delete a line.
 - Ctrl-U: un-delete a line.
@@ -44,8 +41,13 @@ type Ctrl-O to write the file out,
 then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
+Note: if you view our solution,
+it uses `cp` instead of `nano` for our automated back end to check,
+because the back end can't edit files interactively.
+
 *** =solution
 ```{shell}
+# Run "nano names.txt" instead of the command below.
 cp /solutions/names.txt .
 ```
 
@@ -221,6 +223,7 @@ to extract the first column from all of the CSV files in `seasonal`.
 
 *** =solution1
 ```{shell}
+# Run "nano dates.sh" instead of the command below.
 cp /solutions/dates.sh .
 ```
 
@@ -310,6 +313,7 @@ so that this script prints a count of the number of times each tooth name appear
 
 *** =solution1
 ```{shell}
+# Run "nano teeth.sh" instead of the command below.
 cp /solutions/teeth.sh .
 ```
 
@@ -435,6 +439,7 @@ excluding the first line of each.
 
 *** =solution1
 ```{shell}
+# Run "nano count-records.sh" instead of the command below.
 cp /solutions/count-records.sh .
 ```
 
@@ -567,6 +572,7 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
+# Run "nano range.sh" instead of the command below.
 cp /solutions/range-1.sh range.sh
 ```
 
