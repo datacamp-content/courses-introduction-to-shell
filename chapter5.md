@@ -389,7 +389,7 @@ Ex() >> test_cmdline([['cat', '', 'teeth.out']],
 A script that processes specific files is useful as a record of what you did,
 but one that allows you to process any files you want is more useful.
 To support this,
-you can use the special expression `$@` (dollar sign immediately followed by ampersand)
+you can use the special expression `$@` (dollar sign immediately followed by at-sign)
 to mean "all of the command-line parameters given to the script".
 For example,
 if `unique-lines.sh` contains this:
