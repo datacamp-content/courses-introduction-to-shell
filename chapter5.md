@@ -886,5 +886,5 @@ a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not b
 a2 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a3 = 'No: `tail` does print the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a4 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
-Ex() >> test_mc(3, [a1, a2, a3, a4])
+Ex() >> test_mc(4, [a1, a2, a3, a4])
 ```
