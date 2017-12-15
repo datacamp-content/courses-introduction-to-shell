@@ -226,12 +226,14 @@ If you run `head -n 100`,
 it will display the first 100 (assuming there are that many),
 and so on.
 
+A flag's name usually indicates its purpose
+(for example, `-n` is meant to signal "**n**umber of lines").
 Command flags don't have to be a `-` followed by a single letter,
 but it's a widely-used convention.
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines"),
-but what was obvious to the person who created the command
-sometimes isn't obvious to everyone else.
+
+It's also considered good style to put all of the flags *before* any other values like filenames,
+so in this course,
+we only accept answers that do that.
 
 *** =instructions
 
@@ -751,7 +753,14 @@ Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
 Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
 (Again, run a single command from your home directory.)
 
+Rememer,
+it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
+so in this course,
+we only accept answers that do that.
+
 *** =hint3
+
+Make sure you put `-v` and `-n` *before* the word `molar` or the filename.
 
 *** =sample_code2
 ```{shell}
@@ -765,7 +774,7 @@ grep -v -n molar seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv']]],
+Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': None, '-n': None}]],
                      msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
@@ -795,8 +804,8 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']]], msg=msg))
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']], {'-c': None}], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']], {'-c': None}], msg=msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
