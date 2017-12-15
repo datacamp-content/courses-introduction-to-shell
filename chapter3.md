@@ -226,8 +226,8 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
 *** =instructions
 
-Use `grep` and `wc` in a pipe to count how many records there are in `seasonal/spring.csv`
-from July 2017.
+Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
+are from July 2017.
 (Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
 
 *** =solution
@@ -238,7 +238,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['2017-07', 'seasonal/spring.csv']],
+Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
                       ['wc', 'l']],
                      msg='Use `grep` and `wc`.')
 ```
