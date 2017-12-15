@@ -178,8 +178,8 @@ it is relative.
 *** =instructions1
 
 You are in `/home/repl`.
-Use `ls some/relative/path` to list
-the file `/home/repl/course.txt` (and only that file).
+Use `ls` with a relative path
+to list the file `/home/repl/course.txt` (and only that file).
 
 *** =hint1
 
@@ -211,8 +211,8 @@ Ex() >> test_cmdline([['ls', '', {'course.txt'}]],
 *** =instructions2
 
 You are in `/home/repl`.
-Use `ls some/relative/path` to list
-the file `/home/repl/seasonal/summer.csv` (and only that file).
+Use `ls` with a relative path
+to list the file `/home/repl/seasonal/summer.csv` (and only that file).
 
 *** =hint2
 
@@ -240,8 +240,8 @@ Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]],
 *** =instructions3
 
 You are in `/home/repl`.
-Use `ls some/relative/path` to list
-the contents of the directory `/home/repl/people`.
+Use `ls` with a relative path
+to list the contents of the directory `/home/repl/people`.
 
 *** =hint3
 
@@ -259,7 +259,7 @@ ls people
 import re
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', re.compile('people/?')]],
-                     msg='Use `ls` followed by a relative path.')
+                     msg='Use `ls` followed by the relative path to the directory.')
 ```
 
 --- type:BulletConsoleExercise key:dbdaec5610
