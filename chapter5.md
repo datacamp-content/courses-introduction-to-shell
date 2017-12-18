@@ -506,32 +506,32 @@ Notice how the script uses the two parameters in reverse order.
 
 <hr>
 
-The script `get-lines.sh` is supposed to take
-a start line,
-and an end line as arguments,
-and select that range of lines from that file.
+The script `get-field.sh` is supposed to take a filename,
+and the number of the row to select,
+and the number of the column to select,
+and print just that field from a CSV file.
 For example:
 
 ```
-bash get-lines.sh seasonal/summer.csv 5 8
+bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select lines 5-8 from `seasonal/summer.csv`.
-Which of the following commands should be put in `get-lines.sh` to do that?
+should select the second field from line 4 of `seasonal/summer.csv`.
+Which of the following commands should be put in `get-field.sh` to do that?
 
 *** =possible_answers
-- `head -n $1 $2 | tail -n $3`
-- `head -n $2 $1 | tail -n $3`
-- `head -n $3 $2 | tail -n $1`
-- [`head -n $3 $1 | tail -n $2`]
+- `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
+- [`head -n $2 $1 | tail -n 1 | cut -d , -f $3`]
+- `head -n $3 $1 | tail -n 1 | cut -d , -f $2`
+- `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 *** =hint
 
 *** =feedbacks
 - No: that will try to use the filename as the number of lines to select with `head`.
-- No: that will try to use the end line number as the filename.
-- No: that one uses the starting line number as the filename.
 - Correct!
+- No: that will try to use the column number as the line number and vice versa.
+- No: that will use the field number as the filename and vice versa.
 
 --- type:TabConsoleExercise key:846bc70e9d
 ## How can one shell script do many things?
