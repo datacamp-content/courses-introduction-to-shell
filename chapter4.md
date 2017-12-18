@@ -284,7 +284,7 @@ for filename in people/*; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$filename;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
