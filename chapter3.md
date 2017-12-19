@@ -424,6 +424,89 @@ Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
                      msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+## Pipes and Redirection
+
+The shell lets us redirect the output of a sequence of piped commands:
+
+```{shell}
+cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
+```
+
+However, `>` must appear at the end of the pipeline:
+if we try to use it in the middle, like this:
+
+```{shell}
+cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
+```
+
+then since all of the output from `cut` is written to `teeth-only.txt`,
+there is nothing left for `grep`,
+so it waits forever for some input.
+
+<hr>
+
+What happens if we put redirection at the front of a pipeline as in:
+
+```{shell}
+> result.txt head -n 3 seasonal/winter.csv
+```
+
+*** =instructions
+- [The command's output is redirected to the file as usual.]
+- The shell reports it as an error.
+- The shell waits for input forever.
+
+*** =hint
+
+Try it out in the shell.
+
+*** =pre_exercise_code
+```{shell}
+```
+
+*** =sct
+```{python}
+Ex() >> test_mc(1, ['Correct!',
+                    'No: the shell can actually execute this.',
+                    'No: the shell can actually execute this.'])
+```
+
+--- type:ConsoleExercise xp:100 key:
+## How can I stop a running program?
+
+The commands and scripts that you have run so far have all executed quickly,
+but some tasks will take minutes, hours, or even days to complete.
+You may also mistakenly put redirection in the middle of a pipeline,
+causing it to hang up.
+If you decide that you don't want a program to keep running,
+you can type Ctrl-C to end it.
+This is often written `^C` in Unix documentation;
+note that the 'c' can be lower-case.
+
+*** =instructions
+
+Run the command:
+
+```{shell}
+head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
+```
+
+and then stop it by typing Ctrl-C.
+
+*** =solution
+```{bash}
+# Use 'echo' rather than actually running the command to prevent automated tests hanging up.
+echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
+```
+
+*** =sct
+```{python}
+Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
+                           fixed=False,
+                           msg="Use the control key and 'c' at the same time to stop the script.")
+```
+
 --- type:BulletConsoleExercise key:659d3caa48
 ## Wrapping up
 

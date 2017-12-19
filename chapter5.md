@@ -792,52 +792,6 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
                            msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
 ```
 
---- type:BulletConsoleExercise key:c0b03ca7d1
-## How can I stop a running program?
-
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-If you decide that you don't want a program to keep running,
-you can type Ctrl-C to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
-
-*** =pre_exercise_code
-```{python}
-import shutil
-shutil.copyfile('/solutions/current-time.sh', 'current-time.sh')
-```
-
-*** =type1: ConsoleExercise
-*** =key1: 7cdb55125f
-
-*** =xp1: 10
-
-*** =instructions1
-
-The script `current-time.sh` prints the current time at one-second intervals forever.
-Run it with `bash current-time.sh`
-and then use Ctrl-C to stop it.
-
-*** =hint1
-
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
-```{shell}
-# Use echo to prevent execution of never-ending script.
-echo bash current-time.sh
-```
-
-*** =sct1
-```{python}
-Ex() >> test_student_typed(r'\s*bash\s+current-time\.sh\s*',
-                           fixed=False,
-                           msg="Use the control key and 'c' at the same time to stop the script.")
-```
-
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:8a162c4d54
 ## What happens when I don't provide filenames?
 
