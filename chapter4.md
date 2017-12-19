@@ -244,7 +244,7 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf\s*;\s*do\s+echo\s+\$suffix\s*;\s*done\s*',
                            fixed=False,
                            msg='Change the list of suffix names that the loop operatores on.')
 ```
@@ -426,7 +426,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+file\s+in\s+seasonal/\*\.csv;\s+do\s+grep(\s+-h)?\s+2017-07\s+\$\1;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+(\w+)\s+in\s+seasonal/\*\.csv\*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$\1\s*;\*+done\s*',
                            fixed=False,
                            msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
