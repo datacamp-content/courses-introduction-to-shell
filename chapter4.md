@@ -426,7 +426,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+file\s+in\s+seasonal/\*\.csv\*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$file\s*;\*+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$\1\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
