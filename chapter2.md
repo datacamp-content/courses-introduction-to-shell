@@ -337,7 +337,7 @@ SEE ALSO
 so you may need to press spacebar to page through the information.
 
 The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all of the options.
+and the summary under `SYNOPSIS` lists all the flags it understands.
 Anything that is optional is shown in square brackets `[...]`,
 either/or alternatives are separated by `|`,
 and things that can be repeated are shown by `...`,
@@ -407,7 +407,7 @@ tail -n +7 seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/spring.csv', {'-n' : '+7'}]],
+Ex() >> test_cmdline([['tail', 'n:', re.compile(r'(~/)?seasonal/spring.csv'), {'-n' : '+7'}]],
                      msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
 ```
 
