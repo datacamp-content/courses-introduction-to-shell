@@ -677,10 +677,9 @@ Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+.+>\s*range.out\s*',
 --- type:BulletConsoleExercise key:6be8ca6009
 ## How can I write loops in a shell script?
 
-Shell scripts can contain loops as well as pipes and multiple command lines.
+Shell scripts can also contain loops.
 You can write these loops using semi-colons,
-or to make them more readable,
-you can split them across multiple lines like this:
+or split them across multiple lines to make them more readable:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -691,8 +690,8 @@ do
 done
 ```
 
-You don't have to indent the commands inside the loop,
-but it make scripts more readable.
+(You don't have to indent the commands inside the loop,
+but it make things clearer.)
 
 The first line of this script is a **comment**
 to tell readers what the script does.
