@@ -424,7 +424,7 @@ Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
                      msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
 ## Pipes and Redirection
 
 The shell lets us redirect the output of a sequence of piped commands:
@@ -472,7 +472,7 @@ Ex() >> test_mc(1, ['Correct!',
                     'No: the shell can actually execute this.'])
 ```
 
---- type:ConsoleExercise xp:100 key:
+--- type:ConsoleExercise xp:100 key:d1694dbdcd
 ## How can I stop a running program?
 
 The commands and scripts that you have run so far have all executed quickly,
