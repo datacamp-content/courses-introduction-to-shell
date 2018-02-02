@@ -572,7 +572,7 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
-# Run "nano range.sh" instead of the following command: 
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-1.sh range.sh
 ```
 
@@ -604,6 +604,7 @@ and then `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command:  
 cp /solutions/range-2.sh range.sh
 ```
 
@@ -622,7 +623,7 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
 
 Add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
-(Use `sort -n -r` and `head` rather than `sort -n` and `tail`.)
+(Use `sort -n -r` and `head -n 1` rather than `sort -n` and `head -n 1`.)
 
 *** =hint3
 
@@ -634,6 +635,7 @@ Copy the first line and modify the sorting order.
 
 *** =solution3
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-3.sh range.sh
 ```
 
@@ -655,6 +657,8 @@ using a wildcard expression to match all of the files
 and redirect the output to a file called `range.out` in your home directory.
 
 *** =hint4
+The wildcard expression you need to use here is `*`. 
+
 
 *** =sample_code4
 ```{shell}
