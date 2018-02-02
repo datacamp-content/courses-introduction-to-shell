@@ -46,7 +46,7 @@ Ex() >> test_cmdline([['cat', '', 'course.txt']],
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
 ## How can I view a file's contents piece by piece?
 
-You can cat` large files and then scroll through the output,
+You can use `cat` to print large files and then scroll through the output,
 but it is usually more convenient to **page** the output.
 The original command for doing this was called `more`,
 but it has been superseded by a more powerful command called `less`.
@@ -58,18 +58,20 @@ If you are viewing several files,
 type `:n` (colon and a lower-case 'n') to move to the next file,
 or `:p` to go back to the previous one.
 
-Note: if you view solutions to exercises that use `less`,
+Note: If you view solutions to exercises that use `less`,
 you will see an extra command at the end that turns paging *off*
-so that our automated back end can test solutions automatically.
+so that we can test your solutions efficiently.
 
 *** =instructions
 
 Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
-in that order.
+in that order. 
+
+(Remember to press spacebar to page down and/or type `q` to quit.)
 
 *** =solution
 ```{bash}
-# Run the following command *without* '| cat'.
+# Run the following command *without* '| cat': 
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
@@ -373,7 +375,7 @@ Read the manual page for the `tail` command.
 
 *** =solution1
 ```{shell}
-# Run the following command *without* '| cat'.
+# Run the following command *without* '| cat': 
 man tail | cat
 ```
 
@@ -758,7 +760,7 @@ Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
 Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
 (Again, run a single command from your home directory.)
 
-Rememer,
+Remember,
 it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
 so in this course,
 we only accept answers that do that.
