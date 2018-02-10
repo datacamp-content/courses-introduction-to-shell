@@ -47,7 +47,7 @@ because the back end can't edit files interactively.
 
 *** =solution
 ```{shell}
-# Run "nano names.txt" instead of the command below.
+# Run "nano names.txt" instead of the following command: 
 cp /solutions/names.txt .
 ```
 
@@ -223,7 +223,7 @@ to extract the first column from all of the CSV files in `seasonal`.
 
 *** =solution1
 ```{shell}
-# Run "nano dates.sh" instead of the command below.
+# Run "nano dates.sh" instead of the following command: 
 cp /solutions/dates.sh .
 ```
 
@@ -313,7 +313,7 @@ so that this script prints a count of the number of times each tooth name appear
 
 *** =solution1
 ```{shell}
-# Run "nano teeth.sh" instead of the command below.
+# Run "nano teeth.sh" instead of the following command: 
 cp /solutions/teeth.sh .
 ```
 
@@ -439,7 +439,7 @@ excluding the first line of each.
 
 *** =solution1
 ```{shell}
-# Run "nano count-records.sh" instead of the command below.
+# Run "nano count-records.sh" instead of the following command: 
 cp /solutions/count-records.sh .
 ```
 
@@ -506,9 +506,9 @@ Notice how the script uses the two parameters in reverse order.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-and the number of the row to select,
-and the number of the column to select,
+The script `get-field.sh` is supposed to take a filename, 
+the number of the row to select, 
+the number of the column to select,
 and print just that field from a CSV file.
 For example:
 
@@ -572,7 +572,7 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
-# Run "nano range.sh" instead of the command below.
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-1.sh range.sh
 ```
 
@@ -604,6 +604,7 @@ and then `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command:  
 cp /solutions/range-2.sh range.sh
 ```
 
@@ -622,7 +623,7 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
 
 Add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
-(Use `sort -n -r` and `head` rather than `sort -n` and `tail`.)
+(Use `sort -n -r` and `head -n 1` rather than `sort -n` and `head -n 1`.)
 
 *** =hint3
 
@@ -634,6 +635,7 @@ Copy the first line and modify the sorting order.
 
 *** =solution3
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-3.sh range.sh
 ```
 
@@ -655,6 +657,8 @@ using a wildcard expression to match all of the files
 and redirect the output to a file called `range.out` in your home directory.
 
 *** =hint4
+The wildcard expression you need to use here is `*`. 
+
 
 *** =sample_code4
 ```{shell}
@@ -691,7 +695,7 @@ done
 ```
 
 (You don't have to indent the commands inside the loop,
-but it make things clearer.)
+but it makes things clearer.)
 
 The first line of this script is a **comment**
 to tell readers what the script does.
@@ -823,7 +827,6 @@ head -n 5 | tail -n 3 somefile.txt
 *** =instructions
 - It prints lines 3-5 of `somefile.txt` and halts.
 - It prints lines 3-5 of `somefile.txt` and waits for more input.
-- It prints the last 3 lines of `somefile.txt` and halts.
 - It prints the last 3 lines of `somefile.txt` and waits for more input.
 
 *** =hint
@@ -837,7 +840,6 @@ head -n 5 | tail -n 3 somefile.txt
 ```{python}
 a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a2 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a3 = 'No: `tail` does print the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a4 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
-Ex() >> test_mc(4, [a1, a2, a3, a4])
+a3 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
+Ex() >> test_mc(3, [a1, a2, a3])
 ```

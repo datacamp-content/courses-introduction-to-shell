@@ -496,7 +496,7 @@ and then stop it by typing Ctrl-C.
 
 *** =solution
 ```{bash}
-# Use 'echo' rather than actually running the command to prevent automated tests hanging up.
+# Use 'echo' rather than actually running the command to prevent automated tests hanging up: 
 echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
 ```
 
