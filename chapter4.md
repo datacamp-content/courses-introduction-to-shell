@@ -183,7 +183,6 @@ using the value of the variable `testing` instead of the name of the file.
 
 *** =solution2
 ```{shell}
-testing=seasonal/winter.csv
 head -n 1 $testing
 ```
 
