@@ -183,6 +183,8 @@ using the value of the variable `testing` instead of the name of the file.
 
 *** =solution2
 ```{shell}
+# Run only "head -n 1 $testing"
+testing=seasonal/winter.csv
 head -n 1 $testing
 ```
 
@@ -191,7 +193,8 @@ head -n 1 $testing
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
                      last_line=True,
-                     msg='Use `head` with `$testing` as an argument.')
+                     msg='Did you use `head` with `$testing` as an argument?') \
+     >> test_expr('head -n 1 seasonal/winter.csv', msg = 'Did you use `head` with `$testing` as an argument?')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3
