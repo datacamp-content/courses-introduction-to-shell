@@ -183,7 +183,6 @@ using the value of the variable `testing` instead of the name of the file.
 
 *** =solution2
 ```{shell}
-testing=seasonal/winter.csv
 head -n 1 $testing
 ```
 
@@ -244,7 +243,7 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf;\s+do\s+echo\s+\$suffix;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf\s*;\s*do\s+echo\s+\$suffix\s*;\s*done\s*',
                            fixed=False,
                            msg='Change the list of suffix names that the loop operatores on.')
 ```
@@ -284,7 +283,7 @@ for filename in people/*; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*;\s+do\s+echo\s+\$filename;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
@@ -426,7 +425,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*\.csv;\s+do\s+grep\s+2017-07\s+\$\1;\s+done\s*',
+Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$\1\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```

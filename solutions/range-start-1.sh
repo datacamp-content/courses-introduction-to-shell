@@ -1,1 +1,1 @@
-wc -l ____ | grep ____ Total
+wc -l ____ | grep ____ total

@@ -177,7 +177,7 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth']],
+                      ['grep', 'v', 'Tooth', {'-v': None}]],
                      msg='Use `cut` and `grep`.')
 ```
 
@@ -213,7 +213,7 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `cut`, `grep`, and `head`.')
 ```
@@ -226,8 +226,8 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
 *** =instructions
 
-Use `grep` and `wc` in a pipe to count how many records there are in `seasonal/spring.csv`
-from July 2017.
+Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
+are from July 2017.
 (Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
 
 *** =solution
@@ -238,7 +238,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['2017-07', 'seasonal/spring.csv']],
+Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
                       ['wc', 'l']],
                      msg='Use `grep` and `wc`.')
 ```
@@ -283,13 +283,13 @@ Use a wildcard instead of spelling out the files' names in full.
 
 *** =solution
 ```{shell}
-head -n 3 seasonal/s*.csv
+head -n 3 seasonal/s* # ...or seasonal/s*.csv
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+.+\.csv\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
                            fixed=False,
                            msg='Remember that "spring" and "summer" both start with "s".')
 ```
@@ -352,7 +352,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
                      msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
@@ -418,10 +418,93 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth'],
+                      ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r'],
                       ['uniq', 'c']],
                      msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+```
+
+--- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
+## Pipes and Redirection
+
+The shell lets us redirect the output of a sequence of piped commands:
+
+```{shell}
+cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
+```
+
+However, `>` must appear at the end of the pipeline:
+if we try to use it in the middle, like this:
+
+```{shell}
+cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
+```
+
+then since all of the output from `cut` is written to `teeth-only.txt`,
+there is nothing left for `grep`,
+so it waits forever for some input.
+
+<hr>
+
+What happens if we put redirection at the front of a pipeline as in:
+
+```{shell}
+> result.txt head -n 3 seasonal/winter.csv
+```
+
+*** =instructions
+- [The command's output is redirected to the file as usual.]
+- The shell reports it as an error.
+- The shell waits for input forever.
+
+*** =hint
+
+Try it out in the shell.
+
+*** =pre_exercise_code
+```{shell}
+```
+
+*** =sct
+```{python}
+Ex() >> test_mc(1, ['Correct!',
+                    'No: the shell can actually execute this.',
+                    'No: the shell can actually execute this.'])
+```
+
+--- type:ConsoleExercise xp:100 key:d1694dbdcd
+## How can I stop a running program?
+
+The commands and scripts that you have run so far have all executed quickly,
+but some tasks will take minutes, hours, or even days to complete.
+You may also mistakenly put redirection in the middle of a pipeline,
+causing it to hang up.
+If you decide that you don't want a program to keep running,
+you can type Ctrl-C to end it.
+This is often written `^C` in Unix documentation;
+note that the 'c' can be lower-case.
+
+*** =instructions
+
+Run the command:
+
+```{shell}
+head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
+```
+
+and then stop it by typing Ctrl-C.
+
+*** =solution
+```{bash}
+# Use 'echo' rather than actually running the command to prevent automated tests hanging up: 
+echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
+```
+
+*** =sct
+```{python}
+Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
+                           fixed=False,
+                           msg="Use the control key and 'c' at the same time to stop the script.")
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
@@ -520,7 +603,7 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['wc', 'l', '+'],
-                      ['grep', 'v', 'total'],
+                      ['grep', 'v', 'total', {'-v': None}],
                       ['sort', 'n'],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `sort -n` and `head -n 1`.')

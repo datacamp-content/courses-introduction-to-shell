@@ -9,18 +9,15 @@ description : >-
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:39eee3cfc0
 ## How can I edit a file?
 
-Unix has a bewildering variety of text editors,
-some of which combine the power of tools like RStudio or the Jupyter Notebook
-with the readability of Egyptian hieroglyphics.
+Unix has a bewildering variety of text editors.
 For this course,
-we will use a very simple editor called Nano.
+we will use a simple one called Nano.
 If you type `nano filename`,
 it will open `filename` for editing
 (or create it if it doesn't already exist).
-You can then move around with the arrow keys,
-delete characters with the backspace key,
-and so on.
-You can also do a few other operations with control-key combinations:
+You can move around with the arrow keys,
+delete characters using backspace,
+and do other operations with control-key combinations:
 
 - Ctrl-K: delete a line.
 - Ctrl-U: un-delete a line.
@@ -44,8 +41,13 @@ type Ctrl-O to write the file out,
 then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
+Note: if you view our solution,
+it uses `cp` instead of `nano` for our automated back end to check,
+because the back end can't edit files interactively.
+
 *** =solution
 ```{shell}
+# Run "nano names.txt" instead of the following command: 
 cp /solutions/names.txt .
 ```
 
@@ -221,6 +223,7 @@ to extract the first column from all of the CSV files in `seasonal`.
 
 *** =solution1
 ```{shell}
+# Run "nano dates.sh" instead of the following command: 
 cp /solutions/dates.sh .
 ```
 
@@ -310,6 +313,7 @@ so that this script prints a count of the number of times each tooth name appear
 
 *** =solution1
 ```{shell}
+# Run "nano teeth.sh" instead of the following command: 
 cp /solutions/teeth.sh .
 ```
 
@@ -385,7 +389,7 @@ Ex() >> test_cmdline([['cat', '', 'teeth.out']],
 A script that processes specific files is useful as a record of what you did,
 but one that allows you to process any files you want is more useful.
 To support this,
-you can use the special expression `$@` (dollar sign immediately followed by ampersand)
+you can use the special expression `$@` (dollar sign immediately followed by at-sign)
 to mean "all of the command-line parameters given to the script".
 For example,
 if `unique-lines.sh` contains this:
@@ -435,6 +439,7 @@ excluding the first line of each.
 
 *** =solution1
 ```{shell}
+# Run "nano count-records.sh" instead of the following command: 
 cp /solutions/count-records.sh .
 ```
 
@@ -501,32 +506,32 @@ Notice how the script uses the two parameters in reverse order.
 
 <hr>
 
-The script `get-lines.sh` is supposed to take
-a start line,
-and an end line as arguments,
-and select that range of lines from that file.
+The script `get-field.sh` is supposed to take a filename, 
+the number of the row to select, 
+the number of the column to select,
+and print just that field from a CSV file.
 For example:
 
 ```
-bash get-lines.sh seasonal/summer.csv 5 8
+bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select lines 5-8 from `seasonal/summer.csv`.
-Which of the following commands should be put in `get-lines.sh` to do that?
+should select the second field from line 4 of `seasonal/summer.csv`.
+Which of the following commands should be put in `get-field.sh` to do that?
 
 *** =possible_answers
-- `head -n $1 $2 | tail -n $3`
-- `head -n $2 $1 | tail -n $3`
-- `head -n $3 $2 | tail -n $1`
-- [`head -n $3 $1 | tail -n $2`]
+- `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
+- [`head -n $2 $1 | tail -n 1 | cut -d , -f $3`]
+- `head -n $3 $1 | tail -n 1 | cut -d , -f $2`
+- `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 *** =hint
 
 *** =feedbacks
 - No: that will try to use the filename as the number of lines to select with `head`.
-- No: that will try to use the end line number as the filename.
-- No: that one uses the starting line number as the filename.
 - Correct!
+- No: that will try to use the column number as the line number and vice versa.
+- No: that will use the field number as the filename and vice versa.
 
 --- type:TabConsoleExercise key:846bc70e9d
 ## How can one shell script do many things?
@@ -567,6 +572,7 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-1.sh range.sh
 ```
 
@@ -598,6 +604,7 @@ and then `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command:  
 cp /solutions/range-2.sh range.sh
 ```
 
@@ -616,7 +623,7 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
 
 Add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
-(Use `sort -n -r` and `head` rather than `sort -n` and `tail`.)
+(Use `sort -n -r` and `head -n 1` rather than `sort -n` and `head -n 1`.)
 
 *** =hint3
 
@@ -628,6 +635,7 @@ Copy the first line and modify the sorting order.
 
 *** =solution3
 ```{shell}
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-3.sh range.sh
 ```
 
@@ -649,6 +657,8 @@ using a wildcard expression to match all of the files
 and redirect the output to a file called `range.out` in your home directory.
 
 *** =hint4
+The wildcard expression you need to use here is `*`. 
+
 
 *** =sample_code4
 ```{shell}
@@ -671,10 +681,9 @@ Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+.+>\s*range.out\s*',
 --- type:BulletConsoleExercise key:6be8ca6009
 ## How can I write loops in a shell script?
 
-Shell scripts can contain loops as well as pipes and multiple command lines.
+Shell scripts can also contain loops.
 You can write these loops using semi-colons,
-or to make them more readable,
-you can split them across multiple lines like this:
+or split them across multiple lines to make them more readable:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -685,8 +694,8 @@ do
 done
 ```
 
-You don't have to indent the commands inside the loop,
-but it make scripts more readable.
+(You don't have to indent the commands inside the loop,
+but it makes things clearer.)
 
 The first line of this script is a **comment**
 to tell readers what the script does.
@@ -787,52 +796,6 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
                            msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
 ```
 
---- type:BulletConsoleExercise key:c0b03ca7d1
-## How can I stop a running program?
-
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-If you decide that you don't want a program to keep running,
-you can type Ctrl-C to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
-
-*** =pre_exercise_code
-```{python}
-import shutil
-shutil.copyfile('/solutions/current-time.sh', 'current-time.sh')
-```
-
-*** =type1: ConsoleExercise
-*** =key1: 7cdb55125f
-
-*** =xp1: 10
-
-*** =instructions1
-
-The script `current-time.sh` prints the current time at one-second intervals forever.
-Run it with `bash current-time.sh`
-and then use Ctrl-C to stop it.
-
-*** =hint1
-
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
-```{shell}
-# Use echo to prevent execution of never-ending script.
-echo bash current-time.sh
-```
-
-*** =sct1
-```{python}
-Ex() >> test_student_typed(r'\s*bash\s+current-time\.sh\s*',
-                           fixed=False,
-                           msg="Use the control key and 'c' at the same time to stop the script.")
-```
-
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:8a162c4d54
 ## What happens when I don't provide filenames?
 
@@ -864,7 +827,6 @@ head -n 5 | tail -n 3 somefile.txt
 *** =instructions
 - It prints lines 3-5 of `somefile.txt` and halts.
 - It prints lines 3-5 of `somefile.txt` and waits for more input.
-- It prints the last 3 lines of `somefile.txt` and halts.
 - It prints the last 3 lines of `somefile.txt` and waits for more input.
 
 *** =hint
@@ -878,7 +840,6 @@ head -n 5 | tail -n 3 somefile.txt
 ```{python}
 a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
 a2 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a3 = 'No: `tail` does print the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a4 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
-Ex() >> test_mc(3, [a1, a2, a3, a4])
+a3 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
+Ex() >> test_mc(3, [a1, a2, a3])
 ```

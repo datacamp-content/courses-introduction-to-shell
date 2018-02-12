@@ -46,8 +46,8 @@ Ex() >> test_cmdline([['cat', '', 'course.txt']],
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
 ## How can I view a file's contents piece by piece?
 
-While you can print large files with `cat` and then scroll through the output,
-it is often more convenient to **page** the output.
+You can use `cat` to print large files and then scroll through the output,
+but it is usually more convenient to **page** the output.
 The original command for doing this was called `more`,
 but it has been superseded by a more powerful command called `less`.
 (This kind of naming is what passes for humor in the Unix world.)
@@ -58,14 +58,20 @@ If you are viewing several files,
 type `:n` (colon and a lower-case 'n') to move to the next file,
 or `:p` to go back to the previous one.
 
+Note: If you view solutions to exercises that use `less`,
+you will see an extra command at the end that turns paging *off*
+so that we can test your solutions efficiently.
+
 *** =instructions
 
 Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
-in that order.
+in that order. 
+
+(Remember to press spacebar to page down and/or type `q` to quit.)
 
 *** =solution
 ```{bash}
-# Using 'cat' to prevent hang-up during backend testing.
+# Run the following command *without* '| cat': 
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
@@ -226,12 +232,14 @@ If you run `head -n 100`,
 it will display the first 100 (assuming there are that many),
 and so on.
 
+A flag's name usually indicates its purpose
+(for example, `-n` is meant to signal "**n**umber of lines").
 Command flags don't have to be a `-` followed by a single letter,
 but it's a widely-used convention.
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines"),
-but what was obvious to the person who created the command
-sometimes isn't obvious to everyone else.
+
+It's also considered good style to put all of the flags *before* any other values like filenames,
+so in this course,
+we only accept answers that do that.
 
 *** =instructions
 
@@ -331,7 +339,7 @@ SEE ALSO
 so you may need to press spacebar to page through the information.
 
 The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all of the options.
+and the summary under `SYNOPSIS` lists all the flags it understands.
 Anything that is optional is shown in square brackets `[...]`,
 either/or alternatives are separated by `|`,
 and things that can be repeated are shown by `...`,
@@ -367,6 +375,7 @@ Read the manual page for the `tail` command.
 
 *** =solution1
 ```{shell}
+# Run the following command *without* '| cat': 
 man tail | cat
 ```
 
@@ -400,7 +409,7 @@ tail -n +7 seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/spring.csv', {'-n' : '+7'}]],
+Ex() >> test_cmdline([['tail', 'n:', re.compile(r'(~/)?seasonal/spring.csv'), {'-n' : '+7'}]],
                      msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
 ```
 
@@ -751,7 +760,14 @@ Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
 Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
 (Again, run a single command from your home directory.)
 
+Remember,
+it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
+so in this course,
+we only accept answers that do that.
+
 *** =hint3
+
+Make sure you put `-v` and `-n` *before* the word `molar` or the filename.
 
 *** =sample_code2
 ```{shell}
@@ -765,7 +781,7 @@ grep -v -n molar seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv']]],
+Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': None, '-n': None}]],
                      msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
@@ -795,8 +811,8 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv']]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv']]], msg=msg))
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv'], {'-c': None}]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv'], {'-c': None}]], msg=msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
