@@ -86,11 +86,10 @@ Where are you right now?
 - `/home/repl`
 
 *** =hint
-
+Unix systems typically place all users' home directories underneath `/home`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -135,8 +134,7 @@ Which of the following files is *not* in that directory?
 If you give `ls` a path, it shows what's in that path.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -216,6 +214,8 @@ to list the file `/home/repl/seasonal/summer.csv` (and only that file).
 
 *** =hint2
 
+Relative paths do *not* start with a leading '/'.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -244,6 +244,8 @@ Use `ls` with a relative path
 to list the contents of the directory `/home/repl/people`.
 
 *** =hint3
+
+Relative paths do not start with a leading '/'.
 
 *** =sample_code3
 ```{shell}
@@ -292,6 +294,8 @@ Go into `/home/repl/seasonal` using a relative path.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -319,6 +323,8 @@ Use `pwd` to check that you're there.
 
 *** =hint2
 
+Remember to press "enter" or "return" after entering the command.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -345,6 +351,8 @@ Ex() >> test_cmdline([['pwd']],
 Use `ls` without any paths to see what's in that directory.
 
 *** =hint3
+
+Remember to press "enter" or "return" after the command.
 
 *** =sample_code3
 ```{shell}
@@ -581,6 +589,8 @@ Go into the `seasonal` directory.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -609,6 +619,8 @@ Rename the file `winter.csv` to be `winter.csv.bck`.
 
 *** =hint2
 
+Use `mv` with the current name of the file and the name you want it to have in that order.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -635,6 +647,8 @@ Ex() >> test_cmdline([['mv', '', ['winter.csv', 'winter.csv.bck']]],
 Run `ls` to check that everything has worked.
 
 *** =hint3
+
+Remember to press "enter" or "return" to run the command.
 
 *** =sample_code3
 ```{shell}
@@ -692,6 +706,8 @@ Go into the `seasonal` directory.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -720,6 +736,8 @@ Remove `autumn.csv`.
 
 *** =hint2
 
+Remember that `rm` stands for "remove".
+
 *** =sample_code2
 ```{shell}
 ```
@@ -747,6 +765,8 @@ Go back to your home directory.
 
 *** =hint3
 
+If you use `cd` without any paths, it takes you home.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -773,6 +793,8 @@ Ex() >> test_student_typed(r'\s*cd(\s+(\.\.|\~))?\s*',
 Remove `seasonal/summer.csv` without changing directories again.
 
 *** =hint4
+
+Remember that `rm` stands for "remove".
 
 *** =sample_code4
 ```{shell}
@@ -825,6 +847,8 @@ delete the file `agarwal.txt` in the `people` directory.
 
 *** =hint1
 
+Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -852,6 +876,8 @@ Now that the `people` directory is empty,
 use a single command to delete it.
 
 *** =hint2
+
+Remember that `rm` only works on files.
 
 *** =sample_code2
 ```{shell}
@@ -956,6 +982,8 @@ Go into the `/tmp` directory.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -983,6 +1011,8 @@ Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
 List the contents of `/tmp` *without* typing a directory name.
 
 *** =hint2
+
+If you don't tell `ls` what to list, it shows you what's in your current directory.
 
 *** =sample_code2
 ```{shell}

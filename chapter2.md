@@ -129,14 +129,17 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =hint
 
-*** =pre_exercise_code
-```{shell}
+What is the most useful thing it could do?
 
+*** =pre_exercise_code
+```{python}
 ```
 
 *** =sct
 ```{shell}
-Ex() >> test_mc(2, ['Incorrect, try again.', 'Correct!', 'Incorrect, try again.'])
+Ex() >> test_mc(2, ["Incorrect: that isn't the most useful thing it could do.",
+                    "Correct!",
+                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
 ```
 
 --- type:BulletConsoleExercise key:0b7b8ca8f7
@@ -172,6 +175,8 @@ Run `head seasonal/autumn.csv` without typing the full filename.
 
 *** =hint1
 
+Type as much of the path as you need to, then press tab, and repeat.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -198,6 +203,8 @@ Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
 Run `head seasonal/spring.csv` without typing the full filename.
 
 *** =hint2
+
+Type as much of the path as you need to, then press tab, and repeat.
 
 *** =sample_code2
 ```{shell}
@@ -369,6 +376,8 @@ Read the manual page for the `tail` command.
 
 *** =hint1
 
+Remember: `man` is short for "manual".
+
 *** =sample_code1
 ```{shell}
 ```
@@ -393,9 +402,11 @@ Ex() >> test_student_typed(r'\s*man\s+tail.*',
 
 *** =instructions2
 
- Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
+Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint2
+
+Use a plus sign '+' in front of the number of lines you want displayed.
 
 *** =sample_code2
 ```{shell}
@@ -449,8 +460,7 @@ What command will select the first column (containing dates) from the  file `spr
 The order of the flags doesn't matter.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -511,8 +521,7 @@ first:second:third:
 Pay attention to the trailing colon.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -552,6 +561,8 @@ Run `head summer.csv` in your home directory (which should fail).
 
 *** =hint1
 
+Tab completion won't work if there isn't a matching filename.
+
 *** =sample_code1
 ```{bash}
 
@@ -583,6 +594,8 @@ Change directory to `seasonal`.
 
 *** =hint2
 
+Remember that `cd` stands for "change directory".
+
 *** =sample_code2
 ```{bash}
 
@@ -610,9 +623,10 @@ You can now repeat your previous `head` command without retyping it.
 *** =instructions3
 
 Re-run the `head` command using `!` followed by the command name.
-Do not type any spaces between `!` and what follows.
 
 *** =hint3
+
+Do not type any spaces between `!` and what follows.
 
 *** =sample_code3
 ```{bash}
@@ -645,6 +659,8 @@ Use `history` to look at what you have done.
 
 *** =hint4
 
+Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+
 *** =sample_code4
 ```{bash}
 ```
@@ -671,9 +687,10 @@ You can now repeat your earlier `head` command using its serial number.
 *** =instructions5
 
 Re-run `head` again using `!` followed by a command number.
-Do *not* type any spaces between `!` and what follows.
 
 *** =hint5
+
+Do *not* type any spaces between `!` and what follows.
 
 *** =sample_code5
 ```{bash}
@@ -797,6 +814,8 @@ Count how many lines contain the word `incisor` in the autumn and winter data fi
 
 *** =hint3
 
+Remember to use `-c` with `grep` to count lines.
+
 *** =sample_code3
 ```{shell}
 
@@ -839,8 +858,7 @@ If you `cut` the output of `paste` using commas as a separator,
 would it produce the right answer?
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
