@@ -212,7 +212,7 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^((\.|~)/)?seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `cut` to get columns, `grep` to remove the header line, and `head` to select one row.')
@@ -239,7 +239,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), re.compile(r'^((\.|~)/)?seasonal/spring.csv$')]],
+Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), re.compile(r'^([.~]/)?seasonal/spring.csv$')]],
                       ['wc', 'l']],
                      msg='Use `grep` and `wc`.')
 ```
@@ -252,7 +252,7 @@ For example,
 you can get the first column from all of the seasonal data files at once like this:
 
 ```{shell}
-cut -d , -f 1 seasonal/winter.csv sesaonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
+cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
 But typing the names of many files over and over is a bad idea:
@@ -277,20 +277,20 @@ cut -d , -f 1 seasonal/*.csv
 
 *** =instructions
 
-Write a single command to get the first three lines from each of the spring and summer data files
+Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`
 (a total of six lines of data)
 but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
 *** =solution
 ```{shell}
-head -n 3 seasonal/s* # ...or seasonal/s*.csv
+head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+(([.~]/)?s.+/s.+)\s*',
                            fixed=False,
                            msg='Remember that "spring" and "summer" both start with "s".')
 ```
@@ -303,7 +303,7 @@ though they are less commonly used:
 
 - `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
 - `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the command-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
 
 <hr/>
 
@@ -343,6 +343,7 @@ Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in desc
 *without* including the header "Tooth".
 Use `cut`, `grep`, and `sort` in that order,
 and remember that the names are in column 2.
+(Please use tab completion to fill in the complete filename rather than using wildcards.)
 
 *** =solution
 ```{shell}
@@ -352,7 +353,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
                      msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
@@ -408,7 +409,8 @@ Write a pipeline to:
 - sort the output so that all occurrences of a particular tooth name are adjacent; and
 - display each tooth name once along with a count of how often it occurs.
 
-Use `uniq -c` to display unique lines with a count of how often each occurs.
+Use `uniq -c` to display unique lines with a count of how often each occurs
+rather than using `uniq` and `wc`.
 
 *** =solution
 ```{shell}
@@ -418,7 +420,7 @@ cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?s.+/.*\*.*$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r'],
                       ['uniq', 'c']],
@@ -426,7 +428,7 @@ Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
-## Pipes and Redirection
+## Pipes and redirection
 
 The shell lets us redirect the output of a sequence of piped commands:
 
@@ -544,7 +546,7 @@ wc -l seasonal/*.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+']],
+Ex() >> test_cmdline([['wc', 'l', re.compile(r'^([~.]/)?s.+/.*\*.*$')]],
                      msg='Use `wc -l` and `seasonal/*.csv`.')
 ```
 
@@ -573,7 +575,7 @@ wc -l seasonal/*.csv | grep -v total
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+'],
+Ex() >> test_cmdline([['wc', 'l', re.compile(r'^([~.]/)?s.+/.*\*.*$')],
                       ['grep' ,'v', 'total']],
                      msg='Use `grep -v total` as the second stage of the pipe.')
 ```
@@ -585,7 +587,7 @@ Ex() >> test_cmdline([['wc', 'l', '+'],
 
 *** =instructions3
 
-Add two more stages to the pipeline that use `sort` and `head` to find the file containing the fewest lines.
+Add two more stages to the pipeline that use `sort` and `head -n 1` to find the file containing the fewest lines.
 
 *** =hint3
 
@@ -603,7 +605,7 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 *** =sct3
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+'],
+Ex() >> test_cmdline([['wc', 'l', re.compile(r'^([~.]/)?s.+/.*\*.*$')],
                       ['grep', 'v', 'total', {'-v': None}],
                       ['sort', 'n'],
                       ['head', 'n:', None, {'-n' : '1'}]],
