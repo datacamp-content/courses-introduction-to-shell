@@ -752,7 +752,7 @@ grep molar seasonal/autumn.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['molar', re.compile(r'^(\.|~/)?seasonal/autumn.csv')]]],
+Ex() >> test_cmdline([['grep', '', ['molar', re.compile(r'^([.~]/)?seasonal/autumn.csv')]]],
                      msg='Use the relative path to the file to search.')
 ```
 
@@ -785,7 +785,7 @@ grep -v -n molar seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', re.compile(r'(\.|~/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
+Ex() >> test_cmdline([['grep', 'vn', ['molar', re.compile(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
                      msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
@@ -815,8 +815,8 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', re.compile(r'(\.|~/)?seasonal/autumn.csv'), re.compile(r'(\.|~/)?seasonal/winter.csv')], {'-c': None}]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', re.compile(r'(\.|~/)?seasonal/winter.csv'), re.compile(r'(\.|~/)?seasonal/autumn.csv')], {'-c': None}]], msg=msg))
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/autumn.csv'), re.compile(r'([.~]/)?seasonal/winter.csv')], {'-c': None}]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/winter.csv'), re.compile(r'([.~]/)?seasonal/autumn.csv')], {'-c': None}]], msg=msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
