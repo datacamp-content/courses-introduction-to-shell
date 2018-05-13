@@ -69,7 +69,7 @@ and redirect that to a file,
 and then use `tail` to select the last 3:
 
 ```{shell}
-head -n 5 sesaonal/winter.csv > top.csv
+head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
@@ -178,7 +178,7 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}]],
-                     msg='Use `cut` and `grep`.')
+                     msg='Use `cut` with `-d` and `-f` on `seasonal/summer.csv` and then `grep` with `-v` and the word to exclude.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -212,10 +212,10 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^((\.|~)/)?seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `cut`, `grep`, and `head`.')
+                     msg='Use `cut` to get columns, `grep` to remove the header line, and `head` to select one row.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
@@ -227,8 +227,9 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 *** =instructions
 
 Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
-are from July 2017.
-(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
+have dates in July 2017.
+(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.
+Remember, the two columns in the CSV file are `Date` and `Tooth`.)
 
 *** =solution
 ```{shell}
@@ -238,7 +239,7 @@ grep 2017-07 seasonal/spring.csv | wc -l
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
+Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), re.compile(r'^((\.|~)/)?seasonal/spring.csv$')]],
                       ['wc', 'l']],
                      msg='Use `grep` and `wc`.')
 ```
