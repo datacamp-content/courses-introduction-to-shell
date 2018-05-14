@@ -11,7 +11,7 @@ description : >-
 
 Unix has a bewildering variety of text editors.
 For this course,
-we will use a very simple one called Nano that runs inside the terminal window.
+we will use a simple one called Nano.
 If you type `nano filename`,
 it will open `filename` for editing
 (or create it if it doesn't already exist).
@@ -42,8 +42,8 @@ then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
 Note: if you view our solution,
-it uses `cp` instead of `nano`,
-because our automated back end can't edit files interactively.
+it uses `cp` instead of `nano` for our automated back end to check,
+because the back end can't edit files interactively.
 
 *** =solution
 ```{shell}
@@ -115,8 +115,8 @@ Ex() >> test_compare_file_to_file('spring.csv', 'seasonal/spring.csv') \
 
 Use `grep` with the `-h` flag (to stop it from printing filenames)
 and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `./*.csv` (to match the two CSV files in the current directory)
-and redirect the output to `temp.csv` using `>`.
+to select the data records from `spring.csv` and `summer.csv` in that order
+and redirect the output to `temp.csv`.
 
 *** =hint2
 
@@ -132,10 +132,9 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-msg = 'Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.'
-Ex() >> test_cmdline([['grep', 'hv:', ['*.csv'], {'-v' : 'Tooth'}]],
+Ex() >> test_cmdline([['grep', 'hv', ['Tooth', 'spring.csv', 'summer.csv']]],
                      redirect='temp.csv',
-                     msg=msg)
+                     msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
 ```
 
 *** =type3: ConsoleExercise
@@ -146,7 +145,7 @@ Ex() >> test_cmdline([['grep', 'hv:', ['*.csv'], {'-v' : 'Tooth'}]],
 *** =instructions3
 
 Pipe `history` into `tail -n 3`
-and redirect the output with `>` to `steps.txt`
+and redirect the output to `steps.txt`
 to save the last three commands in a file.
 (You need to save three instead of just two
 because the `history` command itself will be in the list.)
@@ -178,14 +177,14 @@ You have been using the shell interactively so far.
 But since the commands you type in are just text,
 you can store them in files for the shell to run over and over again.
 To start exploring this powerful capability,
-you could put the following command in a file called `headers.sh`:
+put the following command in a file called `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
 This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created the file `headers.sh`,
+Once you have created this file,
 you can run it by typing:
 
 ```{shell}
@@ -208,15 +207,13 @@ which produces the same output as running the commands directly.
 *** =instructions1
 
 Use `nano dates.sh` to create a file called `dates.sh`
-and put this command in it:
+that uses this command:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 to extract the first column from all of the CSV files in `seasonal`.
-Remember to use Ctrl-O/Enter to write out your file,
-and Ctrl-X/Enter to exit the editor.
 
 *** =hint1
 
@@ -226,8 +223,7 @@ and Ctrl-X/Enter to exit the editor.
 
 *** =solution1
 ```{shell}
-# We have to use 'cp' because our automated back end cannot run 'nano' interactively.
-# You should run 'nano dates.sh' instead of the following command: 
+# Run "nano dates.sh" instead of the following command: 
 cp /solutions/dates.sh .
 ```
 
@@ -248,7 +244,7 @@ Use `bash` to run the file `dates.sh`.
 
 *** =hint2
 
-Use `bash filename` to run a file.
+Use `bash filename` to run the file.
 
 *** =sample_code2
 ```{shell}
@@ -269,7 +265,7 @@ Ex() >> test_cmdline([['bash', '', 'dates.sh']],
 --- type:BulletConsoleExercise key:da13667750
 ## How can I re-use pipes?
 
-A file full of shell commands is called a *shell script*,
+A file full of shell commands is called a **[shell script](http://datacamp.github.io/glossary/#shell-script)**,
 or sometimes just a "script" for short.
 Scripts don't have to have names ending in `.sh`,
 but this lesson will use that convention
@@ -306,8 +302,10 @@ shutil.copyfile('/solutions/teeth-start.sh', 'teeth.sh')
 *** =instructions1
 
 Use Nano to edit the shell script `teeth.sh`
-and replace the `____` placeholders
-so that this script prints a count of the number of times each tooth name appears in the seasonal data.
+and replace the two `____` placeholders
+with `seasonal/*.csv` and `-c`
+so that this script prints a count of the number of times each tooth name appears in
+the CSV files in the `seasonal` directory.
 
 *** =hint1
 
@@ -334,11 +332,11 @@ Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
 
 *** =instructions2
 
-Use `bash` to run `teeth.sh` and redirect its output to `teeth.out`.
+Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
 
 *** =hint2
 
-Use `>` to redirect the output.
+Remember that `> teeth.out` must come *after* the command that is producing output.
 
 *** =sample_code2
 ```{shell}
@@ -346,6 +344,8 @@ Use `>` to redirect the output.
 
 *** =solution2
 ```{shell}
+# We need to use 'cp' below to satisfy our automated back end.
+# You should only use the last line that runs 'bash'.
 cp /solutions/teeth.sh .
 bash teeth.sh > teeth.out
 ```
@@ -367,7 +367,7 @@ Ex() >> test_cmdline([['bash', '', 'teeth.sh']],
 
 *** =instructions3
 
-Use `cat teeth.out` to inspect your results.
+Run `cat teeth.out` to inspect your results.
 
 *** =hint3
 
@@ -412,10 +412,10 @@ the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
 If you run this:
 
 ```{shell}
-bash unique-lines.sh seasonal/*.csv
+bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes all four data files,
+it processes two data files,
 and so on.
 
 *** =pre_exercise_code
@@ -431,7 +431,8 @@ shutil.copyfile('/solutions/count-records-start.sh', 'count-records.sh')
 
 *** =instructions1
 
-Open the script `count-records.sh` in Nano and fill in the `____` placeholders
+Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
+with `$@` and `-l` respectively
 so that it counts the number of lines in one or more files,
 excluding the first line of each.
 
@@ -460,8 +461,8 @@ Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.
 
 *** =instructions2
 
-Run `count-records.sh` on all of the seasonal data files
-and redirect the output to `num-records.out`.
+Run `count-records.sh` on `seasonal/*.csv`
+and redirect the output to `num-records.out` using `>`.
 
 *** =hint2
 
@@ -481,7 +482,7 @@ bash count-records.sh seasonal/*.csv > num-records.out
 ```{python}
 from shellwhat_ext import test_compare_file_to_file, test_cmdline
 Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+.+>\s*num-records.out\s*',
-                           fixed=False, 
+                           fixed=False,
                            msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
      >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
 ```
@@ -510,8 +511,8 @@ Notice how the script uses the two parameters in reverse order.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename, 
-the number of the row to select, 
+The script `get-field.sh` is supposed to take a filename,
+the number of the row to select,
 the number of the column to select,
 and print just that field from a CSV file.
 For example:
@@ -561,8 +562,9 @@ shutil.copyfile('/solutions/range-start-1.sh', 'range.sh')
 *** =instructions1
 
 Use Nano to edit the script `range.sh`
-and replace the `____` placeholders so that it lists
-the names and number of lines in all of the files given on the command line
+and replace the two `____` placeholders
+with `$@` and `-v`
+so that it lists the names and number of lines in all of the files given on the command line
 *without* showing the total number of lines in all files.
 (Do not try to subtract the column header lines from the files.)
 
@@ -593,8 +595,8 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-1.sh')
 
 *** =instructions2
 
-Extend the pipeline in `range.sh`
-so that it uses `sort -n` and `head -n 1` in that order
+Add `sort -n` and `head -n 1` in that order
+to the pipeline in `range.sh`
 to display the name and line count of the shortest file given to it.
 
 *** =hint3
@@ -608,7 +610,7 @@ and then `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-# Run "nano range.sh" to update the file instead of the following command:  
+# Run "nano range.sh" to update the file instead of the following command: 
 cp /solutions/range-2.sh range.sh
 ```
 
@@ -627,7 +629,8 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
 
 Add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
-(Use `sort -n -r` and `head -n 1` rather than `sort -n` and `head -n 1`.)
+This line should be a duplicate of the one you have already written,
+but with `sort -n -r` rather than `sort -n`.
 
 *** =hint3
 
@@ -657,12 +660,13 @@ Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-3.sh')
 *** =instructions4
 
 Run the script on the files in the `seasonal` directory
-using a wildcard expression to match all of the files
-and redirect the output to a file called `range.out` in your home directory.
+using `seasonal/*.csv` to match all of the files
+and redirect the output using `>`
+to a file called `range.out` in your home directory.
 
 *** =hint4
-The wildcard expression you need to use here is `*`. 
 
+Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
 
 *** =sample_code4
 ```{shell}
@@ -677,17 +681,17 @@ bash range.sh seasonal/*.csv > range.out
 *** =sct4
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+.+>\s*range.out\s*',
-                           fixed=False, 
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.')
+Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*range.out\s*',
+                           fixed=False,
+                           msg='Run the script with `bash` and `seasonal/*.csv` and use `>` to redirect its output.')
 ```
 
 --- type:BulletConsoleExercise key:6be8ca6009
 ## How can I write loops in a shell script?
 
 Shell scripts can also contain loops.
-You can write these loops using semi-colons,
-or split them across multiple lines to make them more readable:
+You can write them using semi-colons,
+or split them across lines without semi-colons to make them more readable:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -699,9 +703,9 @@ done
 ```
 
 (You don't have to indent the commands inside the loop,
-but it makes things clearer.)
+but doing so makes things clearer.)
 
-The first line of this script is a **comment**
+The first line of this script is a **[comment](http://datacamp.github.io/glossary/#comment)**
 to tell readers what the script does.
 Comments start with the `#` character and run to the end of the line.
 Your future self will thank you for adding brief explanations like the one shown here
@@ -720,7 +724,8 @@ shutil.copyfile('/solutions/date-range-start.sh', 'date-range.sh')
 
 *** =instructions1
 
-Modify the script `date-range.sh`
+Fill in the placeholders in the script `date-range.sh`
+with `$filename` (twice), `head`, and `tail`
 so that it prints the first and last date from one or more files.
 
 *** =hint1
@@ -733,6 +738,8 @@ Remember to use `$filename` to get the current value of the loop variable.
 
 *** =solution1
 ```{shell}
+# We have to use 'cp' because our automated back end cannot edit a file.
+# Please use Nano to edit date-range.sh instead.
 cp /solutions/date-range.sh date-range.sh
 ```
 
@@ -749,8 +756,8 @@ Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
 
 *** =instructions2
 
-Run `date-range.sh` on all four of the seasonal data files,
-using a wildcard expression for the files.
+Run `date-range.sh` on all four of the seasonal data files
+using `seasonal/*.csv` to match their names.
 
 *** =hint2
 
@@ -777,10 +784,9 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
 
 *** =instructions3
 
-Run `date-range.sh` on all four of the seasonal data files,
-using a wildcard expression for the files,
+Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
 and pipe its output to `sort`
-to see how your scripts can be used just like Unix's built-in commands.
+to see that your scripts can be used just like Unix's built-in commands.
 
 *** =hint3
 
@@ -807,31 +813,35 @@ A common mistake in shell scripts (and interactive commands) is to put filenames
 If you type:
 
 ```{shell}
-tail -n 3 somefile.txt
+tail -n 3
 ```
 
-then `tail` prints the last three lines of the file.
-If, on the other hand, you type:
-
-```{shell}
-head -n 5 somefile.txt | tail -n 3
-```
-
-then since `tail` hasn't been given the names of any files to process,
-it waits for some other program (in this case, `head`) to send it data.
-
-<hr>
-
-What happens if you run the command:
+then since `tail` hasn't been given any filenames,
+it waits to read input from your keyboard.
+This means that if you type:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
+then `tail` goes ahead and prints the last three lines of `somefile.txt`,
+but `head` waits forever for keyboard input,
+since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+
+<hr>
+
+Suppose you do accidentally type:
+
+```{shell}
+head -n 5 | tail -n 3 somefile.txt
+```
+
+What should you do next?
+
 *** =instructions
-- It prints lines 3-5 of `somefile.txt` and halts.
-- It prints lines 3-5 of `somefile.txt` and waits for more input.
-- It prints the last 3 lines of `somefile.txt` and waits for more input.
+- Wait 10 seconds for `head` to time out.
+- Type `somefile.txt` and press Enter to give `head` some input.
+- Type Ctrl-C to stop the running `head` program.
 
 *** =hint
 
@@ -842,8 +852,8 @@ head -n 5 | tail -n 3 somefile.txt
 
 *** =sct
 ```{python}
-a1 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a2 = 'No: `tail` prints the last 3 lines of the file, but since `head` has not been given any filenames, it waits for input.'
-a3 = 'Correct: `tail` prints the last 3 lines of the file, but `head` then waits forever for input.'
+a1 = 'No: commands will not time out.'
+a2 = 'No: that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
+a3 = 'Yes: use Ctrl-C to stop a running program.'
 Ex() >> test_mc(3, [a1, a2, a3])
 ```
