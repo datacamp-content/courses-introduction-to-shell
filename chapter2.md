@@ -47,7 +47,7 @@ Ex() >> test_cmdline([['cat', '', 'course.txt']],
 ## How can I view a file's contents piece by piece?
 
 You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
+but it is usually more convenient to **[page](http://datacamp.github.io/glossary/#page)** the output.
 The original command for doing this was called `more`,
 but it has been superseded by a more powerful command called `less`.
 (This kind of naming is what passes for humor in the Unix world.)
@@ -89,7 +89,7 @@ Ex() >> test_student_typed(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.c
 The first thing most data scientists do when given a new dataset to analyze is
 figure out what fields it contains and what values those fields have.
 If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
+it will often be stored as **[comma-separated values](http://datacamp.github.io/glossary/#comma-separated-values)** (CSV).
 A quick way to figure out what it contains is to look at the first few rows.
 
 We can do this in the shell using a command called `head`.
@@ -142,7 +142,7 @@ Ex() >> test_mc(2, ['Incorrect, try again.', 'Correct!', 'Incorrect, try again.'
 --- type:BulletConsoleExercise key:0b7b8ca8f7
 ## How can I type less?
 
-One of the shell's power tools is **tab completion**.
+One of the shell's power tools is **[tab completion](http://datacamp.github.io/glossary/#tab-completion)**.
 If you start typing the name of a file and then press the tab key,
 the shell will do its best to auto-complete the path.
 For example,
@@ -220,7 +220,7 @@ Ex() >> test_cmdline([['head', '', 'seasonal/spring.csv']],
 
 You won't always want to look at the first 10 lines of a file,
 so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
+by giving it a **[command-line flag](http://datacamp.github.io/glossary/#command-line-flag)** (or just "flag" for short).
 If you run the command:
 
 ```{shell}

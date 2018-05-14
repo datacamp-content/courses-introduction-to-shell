@@ -20,11 +20,11 @@ The most common one these days is a graphical file explorer,
 which translates clicks and double-clicks into commands to open files and run programs.
 Before computers had graphical displays,
 though,
-people typed instructions into a program called a **command-line shell**.
+people typed instructions into a program called a **[command-line shell](http://datacamp.github.io/glossary/#command-line-shell)**.
 Each time a command is entered,
 the shell runs some other programs,
 prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
+and then displays a **[prompt](http://datacamp.github.io/glossary/#prompt)** to signal that it's ready to accept the next command.
 (Its name comes from the notion that it's the "outer shell" of the computer.)
 
 Typing commands instead of clicking and dragging may seem clumsy at first,
@@ -56,14 +56,14 @@ Remember that a user can only interact with an operating system through a progra
 ## Where am I?
 
 The part of the operating system responsible for managing files and directories
-is called the **filesystem**.
+is called the **[filesystem](http://datacamp.github.io/glossary/#filesystem)**.
 It organizes data into files,
 which hold information,
 and directories (also called "folders"),
 which hold files or other directories.
 
-Every file or directory is identified by an **absolute path**
-that specifies how to get to it from the top (or **root**) of the filesystem.
+Every file or directory is identified by an **[absolute path](http://datacamp.github.io/glossary/#absolute-path)**
+that specifies how to get to it from the top (or **[root directory](http://datacamp.github.io/glossary/#root-directory)**) of the filesystem.
 For example,
 the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
 while the path `/home/repl/course.txt` identifies a file called `course.txt` inside that directory.
@@ -71,7 +71,7 @@ while the path `/home/repl/course.txt` identifies a file called `course.txt` ins
 To find out where you are in the filesystem,
 type the command `pwd`
 (which stands for "print working directory").
-This tells you the absolute path of your **current working directory**,
+This tells you the absolute path of your **[current working directory](http://datacamp.github.io/glossary/#current-working-directory)**,
 which is where the shell will run commands and look for files
 unless and until you tell it to do so elsewhere.
 You can also use the command `whoami` to find out who the computer thinks you are.
@@ -117,7 +117,7 @@ and if you add the names of directories,
 it will list the contents of those directories.
 For example,
 `ls /home/repl` will show you the contents of your starting directory
-(usually called your **home directory**),
+(usually called your **[home directory](http://datacamp.github.io/glossary/#home-directory)**),
 which is the same as what it shows you if you are in that directory and type `ls` on its own.
 
 <hr>
@@ -152,7 +152,7 @@ Ex() >> test_mc(2, [err, correct, err, err])
 
 An absolute path is like the latitude and longitude of a point on a map:
 it specifies the same thing no matter where you are.
-A **relative path**,
+A **[relative path](http://datacamp.github.io/glossary/#relative-path)**,
 on the other hand,
 specifies a location starting from where you are:
 it's like saying "20 kilometers north".
@@ -365,7 +365,7 @@ Ex() >> test_cmdline([['ls']],
 --- type:PureMultipleChoiceExercise lang:shell xp:50 skills:1 key:09c717ef76
 ## How can I move up a directory?
 
-The **parent** of a directory is the directory above it.
+The **[parent](http://datacamp.github.io/glossary/#parent-directory)** of a directory is the directory above it.
 For example, `/home` is the parent of `/home/repl`,
 and `/home/repl` is the parent of `/home/repl/seasonal`.
 You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
@@ -377,7 +377,7 @@ If you are in `/home/repl/seasonal`,
 then `cd ..` moves you up to `/home/repl`.
 If you use `cd ..` once again,
 it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
+One more `cd ..` puts you in the root directory `/`,
 which is the very top of the filesystem.
 
 A single dot on its own, `.`, always means "the current directory",
