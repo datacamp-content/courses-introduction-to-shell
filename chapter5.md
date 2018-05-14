@@ -265,7 +265,7 @@ Ex() >> test_cmdline([['bash', '', 'dates.sh']],
 --- type:BulletConsoleExercise key:da13667750
 ## How can I re-use pipes?
 
-A file full of shell commands is called a *shell script*,
+A file full of shell commands is called a **[shell script](http://datacamp.github.io/glossary/#shell-script)**,
 or sometimes just a "script" for short.
 Scripts don't have to have names ending in `.sh`,
 but this lesson will use that convention
