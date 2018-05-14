@@ -11,7 +11,7 @@ description : >-
 
 Unix has a bewildering variety of text editors.
 For this course,
-we will use a simple one called Nano.
+we will use a very simple one called Nano that runs inside the terminal window.
 If you type `nano filename`,
 it will open `filename` for editing
 (or create it if it doesn't already exist).
@@ -42,8 +42,8 @@ then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
 Note: if you view our solution,
-it uses `cp` instead of `nano` for our automated back end to check,
-because the back end can't edit files interactively.
+it uses `cp` instead of `nano`,
+because our automated back end can't edit files interactively.
 
 *** =solution
 ```{shell}
@@ -115,8 +115,8 @@ Ex() >> test_compare_file_to_file('spring.csv', 'seasonal/spring.csv') \
 
 Use `grep` with the `-h` flag (to stop it from printing filenames)
 and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+to select the data records from `./*.csv` (to match the two CSV files in the current directory)
+and redirect the output to `temp.csv` using `>`.
 
 *** =hint2
 
@@ -132,9 +132,10 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'hv', ['Tooth', 'spring.csv', 'summer.csv']]],
+msg = 'Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.'
+Ex() >> test_cmdline([['grep', 'hv:', ['*.csv'], {'-v' : 'Tooth'}]],
                      redirect='temp.csv',
-                     msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
+                     msg=msg)
 ```
 
 *** =type3: ConsoleExercise
@@ -145,7 +146,7 @@ Ex() >> test_cmdline([['grep', 'hv', ['Tooth', 'spring.csv', 'summer.csv']]],
 *** =instructions3
 
 Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
+and redirect the output with `>` to `steps.txt`
 to save the last three commands in a file.
 (You need to save three instead of just two
 because the `history` command itself will be in the list.)
@@ -177,14 +178,14 @@ You have been using the shell interactively so far.
 But since the commands you type in are just text,
 you can store them in files for the shell to run over and over again.
 To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+you could put the following command in a file called `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
 This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
+Once you have created the file `headers.sh`,
 you can run it by typing:
 
 ```{shell}
@@ -207,13 +208,15 @@ which produces the same output as running the commands directly.
 *** =instructions1
 
 Use `nano dates.sh` to create a file called `dates.sh`
-that uses this command:
+and put this command in it:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 to extract the first column from all of the CSV files in `seasonal`.
+Remember to use Ctrl-O/Enter to write out your file,
+and Ctrl-X/Enter to exit the editor.
 
 *** =hint1
 
@@ -223,7 +226,8 @@ to extract the first column from all of the CSV files in `seasonal`.
 
 *** =solution1
 ```{shell}
-# Run "nano dates.sh" instead of the following command: 
+# We have to use 'cp' because our automated back end cannot run 'nano' interactively.
+# You should run 'nano dates.sh' instead of the following command: 
 cp /solutions/dates.sh .
 ```
 
@@ -244,7 +248,7 @@ Use `bash` to run the file `dates.sh`.
 
 *** =hint2
 
-Use `bash filename` to run the file.
+Use `bash filename` to run a file.
 
 *** =sample_code2
 ```{shell}
