@@ -10,7 +10,7 @@ description : >-
 
 Like other programs, the shell stores information in variables.
 Some of these,
-called **environment variables**,
+called **[environment variables](http://datacamp.github.io/glossary/#(http://datacamp.github.io/glossary/#environment-variable)**,
 are available all the time.
 Environment variables' names are conventionally written in upper case,
 and a few of the more commonly-used ones are shown below.
@@ -113,7 +113,7 @@ Ex() >> test_cmdline([['echo', '', '+']],
 --- type:BulletConsoleExercise key:e925da48e4
 ## How else does the shell store information?
 
-The other kind of variable is called a **shell variable**,
+The other kind of variable is called a **[shell variable](http://datacamp.github.io/glossary/#shell-variable)**,
 which is like a local variable in a programming language.
 
 To create a shell variable,
@@ -200,7 +200,7 @@ Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3
 ## How can I repeat a command many times?
 
-Shell variables are also used in **loops**,
+Shell variables are also used in **[loops](http://datacamp.github.io/glossary/#loop)**,
 which repeat commands many times.
 If we run this command:
 

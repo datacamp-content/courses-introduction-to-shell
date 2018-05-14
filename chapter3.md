@@ -12,7 +12,7 @@ description : >-
 All of the tools you have seen so far let you name input files.
 Most don't have an option for naming an output file because they don't need one.
 Instead,
-you can use **redirection** to save any command's output anywhere you want.
+you can use **[redirection](http://datacamp.github.io/glossary/#redirection)** to save any command's output anywhere you want.
 If you run this command:
 
 ```{shell}
@@ -258,7 +258,8 @@ But typing the names of many files over and over is a bad idea:
 it wastes time,
 and sooner or later you will either leave a file out or repeat a file's name.
 To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
+the shell allows you to use **[wildcards](http://datacamp.github.io/glossary/#wildcard)**
+to specify a list of files with a single expression.
 The most common wildcard is `*`,
 which means "match zero or more characters".
 Using it,

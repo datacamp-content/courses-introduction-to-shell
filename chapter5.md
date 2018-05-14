@@ -697,7 +697,7 @@ done
 (You don't have to indent the commands inside the loop,
 but it makes things clearer.)
 
-The first line of this script is a **comment**
+The first line of this script is a **[comment](http://datacamp.github.io/glossary/#comment)**
 to tell readers what the script does.
 Comments start with the `#` character and run to the end of the line.
 Your future self will thank you for adding brief explanations like the one shown here
