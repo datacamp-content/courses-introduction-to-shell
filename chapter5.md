@@ -691,7 +691,6 @@ Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `
 
 *** =solution4
 ```{shell}
-cp /solutions/range-3.sh range.sh
 bash range.sh seasonal/*.csv > range.out
 ```
 
