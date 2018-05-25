@@ -841,7 +841,7 @@ What should you do next?
 *** =instructions
 - Wait 10 seconds for `head` to time out.
 - Type `somefile.txt` and press Enter to give `head` some input.
-- Type Ctrl-C to stop the running `head` program.
+- Use Ctrl-C to stop the running `head` program.
 
 *** =hint
 
@@ -852,8 +852,8 @@ What should you do next?
 
 *** =sct
 ```{python}
-a1 = 'No: commands will not time out.'
-a2 = 'No: that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = 'Yes: use Ctrl-C to stop a running program.'
+a1 = 'No, commands will not time out.'
+a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
+a3 = 'Yes! You should use Ctrl-C to stop a running program.'
 Ex() >> test_mc(3, [a1, a2, a3])
 ```
