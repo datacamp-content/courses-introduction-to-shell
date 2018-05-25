@@ -488,7 +488,6 @@ Use `>` to redirect the output.
 
 *** =solution2
 ```{shell}
-cp /solutions/count-records.sh .
 bash count-records.sh seasonal/*.csv > num-records.out
 ```
 
