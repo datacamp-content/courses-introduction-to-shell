@@ -410,9 +410,9 @@ Trace the path one directory at a time.
 
 *** =feedbacks
 - No, but either `~` or `..` on its own would take you there.
-- Correct: the path means 'home directory', 'up a level', 'here'.
+- Correct! The path means 'home directory', 'up a level', 'here'.
 - No, but `.` on its own would do that.
-- No: the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
 
 --- type:BulletConsoleExercise key:832de9e74c
 ## How can I copy files?
