@@ -788,7 +788,7 @@ rm seasonal/summer.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['rm', '', re.compile('(./)?seasonal/summer.csv')]],
-                     msg='`rm` works with paths.')
+                     msg='`rm` also works with paths! So try removing `summer.csv` without getting inside `seasonal`.')
 ```
 
 --- type:BulletConsoleExercise key:63e8fbd0c2
@@ -1041,7 +1041,7 @@ Ex() >> test_cmdline([['mkdir', '', re.compile('(./)?scratch')]],
 Move `/home/repl/people/agarwal.txt` into `/tmp`
 using the `~` shortcut for your home directory
 and a relative path for the second
-rather than the absolute path '/tmp/.
+rather than the absolute path `/home/repl/tmp`.
 
 *** =sample_code4
 ```{shell}
