@@ -92,6 +92,8 @@ and save them in a file called `bottom.csv`.
 
 *** =hint1
 
+Use `tail` to select lines and `>` to redirect `tail`'s output.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -120,6 +122,8 @@ Select the first line from `bottom.csv`
 in order to get the second-to-last line of the original file.
 
 *** =hint2
+
+Use `head` to select the line you want.
 
 *** =sample_code2
 ```{shell}
@@ -462,7 +466,7 @@ What happens if we put redirection at the front of a pipeline as in:
 Try it out in the shell.
 
 *** =pre_exercise_code
-```{shell}
+```{python}
 ```
 
 *** =sct

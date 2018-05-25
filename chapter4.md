@@ -42,7 +42,7 @@ What is its value?
 Use `set | grep HISTFILESIZE` to get the line you need.
 
 *** =pre_exercise_code
-```{shell}
+```{python}
 ```
 
 *** =sct
@@ -149,6 +149,8 @@ Define a variable called `testing` with the value `seasonal/winter.csv`.
 
 *** =hint1
 
+There should *not* be spaces between the variable's name and its value.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -176,6 +178,8 @@ Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
 using the value of the variable `testing` instead of the name of the file.
 
 *** =hint2
+
+Remember to use `$` in front of the variable's name to get its value.
 
 *** =sample_code2
 ```{shell}
@@ -327,12 +331,10 @@ for f in $files; do echo $f; done
 
 *** =hint
 
-Remember that `X` on its own is just "X",
-while `$X` is the value of the variable `X`.
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -480,6 +482,8 @@ what will happen:
 
 *** =hint
 
+What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+
 *** =feedbacks
 - Yes, but that's not all.
 - Yes, but that's not all.
@@ -530,8 +534,7 @@ What will the shell do?
 You can pipe the output of `echo` to `tail`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct

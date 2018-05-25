@@ -90,6 +90,8 @@ Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home dire
 
 *** =hint1
 
+Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -119,6 +121,8 @@ to select the data records from `spring.csv` and `summer.csv` in that order
 and redirect the output to `temp.csv`.
 
 *** =hint2
+
+Put the flags before the filenames.
 
 *** =sample_code2
 ```{shell}
@@ -151,6 +155,8 @@ to save the last three commands in a file.
 because the `history` command itself will be in the list.)
 
 *** =hint3
+
+Remember that redirection with `>` comes at the end of the seuqence of piped commands.
 
 *** =sample_code3
 ```{shell}
@@ -216,6 +222,8 @@ cut -d , -f 1 seasonal/*.csv
 to extract the first column from all of the CSV files in `seasonal`.
 
 *** =hint1
+
+Put the commands shown into the file without extra blank lines or spaces.
 
 *** =sample_code1
 ```{shell}
@@ -309,6 +317,8 @@ the CSV files in the `seasonal` directory.
 
 *** =hint1
 
+Use `nano teeth.sh` to edit the file.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -371,6 +381,8 @@ Run `cat teeth.out` to inspect your results.
 
 *** =hint3
 
+Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -431,12 +443,14 @@ shutil.copyfile('/solutions/count-records-start.sh', 'count-records.sh')
 
 *** =instructions1
 
+
 Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` respectively
-so that it counts the number of lines in one or more files,
+with `$@` and `-l` respectively so that it counts the number of lines in one or more files,
 excluding the first line of each.
 
 *** =hint1
+
+Use `nano count-records.sh` to edit the filename.
 
 *** =sample_code1
 ```{shell}
@@ -531,6 +545,8 @@ Which of the following commands should be put in `get-field.sh` to do that?
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 *** =hint
+
+Remember that command-line parameters are numbered left to right.
 
 *** =feedbacks
 - No: that will try to use the filename as the number of lines to select with `head`.
@@ -666,7 +682,9 @@ to a file called `range.out` in your home directory.
 
 *** =hint4
 
+
 Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+
 
 *** =sample_code4
 ```{shell}
@@ -756,10 +774,14 @@ Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
 
 *** =instructions2
 
+
 Run `date-range.sh` on all four of the seasonal data files
 using `seasonal/*.csv` to match their names.
 
+
 *** =hint2
+
+The wildcard expression should start with the directory name.
 
 *** =sample_code2
 ```{shell}
@@ -784,11 +806,15 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
 
 *** =instructions3
 
+
 Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
+
 and pipe its output to `sort`
 to see that your scripts can be used just like Unix's built-in commands.
 
 *** =hint3
+
+Use the same wildcard expression you used earlier.
 
 *** =sample_code3
 ```{shell}
@@ -845,9 +871,10 @@ What should you do next?
 
 *** =hint
 
-*** =pre_exercise_code
-```{shell}
+What does `head` do if it doesn't have a filename and nothing is upstream from it?
 
+*** =pre_exercise_code
+```{python}
 ```
 
 *** =sct
