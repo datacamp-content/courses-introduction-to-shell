@@ -495,7 +495,7 @@ Run the command:
 head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
 ```
 
-and then stop it by typing Ctrl-C.
+and then stop it by using Ctrl-C.
 
 *** =solution
 ```{bash}
