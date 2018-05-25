@@ -54,9 +54,11 @@ but it has been superseded by a more powerful command called `less`.
 When you `less` a file,
 one page is displayed at a time;
 you can press spacebar to page down or type `q` to quit.
-If you are viewing several files,
-type `:n` (colon and a lower-case 'n') to move to the next file,
-or `:p` to go back to the previous one.
+
+If you give `less` the names of several files,
+you can type `:n` (colon and a lower-case 'n') to move to the next file,
+`:p` to go back to the previous one,
+or `:q` to quit.
 
 Note: If you view solutions to exercises that use `less`,
 you will see an extra command at the end that turns paging *off*
@@ -64,14 +66,12 @@ so that we can test your solutions efficiently.
 
 *** =instructions
 
-Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
-in that order. 
-
-(Remember to press spacebar to page down and/or type `q` to quit.)
+Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
+Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
 
 *** =solution
 ```{bash}
-# Run the following command *without* '| cat': 
+# Run the following command *without* '| cat':
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
@@ -150,9 +150,10 @@ If you start typing the name of a file and then press the tab key,
 the shell will do its best to auto-complete the path.
 For example,
 if you type `sea` and press tab,
-it will fill in the word `seasonal`.
+it will fill in the directory name `seasonal/` (with a trailing slash).
 If you then type `a` and tab,
 it will complete the path as `seasonal/autumn.csv`.
+
 If the path is ambiguous,
 such as `seasonal/s`,
 pressing tab a second time will display a list of possibilities.
@@ -244,13 +245,13 @@ A flag's name usually indicates its purpose
 Command flags don't have to be a `-` followed by a single letter,
 but it's a widely-used convention.
 
-It's also considered good style to put all of the flags *before* any other values like filenames,
+Note: it's considered good style to put all flags *before* any filenames,
 so in this course,
 we only accept answers that do that.
 
 *** =instructions
 
-Display the first 5 lines of the winter data in the `seasonal` directory.
+Display the first 5 lines of `winter.csv` in the `seasonal` directory.
 
 *** =solution
 ```{shell}
@@ -295,7 +296,7 @@ and so on.
 To help you know what is what,
 `ls` has another flag `-F` that prints a `/` after the name of every directory
 and a `*` after the name of every runnable program.
-Run `ls` with `-R`, `-F`, *and* the absolute path to your home directory
+Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
 to see everything it contains.
 (The order of the flags doesn't matter, but the directory name must come last.)
 
@@ -307,7 +308,7 @@ ls -R -F /home/repl
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', 'RF', re.compile(r'/home/repl/?')]],
+Ex() >> test_cmdline([['ls', 'RF', re.compile(r'^(~|/home/repl)/?$')]],
                      msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
 ```
 
@@ -343,7 +344,8 @@ SEE ALSO
 ```
 
 `man` automatically invokes `less`,
-so you may need to press spacebar to page through the information.
+so you may need to press spacebar to page through the information
+and `:q` to quit.
 
 The one-line description under `NAME` tells you briefly what the command does,
 and the summary under `SYNOPSIS` lists all the flags it understands.
@@ -371,7 +373,8 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =instructions1
 
-Read the manual page for the `tail` command.
+Read the manual page for the `tail` command to find out
+what putting a `+` sign in front of the number used with the `-n` flag does.
 (Remember to press spacebar to page down and/or type `q` to quit.)
 
 *** =hint1
@@ -384,7 +387,7 @@ Remember: `man` is short for "manual".
 
 *** =solution1
 ```{shell}
-# Run the following command *without* '| cat': 
+# Run the following command *without* '| cat':
 man tail | cat
 ```
 
@@ -402,7 +405,8 @@ Ex() >> test_student_typed(r'\s*man\s+tail.*',
 
 *** =instructions2
 
-Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
+Use `tail` with `-n` and a number with a leading `+`
+to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint2
 
@@ -420,7 +424,7 @@ tail -n +7 seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', re.compile(r'(~/)?seasonal/spring.csv'), {'-n' : '+7'}]],
+Ex() >> test_cmdline([['tail', 'n:', re.compile(r'^(~/)?seasonal/spring.csv$'), {'-n' : '+7'}]],
                      msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
 ```
 
@@ -609,7 +613,7 @@ cd seasonal
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', 'seasonal']],
+Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?$')]],
                      msg='Use `cd` and a directory name.')
 ```
 
@@ -720,7 +724,7 @@ In its simplest form,
 and prints all of the lines in those files that contain that text.
 For example,
 `grep bicuspid seasonal/winter.csv`
-prints all of the lines from the winter data that contain "bicuspid".
+prints lines from `winter.csv` that contain "bicuspid".
 
 `grep` can search for patterns as well;
 we will explore those in the next course.
@@ -744,8 +748,10 @@ What's more important right now is some of `grep`'s more common flags:
 
 *** =instructions1
 
-Find all of the lines containing the word `molar` in the autumn data
-by running a single command from your home directory.
+Find all of the lines containing the word `molar` in `seasonal/autumn.csv`
+by running a single command while in your home directory.
+Again, it's considered good practice to put flags and arguments before filenames,
+so this course only accepts solutions that do that.
 
 *** =hint1
 
@@ -763,7 +769,7 @@ grep molar seasonal/autumn.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
+Ex() >> test_cmdline([['grep', '', ['molar', re.compile(r'^([.~]/)?seasonal/autumn.csv')]]],
                      msg='Use the relative path to the file to search.')
 ```
 
@@ -774,9 +780,7 @@ Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
 
 *** =instructions2
 
-Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
-(Again, run a single command from your home directory.)
-
+Find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
 Remember,
 it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
 so in this course,
@@ -798,7 +802,7 @@ grep -v -n molar seasonal/spring.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': None, '-n': None}]],
+Ex() >> test_cmdline([['grep', 'vn', ['molar', re.compile(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
                      msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
 ```
 
@@ -809,7 +813,7 @@ Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': No
 
 *** =instructions3
 
-Count how many lines contain the word `incisor` in the autumn and winter data files.
+Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
 (Again, run a single command from your home directory.)
 
 *** =hint3
@@ -830,8 +834,8 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv'], {'-c': None}]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv'], {'-c': None}]], msg=msg))
+Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/autumn.csv'), re.compile(r'([.~]/)?seasonal/winter.csv')], {'-c': None}]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/winter.csv'), re.compile(r'([.~]/)?seasonal/autumn.csv')], {'-c': None}]], msg=msg))
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
