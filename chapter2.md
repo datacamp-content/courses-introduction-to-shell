@@ -289,7 +289,7 @@ and so on.
 To help you know what is what,
 `ls` has another flag `-F` that prints a `/` after the name of every directory
 and a `*` after the name of every runnable program.
-Run `ls` with the two flags `-R` and `-F` and the absolute path to your home directory
+Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
 to see everything it contains.
 (The order of the flags doesn't matter, but the directory name must come last.)
 
