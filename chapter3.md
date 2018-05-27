@@ -492,20 +492,20 @@ note that the 'c' can be lower-case.
 Run the command:
 
 ```{shell}
-head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
+head -n 1
 ```
 
-and then stop it by using Ctrl-C.
+*without* giving a filename and then stop it using Ctrl-C.
 
 *** =solution
 ```{bash}
 # Use 'echo' rather than actually running the command to prevent automated tests hanging up: 
-echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
+echo 'head -n 1'
 ```
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s*',
                            fixed=False,
                            msg="Use the control key and 'c' at the same time to stop the script.")
 ```
