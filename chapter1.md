@@ -66,7 +66,8 @@ Every file or directory is identified by an **[absolute path](http://datacamp.gi
 that specifies how to get to it from the top (or **[root directory](http://datacamp.github.io/glossary/#root-directory)**) of the filesystem.
 For example,
 the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
-while the path `/home/repl/course.txt` identifies a file called `course.txt` inside that directory.
+while `/home/repl/course.txt` identifies a file `course.txt` in that directory,
+and `/` on its own identifies the root directory.
 
 To find out where you are in the filesystem,
 type the command `pwd`
@@ -74,7 +75,7 @@ type the command `pwd`
 This tells you the absolute path of your **[current working directory](http://datacamp.github.io/glossary/#current-working-directory)**,
 which is where the shell will run commands and look for files
 unless and until you tell it to do so elsewhere.
-You can also use the command `whoami` to find out who the computer thinks you are.
+You can also use the command `whoami` to display your username.
 
 <hr>
 Run `pwd` in the shell window to the right.
@@ -86,11 +87,10 @@ Where are you right now?
 - `/home/repl`
 
 *** =hint
-
+Unix systems typically place all users' home directories underneath `/home`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -107,18 +107,18 @@ Ex() >> test_mc(3, [err, err, correct])
 `pwd` tells you where you are,
 but doesn't tell you what files and directories are there.
 To find out,
-you can use the command `ls` (which is short for "listing").
-Entered on its own,
-it lists the contents of your current working directory
+you can type `ls` (which is short for "listing") and press the enter key.
+On its own,
+`ls` lists the contents of your current directory
 (the one displayed by `pwd`).
 If you add the names of one or more files,
 `ls` will list those files,
 and if you add the names of directories,
-it will list the contents of those directories.
+it will list their contents.
 For example,
-`ls /home/repl` will show you the contents of your starting directory
+typing `ls /home/repl` will show you the contents of your starting directory
 (usually called your **[home directory](http://datacamp.github.io/glossary/#home-directory)**),
-which is the same as what it shows you if you are in that directory and type `ls` on its own.
+which it also shows you if you are in that directory and type `ls` on its own.
 
 <hr>
 Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`
@@ -135,8 +135,7 @@ Which of the following files is *not* in that directory?
 If you give `ls` a path, it shows what's in that path.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -150,7 +149,7 @@ Ex() >> test_mc(2, [err, correct, err, err])
 --- type:BulletConsoleExercise key:a766184b59
 ## How else can I identify files and directories?
 
-An absolute path is like the latitude and longitude of a point on a map:
+An absolute path is like a latitude and longitude:
 it specifies the same thing no matter where you are.
 A **[relative path](http://datacamp.github.io/glossary/#relative-path)**,
 on the other hand,
@@ -160,10 +159,10 @@ it's like saying "20 kilometers north".
 For example,
 if you are in the directory `/home/repl`,
 the relative path `seasonal` specifies the same directory as `/home/repl/seasonal`,
-and the relative path `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
-The shell can tell whether a path is absolute or relative by looking at its first character.
-If the path begins with `/`, it is absolute;
-if it doesn't,
+while `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
+The shell decides if a path is absolute or relative by looking at its first character:
+if it begins with `/`, it is absolute,
+and if it doesn't,
 it is relative.
 
 *** =pre_exercise_code
@@ -216,6 +215,8 @@ to list the file `/home/repl/seasonal/summer.csv` (and only that file).
 
 *** =hint2
 
+Relative paths do *not* start with a leading '/'.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -245,6 +246,8 @@ to list the contents of the directory `/home/repl/people`.
 
 *** =hint3
 
+Relative paths do not start with a leading '/'.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -258,7 +261,7 @@ ls people
 ```{python}
 import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', '', re.compile('people/?')]],
+Ex() >> test_cmdline([['ls', '', re.compile('^people/?')]],
                      msg='Use `ls` followed by the relative path to the directory.')
 ```
 
@@ -288,9 +291,12 @@ you can use the command `cd /home/repl`.
 
 *** =instructions1
 
-Go into `/home/repl/seasonal` using a relative path.
+You are in `/home/repl`/.
+Change directory to `/home/repl/seasonal` using a relative path.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
 
 *** =sample_code1
 ```{shell}
@@ -319,6 +325,8 @@ Use `pwd` to check that you're there.
 
 *** =hint2
 
+Remember to press "enter" or "return" after entering the command.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -346,6 +354,8 @@ Use `ls` without any paths to see what's in that directory.
 
 *** =hint3
 
+Remember to press "enter" or "return" after the command.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -372,22 +382,23 @@ You can always give the absolute path of your parent directory to commands like 
 More often,
 though,
 you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in.
+(two dots with no spaces) means "the directory above the one I'm currently in".
 If you are in `/home/repl/seasonal`,
 then `cd ..` moves you up to `/home/repl`.
 If you use `cd ..` once again,
 it puts you in `/home`.
 One more `cd ..` puts you in the root directory `/`,
 which is the very top of the filesystem.
+(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
 
 A single dot on its own, `.`, always means "the current directory",
 so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
 
-One final special path is `~`
-(the tilde character, pronounced *til-duh*),
-which means "your home directory".
+One final special path is `~` (the tilde character),
+which means "your home directory",
+such as `/home/repl`.
 No matter where you are,
 `ls ~` will always list the contents of your home directory,
 and `cd ~` will always take you home.
@@ -400,27 +411,26 @@ where does `cd ~/../.` take you?
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
+- `/` (the root directory)
 
 *** =hint
 Trace the path one directory at a time.
 
 *** =feedbacks
 - No, but either `~` or `..` on its own would take you there.
-- Correct - the path means 'home directory', 'up a level', 'here'.
+- Correct! The path means 'home directory', 'up a level', 'here'.
 - No, but `.` on its own would do that.
-
-Ex() >> test_mc(2, [err1, correct, err3])
+- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
 
 --- type:BulletConsoleExercise key:832de9e74c
 ## How can I copy files?
 
-Once you have some files,
-you will often want to make copies,
-move them into other directories in order to organize them,
+You will often want to copy files,
+move them into other directories to organize them,
 or rename them.
 One command to do this is `cp`, which is short for "copy".
 If `original.txt` is an existing file,
-then the command:
+then:
 
 ```{shell}
 cp original.txt duplicate.txt
@@ -429,6 +439,14 @@ cp original.txt duplicate.txt
 creates a copy of `original.txt` called `duplicate.txt`.
 If there already was a file called `duplicate.txt`,
 it is overwritten.
+If the last parameter to `cp` is an existing directory,
+then a command like:
+
+```{shell}
+cp seasonal/autumn.csv seasonal/winter.csv backup
+```
+
+copies *all* of the files into that directory.
 
 *** =pre_exercise_code
 ```{python}
@@ -461,7 +479,7 @@ cp seasonal/summer.csv backup/summer.bck
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
+Ex() >> test_cmdline([['cp', '', [re.compile('(./)?seasonal/summer.csv'), re.compile('(./)?backup/summer.bck')]]],
                      msg='Provide two paths to `cp`.')
 ```
 
@@ -472,18 +490,9 @@ Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
 
 *** =instructions2
 
-If the last parameter to `cp` is an existing directory,
-then a command like:
-
-```{shell}
-cp seasonal/autumn.csv seasonal/winter.csv backup
-```
-
-copies *all* of those files into that directory.
-Use this fact
-to copy the spring and summer data files (located in the `seasonal` directory) into the `backup` directory
-*without* changing directory
-(i.e., run a single command from your home directory).
+You are in `/home/repl`, and there is a directory below it called `backup`.
+Copy `spring.csv` and `summer.csv` from the `seasonal` directory into `backup`
+*without* changing directory.
 
 *** =hint2
 
@@ -511,8 +520,8 @@ Ex() >> test_or(test_cmdline([['cp', '', ['seasonal/spring.csv', 'seasonal/summe
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:663a083a3c
 ## How can I move a file?
 
-While `cp` gives you a way to copy a file,
-`mv` lets you move it from one directory to another,
+While `cp` copies a file,
+`mv` moves it from one directory to another,
 just as if you had dragged it in a graphical file browser.
 It handles its parameters the same way as `cp`,
 so the command:
@@ -527,8 +536,9 @@ up one level to its parent directory
 
 *** =instructions
 
+You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
 Using a single command,
-move the spring and summer data files to the `backup` directory.
+move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
 
 *** =solution
 ```{shell}
@@ -581,6 +591,8 @@ Go into the `seasonal` directory.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -609,6 +621,8 @@ Rename the file `winter.csv` to be `winter.csv.bck`.
 
 *** =hint2
 
+Use `mv` with the current name of the file and the name you want it to have in that order.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -636,6 +650,8 @@ Run `ls` to check that everything has worked.
 
 *** =hint3
 
+Remember to press "enter" or "return" to run the command.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -655,14 +671,12 @@ Ex() >> test_cmdline([['ls']],
 --- type:BulletConsoleExercise key:2734680614
 ## How can I delete files?
 
-We can create files,
-copy them,
-and move them around;
-the only thing left is to delete them.
-The command to do this is `rm`,
+We can copy files and move them around;
+to delete them,
+we use `rm`,
 which stands for "remove".
 As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like.
+you can give `rm` the names of as many files as you'd like, so:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
@@ -688,9 +702,12 @@ your thesis is gone for good.
 
 *** =instructions1
 
+You are in `/home/repl`.
 Go into the `seasonal` directory.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
 
 *** =sample_code1
 ```{shell}
@@ -720,6 +737,8 @@ Remove `autumn.csv`.
 
 *** =hint2
 
+Remember that `rm` stands for "remove".
+
 *** =sample_code2
 ```{shell}
 ```
@@ -746,6 +765,8 @@ Ex() >> test_cmdline([['rm', '', 'autumn.csv']],
 Go back to your home directory.
 
 *** =hint3
+
+If you use `cd` without any paths, it takes you home.
 
 *** =sample_code3
 ```{shell}
@@ -774,6 +795,8 @@ Remove `seasonal/summer.csv` without changing directories again.
 
 *** =hint4
 
+Remember that `rm` stands for "remove".
+
 *** =sample_code4
 ```{shell}
 ```
@@ -786,8 +809,8 @@ rm seasonal/summer.csv
 *** =sct4
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['rm', '', 'seasonal/summer.csv']],
-                     msg='`rm` works with paths.')
+Ex() >> test_cmdline([['rm', '', re.compile('(./)?seasonal/summer.csv')]],
+                     msg='`rm` also works with paths! So try removing `summer.csv` without getting inside `seasonal`.')
 ```
 
 --- type:BulletConsoleExercise key:63e8fbd0c2
@@ -801,13 +824,15 @@ However,
 `rm` works differently.
 
 If you try to `rm` a directory,
-the shell will print an error message telling you that it can't do that,
+the shell prints an error message telling you it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
 Instead,
-you must use a separate command called `rmdir`.
+you can use a separate command called `rmdir`.
 For added safety,
 it only works when the directory is empty,
-so you must delete all the files in a directory *before* you delete the directory.
+so you must delete the files in a directory *before* you delete the directory.
+(Experienced users can use the `-r` option to `rm` to get the same effect;
+we will discuss command options in the next chapter.)
 
 *** =pre_exercise_code
 ```{python}
@@ -824,6 +849,8 @@ Without changing directories,
 delete the file `agarwal.txt` in the `people` directory.
 
 *** =hint1
+
+Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
 
 *** =sample_code1
 ```{shell}
@@ -852,6 +879,8 @@ Now that the `people` directory is empty,
 use a single command to delete it.
 
 *** =hint2
+
+Remember that `rm` only works on files.
 
 *** =sample_code2
 ```{shell}
@@ -939,7 +968,9 @@ Ex() >> test_cmdline([['mkdir', '', 'yearly/2017']],
 You will often create intermediate files when analyzing data.
 Rather than storing them in your home directory,
 you can put them in `/tmp`,
-which is where programs typically keep files that they only need briefly.
+which is where people and programs often keep files they only need briefly.
+(Note that `/tmp` is immediately below the root directory `/`,
+*not* below your home directory.)
 This wrap-up exercise will show you how to do that.
 
 *** =pre_exercise_code
@@ -952,9 +983,11 @@ This wrap-up exercise will show you how to do that.
 *** =xp1: 10
 
 *** =instructions1
-Go into the `/tmp` directory.
+Use `cd` to go into `/tmp`.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
 
 *** =sample_code1
 ```{shell}
@@ -969,7 +1002,7 @@ cd /tmp
 ```{python}
 import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
+Ex() >> test_cmdline([['cd', '', re.compile(r'^/tmp/?')]],
                      msg='Change your directory to `/tmp`.')
 ```
 
@@ -983,6 +1016,8 @@ Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
 List the contents of `/tmp` *without* typing a directory name.
 
 *** =hint2
+
+If you don't tell `ls` what to list, it shows you what's in your current directory.
 
 *** =sample_code2
 ```{shell}
@@ -1006,7 +1041,7 @@ Ex() >> test_cmdline([['ls']],
 *** =xp3: 20
 
 *** =instructions3
-Make a new directory called `scratch`.
+Make a new directory inside `/tmp` called `scratch`.
 
 *** =hint3
 Use `mkdir` to make directories.
@@ -1023,7 +1058,7 @@ mkdir scratch
 *** =sct3
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mkdir', '', 'scratch']],
+Ex() >> test_cmdline([['mkdir', '', re.compile('(./)?scratch')]],
                      msg='Use `mkdir` followed by the relative path of the directory you want to create.')
 ```
 
@@ -1034,7 +1069,9 @@ Ex() >> test_cmdline([['mkdir', '', 'scratch']],
 
 *** =instructions4
 Move `/home/repl/people/agarwal.txt` into `/tmp`
-using the `~` shortcut for your home directory.
+using the `~` shortcut for your home directory
+and a relative path for the second
+rather than the absolute path `/home/repl/tmp`.
 
 *** =sample_code4
 ```{shell}
@@ -1042,13 +1079,13 @@ using the `~` shortcut for your home directory.
 
 *** =solution4
 ```{shell}
-mv ~/people/agarwal.txt /tmp
+mv ~/people/agarwal.txt .
 ```
 
 *** =sct4
 ```{python}
 import re
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', re.compile(r'/tmp/?')]]],
-                     msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
+Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', re.compile(r'^./?')]]],
+                     msg='Use `~/people/agarwal.txt` for the first parameter and `.` for the second.')
 ```
