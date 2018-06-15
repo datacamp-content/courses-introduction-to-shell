@@ -55,20 +55,18 @@ Remember that a user can only interact with an operating system through a progra
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
 ## Where am I?
 
-The **filesystem**
-organizes data into files and directories (also called "folders").
-Every file or directory is identified by an **absolute path**
-that specifies how to get to it from the top (or **root**) of the filesystem.
-For example,
-`/home/repl` is the path to a directory called `repl` inside a directory called `home`,
-while `/home/repl/course.txt` identifies a file `course.txt` in that directory.
-`/` on its own identifies the root directory.
+The **filesystem** manages files and directories (or folders).
+Each is identified by an **absolute path**
+that shows how to reach it from the filesystem's **root directory**:
+`/home/repl` is the directory `repl` in the directory `home`,
+while `/home/repl/course.txt` is a file `course.txt` in that directory,
+and `/` on its own is the root directory.
 
 To find out where you are in the filesystem,
-type the command `pwd`
+run the command `pwd`
 (short for "**p**rint **w**orking **d**irectory").
-This tells you the absolute path of your **current working directory**,
-which is where the shell will run commands and look for files by default.
+This prints the absolute path of your **current working directory**,
+which is where the shell runs commands and looks for files by default.
 
 <hr>
 Run `pwd`.
