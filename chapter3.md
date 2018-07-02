@@ -255,7 +255,7 @@ For example,
 you can get the first column from all of the seasonal data files at once like this:
 
 ```{shell}
-cut -d , -f 1 seasonal/winter.csv sesaonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
+cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
 But typing the names of many files over and over is a bad idea:
