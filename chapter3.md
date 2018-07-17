@@ -440,8 +440,8 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?s.+/.*\*.*$'), {'-d': ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r'],
                       ['uniq', 'c']],
