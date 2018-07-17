@@ -7,7 +7,9 @@ FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
 PYTHON=python3
 PIP=pip3
-SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git
+
+# SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@v0.2.0
+SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@adding-condition-and-cwd
 
 # Report start.
 echo ''
@@ -17,7 +19,6 @@ echo 'HOME_DIR: ' ${HOME_DIR}
 echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
 echo 'FILESYS: ' ${FILESYS}
-echo 'This message is to force a rebuild 49 to get shellwhat_ext 0.1.3.'
 echo
 
 # Make sure we're in the home directory.
@@ -33,7 +34,7 @@ apt-get -y install nano
 apt-get -y install unzip
 
 # Install the shellwhat_ext extensions.
-${PIP} install ${SHELLWHAT_EXT}
+${PIP} install ${SHELLWHAT_EXT} --no-deps
 ${PYTHON} -c "import sys; print('sys.version:', sys.version)"
 ${PYTHON} -c "import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 

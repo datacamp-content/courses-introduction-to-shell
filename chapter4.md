@@ -42,7 +42,7 @@ What is its value?
 Use `set | grep HISTFILESIZE` to get the line you need.
 
 *** =pre_exercise_code
-```{shell}
+```{python}
 ```
 
 *** =sct
@@ -106,7 +106,7 @@ echo $OSTYPE
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['echo', '', '+']],
+Ex() >> test_cmdline([['echo', '', re.compile(r'\$OSTYPE')]],
                      msg='Remember to put `$` in front of the variable name')
 ```
 
@@ -149,6 +149,8 @@ Define a variable called `testing` with the value `seasonal/winter.csv`.
 
 *** =hint1
 
+There should *not* be spaces between the variable's name and its value.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -177,13 +179,18 @@ using the value of the variable `testing` instead of the name of the file.
 
 *** =hint2
 
+
+Remember to use `$testing` rather than just `testing`
+(the `$` is needed to get the value of the variable).
+
+
 *** =sample_code2
 ```{shell}
 ```
 
 *** =solution2
 ```{shell}
-# Run only "head -n 1 $testing"
+# We need to re-set the variable for testing purposes for this exercise - you should only run "head -n 1 $testing"
 testing=seasonal/winter.csv
 head -n 1 $testing
 ```
@@ -191,7 +198,7 @@ head -n 1 $testing
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', '+', {'-n' : '1'}]],
+Ex() >> test_cmdline([['head', 'n:', re.compile(r'\$testing'), {'-n' : '1'}]],
                      last_line=True,
                      msg='Did you use `head` with `$testing` as an argument?') \
      >> test_expr('head -n 1 seasonal/winter.csv', msg = 'Did you use `head` with `$testing` as an argument?')
@@ -218,7 +225,7 @@ png
 
 The loop's parts are:
 
-1. The skeleton `for ...variable... in ...list...; ...body...; done
+1. The skeleton `for` ...variable... `in` ...list... `; do` ...body... `; done`
 2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
 3. The variable that keeps track of which thing the loop is currently processing (in our case, `suffix`).
 4. The body of the loop that does the processing (in our case, `echo $suffix`).
@@ -238,6 +245,8 @@ docx
 odt
 pdf
 ```
+
+Please use `suffix` as the name of the loop variable.
 
 *** =solution
 ```{shell}
@@ -276,8 +285,10 @@ before it runs the loop.
 
 *** =instructions
 
-Modify the wildcard expression so that the loop prints the names of the files in the `people` directory
-(regardless of what suffix they do or don't have).
+Modify the wildcard expression to `people/*`
+so that the loop prints the names of the files in the `people` directory
+regardless of what suffix they do or don't have.
+Please use `filename` as the name of your loop variable.
 
 *** =solution
 ```{bash}
@@ -286,7 +297,7 @@ for filename in people/*; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
+Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+([~.]/)?people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `people/*` to get the name of all the files in the `people` directory.')
 ```
@@ -327,12 +338,10 @@ for f in $files; do echo $f; done
 
 *** =hint
 
-Remember that `X` on its own is just "X",
-while `$X` is the value of the variable `X`.
+Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -351,7 +360,7 @@ When you do this,
 the shell uses the name you have typed
 rather than the value of that variable.
 
-Another common mistake is to mis-type the variable's name.
+A more common mistake for experienced users is to mis-type the variable's name.
 For example,
 if you define `datasets` like this:
 
@@ -417,9 +426,8 @@ grep -h 2017-07 seasonal/*.csv
 ```
 
 but uses a loop to process each file separately.
-Use `file` as the name of the loop variable.
-
-(Remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.)
+Please use `file` as the name of the loop variable,
+and remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.
 
 *** =solution
 ```{bash}
@@ -428,7 +436,7 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+(file)\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$\1\s*;\s*done\s*',
+Ex() >> test_student_typed(r'\s*for\s+file\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$file\s*;\s*done\s*',
                            fixed=False,
                            msg='Use `grep 2017-07 $file` as the body of the loop.')
 ```
@@ -451,7 +459,6 @@ mv July 2017.csv 2017 July data.csv
 because it looks to the shell as though you are trying to move
 four files called `July`, `2017.csv`, `2017`, and `July` (again)
 into a directory called `data.csv`.
-
 Instead,
 you have to quote the files' names
 so that the shell treats each one as a single parameter:
@@ -479,6 +486,8 @@ what will happen:
 - Nothing.
 
 *** =hint
+
+What would you think was going to happen if someone showed you the command and you didn't know what files existed?
 
 *** =feedbacks
 - Yes, but that's not all.
@@ -530,8 +539,7 @@ What will the shell do?
 You can pipe the output of `echo` to `tail`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct

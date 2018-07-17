@@ -8,7 +8,7 @@ description : >-
 
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:badd717ea4
-## How does the shell compare to a graphical user interface?
+## How does the shell compare to a desktop interface?
 
 An operating system like Windows, Linux, or Mac OS is a special kind of program.
 It controls the computer's processor, hard drive, and network connection,
@@ -55,29 +55,21 @@ Remember that a user can only interact with an operating system through a progra
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:7c1481dbd3
 ## Where am I?
 
-The part of the operating system responsible for managing files and directories
-is called the **filesystem**.
-It organizes data into files,
-which hold information,
-and directories (also called "folders"),
-which hold files or other directories.
-
-Every file or directory is identified by an **absolute path**
-that specifies how to get to it from the top (or **root**) of the filesystem.
-For example,
-the path `/home/repl` is the path to a directory called `repl` inside a directory called `home`,
-while the path `/home/repl/course.txt` identifies a file called `course.txt` inside that directory.
+The **filesystem** manages files and directories (or folders).
+Each is identified by an **absolute path**
+that shows how to reach it from the filesystem's **root directory**:
+`/home/repl` is the directory `repl` in the directory `home`,
+while `/home/repl/course.txt` is a file `course.txt` in that directory,
+and `/` on its own is the root directory.
 
 To find out where you are in the filesystem,
-type the command `pwd`
-(which stands for "print working directory").
-This tells you the absolute path of your **current working directory**,
-which is where the shell will run commands and look for files
-unless and until you tell it to do so elsewhere.
-You can also use the command `whoami` to find out who the computer thinks you are.
+run the command `pwd`
+(short for "**p**rint **w**orking **d**irectory").
+This prints the absolute path of your **current working directory**,
+which is where the shell runs commands and looks for files by default.
 
 <hr>
-Run `pwd` in the shell window to the right.
+Run `pwd`.
 Where are you right now?
 
 *** =instructions
@@ -86,11 +78,10 @@ Where are you right now?
 - `/home/repl`
 
 *** =hint
-
+Unix systems typically place all users' home directories underneath `/home`.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -104,26 +95,24 @@ Ex() >> test_mc(3, [err, err, correct])
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f5b0499835
 ## How can I identify files and directories?
 
-`pwd` tells you where you are,
-but doesn't tell you what files and directories are there.
-To find out,
-you can use the command `ls` (which is short for "listing").
-Entered on its own,
-it lists the contents of your current working directory
+`pwd` tells you where you are.
+To find out what's there,
+type `ls` (which is short for "listing") and press the enter key.
+On its own,
+`ls` lists the contents of your current directory
 (the one displayed by `pwd`).
-If you add the names of one or more files,
-`ls` will list those files,
+If you add the names of some files,
+`ls` will list them,
 and if you add the names of directories,
-it will list the contents of those directories.
+it will list their contents.
 For example,
-`ls /home/repl` will show you the contents of your starting directory
-(usually called your **home directory**),
-which is the same as what it shows you if you are in that directory and type `ls` on its own.
+`ls /home/repl` shows you what's in your starting directory
+(usually called your **home directory**).
 
 <hr>
-Use `ls` with an appropriate argument to get a listing of the files in the directory `/home/repl/seasonal`
+Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
 (which holds information on dental surgeries by date, broken down by season).
-Which of the following files is *not* in that directory?
+Which of these files is *not* in that directory?
 
 *** =instructions
 - `autumn.csv`
@@ -135,8 +124,7 @@ Which of the following files is *not* in that directory?
 If you give `ls` a path, it shows what's in that path.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -150,7 +138,7 @@ Ex() >> test_mc(2, [err, correct, err, err])
 --- type:BulletConsoleExercise key:a766184b59
 ## How else can I identify files and directories?
 
-An absolute path is like the latitude and longitude of a point on a map:
+An absolute path is like a latitude and longitude:
 it specifies the same thing no matter where you are.
 A **relative path**,
 on the other hand,
@@ -160,10 +148,10 @@ it's like saying "20 kilometers north".
 For example,
 if you are in the directory `/home/repl`,
 the relative path `seasonal` specifies the same directory as `/home/repl/seasonal`,
-and the relative path `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
-The shell can tell whether a path is absolute or relative by looking at its first character.
-If the path begins with `/`, it is absolute;
-if it doesn't,
+while `seasonal/winter.csv` specifies the same file as `/home/repl/seasonal/winter.csv`.
+The shell decides if a path is absolute or relative by looking at its first character:
+if it begins with `/`, it is absolute,
+and if it doesn't,
 it is relative.
 
 *** =pre_exercise_code
@@ -200,7 +188,8 @@ ls course.txt
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['ls', '', {'course.txt'}]],
-                     msg='Use `ls` followed by a relative path.')
+                     msg='Use `ls` followed by a relative path.') \
+     >> test_output_contains('course.txt', fixed=True, msg="'course.txt' should have been in your command's output")
 ```
 
 *** =type2: ConsoleExercise
@@ -216,6 +205,8 @@ to list the file `/home/repl/seasonal/summer.csv` (and only that file).
 
 *** =hint2
 
+Relative paths do *not* start with a leading '/'.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -228,8 +219,8 @@ ls seasonal/summer.csv
 *** =sct2
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', '', {'seasonal/summer.csv'}]],
-                     msg='Use `ls` followed by a relative path.')
+Ex() >> test_output_contains(r'seasonal/summer\.csv', fixed=False,
+                             msg="'seasonal/summer.csv' should have been in your command's output")
 ```
 
 *** =type3: ConsoleExercise
@@ -245,6 +236,8 @@ to list the contents of the directory `/home/repl/people`.
 
 *** =hint3
 
+Relative paths do not start with a leading '/'.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -257,9 +250,11 @@ ls people
 *** =sct3
 ```{python}
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', '', re.compile('people/?')]],
-                     msg='Use `ls` followed by the relative path to the directory.')
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['ls', '', rxc('^people/?')]],
+                     msg='Use `ls` followed by the relative path to the directory.') \
+     >> test_output_contains(r'agarwal\.txt', fixed=False,
+                             msg="The file 'agarwal.txt' should have been in your command's output")
 ```
 
 --- type:BulletConsoleExercise key:dbdaec5610
@@ -288,9 +283,12 @@ you can use the command `cd /home/repl`.
 
 *** =instructions1
 
-Go into `/home/repl/seasonal` using a relative path.
+You are in `/home/repl`/.
+Change directory to `/home/repl/seasonal` using a relative path.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
 
 *** =sample_code1
 ```{shell}
@@ -303,9 +301,10 @@ cd seasonal
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
-                     msg='Use `cd` followed by a path.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'seasonal/?')]],
+                     msg='Use `cd` followed by a path.') \
+     >> test_cwd('/home/repl/seasonal', 'You are not in the expected directory')
 ```
 
 *** =type2: ConsoleExercise
@@ -319,6 +318,8 @@ Use `pwd` to check that you're there.
 
 *** =hint2
 
+Remember to press "enter" or "return" after entering the command.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -330,9 +331,11 @@ pwd
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_cwd
 Ex() >> test_cmdline([['pwd']],
-                     msg='Remember: "print working directory".')
+                     msg='Remember: "print working directory".') \
+     >> test_cwd('/home/repl/seasonal',
+                 msg="You are not in the expected directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -345,6 +348,8 @@ Ex() >> test_cmdline([['pwd']],
 Use `ls` without any paths to see what's in that directory.
 
 *** =hint3
+
+Remember to press "enter" or "return" after the command.
 
 *** =sample_code3
 ```{shell}
@@ -372,22 +377,23 @@ You can always give the absolute path of your parent directory to commands like 
 More often,
 though,
 you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in.
+(two dots with no spaces) means "the directory above the one I'm currently in".
 If you are in `/home/repl/seasonal`,
 then `cd ..` moves you up to `/home/repl`.
 If you use `cd ..` once again,
 it puts you in `/home`.
 One more `cd ..` puts you in the *root directory* `/`,
 which is the very top of the filesystem.
+(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
 
 A single dot on its own, `.`, always means "the current directory",
 so `ls` on its own and `ls .` do the same thing,
 while `cd .` has no effect
 (because it moves you into the directory you're currently in).
 
-One final special path is `~`
-(the tilde character, pronounced *til-duh*),
-which means "your home directory".
+One final special path is `~` (the tilde character),
+which means "your home directory",
+such as `/home/repl`.
 No matter where you are,
 `ls ~` will always list the contents of your home directory,
 and `cd ~` will always take you home.
@@ -400,27 +406,26 @@ where does `cd ~/../.` take you?
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
+- `/` (the root directory)
 
 *** =hint
 Trace the path one directory at a time.
 
 *** =feedbacks
 - No, but either `~` or `..` on its own would take you there.
-- Correct - the path means 'home directory', 'up a level', 'here'.
+- Correct! The path means 'home directory', 'up a level', 'here'.
 - No, but `.` on its own would do that.
-
-Ex() >> test_mc(2, [err1, correct, err3])
+- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
 
 --- type:BulletConsoleExercise key:832de9e74c
 ## How can I copy files?
 
-Once you have some files,
-you will often want to make copies,
-move them into other directories in order to organize them,
+You will often want to copy files,
+move them into other directories to organize them,
 or rename them.
 One command to do this is `cp`, which is short for "copy".
 If `original.txt` is an existing file,
-then the command:
+then:
 
 ```{shell}
 cp original.txt duplicate.txt
@@ -429,6 +434,14 @@ cp original.txt duplicate.txt
 creates a copy of `original.txt` called `duplicate.txt`.
 If there already was a file called `duplicate.txt`,
 it is overwritten.
+If the last parameter to `cp` is an existing directory,
+then a command like:
+
+```{shell}
+cp seasonal/autumn.csv seasonal/winter.csv backup
+```
+
+copies *all* of the files into that directory.
 
 *** =pre_exercise_code
 ```{python}
@@ -460,9 +473,12 @@ cp seasonal/summer.csv backup/summer.bck
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
-                     msg='Provide two paths to `cp`.')
+import os
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['cp', '', [rxc('(./)?seasonal/summer.csv'), rxc('(./)?backup/summer.bck')]]],
+                     msg='Provide two paths to `cp`.') \
+     >> test_condition('summer.bck' in os.listdir('/home/repl/backup'),
+                       msg="'summer.bck' doesn't appear to exist in the 'backup' directory")
 ```
 
 *** =type2: ConsoleExercise
@@ -472,18 +488,9 @@ Ex() >> test_cmdline([['cp', '', ['seasonal/summer.csv', 'backup/summer.bck']]],
 
 *** =instructions2
 
-If the last parameter to `cp` is an existing directory,
-then a command like:
-
-```{shell}
-cp seasonal/autumn.csv seasonal/winter.csv backup
-```
-
-copies *all* of those files into that directory.
-Use this fact
-to copy the spring and summer data files (located in the `seasonal` directory) into the `backup` directory
-*without* changing directory
-(i.e., run a single command from your home directory).
+You are in `/home/repl`, and there is a directory below it called `backup`.
+Copy `spring.csv` and `summer.csv` from the `seasonal` directory into `backup`
+*without* changing directory.
 
 *** =hint2
 
@@ -502,17 +509,21 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 *** =sct2
 ```{python}
 import re
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_condition
 msg = 'Provide two filenames and a directory name to `cp`.'
-Ex() >> test_or(test_cmdline([['cp', '', ['seasonal/spring.csv', 'seasonal/summer.csv', re.compile(r'backup/?')]]], msg=msg),
-                test_cmdline([['cp', '', ['seasonal/summer.csv', 'seasonal/spring.csv', re.compile(r'backup/?')]]], msg=msg))
+import os
+backup_files = os.listdir('/home/repl/backup')
+Ex() >> test_condition('spring.csv' in backup_files,
+                       msg="'spring.csv' doesn't appear to have been copied into the 'backup' directory") \
+     >> test_condition('summer.csv' in backup_files,
+                       msg="'summer.csv' doesn't appear to have been copied into the 'backup' directory")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:663a083a3c
 ## How can I move a file?
 
-While `cp` gives you a way to copy a file,
-`mv` lets you move it from one directory to another,
+While `cp` copies a file,
+`mv` moves it from one directory to another,
 just as if you had dragged it in a graphical file browser.
 It handles its parameters the same way as `cp`,
 so the command:
@@ -527,8 +538,9 @@ up one level to its parent directory
 
 *** =instructions
 
+You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
 Using a single command,
-move the spring and summer data files to the `backup` directory.
+move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
 
 *** =solution
 ```{shell}
@@ -537,11 +549,16 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 *** =sct
 ```{python}
+import os
 import re
-from shellwhat_ext import test_cmdline
-msg = 'Use two filenames and a directory name as parameters.'
-Ex() >> test_or(test_cmdline([['mv', '', ['seasonal/spring.csv', 'seasonal/summer.csv', re.compile(r'backup/?')]]], msg=msg),
-                test_cmdline([['mv', '', ['seasonal/summer.csv', 'seasonal/spring.csv', re.compile(r'backup/?')]]], msg=msg))
+from shellwhat_ext import test_cmdline, test_condition
+seasonal_files = os.listdir('/home/repl/seasonal')
+backup_files = os.listdir('/home/repl/backup')
+Ex() >> test_student_typed(r'^\s*mv', fixed=False, msg='Use two filenames and a directory name as parameters.') \
+     >> test_condition('spring.csv' in backup_files, msg="Was expecting 'spring.csv' in the 'backup' directory") \
+     >> test_condition('summer.csv' in backup_files, msg="Was expecting 'summer.csv' in the 'backup' directory") \
+     >> test_condition('spring.csv' not in seasonal_files, msg="Wasn't expecting 'spring.csv' to still be in the 'seasonal' directory") \
+     >> test_condition('summer.csv' not in seasonal_files, msg="Wasn't expecting 'summer.csv' to still be in the 'seasonal' directory")
 ```
 
 --- type:BulletConsoleExercise key:001801a652
@@ -581,6 +598,8 @@ Go into the `seasonal` directory.
 
 *** =hint1
 
+Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -593,9 +612,11 @@ cd seasonal
 *** =sct1
 ```{python}
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
-                     msg='Use `cd` to change directory.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'seasonal/?')]],
+                     msg='Use `cd` to change directory.') \
+     >> test_cwd('/home/repl/seasonal',
+                 msg="You are not in the expected directory")
 ```
 
 *** =type2: ConsoleExercise
@@ -609,6 +630,8 @@ Rename the file `winter.csv` to be `winter.csv.bck`.
 
 *** =hint2
 
+Use `mv` with the current name of the file and the name you want it to have in that order.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -620,9 +643,13 @@ mv winter.csv winter.csv.bck
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
+import os
+from shellwhat_ext import test_cmdline, test_condition
+contents = os.listdir('/home/repl/seasonal')
 Ex() >> test_cmdline([['mv', '', ['winter.csv', 'winter.csv.bck']]],
-                     msg='Use `mv` to rename a file.')
+                     msg='Use `mv` to rename a file.') \
+     >> test_condition('winter.csv.bck' in contents, "Was expecting 'winter.csv.bck' to be in the directory") \
+     >> test_condition('winter.csv' not in contents, "Was not expecting 'winter.csv' to still be in the directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -635,6 +662,8 @@ Ex() >> test_cmdline([['mv', '', ['winter.csv', 'winter.csv.bck']]],
 Run `ls` to check that everything has worked.
 
 *** =hint3
+
+Remember to press "enter" or "return" to run the command.
 
 *** =sample_code3
 ```{shell}
@@ -655,14 +684,12 @@ Ex() >> test_cmdline([['ls']],
 --- type:BulletConsoleExercise key:2734680614
 ## How can I delete files?
 
-We can create files,
-copy them,
-and move them around;
-the only thing left is to delete them.
-The command to do this is `rm`,
+We can copy files and move them around;
+to delete them,
+we use `rm`,
 which stands for "remove".
 As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like.
+you can give `rm` the names of as many files as you'd like, so:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
@@ -688,9 +715,12 @@ your thesis is gone for good.
 
 *** =instructions1
 
+You are in `/home/repl`.
 Go into the `seasonal` directory.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
 
 *** =sample_code1
 ```{shell}
@@ -704,9 +734,11 @@ cd seasonal
 *** =sct1
 ```{python}
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?')]],
-                     msg='Use `cd` to change directory.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'seasonal/?')]],
+                     msg='Use `cd` to change directory.') \
+     >> test_cwd('/home/repl/seasonal',
+                 msg="You are not in the expected directory")
 ```
 
 *** =type2: ConsoleExercise
@@ -720,6 +752,8 @@ Remove `autumn.csv`.
 
 *** =hint2
 
+Remember that `rm` stands for "remove".
+
 *** =sample_code2
 ```{shell}
 ```
@@ -731,9 +765,12 @@ rm autumn.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
+import os
+from shellwhat_ext import test_cmdline, test_condition
 Ex() >> test_cmdline([['rm', '', 'autumn.csv']],
-                     msg='Use `rm` to remove a single file.')
+                     msg='Use `rm` to remove a single file.') \
+     >> test_condition('autumn.csv' not in os.listdir('/home/repl/seasonal'),
+                       msg="Wasn't expecting 'autumn.csv' to still be in the 'seasonal' directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -747,6 +784,8 @@ Go back to your home directory.
 
 *** =hint3
 
+If you use `cd` without any paths, it takes you home.
+
 *** =sample_code3
 ```{shell}
 ```
@@ -758,9 +797,12 @@ cd
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'\s*cd(\s+(\.\.|\~))?\s*',
+from shellwhat_ext import test_cwd
+Ex() >> test_student_typed(r'^\s*cd',
                            fixed=False,
-                           msg='Use `cd ..` to go up a level or `cd ~` to return home.')
+                           msg='Use `cd ..` to go up a level or `cd ~` to return home.') \
+     >> test_cwd('/home/repl',
+                 msg="You don't appear to be in your home directory")
 ```
 
 *** =type4: ConsoleExercise
@@ -774,6 +816,8 @@ Remove `seasonal/summer.csv` without changing directories again.
 
 *** =hint4
 
+Remember that `rm` stands for "remove".
+
 *** =sample_code4
 ```{shell}
 ```
@@ -785,9 +829,12 @@ rm seasonal/summer.csv
 
 *** =sct4
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['rm', '', 'seasonal/summer.csv']],
-                     msg='`rm` works with paths.')
+import os
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['rm', '', rxc('(./)?seasonal/summer.csv')]],
+                     msg='`rm` also works with paths! So try removing `summer.csv` without getting inside `seasonal`.') \
+     >> test_condition('summer.csv' not in os.listdir('/home/repl/seasonal'),
+                       msg="'summer.csv' should not still be in the 'seasonal' directory")
 ```
 
 --- type:BulletConsoleExercise key:63e8fbd0c2
@@ -801,13 +848,15 @@ However,
 `rm` works differently.
 
 If you try to `rm` a directory,
-the shell will print an error message telling you that it can't do that,
+the shell prints an error message telling you it can't do that,
 primarily to stop you from accidentally deleting an entire directory full of work.
 Instead,
-you must use a separate command called `rmdir`.
+you can use a separate command called `rmdir`.
 For added safety,
 it only works when the directory is empty,
-so you must delete all the files in a directory *before* you delete the directory.
+so you must delete the files in a directory *before* you delete the directory.
+(Experienced users can use the `-r` option to `rm` to get the same effect;
+we will discuss command options in the next chapter.)
 
 *** =pre_exercise_code
 ```{python}
@@ -825,6 +874,8 @@ delete the file `agarwal.txt` in the `people` directory.
 
 *** =hint1
 
+Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -836,9 +887,12 @@ rm people/agarwal.txt
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
+import os
+from shellwhat_ext import test_cmdline, test_condition
 Ex() >> test_cmdline([['rm', '', 'people/agarwal.txt']],
-                     msg='Remove the file inside `people`.')
+                     msg='Remove the file inside `people`.') \
+     >> test_condition('agarwal.txt' not in os.listdir('/home/repl/people'),
+                       msg="'agarwal.txt' should not still be in '/home/repl/people'")
 ```
 
 *** =type2: ConsoleExercise
@@ -853,6 +907,8 @@ use a single command to delete it.
 
 *** =hint2
 
+Remember that `rm` only works on files.
+
 *** =sample_code2
 ```{shell}
 ```
@@ -864,10 +920,13 @@ rmdir people
 
 *** =sct2
 ```{python}
+import os
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['rmdir', '', re.compile('people/?')]],
-                     msg='Remove the directory `people`.')
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['rmdir', '', rxc('people/?')]],
+                     msg='Remove the directory `people`.') \
+     >> test_condition('people' not in os.listdir('/home/repl'),
+                       msg="The 'people' directory should no longer be in your home directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -897,9 +956,12 @@ mkdir yearly
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
+import os
+from shellwhat_ext import test_cmdline, test_condition
 Ex() >> test_cmdline([['mkdir', '', 'yearly']],
-                     msg='Make the upper directory.')
+                     msg='Make the upper directory.') \
+     >> test_condition('yearly' in os.listdir('/home/repl'),
+                       msg="Cannot find a 'yearly' directory in your home directory")
 ```
 
 *** =type4: ConsoleExercise
@@ -928,9 +990,12 @@ mkdir yearly/2017
 
 *** =sct4
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mkdir', '', 'yearly/2017']],
-                     msg='Make the lower directory using a relative path.')
+import os
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['mkdir', '', rxc('yearly/2017')]],
+                     msg='Make the lower directory using a relative path.') \
+     >> test_condition('2017' in os.listdir('/home/repl/yearly'),
+                       msg="Cannot find a '2017' directory in '/home/repl/yearly'")
 ```
 
 --- type:BulletConsoleExercise key:b1990e9a42
@@ -939,7 +1004,9 @@ Ex() >> test_cmdline([['mkdir', '', 'yearly/2017']],
 You will often create intermediate files when analyzing data.
 Rather than storing them in your home directory,
 you can put them in `/tmp`,
-which is where programs typically keep files that they only need briefly.
+which is where people and programs often keep files they only need briefly.
+(Note that `/tmp` is immediately below the root directory `/`,
+*not* below your home directory.)
 This wrap-up exercise will show you how to do that.
 
 *** =pre_exercise_code
@@ -952,9 +1019,11 @@ This wrap-up exercise will show you how to do that.
 *** =xp1: 10
 
 *** =instructions1
-Go into the `/tmp` directory.
+Use `cd` to go into `/tmp`.
 
 *** =hint1
+
+Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
 
 *** =sample_code1
 ```{shell}
@@ -968,9 +1037,11 @@ cd /tmp
 *** =sct1
 ```{python}
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
-                     msg='Change your directory to `/tmp`.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'^/tmp/?')]],
+                     msg='Change your directory to `/tmp`.') \
+     >> test_cwd('/tmp',
+                 msg="Expected to be in '/tmp'")
 ```
 
 
@@ -983,6 +1054,8 @@ Ex() >> test_cmdline([['cd', '', re.compile(r'/tmp/?')]],
 List the contents of `/tmp` *without* typing a directory name.
 
 *** =hint2
+
+If you don't tell `ls` what to list, it shows you what's in your current directory.
 
 *** =sample_code2
 ```{shell}
@@ -1006,7 +1079,7 @@ Ex() >> test_cmdline([['ls']],
 *** =xp3: 20
 
 *** =instructions3
-Make a new directory called `scratch`.
+Make a new directory inside `/tmp` called `scratch`.
 
 *** =hint3
 Use `mkdir` to make directories.
@@ -1022,9 +1095,12 @@ mkdir scratch
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mkdir', '', 'scratch']],
-                     msg='Use `mkdir` followed by the relative path of the directory you want to create.')
+import os
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['mkdir', '', rxc('(./)?scratch')]],
+                     msg='Use `mkdir` followed by the relative path of the directory you want to create.') \
+     >> test_condition('scratch' in os.listdir('/tmp'),
+                       msg="Cannot find a 'scratch' directory under '/tmp'")
 ```
 
 *** =type4: ConsoleExercise
@@ -1033,8 +1109,10 @@ Ex() >> test_cmdline([['mkdir', '', 'scratch']],
 *** =xp4: 30
 
 *** =instructions4
-Move `/home/repl/people/agarwal.txt` into `/tmp`
-using the `~` shortcut for your home directory.
+Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`
+using the `~` shortcut for your home directory
+and a relative path for the second
+rather than the absolute path.
 
 *** =sample_code4
 ```{shell}
@@ -1042,13 +1120,16 @@ using the `~` shortcut for your home directory.
 
 *** =solution4
 ```{shell}
-mv ~/people/agarwal.txt /tmp
+mv ~/people/agarwal.txt scratch
 ```
 
 *** =sct4
 ```{python}
+import os
 import re
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', re.compile(r'/tmp/?')]]],
-                     msg='Use `~/people/agarwal.txt` for the first parameter and `/tmp` for the second.')
+from shellwhat_ext import test_cmdline, test_condition, rxc
+Ex() >> test_cmdline([['mv', '', ['~/people/agarwal.txt', rxc(r'scratch')]]],
+                     msg='Use `~/people/agarwal.txt` for the first parameter and `scratch` for the second.') \
+     >> test_condition('agarwal.txt' in os.listdir('/tmp/scratch'),
+                       msg="Cannot find 'agarwal.txt' in '/tmp/scratch'")
 ```

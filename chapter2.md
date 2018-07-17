@@ -40,7 +40,10 @@ cat course.txt
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cat', '', 'course.txt']],
-                     msg='Type `cat` followed by the name of the file.')
+                     msg='Type `cat` followed by the name of the file.') \
+     >> test_output_contains('Introduction to the Unix Shell',
+                             msg="That doesn't appear to be the right file")
+# Note: only checking part of the first line of output.
 ```
 
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
@@ -54,9 +57,11 @@ but it has been superseded by a more powerful command called `less`.
 When you `less` a file,
 one page is displayed at a time;
 you can press spacebar to page down or type `q` to quit.
-If you are viewing several files,
-type `:n` (colon and a lower-case 'n') to move to the next file,
-or `:p` to go back to the previous one.
+
+If you give `less` the names of several files,
+you can type `:n` (colon and a lower-case 'n') to move to the next file,
+`:p` to go back to the previous one,
+or `:q` to quit.
 
 Note: If you view solutions to exercises that use `less`,
 you will see an extra command at the end that turns paging *off*
@@ -64,14 +69,12 @@ so that we can test your solutions efficiently.
 
 *** =instructions
 
-Use a single `less` command to view the contents of `seasonal/spring.csv` and `seasonal/summer.csv`
-in that order. 
-
-(Remember to press spacebar to page down and/or type `q` to quit.)
+Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
+Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
 
 *** =solution
 ```{bash}
-# Run the following command *without* '| cat': 
+# Run the following command *without* '| cat':
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
@@ -129,14 +132,17 @@ What does `head` do if there aren't 10 lines in the file?
 
 *** =hint
 
-*** =pre_exercise_code
-```{shell}
+What is the most useful thing it could do?
 
+*** =pre_exercise_code
+```{python}
 ```
 
 *** =sct
 ```{shell}
-Ex() >> test_mc(2, ['Incorrect, try again.', 'Correct!', 'Incorrect, try again.'])
+Ex() >> test_mc(2, ["Incorrect: that isn't the most useful thing it could do.",
+                    "Correct!",
+                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
 ```
 
 --- type:BulletConsoleExercise key:0b7b8ca8f7
@@ -147,9 +153,10 @@ If you start typing the name of a file and then press the tab key,
 the shell will do its best to auto-complete the path.
 For example,
 if you type `sea` and press tab,
-it will fill in the word `seasonal`.
+it will fill in the directory name `seasonal/` (with a trailing slash).
 If you then type `a` and tab,
 it will complete the path as `seasonal/autumn.csv`.
+
 If the path is ambiguous,
 such as `seasonal/s`,
 pressing tab a second time will display a list of possibilities.
@@ -172,6 +179,8 @@ Run `head seasonal/autumn.csv` without typing the full filename.
 
 *** =hint1
 
+Type as much of the path as you need to, then press tab, and repeat.
+
 *** =sample_code1
 ```{shell}
 ```
@@ -183,9 +192,12 @@ head seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition
 Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
-                     msg='Type `head s`, a tab, `a`, and a tab.')
+                     msg='Type `head s`, a tab, `a`, and a tab.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file") \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 10,
+                              msg="Expected more lines of output")
 ```
 
 *** =type2: ConsoleExercise
@@ -198,6 +210,8 @@ Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
 Run `head seasonal/spring.csv` without typing the full filename.
 
 *** =hint2
+
+Type as much of the path as you need to, then press tab, and repeat.
 
 *** =sample_code2
 ```{shell}
@@ -212,7 +226,8 @@ head seasonal/spring.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', '', 'seasonal/spring.csv']],
-                     msg='Type `head s`, a tab, `sp`, and a tab.')
+                     msg='Type `head s`, a tab, `sp`, and a tab.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -237,13 +252,13 @@ A flag's name usually indicates its purpose
 Command flags don't have to be a `-` followed by a single letter,
 but it's a widely-used convention.
 
-It's also considered good style to put all of the flags *before* any other values like filenames,
+Note: it's considered good style to put all flags *before* any filenames,
 so in this course,
 we only accept answers that do that.
 
 *** =instructions
 
-Display the first 5 lines of the winter data in the `seasonal` directory.
+Display the first 5 lines of `winter.csv` in the `seasonal` directory.
 
 *** =solution
 ```{shell}
@@ -254,7 +269,8 @@ head -n 5 seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
-                     msg='Use `head` with `-n` and the number of lines you want.')
+                     msg='Use `head` with `-n` and the number of lines you want.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
@@ -288,7 +304,7 @@ and so on.
 To help you know what is what,
 `ls` has another flag `-F` that prints a `/` after the name of every directory
 and a `*` after the name of every runnable program.
-Run `ls` with `-R`, `-F`, *and* the absolute path to your home directory
+Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
 to see everything it contains.
 (The order of the flags doesn't matter, but the directory name must come last.)
 
@@ -299,9 +315,11 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', 'RF', re.compile(r'/home/repl/?')]],
-                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['ls', 'RF', rxc(r'^(~|/home/repl)/?$')]],
+                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.') \
+     >> test_output_contains(r'\s*course.txt\s*people/\s*seasonal/', fixed=False,
+                             msg="That doesn't appear to be the right root directory.")
 ```
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
@@ -336,7 +354,8 @@ SEE ALSO
 ```
 
 `man` automatically invokes `less`,
-so you may need to press spacebar to page through the information.
+so you may need to press spacebar to page through the information
+and `:q` to quit.
 
 The one-line description under `NAME` tells you briefly what the command does,
 and the summary under `SYNOPSIS` lists all the flags it understands.
@@ -364,10 +383,13 @@ or look at the `SEE ALSO` sections of the commands you already know.
 
 *** =instructions1
 
-Read the manual page for the `tail` command.
+Read the manual page for the `tail` command to find out
+what putting a `+` sign in front of the number used with the `-n` flag does.
 (Remember to press spacebar to page down and/or type `q` to quit.)
 
 *** =hint1
+
+Remember: `man` is short for "manual".
 
 *** =sample_code1
 ```{shell}
@@ -375,7 +397,7 @@ Read the manual page for the `tail` command.
 
 *** =solution1
 ```{shell}
-# Run the following command *without* '| cat': 
+# Run the following command *without* '| cat':
 man tail | cat
 ```
 
@@ -393,9 +415,12 @@ Ex() >> test_student_typed(r'\s*man\s+tail.*',
 
 *** =instructions2
 
- Use `tail` to display all *but* the first six lines of `seasonal/spring.csv`.
+Use `tail` with `-n` and a number with a leading `+`
+to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint2
+
+Use a plus sign '+' in front of the number of lines you want displayed.
 
 *** =sample_code2
 ```{shell}
@@ -408,9 +433,11 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', re.compile(r'(~/)?seasonal/spring.csv'), {'-n' : '+7'}]],
-                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['tail', 'n:', rxc(r'^(~/)?seasonal/spring.csv$'), {'-n' : '+7'}]],
+                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 18,
+                              msg="Expected 18 lines of output")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -449,8 +476,7 @@ What command will select the first column (containing dates) from the  file `spr
 The order of the flags doesn't matter.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -511,8 +537,7 @@ first:second:third:
 Pay attention to the trailing colon.
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
@@ -552,6 +577,8 @@ Run `head summer.csv` in your home directory (which should fail).
 
 *** =hint1
 
+Tab completion won't work if there isn't a matching filename.
+
 *** =sample_code1
 ```{bash}
 
@@ -565,8 +592,8 @@ head summer.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', '', 'summer.csv']],
-                     msg='Use `head` and a filename.')
+Ex() >> test_cmdline([['head', '', 'summer.csv']], msg='Use `head` and a filename.')
+# Note: not checking output because in the wrong directory (by design).
 ```
 
 *** =type2: ConsoleExercise
@@ -583,6 +610,8 @@ Change directory to `seasonal`.
 
 *** =hint2
 
+Remember that `cd` stands for "change directory".
+
 *** =sample_code2
 ```{bash}
 
@@ -595,9 +624,11 @@ cd seasonal
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', 'seasonal']],
-                     msg='Use `cd` and a directory name.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'seasonal/?$')]],
+                     msg='Use `cd` and a directory name.') \
+     >> test_cwd('/home/repl/seasonal',
+                 msg="You are not in the expected directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -610,9 +641,10 @@ You can now repeat your previous `head` command without retyping it.
 *** =instructions3
 
 Re-run the `head` command using `!` followed by the command name.
-Do not type any spaces between `!` and what follows.
 
 *** =hint3
+
+Do not type any spaces between `!` and what follows.
 
 *** =sample_code3
 ```{bash}
@@ -625,10 +657,13 @@ Do not type any spaces between `!` and what follows.
 
 *** =sct3
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
-                           fixed=False,
+# Note: simply testing for use of 'head' - the shell history doesn't have a previous run of that
+# command, so the output is empty (which means we can't test the user output).
+from shellwhat_ext import test_output_condition, test_show_student_code, test_show_student_output
+Ex() >> test_student_typed(r'head', fixed=False,
                            msg='Use `!` followed by the name of the command.')
+#     >> test_show_student_code('STUDENT CODE') \
+#     >> test_show_student_output('STUDENT OUTPUT')
 ```
 
 *** =type4: ConsoleExercise
@@ -644,6 +679,8 @@ you must take a look at what you've done.
 Use `history` to look at what you have done.
 
 *** =hint4
+
+Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
 
 *** =sample_code4
 ```{bash}
@@ -671,9 +708,10 @@ You can now repeat your earlier `head` command using its serial number.
 *** =instructions5
 
 Re-run `head` again using `!` followed by a command number.
-Do *not* type any spaces between `!` and what follows.
 
 *** =hint5
+
+Do *not* type any spaces between `!` and what follows.
 
 *** =sample_code5
 ```{bash}
@@ -686,14 +724,16 @@ Do *not* type any spaces between `!` and what follows.
 
 *** =sct5
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
+# Note: the history of this shell doesn't include a previous 'head' command, so
+# the SCT simply checks that they used '!'.
+from shellwhat_ext import test_show_student_code
+Ex() >> test_student_typed(r'!',
                            fixed=False,
                            msg='Use `!` followed by a number.')
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
-## How can I select lines containing particular values?
+## How can I select lines containing specific values?
 
 `head` and `tail` select rows,
 `cut` selects columns,
@@ -703,7 +743,7 @@ In its simplest form,
 and prints all of the lines in those files that contain that text.
 For example,
 `grep bicuspid seasonal/winter.csv`
-prints all of the lines from the winter data that contain "bicuspid".
+prints lines from `winter.csv` that contain "bicuspid".
 
 `grep` can search for patterns as well;
 we will explore those in the next course.
@@ -727,8 +767,10 @@ What's more important right now is some of `grep`'s more common flags:
 
 *** =instructions1
 
-Find all of the lines containing the word `molar` in the autumn data
-by running a single command from your home directory.
+Find all of the lines containing the word `molar` in `seasonal/autumn.csv`
+by running a single command while in your home directory.
+Again, it's considered good practice to put flags and arguments before filenames,
+so this course only accepts solutions that do that.
 
 *** =hint1
 
@@ -745,9 +787,11 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
-                     msg='Use the relative path to the file to search.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['grep', '', ['molar', rxc(r'^([.~]/)?seasonal/autumn.csv')]]],
+                     msg='Use the relative path to the file to search.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 2,
+                              msg="Expected 2 lines of output")
 ```
 
 *** =type2: ConsoleExercise
@@ -757,9 +801,7 @@ Ex() >> test_cmdline([['grep', '', ['molar', 'seasonal/autumn.csv']]],
 
 *** =instructions2
 
-Find all of the lines that *don't* contain the word `molar` in the spring data, and show their line numbers.
-(Again, run a single command from your home directory.)
-
+Find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
 Remember,
 it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
 so in this course,
@@ -780,9 +822,10 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': None, '-n': None}]],
-                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['grep', 'vn', ['molar', rxc(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
+                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.') \
+     >> test_output_contains('1:Date,Tooth', msg="This doesn't appear to be a dental data file")
 ```
 
 *** =type3: ConsoleExercise
@@ -792,10 +835,12 @@ Ex() >> test_cmdline([['grep', 'vn', ['molar', 'seasonal/spring.csv'], {'-v': No
 
 *** =instructions3
 
-Count how many lines contain the word `incisor` in the autumn and winter data files.
+Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
 (Again, run a single command from your home directory.)
 
 *** =hint3
+
+Remember to use `-c` with `grep` to count lines.
 
 *** =sample_code3
 ```{shell}
@@ -809,10 +854,15 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+autumn = rxc(r'([.~]/)?seasonal/autumn.csv')
+winter = rxc(r'([.~]/)?seasonal/winter.csv')
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', 'seasonal/autumn.csv', 'seasonal/winter.csv'], {'-c': None}]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', 'seasonal/winter.csv', 'seasonal/autumn.csv'], {'-c': None}]], msg=msg))
+Ex() >> test_output_condition(lambda s: len(s.strip().split('\n')) == 2,
+                              msg="Expected 2 lines of output") \
+     >> test_or(test_cmdline([['grep', 'c', ['incisor', autumn, winter], {'-c': None}]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', winter, autumn], {'-c': None}]], msg=msg))
+# Note: very important to put test_or last, since nothing can chain off it as of 2018-06-13.
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
@@ -839,8 +889,7 @@ If you `cut` the output of `paste` using commas as a separator,
 would it produce the right answer?
 
 *** =pre_exercise_code
-```{shell}
-
+```{python}
 ```
 
 *** =sct
