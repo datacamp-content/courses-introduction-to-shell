@@ -73,7 +73,7 @@ and redirect that to a file,
 and then use `tail` to select the last 3:
 
 ```{shell}
-head -n 5 sesaonal/winter.csv > top.csv
+head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
@@ -191,9 +191,7 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 from shellwhat_ext import test_cmdline, test_output_does_not_contain, rxc
 Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/summer.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}]],
-                     msg='Use `cut` and `grep`.') \
-     >> test_output_does_not_contain('Tooth',
-                                     msg='"Tooth" should not be in the output')
+                     msg='Use `cut` with `-d` and `-f` on `seasonal/summer.csv` and then `grep` with `-v` and the word to exclude.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -226,12 +224,11 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline, rxc
-Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `cut`, `grep`, and `head`.') \
-     >> test_output_contains('canine', msg='The output should contain the word "canine"')
+                     msg='Use `cut` to get columns, `grep` to remove the header line, and `head` to select one row.')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
@@ -243,8 +240,9 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 *** =instructions
 
 Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
-are from July 2017.
-(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
+have dates in July 2017.
+(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.
+Remember, the two columns in the CSV file are `Date` and `Tooth`.)
 
 *** =solution
 ```{shell}
@@ -253,8 +251,8 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline, rxc
-Ex() >> test_cmdline([['grep', '', [rxc('((2017)?-07-?)|(((2017)?-)?07-)'), rxc(r'seasonal/spring.csv$')]],
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), re.compile(r'^([.~]/)?seasonal/spring.csv$')]],
                       ['wc', 'l']],
                      msg='Use `grep` and `wc`.') \
      >> test_output_contains('3', msg="That doesn't appear to be the right number of lines.")
@@ -293,20 +291,20 @@ cut -d , -f 1 seasonal/*.csv
 
 *** =instructions
 
-Write a single command to get the first three lines from each of the spring and summer data files
+Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`
 (a total of six lines of data)
 but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
 *** =solution
 ```{shell}
-head -n 3 seasonal/s* # ...or seasonal/s*.csv
+head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```
 
 *** =sct
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
+Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+(([.~]/)?s.+/s.+)\s*',
                            fixed=False,
                            msg='Remember that "spring" and "summer" both start with "s".') \
      >> test_output_contains('seasonal/spring.csv',
@@ -363,6 +361,7 @@ Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in desc
 *without* including the header "Tooth".
 Use `cut`, `grep`, and `sort` in that order,
 and remember that the names are in column 2.
+(Please use tab completion to fill in the complete filename rather than using wildcards.)
 
 *** =solution
 ```{shell}
@@ -371,8 +370,8 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline, test_output_does_not_contain, test_output_condition
-Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline
+Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
                      msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.') \
@@ -431,7 +430,8 @@ Write a pipeline to:
 - sort the output so that all occurrences of a particular tooth name are adjacent; and
 - display each tooth name once along with a count of how often it occurs.
 
-Use `uniq -c` to display unique lines with a count of how often each occurs.
+Use `uniq -c` to display unique lines with a count of how often each occurs
+rather than using `uniq` and `wc`.
 
 *** =solution
 ```{shell}
@@ -600,6 +600,7 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
+
 from shellwhat_ext import test_cmdline, test_output_condition
 Ex() >> test_cmdline([['wc', 'l', '+'],
                       ['grep' ,'v', 'total']],
@@ -615,7 +616,7 @@ Ex() >> test_cmdline([['wc', 'l', '+'],
 
 *** =instructions3
 
-Add two more stages to the pipeline that use `sort` and `head` to find the file containing the fewest lines.
+Add two more stages to the pipeline that use `sort` and `head -n 1` to find the file containing the fewest lines.
 
 *** =hint3
 
