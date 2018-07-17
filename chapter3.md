@@ -52,14 +52,18 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
+import os
+from shellwhat_ext import test_cmdline, test_file_content_condition, rxc
+Ex() >> test_cmdline([['tail', 'n:', rxc(r'seasonal/winter.csv$'), {'-n': '5'}]],
                      redirect='last.csv',
-                     msg='Use `tail` (with the proper flag) and `>` together.')
+                     msg='Use `tail` (with the proper flag) and `>` together.') \
+     >> test_file_content_condition('/home/repl/last.csv',
+                                    lambda t: len(t.strip().split()) == 5,
+                                    'Expected to find 5 lines in last.csv')
 ```
 
 --- type:BulletConsoleExercise key:f47d337593
-## How can I use one command's output as the input to another command?
+## How can I use a command's output as an input?
 
 Suppose you want to get lines from the middle of a file.
 More specifically,
@@ -105,10 +109,13 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n' : '2'}]],
+from shellwhat_ext import test_cmdline, test_file_content_condition, rxc
+Ex() >> test_cmdline([['tail', 'n:', rxc(r'seasonal/winter.csv$'), {'-n' : '2'}]],
                      redirect='bottom.csv',
-                     msg='Use `tail` and `>` together.')
+                     msg='Use `tail` and `>` together.') \
+     >> test_file_content_condition('/home/repl/bottom.csv',
+                                    lambda t: len(t.strip().split()) == 2,
+                                    'Expected to find 2 lines in bottom.csv')
 ```
 
 *** =type2: ConsoleExercise
@@ -136,13 +143,15 @@ head -n 1 bottom.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', 'bottom.csv', {'-n' : '1'}]],
-                     msg='Use `head` on the temporary file.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['head', 'n:', rxc(r'bottom.csv$'), {'-n' : '1'}]],
+                     msg='Use `head` on the temporary file.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 1,
+                              msg="Expected a single line of output")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b36aea9a1e
-## What's a better way to use one command's output as another command's input?
+## What's a better way to combine commands?
 
 Using redirection to combine commands has two drawbacks:
 
@@ -179,10 +188,12 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline, test_output_does_not_contain, rxc
+Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/summer.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}]],
-                     msg='Use `cut` and `grep`.')
+                     msg='Use `cut` and `grep`.') \
+     >> test_output_does_not_contain('Tooth',
+                                     msg='"Tooth" should not be in the output')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -215,11 +226,12 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/autumn.csv$'), {'-d' : ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `cut`, `grep`, and `head`.')
+                     msg='Use `cut`, `grep`, and `head`.') \
+     >> test_output_contains('canine', msg='The output should contain the word "canine"')
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
@@ -241,14 +253,15 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['grep', '', [rxc('((2017)?-07-?)|(((2017)?-)?07-)'), rxc(r'seasonal/spring.csv$')]],
                       ['wc', 'l']],
-                     msg='Use `grep` and `wc`.')
+                     msg='Use `grep` and `wc`.') \
+     >> test_output_contains('3', msg="That doesn't appear to be the right number of lines.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
-## How can I specify many files with a single command?
+## How can I specify many files at once?
 
 Most shell commands will work on multiple files if you give them multiple filenames.
 For example,
@@ -295,7 +308,11 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv
 from shellwhat_ext import test_cmdline
 Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
                            fixed=False,
-                           msg='Remember that "spring" and "summer" both start with "s".')
+                           msg='Remember that "spring" and "summer" both start with "s".') \
+     >> test_output_contains('seasonal/spring.csv',
+                             msg="The name of the spring data file should have been in the output") \
+     >> test_output_contains('seasonal/summer.csv',
+                             msg="The name of the summer data file should have been in the output")
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
@@ -354,11 +371,14 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline, test_output_does_not_contain, test_output_condition
+Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
-                     msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
+                     msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.') \
+     >> test_output_does_not_contain('Tooth', msg='The word "Tooth" should not be in the output') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 25,
+                              msg="The output doesn't have the expected number of lines")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
@@ -406,7 +426,7 @@ it only has to keep the most recent unique line in memory.
 
 Write a pipeline to:
 
-- get the second column from all of the data files in `seasonal`,
+- get the second column from `seasonal/winter.csv`,
 - remove the word "Tooth" from the output so that only tooth names are displayed,
 - sort the output so that all occurrences of a particular tooth name are adjacent; and
 - display each tooth name once along with a count of how often it occurs.
@@ -415,21 +435,23 @@ Use `uniq -c` to display unique lines with a count of how often each occurs.
 
 *** =solution
 ```{shell}
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
+cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c
 ```
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['cut', 'd:f:', rxc(r'seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r'],
                       ['uniq', 'c']],
-                     msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+                     msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 5,
+                              msg="Expected to find 5 different kinds of teeth")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
-## Pipes and Redirection
+## How can I save the output of a pipe?
 
 The shell lets us redirect the output of a sequence of piped commands:
 
@@ -444,9 +466,9 @@ if we try to use it in the middle, like this:
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then since all of the output from `cut` is written to `teeth-only.txt`,
-there is nothing left for `grep`,
-so it waits forever for some input.
+then all of the output from `cut` is written to `teeth-only.txt`,
+so there is nothing left for `grep`
+and it waits forever for some input.
 
 <hr>
 
@@ -493,20 +515,21 @@ note that the 'c' can be lower-case.
 Run the command:
 
 ```{shell}
-head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
+head
 ```
 
+with no arguments (so that it waits for input that will never come)
 and then stop it by typing Ctrl-C.
 
 *** =solution
 ```{bash}
 # Use 'echo' rather than actually running the command to prevent automated tests hanging up: 
-echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
+echo 'head'
 ```
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
+Ex() >> test_student_typed(r'\s*head\s*',
                            fixed=False,
                            msg="Use the control key and 'c' at the same time to stop the script.")
 ```
@@ -546,9 +569,11 @@ wc -l seasonal/*.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+']],
-                     msg='Use `wc -l` and `seasonal/*.csv`.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['wc', 'l', rxc(r'seasonal/\*.*?$')]],
+                     msg='Use `wc -l` and `seasonal/*.csv`.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 5,
+                              msg="There should be one line of output for each file, plus another for the total")
 ```
 
 *** =type2: ConsoleExercise
@@ -558,7 +583,7 @@ Ex() >> test_cmdline([['wc', 'l', '+']],
 
 *** =instructions2
 
-Add another command to the previous one using a pipe to remove the line reporting the total number of lines.
+Add another command to the previous one using a pipe to remove the line containing the word "total".
 
 *** =hint3
 
@@ -575,10 +600,12 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition
 Ex() >> test_cmdline([['wc', 'l', '+'],
                       ['grep' ,'v', 'total']],
-                     msg='Use `grep -v total` as the second stage of the pipe.')
+                     msg='Use `grep -v total` as the second stage of the pipe.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 4,
+                              msg="There should be exactly one line of output for each file")
 ```
 
 *** =type3: ConsoleExercise
@@ -605,10 +632,14 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition
 Ex() >> test_cmdline([['wc', 'l', '+'],
                       ['grep', 'v', 'total', {'-v': None}],
                       ['sort', 'n'],
                       ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `sort -n` and `head -n 1`.')
+                     msg='Use `sort -n` and `head -n 1`.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 1,
+                              msg="There should only be one line of output") \
+     >> test_output_contains('autumn.csv',
+                             msg="The file 'autumn.csv' is the shortest.")
 ```

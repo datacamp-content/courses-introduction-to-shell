@@ -7,7 +7,9 @@ FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
 PYTHON=python3
 PIP=pip3
-SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@v0.2.0
+
+# SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@v0.2.0
+SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@adding-condition-and-cwd
 
 # Report start.
 echo ''

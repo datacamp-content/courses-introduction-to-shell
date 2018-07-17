@@ -40,7 +40,10 @@ cat course.txt
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cat', '', 'course.txt']],
-                     msg='Type `cat` followed by the name of the file.')
+                     msg='Type `cat` followed by the name of the file.') \
+     >> test_output_contains('Introduction to the Unix Shell',
+                             msg="That doesn't appear to be the right file")
+# Note: only checking part of the first line of output.
 ```
 
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
@@ -189,9 +192,12 @@ head seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition
 Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
-                     msg='Type `head s`, a tab, `a`, and a tab.')
+                     msg='Type `head s`, a tab, `a`, and a tab.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file") \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 10,
+                              msg="Expected more lines of output")
 ```
 
 *** =type2: ConsoleExercise
@@ -220,7 +226,8 @@ head seasonal/spring.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', '', 'seasonal/spring.csv']],
-                     msg='Type `head s`, a tab, `sp`, and a tab.')
+                     msg='Type `head s`, a tab, `sp`, and a tab.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -262,7 +269,8 @@ head -n 5 seasonal/winter.csv
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
-                     msg='Use `head` with `-n` and the number of lines you want.')
+                     msg='Use `head` with `-n` and the number of lines you want.') \
+     >> test_output_contains('Date,Tooth', msg="That doesn't appear to be a dental data file")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
@@ -307,9 +315,11 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', 'RF', re.compile(r'^(~|/home/repl)/?$')]],
-                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['ls', 'RF', rxc(r'^(~|/home/repl)/?$')]],
+                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.') \
+     >> test_output_contains(r'\s*course.txt\s*people/\s*seasonal/', fixed=False,
+                             msg="That doesn't appear to be the right root directory.")
 ```
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
@@ -423,9 +433,11 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', re.compile(r'^(~/)?seasonal/spring.csv$'), {'-n' : '+7'}]],
-                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['tail', 'n:', rxc(r'^(~/)?seasonal/spring.csv$'), {'-n' : '+7'}]],
+                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 18,
+                              msg="Expected 18 lines of output")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -580,8 +592,8 @@ head summer.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', '', 'summer.csv']],
-                     msg='Use `head` and a filename.')
+Ex() >> test_cmdline([['head', '', 'summer.csv']], msg='Use `head` and a filename.')
+# Note: not checking output because in the wrong directory (by design).
 ```
 
 *** =type2: ConsoleExercise
@@ -612,9 +624,11 @@ cd seasonal
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?$')]],
-                     msg='Use `cd` and a directory name.')
+from shellwhat_ext import test_cmdline, test_cwd, rxc
+Ex() >> test_cmdline([['cd', '', rxc(r'seasonal/?$')]],
+                     msg='Use `cd` and a directory name.') \
+     >> test_cwd('/home/repl/seasonal',
+                 msg="You are not in the expected directory")
 ```
 
 *** =type3: ConsoleExercise
@@ -643,10 +657,13 @@ Do not type any spaces between `!` and what follows.
 
 *** =sct3
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
-                           fixed=False,
+# Note: simply testing for use of 'head' - the shell history doesn't have a previous run of that
+# command, so the output is empty (which means we can't test the user output).
+from shellwhat_ext import test_output_condition, test_show_student_code, test_show_student_output
+Ex() >> test_student_typed(r'head', fixed=False,
                            msg='Use `!` followed by the name of the command.')
+#     >> test_show_student_code('STUDENT CODE') \
+#     >> test_show_student_output('STUDENT OUTPUT')
 ```
 
 *** =type4: ConsoleExercise
@@ -707,14 +724,16 @@ Do *not* type any spaces between `!` and what follows.
 
 *** =sct5
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
+# Note: the history of this shell doesn't include a previous 'head' command, so
+# the SCT simply checks that they used '!'.
+from shellwhat_ext import test_show_student_code
+Ex() >> test_student_typed(r'!',
                            fixed=False,
                            msg='Use `!` followed by a number.')
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
-## How can I select lines containing particular values?
+## How can I select lines containing specific values?
 
 `head` and `tail` select rows,
 `cut` selects columns,
@@ -768,9 +787,11 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['molar', re.compile(r'^([.~]/)?seasonal/autumn.csv')]]],
-                     msg='Use the relative path to the file to search.')
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+Ex() >> test_cmdline([['grep', '', ['molar', rxc(r'^([.~]/)?seasonal/autumn.csv')]]],
+                     msg='Use the relative path to the file to search.') \
+     >> test_output_condition(lambda s: len(s.strip().split('\n')) == 2,
+                              msg="Expected 2 lines of output")
 ```
 
 *** =type2: ConsoleExercise
@@ -801,9 +822,10 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', re.compile(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
-                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
+from shellwhat_ext import test_cmdline, rxc
+Ex() >> test_cmdline([['grep', 'vn', ['molar', rxc(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
+                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.') \
+     >> test_output_contains('1:Date,Tooth', msg="This doesn't appear to be a dental data file")
 ```
 
 *** =type3: ConsoleExercise
@@ -832,10 +854,15 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
+from shellwhat_ext import test_cmdline, test_output_condition, rxc
+autumn = rxc(r'([.~]/)?seasonal/autumn.csv')
+winter = rxc(r'([.~]/)?seasonal/winter.csv')
 msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/autumn.csv'), re.compile(r'([.~]/)?seasonal/winter.csv')], {'-c': None}]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/winter.csv'), re.compile(r'([.~]/)?seasonal/autumn.csv')], {'-c': None}]], msg=msg))
+Ex() >> test_output_condition(lambda s: len(s.strip().split('\n')) == 2,
+                              msg="Expected 2 lines of output") \
+     >> test_or(test_cmdline([['grep', 'c', ['incisor', autumn, winter], {'-c': None}]], msg=msg),
+                test_cmdline([['grep', 'c', ['incisor', winter, autumn], {'-c': None}]], msg=msg))
+# Note: very important to put test_or last, since nothing can chain off it as of 2018-06-13.
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
