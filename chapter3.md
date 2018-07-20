@@ -370,7 +370,7 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline, test_output_does_not_contain
+from shellwhat_ext import test_cmdline, test_output_does_not_contain, test_output_condition
 Ex() >> test_cmdline([['cut', 'd:f:', re.compile(r'^([.~]/)?seasonal/winter.csv$'), {'-d': ',', '-f' : '2'}],
                       ['grep', 'v', 'Tooth', {'-v': None}],
                       ['sort', 'r']],
