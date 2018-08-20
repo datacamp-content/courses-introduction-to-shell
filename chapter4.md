@@ -51,7 +51,7 @@ err1 = "No: the shell records more history than that."
 err2 = "No: the shell records more history than that."
 correct3 = "Correct: the shell saves 2000 old commands by default on this system."
 err4 = "No: the variable `HISTFILESIZE` is there."
-Ex() >> test_mc(3, [err1, err2, correct3, err4])
+Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:afae0f33a7
@@ -105,9 +105,18 @@ echo $OSTYPE
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['echo', '', re.compile(r'\$OSTYPE')]],
-                     msg='Remember to put `$` in front of the variable name')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(),
+        multi(
+            has_code('echo', incorrect_msg="You should use `echo` in your command."),
+            has_code('OSTYPE', incorrect_msg="You should use `OSTYPE` in your command."),
+            has_code('$', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`")
+        )
+    )
+)
+Ex().success_msg("You're off to a good start. Let's carry on!")
 ```
 
 --- type:BulletConsoleExercise key:e925da48e4
@@ -162,9 +171,21 @@ testing=seasonal/winter.csv
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*testing=seasonal/winter\.csv\s*',
-                           fixed=False,
-                           msg='Set `testing` with `variable=value`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(
+            expr='echo $testing',
+            output='seasonal/winter.csv',
+            incorrect_msg="Have you used `testing=seasonal/winter.csv` to define the `testing` variable?"
+        ),
+        multi(
+            has_code("testing", incorrect_msg="You should use `testing` in your command."),
+            has_code("=", incorrect_msg="You should use the `=` sign in your command."),
+            has_code("seasonal/winter\.csv", incorrect_msg="You should use `seasonal/winter.csv` in your command.")
+        )
+    )
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -190,18 +211,26 @@ Remember to use `$testing` rather than just `testing`
 
 *** =solution2
 ```{shell}
-# We need to re-set the variable for testing purposes for this exercise - you should only run "head -n 1 $testing"
+# We need to re-set the variable for testing purposes for this exercise
+# you should only run "head -n 1 $testing"
 testing=seasonal/winter.csv
 head -n 1 $testing
 ```
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', re.compile(r'\$testing'), {'-n' : '1'}]],
-                     last_line=True,
-                     msg='Did you use `head` with `$testing` as an argument?') \
-     >> test_expr('head -n 1 seasonal/winter.csv', msg = 'Did you use `head` with `$testing` as an argument?')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_output('^Date,Tooth\s*$', incorrect_msg="Have you used `head -n 1 $testing`?"),
+        multi(
+            has_code('head', incorrect_msg="You should use `head` in your command."),
+            has_code('-n\s+1', incorrect_msg="You should use `-n 1` in your command."),
+            has_code('\$testing', incorrect_msg="you should use `$testing` in your command.")
+        )
+    )
+)
+Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:920d1887e3
@@ -255,9 +284,14 @@ for suffix in docx odt pdf; do echo $suffix; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf\s*;\s*do\s+echo\s+\$suffix\s*;\s*done\s*',
-                           fixed=False,
-                           msg='Change the list of suffix names that the loop operatores on.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(),
+        has_code(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf\s*;\s*do\s+echo\s+\$suffix\s*;\s*done\s*',
+                 incorrect_msg='Change the list of suffix names that the loop operatores on: `docx odt pdf` instead of `gif jpg png`.')
+    )
+)
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
@@ -297,9 +331,14 @@ for filename in people/*; do echo $filename; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+filename\s+in\s+([~.]/)?people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
-                           fixed=False,
-                           msg='Use `people/*` to get the name of all the files in the `people` directory.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(),
+        has_code(r'\s*for\s+filename\s+in\s+([~.]/)?people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
+                 incorrect_msg='The example uses `seasonal/*.csv`; you should use `people/*` to get the name of all the files in the `people` directory.')
+    )
+)
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
@@ -349,7 +388,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 err1 = "No: you do not have to define a variable on the same line you use it."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
 correct3 = "Correct."
-Ex() >> test_mc(3, [err1, err2, correct3])
+Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
@@ -398,7 +437,7 @@ for f in files; do echo $f; done
 
 Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
 
-*** =feedbacks
+*** =feedback
 - Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
 - No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
 - No: the variable `f` is defined automatically by the `for` loop.
@@ -436,9 +475,13 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*for\s+file\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$file\s*;\s*done\s*',
-                           fixed=False,
-                           msg='Use `grep 2017-07 $file` as the body of the loop.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(),
+        has_code(r'\s*for\s+file\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$file\s*;\s*done\s*', incorrect_msg='Use `grep 2017-07 $file` as the body of the loop.')
+    )
+)
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
@@ -489,7 +532,7 @@ what will happen:
 
 What would you think was going to happen if someone showed you the command and you didn't know what files existed?
 
-*** =feedbacks
+*** =feedback
 - Yes, but that's not all.
 - Yes, but that's not all.
 - Correct.
@@ -506,6 +549,7 @@ you must separate them with semi-colons:
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
 ```
+
 ```
 seasonal/autumn.csv
 2017-01-05,canine
@@ -548,5 +592,5 @@ err1 = "No: the loop will run, it just won't do something sensible."
 correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
 err3 = "No: the loop runs one for each of the four filenames."
 err4 = "No: the input of `tail` is the output of `echo` for each filename."
-Ex() >> test_mc(2, [err1, correct2, err3, err4])
+Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

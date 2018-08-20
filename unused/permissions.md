@@ -39,7 +39,7 @@ Use the same command shown in the lesson.
 ```{python}
 err = "No - you are looking at the wrong column."
 correct = "That's correct!"
-Ex() >> test_mc(3, [err, err, correct])
+Ex().has_chosen(3, [err, err, correct])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:3061b5a818
@@ -91,7 +91,7 @@ a1 = 'Correct!'
 a2 = 'No: the third group of characters does not contain a "w".'
 a3 = 'No: the third group of characters does not contain an "x".'
 a4 = 'No: the third group of characters contains an "r".'
-Ex() >> test_mc(1, [a1, a2, a3, a4])
+Ex().has_chosen(1, [a1, a2, a3, a4])
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f1988ccaf6
@@ -220,8 +220,7 @@ lines.sh seasonal/*.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'\s*lines\.sh\s+seasonal/\*\.csv\s*', \
-                           fixed=False, \
-                           msg='Type the name of the script and the wildcard pattern for the files.')
+Ex().has_code(r'\s*lines\.sh\s+seasonal/\*\.csv\s*',
+              fixed=False, incorrect_msg='Type the name of the script and the wildcard pattern for the files.')
 ```
 

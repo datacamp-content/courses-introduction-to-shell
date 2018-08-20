@@ -1,5 +1,3 @@
----
----
 # Citation
 
 Please cite this lesson as:

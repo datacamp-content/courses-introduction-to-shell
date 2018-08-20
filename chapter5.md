@@ -41,20 +41,26 @@ type Ctrl-O to write the file out,
 then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
-Note: if you view our solution,
-it uses `cp` instead of `nano` for our automated back end to check,
-because the back end can't edit files interactively.
-
 *** =solution
 ```{shell}
-# Run "nano names.txt" instead of the following command: 
-cp /solutions/names.txt .
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
+cp /solutions/names.txt /home/repl
 ```
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('names.txt', '/solutions/names.txt')
+patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/names.txt').multi(
+        has_code('Lovelace', incorrect_msg=patt%'Lovelace'),
+        has_code('Hopper', incorrect_msg=patt%'Hopper'),
+        has_code('Johnson', incorrect_msg=patt%'Johnson'),
+        has_code('Wilson', incorrect_msg=patt%'Wilson')
+    )
+)
+Ex().success_msg("Well done! Off to the next one!")
 ```
 
 --- type:BulletConsoleExercise key:80c3532985
@@ -103,9 +109,14 @@ cp seasonal/s*.csv ~
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('spring.csv', 'seasonal/spring.csv') \
-     >> test_compare_file_to_file('summer.csv', 'seasonal/summer.csv')
+msg="Have you used `cp seasonal/s*.csv ~` to copy the required files to your home directory?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/spring.csv', missing_msg=msg).\
+        has_code('2017-01-25,wisdom', incorrect_msg=msg),
+    check_file('/home/repl/summer.csv', missing_msg=msg).\
+        has_code('2017-01-11,canine', incorrect_msg=msg)
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -135,10 +146,16 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'hv', ['Tooth', 'spring.csv', 'summer.csv']]],
-                     redirect='temp.csv',
-                     msg='Use `-h` and `-v Tooth` with `spring.csv` and `summer.csv`.')
+msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
+msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
+        has_code('2017-08-04,canine', incorrect_msg=msg2),
+        has_code('2017-03-14,incisor', incorrect_msg=msg2),
+        has_code('2017-03-12,wisdom', incorrect_msg=msg2)
+    )
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -169,11 +186,20 @@ history | tail -n 3 > steps.txt
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['history'],
-                      ['tail', 'n:', None, {'-n' : '3'}]],
-                     redirect='steps.txt',
-                     msg='Remember to redirect the output to `steps.txt`.')
+msg1="Make sure to redirect the output of your command to `steps.txt`."
+msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    # When run by the validator, solution3 doesn't pass, so including a has_code for that
+    check_or(
+        check_file('/home/repl/steps.txt', missing_msg=msg1).multi(
+            has_code('\s+1\s+', incorrect_msg=msg2),
+            has_code('\s+3\s+history', incorrect_msg=msg2)
+        ),
+        has_code('history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
+    )
+)
+Ex().success_msg("Well done! Let's step it up!")
 ```
 
 --- type:BulletConsoleExercise key:4507a0dbd8
@@ -213,7 +239,7 @@ which produces the same output as running the commands directly.
 *** =instructions1
 
 Use `nano dates.sh` to create a file called `dates.sh`
-that uses this command:
+that contains this command:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
@@ -231,14 +257,19 @@ Put the commands shown into the file without extra blank lines or spaces.
 
 *** =solution1
 ```{shell}
-# Run "nano dates.sh" instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/dates.sh .
 ```
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('dates.sh', '/solutions/dates.sh')
+msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/dates.sh').\
+        has_code('cut -d , -f 1 seasonal/*.csv', fixed=True, incorrect_msg=msg)
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -265,21 +296,21 @@ bash dates.sh
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['bash', '', 'dates.sh']],
-                     msg='Use `bash` and the name of the file to run.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg="Have you used `bash dates.sh` to execute the file?")
+)
 ```
 
 --- type:BulletConsoleExercise key:da13667750
 ## How can I re-use pipes?
 
-A file full of shell commands is called a **[shell script](http://datacamp.github.io/glossary/#shell-script)**,
-or sometimes just a "script" for short.
-Scripts don't have to have names ending in `.sh`,
+A file full of shell commands is called a ***shell script**,
+or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
 but this lesson will use that convention
 to help you keep track of which files are scripts.
 
-Scripts may contain pipes.
+Scripts can also contain pipes.
 For example,
 if `all-dates.sh` contains this line:
 
@@ -309,11 +340,10 @@ shutil.copyfile('/solutions/teeth-start.sh', 'teeth.sh')
 
 *** =instructions1
 
-Use Nano to edit the shell script `teeth.sh`
-and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c`
-so that this script prints a count of the number of times each tooth name appears in
-the CSV files in the `seasonal` directory.
+A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
+Use Nano to edit the file and replace the two `____` placeholders
+with `seasonal/*.csv` and `-c` so that this script prints a count of the
+number of times each tooth name appears in the CSV files in the `seasonal` directory.
 
 *** =hint1
 
@@ -325,14 +355,19 @@ Use `nano teeth.sh` to edit the file.
 
 *** =solution1
 ```{shell}
-# Run "nano teeth.sh" instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/teeth.sh .
 ```
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('teeth.sh', '/solutions/teeth.sh')
+msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/teeth.sh').\
+        has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -354,7 +389,7 @@ Remember that `> teeth.out` must come *after* the command that is producing outp
 
 *** =solution2
 ```{shell}
-# We need to use 'cp' below to satisfy our automated back end.
+# We need to use 'cp' below to satisfy our automated tests.
 # You should only use the last line that runs 'bash'.
 cp /solutions/teeth.sh .
 bash teeth.sh > teeth.out
@@ -362,12 +397,14 @@ bash teeth.sh > teeth.out
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file, test_cmdline
-Ex() >> test_cmdline([['bash', '', 'teeth.sh']],
-                     redirect='teeth.out',
-                     last_line=True,
-                     msg='Run the script with `bash` and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('teeth.out', '/solutions/teeth.out')
+msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/teeth.out').multi(
+        has_code('31 canine', incorrect_msg=msg),
+        has_code('17 wisdom', incorrect_msg=msg)
+    )
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -394,9 +431,8 @@ cat teeth.out
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cat', '', 'teeth.out']],
-                     msg='Run the indicated command.')
+Ex().has_expr_output(incorrect_msg="Run `cat teeth.out` to have a look at the resulting file!")
+Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
 ```
 
 --- type:BulletConsoleExercise key:c2623b9c14
@@ -458,14 +494,19 @@ Use `nano count-records.sh` to edit the filename.
 
 *** =solution1
 ```{shell}
-# Run "nano count-records.sh" instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/count-records.sh .
 ```
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('count-records.sh', '/solutions/count-records.sh')
+msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/count-records.sh').\
+        has_code('tail\s+-q\s+-n\s+\+2\s+\$@\s+|\s+wc\s+-l', incorrect_msg=msg)
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -493,11 +534,12 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file, test_cmdline
-Ex() >> test_student_typed(r'\s*bash\s+count-records\.sh\s+.+>\s*num-records.out\s*',
-                           fixed=False,
-                           msg='Run the script with `bash` and some filenames and use `>` to redirect its output.') \
-     >> test_compare_file_to_file('num-records.out', '/solutions/num-records.out')
+msg="Have you correctly redirected the result of `bash count-records.sh seasonal/*.csv` to `num-records.out` with the `>`?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/num-records.out').has_code('92', incorrect_msg=msg)
+)
+Ex().success_msg("A job well done! Your shell power is ever-expanding!")
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4092cb4cda
@@ -547,7 +589,7 @@ Which of the following commands should be put in `get-field.sh` to do that?
 
 Remember that command-line parameters are numbered left to right.
 
-*** =feedbacks
+*** =feedback
 - No: that will try to use the filename as the number of lines to select with `head`.
 - Correct!
 - No: that will try to use the column number as the line number and vice versa.
@@ -593,14 +635,19 @@ Use `wc -l $@` to count lines in all the files given on the command line.
 
 *** =solution1
 ```{shell}
-# Run "nano range.sh" to update the file instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/range-1.sh range.sh
 ```
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-1.sh')
+msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/range.sh').\
+        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -625,14 +672,19 @@ and then `head -n 1` to select the shortest line.
 
 *** =solution2
 ```{shell}
-# Run "nano range.sh" to update the file instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/range-2.sh range.sh
 ```
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-2.sh')
+msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/range.sh').\
+        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -657,14 +709,22 @@ Copy the first line and modify the sorting order.
 
 *** =solution3
 ```{shell}
-# Run "nano range.sh" to update the file instead of the following command: 
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/range-3.sh range.sh
 ```
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('range.sh', '/solutions/range-3.sh')
+msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/range.sh').multi(
+        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg1),
+        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
+    )
+)
 ```
 
 *** =type4: ConsoleExercise
@@ -696,10 +756,15 @@ bash range.sh seasonal/*.csv > range.out
 
 *** =sct4
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*bash\s+range\.sh\s+seasonal/\*\.csv\s*>\s*range.out\s*',
-                           fixed=False,
-                           msg='Run the script with `bash` and `seasonal/*.csv` and use `>` to redirect its output.')
+msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/range.out').multi(
+        has_code('21 seasonal/autumn.csv', fixed=True, incorrect_msg=msg),
+        has_code('26 seasonal/winter.csv', fixed=True, incorrect_msg=msg)
+    )
+)
+Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
 ```
 
 --- type:BulletConsoleExercise key:6be8ca6009
@@ -721,7 +786,7 @@ done
 (You don't have to indent the commands inside the loop,
 but doing so makes things clearer.)
 
-The first line of this script is a **[comment](http://datacamp.github.io/glossary/#comment)**
+The first line of this script is a **comment**
 to tell readers what the script does.
 Comments start with the `#` character and run to the end of the line.
 Your future self will thank you for adding brief explanations like the one shown here
@@ -754,15 +819,27 @@ Remember to use `$filename` to get the current value of the loop variable.
 
 *** =solution1
 ```{shell}
-# We have to use 'cp' because our automated back end cannot edit a file.
-# Please use Nano to edit date-range.sh instead.
+# This solution uses `cp` instead of `nano`
+# because our automated tests can't edit files interactively.
 cp /solutions/date-range.sh date-range.sh
 ```
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_compare_file_to_file
-Ex() >> test_compare_file_to_file('date-range.sh', '/solutions/date-range.sh')
+msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
+msg1=msgpatt%('first', cmdpatt%'head')
+msg2=msgpatt%('second', cmdpatt%'tail')
+patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
+patt1 = patt%'head'
+patt2 = patt%'tail'
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/date-range.sh').multi(
+        has_code(patt1, incorrect_msg=msg1),
+        has_code(patt2, incorrect_msg=msg2)
+    )
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -792,9 +869,10 @@ bash date-range.sh seasonal/*.csv
 
 *** =sct2
 ```{python}
-Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*',
-                           fixed=False,
-                           msg='Use `bash date-range.sh` on `seasonal/*.csv`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg='Have you used `bash date-range.sh` on `seasonal/*.csv`?')
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -804,11 +882,8 @@ Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*
 
 *** =instructions3
 
-
 Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-
-and pipe its output to `sort`
-to see that your scripts can be used just like Unix's built-in commands.
+and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
 
 *** =hint3
 
@@ -825,9 +900,11 @@ bash date-range.sh seasonal/*.csv | sort
 
 *** =sct3
 ```{python}
-Ex() >> test_student_typed(r'.*\s*bash\s+date-range\.sh\s+seasonal/\*(\.csv)?\s*|\s*sort\s*',
-                           fixed=False,
-                           msg='Pipe `bash date-range.sh` with `seasonal/*.csv` to `sort`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg='Starting from the command for the previous instruction, `bash date-range.sh seasonal/*.csv`, add a `|` to pipe its output to `sort`.')
+)
+Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:8a162c4d54
@@ -880,5 +957,5 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 a1 = 'No, commands will not time out.'
 a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
 a3 = 'Yes! You should use Ctrl-C to stop a running program.'
-Ex() >> test_mc(3, [a1, a2, a3])
+Ex().has_chosen(3, [a1, a2, a3])
 ```
