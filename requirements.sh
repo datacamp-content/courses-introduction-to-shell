@@ -5,9 +5,7 @@ USER_GROUP=repl:repl
 COURSE_ID=course_5065
 FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
-PYTHON=python3
-PIP=pip3
-SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@v0.2.0
+SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@adding-condition-and-cwd
 
 # Report start.
 echo ''
@@ -18,6 +16,12 @@ echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
 echo 'FILESYS: ' ${FILESYS}
 echo
+
+## Install dev version of shellwhat and later version of protowhat
+## Rebuild 1-2-3-4
+pip3 install jinja2==2.10
+pip3 install protowhat==1.1.0
+pip3 install git+https://github.com/datacamp/shellwhat.git@fs/refactor --no-dependencies
 
 # Make sure we're in the home directory.
 cd ${HOME_DIR}
@@ -31,10 +35,6 @@ apt-get update
 apt-get -y install nano
 apt-get -y install unzip
 
-# Install the shellwhat_ext extensions.
-${PIP} install ${SHELLWHAT_EXT} --no-deps
-${PYTHON} -c "import sys; print('sys.version:', sys.version)"
-${PYTHON} -c "import shellwhat_ext; print('shellwhat_ext version:', shellwhat_ext.__version__)"
 
 # Unpack to the local directory.
 unzip ./${FILESYS}

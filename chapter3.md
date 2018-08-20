@@ -43,7 +43,7 @@ it works with every shell command that produces output.
 *** =instructions
 
 Save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
-(Use `tail` to get the last 5 lines.)
+(Use `tail -n 5` to get the last 5 lines.)
 
 *** =solution
 ```{shell}
@@ -52,14 +52,19 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
-                     redirect='last.csv',
-                     msg='Use `tail` (with the proper flag) and `>` together.')
+patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/last.csv').multi(
+        has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
+        has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
+    )
+)
+Ex().success_msg("Nice! Let's practice some more!")
 ```
 
 --- type:BulletConsoleExercise key:f47d337593
-## How can I use one command's output as the input to another command?
+## How can I use a command's output as an input?
 
 Suppose you want to get lines from the middle of a file.
 More specifically,
@@ -105,10 +110,14 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n' : '2'}]],
-                     redirect='bottom.csv',
-                     msg='Use `tail` and `>` together.')
+patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/bottom.csv').multi(
+        has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
+        has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
+    )
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -136,13 +145,17 @@ head -n 1 bottom.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', 'bottom.csv', {'-n' : '1'}]],
-                     msg='Use `head` on the temporary file.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
+    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+)
+
+Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b36aea9a1e
-## What's a better way to use one command's output as another command's input?
+## What's a better way to combine commands?
 
 Using redirection to combine commands has two drawbacks:
 
@@ -179,10 +192,11 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth', {'-v': None}]],
-                     msg='Use `cut` and `grep`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?')
+)
+Ex().success_msg("This may be the first time you used `|`, but it's definitely not the last!")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
@@ -204,9 +218,13 @@ will:
 
 *** =instructions
 
-Write a pipeline that uses `cut`, `grep`, and `head` in that order
-to select the first value in column 2 of `seasonal/autumn.csv`
-*after* the header "Tooth".
+In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+
+```
+cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
+```
+
+Extend this pipeline with a `head` command to only select the very first tooth name.
 
 *** =solution
 ```{shell}
@@ -215,11 +233,11 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth', {'-v': None}],
-                      ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `cut`, `grep`, and `head`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    # for some reason has_expr_output with strict=True does not work here...
+    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly.")
+)
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
@@ -229,11 +247,7 @@ The command `wc` (short for "word count") prints the number of characters, words
 You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
 *** =instructions
-
-Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
-have dates in July 2017.
-(Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.
-Remember, the two columns in the CSV file are `Date` and `Tooth`.)
+Count how many records in `seasonal/spring.csv` have dates in July 2017. To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
 
 *** =solution
 ```{shell}
@@ -242,14 +256,15 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
-                      ['wc', 'l']],
-                     msg='Use `grep` and `wc`.')
+msg="Pipe the result of `grep 2017-07 seasonal/spring.csv` into `wc`. Make sure to use the appropriate flag; you want to count the number of _lines_."
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(strict=True, incorrect_msg=msg)
+)
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
-## How can I specify many files with a single command?
+## How can I specify many files at once?
 
 Most shell commands will work on multiple files if you give them multiple filenames.
 For example,
@@ -281,9 +296,7 @@ cut -d , -f 1 seasonal/*.csv
 
 *** =instructions
 
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`
-(a total of six lines of data)
-but *not* from the autumn or winter data files.
+Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
 *** =solution
@@ -293,10 +306,11 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+(([.~]/)?s.+/s.+)\s*',
-                           fixed=False,
-                           msg='Remember that "spring" and "summer" both start with "s".')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!")
+)
+Ex().success_msg("Good work!")
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
@@ -323,7 +337,7 @@ Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` 
 
 Match each expression against each filename in turn.
 
-*** =feedbacks
+*** =feedback
 - No: `.pdf` and `.txt` are not filenames.
 - No: this will match `sandhu.pdf`.
 - No: the expression in square brackets matches only one character, not entire words.
@@ -343,11 +357,13 @@ and then `sort` to put the remaining records in order.
 
 *** =instructions
 
-Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in descending alphabetical order
-*without* including the header "Tooth".
-Use `cut`, `grep`, and `sort` in that order,
-and remember that the names are in column 2.
-(Please use tab completion to fill in the complete filename rather than using wildcards.)
+Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+
+```
+cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
+```
+
+Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
 
 *** =solution
 ```{shell}
@@ -356,11 +372,10 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth', {'-v': None}],
-                      ['sort', 'r']],
-                     msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg = "Have you used `|` to extend the pipeline with a `sort` command? Make sure to work with `seasonal/winter.csv` and to sort in descending alphabetical order with the appropriate flag.")
+)
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
@@ -408,31 +423,43 @@ it only has to keep the most recent unique line in memory.
 
 Write a pipeline to:
 
-- get the second column from all of the data files in `seasonal`,
+- get the second column from `seasonal/winter.csv`,
 - remove the word "Tooth" from the output so that only tooth names are displayed,
 - sort the output so that all occurrences of a particular tooth name are adjacent; and
 - display each tooth name once along with a count of how often it occurs.
 
-Use `uniq -c` to display unique lines with a count of how often each occurs
-rather than using `uniq` and `wc`.
+The start of your pipeline is the same as the previous exercise:
+
+```
+cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
+```
+
+Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
 
 *** =solution
 ```{shell}
-cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
+cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c
 ```
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
-                      ['grep', 'v', 'Tooth', {'-v': None}],
-                      ['sort', 'r'],
-                      ['uniq', 'c']],
-                     msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(),
+        multi(
+            has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
+                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
+            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
+            has_code('\|\s+uniq\s+-c\s*', incorrect_msg="Have you extended the command with `| uniq -c`?")
+        )
+    )
+)
+Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
-## Pipes and Redirection
+## How can I save the output of a pipe?
 
 The shell lets us redirect the output of a sequence of piped commands:
 
@@ -447,9 +474,9 @@ if we try to use it in the middle, like this:
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then since all of the output from `cut` is written to `teeth-only.txt`,
-there is nothing left for `grep`,
-so it waits forever for some input.
+then all of the output from `cut` is written to `teeth-only.txt`,
+so there is nothing left for `grep`
+and it waits forever for some input.
 
 <hr>
 
@@ -474,9 +501,7 @@ Try it out in the shell.
 
 *** =sct
 ```{python}
-Ex() >> test_mc(1, ['Correct!',
-                    'No: the shell can actually execute this.',
-                    'No: the shell can actually execute this.'])
+Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
 ```
 
 --- type:ConsoleExercise xp:100 key:d1694dbdcd
@@ -496,22 +521,22 @@ note that the 'c' can be lower-case.
 Run the command:
 
 ```{shell}
-head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
+head
 ```
 
-and then stop it by typing Ctrl-C.
+with no arguments (so that it waits for input that will never come)
+and then stop it by typing <kbd>Ctrl</kbd> + <kbd>C</kbd>.
 
 *** =solution
 ```{bash}
-# Use 'echo' rather than actually running the command to prevent automated tests hanging up:
-echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
+# This solution is different from what you should do.
+# Simply type head, hit Enter and exit the running program with Ctrl + C.
+echo 'head'
 ```
 
 *** =sct
 ```{python}
-Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
-                           fixed=False,
-                           msg="Use the control key and 'c' at the same time to stop the script.")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
 ```
 
 --- type:BulletConsoleExercise key:659d3caa48
@@ -549,9 +574,10 @@ wc -l seasonal/*.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+']],
-                     msg='Use `wc -l` and `seasonal/*.csv`.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg = "Have you used `wc` on `seasonal/*csv`? Make sure to include a flag that tells `wc` to count the lines.")
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -561,11 +587,11 @@ Ex() >> test_cmdline([['wc', 'l', '+']],
 
 *** =instructions2
 
-Add another command to the previous one using a pipe to remove the line reporting the total number of lines.
+Add another command to the previous one using a pipe to remove the line containing the word "total".
 
 *** =hint3
 
-Use `grep -v` to select lines that *don't* contain certain text.
+Use `grep -v total` to select lines that *don't* contain the word "total".
 
 *** =sample_code2
 ```{shell}
@@ -578,10 +604,14 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+'],
-                      ['grep' ,'v', 'total']],
-                     msg='Use `grep -v total` as the second stage of the pipe.')
+msg="Have you piped the result of `wc -l seasonal/*.csv` into a `grep` command with `|`? Make sure to use the flag `-v` to select lines that *don't* contain `total`."
+Ex().multi(
+    has_cwd('/home/repl'),
+    multi(
+        has_expr_output(incorrect_msg=msg),
+        check_not(has_output('total'), incorrect_msg=msg)
+    )
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -591,7 +621,7 @@ Ex() >> test_cmdline([['wc', 'l', '+'],
 
 *** =instructions3
 
-Add two more stages to the pipeline that use `sort` and `head -n 1` to find the file containing the fewest lines.
+Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
 
 *** =hint3
 
@@ -608,10 +638,10 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['wc', 'l', '+'],
-                      ['grep', 'v', 'total', {'-v': None}],
-                      ['sort', 'n'],
-                      ['head', 'n:', None, {'-n' : '1'}]],
-                     msg='Use `sort -n` and `head -n 1`.')
+msg = "Pipe the result of `wc -l seasonal/*.csv | grep -v total` to `sort -n`, which you then pipe into `head -n 1` to make the appropriate printout."
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(strict=True, incorrect_msg=msg)
+)
+Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
 ```
