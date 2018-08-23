@@ -1,0 +1,13 @@
+rules:
+    course_pct_ex_assignment_lte_reco:
+        min: 0
+        max: 1
+    course_pct_ex_code_sample_lte_reco:
+        min: 0
+        max: 1
+    course_pct_ex_code_solution_lte_reco:
+        min: 0
+        max: 1
+    mce_num_chars_assignment:
+        min: 0
+        max: 2000
