@@ -392,7 +392,7 @@ Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:4fcfb63c4f
-## What's the difference between a variable's name and its value?
+## A variable's name versus its value
 
 A common mistake is to forget to use `$` before the name of a variable.
 When you do this,
