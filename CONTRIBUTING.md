@@ -1,5 +1,3 @@
----
----
 # Contributing
 
 [DataCamp](https://www.datacamp.com/) welcomes bug reports, feature requests, and fixes. By contributing to this lesson, you agree that we may redistribute your work under [our license](LICENSE.md). In exchange, we will address your issues and/or assess your proposed changes as promptly as we can.

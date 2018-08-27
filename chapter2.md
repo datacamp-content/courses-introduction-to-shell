@@ -38,9 +38,11 @@ cat course.txt
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cat', '', 'course.txt']],
-                     msg='Type `cat` followed by the name of the file.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+)
+Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
 ```
 
 --- type:ConsoleExercise xp:100 key:d8a30a3f81
@@ -71,16 +73,20 @@ Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
 
 *** =solution
 ```{bash}
-# Run the following command *without* '| cat':
+# You can leave out the '| cat' part here:
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_student_typed(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                           fixed=False,
-                           msg='Use `less` and the filenames.  Remember that `:n` moves you to the next file.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_or(
+        has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
+                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+        has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
+    )
+)
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
@@ -137,7 +143,7 @@ What is the most useful thing it could do?
 
 *** =sct
 ```{shell}
-Ex() >> test_mc(2, ["Incorrect: that isn't the most useful thing it could do.",
+Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
                     "Correct!",
                     "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
 ```
@@ -189,9 +195,10 @@ head seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', '', 'seasonal/autumn.csv']],
-                     msg='Type `head s`, a tab, `a`, and a tab.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -218,9 +225,11 @@ head seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', '', 'seasonal/spring.csv']],
-                     msg='Type `head s`, a tab, `sp`, and a tab.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+)
+Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
@@ -260,9 +269,15 @@ head -n 5 seasonal/winter.csv
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
-                     msg='Use `head` with `-n` and the number of lines you want.')
+from shellwhat_ext import test_output_condition
+Ex().multi(
+    has_cwd('/home/repl'),
+    check_correct(
+        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
+        test_output_condition(lambda s: len(s.strip().split('\n')) == 5, msg = "The output of your command should be exactly 5 lines. Are you sure you used the flag `-n 5`?")
+    )
+)
+Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
@@ -307,9 +322,8 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['ls', 'RF', re.compile(r'^(~|/home/repl)/?$')]],
-                     msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+Ex().has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+Ex().success_msg("That's a pretty neat overview, isn't it?")
 ```
 
 --- type:BulletConsoleExercise key:7b90b8a7cd
@@ -393,9 +407,7 @@ man tail | cat
 
 *** =sct1
 ```{python}
-Ex() >> test_student_typed(r'\s*man\s+tail.*',
-                           fixed=False,
-                           msg='Use `man` and the command name.')
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
 ```
 
 *** =type2: ConsoleExercise
@@ -405,8 +417,7 @@ Ex() >> test_student_typed(r'\s*man\s+tail.*',
 
 *** =instructions2
 
-Use `tail` with `-n` and a number with a leading `+`
-to display all *but* the first six lines of `seasonal/spring.csv`.
+Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
 
 *** =hint2
 
@@ -423,9 +434,13 @@ tail -n +7 seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['tail', 'n:', re.compile(r'^(~/)?seasonal/spring.csv$'), {'-n' : '+7'}]],
-                     msg='`man` told you that using the `-n` flag with `+NUMBER` will display lines starting from NUMBER.')
+from shellwhat_ext import test_output_condition
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
+    test_output_condition(lambda s: len(s.strip().split('\n')) == 18,
+                          msg="The output of your command should be exactly 18 lines. Are you sure you used the flag `-n +7`?")
+)
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
@@ -469,7 +484,7 @@ The order of the flags doesn't matter.
 
 *** =sct
 ```{python}
-Ex() >> test_mc(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:b9bb10ae87
@@ -530,7 +545,7 @@ Pay attention to the trailing colon.
 
 *** =sct
 ```{python}
-Ex() >> test_mc(3, ['No, there is more.', 'No, there is more.', 'Correct!', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct!', 'No, `cut` does the best it can.'])
 ```
 
 --- type:TabConsoleExercise key:32c0d30049
@@ -580,8 +595,10 @@ head summer.csv
 *** =sct1
 ```{python}
 from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['head', '', 'summer.csv']],
-                     msg='Use `head` and a filename.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    test_cmdline([['head', '', 'summer.csv']], incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -612,9 +629,7 @@ cd seasonal
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['cd', '', re.compile(r'seasonal/?$')]],
-                     msg='Use `cd` and a directory name.')
+Ex().has_cwd('/home/repl/seasonal', incorrect_msg="You are not in the `seasonal` directory. Try again.")
 ```
 
 *** =type3: ConsoleExercise
@@ -626,7 +641,7 @@ You can now repeat your previous `head` command without retyping it.
 
 *** =instructions3
 
-Re-run the `head` command using `!` followed by the command name.
+Re-run the `head` command with `!head`.
 
 *** =hint3
 
@@ -643,10 +658,16 @@ Do not type any spaces between `!` and what follows.
 
 *** =sct3
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
-                           fixed=False,
-                           msg='Use `!` followed by the name of the command.')
+# !head is expanded into head summer.csv by the terminal, so manually specify expression
+# This won't work for the validator though, so we have to use check_or to satisfy it.
+Ex().multi(
+    has_cwd('/home/repl/seasonal'),
+    check_or(
+        has_expr_output(expr = 'head summer.csv',
+                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+        has_code('!head')
+    )
+)
 ```
 
 *** =type4: ConsoleExercise
@@ -676,9 +697,7 @@ history
 
 *** =sct4
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['history']],
-                     msg='Use `history` to get a list.')
+Ex().has_code('history', incorrect_msg='Use `history` to get a list.')
 ```
 
 *** =type5: ConsoleExercise
@@ -707,14 +726,21 @@ Do *not* type any spaces between `!` and what follows.
 
 *** =sct5
 ```{python}
-# FIXME: bodging the SCT to get a pass.
-Ex() >> test_student_typed(r'\s*.+\s*',
-                           fixed=False,
-                           msg='Use `!` followed by a number.')
+# !3 is expanded into head summer.csv by the terminal, so manually specify expression
+# This won't work for the validator though, so we have to use check_or to satisfy it.
+Ex().multi(
+    has_cwd('/home/repl/seasonal'),
+    check_or(
+        has_expr_output(expr = 'head summer.csv',
+                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+        has_code('!3')
+    )
+)
+Ex().success_msg("Well done! To the next one!")
 ```
 
 --- type:BulletConsoleExercise key:adf1516acf
-## How can I select lines containing particular values?
+## How can I select lines containing specific values?
 
 `head` and `tail` select rows,
 `cut` selects columns,
@@ -768,9 +794,10 @@ grep molar seasonal/autumn.csv
 
 *** =sct1
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', '', ['molar', re.compile(r'^([.~]/)?seasonal/autumn.csv')]]],
-                     msg='Use the relative path to the file to search.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output()
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -801,9 +828,10 @@ grep -v -n molar seasonal/spring.csv
 
 *** =sct2
 ```{python}
-from shellwhat_ext import test_cmdline
-Ex() >> test_cmdline([['grep', 'vn', ['molar', re.compile(r'([.~]/)?seasonal/spring.csv')], {'-v': None, '-n': None}]],
-                     msg='Use `-v` and `-n` in either order. Don\'t forget to use the spring data.')
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output()
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -832,10 +860,10 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 
 *** =sct3
 ```{python}
-from shellwhat_ext import test_cmdline
-msg = 'Use `-c` to get a count.'
-Ex() >> test_or(test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/autumn.csv'), re.compile(r'([.~]/)?seasonal/winter.csv')], {'-c': None}]], msg=msg),
-                test_cmdline([['grep', 'c', ['incisor', re.compile(r'([.~]/)?seasonal/winter.csv'), re.compile(r'([.~]/)?seasonal/autumn.csv')], {'-c': None}]], msg=msg))
+Ex().multi(
+    has_cwd('/home/repl'),
+    has_expr_output()
+)
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
@@ -870,5 +898,5 @@ would it produce the right answer?
 err1 = 'True, but it is not necessarily an error.'
 correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
 err3 = 'No, all of the winter data is there.'
-Ex() >> test_mc(2, [err1, correct2, err3])
+Ex().has_chosen(2, [err1, correct2, err3])
 ```
