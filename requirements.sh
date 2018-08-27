@@ -21,7 +21,7 @@ echo
 ## Rebuild 1-2-3-4
 pip3 install jinja2==2.10
 pip3 install protowhat==1.1.0
-pip3 install git+https://github.com/datacamp/shellwhat.git@fs/refactor --no-dependencies
+pip3 install shellwhat==1.0.0 --no-dependencies
 
 # Make sure we're in the home directory.
 cd ${HOME_DIR}
