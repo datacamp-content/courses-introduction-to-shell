@@ -593,7 +593,7 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code('\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
 )
 ```
 
@@ -693,7 +693,7 @@ history
 
 *** =sct4
 ```{python}
-Ex().has_code('history', incorrect_msg='Use `history` to get a list.')
+Ex().has_code(r'history', incorrect_msg='Use `history` to get a list.')
 ```
 
 *** =type5: ConsoleExercise
@@ -729,7 +729,7 @@ Ex().multi(
     check_or(
         has_expr_output(expr = 'head summer.csv',
                         incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
-        has_code('!3')
+        has_code(r'!3')
     )
 )
 Ex().success_msg("Well done! To the next one!")

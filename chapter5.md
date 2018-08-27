@@ -54,10 +54,10 @@ patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
-        has_code('Lovelace', incorrect_msg=patt%'Lovelace'),
-        has_code('Hopper', incorrect_msg=patt%'Hopper'),
-        has_code('Johnson', incorrect_msg=patt%'Johnson'),
-        has_code('Wilson', incorrect_msg=patt%'Wilson')
+        has_code(r'Lovelace', incorrect_msg=patt%'Lovelace'),
+        has_code(r'Hopper', incorrect_msg=patt%'Hopper'),
+        has_code(r'Johnson', incorrect_msg=patt%'Johnson'),
+        has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
 Ex().success_msg("Well done! Off to the next one!")
@@ -113,9 +113,9 @@ msg="Have you used `cp seasonal/s*.csv ~` to copy the required files to your hom
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
-        has_code('2017-01-25,wisdom', incorrect_msg=msg),
+        has_code(r'2017-01-25,wisdom', incorrect_msg=msg),
     check_file('/home/repl/summer.csv', missing_msg=msg).\
-        has_code('2017-01-11,canine', incorrect_msg=msg)
+        has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
 ```
 
@@ -151,9 +151,9 @@ msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
-        has_code('2017-08-04,canine', incorrect_msg=msg2),
-        has_code('2017-03-14,incisor', incorrect_msg=msg2),
-        has_code('2017-03-12,wisdom', incorrect_msg=msg2)
+        has_code(r'2017-08-04,canine', incorrect_msg=msg2),
+        has_code(r'2017-03-14,incisor', incorrect_msg=msg2),
+        has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
 ```
@@ -193,10 +193,10 @@ Ex().multi(
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
     check_or(
         check_file('/home/repl/steps.txt', missing_msg=msg1).multi(
-            has_code('\s+1\s+', incorrect_msg=msg2),
-            has_code('\s+3\s+history', incorrect_msg=msg2)
+            has_code(r'\s+1\s+', incorrect_msg=msg2),
+            has_code(r'\s+3\s+history', incorrect_msg=msg2)
         ),
-        has_code('history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
+        has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
 Ex().success_msg("Well done! Let's step it up!")
@@ -366,7 +366,7 @@ msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
-        has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
+        has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
 ```
 
@@ -401,8 +401,8 @@ msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.out').multi(
-        has_code('31 canine', incorrect_msg=msg),
-        has_code('17 wisdom', incorrect_msg=msg)
+        has_code(r'31 canine', incorrect_msg=msg),
+        has_code(r'17 wisdom', incorrect_msg=msg)
     )
 )
 ```
@@ -505,7 +505,7 @@ msg="Have you a replaced the blanks properly so the command in `count-records.sh
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
-        has_code('tail\s+-q\s+-n\s+\+2\s+\$@\s+|\s+wc\s+-l', incorrect_msg=msg)
+        has_code(r'tail\s+-q\s+-n\s+\+2\s+\$@\s+|\s+wc\s+-l', incorrect_msg=msg)
 )
 ```
 
@@ -537,7 +537,7 @@ bash count-records.sh seasonal/*.csv > num-records.out
 msg="Have you correctly redirected the result of `bash count-records.sh seasonal/*.csv` to `num-records.out` with the `>`?"
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/num-records.out').has_code('92', incorrect_msg=msg)
+    check_file('/home/repl/num-records.out').has_code(r'92', incorrect_msg=msg)
 )
 Ex().success_msg("A job well done! Your shell power is ever-expanding!")
 ```
@@ -646,7 +646,7 @@ msg="Have you a replaced the blanks properly so the command in `range.sh` reads 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
-        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
+        has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
 ```
 
@@ -683,7 +683,7 @@ msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file?
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
-        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
+        has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
 ```
 
@@ -721,8 +721,8 @@ msg2="Have you duplicated the first line in `range.sh` and made a small change? 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
-        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg1),
-        has_code('wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
+        has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg1),
+        has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
 ```

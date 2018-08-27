@@ -110,9 +110,9 @@ Ex().multi(
     check_correct(
         has_expr_output(),
         multi(
-            has_code('echo', incorrect_msg="You should use `echo` in your command."),
-            has_code('OSTYPE', incorrect_msg="You should use `OSTYPE` in your command."),
-            has_code('$', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`")
+            has_code(r'echo', incorrect_msg="You should use `echo` in your command."),
+            has_code(r'OSTYPE', incorrect_msg="You should use `OSTYPE` in your command."),
+            has_code(r'$', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`")
         )
     )
 )
@@ -180,9 +180,9 @@ Ex().multi(
             incorrect_msg="Have you used `testing=seasonal/winter.csv` to define the `testing` variable?"
         ),
         multi(
-            has_code("testing", incorrect_msg="You should use `testing` in your command."),
-            has_code("=", incorrect_msg="You should use the `=` sign in your command."),
-            has_code("seasonal/winter\.csv", incorrect_msg="You should use `seasonal/winter.csv` in your command.")
+            has_code(r'testing', incorrect_msg='You should use `testing` in your command.'),
+            has_code(r'=', incorrect_msg='You should use the `=` sign in your command.'),
+            has_code(r'seasonal/winter\.csv', incorrect_msg='You should use `seasonal/winter.csv` in your command.')
         )
     )
 )
@@ -224,9 +224,9 @@ Ex().multi(
     check_correct(
         has_output('^Date,Tooth\s*$', incorrect_msg="Have you used `head -n 1 $testing`?"),
         multi(
-            has_code('head', incorrect_msg="You should use `head` in your command."),
-            has_code('-n\s+1', incorrect_msg="You should use `-n 1` in your command."),
-            has_code('\$testing', incorrect_msg="you should use `$testing` in your command.")
+            has_code(r'head', incorrect_msg="You should use `head` in your command."),
+            has_code(r'-n\s+1', incorrect_msg="You should use `-n 1` in your command."),
+            has_code(r'\$testing', incorrect_msg="you should use `$testing` in your command.")
         )
     )
 )
