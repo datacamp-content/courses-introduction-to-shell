@@ -956,6 +956,6 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 ```{python}
 a1 = 'No, commands will not time out.'
 a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = 'Yes! You should use Ctrl-C to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our intro to Git course!'
+a3 = "Yes! You should use Ctrl-C to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
 Ex().has_chosen(3, [a1, a2, a3])
 ```
