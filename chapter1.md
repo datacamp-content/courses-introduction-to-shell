@@ -313,7 +313,10 @@ cd seasonal
 
 *** =sct1
 ```{python}
-Ex().has_cwd('/home/repl/seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+Ex().check_correct(
+  has_cwd('/home/repl/seasonal'),
+  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -342,7 +345,10 @@ pwd
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output()
+    check_correct(
+      has_expr_output(),
+      has_code('pwd')
+    )
 )
 ```
 
@@ -372,7 +378,10 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+    check_correct(
+      has_expr_output(),
+      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+    )
 )
 
 Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
