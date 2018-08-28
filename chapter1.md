@@ -1040,7 +1040,10 @@ cd /tmp
 
 *** =sct1
 ```{python}
-Ex().has_cwd('/tmp')
+Ex().check_correct(
+  has_cwd('/tmp'),
+  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+)
 ```
 
 
@@ -1068,8 +1071,12 @@ ls
 *** =sct2
 ```{python}
 Ex().multi(
-    has_cwd('/tmp'),
-    has_code('^\s*ls', incorrect_msg="Have you used `ls`, simply to list the files in `/tmp`, your current working directory?")
+    has_cwd("/tmp"),
+    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    check_correct(
+      has_expr_output(strict=True),
+      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+    )
 )
 ```
 
@@ -1097,7 +1104,10 @@ mkdir scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    has_dir('/tmp/scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+    check_correct(
+      has_dir('/tmp/scratch'),
+      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+    )
 )
 ```
 
