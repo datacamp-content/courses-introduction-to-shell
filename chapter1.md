@@ -898,7 +898,8 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?")
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
 )
 ```
 
@@ -963,7 +964,7 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', incorrect_msg="There is no `yearly` directiory in your home directory. Use `mkdir yearly` to create one!")
+    has_dir('/home/repl/yearly', incorrect_msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
 )
 ```
 
@@ -996,7 +997,7 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            incorrect_msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can create this directory using the relative path `yearly/2017`.")
+            incorrect_msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
 )
 Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
 ```
