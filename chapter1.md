@@ -782,7 +782,8 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove.")
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
+    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
 )
 ```
 
@@ -810,7 +811,7 @@ cd
 
 *** =sct3
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd` or `cd ~` to retrun back to the home directory")
+Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
 ```
 
 *** =type4: ConsoleExercise
@@ -839,7 +840,8 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="`summer.csv` should no longer be be in the `seasonal` directory. Have you used `rm` correctly?")
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
+    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
 )
 Ex().success_msg("Impressive stuff! Off to the next one!")
 ```
