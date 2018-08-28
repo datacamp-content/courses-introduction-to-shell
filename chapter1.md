@@ -97,7 +97,7 @@ Ex().has_chosen(3, [err, err, correct])
 
 `pwd` tells you where you are.
 To find out what's there,
-type `ls` (which is short for "listing") and press the enter key.
+type `ls` (which is short for "**l**i**s**ting") and press the enter key.
 On its own,
 `ls` lists the contents of your current directory
 (the one displayed by `pwd`).
@@ -139,7 +139,7 @@ Ex().has_chosen(2, [err, correct, err, err])
 ## How else can I identify files and directories?
 
 An absolute path is like a latitude and longitude:
-it specifies the same thing no matter where you are.
+it has the same value no matter where you are.
 A **relative path**,
 on the other hand,
 specifies a location starting from where you are:
@@ -188,7 +188,11 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_expr_output(strict=True, incorrect_msg="Your command didn't generate the right output. Use `ls` followed by a relative path.")
+    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    check_correct(
+      has_expr_output(strict=True),
+      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+    )
 )
 ```
 
@@ -220,7 +224,11 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_expr_output(incorrect_msg="Have you used `ls seasonal/summer.csv`?")
+    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    check_correct(
+      has_expr_output(strict=True),
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+    )
 )
 ```
 
@@ -251,8 +259,12 @@ ls people
 *** =sct3
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg='Use `ls` followed by the relative path to the directory: `people`.')
+    has_cwd("/home/repl"),
+    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    check_correct(
+      has_expr_output(strict=True),
+      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+    )
 )
 Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
 ```
