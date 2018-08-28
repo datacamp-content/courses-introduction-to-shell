@@ -623,7 +623,10 @@ cd seasonal
 
 *** =sct1
 ```{python}
-Ex().has_cwd('/home/repl/seasonal')
+Ex().check_correct(
+  has_cwd('/home/repl/seasonal'),
+  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+)
 ```
 
 *** =type2: ConsoleExercise
@@ -687,6 +690,13 @@ ls
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+)
+Ex().multi(
+    has_cwd("/home/repl/seasonal"),
+    check_correct(
+      has_expr_output(strict=True),
+      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+    )
 )
 Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
 ```
