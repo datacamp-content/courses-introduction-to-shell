@@ -315,6 +315,10 @@ Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home d
 to see everything it contains.
 (The order of the flags doesn't matter, but the directory name must come last.)
 
+*** =hint
+
+Your home directory can be specified using `~` or `.` or its absolute path.
+
 *** =solution
 ```{shell}
 ls -R -F /home/repl
