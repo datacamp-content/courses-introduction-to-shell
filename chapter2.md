@@ -489,7 +489,7 @@ The order of the flags doesn't matter.
 
 *** =sct
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct!', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:b9bb10ae87
