@@ -415,7 +415,7 @@ Ex().multi(
     multi(
       has_code("bash", incorrect_msg = 'Did you call `bash`?'),
       has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.sh", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
     )
   )
 )
@@ -557,10 +557,17 @@ bash count-records.sh seasonal/*.csv > num-records.out
 
 *** =sct2
 ```{python}
-msg="Have you correctly redirected the result of `bash count-records.sh seasonal/*.csv` to `num-records.out` with the `>`?"
 Ex().multi(
-    has_cwd('/home/repl'),
-    check_file('/home/repl/num-records.out').has_code(r'92', incorrect_msg=msg)
+  has_cwd('/home/repl'),
+  check_correct(
+    check_file('/home/repl/num-records.out').has_code(r'92'),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
+      has_code("seasonal/*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+    )
+  )
 )
 Ex().success_msg("A job well done! Your shell power is ever-expanding!")
 ```
