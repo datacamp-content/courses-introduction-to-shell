@@ -57,12 +57,14 @@ Ex().has_chosen(3, [err1, err2, correct3, err4])
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:afae0f33a7
 ## How can I print a variable's value?
 
-A simpler way to find a variable's value is to use a command called `echo`,
-which prints its arguments:
+A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
 
 ```{shell}
 echo hello DataCamp!
 ```
+
+prints
+
 ```
 hello DataCamp!
 ```
@@ -72,17 +74,17 @@ If you try to use it to print a variable's value like this:
 ```{shell}
 echo USER
 ```
-```
-USER
-```
 
-it will print the variable's name.
-To get the variable's value,
-you must put a dollar sign `$` in front of it:
+it will print the variable's name, `USER`.
+
+To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
 
 ```{shell}
 echo $USER
 ```
+
+prints
+
 ```
 repl
 ```
@@ -98,6 +100,10 @@ or "the value of a variable named X".)
 The variable `OSTYPE` holds the name of the kind of operating system you are using.
 Display its value using `echo`.
 
+*** =hint
+
+Call `echo` with the variable `OSTYPE` prepended by `$`.
+
 *** =solution
 ```{shell}
 echo $OSTYPE
@@ -110,13 +116,13 @@ Ex().multi(
     check_correct(
         has_expr_output(),
         multi(
-            has_code(r'echo', incorrect_msg="You should use `echo` in your command."),
-            has_code(r'OSTYPE', incorrect_msg="You should use `OSTYPE` in your command."),
-            has_code(r'$', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`")
+            has_code('echo', incorrect_msg="Did you call `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
+            has_code('$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
         )
     )
 )
-Ex().success_msg("You're off to a good start. Let's carry on!")
+Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
 ```
 
 --- type:BulletConsoleExercise key:e925da48e4
