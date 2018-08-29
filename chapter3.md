@@ -332,6 +332,11 @@ cut -d , -f 1 seasonal/*.csv
 Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
+*** =hint
+
+- The command takes the form `head -n number_of_lines filename_pattern`.
+- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+
 *** =solution
 ```{shell}
 head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
@@ -341,9 +346,11 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!")
+    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
 )
-Ex().success_msg("Good work!")
+Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
