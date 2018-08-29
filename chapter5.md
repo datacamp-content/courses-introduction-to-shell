@@ -635,6 +635,8 @@ you can create one that tells you how many records are in the shortest and longe
 i.e.,
 the range of your datasets' lengths.
 
+Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL+K` to cut the line, then `CTRL+U` twice to paste two copies of it.
+
 *** =pre_exercise_code
 ```{python}
 import shutil
@@ -788,11 +790,19 @@ bash range.sh seasonal/*.csv > range.out
 ```{python}
 msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
 Ex().multi(
-    has_cwd('/home/repl'),
+  has_cwd('/home/repl'),
+  check_correct(
     check_file('/home/repl/range.out').multi(
-        has_code('21 seasonal/autumn.csv', fixed=True, incorrect_msg=msg),
-        has_code('26 seasonal/winter.csv', fixed=True, incorrect_msg=msg)
+      has_code('21 seasonal/autumn.csv', fixed=True, incorrect_msg=msg),
+      has_code('26 seasonal/winter.csv', fixed=True, incorrect_msg=msg)
+    ),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
+      has_code("seasonal/*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+      has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
     )
+  )
 )
 Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
 ```
