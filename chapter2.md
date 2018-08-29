@@ -550,7 +550,7 @@ Pay attention to the trailing colon.
 
 *** =sct
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct!', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
 ```
 
 --- type:TabConsoleExercise key:32c0d30049
