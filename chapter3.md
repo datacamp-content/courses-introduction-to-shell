@@ -42,8 +42,11 @@ it works with every shell command that produces output.
 
 *** =instructions
 
-Save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
-(Use `tail -n 5` to get the last 5 lines.)
+Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+
+*** =hint
+
+Use `tail -n 5` to get the last 5 lines.
 
 *** =solution
 ```{shell}
@@ -56,6 +59,7 @@ patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect t
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
