@@ -589,7 +589,7 @@ What would you think was going to happen if someone showed you the command and y
 *** =feedback
 - Yes, but that's not all.
 - Yes, but that's not all.
-- Correct.
+- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
 - Unfortunately not.
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:f6d0530991
