@@ -423,7 +423,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 ```{python}
 err1 = "No: you do not have to define a variable on the same line you use it."
 err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct."
+correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
