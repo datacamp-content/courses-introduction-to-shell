@@ -306,7 +306,7 @@ Ex().multi(
       has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
       has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
       has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code('pdf;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
+      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('echo', incorrect_msg='Did you call `echo`?'),
       has_code('$filetype', incorrect_msg='Did you echo `$filetype`?'),
@@ -348,6 +348,7 @@ so that the loop prints the names of the files in the `people` directory
 regardless of what suffix they do or don't have.
 Please use `filename` as the name of your loop variable.
 
+
 *** =solution
 ```{bash}
 for filename in people/*; do echo $filename; done
@@ -356,13 +357,24 @@ for filename in people/*; do echo $filename; done
 *** =sct
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    check_correct(
-        has_expr_output(),
-        has_code(r'\s*for\s+filename\s+in\s+([~.]/)?people/\*\s*;\s*do\s+echo\s+\$filename\s*;\s*done\s*',
-                 incorrect_msg='The example uses `seasonal/*.csv`; you should use `people/*` to get the name of all the files in the `people` directory.')
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code('for', incorrect_msg='Did you call `for`?'),
+      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
+      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
+      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
+      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
+      has_code('echo', incorrect_msg='Did you call `echo`?'),
+      has_code('$filename', incorrect_msg='Did you echo `$filename`?'),
+      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
+      has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
+  )
 )
+Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
 ```
 
 --- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:153ca10317
