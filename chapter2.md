@@ -322,7 +322,10 @@ ls -R -F /home/repl
 
 *** =sct
 ```{python}
-Ex().has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+Ex().check_or(
+  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+)
 Ex().success_msg("That's a pretty neat overview, isn't it?")
 ```
 
