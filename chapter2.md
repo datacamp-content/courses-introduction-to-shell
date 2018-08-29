@@ -274,7 +274,8 @@ Ex().multi(
     check_correct(
         has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
         has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
-    )
+    ),
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
 )
 Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
 ```
