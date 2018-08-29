@@ -298,8 +298,14 @@ bash dates.sh
 *** =sct2
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Have you used `bash dates.sh` to execute the file?")
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(incorrect_msg="Have you used `bash dates.sh` to execute the file?"),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+    )
+  )
 )
 ```
 
