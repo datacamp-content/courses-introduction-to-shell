@@ -633,7 +633,10 @@ cd seasonal
 
 *** =sct2
 ```{python}
-Ex().has_cwd('/home/repl/seasonal', incorrect_msg="You are not in the `seasonal` directory. Try again.")
+Ex().check_correct(
+  has_cwd('/home/repl/seasonal'),
+  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+)
 ```
 
 *** =type3: ConsoleExercise
@@ -701,7 +704,7 @@ history
 
 *** =sct4
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` to get a list.')
+Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
 ```
 
 *** =type5: ConsoleExercise
@@ -737,7 +740,11 @@ Ex().multi(
     check_or(
         has_expr_output(expr = 'head summer.csv',
                         incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
-        has_code(r'!3')
+        # The head cmd should appear twice, at positions 1 and 3, though this will change 
+        # if the student typed a wrong answer.
+        # Since we're also checking output, this should be niche enough to ignore.
+        has_code(r'!3'),
+        has_code(r'!1') 
     )
 )
 Ex().success_msg("Well done! To the next one!")
