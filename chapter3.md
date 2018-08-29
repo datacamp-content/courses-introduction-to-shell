@@ -187,8 +187,12 @@ as the input to the command on the right.
 
 *** =instructions
 
-Write a pipeline that uses `cut` to select all of the tooth names from column 2 of `seasonal/summer.csv`
-and then `grep -v` to exclude the header line containing the word "Tooth".
+Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+
+*** =hint
+
+- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
+- The second part of the command takes the form `grep -v thing_to_match`.
 
 *** =solution
 ```{shell}
@@ -199,9 +203,10 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?')
+    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
 )
-Ex().success_msg("This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
