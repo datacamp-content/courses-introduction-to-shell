@@ -250,7 +250,7 @@ which repeat commands many times.
 If we run this command:
 
 ```{shell}
-for suffix in gif jpg png; do echo $suffix; done
+for filetype in gif jpg png; do echo $filetype; done
 ```
 
 it produces:
@@ -261,14 +261,14 @@ jpg
 png
 ```
 
-The loop's parts are:
+Notice these things about the loop:
 
-1. The skeleton `for` ...variable... `in` ...list... `; do` ...body... `; done`
+1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
 2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `suffix`).
-4. The body of the loop that does the processing (in our case, `echo $suffix`).
+3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
+4. The body of the loop that does the processing (in our case, `echo $filetype`).
 
-Notice that the body uses `$suffix` to get the variable's value instead of just `suffix`,
+Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
 just like it does with any other shell variable.
 Also notice where the semi-colons go:
 the first one comes between the list and the keyword `do`,
@@ -284,23 +284,38 @@ odt
 pdf
 ```
 
-Please use `suffix` as the name of the loop variable.
+Please use `filetype` as the name of the loop variable.
+
+*** =hint
+
+Use the code structure in the introductory text, swapping the image file types for document file types.
 
 *** =solution
 ```{shell}
-for suffix in docx odt pdf; do echo $suffix; done
+for filetype in docx odt pdf; do echo $filetype; done
 ```
 
 *** =sct
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    check_correct(
-        has_expr_output(),
-        has_code(r'\s*for\s+suffix\s+in\s+docx\s+odt\s+pdf\s*;\s*do\s+echo\s+\$suffix\s*;\s*done\s*',
-                 incorrect_msg='Change the list of suffix names that the loop operatores on: `docx odt pdf` instead of `gif jpg png`.')
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code('for', incorrect_msg='Did you call `for`?'),
+      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
+      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
+      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
+      has_code('pdf;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
+      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
+      has_code('echo', incorrect_msg='Did you call `echo`?'),
+      has_code('$filetype', incorrect_msg='Did you echo `$filetype`?'),
+      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
+      has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
+  )
 )
+Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
 ```
 
 --- type:ConsoleExercise xp:100 key:8468b70a71
