@@ -104,12 +104,12 @@ Use `cp` to copy and `~` as a shortcut for the path to your home directory.
 
 *** =solution1
 ```{shell}
-cp seasonal/s*.csv ~
+cp seasonal/s* ~
 ```
 
 *** =sct1
 ```{python}
-msg="Have you used `cp seasonal/s*.csv ~` to copy the required files to your home directory?"
+msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -117,6 +117,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
+Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
 ```
 
 *** =type2: ConsoleExercise
