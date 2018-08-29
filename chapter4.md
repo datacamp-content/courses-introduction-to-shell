@@ -177,19 +177,21 @@ testing=seasonal/winter.csv
 
 *** =sct1
 ```{python}
+# For some reason, testing the shell variable directly always passes, so we can't do the following.
+# Ex().multi(
+#     has_cwd('/home/repl'),
+#     has_expr_output(
+#         expr='echo $testing',
+#         output='seasonal/winter.csv',
+#         incorrect_msg="Have you used `testing=seasonal/winter.csv` to define the `testing` variable?"
+#     )
+# )
 Ex().multi(
     has_cwd('/home/repl'),
-    check_correct(
-        has_expr_output(
-            expr='echo $testing',
-            output='seasonal/winter.csv',
-            incorrect_msg="Have you used `testing=seasonal/winter.csv` to define the `testing` variable?"
-        ),
-        multi(
-            has_code(r'testing', incorrect_msg='You should use `testing` in your command.'),
-            has_code(r'=', incorrect_msg='You should use the `=` sign in your command.'),
-            has_code(r'seasonal/winter\.csv', incorrect_msg='You should use `seasonal/winter.csv` in your command.')
-        )
+    multi(
+        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
+        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
     )
 )
 ```
@@ -227,12 +229,13 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
+    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
     check_correct(
-        has_output('^Date,Tooth\s*$', incorrect_msg="Have you used `head -n 1 $testing`?"),
+        has_output('^Date,Tooth\s*$'),
         multi(
-            has_code(r'head', incorrect_msg="You should use `head` in your command."),
-            has_code(r'-n\s+1', incorrect_msg="You should use `-n 1` in your command."),
-            has_code(r'\$testing', incorrect_msg="you should use `$testing` in your command.")
+            has_code('head', incorrect_msg="Did you call `head`?"),
+            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
         )
     )
 )
