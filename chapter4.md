@@ -504,6 +504,10 @@ but uses a loop to process each file separately.
 Please use `file` as the name of the loop variable,
 and remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.
 
+*** =hint
+
+The loop body is the grep command shown in the instructions, with `seasonal/*.csv` replaced by `$file`.
+
 *** =solution
 ```{bash}
 for file in seasonal/*.csv; do grep 2017-07 $file; done
@@ -512,12 +516,26 @@ for file in seasonal/*.csv; do grep 2017-07 $file; done
 *** =sct
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    check_correct(
-        has_expr_output(),
-        has_code(r'\s*for\s+file\s+in\s+seasonal/\*\.csv\s*;\s*do\s+grep(\s+-h)?\s+2017-07\s+\$file\s*;\s*done\s*', incorrect_msg='Use `grep 2017-07 $file` as the body of the loop.')
+  has_cwd('/home/repl'),
+  # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
+  has_code('for', incorrect_msg='Did you call `for`?'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'), # This needs to be higher precedence than choice of loop variable
+      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
+      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
+      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
+      has_code(r'seasonal/[*.csv]*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
+      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
+      has_code('grep', incorrect_msg='Did you call `grep`?'),
+      has_code('$file', incorrect_msg='Did you echo `$file`?'),
+      has_code(r'file\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
+      has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
+  )
 )
+Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
 ```
 
 --- type:PureMultipleChoiceExercise lang:bash xp:50 key:b974b7f45a
