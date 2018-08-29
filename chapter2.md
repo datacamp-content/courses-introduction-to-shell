@@ -15,7 +15,7 @@ you may want to have a look at their contents.
 The simplest way to do this is with `cat`,
 which just prints the contents of files onto the screen.
 (Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other).
+since it will print all the files whose names you give it, one after the other.)
 
 ```{shell}
 cat agarwal.txt
