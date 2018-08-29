@@ -785,10 +785,8 @@ What's more important right now is some of `grep`'s more common flags:
 
 *** =instructions1
 
-Find all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory.
-Again, it's considered good practice to put flags and arguments before filenames,
-so this course only accepts solutions that do that.
+Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
+by running a single command while in your home directory. Don't use any flags.
 
 *** =hint1
 
@@ -806,8 +804,15 @@ grep molar seasonal/autumn.csv
 *** =sct1
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output()
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+    )
+  )
 )
 ```
 
@@ -818,11 +823,8 @@ Ex().multi(
 
 *** =instructions2
 
-Find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember,
-it's considered good style to put all of the flags *before* other values like filenames or the search term "molar",
-so in this course,
-we only accept answers that do that.
+Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
+Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
 
 *** =hint3
 
@@ -840,8 +842,17 @@ grep -v -n molar seasonal/spring.csv
 *** =sct2
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output()
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
+      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
+      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+    )
+  )
 )
 ```
 
@@ -872,8 +883,17 @@ grep -c incisor seasonal/autumn.csv seasonal/winter.csv
 *** =sct3
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output()
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
+      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+    )
+  )
 )
 ```
 
