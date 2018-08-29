@@ -287,7 +287,7 @@ Ex().multi(
       has_code("grep", incorrect_msg = "Did you call `grep`?"),
       has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
       has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),
+      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
       has_code("wc", incorrect_msg = "Did you call `wc`?"),
       has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
     )
@@ -405,6 +405,10 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 
 Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
 
+*** =hint
+
+Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+
 *** =solution
 ```{shell}
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
@@ -413,9 +417,23 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 *** =sct
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "Have you used `|` to extend the pipeline with a `sort` command? Make sure to work with `seasonal/winter.csv` and to sort in descending alphabetical order with the appropriate flag.")
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(strict=True),
+    multi(
+      has_code("cut", incorrect_msg = "Did you call `cut`?"),
+      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
+      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
+      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
+      has_code("sort", incorrect_msg = "Did you call `sort`?"),
+      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+    )
+  )
 )
+Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
