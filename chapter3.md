@@ -640,8 +640,15 @@ wc -l seasonal/*.csv
 *** =sct1
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "Have you used `wc` on `seasonal/*csv`? Make sure to include a flag that tells `wc` to count the lines.")
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(strict=True),
+    multi(
+      has_code("wc", incorrect_msg = "Did you call `wc`?"),
+      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+    )
+  )
 )
 ```
 
@@ -656,7 +663,7 @@ Add another command to the previous one using a pipe to remove the line containi
 
 *** =hint3
 
-Use `grep -v total` to select lines that *don't* contain the word "total".
+Use `grep` with the `-v` flag, seraching for `total` to select lines that *don't* contain the word "total".
 
 *** =sample_code2
 ```{shell}
@@ -669,13 +676,20 @@ wc -l seasonal/*.csv | grep -v total
 
 *** =sct2
 ```{python}
-msg="Have you piped the result of `wc -l seasonal/*.csv` into a `grep` command with `|`? Make sure to use the flag `-v` to select lines that *don't* contain `total`."
 Ex().multi(
-    has_cwd('/home/repl'),
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(strict=True),
     multi(
-        has_expr_output(incorrect_msg=msg),
-        check_not(has_output('total'), incorrect_msg=msg)
+      has_code("wc", incorrect_msg = "Did you call `wc`?"),
+      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
+      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
+      has_code("total", incorrect_msg = "Did you search for `total`?")
     )
+  )
 )
 ```
 
@@ -690,7 +704,8 @@ Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find t
 
 *** =hint3
 
-Remember to use `sort -n` to sort numerically.
+- Use `sort`'s `-n` flag to sort numerically.
+- Use `head`'s `-n` flag to limit to keeping 1 line. 
 
 *** =sample_code3
 ```{shell}
@@ -703,10 +718,23 @@ wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
 
 *** =sct3
 ```{python}
-msg = "Pipe the result of `wc -l seasonal/*.csv | grep -v total` to `sort -n`, which you then pipe into `head -n 1` to make the appropriate printout."
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(strict=True, incorrect_msg=msg)
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(strict=True),
+    multi(
+      has_code("wc", incorrect_msg = "Did you call `wc`?"),
+      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
+      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
+      has_code("total", incorrect_msg = "Did you search for `total`?"),
+      has_code("sort", incorrect_msg = "Did you call `sort`?"),
+      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
+      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+    )
+  )
 )
 Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
 ```
