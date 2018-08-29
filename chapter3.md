@@ -266,6 +266,12 @@ You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 *** =instructions
 Count how many records in `seasonal/spring.csv` have dates in July 2017. To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
 
+*** =hint
+
+- Use `head seasonal/spring.csv` to remind yourself of the date format.
+- The first part of the command tkaes the form `grep thing_to_match filename`.
+- After the pipe, `|`, call `wc` with the `-l` flag.
+
 *** =solution
 ```{shell}
 grep 2017-07 seasonal/spring.csv | wc -l
@@ -273,11 +279,21 @@ grep 2017-07 seasonal/spring.csv | wc -l
 
 *** =sct
 ```{python}
-msg="Pipe the result of `grep 2017-07 seasonal/spring.csv` into `wc`. Make sure to use the appropriate flag; you want to count the number of _lines_."
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(strict=True, incorrect_msg=msg)
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(strict=True),
+    multi(
+      has_code("grep", incorrect_msg = "Did you call `grep`?"),
+      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
+      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),
+      has_code("wc", incorrect_msg = "Did you call `wc`?"),
+      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+    )
+  )
 )
+Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
