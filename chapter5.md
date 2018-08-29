@@ -564,7 +564,7 @@ Ex().multi(
     multi(
       has_code("bash", incorrect_msg = 'Did you call `bash`?'),
       has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
       has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
     )
   )
@@ -799,7 +799,7 @@ Ex().multi(
     multi(
       has_code("bash", incorrect_msg = 'Did you call `bash`?'),
       has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-      has_code("seasonal/*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
       has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
     )
   )
@@ -910,8 +910,15 @@ bash date-range.sh seasonal/*.csv
 *** =sct2
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg='Have you used `bash date-range.sh` on `seasonal/*.csv`?')
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
+      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+    )
+  )
 )
 ```
 
@@ -941,8 +948,17 @@ bash date-range.sh seasonal/*.csv | sort
 *** =sct3
 ```{python}
 Ex().multi(
-    has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg='Starting from the command for the previous instruction, `bash date-range.sh seasonal/*.csv`, add a `|` to pipe its output to `sort`.')
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
+      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
+      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+    )
+  )
 )
 Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
 ```
