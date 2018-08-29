@@ -300,7 +300,7 @@ bash dates.sh
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
-    has_expr_output(incorrect_msg="Have you used `bash dates.sh` to execute the file?"),
+    has_expr_output(),
     multi(
       has_code("bash", incorrect_msg = 'Did you call `bash`?'),
       has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
@@ -406,11 +406,18 @@ bash teeth.sh > teeth.out
 ```{python}
 msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
 Ex().multi(
-    has_cwd('/home/repl'),
+  has_cwd('/home/repl'),
+  check_correct(
     check_file('/home/repl/teeth.out').multi(
-        has_code(r'31 canine', incorrect_msg=msg),
-        has_code(r'17 wisdom', incorrect_msg=msg)
+      has_code(r'31 canine', incorrect_msg=msg),
+      has_code(r'17 wisdom', incorrect_msg=msg)
+    ),
+    multi(
+      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
+      has_code(">\s+teeth.sh", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
     )
+  )
 )
 ```
 
@@ -438,7 +445,16 @@ cat teeth.out
 
 *** =sct3
 ```{python}
-Ex().has_expr_output(incorrect_msg="Run `cat teeth.out` to have a look at the resulting file!")
+Ex().multi(
+  has_cwd('/home/repl'),
+  check_correct(
+    has_expr_output(),
+    multi(
+      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
+      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+    )
+  )
+)
 Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
 ```
 
