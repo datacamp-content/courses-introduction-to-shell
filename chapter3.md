@@ -494,6 +494,10 @@ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 
 Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
 
+*** =hint
+
+Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+
 *** =solution
 ```{shell}
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c
@@ -509,7 +513,8 @@ Ex().multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
                      incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
             has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq\s+-c\s*', incorrect_msg="Have you extended the command with `| uniq -c`?")
+            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
+            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
         )
     )
 )
