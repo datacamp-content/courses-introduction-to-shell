@@ -236,6 +236,10 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 
 Extend this pipeline with a `head` command to only select the very first tooth name.
 
+*** =hint
+
+Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+
 *** =solution
 ```{shell}
 cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
@@ -246,8 +250,11 @@ cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly.")
+    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
+    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
 )
+Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
 ```
 
 --- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
