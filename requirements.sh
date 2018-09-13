@@ -5,7 +5,6 @@ USER_GROUP=repl:repl
 COURSE_ID=course_5065
 FILESYS=filesys.zip
 SOLUTIONS=solutions.zip
-SHELLWHAT_EXT=git+https://github.com/datacamp/shellwhat_ext.git@adding-condition-and-cwd
 
 # Report start.
 echo ''
@@ -16,12 +15,6 @@ echo 'USER_GROUP: ' ${USER_GROUP}
 echo 'COURSE_ID: ' ${COURSE_ID}
 echo 'FILESYS: ' ${FILESYS}
 echo
-
-## Install dev version of shellwhat and later version of protowhat
-## Rebuild 1-2-3-4
-pip3 install jinja2==2.10
-pip3 install protowhat==1.1.0
-pip3 install shellwhat==1.0.0 --no-dependencies
 
 # Make sure we're in the home directory.
 cd ${HOME_DIR}
