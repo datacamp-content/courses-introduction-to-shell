@@ -1,13 +1,16 @@
 ---
-title       : Combining tools
-description : >-
-  The real power of the Unix shell lies not in the individual commands,
-  but in how easily they can be combined to do new things.
-  This chapter will show you how to use this power to select the data you want,
-  and introduce commands for sorting values and removing duplicates.
+title: 'Combining tools'
+description: 'The real power of the Unix shell lies not in the individual commands, but in how easily they can be combined to do new things. This chapter will show you how to use this power to select the data you want, and introduce commands for sorting values and removing duplicates.'
+---
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:07a427d50c
 ## How can I store a command's output in a file?
+
+```yaml
+type: ConsoleExercise
+key: 07a427d50c
+lang: shell
+skills: 1
+```
 
 All of the tools you have seen so far let you name input files.
 Most don't have an option for naming an output file because they don't need one.
@@ -40,17 +43,24 @@ It isn't part of the `head` command;
 instead,
 it works with every shell command that produces output.
 
-*** =instructions
-
+`@instructions`
 Save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
 (Use `tail` to get the last 5 lines.)
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 tail -n 5 seasonal/winter.csv > last.csv
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
@@ -58,8 +68,15 @@ Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n': '5'}]],
                      msg='Use `tail` (with the proper flag) and `>` together.')
 ```
 
---- type:BulletConsoleExercise key:f47d337593
+---
+
 ## How can I use one command's output as the input to another command?
+
+```yaml
+type: BulletConsoleExercise
+key: f47d337593
+xp: 100
+```
 
 Suppose you want to get lines from the middle of a file.
 More specifically,
@@ -76,73 +93,80 @@ tail -n 3 top.csv
 A quick check confirms that this is lines 3-5 of our original file,
 because it is the last 3 lines of the first 5.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: 35bbb5520e
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: 35bbb5520e
+xp: 50
+```
 
-*** =instructions1
-
+`@instructions`
 Select the last two lines from `seasonal/winter.csv`
 and save them in a file called `bottom.csv`.
 
-*** =hint1
-
+`@hint`
 Use `tail` to select lines and `>` to redirect `tail`'s output.
 
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
+`@solution`
 ```{shell}
 tail -n 2 seasonal/winter.csv > bottom.csv
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['tail', 'n:', 'seasonal/winter.csv', {'-n' : '2'}]],
                      redirect='bottom.csv',
                      msg='Use `tail` and `>` together.')
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: c94d3936a7
+***
 
-*** =xp2: 10
+```yaml
+type: ConsoleExercise
+key: c94d3936a7
+xp: 50
+```
 
-*** =instructions2
-
+`@instructions`
 Select the first line from `bottom.csv`
 in order to get the second-to-last line of the original file.
 
-*** =hint2
-
+`@hint`
 Use `head` to select the line you want.
 
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
+`@solution`
 ```{shell}
 head -n 1 bottom.csv
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['head', 'n:', 'bottom.csv', {'-n' : '1'}]],
                      msg='Use `head` on the temporary file.')
+
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:b36aea9a1e
+---
+
 ## What's a better way to use one command's output as another command's input?
+
+```yaml
+type: ConsoleExercise
+key: b36aea9a1e
+lang: shell
+skills: 1
+```
 
 Using redirection to combine commands has two drawbacks:
 
@@ -167,17 +191,24 @@ head -n 5 seasonal/summer.csv | tail -n 3
 The pipe symbol tells the shell to use the output of the command on the left
 as the input to the command on the right.
 
-*** =instructions
-
+`@instructions`
 Write a pipeline that uses `cut` to select all of the tooth names from column 2 of `seasonal/summer.csv`
 and then `grep -v` to exclude the header line containing the word "Tooth".
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' : '2'}],
@@ -185,8 +216,16 @@ Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/summer.csv', {'-d' : ',', '-f' :
                      msg='Use `cut` and `grep`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:b8753881d6
+---
+
 ## How can I combine many commands?
+
+```yaml
+type: ConsoleExercise
+key: b8753881d6
+lang: shell
+skills: 1
+```
 
 You can chain any number of commands together.
 For example,
@@ -202,18 +241,25 @@ will:
 2. remove the header line containing the word "Date"; and
 3. select the first 10 lines of actual data.
 
-*** =instructions
-
+`@instructions`
 Write a pipeline that uses `cut`, `grep`, and `head` in that order
 to select the first value in column 2 of `seasonal/autumn.csv`
 *after* the header "Tooth".
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' : '2'}],
@@ -222,24 +268,39 @@ Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/autumn.csv', {'-d' : ',', '-f' :
                      msg='Use `cut`, `grep`, and `head`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:ae6a48d6aa
+---
+
 ## How can I count the records in a file?
+
+```yaml
+type: ConsoleExercise
+key: ae6a48d6aa
+lang: shell
+skills: 1
+```
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
 You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
 
-*** =instructions
-
+`@instructions`
 Use `grep` and `wc` in a pipe to count how many records in `seasonal/spring.csv`
 are from July 2017.
 (Use `grep` with a partial date to select the lines and `wc` with an appropriate flag to count.)
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 grep 2017-07 seasonal/spring.csv | wc -l
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'), 'seasonal/spring.csv']],
@@ -247,8 +308,16 @@ Ex() >> test_cmdline([['grep', '', [re.compile('((2017)?-07-?)|(((2017)?-)?07-)'
                      msg='Use `grep` and `wc`.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:602d47e70c
+---
+
 ## How can I specify many files with a single command?
+
+```yaml
+type: ConsoleExercise
+key: 602d47e70c
+lang: shell
+skills: 1
+```
 
 Most shell commands will work on multiple files if you give them multiple filenames.
 For example,
@@ -279,19 +348,26 @@ or:
 cut -d , -f 1 seasonal/*.csv
 ```
 
-*** =instructions
-
+`@instructions`
 Write a single command to get the first three lines from each of the spring and summer data files
 (a total of six lines of data)
 but *not* from the autumn or winter data files.
 Use a wildcard instead of spelling out the files' names in full.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 head -n 3 seasonal/s* # ...or seasonal/s*.csv
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
@@ -299,8 +375,16 @@ Ex() >> test_student_typed(r'\s*head\s+-n\s+3\s+s.+\s*',
                            msg='Remember that "spring" and "summer" both start with "s".')
 ```
 
---- type:PureMultipleChoiceExercise lang:bash xp:50 key:f8feeacd8c
+---
+
 ## What other wildcards can I use?
+
+```yaml
+type: PureMultipleChoiceExercise
+key: f8feeacd8c
+lang: bash
+xp: 50
+```
 
 The shell has other wildcards as well,
 though they are less commonly used:
@@ -313,24 +397,31 @@ though they are less commonly used:
 
 Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
 
-*** =possible_answers
+`@hint`
+Match each expression against each filename in turn.
+
+`@possible_answers`
 - `[sj]*.{.pdf, .txt}`
 - `{s*.pdf, j*.txt}`
 - `[singh,johel]{*.pdf, *.txt}`
 - [`{singh.pdf, j*.txt}`]
 
-*** =hint
-
-Match each expression against each filename in turn.
-
-*** =feedbacks
+`@feedback`
 - No: `.pdf` and `.txt` are not filenames.
 - No: this will match `sandhu.pdf`.
 - No: the expression in square brackets matches only one character, not entire words.
 - Correct!
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:f06d9e310e
+---
+
 ## How can I sort lines of text?
+
+```yaml
+type: ConsoleExercise
+key: f06d9e310e
+lang: shell
+skills: 1
+```
 
 As its name suggests,
 `sort` puts data in order.
@@ -341,19 +432,26 @@ and `-f` tells it to **f**old case (i.e., be case-insensitive).
 Pipelines often use `grep` to get rid of unwanted records
 and then `sort` to put the remaining records in order.
 
-*** =instructions
-
+`@instructions`
 Write a pipeline to sort the names of the teeth in `seasonal/winter.csv` in descending alphabetical order
 *without* including the header "Tooth".
 Use `cut`, `grep`, and `sort` in that order,
 and remember that the names are in column 2.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort -r
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : '2'}],
@@ -362,8 +460,16 @@ Ex() >> test_cmdline([['cut', 'd:f:', 'seasonal/winter.csv', {'-d': ',', '-f' : 
                      msg='Use `cut` to get the column, `grep` to get rid of the header, and `sort -r` to sort.')
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:ed77aed337
+---
+
 ## How can I remove duplicate lines?
+
+```yaml
+type: ConsoleExercise
+key: ed77aed337
+lang: shell
+skills: 1
+```
 
 Another command that is often used with `sort` is `uniq`,
 whose job is to remove duplicated lines.
@@ -403,8 +509,7 @@ all the unique lines seen so far).
 By only removing adjacent duplicates,
 it only has to keep the most recent unique line in memory.
 
-*** =instructions
-
+`@instructions`
 Write a pipeline to:
 
 - get the second column from all of the data files in `seasonal`,
@@ -414,12 +519,20 @@ Write a pipeline to:
 
 Use `uniq -c` to display unique lines with a count of how often each occurs.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c
 ```
 
-*** =sct
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
@@ -429,8 +542,17 @@ Ex() >> test_cmdline([['cut', 'd:f:', '+', {'-d': ',', '-f' : '2'}],
                      msg='Use `cut`, `grep -v`, `sort`, and `uniq -c`.')
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:4115aa25b2
+---
+
 ## Pipes and Redirection
+
+```yaml
+type: MultipleChoiceExercise
+key: 4115aa25b2
+lang: shell
+xp: 50
+skills: 1
+```
 
 The shell lets us redirect the output of a sequence of piped commands:
 
@@ -457,28 +579,34 @@ What happens if we put redirection at the front of a pipeline as in:
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
-*** =instructions
+`@possible_answers`
 - [The command's output is redirected to the file as usual.]
 - The shell reports it as an error.
 - The shell waits for input forever.
 
-*** =hint
-
+`@hint`
 Try it out in the shell.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex() >> test_mc(1, ['Correct!',
                     'No: the shell can actually execute this.',
                     'No: the shell can actually execute this.'])
 ```
 
---- type:ConsoleExercise xp:100 key:d1694dbdcd
+---
+
 ## How can I stop a running program?
+
+```yaml
+type: ConsoleExercise
+key: d1694dbdcd
+```
 
 The commands and scripts that you have run so far have all executed quickly,
 but some tasks will take minutes, hours, or even days to complete.
@@ -489,8 +617,7 @@ you can type Ctrl-C to end it.
 This is often written `^C` in Unix documentation;
 note that the 'c' can be lower-case.
 
-*** =instructions
-
+`@instructions`
 Run the command:
 
 ```{shell}
@@ -499,112 +626,124 @@ head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth
 
 and then stop it by typing Ctrl-C.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{bash}
 # Use 'echo' rather than actually running the command to prevent automated tests hanging up: 
 echo 'head -n 1 seasonal/winter.csv > winter.txt | grep -v Tooth'
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex() >> test_student_typed(r'\s*head\s+-n\s+1\s+seasonal/winter.csv\s*>\s*winter.txt\s*|\s*grep\s+-v\s+Tooth\s*',
                            fixed=False,
                            msg="Use the control key and 'c' at the same time to stop the script.")
 ```
 
---- type:BulletConsoleExercise key:659d3caa48
+---
+
 ## Wrapping up
+
+```yaml
+type: BulletConsoleExercise
+key: 659d3caa48
+xp: 100
+```
 
 To wrap up,
 you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: b1f9c8ff84
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: b1f9c8ff84
+xp: 35
+```
 
-*** =instructions1
-
+`@instructions`
 Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
 (Use a wildcard for the filenames instead of typing them all in by hand.)
 
-*** =hint1
-
+`@hint`
 Use `-l` to list only the lines and `*` to match filenames.
 
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
+`@solution`
 ```{shell}
 wc -l seasonal/*.csv
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['wc', 'l', '+']],
                      msg='Use `wc -l` and `seasonal/*.csv`.')
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: 7f94acc679
+***
 
-*** =xp2: 20
+```yaml
+type: ConsoleExercise
+key: 7f94acc679
+xp: 35
+```
 
-*** =instructions2
-
+`@instructions`
 Add another command to the previous one using a pipe to remove the line reporting the total number of lines.
 
-*** =hint3
+`@hint`
 
-Use `grep -v` to select lines that *don't* contain certain text.
 
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
+`@solution`
 ```{shell}
 wc -l seasonal/*.csv | grep -v total
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['wc', 'l', '+'],
                       ['grep' ,'v', 'total']],
                      msg='Use `grep -v total` as the second stage of the pipe.')
+
 ```
 
-*** =type3: ConsoleExercise
-*** =key3: c5f55bff6b
+***
 
-*** =xp3: 30
+```yaml
+type: ConsoleExercise
+key: c5f55bff6b
+xp: 30
+```
 
-*** =instructions3
-
+`@instructions`
 Add two more stages to the pipeline that use `sort` and `head` to find the file containing the fewest lines.
 
-*** =hint3
-
+`@hint`
 Remember to use `sort -n` to sort numerically.
 
-*** =sample_code3
-```{shell}
-```
-
-*** =solution3
+`@solution`
 ```{shell}
 wc -l seasonal/*.csv | grep -v total | sort -n | head -n 1
+
 ```
 
-*** =sct3
+`@sct`
 ```{python}
 from shellwhat_ext import test_cmdline
 Ex() >> test_cmdline([['wc', 'l', '+'],
@@ -612,4 +751,5 @@ Ex() >> test_cmdline([['wc', 'l', '+'],
                       ['sort', 'n'],
                       ['head', 'n:', None, {'-n' : '1'}]],
                      msg='Use `sort -n` and `head -n 1`.')
+
 ```
