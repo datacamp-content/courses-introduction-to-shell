@@ -1,6 +1,7 @@
 ---
 title: 'Manipulating files and directories'
 description: 'This chapter is a brief introduction to the Unix shell.  You''ll learn why it is still in use after almost fifty years, how it compares to the graphical tools you may be more familiar with, how to move around in the shell, and how to create, modify, and delete files and folders.'
+free_preview: true
 ---
 
 ## How does the shell compare to a graphical user interface?
