@@ -688,7 +688,7 @@ head
 ```
 
 with no arguments (so that it waits for input that will never come)
-and then stop it by typing <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+and then stop it by typing `Ctrl` + `C`.
 
 `@hint`
 Simply type head, hit Enter and exit the running program with Ctrl + C.
