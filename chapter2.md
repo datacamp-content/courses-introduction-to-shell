@@ -1,14 +1,14 @@
 ---
-title       : Manipulating data
-description : >-
-  The commands you saw in the previous chapter let you move things around in the filesystem.
-  This chapter will show you how to work with the data that's in those files.
-  The tools we will look at are fairly simple,
-  but are the model for everything that's more powerful.
+title: 'Manipulating data'
+description: 'The commands you saw in the previous chapter let you move things around in the filesystem. This chapter will show you how to work with the data that''s in those files. The tools we will look at are fairly simple, but are the model for everything that''s more powerful.'
+---
 
-
---- type:ConsoleExercise xp:100 key:8acc09ede3
 ## How can I view a file's contents?
+
+```yaml
+type: ConsoleExercise
+key: 8acc09ede3
+```
 
 Before you rename or delete files,
 you may want to have a look at their contents.
@@ -27,16 +27,23 @@ start: 2017-04-01
 benefits: full
 ```
 
-*** =instructions
-
+`@instructions`
 Print the contents of `course.txt` to the screen.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{bash}
 cat course.txt
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -45,8 +52,14 @@ Ex().multi(
 Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
 ```
 
---- type:ConsoleExercise xp:100 key:d8a30a3f81
+---
+
 ## How can I view a file's contents piece by piece?
+
+```yaml
+type: ConsoleExercise
+key: d8a30a3f81
+```
 
 You can use `cat` to print large files and then scroll through the output,
 but it is usually more convenient to **page** the output.
@@ -66,18 +79,25 @@ Note: If you view solutions to exercises that use `less`,
 you will see an extra command at the end that turns paging *off*
 so that we can test your solutions efficiently.
 
-*** =instructions
-
+`@instructions`
 Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
 Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{bash}
 # You can leave out the '| cat' part here:
 less seasonal/spring.csv seasonal/summer.csv | cat
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -89,8 +109,17 @@ Ex().multi(
 )
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:82bdc9af65
+---
+
 ## How can I look at the start of a file?
+
+```yaml
+type: MultipleChoiceExercise
+key: 82bdc9af65
+lang: shell
+xp: 50
+skills: 1
+```
 
 The first thing most data scientists do when given a new dataset to analyze is
 figure out what fields it contains and what values those fields have.
@@ -128,28 +157,35 @@ Date,Tooth
 What does `head` do if there aren't 10 lines in the file?
 (To find out, use it to look at the top of `people/agarwal.txt`.)
 
-*** =instructions
+`@possible_answers`
 - Print an error message because the file is too short.
 - Display as many lines as there are.
 - Display enough blank lines to bring the total to 10.
 
-*** =hint
-
+`@hint`
 What is the most useful thing it could do?
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =sct
+`@sct`
 ```{shell}
 Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
                     "Correct!",
                     "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
 ```
 
---- type:BulletConsoleExercise key:0b7b8ca8f7
+---
+
 ## How can I type less?
+
+```yaml
+type: BulletConsoleExercise
+key: 0b7b8ca8f7
+xp: 100
+```
 
 One of the shell's power tools is **tab completion**.
 If you start typing the name of a file and then press the tab key,
@@ -167,73 +203,80 @@ Typing another character or two to make your path more specific
 and then pressing tab
 will fill in the rest of the name.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: 4e30296c27
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: 4e30296c27
+xp: 50
+```
 
-*** =instructions1
-
+`@instructions`
 Run `head seasonal/autumn.csv` without typing the full filename.
 
-*** =hint1
-
+`@hint`
 Type as much of the path as you need to, then press tab, and repeat.
 
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
+`@solution`
 ```{shell}
 head seasonal/autumn.csv
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
     has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
 )
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: e249266733
+***
 
-*** =xp2: 10
+```yaml
+type: ConsoleExercise
+key: e249266733
+xp: 50
+```
 
-*** =instructions2
-
+`@instructions`
 Run `head seasonal/spring.csv` without typing the full filename.
 
-*** =hint2
-
+`@hint`
 Type as much of the path as you need to, then press tab, and repeat.
 
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
+`@solution`
 ```{shell}
 head seasonal/spring.csv
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
     has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
 )
 Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
+
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:9eb608f6c9
+---
+
 ## How can I control what commands do?
+
+```yaml
+type: ConsoleExercise
+key: 9eb608f6c9
+lang: shell
+skills: 1
+```
 
 You won't always want to look at the first 10 lines of a file,
 so the shell lets you change `head`'s behavior
@@ -258,16 +301,23 @@ Note: it's considered good style to put all flags *before* any filenames,
 so in this course,
 we only accept answers that do that.
 
-*** =instructions
-
+`@instructions`
 Display the first 5 lines of `winter.csv` in the `seasonal` directory.
 
-*** =solution
+`@hint`
+
+
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 head -n 5 seasonal/winter.csv
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
@@ -280,8 +330,16 @@ Ex().multi(
 Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
 ```
 
---- type:ConsoleExercise lang:shell xp:100 skills:1 key:f830d46419
+---
+
 ## How can I list everything below a directory?
+
+```yaml
+type: ConsoleExercise
+key: f830d46419
+lang: shell
+skills: 1
+```
 
 In order to see everything underneath a directory,
 no matter how deeply nested it is,
@@ -306,8 +364,7 @@ This shows every file and directory in the current level,
 then everything in each sub-directory,
 and so on.
 
-*** =instructions
-
+`@instructions`
 To help you know what is what,
 `ls` has another flag `-F` that prints a `/` after the name of every directory
 and a `*` after the name of every runnable program.
@@ -315,16 +372,20 @@ Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home d
 to see everything it contains.
 (The order of the flags doesn't matter, but the directory name must come last.)
 
-*** =hint
-
+`@hint`
 Your home directory can be specified using `~` or `.` or its absolute path.
 
-*** =solution
+`@pre_exercise_code`
+```{python}
+
+```
+
+`@solution`
 ```{shell}
 ls -R -F /home/repl
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().check_or(
   has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
@@ -333,8 +394,15 @@ Ex().check_or(
 Ex().success_msg("That's a pretty neat overview, isn't it?")
 ```
 
---- type:BulletConsoleExercise key:7b90b8a7cd
+---
+
 ## How can I get help for a command?
+
+```yaml
+type: BulletConsoleExercise
+key: 7b90b8a7cd
+xp: 100
+```
 
 To find out what commands do,
 people used to use the `man` command
@@ -383,73 +451,81 @@ you can search [Stack Overflow](https://stackoverflow.com/),
 ask a question on DataCamp's Slack channels,
 or look at the `SEE ALSO` sections of the commands you already know.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: 52d629048a
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: 52d629048a
+xp: 50
+```
 
-*** =instructions1
-
+`@instructions`
 Read the manual page for the `tail` command to find out
 what putting a `+` sign in front of the number used with the `-n` flag does.
 (Remember to press spacebar to page down and/or type `q` to quit.)
 
-*** =hint1
-
+`@hint`
 Remember: `man` is short for "manual".
 
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
+`@solution`
 ```{shell}
 # Run the following command *without* '| cat':
 man tail | cat
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: 6a07958ae0
+***
 
-*** =xp2: 10
+```yaml
+type: ConsoleExercise
+key: 6a07958ae0
+xp: 50
+```
 
-*** =instructions2
-
+`@instructions`
 Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
 
-*** =hint2
-
+`@hint`
 Use a plus sign '+' in front of the number of lines you want displayed.
 
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
+`@solution`
 ```{shell}
 tail -n +7 seasonal/spring.csv
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
     has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
     has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
 )
+
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:925e9d645a
+---
+
 ## How can I select columns from a file?
+
+```yaml
+type: MultipleChoiceExercise
+key: 925e9d645a
+lang: shell
+xp: 50
+skills: 1
+```
 
 `head` and `tail` let you select rows from a text file.
 If you want to select columns,
@@ -472,28 +548,36 @@ You need to specify the latter because some files may use spaces, tabs, or colon
 
 What command will select the first column (containing dates) from the  file `spring.csv`?
 
-*** =instructions
-
+`@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
 - Either of the above.
 - Neither of the above, because `-f` must come before `-d`.
 
-*** =hint
-
+`@hint`
 The order of the flags doesn't matter.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:b9bb10ae87
+---
+
 ## What can't cut do?
+
+```yaml
+type: MultipleChoiceExercise
+key: b9bb10ae87
+lang: shell
+xp: 50
+skills: 1
+```
 
 `cut` is a simple-minded command.
 In particular,
@@ -533,28 +617,34 @@ first:second:third:
 
 (Note the trailing colon.)
 
-*** =instructions
-
+`@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
 - None of the above, because there aren't four fields.
 
-*** =hint
-
+`@hint`
 Pay attention to the trailing colon.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =sct
+`@sct`
 ```{python}
 Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
 ```
 
---- type:TabConsoleExercise key:32c0d30049
+---
+
 ## How can I repeat commands?
+
+```yaml
+type: TabConsoleExercise
+key: 32c0d30049
+xp: 100
+```
 
 One of the biggest advantages of using the shell is that
 it makes it easy for you to do things over again.
@@ -570,100 +660,90 @@ You can also re-run a command by typing an exclamation mark followed by the comm
 such as `!head` or `!cut`,
 which will re-run the most recent use of that command.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: 188a2fab38
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: 188a2fab38
+xp: 20
+```
 
-*** =instructions1
-
+`@instructions`
 Run `head summer.csv` in your home directory (which should fail).
 
-*** =hint1
-
+`@hint`
 Tab completion won't work if there isn't a matching filename.
 
-*** =sample_code1
-```{bash}
-
-```
-
-*** =solution1
-```{bash}
+`@solution`
+```{shell}
 head summer.csv
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
     has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
 )
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: cba6bf99a5
+***
 
-*** =xp2: 10
+```yaml
+type: ConsoleExercise
+key: cba6bf99a5
+xp: 20
+```
 
-To make the previous command work,
-you need to be in the `seasonal` directory.
-
-*** =instructions2
-
+`@instructions`
 Change directory to `seasonal`.
 
-*** =hint2
-
+`@hint`
 Remember that `cd` stands for "change directory".
 
-*** =sample_code2
-```{bash}
-
-```
-
-*** =solution2
-```{bash}
+`@solution`
+```{shell}
 cd seasonal
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
   has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
 )
+
 ```
 
-*** =type3: ConsoleExercise
-*** =key3: 74f5c8d2fc
+***
 
-*** =xp3: 10
+```yaml
+type: ConsoleExercise
+key: 74f5c8d2fc
+xp: 20
+```
 
-You can now repeat your previous `head` command without retyping it.
-
-*** =instructions3
-
+`@instructions`
 Re-run the `head` command with `!head`.
 
-*** =hint3
-
+`@hint`
 Do not type any spaces between `!` and what follows.
 
-*** =sample_code3
-```{bash}
-```
-
-*** =solution3
-```{bash}
+`@solution`
+```{shell}
 !head
+
 ```
 
-*** =sct3
+`@sct`
 ```{python}
 # !head is expanded into head summer.csv by the terminal, so manually specify expression
 # This won't work for the validator though, so we have to use check_or to satisfy it.
@@ -675,63 +755,56 @@ Ex().multi(
         has_code('!head')
     )
 )
+
 ```
 
-*** =type4: ConsoleExercise
-*** =key4: a28555575a
+***
 
-*** =xp4: 10
+```yaml
+type: ConsoleExercise
+key: a28555575a
+xp: 20
+```
 
-To find out how to repeat the command by number,
-you must take a look at what you've done.
-
-*** =instructions4
-
+`@instructions`
 Use `history` to look at what you have done.
 
-*** =hint4
-
+`@hint`
 Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
 
-*** =sample_code4
-```{bash}
-```
-
-*** =solution4
-```{bash}
+`@solution`
+```{shell}
 history
+
 ```
 
-*** =sct4
+`@sct`
 ```{python}
 Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
+
 ```
 
-*** =type5: ConsoleExercise
-*** =key5: 0629b2adf3
+***
 
-*** =xp5: 10
+```yaml
+type: ConsoleExercise
+key: 0629b2adf3
+xp: 20
+```
 
-You can now repeat your earlier `head` command using its serial number.
-
-*** =instructions5
-
+`@instructions`
 Re-run `head` again using `!` followed by a command number.
 
-*** =hint5
-
+`@hint`
 Do *not* type any spaces between `!` and what follows.
 
-*** =sample_code5
-```{bash}
-```
-
-*** =solution5
-```{bash}
+`@solution`
+```{shell}
 !3
+
 ```
 
-*** =sct5
+`@sct`
 ```{python}
 # !3 is expanded into head summer.csv by the terminal, so manually specify expression
 # This won't work for the validator though, so we have to use check_or to satisfy it.
@@ -748,10 +821,18 @@ Ex().multi(
     )
 )
 Ex().success_msg("Well done! To the next one!")
+
 ```
 
---- type:BulletConsoleExercise key:adf1516acf
+---
+
 ## How can I select lines containing specific values?
+
+```yaml
+type: BulletConsoleExercise
+key: adf1516acf
+xp: 100
+```
 
 `head` and `tail` select rows,
 `cut` selects columns,
@@ -774,34 +855,33 @@ What's more important right now is some of `grep`'s more common flags:
 - `-n`: print line numbers for matching lines
 - `-v`: invert the match, i.e., only show lines that *don't* match
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =type1: ConsoleExercise
-*** =key1: 0d7ef2baa0
+***
 
-*** =xp1: 10
+```yaml
+type: ConsoleExercise
+key: 0d7ef2baa0
+xp: 35
+```
 
-*** =instructions1
-
+`@instructions`
 Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
 by running a single command while in your home directory. Don't use any flags.
 
-*** =hint1
-
+`@hint`
 Use `grep` with the word you are searching for and the name of the file(s) to search in.
 
-*** =sample_code1
-```{shell}
-```
-
-*** =solution1
+`@solution`
 ```{shell}
 grep molar seasonal/autumn.csv
+
 ```
 
-*** =sct1
+`@sct`
 ```{python}
 Ex().multi(
   has_cwd('/home/repl'),
@@ -814,32 +894,31 @@ Ex().multi(
     )
   )
 )
+
 ```
 
-*** =type2: ConsoleExercise
-*** =key2: a0eee34d1e
+***
 
-*** =xp2: 20
+```yaml
+type: ConsoleExercise
+key: a0eee34d1e
+xp: 35
+```
 
-*** =instructions2
-
+`@instructions`
 Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
 Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
 
-*** =hint3
+`@hint`
 
-Make sure you put `-v` and `-n` *before* the word `molar` or the filename.
 
-*** =sample_code2
-```{shell}
-```
-
-*** =solution2
+`@solution`
 ```{shell}
 grep -v -n molar seasonal/spring.csv
+
 ```
 
-*** =sct2
+`@sct`
 ```{python}
 Ex().multi(
   has_cwd('/home/repl'),
@@ -854,33 +933,31 @@ Ex().multi(
     )
   )
 )
+
 ```
 
-*** =type3: ConsoleExercise
-*** =key3: f5641234fe
+***
 
-*** =xp3: 30
+```yaml
+type: ConsoleExercise
+key: f5641234fe
+xp: 30
+```
 
-*** =instructions3
-
+`@instructions`
 Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
 (Again, run a single command from your home directory.)
 
-*** =hint3
-
+`@hint`
 Remember to use `-c` with `grep` to count lines.
 
-*** =sample_code3
-```{shell}
-
-```
-
-*** =solution3
+`@solution`
 ```{shell}
 grep -c incisor seasonal/autumn.csv seasonal/winter.csv
+
 ```
 
-*** =sct3
+`@sct`
 ```{python}
 Ex().multi(
   has_cwd('/home/repl'),
@@ -895,10 +972,20 @@ Ex().multi(
     )
   )
 )
+
 ```
 
---- type:MultipleChoiceExercise lang:shell xp:50 skills:1 key:11914639fc
+---
+
 ## Why isn't it always safe to treat data as text?
+
+```yaml
+type: MultipleChoiceExercise
+key: 11914639fc
+lang: shell
+xp: 50
+skills: 1
+```
 
 The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
 that can be used to combine data files instead of cutting them up.
@@ -910,21 +997,21 @@ and then run `paste` to combine the autumn and winter data files in a single tab
 using a comma as a separator.
 What's wrong with the output from a data analysis point of view?
 
-*** =instructions
+`@possible_answers`
 - The column headers are repeated.
 - The last few rows have the wrong number of columns.
 - Some of the data from `winter.csv` is missing.
 
-*** =hint
-
+`@hint`
 If you `cut` the output of `paste` using commas as a separator,
 would it produce the right answer?
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{python}
+
 ```
 
-*** =sct
+`@sct`
 ```{python}
 err1 = 'True, but it is not necessarily an error.'
 correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
