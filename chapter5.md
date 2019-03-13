@@ -23,9 +23,9 @@ delete characters using backspace,
 and do other operations with control-key combinations:
 
 - `Ctrl` + `K`: delete a line.
-- Ctrl-U: un-delete a line.
+- `Ctrl` + `U`: un-delete a line.
 - `Ctrl` + `O`: save the file ('O' stands for 'output').
-- Ctrl-X: exit the editor.
+- `Ctrl` + `X`: exit the editor.
 
 `@instructions`
 Run `nano names.txt` to edit a new file in your home directory
