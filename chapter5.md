@@ -22,7 +22,7 @@ You can move around with the arrow keys,
 delete characters using backspace,
 and do other operations with control-key combinations:
 
-- Ctrl-K: delete a line.
+- `Ctrl` + `K`: delete a line.
 - Ctrl-U: un-delete a line.
 - Ctrl-O: save the file ('O' stands for 'output').
 - Ctrl-X: exit the editor.
