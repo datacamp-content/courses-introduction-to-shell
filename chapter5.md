@@ -678,7 +678,7 @@ you can create one that tells you how many records are in the shortest and longe
 i.e.,
 the range of your datasets' lengths.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL+K` to cut the line, then `CTRL+U` twice to paste two copies of it.
+Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
 
 `@pre_exercise_code`
 ```{python}
