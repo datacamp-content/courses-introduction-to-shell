@@ -676,7 +676,7 @@ but some tasks will take minutes, hours, or even days to complete.
 You may also mistakenly put redirection in the middle of a pipeline,
 causing it to hang up.
 If you decide that you don't want a program to keep running,
-you can type Ctrl-C to end it.
+you can type `Ctrl` + `C` to end it.
 This is often written `^C` in Unix documentation;
 note that the 'c' can be lower-case.
 
@@ -691,7 +691,7 @@ with no arguments (so that it waits for input that will never come)
 and then stop it by typing `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with Ctrl + C.
+Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -700,7 +700,7 @@ Simply type head, hit Enter and exit the running program with Ctrl + C.
 
 `@solution`
 ```{shell}
-# Simply type head, hit Enter and exit the running program with Ctrl + C.
+# Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 ```
 
 `@sct`
