@@ -24,7 +24,7 @@ and do other operations with control-key combinations:
 
 - `Ctrl` + `K`: delete a line.
 - Ctrl-U: un-delete a line.
-- Ctrl-O: save the file ('O' stands for 'output').
+- `Ctrl` + `O`: save the file ('O' stands for 'output').
 - Ctrl-X: exit the editor.
 
 `@instructions`
@@ -39,7 +39,7 @@ Wilson
 ```
 
 To save what you have written,
-type Ctrl-O to write the file out,
+type `Ctrl` + `O` to write the file out,
 then Enter to confirm the filename,
 then Ctrl-X and Enter to exit the editor.
 
@@ -60,7 +60,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and Ctrl-X to exit."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -286,7 +286,7 @@ cp /solutions/dates.sh .
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and Ctrl-X to exit."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
