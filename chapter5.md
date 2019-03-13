@@ -22,10 +22,10 @@ You can move around with the arrow keys,
 delete characters using backspace,
 and do other operations with control-key combinations:
 
-- Ctrl-K: delete a line.
-- Ctrl-U: un-delete a line.
-- Ctrl-O: save the file ('O' stands for 'output').
-- Ctrl-X: exit the editor.
+- `Ctrl` + `K`: delete a line.
+- `Ctrl` + `U`: un-delete a line.
+- `Ctrl` + `O`: save the file ('O' stands for 'output').
+- `Ctrl` + `X`: exit the editor.
 
 `@instructions`
 Run `nano names.txt` to edit a new file in your home directory
@@ -39,9 +39,9 @@ Wilson
 ```
 
 To save what you have written,
-type Ctrl-O to write the file out,
+type `Ctrl` + `O` to write the file out,
 then Enter to confirm the filename,
-then Ctrl-X and Enter to exit the editor.
+then `Ctrl` + `X` and Enter to exit the editor.
 
 `@hint`
 
@@ -60,7 +60,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -286,7 +286,7 @@ cp /solutions/dates.sh .
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use Ctrl-O to save and Ctrl-X to exit."
+msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
@@ -678,7 +678,7 @@ you can create one that tells you how many records are in the shortest and longe
 i.e.,
 the range of your datasets' lengths.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL+K` to cut the line, then `CTRL+U` twice to paste two copies of it.
+Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
 
 `@pre_exercise_code`
 ```{python}
@@ -1045,7 +1045,7 @@ What should you do next?
 `@possible_answers`
 - Wait 10 seconds for `head` to time out.
 - Type `somefile.txt` and press Enter to give `head` some input.
-- Use Ctrl-C to stop the running `head` program.
+- Use `Ctrl` + `C` to stop the running `head` program.
 
 `@hint`
 What does `head` do if it doesn't have a filename and nothing is upstream from it?
@@ -1059,6 +1059,6 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 ```{python}
 a1 = 'No, commands will not time out.'
 a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use Ctrl-C to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
 Ex().has_chosen(3, [a1, a2, a3])
 ```
