@@ -8,8 +8,6 @@ description: 'History lets you repeat things with just a few keystrokes, and pip
 ```yaml
 type: ConsoleExercise
 key: 39eee3cfc0
-lang: shell
-skills: 1
 ```
 
 Unix has a bewildering variety of text editors.
@@ -608,7 +606,6 @@ Ex().success_msg("A job well done! Your shell power is ever-expanding!")
 ```yaml
 type: PureMultipleChoiceExercise
 key: 4092cb4cda
-lang: bash
 xp: 50
 ```
 
@@ -1008,9 +1005,7 @@ Ex().success_msg("Magic! Notice how composable all the things we've learned are.
 ```yaml
 type: MultipleChoiceExercise
 key: 8a162c4d54
-lang: shell
 xp: 50
-skills: 1
 ```
 
 A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.

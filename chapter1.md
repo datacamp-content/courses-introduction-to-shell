@@ -9,7 +9,6 @@ free_preview: true
 ```yaml
 type: PureMultipleChoiceExercise
 key: badd717ea4
-lang: bash
 xp: 50
 ```
 
@@ -62,9 +61,7 @@ Remember that a user can only interact with an operating system through a progra
 ```yaml
 type: MultipleChoiceExercise
 key: 7c1481dbd3
-lang: shell
 xp: 50
-skills: 1
 ```
 
 The **filesystem** manages files and directories (or folders).
@@ -112,9 +109,7 @@ Ex().has_chosen(3, [err, err, correct])
 ```yaml
 type: MultipleChoiceExercise
 key: f5b0499835
-lang: shell
 xp: 50
-skills: 1
 ```
 
 `pwd` tells you where you are.
@@ -258,7 +253,6 @@ Ex().multi(
       has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
     )
 )
-
 ```
 
 ***
@@ -427,9 +421,7 @@ Ex().success_msg("Neat! This was about navigating down to subdirectories. What a
 ```yaml
 type: PureMultipleChoiceExercise
 key: 09c717ef76
-lang: shell
 xp: 50
-skills: 1
 ```
 
 The **parent** of a directory is the directory above it.
@@ -579,7 +571,6 @@ Ex().multi(
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
 Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exerise!")
-
 ```
 
 ---
@@ -589,8 +580,6 @@ Ex().success_msg("Good job. Other than copying, we should also be able to move f
 ```yaml
 type: ConsoleExercise
 key: 663a083a3c
-lang: shell
-skills: 1
 ```
 
 While `cp` copies a file,

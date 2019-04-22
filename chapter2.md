@@ -274,8 +274,6 @@ Ex().success_msg("Good work! Once you get used to using tab completion, it will 
 ```yaml
 type: ConsoleExercise
 key: 9eb608f6c9
-lang: shell
-skills: 1
 ```
 
 You won't always want to look at the first 10 lines of a file,
@@ -337,8 +335,6 @@ Ex().success_msg("Nice! With this technique, you can avoid your shell from blowi
 ```yaml
 type: ConsoleExercise
 key: f830d46419
-lang: shell
-skills: 1
 ```
 
 In order to see everything underneath a directory,
@@ -522,9 +518,7 @@ Ex().multi(
 ```yaml
 type: MultipleChoiceExercise
 key: 925e9d645a
-lang: shell
 xp: 50
-skills: 1
 ```
 
 `head` and `tail` let you select rows from a text file.
@@ -574,9 +568,7 @@ Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Cor
 ```yaml
 type: MultipleChoiceExercise
 key: b9bb10ae87
-lang: shell
 xp: 50
-skills: 1
 ```
 
 `cut` is a simple-minded command.
@@ -982,9 +974,7 @@ Ex().multi(
 ```yaml
 type: MultipleChoiceExercise
 key: 11914639fc
-lang: shell
 xp: 50
-skills: 1
 ```
 
 The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
