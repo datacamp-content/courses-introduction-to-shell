@@ -8,9 +8,7 @@ description: 'Most shell commands will process many files at once. This chapter 
 ```yaml
 type: MultipleChoiceExercise
 key: e4d5f4adea
-lang: shell
 xp: 50
-skills: 1
 ```
 
 Like other programs, the shell stores information in variables.
@@ -66,8 +64,6 @@ Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```yaml
 type: ConsoleExercise
 key: afae0f33a7
-lang: shell
-skills: 1
 ```
 
 A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
@@ -269,8 +265,6 @@ Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
 ```yaml
 type: ConsoleExercise
 key: 920d1887e3
-lang: shell
-skills: 1
 ```
 
 Shell variables are also used in **loops**,
@@ -427,9 +421,7 @@ Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination
 ```yaml
 type: MultipleChoiceExercise
 key: 153ca10317
-lang: shell
 xp: 50
-skills: 1
 ```
 
 People often set a variable using a wildcard expression to record a list of filenames.
@@ -486,7 +478,6 @@ Ex().has_chosen(3, [err1, err2, correct3])
 ```yaml
 type: PureMultipleChoiceExercise
 key: 4fcfb63c4f
-lang: bash
 xp: 50
 ```
 
@@ -613,7 +604,6 @@ Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination
 ```yaml
 type: PureMultipleChoiceExercise
 key: b974b7f45a
-lang: bash
 xp: 50
 ```
 
@@ -674,9 +664,7 @@ What would you think was going to happen if someone showed you the command and y
 ```yaml
 type: MultipleChoiceExercise
 key: f6d0530991
-lang: shell
 xp: 50
-skills: 1
 ```
 
 The loops you have seen so far all have a single command or pipeline in their body,
