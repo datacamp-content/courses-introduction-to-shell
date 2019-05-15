@@ -130,7 +130,7 @@ Ex().multi(
         multi(
             has_code('echo', incorrect_msg="Did you call `echo`?"),
             has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code('$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
         )
     )
 )
