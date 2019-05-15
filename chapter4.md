@@ -406,7 +406,7 @@ Ex().multi(
       has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code('$filename', incorrect_msg='Did you echo `$filename`?'),
+      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
       has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
