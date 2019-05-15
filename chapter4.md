@@ -134,7 +134,6 @@ Ex().multi(
         )
     )
 )
-
 Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
 ```
 
