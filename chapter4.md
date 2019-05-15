@@ -335,7 +335,7 @@ Ex().multi(
       has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code('$filetype', incorrect_msg='Did you echo `$filetype`?'),
+      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
       has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
