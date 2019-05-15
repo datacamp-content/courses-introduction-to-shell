@@ -126,7 +126,7 @@ echo $OSTYPE
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(),
+        has_expr_output(strict = True),
         multi(
             has_code('echo', incorrect_msg="Did you call `echo`?"),
             has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
@@ -134,6 +134,7 @@ Ex().multi(
         )
     )
 )
+
 Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
 ```
 
