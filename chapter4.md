@@ -126,11 +126,11 @@ echo $OSTYPE
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(),
+        has_expr_output(strict = True),
         multi(
             has_code('echo', incorrect_msg="Did you call `echo`?"),
             has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code('$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
         )
     )
 )
@@ -334,7 +334,7 @@ Ex().multi(
       has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code('$filetype', incorrect_msg='Did you echo `$filetype`?'),
+      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
       has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
@@ -405,7 +405,7 @@ Ex().multi(
       has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code('$filename', incorrect_msg='Did you echo `$filename`?'),
+      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
       has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
@@ -585,10 +585,10 @@ Ex().multi(
       has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
       has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
       has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal/[*.csv]*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('$file', incorrect_msg='Did you echo `$file`?'),
+      has_code(r'\$file', incorrect_msg='Did you echo `$file`?'),
       has_code(r'file\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
