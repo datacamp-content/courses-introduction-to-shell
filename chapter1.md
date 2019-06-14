@@ -580,6 +580,7 @@ Ex().success_msg("Good job. Other than copying, we should also be able to move f
 ```yaml
 type: ConsoleExercise
 key: 663a083a3c
+xp: 100
 ```
 
 While `cp` copies a file,
