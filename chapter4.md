@@ -64,6 +64,7 @@ Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```yaml
 type: ConsoleExercise
 key: afae0f33a7
+xp: 100
 ```
 
 A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
@@ -265,6 +266,7 @@ Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
 ```yaml
 type: ConsoleExercise
 key: 920d1887e3
+xp: 100
 ```
 
 Shell variables are also used in **loops**,
@@ -350,6 +352,7 @@ Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do 
 ```yaml
 type: ConsoleExercise
 key: 8468b70a71
+xp: 100
 ```
 
 You can always type in the names of the files you want to process when writing the loop,
@@ -535,6 +538,7 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 ```yaml
 type: ConsoleExercise
 key: 39b5dcf81a
+xp: 100
 ```
 
 Printing filenames is useful for debugging,
