@@ -8,7 +8,6 @@ description: 'The real power of the Unix shell lies not in the individual comman
 ```yaml
 type: ConsoleExercise
 key: 07a427d50c
-xp: 100
 ```
 
 All of the tools you have seen so far let you name input files.
@@ -177,7 +176,6 @@ Ex().success_msg("Well done. Head over to the next exercise to find out about be
 ```yaml
 type: ConsoleExercise
 key: b36aea9a1e
-xp: 100
 ```
 
 Using redirection to combine commands has two drawbacks:
@@ -237,7 +235,6 @@ Ex().success_msg("Perfect piping! This may be the first time you used `|`, but i
 ```yaml
 type: ConsoleExercise
 key: b8753881d6
-xp: 100
 ```
 
 You can chain any number of commands together.
@@ -295,7 +292,6 @@ Ex().success_msg("Cheerful chaining! By chaining several commands together, you 
 ```yaml
 type: ConsoleExercise
 key: ae6a48d6aa
-xp: 100
 ```
 
 The command `wc` (short for "word count") prints the number of characters, words, and lines in a file.
@@ -345,7 +341,6 @@ Ex().success_msg("Careful counting! Determining how much data you have is a grea
 ```yaml
 type: ConsoleExercise
 key: 602d47e70c
-xp: 100
 ```
 
 Most shell commands will work on multiple files if you give them multiple filenames.
@@ -448,7 +443,6 @@ Match each expression against each filename in turn.
 ```yaml
 type: ConsoleExercise
 key: f06d9e310e
-xp: 100
 ```
 
 As its name suggests,
@@ -511,7 +505,6 @@ Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to
 ```yaml
 type: ConsoleExercise
 key: ed77aed337
-xp: 100
 ```
 
 Another command that is often used with `sort` is `uniq`,
@@ -659,7 +652,6 @@ Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No;
 ```yaml
 type: ConsoleExercise
 key: d1694dbdcd
-xp: 100
 ```
 
 The commands and scripts that you have run so far have all executed quickly,
