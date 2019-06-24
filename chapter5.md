@@ -8,6 +8,7 @@ description: 'History lets you repeat things with just a few keystrokes, and pip
 ```yaml
 type: ConsoleExercise
 key: 39eee3cfc0
+xp: 100
 ```
 
 Unix has a bewildering variety of text editors.

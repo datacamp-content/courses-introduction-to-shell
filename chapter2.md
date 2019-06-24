@@ -8,6 +8,7 @@ description: 'The commands you saw in the previous chapter let you move things a
 ```yaml
 type: ConsoleExercise
 key: 8acc09ede3
+xp: 100
 ```
 
 Before you rename or delete files,
@@ -59,6 +60,7 @@ Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
 ```yaml
 type: ConsoleExercise
 key: d8a30a3f81
+xp: 100
 ```
 
 You can use `cat` to print large files and then scroll through the output,
@@ -274,6 +276,7 @@ Ex().success_msg("Good work! Once you get used to using tab completion, it will 
 ```yaml
 type: ConsoleExercise
 key: 9eb608f6c9
+xp: 100
 ```
 
 You won't always want to look at the first 10 lines of a file,
@@ -335,6 +338,7 @@ Ex().success_msg("Nice! With this technique, you can avoid your shell from blowi
 ```yaml
 type: ConsoleExercise
 key: f830d46419
+xp: 100
 ```
 
 In order to see everything underneath a directory,
