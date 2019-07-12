@@ -556,7 +556,7 @@ msg="Have you a replaced the blanks properly so the command in `count-records.sh
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
-        has_code(r'tail\s+-q\s+-n\s+\+2\s+\$@\s+|\s+wc\s+-l', incorrect_msg=msg)
+        has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
 
 ```
