@@ -556,7 +556,7 @@ msg="Have you a replaced the blanks properly so the command in `count-records.sh
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
-        has_code(r'tail\s+-q\s+-n\s+\+2\s+\$@\s+|\s+wc\s+-l', incorrect_msg=msg)
+        has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
 
 ```
@@ -789,7 +789,7 @@ msg2="Have you duplicated the first line in `range.sh` and made a small change? 
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
-        has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg1),
+        has_code("wc -l $@ | grep -v total | sort -n | head -n 1", fixed=True, incorrect_msg = msg1),
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
