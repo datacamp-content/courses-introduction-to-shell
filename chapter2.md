@@ -1,6 +1,6 @@
 ---
 title: 'Manipulating data'
-description: 'The commands you saw in the previous chapter let you move things around in the filesystem. This chapter will show you how to work with the data that''s in those files. The tools we will look at are fairly simple, but are the model for everything that''s more powerful.'
+description: 'The commands you saw in the previous chapter allowed you to move things around in the filesystem. This chapter will show you how to work with the data in those files. The tools we’ll use are fairly simple, but are solid building blocks.'
 ---
 
 ## How can I view a file's contents?
