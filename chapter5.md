@@ -536,11 +536,12 @@ xp: 50
 
 `@instructions`
 Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` respectively so that it counts the number of lines in one or more files,
+with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
 excluding the first line of each.
 
 `@hint`
-Use `nano count-records.sh` to edit the filename.
+* Use `nano count-records.sh` to edit the filename.
+* Make sure you are specifying the _letter_ `-l`, and not the number one.
 
 `@solution`
 ```{shell}
