@@ -273,7 +273,7 @@ Copy and paste the code in the instructions, append a pipe, then call `head` wit
 
 `@solution`
 ```{shell}
-cut -d , -f 2 seasonal/autumn.csv | grep -v Tooth | head -n 1
+cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 ```
 
 `@sct`
