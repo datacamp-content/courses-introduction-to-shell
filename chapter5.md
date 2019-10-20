@@ -289,7 +289,7 @@ msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.s
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
-        has_code('cut -d , -f 1 seasonal/*.csv', fixed=True, incorrect_msg=msg)
+        has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
 
 ```
