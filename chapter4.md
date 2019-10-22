@@ -592,7 +592,7 @@ Ex().multi(
       has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code(r'\$file', incorrect_msg='Did you echo `$file`?'),
+      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
       has_code(r'file\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
