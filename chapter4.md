@@ -553,18 +553,16 @@ It has the same structure as the other loops you have already seen:
 all that's different is that its body is a pipeline of two commands instead of a single command.
 
 `@instructions`
-Write a loop that produces the same output as
+Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
 
 ```{shell}
-grep -h 2017-07 seasonal/*.csv
+grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but uses a loop to process each file separately.
-Please use `file` as the name of the loop variable,
-and remember that the `-h` flag used above tells `grep` *not* to print filenames in the output.
+but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/*.csv` replaced by `$file`.
+The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -573,7 +571,7 @@ The loop body is the grep command shown in the instructions, with `seasonal/*.cs
 
 `@solution`
 ```{bash}
-for file in seasonal/*.csv; do grep 2017-07 $file; done
+for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 ```
 
 `@sct`
@@ -585,19 +583,21 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'), # This needs to be higher precedence than choice of loop variable
       has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
       has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
       has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
       has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
       has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
       has_code('grep', incorrect_msg='Did you call `grep`?'),
+      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
       has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
+      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
       has_code('; done', incorrect_msg='Did you finish with `done`?')
     )
   )
 )
+
 Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
 ```
 
