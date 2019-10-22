@@ -23,7 +23,7 @@ and do other operations with control-key combinations:
 
 - `Ctrl` + `K`: delete a line.
 - `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output').
+- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
 - `Ctrl` + `X`: exit the editor.
 
 `@instructions`
@@ -844,9 +844,7 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops.
-You can write them using semi-colons,
-or split them across lines without semi-colons to make them more readable:
+Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -857,14 +855,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop,
-but doing so makes things clearer.)
+(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
 
-The first line of this script is a **comment**
-to tell readers what the script does.
-Comments start with the `#` character and run to the end of the line.
-Your future self will thank you for adding brief explanations like the one shown here
-to every script you write.
+The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` and Enter to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
