@@ -869,7 +869,7 @@ to every script you write.
 `@pre_exercise_code`
 ```{python}
 import shutil
-shutil.copyfile('/solutions/date-range-start.sh', 'date-range.sh')
+shutil.copyfile('/solutions/date-range-start.sh', '/home/repl/date-range.sh')
 ```
 
 ***
