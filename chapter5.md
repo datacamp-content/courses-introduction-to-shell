@@ -670,14 +670,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe,
-but a script can contain many lines of commands.
-For example,
-you can create one that tells you how many records are in the shortest and longest of your data files,
-i.e.,
-the range of your datasets' lengths.
+Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
 
 Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` and Enter to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -732,7 +729,7 @@ xp: 25
 ```
 
 `@instructions`
-Add `sort -n` and `head -n 1` in that order
+Use Nano again to add `sort -n` and `head -n 1` in that order
 to the pipeline in `range.sh`
 to display the name and line count of the shortest file given to it.
 
@@ -767,7 +764,7 @@ xp: 25
 ```
 
 `@instructions`
-Add a second line to `range.sh` to print the name and record count of
+Again using Nano, add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
 This line should be a duplicate of the one you have already written,
 but with `sort -n -r` rather than `sort -n`.
@@ -824,20 +821,15 @@ bash range.sh seasonal/*.csv > range.out
 ```{python}
 msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
 Ex().multi(
-  has_cwd('/home/repl'),
-  check_correct(
-    check_file('/home/repl/range.out').multi(
-      has_code('21 seasonal/autumn.csv', fixed=True, incorrect_msg=msg),
-      has_code('26 seasonal/winter.csv', fixed=True, incorrect_msg=msg)
-    ),
-    multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
-    )
-  )
+has_cwd('/home/repl'),
+multi(
+has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
+has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
 )
+)
+
 Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
 
 ```
