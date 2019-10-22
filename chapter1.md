@@ -171,7 +171,6 @@ As examples:
 
 The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
 
-
 `@pre_exercise_code`
 ```{python}
 
