@@ -40,7 +40,7 @@ Wilson
 To save what you have written,
 type `Ctrl` + `O` to write the file out,
 then Enter to confirm the filename,
-then `Ctrl` + `X` and Enter to exit the editor.
+then `Ctrl` + `X` to exit the editor.
 
 `@hint`
 
@@ -492,33 +492,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did,
-but one that allows you to process any files you want is more useful.
+A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
 To support this,
 you can use the special expression `$@` (dollar sign immediately followed by at-sign)
 to mean "all of the command-line parameters given to the script".
-For example,
-if `unique-lines.sh` contains this:
 
-```{shell}
-sort $@ | uniq
-```
-
-then when you run:
+For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
-If you run this:
+the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files,
-and so on.
+it processes two data files, and so on.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -674,7 +667,7 @@ Our shells scripts so far have had a single command or pipe, but a script can co
 
 Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` and Enter to exit the editor._
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -859,7 +852,7 @@ done
 
 The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` and Enter to exit the editor._
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
