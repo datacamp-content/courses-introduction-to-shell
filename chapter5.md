@@ -23,7 +23,7 @@ and do other operations with control-key combinations:
 
 - `Ctrl` + `K`: delete a line.
 - `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output').
+- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
 - `Ctrl` + `X`: exit the editor.
 
 `@instructions`
@@ -40,7 +40,7 @@ Wilson
 To save what you have written,
 type `Ctrl` + `O` to write the file out,
 then Enter to confirm the filename,
-then `Ctrl` + `X` and Enter to exit the editor.
+then `Ctrl` + `X` to exit the editor.
 
 `@hint`
 
@@ -492,33 +492,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did,
-but one that allows you to process any files you want is more useful.
+A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
 To support this,
 you can use the special expression `$@` (dollar sign immediately followed by at-sign)
 to mean "all of the command-line parameters given to the script".
-For example,
-if `unique-lines.sh` contains this:
 
-```{shell}
-sort $@ | uniq
-```
-
-then when you run:
+For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file.
-If you run this:
+the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files,
-and so on.
+it processes two data files, and so on.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -670,14 +663,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe,
-but a script can contain many lines of commands.
-For example,
-you can create one that tells you how many records are in the shortest and longest of your data files,
-i.e.,
-the range of your datasets' lengths.
+Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
 
 Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -732,7 +722,7 @@ xp: 25
 ```
 
 `@instructions`
-Add `sort -n` and `head -n 1` in that order
+Use Nano again to add `sort -n` and `head -n 1` in that order
 to the pipeline in `range.sh`
 to display the name and line count of the shortest file given to it.
 
@@ -767,7 +757,7 @@ xp: 25
 ```
 
 `@instructions`
-Add a second line to `range.sh` to print the name and record count of
+Again using Nano, add a second line to `range.sh` to print the name and record count of
 the *longest* file in the directory *as well as* the shortest.
 This line should be a duplicate of the one you have already written,
 but with `sort -n -r` rather than `sort -n`.
@@ -824,20 +814,15 @@ bash range.sh seasonal/*.csv > range.out
 ```{python}
 msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
 Ex().multi(
-  has_cwd('/home/repl'),
-  check_correct(
-    check_file('/home/repl/range.out').multi(
-      has_code('21 seasonal/autumn.csv', fixed=True, incorrect_msg=msg),
-      has_code('26 seasonal/winter.csv', fixed=True, incorrect_msg=msg)
-    ),
-    multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
-    )
-  )
+has_cwd('/home/repl'),
+multi(
+has_code("bash", incorrect_msg = 'Did you call `bash`?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
+has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
+has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
 )
+)
+
 Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
 
 ```
@@ -852,9 +837,7 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops.
-You can write them using semi-colons,
-or split them across lines without semi-colons to make them more readable:
+Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -865,19 +848,16 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop,
-but doing so makes things clearer.)
+(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
 
-The first line of this script is a **comment**
-to tell readers what the script does.
-Comments start with the `#` character and run to the end of the line.
-Your future self will thank you for adding brief explanations like the one shown here
-to every script you write.
+The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+
+_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
 
 `@pre_exercise_code`
 ```{python}
 import shutil
-shutil.copyfile('/solutions/date-range-start.sh', 'date-range.sh')
+shutil.copyfile('/solutions/date-range-start.sh', '/home/repl/date-range.sh')
 ```
 
 ***
