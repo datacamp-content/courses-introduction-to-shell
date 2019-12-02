@@ -540,7 +540,7 @@ excluding the first line of each.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/count-records.sh .
+cp /solutions/count-records.sh ~
 
 ```
 
