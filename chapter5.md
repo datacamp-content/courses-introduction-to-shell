@@ -388,7 +388,7 @@ Use `nano teeth.sh` to edit the file.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/teeth.sh .
+cp /solutions/teeth.sh ~
 
 ```
 
