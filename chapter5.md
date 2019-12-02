@@ -279,7 +279,7 @@ Put the commands shown into the file without extra blank lines or spaces.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/dates.sh .
+cp /solutions/dates.sh ~
 
 ```
 
