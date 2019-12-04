@@ -279,7 +279,7 @@ Put the commands shown into the file without extra blank lines or spaces.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/dates.sh .
+cp /solutions/dates.sh ~
 
 ```
 
@@ -388,7 +388,7 @@ Use `nano teeth.sh` to edit the file.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/teeth.sh .
+cp /solutions/teeth.sh ~
 
 ```
 
@@ -540,7 +540,7 @@ excluding the first line of each.
 ```{shell}
 # This solution uses `cp` instead of `nano`
 # because our automated tests can't edit files interactively.
-cp /solutions/count-records.sh .
+cp /solutions/count-records.sh ~
 
 ```
 
