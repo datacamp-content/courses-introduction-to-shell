@@ -1,4 +1,4 @@
-# Introduction to the Unix Shell for Data Science
+# Introduction to Shell
 
 - Teach: https://www.datacamp.com/teach/repositories/1395
 - Campus: https://www.datacamp.com/courses/introduction-to-shell-for-data-science
