@@ -71,6 +71,9 @@ ls -R ${HOME_COPY}
 echo 'solutions directory'
 ls -lR /solutions
 
+echo 'locking protowhat'
+pip install git+https://github.com/datacamp/protowhat.git@v1.8.0 --target /usr/local/lib/python3.5/dist-packages
+
 # Report end of installation.
 echo
 echo 'ENDING requirements.sh'
