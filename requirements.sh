@@ -72,7 +72,7 @@ echo 'solutions directory'
 ls -lR /solutions
 
 echo 'locking protowhat'
-pip install git+https://github.com/datacamp/protowhat.git@v1.14.1 --target /var/lib/python/site-packages
+pip install git+https://github.com/datacamp/protowhat.git@v1.14.1 --target /usr/local/lib/python3.5/dist-packages
 
 # Report end of installation.
 echo
