@@ -1020,7 +1020,7 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', incorrect_msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
 )
 
 ```
