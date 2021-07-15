@@ -1,6 +1,10 @@
 ---
-title: 'Manipulating files and directories'
-description: 'This chapter is a brief introduction to the Unix shell. You''ll learn why it is still in use after almost 50 years, how it compares to the graphical tools you may be more familiar with, how to move around in the shell, and how to create, modify, and delete files and folders.'
+title: Manipulating files and directories
+description: >-
+  This chapter is a brief introduction to the Unix shell. You'll learn why it is
+  still in use after almost 50 years, how it compares to the graphical tools you
+  may be more familiar with, how to move around in the shell, and how to create,
+  modify, and delete files and folders.
 free_preview: true
 ---
 
@@ -755,7 +759,7 @@ Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next
 
 ```yaml
 type: BulletConsoleExercise
-key: 2734680614
+key: '2734680614'
 xp: 100
 ```
 

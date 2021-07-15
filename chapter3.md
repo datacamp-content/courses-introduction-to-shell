@@ -1,6 +1,10 @@
 ---
-title: 'Combining tools'
-description: 'The real power of the Unix shell lies not in the individual commands, but in how easily they can be combined to do new things. This chapter will show you how to use this power to select the data you want, and introduce commands for sorting values and removing duplicates.'
+title: Combining tools
+description: >-
+  The real power of the Unix shell lies not in the individual commands, but in
+  how easily they can be combined to do new things. This chapter will show you
+  how to use this power to select the data you want, and introduce commands for
+  sorting values and removing duplicates.
 ---
 
 ## How can I store a command's output in a file?

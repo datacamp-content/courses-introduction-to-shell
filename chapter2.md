@@ -1,6 +1,10 @@
 ---
-title: 'Manipulating data'
-description: 'The commands you saw in the previous chapter allowed you to move things around in the filesystem. This chapter will show you how to work with the data in those files. The tools we’ll use are fairly simple, but are solid building blocks.'
+title: Manipulating data
+description: >-
+  The commands you saw in the previous chapter allowed you to move things around
+  in the filesystem. This chapter will show you how to work with the data in
+  those files. The tools we’ll use are fairly simple, but are solid building
+  blocks.
 ---
 
 ## How can I view a file's contents?
@@ -120,7 +124,8 @@ type: MultipleChoiceExercise
 key: 82bdc9af65
 lang: shell
 xp: 50
-skills: 1
+skills:
+  - 1
 ```
 
 The first thing most data scientists do when given a new dataset to analyze is
