@@ -7,4 +7,4 @@ description: >-
   clouds that may be halfway around the world. This course will introduce its
   key elements and show you how to use them efficiently.
 programming_language: shell
-from: 'shell-base-prod:22'
+from: 'python-base-prod:v1.2.0'
