@@ -28,6 +28,8 @@ apt-get update
 apt-get -y install nano
 apt-get -y install unzip
 
+# Unminimize the docker image so the man command is available
+yes | unminimize
 
 # Unpack to the local directory.
 unzip ./${FILESYS}
