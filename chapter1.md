@@ -6,6 +6,9 @@ description: >-
   may be more familiar with, how to move around in the shell, and how to create,
   modify, and delete files and folders.
 free_preview: true
+lessons:
+  - nb_of_exercises: 12
+    title: How does the shell compare to a desktop interface?
 ---
 
 ## How does the shell compare to a desktop interface?
