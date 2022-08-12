@@ -5,6 +5,9 @@ description: >-
   how easily they can be combined to do new things. This chapter will show you
   how to use this power to select the data you want, and introduce commands for
   sorting values and removing duplicates.
+lessons:
+  - nb_of_exercises: 12
+    title: How can I store a command's output in a file?
 ---
 
 ## How can I store a command's output in a file?

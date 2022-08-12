@@ -5,6 +5,9 @@ description: >-
   in the filesystem. This chapter will show you how to work with the data in
   those files. The tools we’ll use are fairly simple, but are solid building
   blocks.
+lessons:
+  - nb_of_exercises: 12
+    title: How can I view a file's contents?
 ---
 
 ## How can I view a file's contents?

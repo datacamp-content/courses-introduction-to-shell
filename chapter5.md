@@ -4,6 +4,9 @@ description: >-
   History lets you repeat things with just a few keystrokes, and pipes let you
   combine existing commands to create new ones. In this chapter, you will see
   how to go one step further and create new commands of your own.
+lessons:
+  - nb_of_exercises: 9
+    title: How can I edit a file?
 ---
 
 ## How can I edit a file?
