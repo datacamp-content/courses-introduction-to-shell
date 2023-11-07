@@ -196,7 +196,7 @@ to save the last three commands in a file.
 because the `history` command itself will be in the list.)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the seuqence of piped commands.
+Remember that redirection with `>` comes at the end of the sequence of piped commands.
 
 `@solution`
 ```{shell}
