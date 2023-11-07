@@ -314,7 +314,7 @@ Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-0
 
 `@hint`
 - Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command tkaes the form `grep thing_to_match filename`.
+- The first part of the command takes the form `grep thing_to_match filename`.
 - After the pipe, `|`, call `wc` with the `-l` flag.
 
 `@pre_exercise_code`
