@@ -6,5 +6,15 @@ description: >-
   in new ways, automate repetitive tasks, and run programs on clusters and
   clouds that may be halfway around the world. This course will introduce its
   key elements and show you how to use them efficiently.
+
+
+  The videos contain live transcripts you can reveal by clicking "Show
+  transcript" at the bottom left of the videos.
+
+  The course glossary can be found on the right in the resources section.
+
+  To obtain CPE credits you need to complete the course and reach a score of 70%
+  on the qualified assessment. You can navigate to the assessment by clicking on
+  the CPE credits callout on the right.
 programming_language: shell
 from: 'shell-base-prod:v1.1.3'
