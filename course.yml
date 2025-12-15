@@ -18,3 +18,5 @@ description: >-
   the CPE credits callout on the right.
 programming_language: shell
 from: 'shell-base-prod:v1.1.3'
+datasets:
+  Introduction to Shell.pdf: Course Glossary
