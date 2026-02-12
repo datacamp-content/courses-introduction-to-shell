@@ -1,16 +1,16 @@
 ---
-title: Manipulating data
+title: Manipolare i dati
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  I comandi che hai visto nel capitolo precedente ti permettevano di spostare
+  elementi nel filesystem. In questo capitolo vedrai come lavorare con i dati
+  contenuti in quei file. Gli strumenti che useremo sono piuttosto semplici, ma
+  solidi mattoni di base.
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: Come posso visualizzare il contenuto di un file?
 ---
 
-## How can I view a file's contents?
+## Come posso visualizzare il contenuto di un file?
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +18,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+Prima di rinominare o eliminare file,
+può esserti utile dare un'occhiata al loro contenuto.
+Il modo più semplice è usare `cat`,
+che stampa semplicemente il contenuto dei file sullo schermo.
+(Il nome è l'abbreviazione di "concatenate", cioè "collegare le cose",
+perché stampa tutti i file di cui fornisci i nomi, uno dopo l'altro.)
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +36,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+Stampa a schermo il contenuto di `course.txt`.
 
 `@hint`
 
@@ -55,14 +55,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="Il tuo comando non ha generato l'output corretto. Hai usato `cat` seguito dal nome del file, `course.txt`?")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("Ben fatto! Diamo un'occhiata ad altri modi per visualizzare il contenuto di un file.")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## Come posso visualizzare il contenuto di un file un pezzo alla volta?
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +70,27 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+Puoi usare `cat` per stampare file molto grandi e poi scorrere i risultati,
+ma di solito è più comodo **sfogliare** l'output a pagine.
+Il comando originale per farlo si chiamava `more`,
+ma è stato superato da un comando più potente chiamato `less`.
+(Questo tipo di denominazione è l'umorismo tipico del mondo Unix.)
+Quando usi `less` su un file,
+vedi una pagina alla volta;
+puoi premere la barra spaziatrice per andare avanti o digitare `q` per uscire.
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+Se passi a `less` i nomi di più file,
+puoi digitare `:n` (due punti e una 'n' minuscola) per andare al file successivo,
+`:p` per tornare a quello precedente,
+oppure `:q` per uscire.
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+Nota: Se guardi le soluzioni degli esercizi che usano `less`,
+vedrai un comando extra alla fine che disattiva la paginazione
+così possiamo testare le soluzioni in modo efficiente.
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+Usa `less seasonal/spring.csv seasonal/summer.csv` per visualizzare quei due file in quell'ordine.
+Premi la barra spaziatrice per andare avanti di pagina, `:n` per passare al secondo file e `:q` per uscire.
 
 `@hint`
 
@@ -112,7 +112,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='Usa `less` e i nomi dei file. Ricorda che `:n` ti sposta al file successivo.'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +120,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## Come posso vedere l'inizio di un file?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +131,23 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+La prima cosa che la maggior parte dei data scientist fa quando riceve un nuovo insieme di dati da analizzare è
+capire quali campi contiene e quali valori hanno quei campi.
+Se l'insieme di dati è stato esportato da un database o da un foglio di calcolo,
+spesso sarà salvato come **valori separati da virgola** (CSV).
+Un modo rapido per capire cosa contiene è guardare le prime righe.
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+Possiamo farlo nella shell usando un comando chiamato `head`.
+Come suggerisce il nome,
+stampa le prime righe di un file
+(dove "alcune" significa 10),
+quindi il comando:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+mostra:
 
 ```
 Date,Tooth
@@ -164,16 +164,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+Cosa fa `head` se nel file non ci sono 10 righe?
+(Per scoprirlo, usalo per guardare l'inizio di `people/agarwal.txt`.)
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- Stampa un messaggio di errore perché il file è troppo corto.
+- Mostra tante righe quante ce ne sono.
+- Mostra abbastanza righe vuote da arrivare a 10.
 
 `@hint`
-What is the most useful thing it could do?
+Qual è la cosa più utile che potrebbe fare?
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +182,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["Errato: non è la cosa più utile che potrebbe fare.",
+                    "Corretto!",
+                    "Errato: sarebbe impossibile distinguerlo da un file che termina con un sacco di righe vuote."])
 ```
 
 ---
 
-## How can I type less?
+## Come posso digitare meno?
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +197,21 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+Uno degli strumenti potenti della shell è il **completamento con tab**.
+Se inizi a digitare il nome di un file e poi premi il tasto Tab,
+la shell cercherà di completare automaticamente il percorso.
+Per esempio,
+se digiti `sea` e premi Tab,
+riempirà il nome della directory con `seasonal/` (con lo slash finale).
+Se poi digiti `a` e premi Tab,
+completerà il percorso come `seasonal/autumn.csv`.
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+Se il percorso è ambiguo,
+come `seasonal/s`,
+premendo Tab una seconda volta verrà mostrato un elenco di possibilità.
+Digitando un altro carattere o due per rendere il percorso più specifico
+e poi premendo Tab
+verrà completato il resto del nome.
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +227,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+Esegui `head seasonal/autumn.csv` senza digitare il nome del file per intero.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Digita quanto basta del percorso, poi premi Tab e ripeti.
 
 `@solution`
 ```{shell}
@@ -242,7 +242,7 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="Il checker non è riuscito a trovare l'output corretto nel tuo comando. Sei sicuro di aver chiamato `head` su `seasonal/autumn.csv`?")
 )
 
 ```
@@ -256,10 +256,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+Esegui `head seasonal/spring.csv` senza digitare il nome del file per intero.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Digita quanto basta del percorso, poi premi Tab e ripeti.
 
 `@solution`
 ```{shell}
@@ -271,15 +271,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="Il checker non è riuscito a trovare l'output corretto nel tuo comando. Sei sicuro di aver chiamato `head` su `seasonal/spring.csv`?")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("Ottimo lavoro! Una volta che ti abitui a usare il completamento con il tasto tab, ti farà risparmiare molto tempo!")
 ```
 
 ---
 
-## How can I control what commands do?
+## Come posso controllare cosa fanno i comandi?
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +286,31 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+Non sempre vorrai vedere le prime 10 righe di un file,
+quindi la shell ti permette di modificare il comportamento di `head`
+passandogli un **flag da riga di comando** (o semplicemente "flag").
+Se esegui il comando:
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head` mostrerà solo le prime tre righe del file.
+Se esegui `head -n 100`,
+mostrerà le prime 100 (se ce ne sono così tante),
+e così via.
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+Il nome di un flag di solito indica il suo scopo
+(per esempio, `-n` sta per "**n**umero di righe").
+I flag dei comandi non devono per forza essere un `-` seguito da una singola lettera,
+ma è una convenzione molto diffusa.
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+Nota: è considerata una buona pratica mettere tutti i flag *prima* dei nomi dei file,
+quindi in questo corso
+accettiamo solo risposte che seguono questa regola.
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+Visualizza le prime 5 righe di `winter.csv` nella directory `seasonal`.
 
 `@hint`
 
@@ -331,17 +330,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="Sei sicuro di chiamare `head` sul file `seasonal/winter.csv`?"),
+        has_expr_output(strict=True, incorrect_msg="Sei sicuro di aver usato il flag `-n 5`?")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Sei sicuro di aver usato il flag `-n 5`?")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("Ottimo! Con questa tecnica, puoi evitare che la tua shell esploda se vuoi dare un'occhiata a file di testo più grandi.")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## Come posso elencare tutto ciò che sta sotto una directory?
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +348,12 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+Per vedere tutto ciò che si trova sotto una directory,
+indipendentemente da quanto sia annidato in profondità,
+puoi passare a `ls` l'opzione `-R`
+(che significa "ricorsivo").
+Se usi `ls -R` nella tua home directory,
+vedrai qualcosa del genere:
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +367,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+Questo mostra tutti i file e le directory al livello corrente,
+poi tutto in ciascuna sotto-directory,
+e così via.
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+Per aiutarti a capire cosa è cosa,
+`ls` ha un'altra opzione `-F` che stampa una `/` dopo il nome di ogni directory
+e un `*` dopo il nome di ogni programma eseguibile.
+Esegui `ls` con entrambe le opzioni, `-R` e `-F`, e il percorso assoluto della tua home directory
+per vedere tutto ciò che contiene.
+(L'ordine delle opzioni non importa, ma il nome della directory deve venire per ultimo.)
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+La tua home directory può essere indicata usando `~` oppure `.` o il suo percorso assoluto.
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +395,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='Usa `ls -R -F` oppure `ls -F -R` e il percorso `/home/repl`.'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='Usa `ls -R -F` oppure `ls -F -R` e il percorso `/home/repl`.')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg("È una panoramica piuttosto ordinata, vero?")
 ```
 
 ---
 
-## How can I get help for a command?
+## Come posso ottenere aiuto per un comando?
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +411,7 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+Per scoprire cosa fanno i comandi, in passato si usava il comando `man` (abbreviazione di "manual"). Per esempio, il comando `man head` mostra queste informazioni:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +435,11 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` richiama automaticamente `less`, quindi potresti dover premere la barra spaziatrice per scorrere le informazioni e `:q` per uscire.
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+La descrizione su una riga sotto `NAME` ti dice brevemente cosa fa il comando, e il riepilogo sotto `SYNOPSIS` elenca tutte le opzioni che riconosce. Tutto ciò che è facoltativo è mostrato tra parentesi quadre `[...]`, le alternative sono separate da `|`, e gli elementi ripetibili sono indicati con `...`, quindi la pagina di manuale di `head` ti dice che puoi dare *o* un numero di righe con `-n` *oppure* un numero di byte con `-c`, e che puoi passare un qualsiasi numero di nomi di file.
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Il problema del manuale Unix è che devi sapere cosa stai cercando. Se non lo sai, puoi cercare su [Stack Overflow](https://stackoverflow.com/), fare una domanda sui canali Slack di DataCamp oppure guardare le sezioni `SEE ALSO` dei comandi che già conosci.
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +455,10 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+Leggi la pagina di manuale del comando `tail` per scoprire cosa fa mettere un segno `+` davanti al numero usato con l'opzione `-n`. (Ricorda di premere la barra spaziatrice per andare avanti e/o digitare `q` per uscire.)
 
 `@hint`
-Remember: `man` is short for "manual".
+Ricorda: `man` è l'abbreviazione di "manual".
 
 `@solution`
 ```{shell}
@@ -489,8 +469,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Usa `man` e il nome del comando.')
 ```
 
 ***
@@ -502,10 +481,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+Usa `tail` con l'opzione `-n +7` per visualizzare tutte le righe tranne le prime sei di `seasonal/spring.csv`.
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+Usa un segno più '+' davanti al numero di righe che vuoi visualizzare.
 
 `@solution`
 ```{shell}
@@ -517,15 +496,15 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="Stai chiamando `tail` su `seasonal/spring.csv`?"),
+    has_expr_output(strict=True, incorrect_msg="Sei sicuro di aver usato il flag `-n +7`?")
 )
 
 ```
 
 ---
 
-## How can I select columns from a file?
+## Come posso selezionare colonne da un file?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +512,35 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` e `tail` ti permettono di selezionare righe da un file di testo.
+Se vuoi selezionare colonne,
+puoi usare il comando `cut`.
+Ha diverse opzioni (usa `man cut` per esplorarle),
+ma la più comune è qualcosa del tipo:
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+che significa
+"seleziona le colonne dalla 2 alla 5 e la 8,
+usando la virgola come separatore".
+`cut` usa `-f` (sta per "fields") per specificare le colonne
+e `-d` (sta per "delimiter") per specificare il separatore.
+Devi specificare quest'ultimo perché alcuni file possono usare spazi, tabulazioni o due punti per separare le colonne.
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+Quale comando selezionerà la prima colonna (che contiene le date) dal file `spring.csv`?
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- Entrambe le opzioni.
+- Nessuna delle due, perché `-f` deve venire prima di `-d`.
 
 `@hint`
-The order of the flags doesn't matter.
+L'ordine dei flag non importa.
 
 `@pre_exercise_code`
 ```{python}
@@ -570,12 +549,12 @@ The order of the flags doesn't matter.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['Sì, ma non è tutto', 'Sì, ma non è tutto', 'Corretto! Aggiungere uno spazio dopo il flag è una buona pratica, ma non è obbligatorio.', 'No, l\'ordine dei flag non importa'])
 ```
 
 ---
 
-## What can't cut do?
+## Cosa non può fare cut?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +562,10 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` è un comando piuttosto basilare.
+In particolare,
+non capisce le stringhe tra virgolette.
+Se, ad esempio, il tuo file è:
 
 ```
 Name,Age
@@ -594,13 +573,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+allora:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+produrrà:
 
 ```
 Age
@@ -608,27 +587,27 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+invece dell'età di tutti,
+perché considererà la virgola tra cognome e nome come separatore di colonna.
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+Qual è l'output di `cut -d : -f 2-4` sulla riga:
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+(Nota i due punti finali.)
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- Nessuna delle precedenti, perché non ci sono quattro campi.
 
 `@hint`
-Pay attention to the trailing colon.
+Fai attenzione ai due punti finali.
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +616,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['No, c\'è di più.', 'No, c\'è di più.', 'Corretto! I due punti finali creano un quarto campo vuoto.', 'No, `cut` fa del suo meglio.'])
 ```
 
 ---
 
-## How can I repeat commands?
+## Come posso ripetere i comandi?
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +629,19 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+Uno dei maggiori vantaggi dell'uso della shell è che
+rende facile ripetere le operazioni.
+Se esegui alcuni comandi,
+puoi premere la freccia su per scorrere all'indietro tra quelli già usati.
+Puoi anche usare le frecce sinistra e destra e il tasto cancella per modificarli.
+Premere Invio eseguirà quindi il comando modificato.
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+Ancora meglio, `history` stampa l'elenco dei comandi eseguiti di recente.
+Ognuno è preceduto da un numero progressivo per rendere facile rieseguire comandi specifici:
+ti basta digitare `!55` per rieseguire il 55º comando nella tua cronologia (se ne hai così tanti).
+Puoi anche rieseguire un comando digitando un punto esclamativo seguito dal nome del comando,
+come `!head` o `!cut`,
+che rieseguiranno l'uso più recente di quel comando.
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +657,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+Esegui `head summer.csv` nella tua home directory (dovrebbe fallire).
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+Il completamento con Tab non funziona se non c'è un nome file corrispondente.
 
 `@solution`
 ```{shell}
@@ -693,9 +672,8 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Usa `head` e un nome di file, `summer.csv`. Non preoccuparti se fallisce. Dovrebbe.")
 )
-
 ```
 
 ***
@@ -707,10 +685,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+Cambia directory in `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory".
+Ricorda che `cd` sta per "change directory".
 
 `@solution`
 ```{shell}
@@ -722,9 +700,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Se la tua directory di lavoro corrente (scoprila con `pwd`) è `/home/repl`, puoi spostarti nella cartella `seasonal` con `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -736,10 +713,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+Riesegui il comando `head` con `!head`.
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+Non inserire spazi tra `!` e ciò che segue.
 
 `@solution`
 ```{shell}
@@ -755,11 +732,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='Usa `!head` per ripetere il comando `head`.'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +747,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+Usa `history` per vedere cosa hai fatto.
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+Nota che `history` mostra per ultimi i comandi più recenti, così rimangono sullo schermo quando termina l'esecuzione.
 
 `@solution`
 ```{shell}
@@ -784,8 +760,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='Usa `history` senza flag per ottenere un elenco dei comandi precedenti.')
 ```
 
 ***
@@ -797,10 +772,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+Riesegui di nuovo `head` usando `!` seguito da un numero di comando.
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+Non inserire spazi tra `!` e ciò che segue.
 
 `@solution`
 ```{shell}
@@ -816,7 +791,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='Hai usato `!<un_numero>` per rieseguire l\'ultimo `head` dalla cronologia?'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +799,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("Ben fatto! Alla prossima!")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## Come posso selezionare le righe che contengono valori specifici?
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +812,26 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` e `tail` selezionano le righe,
+`cut` seleziona le colonne,
+e `grep` seleziona le righe in base al loro contenuto.
+Nella sua forma più semplice,
+`grep` prende un frammento di testo seguito da uno o più nomi di file
+e stampa tutte le righe in quei file che contengono quel testo.
+Per esempio,
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+stampa le righe di `winter.csv` che contengono "bicuspid".
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` può anche cercare dei pattern;
+esploreremo questi aspetti nel prossimo corso.
+Quel che conta di più adesso sono alcune delle opzioni più comuni di `grep`:
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: stampa il conteggio delle righe corrispondenti invece delle righe stesse
+- `-h`: *non* stampare i nomi dei file quando si cercano più file
+- `-i`: ignora le maiuscole/minuscole (es., considera "Regression" e "regression" come corrispondenze)
+- `-l`: stampa i nomi dei file che contengono corrispondenze, non le corrispondenze
+- `-n`: stampa i numeri di riga per le righe corrispondenti
+- `-v`: inverte la corrispondenza, cioè mostra solo le righe che *non* corrispondono
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +847,11 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+Stampa il contenuto di tutte le righe che contengono la parola `molar` in `seasonal/autumn.csv`
+eseguendo un solo comando dalla tua home directory. Non usare alcuna opzione.
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+Usa `grep` con la parola che stai cercando e il nome del/dei file in cui cercare.
 
 `@solution`
 ```{shell}
@@ -892,13 +866,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "Hai chiamato `grep`?"),
+      has_code("molar", incorrect_msg = "Hai cercato `molar`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Hai cercato il file `seasonal/autumn.csv`?")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +883,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+Inverti la corrispondenza per trovare tutte le righe che *non* contengono la parola `molar` in `seasonal/spring.csv`, e mostra i loro numeri di riga.
+Ricorda: è considerata una buona pratica mettere tutte le opzioni *prima* di altri valori come i nomi dei file o il termine di ricerca "molar".
 
 `@hint`
 
@@ -929,11 +902,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "Hai usato `grep`?"),
+      has_code("-v", incorrect_msg = "Hai invertito la corrispondenza con `-v`?"),
+      has_code("-n", incorrect_msg = "Hai mostrato i numeri di riga con `-n`?"),
+      has_code("molar", incorrect_msg = "Hai cercato `molar`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Hai cercato nel file `seasonal/spring.csv`?")
     )
   )
 )
@@ -949,11 +922,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+Conta quante righe contengono la parola `incisor` in `autumn.csv` e `winter.csv` insieme.
+(Anche in questo caso, esegui un solo comando dalla tua home directory.)
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+Ricorda di usare `-c` con `grep` per contare le righe.
 
 `@solution`
 ```{shell}
@@ -968,11 +941,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "Hai usato `grep`?"),
+      has_code("-c", incorrect_msg = "Hai ottenuto i conteggi con `-c`?"),
+      has_code("incisor", incorrect_msg = "Hai cercato `incisor`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Hai cercato nel file `seasonal/autumn.csv`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Hai cercato nel file `seasonal/winter.csv`?")
     )
   )
 )
@@ -981,7 +954,7 @@ Ex().multi(
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## Perché non è sempre sicuro trattare i dati come testo?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +962,24 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+La sezione `SEE ALSO` della pagina di manuale di `cut` fa riferimento a un comando chiamato `paste`
+che può essere usato per combinare file di dati invece di suddividerli.
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+Leggi la pagina di manuale di `paste`,
+poi esegui `paste` per combinare i file di dati di autumn e winter in un'unica tabella
+usando la virgola come separatore.
+Cosa non va nell'output dal punto di vista dell'analisi dei dati?
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- Le intestazioni di colonna sono ripetute.
+- Le ultime righe hanno un numero di colonne errato.
+- Alcuni dati di `winter.csv` mancano.
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+Se eseguissi `cut` sull'output di `paste` usando le virgole come separatore,
+otterresti la risposta corretta?
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +988,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = 'Vero, ma non è necessariamente un errore.'
+correct2 = 'Corretto: unire le righe con le colonne crea solo una colonna vuota all\'inizio, non due.'
+err3 = 'No, tutti i dati invernali sono presenti.'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```
