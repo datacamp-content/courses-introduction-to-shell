@@ -1,15 +1,15 @@
 ---
-title: Creating new tools
+title: Nieuwe tools maken
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  Met history kun je dingen met maar een paar toetsaanslagen herhalen, en met
+  pipes kun je bestaande opdrachten combineren om nieuwe te maken. In dit
+  hoofdstuk ga je nog een stap verder en maak je je eigen nieuwe opdrachten.
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: Hoe kan ik een bestand bewerken?
 ---
 
-## How can I edit a file?
+## Hoe kan ik een bestand bewerken?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +17,23 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix heeft een overweldigende hoeveelheid teksteditors.
+Voor deze cursus gebruiken we een eenvoudige editor genaamd Nano.
+Als je `nano filename` typt,
+opent Nano `filename` om te bewerken
+(of maakt het aan als het nog niet bestaat).
+Je kunt bewegen met de pijltjestoetsen,
+tekens verwijderen met backspace,
+en andere bewerkingen doen met combinaties met de control-toets:
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`: een regel verwijderen.
+- `Ctrl` + `U`: een verwijderde regel terughalen.
+- `Ctrl` + `O`: het bestand opslaan ('O' staat voor 'output'). _Je moet ook op Enter drukken om de bestandsnaam te bevestigen!_
+- `Ctrl` + `X`: de editor afsluiten.
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+Voer `nano names.txt` uit om een nieuw bestand in je homedirectory te bewerken
+en voer de volgende vier regels in:
 
 ```
 Lovelace
@@ -43,10 +42,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+Om op te slaan wat je hebt geschreven,
+typ je `Ctrl` + `O` om het bestand weg te schrijven,
+dan Enter om de bestandsnaam te bevestigen,
+dan `Ctrl` + `X` om de editor af te sluiten.
 
 `@hint`
 
@@ -65,7 +64,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "Heb je de regel `%s` in het bestand `names.txt` opgenomen? Gebruik `nano names.txt` opnieuw om je bestand bij te werken. Gebruik `Ctrl` + `O` om op te slaan en `Ctrl` + `X` om af te sluiten."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +74,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("Goed gedaan! Op naar de volgende!")
 ```
 
 ---
 
-## How can I record what I just did?
+## Hoe kan ik vastleggen wat ik net heb gedaan?
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +87,20 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+Als je een complexe analyse doet,
+wil je vaak een overzicht bewaren van de opdrachten die je hebt gebruikt.
+Dat kan met de tools die je al hebt gezien:
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. Voer `history` uit.
+2. Pijp de uitvoer naar `tail -n 10` (of zoveel recente stappen als je wilt bewaren).
+3. Leid dat om naar een bestand met een naam als `figure-5.history`.
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+Dit is beter dan dingen in een labjournaal opschrijven,
+omdat je zo gegarandeerd geen stappen overslaat.
+Het illustreert ook het kernidee van de shell:
+simpele tools die regels tekst produceren en gebruiken
+kun je op allerlei manieren combineren
+om een breed scala aan problemen op te lossen.
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +116,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+Kopieer de bestanden `seasonal/spring.csv` en `seasonal/summer.csv` naar je thuismap.
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+Gebruik `cp` om te kopiëren en `~` als snelkoppeling voor het pad naar je thuismap.
 
 `@solution`
 ```{shell}
@@ -130,7 +129,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="Heb je `cp seasonal/s* ~` gebruikt om de benodigde bestanden naar je home directory te kopiëren?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +137,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("Opmerkelijke administratie! Als je een fout hebt gemaakt in een van de opdrachten, kun je altijd `nano` gebruiken om het geschiedenisbestand van de opslagen achteraf op te schonen.")
 ```
 
 ***
@@ -151,13 +149,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+Gebruik `grep` met de vlag `-h` (zodat bestandsnamen niet worden afgedrukt)
+en `-v Tooth` (om regels te selecteren die niet overeenkomen met de kopregel)
+om de gegevensrecords uit `spring.csv` en `summer.csv` in die volgorde te selecteren
+en leid de uitvoer om naar `temp.csv`.
 
 `@hint`
-Put the flags before the filenames.
+Zet de vlaggen vóór de bestandsnamen.
 
 `@solution`
 ```{shell}
@@ -167,8 +165,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "Zorg ervoor dat je de uitvoer van het `grep`-commando omleidt naar `temp.csv` met `>`!"
+msg2 = "Heb je `grep -h -v ___ ___ ___` gebruikt (vul de lege plekken in) om `temp.csv` te vullen?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +175,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +186,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+Pijp `history` naar `tail -n 3`
+en leid de uitvoer om naar `steps.txt`
+om de laatste drie opdrachten in een bestand op te slaan.
+(Je moet er drie opslaan in plaats van twee,
+omdat de opdracht `history` zelf ook in de lijst staat.)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+Onthoud dat omleiding met `>` aan het einde van de reeks gepijpte opdrachten komt.
 
 `@solution`
 ```{shell}
@@ -206,8 +203,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="Zorg ervoor dat je de uitvoer van je commando omleidt naar `steps.txt`."
+msg2="Heb je `history | tail ___ ___` gebruikt (vul de lege plekken in) om `steps.txt` te vullen?"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +216,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("Goed gedaan! Laten we een stapje verder gaan!")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## Hoe kan ik commando's opslaan om later opnieuw uit te voeren?
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +229,27 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+Je hebt de shell tot nu toe interactief gebruikt.
+Maar omdat de commando's die je typt gewoon tekst zijn,
+kun je ze opslaan in bestanden die de shell steeds opnieuw kan uitvoeren.
+Om deze krachtige mogelijkheid te verkennen,
+zet je het volgende commando in een bestand met de naam `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+Dit commando haalt de eerste rij op uit elk van de CSV-bestanden in de map `seasonal`.
+Zodra je dit bestand hebt gemaakt,
+kun je het uitvoeren door te typen:
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+Dit vertelt de shell (wat gewoon een programma genaamd `bash` is)
+om de commando's in het bestand `headers.sh` uit te voeren,
+wat dezelfde output oplevert als wanneer je de commando's direct draait.
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +265,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+Gebruik `nano dates.sh` om een bestand `dates.sh` te maken
+met dit commando:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+om de eerste kolom uit alle CSV-bestanden in `seasonal` te halen.
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+Zet de getoonde commando's in het bestand zonder extra lege regels of spaties.
 
 `@solution`
 ```{shell}
@@ -291,13 +287,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "Heb je de regel `cut -d , -f 1 seasonal/*.csv` in het bestand `dates.sh` opgenomen? Gebruik `nano dates.sh` opnieuw om je bestand bij te werken. Gebruik `Ctrl` + `O` om op te slaan en `Ctrl` + `X` om af te sluiten."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +304,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+Gebruik `bash` om het bestand `dates.sh` uit te voeren.
 
 `@hint`
-Use `bash filename` to run the file.
+Gebruik `bash bestandsnaam` om het bestand uit te voeren.
 
 `@solution`
 ```{shell}
@@ -327,17 +322,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+      has_code("dates.sh", incorrect_msg = 'Heb je het `dates.sh` bestand gespecificeerd?')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## Hoe kan ik pipes hergebruiken?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +339,26 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+Een bestand vol shell-opdrachten heet een ***shellscript**,
+of kortweg een "script". Scripts hoeven niet per se te eindigen op `.sh`,
+maar in deze les gebruiken we die conventie
+zodat je makkelijk kunt bijhouden welke bestanden scripts zijn.
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+Scripts kunnen ook pipes bevatten.
+Als bijvoorbeeld `all-dates.sh` deze regel bevat:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+dan zal:
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+de unieke datums uit de seizoensdata-bestanden halen
+en opslaan in `dates.out`.
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +375,13 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+Een bestand `teeth.sh` in je home-directory is voor je klaargezet, maar bevat enkele lege plekken.
+Gebruik Nano om het bestand te bewerken en vervang de twee `____` placeholders
+door `seasonal/*.csv` en `-c` zodat dit script een telling afdrukt van het
+aantal keren dat elke tandnaam voorkomt in de CSV-bestanden in de map `seasonal`.
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+Gebruik `nano teeth.sh` om het bestand te bewerken.
 
 `@solution`
 ```{shell}
@@ -400,13 +393,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="Heb je de lege plekken goed vervangen zodat het commando in `teeth.sh` `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c` leest? Gebruik `nano teeth.sh` opnieuw om de vereiste wijzigingen aan te brengen."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +410,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+Gebruik `bash` om `teeth.sh` uit te voeren en `>` om de output om te leiden naar `teeth.out`.
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+Onthoud dat `> teeth.out` *na* de opdracht moet komen die output produceert.
 
 `@solution`
 ```{shell}
@@ -434,7 +426,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="Heb je het resultaat van `bash teeth.sh` correct omgeleid naar `teeth.out` met de `>`?"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +435,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'Heb je het bestand `teeth.sh` uitgevoerd?'),
+      has_code(">\s+teeth.out", incorrect_msg = 'Heb je omgeleid naar het bestand `teeth.out`?')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +452,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+Voer `cat teeth.out` uit om je resultaten te bekijken.
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+Je kunt de eerste paar letters van een bestandsnaam typen en dan op Tab drukken om automatisch aan te vullen.
 
 `@solution`
 ```{shell}
@@ -479,18 +470,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = 'Heb je `cat` aangeroepen?'),
+      has_code("teeth.out", incorrect_msg = 'Heb je het bestand `teeth.out` gespecificeerd?')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("Mooi! Dit alles kan in het begin geforceerd aanvoelen, maar het mooie is dat je stap voor stap delen van je workflow automatiseert. Iets dat erg handig is als data scientist!")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## Hoe kan ik bestandsnamen aan scripts doorgeven?
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +488,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+Een script dat specifieke bestanden verwerkt is handig als verslag van wat je hebt gedaan, maar een script waarmee je elk gewenst bestand kunt verwerken is nog handiger.
+Om dit te ondersteunen,
+kun je de speciale expressie `$@` gebruiken (dollarteken direct gevolgd door apenstaartje)
+om "alle commandoregelparameters die aan het script zijn doorgegeven" te betekenen.
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+Als `unique-lines.sh` bijvoorbeeld `sort $@ | uniq` bevat en je voert uit:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+vervangt de shell `$@` door `seasonal/summer.csv` en wordt één bestand verwerkt. Als je dit uitvoert:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+worden twee databestanden verwerkt, enzovoort.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ter herinnering: om op te slaan wat je in Nano hebt geschreven, typ je `Ctrl` + `O` om het bestand weg te schrijven, druk je op Enter om de bestandsnaam te bevestigen en vervolgens `Ctrl` + `X` om de editor af te sluiten._
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +524,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+Bewerk het script `count-records.sh` met Nano en vul de twee `____` placeholders
+respectievelijk in met `$@` en `-l` (_de letter_) zodat het het aantal regels telt in één of meer bestanden,
+waarbij de eerste regel van elk bestand wordt overgeslagen.
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* Gebruik `nano count-records.sh` om de bestandsnaam te bewerken.
+* Zorg dat je de _letter_ `-l` opgeeft, en niet het cijfer één.
 
 `@solution`
 ```{shell}
@@ -552,13 +542,12 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="Heb je de lege plekken goed vervangen zodat de opdracht in `count-records.sh` leest als `tail -q -n +2 $@ | wc -l`? Gebruik `nano count-records.sh` opnieuw om de vereiste wijzigingen aan te brengen."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
         has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -570,11 +559,11 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+Voer `count-records.sh` uit op `seasonal/*.csv`
+en leid de uitvoer om naar `num-records.out` met `>`.
 
 `@hint`
-Use `>` to redirect the output.
+Gebruik `>` om de uitvoer te herleiden.
 
 `@solution`
 ```{shell}
@@ -589,20 +578,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'Heb je het bestand `count-records.sh` uitgevoerd?'),
+      has_code("seasonal/\*", incorrect_msg = 'Heb je de bestanden gespecificeerd om te verwerken met `seasonal/*`?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'Heb je doorgestuurd naar het bestand `num-records.out`?')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("Goed gedaan! Je shell-kracht breidt zich steeds verder uit!")
 ```
 
 ---
 
-## How can I process a single argument?
+## Hoe verwerk ik één argument?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +598,39 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+Naast `$@` kun je in de shell `$1`, `$2`, enzovoort gebruiken om naar specifieke opdrachtregelparameters te verwijzen.
+Hiermee kun je commando's schrijven die eenvoudiger of natuurlijker aanvoelen dan die van de shell zelf.
+Je kunt bijvoorbeeld een script `column.sh` maken dat één kolom uit een CSV-bestand selecteert wanneer de gebruiker de bestandsnaam als eerste parameter en de kolom als tweede meegeeft:
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+en het vervolgens draaien met:
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+Let op dat het script de twee parameters in omgekeerde volgorde gebruikt.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+Het script `get-field.sh` moet een bestandsnaam aannemen,
+het nummer van de te selecteren rij,
+het nummer van de te selecteren kolom,
+en precies dat veld uit een CSV-bestand afdrukken.
+Bijvoorbeeld:
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+moet het tweede veld uit regel 4 van `seasonal/summer.csv` selecteren.
+Welke van de volgende commando's moet in `get-field.sh` worden gezet om dat te doen?
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+Vergeet niet dat opdrachtregelparameters van links naar rechts genummerd zijn.
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +639,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
+- Nee: daarmee probeer je de bestandsnaam te gebruiken als het aantal regels dat `head` moet selecteren.
 - Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- Nee: daarmee gebruik je het kolomnummer als regelnummer en andersom.
+- Nee: daarmee gebruik je het veldnummer als bestandsnaam en andersom.
 
 ---
 
-## How can one shell script do many things?
+## Hoe kan één shellscript veel dingen doen?
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +654,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+Onze shellscripts hadden tot nu toe één opdracht of pipe, maar een script kan uit veel regels met opdrachten bestaan. Je kunt bijvoorbeeld een script maken dat je vertelt hoeveel records er staan in het kortste en het langste van je gegevensbestanden, dus het bereik van de lengtes van je datasets.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+Let op: in Nano doe je "kopiëren en plakken" door naar de regel te gaan die je wilt kopiëren, `CTRL` + `K` te drukken om de regel te knippen, en daarna twee keer `CTRL` + `U` om er twee kopieën van te plakken.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ter herinnering: om op te slaan wat je in Nano hebt geschreven, typ je `Ctrl` + `O` om het bestand weg te schrijven, druk je op Enter om de bestandsnaam te bevestigen, en daarna `Ctrl` + `X` om de editor te sluiten._
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +675,15 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+Gebruik Nano om het script `range.sh` te bewerken
+en vervang de twee placeholders `____`
+door `$@` en `-v`
+zodat het de namen en het aantal regels van alle op de opdrachtregel opgegeven bestanden laat zien
+*zónder* het totale aantal regels in alle bestanden te tonen.
+(Probeer de kolomkopregels in de bestanden niet af te trekken.)
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+Gebruik `wc -l $@` om regels te tellen in alle bestanden die op de opdrachtregel zijn opgegeven.
 
 `@solution`
 ```{shell}
@@ -710,13 +695,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="Heb je de lege plekken goed ingevuld zodat het commando in `range.sh` `wc -l $@ | grep -v total` leest? Gebruik `nano range.sh` opnieuw om de vereiste wijzigingen aan te brengen."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +712,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+Gebruik opnieuw Nano om `sort -n` en `head -n 1` in die volgorde
+aan de pijplijn in `range.sh` toe te voegen
+zodat de naam en regelcount van het kortste bestand dat eraan is doorgegeven worden getoond.
 
 `@hint`
 
@@ -745,13 +729,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="Heb je `sort -n` en `head -n 1` met pipes toegevoegd aan het `range.sh` bestand? Gebruik `nano range.sh` opnieuw om de vereiste wijzigingen aan te brengen."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +746,13 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+Gebruik weer Nano en voeg een tweede regel toe aan `range.sh` om de naam en het recordaantal van
+het *langste* bestand in de map te printen *én* dat van het kortste.
+Deze regel moet een kopie zijn van de regel die je al hebt geschreven,
+maar met `sort -n -r` in plaats van `sort -n`.
 
 `@hint`
-Copy the first line and modify the sorting order.
+Kopieer de eerste regel en pas de sorteervolgorde aan.
 
 `@solution`
 ```{shell}
@@ -781,8 +764,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="Houd de eerste regel in het `range.sh` bestand: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="Heb je de eerste regel in `range.sh` gedupliceerd en een kleine wijziging gemaakt? `sort -n -r` in plaats van `sort -n`!"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +773,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +784,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+Voer het script uit op de bestanden in de map `seasonal`
+met `seasonal/*.csv` om alle bestanden te matchen
+en leid de uitvoer om met `>`
+naar een bestand `range.out` in je thuismap.
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+Gebruik `bash range.sh` om je script uit te voeren, `seasonal/*.csv` om bestanden op te geven, en `> range.out` om de uitvoer om te leiden.
 
 `@solution`
 ```{shell}
@@ -818,24 +800,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="Heb je het resultaat van `bash range.sh seasonal/*.csv` correct omgeleid naar `range.out` met de `>`?"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Heb je het `range.sh` bestand uitgevoerd?'),
+has_code("seasonal/\*", incorrect_msg = 'Heb je de bestanden om te verwerken gespecificeerd met `seasonal/*`?'),
+has_code(">\s+range.out", incorrect_msg = 'Heb je omgeleid naar het `range.out` bestand?')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("Dit gaat goed. Ga naar de volgende oefening om te leren over het schrijven van loops!")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## Hoe schrijf ik lussen in een shellscript?
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,10 +824,10 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+Shellscripts kunnen ook lussen bevatten. Je kunt ze met puntkomma's schrijven, of over meerdere regels zonder puntkomma's om ze leesbaarder te maken:
 
 ```{shell}
-# Print the first and last data records of each file.
+# Print de eerste en laatste gegevensregel van elk bestand.
 for filename in $@
 do
     head -n 2 $filename | tail -n 1
@@ -854,11 +835,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+(Je hoeft de opdrachten binnen de lus niet in te springen, maar dat maakt het wel duidelijker.)
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+De eerste regel van dit script is een **commentaar** om lezers te vertellen wat het script doet. Commentaar begint met het teken `#` en loopt tot het einde van de regel. Je toekomstige zelf zal je dankbaar zijn als je aan elk script dat je schrijft korte uitleg toevoegt, zoals hier.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ter herinnering: om op te slaan wat je in Nano hebt geschreven, typ je `Ctrl` + `O` om het bestand weg te schrijven, druk je daarna op Enter om de bestandsnaam te bevestigen, en vervolgens `Ctrl` + `X` om de editor te sluiten._
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +856,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+Vul de placeholders in het script `date-range.sh` in
+met `$filename` (twee keer), `head` en `tail`,
+zodat het de eerste en laatste datum uit één of meer bestanden print.
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+Vergeet niet `$filename` te gebruiken om de huidige waarde van de lusvariabele op te halen.
 
 `@solution`
 ```{shell}
@@ -892,10 +873,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="Heb je in `date-range.sh` de %s regel in de lus veranderd naar `%s`? Gebruik `nano date-range.sh` om wijzigingen aan te brengen."
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('eerste', cmdpatt%'head')
+msg2=msgpatt%('tweede', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +887,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +898,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+Voer `date-range.sh` uit op alle vier seizoensgegevensbestanden
+met `seasonal/*.csv` om op hun namen te matchen.
 
 `@hint`
-The wildcard expression should start with the directory name.
+De jokertekenexpressie moet beginnen met de mapnaam.
 
 `@solution`
 ```{shell}
@@ -937,13 +917,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Heb je het bestand `date-range.sh` uitgevoerd?'),
+      has_code("seasonal/\*", incorrect_msg = 'Heb je de bestanden om te verwerken gespecificeerd met `seasonal/*`?')
     )
   )
 )
-
 ```
 
 ***
@@ -955,11 +934,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+Voer `date-range.sh` uit op alle vier de seizoensgegevensbestanden met `seasonal/*.csv` om op hun namen te matchen,
+en stuur de uitvoer via een pipe naar `sort` om te zien dat je scripts net als de ingebouwde Unix-opdrachten gebruikt kunnen worden.
 
 `@hint`
-Use the same wildcard expression you used earlier.
+Gebruik dezelfde jokertekenexpressie als eerder.
 
 `@solution`
 ```{shell}
@@ -974,21 +953,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = 'Heb je `bash` aangeroepen?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Heb je het bestand `date-range.sh` uitgevoerd?'),
+      has_code("seasonal/\*", incorrect_msg = 'Heb je de bestanden gespecificeerd om te verwerken met `seasonal/*`?'),
+      has_code("|", incorrect_msg = 'Heb je de uitvoer van het script naar `sort` gepiped?'),
+      has_code("sort", incorrect_msg = 'Heb je `sort` aangeroepen?')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("Magie! Merk op hoe samenstelbaar alle dingen zijn die we hebben geleerd.")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## Wat gebeurt er als ik geen bestandsnamen opgeef?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +974,42 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+Een veelgemaakte fout in shellscripts (en interactieve commando's) is bestandsnamen op de verkeerde plek zetten.
+Als je typt:
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+Aangezien `tail` geen bestandsnamen heeft gekregen,
+wacht het om invoer van je toetsenbord te lezen.
+Dit betekent dat als je typt:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+`tail` gewoon de laatste drie regels van `somefile.txt` afdrukt,
+maar `head` eindeloos wacht op invoer van het toetsenbord,
+omdat het geen bestandsnaam kreeg en er niets vóór staat in de pijplijn.
 
 <hr>
 
-Suppose you do accidentally type:
+Stel dat je per ongeluk typt:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+Wat moet je dan doen?
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- Wacht 10 seconden totdat `head` een timeout krijgt.
+- Typ `somefile.txt` en druk op Enter om `head` invoer te geven.
+- Gebruik `Ctrl` + `C` om het draaiende `head`-programma te stoppen.
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+Wat doet `head` als het geen bestandsnaam heeft en er niets vóór in de pijplijn staat?
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +1018,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = 'Nee, opdrachten zullen niet verlopen.'
+a2 = 'Nee, dat zal `head` de tekst `somefile.txt` geven om te verwerken, maar dan blijft het wachten op nog meer invoer.'
+a3 = "Ja! Je moet `Ctrl` + `C` gebruiken om een draaiend programma te stoppen. Dit is het einde van deze introductiecursus! Als je geïnteresseerd bent om meer commandoregeltools te leren, raden we je ten zeerste aan om onze gratis intro tot Git-cursus te volgen!"
 Ex().has_chosen(3, [a1, a2, a3])
 ```
