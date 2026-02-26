@@ -1,15 +1,13 @@
 ---
-title: Batch processing
+title: バッチ処理
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  多くのシェルコマンドは複数のファイルを一度に処理できます。この章では、自分のパイプラインでもそれを実現する方法を学びます。その過程で、シェルが情報を保存するために変数をどのように使うかも見ていきます。
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: シェルは情報をどのように保存しますか？
 ---
 
-## How does the shell store information?
+## シェルはどのように情報を保存しますか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +15,32 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+他のプログラムと同様に、シェルも情報を変数に保存します。
+その中には **環境変数** と呼ばれる、常に利用できるものがあります。
+環境変数の名前は慣例的に大文字で書かれ、よく使われるものの一部を以下に示します。
 
 | Variable | Purpose                           | Value                 |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | ユーザーのホームディレクトリ       | `/home/repl`          |
+| `PWD `   | 現在の作業ディレクトリ             | `pwd` コマンドと同じ  |
+| `SHELL`  | 使用中のシェルプログラム           | `/bin/bash`           |
+| `USER`   | ユーザー ID                        | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+完全な一覧（かなり長いです）を得るには、シェルで `set` を入力します。
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+パイプで `set` と `grep` を組み合わせて、コマンド履歴に保存される過去のコマンド数を決める `HISTFILESIZE` の値を表示してください。
+その値はいくつですか？
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- その変数は存在しません。
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+必要な行を取り出すには、`set | grep HISTFILESIZE` を使います。
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +49,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "いいえ: シェルはそれ以上の履歴を記録します。"
+err2 = "いいえ: シェルはそれ以上の履歴を記録します。"
+correct3 = "正解です: このシステムでは、シェルはデフォルトで2000個の古いコマンドを保存します。"
+err4 = "いいえ: 変数 `HISTFILESIZE` は存在します。"
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## 変数の値を表示するには？
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +66,49 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+変数の値を調べるもっと簡単な方法は、引数をそのまま表示するコマンド `echo` を使うことです。次のように入力すると、
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+次のように表示されます。
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+もし次のように、変数の値を表示しようとして:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+と入力すると、表示されるのは変数名 `USER` です。
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+変数の値を得るには、先頭にドル記号 `$` を付ける必要があります。次のように入力すると、
 
 ```{shell}
 echo $USER
 ```
 
-prints
+次のように表示されます。
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+これはどこでも同じです。
+`X` という変数の値を得たいときは、`$X` と書きます。
+（こうすることで、シェルは「X という名前のファイル」を指しているのか、
+「X という名前の変数の値」を指しているのかを判別できます。）
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+変数 `OSTYPE` には、使用しているオペレーティングシステムの種類が入っています。
+`echo` を使ってその値を表示してください。
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+変数名の前に `$` を付けて、`OSTYPE` を `echo` で呼び出してください。
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +127,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="`echo`を呼び出しましたか？"),
+            has_code('OSTYPE', incorrect_msg="`OSTYPE`環境変数を出力しましたか？"),
+            has_code(r'\$OSTYPE', incorrect_msg="`OSTYPE`の前に`$`を付けることを確認してください。")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("環境変数の素晴らしいエコーです！良いスタートを切りましたね。この調子で続けましょう！")
 ```
 
 ---
 
-## How else does the shell store information?
+## シェルはほかにどのように情報を保存しますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +146,18 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+もう一つの種類の変数は **シェル変数** と呼ばれ、プログラミング言語のローカル変数のようなものです。
 
-To create a shell variable,
-you simply assign a value to a name:
+シェル変数を作成するには、
+次のように名前に値を代入します。
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+`=` 記号の前後にスペースを入れないでください。
+この設定ができたら、
+次のコマンドで変数の値を確認できます。
 
 ```{shell}
 echo $training
@@ -189,10 +180,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+`testing` という変数に `seasonal/winter.csv` を代入してください。
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+変数名とその値の間にスペースを入れないでください。
 
 `@solution`
 ```{shell}
@@ -214,12 +205,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='`testing`という名前のシェル変数を定義しましたか？'),
+        has_code('testing=', incorrect_msg='スペースを入れずに`testing`の直後に`=`を書きましたか？'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='`testing`の値を`seasonal/winter.csv`に設定しましたか？')
     )
 )
-
 ```
 
 ***
@@ -231,12 +221,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+`head -n 1 SOMETHING` を使って `seasonal/winter.csv` の最初の1行を取得します。
+ただし、ファイル名の代わりに変数 `testing` の値を使ってください。
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+`testing` ではなく `$testing` を使うことを忘れないでください
+（変数の値を参照するには `$` が必要です）。
 
 `@solution`
 ```{shell}
@@ -251,23 +241,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="シェル変数を `$testing` を使用して参照しましたか？"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="`head` を呼び出しましたか？"),
+            has_code('-n', incorrect_msg="`-n` で行数を制限しましたか？"),
+            has_code(r'-n\s+1', incorrect_msg="`-n 1` で1行を保持することを選択しましたか？")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("素晴らしいです！コマンドを簡単に繰り返す方法を見てみましょう。")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## コマンドを何度も繰り返すにはどうすればよいですか？
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +264,14 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+シェル変数は、コマンドを何度も繰り返す**ループ**でも使われます。
+次のコマンドを実行すると:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+次のように出力されます:
 
 ```
 gif
@@ -291,21 +279,19 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+このループについて、次の点に注目してください。
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. 構造は `for` ...変数... `in` ...リスト... `; do` ...本体... `; done` です。
+2. ループが処理する対象のリスト（ここでは `gif`、`jpg`、`png` という語）。
+3. 現在どの要素を処理しているかを保持する変数（ここでは `filetype`）。
+4. 実際の処理を行うループ本体（ここでは `echo $filetype`）。
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+本体では、他のシェル変数と同様に、単なる `filetype` ではなく `$filetype` を使って変数の値を取得していることに注意してください。
+また、セミコロンの位置にも注意しましょう。
+1つ目はリストとキーワード `do` の間、2つ目は本体とキーワード `done` の間に置きます。
 
 `@instructions`
-Modify the loop so that it prints:
+ループを修正して、次のように表示されるようにしてください。
 
 ```
 docx
@@ -313,10 +299,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+ループ変数の名前は `filetype` を使ってください。
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+導入文のコード構造を参考にして、画像ファイル形式をドキュメントファイル形式に置き換えてください。
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +321,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='`for`を呼び出しましたか？'),
+      has_code('filetype', incorrect_msg='ループ変数として`filetype`を使用しましたか？'),
+      has_code('in', incorrect_msg='ファイルタイプのリストの前に`in`を使用しましたか？'),
+      has_code('docx odt pdf', incorrect_msg='`docx`、`odt`、`pdf`をその順番でループしましたか？'),
+      has_code(r'pdf\s*;', incorrect_msg='最後のループ要素の後にセミコロンを付けましたか？'),
+      has_code(r';\s*do', incorrect_msg='最初のセミコロンの後に`do`を使用しましたか？'),
+      has_code('echo', incorrect_msg='`echo`を呼び出しましたか？'),
+      has_code(r'\$filetype', incorrect_msg='`$filetype`をエコーしましたか？'),
+      has_code(r'filetype\s*;', incorrect_msg='ループ本体の後にセミコロンを付けましたか？'),
+      has_code('; done', incorrect_msg='`done`で終了しましたか？')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("ループのための一流のコードです！ループは、同じことを何百回、何千回も行いたい場合に素晴らしいです。")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## 各ファイルに対してコマンドを1回ずつ実行するには？
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +347,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+ループを書くときに、処理したいファイル名を直接入力してもかまいませんが、
+通常はワイルドカードを使うほうが便利です。
+次のループをコンソールで実行してみてください。
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+次のように表示されます。
 
 ```
 seasonal/autumn.csv
@@ -378,14 +364,12 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+これは、シェルがループを実行する前に `seasonal/*.csv` を4つのファイル名のリストに展開するためです。
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+ワイルドカード表現を `people/*` に変更し、
+拡張子の有無に関係なく `people` ディレクトリ内のファイル名がループで表示されるようにしてください。
+ループ変数の名前は `filename` を使ってください。
 
 `@hint`
 
@@ -407,25 +391,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='`for`を呼び出しましたか？'),
+      has_code('filename', incorrect_msg='ループ変数として`filename`を使用しましたか？'),
+      has_code('in', incorrect_msg='ファイルタイプのリストの前に`in`を使用しましたか？'),
+      has_code('people/\*', incorrect_msg='`people/*`でファイルのリストを指定しましたか？'),
+      has_code(r'people/\*\s*;', incorrect_msg='ファイルのリストの後にセミコロンを付けましたか？'),
+      has_code(r';\s*do', incorrect_msg='最初のセミコロンの後に`do`を使用しましたか？'),
+      has_code('echo', incorrect_msg='`echo`を呼び出しましたか？'),
+      has_code(r'\$filename', incorrect_msg='`$filename`をエコーしましたか？'),
+      has_code(r'filename\s*;', incorrect_msg='ループ本体の後にセミコロンを付けましたか？'),
+      has_code('; done', incorrect_msg='`done`で終了しましたか？')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("ループのループ！ワイルドカードとループは強力な組み合わせです。")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## 複数のファイル名をどうやって記録できますか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +417,25 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+ワイルドカード式を使って変数にファイル名の一覧を記録することはよくあります。
+たとえば、`datasets` を次のように定義すると、
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+後で次のコマンドでファイル名を表示できます。
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+こうすることで、入力の手間が減り、ミスも起こりにくくなります。
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+これら2つのコマンドをホームディレクトリで実行すると、
+出力は何行になりますか？
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +443,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- 0行：`files` は別の行で定義されているため、2行目では値がありません。
+- 1行：「files」という単語だけ。
+- 4行：4つの季節データファイルの名前。
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+`X` はそれ自体では単なる「X」ですが、`$X` は変数 `X` の値になります。
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +457,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "いいえ: 変数を使用する行で定義する必要はありません。"
+err2 = "いいえ: この例では、同じシェルで変数 `files` を定義して使用しています。"
+correct3 = "正解です。このコマンドは `for f in seasonal/*.csv; do echo $f; done` と同等です。"
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## 変数名とその値の違い
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +473,53 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+よくあるミスは、変数名の前に `$` を付け忘れることです。
+これをしてしまうと、シェルはその変数の値ではなく、入力した名前そのものを使ってしまいます。
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+経験者により多いミスは、変数名をタイプミスすることです。
+たとえば、次のように `datasets` を定義しておいて:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+その後に次を入力すると:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+`datsets`（2つ目の "a" がない）という変数は定義されていないため、
+シェルは何も表示しません。
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+ホームディレクトリで次の2つのコマンドを実行した場合、
+どのような出力が表示されますか?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+（回答する前に、ループの最初の部分をよく読んでください。）
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+単独の `X` はただの文字列「X」ですが、`$X` は変数 `X` の値になります。
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [1行: 単語「files」。]
+- 4行: 4つの季節データファイル名すべて。
+- 空行が4行: 変数 `f` に値が代入されていない。
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- 正解です: ループでは `$files` ではなく `files` を使っているため、リストは単語「files」になります。
+- いいえ: ループでは `$files` ではなく `files` を使っているため、リストは `files` の展開結果ではなく、単語「files」になります。
+- いいえ: 変数 `f` は `for` ループによって自動的に定義されます。
 
 ---
 
-## How can I run many commands in a single loop?
+## 1つのループで多くのコマンドをどう実行しますか？
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +527,26 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+ファイル名を表示するのはデバッグに便利ですが、ループの本当の目的は複数ファイルに対して処理を行うことです。
+次のループは、各データファイルの2行目を表示します:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+これまで見てきた他のループと同じ構造で、異なるのは本体が1つのコマンドではなく2つのコマンドからなるパイプラインになっている点だけです。
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+各 seasonal ファイルごとに、2017年7月（`2017-07`）の最後の行を表示するループを書いてください。出力は次のようなものに近くなるはずです:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+ただし、seasonal ファイルを**それぞれ**個別に処理します。ループ変数の名前は `file` を使い、例のような 'seasonal/winter.csv' ではなく、`seasonal/*.csv` というファイル一覧に対してループすることを忘れないでください。
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+ループ本体は、指示にある grep コマンドの `seasonal/winter.csv` を `$file` に置き換えたものです。
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +563,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='`for`を呼び出しましたか？'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='ループ変数として`file`を使用しましたか？'),
+      has_code('in', incorrect_msg='ファイルのリストの前に`in`を使用しましたか？'),
+      has_code('seasonal/\*', incorrect_msg='`seasonal/*`でファイルのリストを指定しましたか？'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='ファイルのリストの後にセミコロンを付けましたか？'),
+      has_code(r';\s*do', incorrect_msg='最初のセミコロンの後に`do`を使用しましたか？'),
+      has_code('grep', incorrect_msg='`grep`を呼び出しましたか？'),
+      has_code('2017-07', incorrect_msg='`2017-07`にマッチしましたか？'),
+      has_code(r'\$file', incorrect_msg='ループ変数の名前として`$file`を使用しましたか？'),
+      has_code(r'file\s*|', incorrect_msg='2番目のコマンドを接続するためにパイプを使用しましたか？'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='2番目のコマンドで各検索の最後のエントリを出力するために`tail -n 1`を使用しましたか？'),
+      has_code('; done', incorrect_msg='`done`で終了しましたか？')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("ループのループ！ワイルドカードとループは強力な組み合わせです。")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## なぜファイル名にスペースを使うべきではないのですか？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +595,20 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+グラフィカルなファイルエクスプローラを使うときは、`July 2017.csv` のように複数語からなる名前を付けるのは簡単で理にかなっています。
+しかし、シェルで作業するときには問題になります。
+たとえば、`July 2017.csv` を `2017 July data.csv` にリネームしたいとします。
+次のようには入力できません。
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+これはシェルから見ると、
+`July`、`2017.csv`、`2017`、そして（再び）`July` という4つのファイルを、`data.csv` というディレクトリに移動しようとしているように見えるためです。
+その代わりに、
+シェルがそれぞれを1つの引数として扱うように、
+ファイル名をクォートで囲む必要があります。
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +616,33 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+`current.csv` と、名前にスペースを含む `last year.csv` という2つのファイルがあり、
+次のように入力した場合：
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+何が起こるでしょうか：
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+誰かにこのコマンドを見せられて、どんなファイルがあるのか知らなかったとしたら、何が起こりそうだと思いますか？
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- シェルは、`last` と `year.csv` が存在しないためエラーメッセージを表示します。
+- シェルは `current.csv` を削除します。
+- [上の両方。]
+- 何も起こりません。
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- そうですが、それだけではありません。
+- そうですが、それだけではありません。
+- 正解です。ファイル名はシングルクォート（`'`）またはダブルクォート（`"`）で囲むことができます。
+- 残念ながら違います。
 
 ---
 
-## How can I do many things in a single loop?
+## 1 回のループで多くのことを行うにはどうすればよいですか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +650,8 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+これまで見てきたループは、本文に 1 つのコマンドまたはパイプラインしか含んでいませんでしたが、ループにはいくつでもコマンドを入れられます。
+どこで 1 つが終わり、次が始まるかをシェルに伝えるには、セミコロンで区切る必要があります。
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +670,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+前のループで `echo` と `head` のコマンドの間のセミコロンを入れ忘れて、
+次のようにシェルに実行させたとします。
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+シェルは何をするでしょうか？
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- エラーメッセージを表示する。
+- 4 つのファイルそれぞれについて 1 行を表示する。
+- `autumn.csv`（最初のファイル）について 1 行を表示する。
+- 各ファイルの最後の行を表示する。
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+`echo` の出力を `tail` にパイプできます。
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +695,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "いいえ: ループは実行されますが、意味のあることはしません。"
+correct2 = "はい: `echo` はファイル名を2回含む1行を生成し、それを `tail` がコピーします。"
+err3 = "いいえ: ループは4つのファイル名のそれぞれに対して1回実行されます。"
+err4 = "いいえ: `tail` の入力は各ファイル名に対する `echo` の出力です。"
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

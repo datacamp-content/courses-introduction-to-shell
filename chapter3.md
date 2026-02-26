@@ -1,16 +1,14 @@
 ---
-title: Combining tools
+title: ツールの組み合わせ
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Unix
+  シェルの真の力は、個々のコマンドそのものではなく、それらを簡単に組み合わせて新しい処理を行える点にあります。この章では、必要なデータを抽出する方法を学び、値のソートや重複の削除を行うコマンドを紹介します。
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: コマンドの出力をファイルに保存するには？
 ---
 
-## How can I store a command's output in a file?
+## コマンドの出力をファイルに保存するにはどうすればよいですか？
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +16,40 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+これまで見てきたツールは、入力ファイル名を指定できました。
+多くのコマンドには出力ファイル名を指定するオプションがありません。必要ないからです。
+その代わりに、任意のコマンドの出力を好きな場所に保存できるよう、**リダイレクト**を使います。
+次のコマンドを実行すると、
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+summer のデータの先頭5行が画面に表示されます。
+代わりに次のコマンドを実行すると、
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+画面には何も表示されません。
+その代わり、
+`head` の出力は `top.csv` という新しいファイルに書き込まれます。
+そのファイルの中身は `cat` で確認できます。
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+不等号の `>` は、シェルに `head` の出力をファイルへリダイレクトするよう指示します。
+これは `head` コマンドの一部ではありません。
+代わりに、出力を生成するあらゆるシェルコマンドで機能します。
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+`tail` とリダイレクトを組み合わせて、`seasonal/winter.csv` の最後の5行を `last.csv` というファイルに保存してください。
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+最後の5行を取得するには、`tail -n 5` を使います。
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +63,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "行 `%s` はファイル `last.csv` にあるべきですが、ありません。`tail -n 5 seasonal/winter.csv` の出力を `>` を使って `last.csv` にリダイレクトしてください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` に行が多すぎます。`tail` に `-n 5` フラグを使用しましたか？'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("素晴らしいです！もう少し練習しましょう！")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## コマンドの出力を別のコマンドの入力として使うには？
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +85,19 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+ファイルの途中の行を取り出したいとします。
+もう少し具体的には、データファイルの3–5行目を取得したいとします。
+まずは `head` を使って先頭5行を取り出し、
+それをファイルにリダイレクトし、
+続けて `tail` で最後の3行を選びます。
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+簡単に確認すると、元のファイルの3–5行目になっていることがわかります。
+先頭5行のうちの最後の3行だからです。
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +113,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+`seasonal/winter.csv` から最後の2行を選び、
+`bottom.csv` というファイルに保存してください。
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+`tail` で行を選び、`>` で `tail` の出力をリダイレクトします。
 
 `@solution`
 ```{shell}
@@ -132,16 +127,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="行 `%s` はファイル `bottom.csv` にあるべきですが、ありません。`tail -n 2 seasonal/winter.csv` の出力を `>` を使って `bottom.csv` にリダイレクトしてください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` に行が多すぎます。`tail` に `-n 2` フラグを使用しましたか？'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +147,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+元のファイルの最後から2番目の行を得るために、
+`bottom.csv` から先頭の1行を選んでください。
 
 `@hint`
-Use `head` to select the line you want.
+目的の行を選ぶには `head` を使います。
 
 `@solution`
 ```{shell}
@@ -169,17 +163,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="`bottom.csv`ファイルに何か問題があります。変更しないようにしてください！"),
+    has_expr_output(strict=True, incorrect_msg="`bottom.csv`で`head`を正しく使用しましたか？`-n`フラグを正しく使用するようにしてください。")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("よくできました。次の演習に進んで、コマンドを組み合わせるより良い方法を見つけてください。")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## コマンドを組み合わせるより良い方法は？
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +181,32 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+リダイレクトでコマンドを組み合わせる方法には、次の2つの欠点があります。
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. 中間ファイル（`top.csv` など）が大量に残ってしまいます。
+2. 最終的な結果を得るためのコマンドが履歴の複数行に分散してしまいます。
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+シェルには、これらの問題を一度に解決する **パイプ** と呼ばれるツールがあります。
+もう一度、まずは `head` を実行してみましょう:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+`head` の出力をファイルに送る代わりに、縦棒とファイル名なしの `tail` コマンドを追加します:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+パイプ記号は、左側のコマンドの出力を右側のコマンドの入力として使うように、シェルに指示します。
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+`cut` を使って、カンマ区切りファイル `seasonal/summer.csv` の2列目からすべての歯の名前を抽出し、その結果をパイプで `grep` に渡して、反転マッチで「Tooth」という語を含むヘッダー行を除外してください。※`cut` と `grep` の詳細は、第2章の演習8と11で扱いました。
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- コマンドの前半は `cut -d field_delimiter -f column_number filename` の形になります。
+- コマンドの後半は `grep -v thing_to_match` の形になります。
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +222,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = '結果を `cut -d , -f 2 seasonal/summer.csv` から `grep -v Tooth` に `|` でパイプしましたか？'),
+    check_not(has_output("Tooth"), incorrect_msg = '`grep` を使用して `"Tooth"` ヘッダー行を除外しましたか？')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("完璧なパイピングです！これが `|` を初めて使用したときかもしれませんが、これが最後ではありません！")
 ```
 
 ---
 
-## How can I combine many commands?
+## 複数のコマンドをどう組み合わせればよいですか？
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +238,30 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+任意の数のコマンドを連結して実行できます。
+たとえば、次のコマンドは：
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+次の処理を行います。
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. spring のデータから最初の列を抽出します。
+2. 「Date」という語を含むヘッダー行を除外します。
+3. 実データの先頭 10 行を取得します。
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+前の演習では、次のコマンドを使って `seasonal/summer.csv` の 2 列目からすべての歯の名前を抽出しました。
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+このパイプラインの末尾に `head` コマンドを追加して、最初の 1 件の歯の名前だけを選択してください。
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+指示にあるコードをコピー＆ペーストし、末尾にパイプを追加してから、`-n` フラグを付けて `head` を呼び出してください。
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +278,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "パイプラインを `head` コマンドで拡張するために `|` を使用しましたか？ `-n` フラグを正しく設定してください。"),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "パイプラインを `head` コマンドで拡張するために `|` を使用しましたか？")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("楽しいチェーン！ 複数のコマンドを連鎖させることで、強力なデータ操作パイプラインを構築できます。")
 ```
 
 ---
 
-## How can I count the records in a file?
+## ファイル内のレコード数を数えるには？
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +295,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+`wc` コマンド（"word count" の略）は、ファイルに含まれる**文字数**、**単語数**、**行数**を表示します。
+それぞれを単独で表示したい場合は、`-c`、`-w`、`-l` を使います。
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+`seasonal/spring.csv` のうち、日付が 2017 年 7 月（`2017-07`）のレコードがいくつあるか数えてください。
+- そのために、部分的な日付で `grep` を使って該当する行を選び、その結果をパイプで `wc` に渡し、行数を数えるための適切なフラグを付けてください。
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- 日付の形式を思い出すには `head seasonal/spring.csv` を使います。
+- コマンドの前半は `grep 検索したいもの ファイル名` の形になります。
+- パイプ `|` の後で、行数を数えるために `wc` に `-l` フラグを付けて呼び出します。
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +324,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "`grep`を呼び出しましたか？"),
+      has_code("2017-07", incorrect_msg = "`2017-07`を検索しましたか？"),
+      has_code("seasonal/spring.csv", incorrect_msg = "`seasonal/spring.csv`ファイルを検索しましたか？"),
+      has_code("|", incorrect_msg = "`|`を使用して`wc`にパイプしましたか？"),      
+      has_code("wc", incorrect_msg = "`wc`を呼び出しましたか？"),
+      has_code("-l", incorrect_msg = "`-l`で行数を数えましたか？")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("慎重に数えましたね！データ分析の最初のステップとして、どれだけのデータがあるかを確認することは重要です。")
 ```
 
 ---
 
-## How can I specify many files at once?
+## 複数のファイルを一度に指定するには？
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +346,37 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+ほとんどのシェルコマンドは、複数のファイル名を渡せば複数ファイルに対して動作します。
+たとえば、次のようにして四季のデータファイルすべてから最初の列を一度に取得できます:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+しかし、多くのファイル名を何度も手で入力するのは得策ではありません。
+時間がかかりますし、いずれファイルを入れ忘れたり、同じ名前を重複してしまったりします。
+そこで便利なのが、シェルの**ワイルドカード**です。1つの表現でファイルの一覧を指定できます。
+最も一般的なワイルドカードは `*` で、
+「0 文字以上にマッチする」という意味です。
+これを使うと、上の `cut` コマンドは次のように短くできます:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+または次のようにも書けます:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+`head` を使って、`seasonal/spring.csv` と `seasonal/summer.csv` の両方から最初の3行、合計6行のデータを取得するコマンドを1行で書いてください。ただし、autumn と winter のファイルは含めないでください。
+ファイル名をすべて書き出すのではなく、ワイルドカードを使用してください。
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- コマンドの形式は `head -n number_of_lines filename_pattern` です。
+- たとえば、ディレクトリ `a` 内で `b` で始まるファイルにマッチさせるには、`a/b*` を使います。
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +392,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "季節/春.csv` と `季節/夏.csv` を選択するには `seasonal/s*` を使用できます。`-n` フラグを使用して各ファイルの最初の3行のみを含めるようにしてください！"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "季節/秋.csv` の出力を含めないでください。`季節/春.csv` と `季節/夏.csv` を選択するには `seasonal/s*` を使用できます"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "季節/冬.csv` の出力を含めないでください。`季節/春.csv` と `季節/夏.csv` を選択するには `seasonal/s*` を使用できます")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("ワイルドカードの作業がうまくいきました！ディレクトリに数百または数千のファイルが含まれている場合、これはさらに重要になります。")
 ```
 
 ---
 
-## What other wildcards can I use?
+## ほかに使えるワイルドカードは？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +409,18 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+シェルにはほかにもワイルドカードがありますが、使用頻度はやや低めです。
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` は1文字にマッチします。たとえば `201?.txt` は `2017.txt` や `2018.txt` にマッチしますが、`2017-01.txt` にはマッチしません。
+- `[...]` は角括弧内のいずれか1文字にマッチします。たとえば `201[78].txt` は `2017.txt` や `2018.txt` にマッチしますが、`2016.txt` にはマッチしません。
+- `{...}` は波括弧内のカンマ区切りのいずれかのパターンにマッチします。たとえば `{*.txt, *.csv}` は名前が `.txt` または `.csv` で終わるファイルにマッチしますが、`.pdf` で終わるファイルにはマッチしません。
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+`singh.pdf` と `johel.txt` にはマッチし、かつ `sandhu.pdf` や `sandhu.txt` にはマッチ「しない」表現はどれですか？
 
 `@hint`
-Match each expression against each filename in turn.
+それぞれの表現を、各ファイル名に順番に当てはめて考えてみてください。
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +429,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- いいえ: `.pdf` と `.txt` はファイル名そのものではありません。
+- いいえ: これは `sandhu.pdf` にもマッチします。
+- いいえ: 角括弧内の表現は単一の文字にしかマッチせず、単語全体にはなりません。
+- 正解です！
 
 ---
 
-## How can I sort lines of text?
+## テキストの行をどのように並べ替えられますか？
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +444,19 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+名前の通り、`sort` はデータを並べ替えます。既定ではアルファベット順の昇順で並べ替えますが、`-n` と `-r` を使うと数値でのソートや出力順の反転ができます。`-b` は先頭の空白を無視し、`-f` は大文字小文字を折りたたみ（つまり大文字小文字を区別しない）ます。パイプラインでは、不要なレコードを `grep` で取り除き、その後 `sort` で残りのレコードを順序付けるのが一般的です。
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+`seasonal/summer.csv` の2列目からすべての歯の名前を選ぶために使った、`cut` と `grep` の組み合わせを覚えていますか？
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+このレシピを出発点にして、`seasonal/winter.csv`（`summer.csv` ではありません）の歯の名前をアルファベットの降順で並べ替えてください。そのために、パイプラインに `sort` のステップを追加しましょう。
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+指示にあるコマンドをコピー＆ペーストし、ファイル名を変更して、パイプを追加し、その後に `-r` フラグ付きで `sort` を実行します。
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +475,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "「cut」を呼び出しましたか？"),
+      has_code("-d", incorrect_msg = "「-d」でフィールド区切り文字を指定しましたか？"),
+      has_code("seasonal/winter.csv", incorrect_msg = "「seasonal/winter.csv」ファイルからデータを取得しましたか？"),
+      has_code("|", incorrect_msg = "「|」を使用して「cut」から「grep」へ、「grep」から「sort」へパイプしましたか？"),      
+      has_code("grep", incorrect_msg = "「grep」を呼び出しましたか？"),
+      has_code("-v", incorrect_msg = "「-v」で一致を反転しましたか？"),
+      has_code("Tooth", incorrect_msg = "「Tooth」を検索しましたか？"),
+      has_code("sort", incorrect_msg = "「sort」を呼び出しましたか？"),
+      has_code("-r", incorrect_msg = "「-r」でソート順を逆にしましたか？")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("ソート完了！「sort」には多くの用途があります。例えば、「sort -n」を「head」にパイプすると、最大値を表示できます。")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## 重複した行を取り除くにはどうしますか？
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +500,10 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+しばしば `sort` と一緒に使われるコマンドに `uniq` があります。
+`uniq` の役割は、重複した行を取り除くことです。
+より正確には、*隣接する* 重複行だけを取り除きます。
+もしファイルが次のようになっている場合は:
 
 ```
 2017-07-03
@@ -535,14 +512,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+`uniq` は次のように出力します:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+しかし、もし次のようになっている場合は:
 
 ```
 2017-07-03
@@ -551,33 +528,32 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+`uniq` は4行すべてを表示します。
+その理由は、`uniq` が非常に大きなファイルで動作するよう設計されているためです。
+隣接していない重複行を取り除くには、
+ファイル全体（少なくとも、これまでに現れたすべてのユニークな行）を
+メモリに保持する必要があります。
+隣接する重複だけを取り除くことで、
+直近のユニークな1行だけをメモリに保持すればよくなります。
 
 `@instructions`
-Write a pipeline to:
+次の処理を行うパイプラインを書いてください:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- `seasonal/winter.csv` から2列目を取得する。
+- 出力から "Tooth" という単語を取り除き、歯の名前だけを表示する。
+- 同じ歯の名前が隣り合うように出力を並べ替える。
+- 各歯の名前を一度だけ表示し、その出現回数も一緒に表示する。
 
-The start of your pipeline is the same as the previous exercise:
+パイプラインの最初の部分は前の演習と同じです:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+ここに `sort` コマンドを続け、`uniq -c` を使って、各ユニークな行を出現回数付きで表示してください。`uniq` と `wc` を組み合わせる代わりに使います。
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+指示にあるコマンドをコピー＆ペーストし、フラグなしの `sort` にパイプし、さらに `uniq` に `-c` フラグを付けてパイプします。
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +573,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="このコマンドから始めるべきです: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`。今、それを拡張してください！"),
+            has_code('\|\s+sort', incorrect_msg="コマンドを `| sort` で拡張しましたか？"),
+            has_code('\|\s+uniq', incorrect_msg="コマンドを `| uniq` で拡張しましたか？"),
+            has_code('-c', incorrect_msg="`-c` を使ってカウントを含めましたか？")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("素晴らしいです！このパイプでの作業の後、結果を保存できたらいいですね？")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## パイプの出力を保存するにはどうすればよいですか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +593,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+シェルでは、パイプでつないだコマンド列の出力をリダイレクトできます。
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+ただし、`>` はパイプラインの末尾に置く必要があります。
+次のように途中で使おうとすると、
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+`cut` の出力はすべて `teeth-only.txt` に書き出され、
+`grep` に渡されるものがなくなるため、
+`grep` は入力をずっと待ち続けてしまいます。
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+では、次のようにパイプラインの先頭にリダイレクトを書いた場合はどうなるでしょうか。
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [コマンドの出力は通常どおりファイルにリダイレクトされます。]
+- シェルはエラーとして報告します。
+- シェルは入力を永遠に待ち続けます。
 
 `@hint`
-Try it out in the shell.
+シェルで実際に試してみてください。
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +633,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['正解です！', 'いいえ；シェルは実際にこれを実行できます。', 'いいえ；シェルは実際にこれを実行できます。'])
 ```
 
 ---
 
-## How can I stop a running program?
+## 実行中のプログラムを止めるには？
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +646,19 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+これまでに実行したコマンドやスクリプトはすべてすぐに終わりましたが、処理によっては数分、数時間、あるいは数日かかることもあります。パイプラインの途中に誤ってリダイレクトを入れてしまい、ハングしてしまうこともあります。もしプログラムをこれ以上動かしたくないと思ったら、`Ctrl` + `C` を入力して終了できます。これは Unix のドキュメントではしばしば `^C` と書かれます。なお、'c' は小文字でも構いません。
 
 `@instructions`
-Run the command:
+次のコマンドを実行します。
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+引数なしで実行し（決して来ない入力を待つ状態にして）、`Ctrl` + `C` を入力して停止してください。
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+単に head と入力して Enter を押し、実行中のプログラムは `Ctrl` + `C` で終了します。
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +672,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="`head` を使用しましたか？")
 ```
 
 ---
 
-## Wrapping up
+## まとめ
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +685,7 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+仕上げとして、季節ごとのデータファイルのうち、最も短いファイルに含まれるレコード数を調べるパイプラインを作成します。
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +701,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+`wc` に適切なパラメータを指定して、すべての季節データファイルの行数を一覧表示してください。
+（ファイル名は手入力せず、ワイルドカードを使いましょう。）
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+`-l` を使って行数のみを表示し、`*` を使ってファイル名にマッチさせます。
 
 `@solution`
 ```{shell}
@@ -753,9 +720,9 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "`wc`を呼び出しましたか？"),
+      has_code("-l", incorrect_msg = "`-l`で行数を数えましたか？"),
+      has_code("seasonal/\*", incorrect_msg = "すべての`seasonal/*`ファイルからデータを取得しましたか？")
     )
   )
 )
@@ -771,7 +738,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+前のコマンドにパイプでコマンドをもう一つ追加し、"total" という語を含む行を取り除いてください。
 
 `@hint`
 
@@ -789,17 +756,16 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "「wc」を呼び出しましたか？"),
+      has_code("-l", incorrect_msg = "「-l」で行数を数えましたか？"),
+      has_code("seasonal/\*", incorrect_msg = "すべての「seasonal/*」ファイルからデータを取得しましたか？"),
+      has_code("|", incorrect_msg = "「|」を使用して「wc」から「grep」へパイプしましたか？"),      
+      has_code("grep", incorrect_msg = "「grep」を呼び出しましたか？"),
+      has_code("-v", incorrect_msg = "「-v」で一致を反転しましたか？"),
+      has_code("total", incorrect_msg = "「total」を検索しましたか？")
     )
   )
 )
-
 ```
 
 ***
@@ -811,11 +777,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+パイプラインにさらに 2 段追加し、`sort -n` と `head -n 1` を使って、最も行数が少ないファイルを見つけてください。
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- 数値として並べ替えるには `sort` の `-n` フラグを使います。
+- 1 行だけ残すには `head` の `-n` フラグを使います。
 
 `@solution`
 ```{shell}
@@ -830,19 +796,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "`wc`を呼び出しましたか？"),
+      has_code("-l", incorrect_msg = "`-l`で行数を数えましたか？"),
+      has_code("seasonal/\*", incorrect_msg = "すべての`seasonal/*`ファイルからデータを取得しましたか？"),
+      has_code("|", incorrect_msg = "`wc`から`grep`、`sort`、`head`に`|`を使ってパイプしましたか？"),      
+      has_code("grep", incorrect_msg = "`grep`を呼び出しましたか？"),
+      has_code("-v", incorrect_msg = "`-v`で一致を反転しましたか？"),
+      has_code("total", incorrect_msg = "`total`を検索しましたか？"),
+      has_code("sort", incorrect_msg = "`sort`を呼び出しましたか？"),
+      has_code("-n", incorrect_msg = "`-n`で保持する行数を指定しましたか？"),
+      has_code("1", incorrect_msg = "`-n 1`で1行を保持するように指定しましたか？")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("素晴らしいです！`autumn.csv`が最も行数の少ないファイルであることが判明しました。バッチ処理についてもっと学ぶために、第4章に急いでください！")
 ```

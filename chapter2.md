@@ -1,16 +1,13 @@
 ---
-title: Manipulating data
+title: データの操作
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  前の章で見たコマンドは、ファイルシステム内でモノを移動するためのものでした。この章では、それらのファイルの中のデータを扱う方法を学びます。使うツールは比較的シンプルですが、確かな基礎となるものです。
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: ファイルの中身はどうやって表示しますか？
 ---
 
-## How can I view a file's contents?
+## ファイルの中身はどうやって確認できますか？
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +15,10 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+ファイル名を変更したり削除したりする前に、まずは中身を確認したいことがあります。
+これを行う最も簡単な方法は `cat` を使うことです。
+`cat` はファイルの内容をそのまま画面に表示します。
+（名前は「concatenate（連結する）」の略で、指定した複数のファイルを順番に続けて表示できることに由来します。）
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +31,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+`course.txt` の内容を画面に表示してください。
 
 `@hint`
 
@@ -55,14 +50,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="コマンドが正しい出力を生成しませんでした。`cat`の後にファイル名`course.txt`を使用しましたか？")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("素晴らしいです！ファイルの内容を表示する他の方法を見てみましょう。")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## ファイルの中身を少しずつ表示するにはどうすればよいですか？
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +65,23 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+大きなファイルは `cat` で表示してスクロールすることもできますが、通常は出力を**ページ送り**にするほうが便利です。
+このための元のコマンドは `more` でしたが、今ではより強力な `less` に置き換えられています。
+（この名前付けは、Unix界隈のユーモアです。）
+`less` でファイルを開くと、1ページずつ表示されます。
+スペースキーで次のページに進み、`q` で終了できます。
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+`less` に複数のファイル名を渡すと、
+次のファイルに進むには `:n`（コロンと小文字の n）、
+前のファイルに戻るには `:p`、
+終了するには `:q` と入力します。
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+注意: `less` を使う演習の模範解答を表示すると、最後にページ送りをオフにするための追加コマンドが入っています。
+これはあなたの解答を効率よく採点するためです。
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+`less seasonal/spring.csv seasonal/summer.csv` を使って、2つのファイルをその順番で表示してください。
+スペースキーでページを進み、`:n` で2つ目のファイルへ、`:q` で終了します。
 
 `@hint`
 
@@ -112,7 +103,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='`less`とファイル名を使用してください。`:n`で次のファイルに移動することを忘れないでください。'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +111,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## ファイルの先頭を確認するには？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +122,19 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+データサイエンティストが新しいデータセットを受け取ったとき、最初に行うことの多くは、どんなフィールドがあり、それぞれにどんな値が入っているかを把握することです。
+データベースやスプレッドシートからエクスポートされたデータセットは、多くの場合 **comma-separated values**（CSV）として保存されています。
+中身を手早く知る方法は、先頭の数行を確認することです。
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+シェルでは、`head` というコマンドでこれができます。
+名前が示すとおり、ファイルの先頭の数行（ここでは 10 行）を表示します。
+例えば、次のコマンドは:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+次のように表示します:
 
 ```
 Date,Tooth
@@ -164,16 +151,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+もしファイルに 10 行なかったら、`head` はどう動作しますか？
+（`people/agarwal.txt` の先頭を表示して確かめてみましょう。）
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- ファイルが短すぎるためエラーメッセージを表示する。
+- 存在する行数だけ表示する。
+- 合計が 10 行になるように空行を追加して表示する。
 
 `@hint`
-What is the most useful thing it could do?
+最も役立つ動作は何でしょうか？
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +169,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["不正解：それは最も有用なことではありません。",
+                    "正解です！",
+                    "不正解：それは、末尾に多数の空白行があるファイルと区別することが不可能です。"])
 ```
 
 ---
 
-## How can I type less?
+## どうすれば入力を減らせますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +184,21 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+シェルの強力な機能のひとつが、**タブ補完**です。
+ファイル名の一部を入力してから Tab キーを押すと、
+シェルが可能な限りパスを自動補完してくれます。
+たとえば、
+`sea` と入力して Tab を押すと、
+ディレクトリ名 `seasonal/`（末尾のスラッシュ付き）が補完されます。
+続けて `a` と入力して Tab を押すと、
+パスは `seasonal/autumn.csv` まで補完されます。
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+パスがあいまいな場合、
+たとえば `seasonal/s` のようなときは、
+Tab をもう一度押すと候補の一覧が表示されます。
+さらに文字を1〜2個追加してパスをより具体的にし、
+もう一度 Tab を押すと、
+残りの名前が補完されます。
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +214,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+ファイル名をすべて入力せずに、`head seasonal/autumn.csv` を実行してください。
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+必要なところまでパスを入力したら Tab を押し、必要に応じて繰り返してください。
 
 `@solution`
 ```{shell}
@@ -242,7 +229,7 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="チェッカーはコマンド内で正しい出力を見つけることができませんでした。`seasonal/autumn.csv` に対して `head` を呼び出したことを確認してください。")
 )
 
 ```
@@ -256,10 +243,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+ファイル名をすべて入力せずに、`head seasonal/spring.csv` を実行してください。
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+必要なところまでパスを入力したら Tab を押し、必要に応じて繰り返してください。
 
 `@solution`
 ```{shell}
@@ -271,15 +258,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="チェッカーはコマンドで正しい出力を見つけることができませんでした。`seasonal/spring.csv` に対して `head` を呼び出したことを確認してください。")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("よくできました！タブ補完の使用に慣れると、多くの時間を節約できますよ！")
 ```
 
 ---
 
-## How can I control what commands do?
+## コマンドの動作はどうやって制御できますか？
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +273,25 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+ファイルの最初の10行だけを常に見たいとは限りません。
+そのためシェルでは、**コマンドラインフラグ**（略して「フラグ」）を指定して、`head` の挙動を変えられます。
+次のコマンドを実行すると、
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head` はファイルの最初の3行だけを表示します。
+`head -n 100` を実行すれば、（行数があれば）最初の100行を表示します。
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+フラグ名は通常、その目的を示しています（たとえば、`-n` は「行数（**n**umber of lines）」を表します）。
+コマンドのフラグは必ずしも `-` に1文字が続く形式である必要はありませんが、広く使われている慣例です。
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+注意: 一般的には、すべてのフラグはファイル名よりも*前*に置くのが良いスタイルとされています。
+このコースでも、その形式のみを正解として受け付けます。
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+`seasonal` ディレクトリにある `winter.csv` の先頭5行を表示してください。
 
 `@hint`
 
@@ -331,17 +311,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="`head` コマンドを `seasonal/winter.csv` ファイルに対して実行していることを確認してください。"),
+        has_expr_output(strict=True, incorrect_msg="`-n 5` フラグを使用したことを確認してください。")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "`-n 5` フラグを使用したことを確認してください。")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("素晴らしいです！この技術を使えば、より大きなテキストファイルを確認したい場合にシェルがクラッシュするのを防ぐことができます。")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## ディレクトリ配下のすべてを一覧するには？
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +329,10 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+あるディレクトリの下にあるものを、
+どれだけ深く入れ子になっていてもすべて確認したいときは、
+`ls` にフラグ `-R`（「再帰的」の意味）を付けます。
+ホームディレクトリで `ls -R` を使うと、次のように表示されます。
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +346,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+これは、まず現在の階層にあるすべてのファイルとディレクトリを示し、
+その後に各サブディレクトリの中身を、
+さらにその下層へと順に表示していきます。
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+何が何かを見分けやすくするために、
+`ls` にはもう一つフラグ `-F` があり、ディレクトリ名の後ろに `/`、
+実行可能なプログラム名の後ろに `*` を付けて表示します。
+`ls` をフラグ `-R` と `-F` の両方、およびホームディレクトリへの絶対パスと一緒に実行して、
+その中身をすべて確認してください。
+（フラグの順序はどちらでも構いませんが、ディレクトリ名は最後に指定する必要があります。）
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+ホームディレクトリは、`~` や `.`、または絶対パスで指定できます。
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +374,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='`ls -R -F` または `ls -F -R` とパス `/home/repl` を使用してください。'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='`ls -R -F` または `ls -F -R` とパス `/home/repl` を使用してください。')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg('なかなか素晴らしい概要ですね。')
 ```
 
 ---
 
-## How can I get help for a command?
+## コマンドのヘルプはどうやって参照できますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +390,7 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+コマンドが何をするかを調べるために、昔からよく使われているのが `man` コマンド（"manual" の略）です。たとえば、`man head` と入力すると次の情報が表示されます。
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +414,11 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` は自動的に `less` を起動します。情報をページ送りするにはスペースキーを押し、終了するには `:q` を入力する必要がある場合があります。
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+`NAME` の下にある1行の説明はコマンドの概要を示し、`SYNOPSIS` の要約には利用できるフラグが一覧されています。省略可能なものは角括弧 `[...]` で示され、どちらか一方を選ぶものは `|` で区切られ、繰り返し可能なものは `...` で示されます。つまり、`head` のマニュアルページは、`-n` で行数、または `-c` でバイト数のいずれかを指定でき、さらに任意の数のファイル名を渡せることを伝えています。
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Unix のマニュアルの難点は、探しているものをあらかじめ知っている必要があることです。わからない場合は、[Stack Overflow](https://stackoverflow.com/) で検索したり、DataCamp の Slack チャンネルで質問したり、すでに知っているコマンドの `SEE ALSO` セクションを参照したりできます。
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +434,10 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+`tail` コマンドのマニュアルページを読み、`-n` フラグで使う数値の前に `+` 記号を付けると何が起きるかを確認してください。（ページを下に進めるにはスペースキー、終了するには `q` を入力することを忘れないでください。）
 
 `@hint`
-Remember: `man` is short for "manual".
+`man` は "manual"（マニュアル）の略です。
 
 `@solution`
 ```{shell}
@@ -489,8 +448,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='`man`とコマンド名を使用してください。')
 ```
 
 ***
@@ -502,10 +460,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+`tail` にフラグ `-n +7` を付けて、`seasonal/spring.csv` の先頭6行以外のすべてを表示してください。
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+表示したい行数の前にプラス記号 '+' を付けてください。
 
 `@solution`
 ```{shell}
@@ -517,15 +475,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="`seasonal/spring.csv` に対して `tail` を呼び出していますか？"),
+    has_expr_output(strict=True, incorrect_msg="`-n +7` フラグを使用したことを確認しましたか？")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## ファイルから列を選択するにはどうすればよいですか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +490,33 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` と `tail` は、テキストファイルから行を選択できます。
+列を選択したい場合は、`cut` コマンドが使えます。
+`cut` にはいくつかのオプションがあります（`man cut` で確認できます）が、最も一般的なのは次のような使い方です。
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+これは
+「区切り文字にカンマを使い、2 列目から 5 列目と 8 列目を選ぶ」
+という意味です。
+`cut` では列を指定するのに `-f`（"fields" の意味）、
+区切り文字を指定するのに `-d`（"delimiter" の意味）を使います。
+ファイルによっては、列の区切りにスペース、タブ、コロンが使われていることがあるため、後者は明示的に指定する必要があります。
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+ファイル `spring.csv` から最初の列（日付が入っている列）を選択するコマンドはどれですか？
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- 上のどちらでもよい。
+- どちらも誤り。`-f` は `-d` の前に来なければならないため。
 
 `@hint`
-The order of the flags doesn't matter.
+フラグの順序は関係ありません。
 
 `@pre_exercise_code`
 ```{python}
@@ -570,12 +525,12 @@ The order of the flags doesn't matter.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['はい、しかしそれだけではありません', 'はい、しかしそれだけではありません', '正解です！フラグの後にスペースを追加するのは良いスタイルですが、必須ではありません。', 'いいえ、フラグの順序は重要ではありません'])
 ```
 
 ---
 
-## What can't cut do?
+## cut にできないことは？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +538,9 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` は単純なコマンドです。
+特に、引用符で囲まれた文字列を理解しません。
+たとえば、ファイルが次のような場合:
 
 ```
 Name,Age
@@ -594,13 +548,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+次のコマンドは:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+以下の出力になります:
 
 ```
 Age
@@ -608,27 +562,26 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+すべての人の年齢ではなくこの結果になるのは、姓と名の間のカンマを列の区切りと見なしてしまうためです。
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+次の行に対して `cut -d : -f 2-4` を実行すると、出力はどうなりますか？
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+（末尾のコロンに注意してください。）
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- 上記のどれでもない。4 つのフィールドがないため。
 
 `@hint`
-Pay attention to the trailing colon.
+末尾のコロンに注意してください。
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +590,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['いいえ、もっとあります。', 'いいえ、もっとあります。', '正解です！末尾のコロンが空の第4フィールドを作成します。', 'いいえ、`cut`はできる限りのことをします。'])
 ```
 
 ---
 
-## How can I repeat commands?
+## コマンドを繰り返すにはどうすればよいですか？
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +603,16 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+シェルを使う大きな利点のひとつは、同じ作業を簡単に繰り返せることです。
+いくつかコマンドを実行したら、上矢印キーでそれらをさかのぼって呼び出せます。
+左右の矢印キーや削除キーで編集することもできます。
+その後、リターンキーを押すと、編集後のコマンドが実行されます。
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+さらに便利なのが、`history` です。最近実行したコマンドの一覧を表示してくれます。
+各コマンドには通し番号が付いているので、特定のコマンドを簡単に再実行できます。
+たとえば、履歴の55番目のコマンドを再実行するには `!55` と入力します（その数だけ履歴がある場合）。
+また、感嘆符に続けてコマンド名を入力する方法でも再実行できます。
+たとえば `!head` や `!cut` のように入力すると、そのコマンドの直近の実行が再実行されます。
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +628,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+ホームディレクトリで `head summer.csv` を実行してください（失敗するはずです）。
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+一致するファイル名がない場合は、Tab 補完は機能しません。
 
 `@solution`
 ```{shell}
@@ -693,7 +643,7 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="`head` とファイル名 `summer.csv` を使用してください。失敗しても心配しないでください。それで大丈夫です。")
 )
 
 ```
@@ -707,10 +657,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+`seasonal` ディレクトリに移動してください。
 
 `@hint`
-Remember that `cd` stands for "change directory".
+`cd` は "change directory"（ディレクトリを変更）を表します。
 
 `@solution`
 ```{shell}
@@ -722,9 +672,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="現在の作業ディレクトリ（`pwd`で確認） が `/home/repl` の場合、`cd seasonal` で `seasonal` フォルダに移動できます。")
 )
-
 ```
 
 ***
@@ -736,10 +685,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+`!head` を使って `head` コマンドを再実行してください。
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+`!` とその後に続く文字のあいだにスペースを入れないでください。
 
 `@solution`
 ```{shell}
@@ -755,11 +704,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='`!head` を使用して `head` コマンドを繰り返してください。'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +719,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+`history` を使って、これまでの操作を確認してください。
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+`history` は最新のコマンドを最後に表示します。実行後も画面に残るので確認しやすいです。
 
 `@solution`
 ```{shell}
@@ -784,8 +732,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='フラグを使用せずに `history` を使用して、以前のコマンドのリストを取得してください。')
 ```
 
 ***
@@ -797,10 +744,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+コマンド番号の前に `!` を付けて、もう一度 `head` を再実行してください。
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+`!` とその後に続く文字のあいだにスペースを入れないでください。
 
 `@solution`
 ```{shell}
@@ -816,7 +763,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='`!<a_number>`を使用して、履歴から最後の`head`を再実行しましたか？'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +771,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("よくできました！次に進みましょう！")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## 特定の値を含む行をどのように抽出できますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +784,26 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` と `tail` は行（行頭・行末）を選び、
+`cut` は列を選び、
+`grep` は行の内容に基づいて行を選びます。
+いちばん基本的な使い方では、
+`grep` は検索したいテキストに続けて1つ以上のファイル名を受け取り、
+そのテキストを含む行をすべて表示します。
+たとえば、
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+は、"bicuspid" を含む `winter.csv` の行を表示します。
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` はパターン検索もできますが、
+それは次のコースで扱います。
+今大事なのは、`grep` のよく使うフラグです。
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: 行そのものではなく、一致した行数を表示します
+- `-h`: 複数ファイルを検索するときに、ファイル名を表示しません
+- `-i`: 大文字小文字を無視します（例: "Regression" と "regression" を一致とみなす）
+- `-l`: 一致を含むファイル名のみを表示し、一致した行は表示しません
+- `-n`: 一致した行の行番号を表示します
+- `-v`: 一致を反転します。つまり、一致「しない」行だけを表示します
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +819,10 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+ホームディレクトリにいる状態で、`seasonal/autumn.csv` の中で単語 `molar` を含むすべての行の内容を、1つのコマンドで表示してください。フラグは使わないでください。
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+探したい単語と検索対象のファイル名を指定して `grep` を使ってください。
 
 `@solution`
 ```{shell}
@@ -892,13 +837,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "`grep`を呼び出しましたか？"),
+      has_code("molar", incorrect_msg = "`molar`を検索しましたか？"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "`seasonal/autumn.csv`ファイルを検索しましたか？")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +854,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+一致を反転して、`seasonal/spring.csv` の中で単語 `molar` を含まない行をすべて見つけ、その行番号を表示してください。
+なお、検索語「molar」やファイル名などの値よりも、フラグを先に書くのがよい書き方とされています。
 
 `@hint`
 
@@ -929,11 +873,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "「grep」を呼び出しましたか？"),
+      has_code("-v", incorrect_msg = "「-v」で一致を反転しましたか？"),
+      has_code("-n", incorrect_msg = "「-n」で行番号を表示しましたか？"),
+      has_code("molar", incorrect_msg = "「molar」を検索しましたか？"),
+      has_code("seasonal/spring.csv", incorrect_msg = "「seasonal/spring.csv」ファイルを検索しましたか？")
     )
   )
 )
@@ -949,11 +893,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+`autumn.csv` と `winter.csv` を合わせて、単語 `incisor` を含む行がいくつあるか数えてください。
+（こちらも、ホームディレクトリから1つのコマンドで実行してください。）
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+行数を数えるには `grep` に `-c` を付けることを思い出してください。
 
 `@solution`
 ```{shell}
@@ -968,20 +912,19 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "「grep」を呼び出しましたか？"),
+      has_code("-c", incorrect_msg = "「-c」でカウントを取得しましたか？"),
+      has_code("incisor", incorrect_msg = "「incisor」を検索しましたか？"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "「seasonal/autumn.csv」ファイルを検索しましたか？"),
+      has_code("seasonal/winter.csv", incorrect_msg = "「seasonal/winter.csv」ファイルを検索しましたか？")
     )
   )
 )
-
 ```
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## なぜデータを常にテキストとして扱うのは安全ではないのですか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +932,20 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+`cut` のマニュアルページの `SEE ALSO` セクションには、データを分割する代わりに結合できる `paste` というコマンドが記載されています。
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+まず `paste` のマニュアルページを読み、次に `paste` を実行して、秋と冬のデータファイルをカンマ区切りで1つの表に結合してください。
+データ分析の観点から見て、この出力のどこが問題でしょうか？
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- 列ヘッダーが繰り返されています。
+- 末尾の数行で列数が合っていません。
+- `winter.csv` の一部のデータが欠けています。
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+`paste` の出力を、区切り文字にカンマを使って `cut` したら、正しい答えになりますか？
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +954,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = '正しいですが、必ずしもエラーではありません。'
+correct2 = '正解です: 列で行を結合すると、最初に空の列が1つだけ作成され、2つではありません。'
+err3 = 'いいえ、すべての冬のデータがそこにあります。'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```
