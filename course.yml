@@ -1,19 +1,20 @@
-title: Introduction to Shell
+title: Shell'e Giriş
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Unix komut satırı, yalnızca birkaç tuşla karmaşık işler yapmana izin verdiği
+  için neredeyse 50 yıldır varlığını sürdürüyor ve gelişiyor. Bazen
+  "programlamanın evrensel yapıştırıcısı" olarak adlandırılır; mevcut
+  programları yeni şekillerde birleştirmene, tekrarlayan görevleri
+  otomatikleştirmene ve dünyanın öbür ucundaki küme ve bulutlarda programlar
+  çalıştırmana yardımcı olur. Bu kurs, temel öğelerini tanıtacak ve onları
+  verimli şekilde nasıl kullanacağını gösterecek.
 
 
-  The course glossary can be found on the right in the resources section.
+  Kurs sözlüğünü sağdaki kaynaklar bölümünde bulabilirsin.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  CPE kredileri almak için kursu tamamlaman ve nitelikli değerlendirmede %70
+  puana ulaşman gerekir. Sağdaki CPE kredileri çağrı kutusuna tıklayarak
+  değerlendirmeye gidebilirsin.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary

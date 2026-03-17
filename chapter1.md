@@ -1,17 +1,17 @@
 ---
-title: Manipulating files and directories
+title: Dosyalar ve dizinlerle çalışma
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  Bu bölüm, Unix kabuğuna kısa bir giriş niteliğindedir. Neredeyse 50 yıl sonra
+  hâlâ neden kullanıldığını, aşina olabileceğin grafiksel araçlarla nasıl
+  karşılaştırıldığını, kabukta nasıl gezineceğini ve dosya ile klasörleri nasıl
+  oluşturup, düzenleyip, sileceğini öğreneceksin.
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: 'Kabuk, masaüstü arayüzüyle nasıl karşılaştırılır?'
 ---
 
-## How does the shell compare to a desktop interface?
+## Kabuk, masaüstü arayüzüyle nasıl karşılaştırılır?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +19,49 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Windows, Linux veya Mac OS gibi bir işletim sistemi özel bir tür programdır.
+Bilgisayarın işlemcisini, sabit diskini ve ağ bağlantısını kontrol eder,
+amma en önemli işi diğer programları çalıştırmaktır.
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+İnsanlar dijital olmadığından,
+işletim sistemiyle etkileşim kurmak için bir arayüze ihtiyaç duyarlar.
+Günümüzde en yaygını, tıklama ve çift tıklamaları dosyaları açma ve programları çalıştırma komutlarına çeviren grafik dosya gezginidir.
+Bilgisayarların grafik ekranları olmadan önceyse,
+insanlar **komut satırı kabuğu** adı verilen bir programa talimatları yazarak girerdi.
+Her komut girildiğinde,
+kabuk başka programlar çalıştırır,
+çıktılarını insanın okuyabileceği biçimde yazdırır
+ve ardından bir sonraki komutu almaya hazır olduğunu belirtmek için bir *istem* gösterir.
+(Adı, bilgisayarın "dış kabuğu" olduğuna dair düşünceden gelir.)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+Tıklayıp sürüklemek yerine komut yazmak ilk başta hantal görünebilir,
+amma göreceğin gibi,
+bilgisayardan ne yapmasını istediğini yazmaya başladığında,
+eski komutları birleştirip yenilerini oluşturabilir
+ve tekrarlayan işlemleri
+yalnızca birkaç tuş vuruşuyla otomatikleştirebilirsin.
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+Çoğu kişinin kullandığı grafik dosya gezgini ile komut satırı kabuğu arasındaki ilişki nedir?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+Bir kullanıcının bir işletim sistemiyle yalnızca bir program aracılığıyla etkileşime girebileceğini unutma.
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- Dosya gezgini dosyaları görmeni ve düzenlemeni sağlar, kabuk ise programları çalıştırmanı sağlar.
+- Dosya gezgini kabuğun üzerine inşa edilmiştir.
+- Kabuk işletim sisteminin bir parçasıdır, dosya gezgini ise ayrı bir bileşendir.
+- [Her ikisi de işletim sistemine komut vermek için kullanılan arayüzlerdir.]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- Her ikisi de dosyaları görüntülemeni ve düzenlemeni ve programları çalıştırmanı sağlar.
+- Grafik dosya gezginleri ve kabuk, aynı temel işletim sistemi işlevlerini çağırır.
+- Kabuk ve dosya gezgini, kullanıcı komutlarını (yazılmış ya da tıklanmış) işletim sistemine yapılan çağrılara çeviren programlardır.
+- Doğru! Her ikisi de kullanıcının komutlarını (ister yazılı ister tıklamayla) alır ve işletim sistemine gönderir.
 
 ---
 
-## Where am I?
+## Neredeyim?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +69,21 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**Dosya sistemi**, dosya ve dizinleri (veya klasörleri) yönetir.
+Her biri, dosya sisteminin **kök dizininden** nasıl ulaşılacağını gösteren bir **mutlak yol** ile tanımlanır:
+`/home/repl`, `home` dizini içindeki `repl` dizinidir,
+`/home/repl/course.txt` ise o dizindeki `course.txt` dosyasıdır,
+ve tek başına `/` kök dizindir.
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+Dosya sisteminde nerede olduğunu öğrenmek için
+`pwd` komutunu çalıştır.
+(bu, "**p**rint **w**orking **d**irectory"nin kısaltmasıdır).
+Bu komut, **geçerli çalışma dizininin** mutlak yolunu yazdırır;
+kabuk varsayılan olarak komutları burada çalıştırır ve dosyaları burada arar.
 
 <hr>
-Run `pwd`.
-Where are you right now?
+`pwd` komutunu çalıştır.
+Şu anda neredesin?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +91,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+Unix sistemleri genellikle tüm kullanıcıların ana dizinlerini `/home` altında konumlandırır.
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +100,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "Bu doğru yol değil."
+correct = "Doğru - `/home/repl` içindesiniz."
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## Dosya ve dizinleri nasıl ayırt edebilirim?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +116,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` nerede olduğunu söyler.
+Orada neler olduğunu görmek için
+`ls` yaz ("**l**i**s**ting"in kısaltmasıdır) ve enter tuşuna bas.
+Tek başına
+`ls` geçerli dizininin içeriğini listeler
+(`pwd` ile gördüğün dizin).
+Eğer bazı dosya adları eklersen
+`ls` onları listeler;
+ve dizin adları eklersen
+onların içeriğini listeler.
+Örneğin
+`ls /home/repl` başlangıç dizininde neler olduğunu gösterir
+(genellikle **home dizini** olarak adlandırılır).
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+`/home/repl/seasonal` dizinindeki dosyaları listelemek için `ls` komutunu uygun bir argümanla kullan
+(bu dizin, mevsimlere göre ayrılmış şekilde, tarih bazında diş cerrahisi bilgilerini tutar).
+Bu dosyalardan hangisi o dizinde *yoktur*?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +142,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+`ls` komutuna bir yol verirsen, o yolun içindekileri gösterir.
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +151,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "Bu dosya `seasonal` dizininde."
+correct = "Doğru - bu dosya `seasonal` dizininde *değil*."
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## Dosya ve dizinleri başka nasıl tanıyabilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +167,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+Mutlak bir yol, enlem ve boylam gibidir: Nerede olursan ol aynı değeri taşır. **Göreli yol** ise bulunduğun yerden başlayarak bir konumu belirtir: "20 kilometre kuzey" demek gibi.
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+Örneklere bakalım:
+- Eğer `/home/repl` dizinindeysen, **göreli** yol `seasonal`, **mutlak** yol `/home/repl/seasonal` ile aynı dizini belirtir. 
+- Eğer `/home/repl/seasonal` dizinindeysen, **göreli** yol `winter.csv`, **mutlak** yol `/home/repl/seasonal/winter.csv` ile aynı dosyayı belirtir.
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Kabuk, bir yolun mutlak mı göreli mi olduğuna ilk karakterine bakarak karar verir: `/` ile başlıyorsa mutlak yoldur. `/` ile başlamıyorsa göreli yoldur.
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +189,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+`/home/repl` dizinindesin. `/home/repl/course.txt` mutlak yoluna sahip dosyayı (ve yalnızca o dosyayı) listelemek için `ls` komutunu **göreli bir yol** ile kullan.
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+Çoğunlukla, bulunduğun konumun mutlak yolunu,
+ulaşmak istediğin şeyin mutlak yolundan çıkararak
+altındaki bir dosya veya dizine giden göreli yolu oluşturabilirsin.
 
 `@solution`
 ```{shell}
@@ -209,10 +206,10 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "`ls` komutunu dosya listesini oluşturmak için çağırmadınız."), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "Komutunuz doğru dosya listesini oluşturmadı. `/home/repl/course.txt`'e göreli bir yol ile `ls` komutunu kullanın.")
     )
 )
 
@@ -227,12 +224,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+`/home/repl` dizinindesin.
+`/home/repl/seasonal/summer.csv` dosyasını (ve yalnızca o dosyayı) listelemek için
+`ls` komutunu **göreli** bir yol ile kullan.
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+Göreli yollar başında '/' ile BAŞLAMAZ.
 
 `@solution`
 ```{shell}
@@ -244,10 +241,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "`ls` komutunu dosya listesini oluşturmak için çağırmadınız."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Komutunuz doğru dosya listesini oluşturmadı. `/home/repl/seasonal/summer.csv` konumuna göreli bir yol izleyerek `ls` komutunu kullanın.")
     )
 )
 ```
@@ -261,12 +258,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+`/home/repl` dizinindesin.
+`/home/repl/people` dizininin içeriğini listelemek için
+`ls` komutunu **göreli** bir yol ile kullan.
 
 `@hint`
-Relative paths do not start with a leading '/'.
+Göreli yollar başında '/' ile başlamaz.
 
 `@solution`
 ```{shell}
@@ -278,19 +275,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "`ls` komutunu dosya listesini oluşturmak için çağırmadınız."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "Komutunuz doğru dosya listesini oluşturmadı. `/home/repl/people`'a göreli bir yolun ardından `ls` kullanın.")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("Tebrikler. Artık dosya ve dizinleri listelemeyi bildiğinize göre, dosya sisteminde nasıl hareket edebileceğinizi görelim!")
 ```
 
 ---
 
-## How can I move to another directory?
+## Başka bir dizine nasıl geçerim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +294,17 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+Dosya gezgininde klasörlere çift tıklayarak nasıl gezinebiliyorsan,
+dosyalar sisteminde de `cd` komutunu kullanarak dolaşabilirsin
+("change directory" yani dizin değiştir anlamına gelir).
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+`cd seasonal` yazıp ardından `pwd` yazarsan,
+kabuk artık `/home/repl/seasonal` içinde olduğunu söyler.
+Sonra `ls` komutunu tek başına çalıştırırsan,
+`/home/repl/seasonal` dizininin içeriğini gösterir,
+çünkü artık oradasın.
+Ev dizinine (`/home/repl`) dönmek istersen,
+`cd /home/repl` komutunu kullanabilirsin.
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +320,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+Şu anda `/home/repl` konumundasın.
+Göreli bir yol kullanarak `/home/repl/seasonal` dizinine geç.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+`cd`'nin "change directory" anlamına geldiğini ve göreli yolların başında '/' olmadığını unutma.
 
 `@solution`
 ```{shell}
@@ -340,9 +336,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Geçerli çalışma dizininiz (bunu `pwd` ile öğrenebilirsiniz) `/home/repl` ise, `cd seasonal` komutuyla `seasonal` klasörüne geçebilirsiniz.")
 )
-
 ```
 
 ***
@@ -354,10 +349,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+Orada olduğunu kontrol etmek için `pwd` kullan.
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+Komutu girdikten sonra "enter" ya da "return" tuşuna basmayı unutma.
 
 `@solution`
 ```{shell}
@@ -374,7 +369,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +380,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+Bu dizinde neler olduğunu görmek için `ls` komutunu herhangi bir yol belirtmeden kullan.
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+Komuttan sonra "enter" ya da "return" tuşuna basmayı unutma.
 
 `@solution`
 ```{shell}
@@ -403,17 +397,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="Komutunuz doğru çıktıyı üretmedi. Geçerli dizinin içeriğini göstermek için `ls` komutunu herhangi bir yol belirtmeden kullandınız mı?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("Harika! Bu, alt dizinlere gitmekle ilgiliydi. Peki ya yukarı çıkmak? Hadi öğrenelim!")
 ```
 
 ---
 
-## How can I move up a directory?
+## Bir dizin yukarı nasıl çıkarım?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +414,54 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+Bir dizinin **ebeveyni**, onun üstündeki dizindir.
+Örneğin, `/home`, `/home/repl` dizininin ebeveynidir,
+ve `/home/repl`, `/home/repl/seasonal` dizininin ebeveynidir.
+Ebeveyn dizininin mutlak yolunu her zaman `cd` ve `ls` gibi komutlara verebilirsin.
+Ancak çoğu zaman
+özel yol olan `..`'dan
+(boşluksuz iki nokta) "şu anda bulunduğum dizinin üstündeki dizin" anlamına geldiği gerçeğinden yararlanırsın.
+Eğer `/home/repl/seasonal` içindeysen,
+`cd ..` seni `/home/repl` dizinine çıkarır.
+`cd ..` komutunu bir kez daha kullanırsan,
+bu sefer `/home` dizinine geçersin.
+Bir `cd ..` daha seni dosya sisteminin en tepesindeki *kök dizin* `/` konumuna getirir.
+(`cd` ile `..` arasında boşluk bırakmayı unutma — bu tek bir dört harfli komut değil, bir komut ve bir yol.)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+Tek başına bir nokta, `.`, her zaman "geçerli dizin" anlamına gelir,
+dolayısıyla tek başına `ls` ile `ls .` aynı şeyi yapar,
+`cd .` ise hiçbir etki yaratmaz
+(çünkü şu anda bulunduğun dizine yeniden geçiş yapar).
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+Son özel yol ise `~` (tilde karakteri),
+bu da "ev dizinin" anlamına gelir,
+örneğin `/home/repl`.
+Nerede olursan ol,
+`ls ~` her zaman ev dizininin içeriğini listeler,
+ve `cd ~` seni her zaman eve götürür.
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+Eğer `/home/repl/seasonal` içindeysen,
+`cd ~/../.` komutu seni nereye götürür?
 
 `@hint`
-Trace the path one directory at a time.
+Yolu, her seferinde bir dizin olacak şekilde takip et.
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (kök dizin)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- Hayır, ama tek başına `~` ya da `..` seni oraya götürürdü.
+- Doğru! Yol, 'ev dizini', 'bir seviye yukarı', 'burada' anlamına geliyor.
+- Hayır, ama bunu tek başına `.` yapar.
+- Hayır, yolun son kısmı `..` ("yukarı" anlamına gelir) değil, `.` ("burada" anlamına gelir).
 
 ---
 
-## How can I copy files?
+## Dosyaları nasıl kopyalayabilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +469,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+Çoğu zaman dosyaları kopyalamak,
+başka dizinlere taşıyarak düzenlemek
+ya da yeniden adlandırmak isteyeceksin.
+Bunu yapmak için kullanabileceğin komutlardan biri `cp` ("copy"nin kısaltması).
+Eğer `original.txt` mevcut bir dosyaysa,
+o zaman:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+`original.txt` dosyasının `duplicate.txt` adlı bir kopyasını oluşturur.
+Eğer zaten `duplicate.txt` adında bir dosya varsa,
+üzerine yazılır.
+Eğer `cp` komutunun son parametresi mevcut bir dizinse,
+o halde şu tür bir komut:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+*tüm* dosyaları o dizine kopyalar.
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +506,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+`seasonal/summer.csv` dosyasının bir kopyasını `backup` dizinine (bu da `/home/repl` içinde) oluştur
+ve yeni dosyanın adını `summer.bck` yap.
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+Hedef dizinin adını ve kopyalanan dosyanın adını birleştirerek
+yeni dosya için göreli bir yol oluştur.
 
 `@solution`
 ```{shell}
@@ -531,10 +522,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` `backup` dizininde yok gibi görünüyor. `cp`'ye iki yol sağlayın: mevcut dosya (`seasonal/summer.csv`) ve hedef dosya (`backup/summer.bck`)."),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +536,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+Geçerli çalışma dizinini (`/home/repl`) değiştirmeden,
+`seasonal` dizinindeki `spring.csv` ve `summer.csv` dosyalarını `backup` dizinine kopyala.
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+Kopyalamak istediğin dosyaların adlarıyla `cp` komutunu kullan
+ve *sonrasında* kopyalanacak dizinin adını yaz.
 
 `@solution`
 ```{shell}
@@ -561,18 +551,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` dosya `backup` dizinine kopyalanmamış gibi görünüyor. `cp` komutuna iki dosya adı ve bir dizin adı sağlayın."
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="Dosyaları `{{dir}}` dizinindeyken kopyaladığınızdan emin olun! Oraya geri dönmek için `cd {{dir}}` komutunu kullanın."),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("İyi iş. Dosyaları kopyalamanın yanı sıra, bir dizinden diğerine taşımayı da bilmeliyiz. Bir sonraki alıştırmada bunu öğrenin!")
 ```
 
 ---
 
-## How can I move a file?
+## Bir dosyayı nasıl taşıyabilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +570,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+`cp` bir dosyayı kopyalarken,
+`mv` onu bir dizinden diğerine taşır;
+sanki grafiksel bir dosya gezgininde sürüklemişsin gibi.
+Parametrelerini `cp` ile aynı şekilde ele alır,
+bu yüzden şu komut:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+`autumn.csv` ve `winter.csv` dosyalarını, geçerli çalışma dizininden
+bir seviye yukarıdaki üst dizine taşır
+(çünkü `..` her zaman bulunduğun konumun bir üstündeki dizini ifade eder).
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+`seasonal` ve `backup` alt dizinlerine sahip `/home/repl` içindesin.
+Tek bir komutla, `spring.csv` ve `summer.csv` dosyalarını `seasonal` dizininden `backup` dizinine taşı.
 
 `@hint`
 
@@ -613,20 +603,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="`%s` dosyası `backup` dizininde değil. `mv` komutunu doğru kullandınız mı? `mv` komutuna iki dosya adı ve bir dizin adı parametre olarak verin."
+seasonal_patt="`%s` dosyası hala `seasonal` dizininde. Dosyaları `cp` ile kopyalamak yerine `mv` ile taşıdığınızdan emin olun!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("Tebrikler, bu kabuk eğitimine devam edelim!")
 ```
 
 ---
 
-## How can I rename files?
+## Dosyaları nasıl yeniden adlandırabilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +624,22 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` dosyaları yeniden adlandırmak için de kullanılabilir. Şunu çalıştırırsan:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+geçerli çalışma dizinindeki `course.txt` dosyası `old-course.txt` dosyasına "taşınır".
+Bu, dosya gezginlerinin çalışma biçiminden farklıdır,
+amma çoğu zaman kullanışlıdır.
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+Bir uyarı:
+`tıpkı `cp` gibi,
+`mv` de mevcut dosyaların üzerine yazar.
+Örneğin,
+`old-course.txt` adında bir dosyan zaten varsa,
+yukarıda gösterilen komut onu `course.txt` içeriğiyle değiştirir.
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +655,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+`seasonal` dizinine gir.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+`cd` "change directory" (dizini değiştir) anlamına gelir ve göreli yollar başında '/' ile başlamaz, unutma.
 
 `@solution`
 ```{shell}
@@ -681,9 +670,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Geçerli çalışma dizininiz (bunu `pwd` ile öğrenebilirsiniz) `/home/repl` ise, `cd seasonal` komutuyla `seasonal` klasörüne geçebilirsiniz.")
 )
-
 ```
 
 ***
@@ -695,10 +683,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+`winter.csv` dosyasının adını `winter.csv.bck` olarak değiştir.
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+`mv` komutunu, önce dosyanın mevcut adı sonra vermek istediğin yeni adı gelecek şekilde kullan.
 
 `@solution`
 ```{shell}
@@ -708,15 +696,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " `mv` komutunu iki argümanla kullanın: yeniden adlandırmak istediğiniz dosya (`winter.csv`) ve dosyanın yeni adı (`winter.csv.bck`)."
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="Dizinde `winter.csv.bck` bulmayı bekliyorduk." + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="Dizinde `winter.csv` dosyasını artık beklemiyorduk." + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +715,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+Her şeyin yolunda olduğunu kontrol etmek için `ls` komutunu çalıştır.
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+Komutu çalıştırmak için "enter" veya "return" tuşuna basmayı unutma.
 
 `@solution`
 ```{shell}
@@ -743,22 +730,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="Geçerli çalışma dizininizin içeriğini listelemek için `ls` kullandınız mı?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "Komutunuz doğru dosya listesini oluşturmadı. Geçerli çalışma dizininizin içeriğini listelemek için `ls`'yi argümansız kullanın.")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("Kopyalama, taşıma, yeniden adlandırma, hepsini çözdünüz! Sırada: dosyaları silmek var.")
 ```
 
 ---
 
-## How can I delete files?
+## Dosyaları nasıl silebilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +752,23 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+Dosyaları kopyalayabilir ve yerlerini değiştirebiliriz;
+silmek içinse
+"remove"ın kısaltması olan `rm` komutunu kullanırız.
+`tıpkı `cp` ve `mv` gibi,
+`rm` komutuna istediğin kadar dosya adı verebilirsin, yani:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+hem `thesis.txt` hem de `backup/thesis-2017-08.txt` dosyalarını siler.
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` isminin söylediğini tam olarak ve anında yapar:
+grafiksel dosya yöneticilerinin aksine,
+kabukta çöp kutusu yoktur,
+bu yüzden yukarıdaki komutu yazdığında,
+tezin geri dönüşü olmayacak şekilde silinir.
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +784,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+Şu anda `/home/repl` dizinindesin.
+`seasonal` dizinine gir.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+`cd` komutunun "change directory" (dizini değiştir) anlamına geldiğini ve bağıl bir yolun başında '/' olmadığını unutma.
 
 `@solution`
 ```{shell}
@@ -815,7 +799,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +810,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+`autumn.csv` dosyasını sil.
 
 `@hint`
-Remember that `rm` stands for "remove".
+`rm` komutunun "remove" (sil) anlamına geldiğini unutma.
 
 `@solution`
 ```{shell}
@@ -842,10 +825,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="`autumn.csv` dosyasının `seasonal` dizininde hâlâ bulunmasını beklemiyorduk. Kaldırmak istediğiniz dosyanın yolunu belirterek `rm` komutunu kullanın."),
+    has_code('rm', incorrect_msg = 'Dosyayı taşımak yerine kaldırmak için `rm` kullanın.')
 )
-
 ```
 
 ***
@@ -857,10 +839,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+Ana dizinine geri dön.
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+`cd` komutunu herhangi bir yol belirtmeden kullanırsan, seni ana dizinine götürür.
 
 `@solution`
 ```{shell}
@@ -870,8 +852,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="Ana dizine dönmek için `cd ..` veya `cd ~` komutunu kullanın.")
 ```
 
 ***
@@ -883,10 +864,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+Dizin değiştirmeden `seasonal/summer.csv` dosyasını sil.
 
 `@hint`
-Remember that `rm` stands for "remove".
+`rm` komutunun "remove" (sil) anlamına geldiğini unutma.
 
 `@solution`
 ```{shell}
@@ -898,16 +879,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="`summer.csv` dosyasının `seasonal` dizininde hâlâ bulunmasını beklemiyorduk. Kaldırmak istediğiniz dosyanın yolunu belirterek `rm` komutunu kullanın."),
+    has_code('rm', incorrect_msg = 'Dosyayı taşımak yerine kaldırmak için `rm` kullanın.')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("Etkileyici şeyler! Bir sonrakine geçelim!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## Dizinleri nasıl oluşturup silebilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +895,22 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv`, dizinlere dosyalarla aynı şekilde davranır:
+örneğin, ev dizinindeyken `mv seasonal by-season` çalıştırırsan,
+`mv`, `seasonal` dizininin adını `by-season` olarak değiştirir.
+Ancak,
+`rm` farklı çalışır.
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+Bir dizini `rm` ile silmeyi denersen,
+kabuk bunu yapamayacağını söyleyen bir hata mesajı yazdırır;
+bunun başlıca nedeni, yanlışlıkla içinde çalışmalarının olduğu koca bir dizini silmeni önlemektir.
+Bunun yerine,
+`rmdir` adlı ayrı bir komut kullanabilirsin.
+Ek güvenlik için,
+`rmdir` yalnızca dizin boşken çalışır;
+yani bir dizini silmeden *önce* içindeki dosyaları silmelisin.
+(Deneyimli kullanıcılar aynı etkiyi elde etmek için `rm` ile `-r` seçeneğini kullanabilir;
+komut seçeneklerini bir sonraki bölümde tartışacağız.)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +926,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+Dizin değiştirmeden,
+`people` dizinindeki `agarwal.txt` dosyasını sil.
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+`rm` komutunun "remove" (kaldır) anlamına geldiğini ve bağıl bir yolun başında '/' olmadığını unutma.
 
 `@solution`
 ```{shell}
@@ -963,8 +942,8 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` artık `/home/repl/people` dizininde olmamalıdır. `rm` komutunu doğru kullandınız mı?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = '`people` dizininde hala dosyalar var. Eğer sadece `agarwal.txt` dosyasını taşıdıysanız veya yeni dosyalar oluşturduysanız, hepsini silin.')
 )
 
 ```
@@ -978,11 +957,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+`people` dizini artık boş olduğuna göre,
+tek bir komutla onu sil.
 
 `@hint`
-Remember that `rm` only works on files.
+`rm` yalnızca dosyalarda çalışır, bunu unutma.
 
 `@solution`
 ```{shell}
@@ -995,7 +974,7 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "'people' dizini artık ana dizininizde olmamalıdır. Onu kaldırmak için `rmdir` komutunu kullanın!")
 )
 
 ```
@@ -1009,13 +988,13 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+Bir dizin dosya değildir,
+bu yüzden yeni (boş) bir dizin oluşturmak için
+`mkdir directory_name` komutunu kullanmalısın.
+Bu komutla, ev dizininin altında `yearly` adında yeni bir dizin oluştur.
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+Oluşturmak istediğin dizinin adıyla `mkdir` çalıştır.
 
 `@solution`
 ```{shell}
@@ -1027,9 +1006,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="Ev dizininizde `yearly` adlı bir dizin yok. Bir tane oluşturmak için `mkdir yearly` komutunu kullanın!")
 )
-
 ```
 
 ***
@@ -1041,12 +1019,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+Artık `yearly` var olduğuna göre,
+evin­den ayrılmadan `yearly` içinde `2017` adlı bir dizin daha oluştur.
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+Oluşturmak istediğin alt dizin için bağıl bir yol kullan.
 
 `@solution`
 ```{shell}
@@ -1059,15 +1036,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="'/home/repl/yearly' dizininde bir '2017' dizini bulunamıyor. Bu dizini `yearly/2017` göreli yolunu kullanarak oluşturabilirsiniz.")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("Harika! Bu bölümü, bazı kavramlarını tekrarlayan bir alıştırma ile tamamlayalım!")
 ```
 
 ---
 
-## Wrapping up
+## Kapanış
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1051,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+Veri analiz ederken sık sık ara dosyalar oluşturursun.
+Bunları ana dizininde saklamak yerine
+`/tmp` içine koyabilirsin;
+insanlar ve programlar genelde kısa süreli ihtiyaç duydukları dosyaları burada tutar.
+(Dikkat: `/tmp`, kök dizin `/` altında yer alır,
+ev dizininin altında değildir.)
+Bu kapanış egzersizi, bunu nasıl yapacağını gösterecek.
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1073,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+`cd` kullanarak `/tmp` içine git.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+`cd` "change directory" (dizin değiştir) anlamına gelir ve mutlak bir yol '/' ile başlar, bunu unutma.
 
 `@solution`
 ```{shell}
@@ -1112,9 +1088,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'Yanlış dizindesiniz. Dizini `/tmp` olarak değiştirmek için `cd` komutunu kullanın.')
 )
-
 ```
 
 ***
@@ -1126,10 +1101,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+Bir dizin adı yazmadan `/tmp` içeriğini listele.
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+`ls`'e neyi listeleyeceğini söylemezsen, geçerli dizinindeki içerikleri gösterir.
 
 `@solution`
 ```{shell}
@@ -1141,13 +1116,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "`ls` komutunu dosya listesini oluşturmak için çağırmadınız."),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "Komutunuz doğru dosya listesini oluşturmadı. `ls` komutunu kullanın.")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1133,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+`/tmp` içinde `scratch` adlı yeni bir dizin oluştur.
 
 `@hint`
-Use `mkdir` to make directories.
+Dizin oluşturmak için `mkdir` kullan.
 
 `@solution`
 ```{shell}
@@ -1176,10 +1150,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="'/tmp' altında bir 'scratch' dizini bulunamıyor. `mkdir` komutunu doğru kullandığınızdan emin olun.")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1164,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+`/home/repl/people/agarwal.txt` dosyasını `/tmp/scratch` içine taşı.
+Ev dizinin için `~` kısayolunu ve ikincisi için mutlak yol yerine göreli bir yol kullanmanı öneririz.
 
 `@hint`
 
@@ -1207,8 +1180,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="'/tmp/scratch' içinde 'agarwal.txt' bulunamıyor. İlk parametre olarak `~/people/agarwal.txt` ve ikinci olarak `scratch` ile `mv` kullanın.")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("Bu, Kabuk Girişine Giriş'in 1. Bölümünü tamamlar! Verileri manipüle etmeyi öğrenmek için bir sonraki bölüme geçin!")
 ```

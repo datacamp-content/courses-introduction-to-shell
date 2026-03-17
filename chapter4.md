@@ -1,15 +1,15 @@
 ---
-title: Batch processing
+title: Toplu işleme
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Çoğu kabuk komutu bir kerede birçok dosyayı işler. Bu bölüm, kendi boru
+  hatlarının bunu nasıl yapacağını gösterir. Bu sırada, kabuğun bilgiyi saklamak
+  için değişkenleri nasıl kullandığını da göreceksin.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Kabuk bilgiyi nasıl saklar?
 ---
 
-## How does the shell store information?
+## Kabuk bilgiyi nasıl saklar?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +17,37 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Diğer programlar gibi kabuk da bilgiyi değişkenlerde saklar.
+Bunlardan bazıları,
+**ortam değişkenleri** olarak adlandırılır,
+ve her zaman kullanılabilir.
+Ortam değişkenlerinin adları geleneksel olarak büyük harfle yazılır
+ve en yaygın kullanılanlardan birkaçı aşağıda gösterilmiştir.
 
 | Variable | Purpose                           | Value                 |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | Kullanıcının ana dizini           | `/home/repl`          |
+| `PWD `   | Geçerli çalışma dizini            | `pwd` komutuyla aynı  |
+| `SHELL`  | Hangi kabuk programının kullanıldığı | `/bin/bash`        |
+| `USER`   | Kullanıcının kimliği              | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Tam listeyi (oldukça uzundur) almak için
+kabukta `set` yazabilirsin.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+`HISTFILESIZE` değerini göstermek için `set` ve `grep`i bir boru ile birlikte kullan;
+bu değer komut geçmişinde kaç eski komutun saklanacağını belirler.
+Değeri nedir?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- Değişken orada yok.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+İhtiyacın olan satırı almak için `set | grep HISTFILESIZE` komutunu kullan.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +56,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Hayır: kabuk bundan daha fazla geçmiş kaydeder."
+err2 = "Hayır: kabuk bundan daha fazla geçmiş kaydeder."
+correct3 = "Doğru: kabuk bu sistemde varsayılan olarak 2000 eski komutu kaydeder."
+err4 = "Hayır: `HISTFILESIZE` değişkeni orada."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Bir değişkenin değerini nasıl yazdırırım?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +73,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Bir değişkenin değerini bulmanın daha basit bir yolu, argümanlarını yazdıran `echo` komutunu kullanmaktır. Şunu yazdığında
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+şu çıktıyı alırsın:
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Eğer bir değişkenin değerini şöyle yazdırmaya çalışırsan:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+bu, değişkenin adını, yani `USER`'ı yazdırır.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Değişkenin değerini almak için başına dolar işareti `$` koymalısın. Şunu yazdığında 
 
 ```{shell}
 echo $USER
 ```
 
-prints
+şunu yazdırır:
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Bu her yerde geçerlidir:
+`X` adlı bir değişkenin değerini almak istiyorsan,
+`$X` yazmalısın.
+(Bu sayede kabuk, "adı X olan bir dosya" mı
+yoksa "adı X olan bir değişkenin değeri" mi demek istediğini ayırt edebilir.)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+`OSTYPE` değişkeni, kullandığın işletim sistemi türünün adını tutar.
+Değerini `echo` kullanarak göster.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+`OSTYPE` değişkeninin önüne `$` ekleyerek `echo` ile çağır.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +135,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="`echo` komutunu çağırdınız mı?"),
+            has_code('OSTYPE', incorrect_msg="`OSTYPE` ortam değişkenini yazdırdınız mı?"),
+            has_code(r'\$OSTYPE', incorrect_msg="`OSTYPE`'in önüne bir `$` eklediğinizden emin olun.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Ortam değişkenlerini mükemmel bir şekilde yankıladınız! İyi bir başlangıç yaptınız. Devam edelim!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Kabuk bilgiyi başka nasıl saklar?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +154,19 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Diğer değişken türüne **kabuk değişkeni** denir,
+bu da programlama dillerindeki yerel değişkenlere benzer.
 
-To create a shell variable,
-you simply assign a value to a name:
+Bir kabuk değişkeni oluşturmak için
+bir ada bir değer ataman yeter:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+`=` işaretinin önünde veya arkasında boşluk olmadan.
+Bunu yaptıktan sonra,
+değişkenin değerini şununla kontrol edebilirsin:
 
 ```{shell}
 echo $training
@@ -189,10 +189,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+`testing` adında, değeri `seasonal/winter.csv` olan bir değişken tanımla.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Değişkenin adıyla değeri arasında boşluk olmamalı.
 
 `@solution`
 ```{shell}
@@ -214,12 +214,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='`testing` adında bir kabuk değişkeni tanımladınız mı?'),
+        has_code('testing=', incorrect_msg='Boşluk bırakmadan `testing`\'den hemen sonra `=` yazdınız mı?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='`testing`\'in değerini `seasonal/winter.csv` olarak ayarladınız mı?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +230,11 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+`head -n 1 BIRSEY` komutunu kullanarak, dosya adının yerine `testing` değişkeninin değerini kullanıp `seasonal/winter.csv` dosyasının ilk satırını al.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Sadece `testing` yerine `$testing` kullanmayı unutma
+(değişkenin değerini almak için `$` gerekir).
 
 `@solution`
 ```{shell}
@@ -251,23 +249,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Kabuk değişkenine `$testing` kullanarak başvurdunuz mu?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="`head` fonksiyonunu çağırdınız mı?"),
+            has_code('-n', incorrect_msg="Satır sayısını `-n` ile sınırladınız mı?"),
+            has_code(r'-n\s+1', incorrect_msg="`-n 1` ile 1 satır tutmayı seçtiniz mi?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Harika! Komutları nasıl kolayca tekrarlayabileceğinizi görelim.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Bir komutu birçok kez nasıl tekrarlarım?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +272,14 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Shell değişkenleri, komutları birçok kez tekrarlayan **döngülerde** de kullanılır.
+Bu komutu çalıştırırsak:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+şunu üretir:
 
 ```
 gif
@@ -291,21 +287,20 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Döngüyle ilgili şunlara dikkat et:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Yapı `for` ...değişken... `in` ...liste... `; do` ...gövde... `; done` şeklindedir.
+2. Döngünün işleyeceği şeylerin listesi (bu örnekte `gif`, `jpg` ve `png` sözcükleri).
+3. Döngünün şu anda hangisini işlediğini takip eden değişken (bu örnekte `filetype`).
+4. İşlemi yapan döngü gövdesi (bu örnekte `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Gövdenin, tıpkı diğer shell değişkenlerinde olduğu gibi, değişkenin değerini almak için sadece `filetype` yerine `$filetype` kullandığına dikkat et.
+Ayrıca noktalı virgüllerin yerlerine de dikkat et:
+ilki listenin ve `do` anahtar kelimesinin arasına gelir,
+ikincisi ise gövdenin ve `done` anahtar kelimesinin arasına gelir.
 
 `@instructions`
-Modify the loop so that it prints:
+Döngüyü, şunları yazdıracak şekilde değiştir:
 
 ```
 docx
@@ -313,10 +308,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Lütfen döngü değişkeninin adı olarak `filetype` kullan.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Giriş metnindeki kod yapısını kullan, resim dosya türleri yerine belge dosya türlerini koy.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +330,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='`for` ifadesini çağırdınız mı?'),
+      has_code('filetype', incorrect_msg='Döngü değişkeni olarak `filetype` kullandınız mı?'),
+      has_code('in', incorrect_msg='Dosya türleri listesinden önce `in` kullandınız mı?'),
+      has_code('docx odt pdf', incorrect_msg='`docx`, `odt` ve `pdf` üzerinde bu sırayla döngü yaptınız mı?'),
+      has_code(r'pdf\s*;', incorrect_msg='Son döngü elemanından sonra noktalı virgül koydunuz mu?'),
+      has_code(r';\s*do', incorrect_msg='İlk noktalı virgülden sonra `do` kullandınız mı?'),
+      has_code('echo', incorrect_msg='`echo` ifadesini çağırdınız mı?'),
+      has_code(r'\$filetype', incorrect_msg='`$filetype` ifadesini echo ile yazdırdınız mı?'),
+      has_code(r'filetype\s*;', incorrect_msg='Döngü gövdesinden sonra noktalı virgül koydunuz mu?'),
+      has_code('; done', incorrect_msg='`done` ifadesi ile bitirdiniz mi?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Döngü kullanımı mükemmel! Döngüler, aynı işlemi yüzlerce veya binlerce kez yapmak istediğinizde harikadır.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Bir komutu her dosya için bir kez nasıl tekrarlarım?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +356,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Döngüyü yazarken işlemek istediğin dosyaların adlarını elle yazabilirsin,
+ancak genellikle joker karakterler kullanmak daha iyidir.
+Konsolda bu döngüyü çalıştırmayı dene:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Şunu yazdırır:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +373,12 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+çünkü kabuk, döngüyü çalıştırmadan önce `seasonal/*.csv` ifadesini dört dosya adının listesine genişletir.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Joker karakter ifadesini `people/*` olarak değiştir,
+böylece döngü, sonekleri olsun ya da olmasın `people` dizinindeki dosyaların adlarını yazdırsın.
+Lütfen döngü değişkeni adı olarak `filename` kullan.
 
 `@hint`
 
@@ -407,25 +400,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='`for` ifadesini çağırdınız mı?'),
+      has_code('filename', incorrect_msg='Döngü değişkeni olarak `filename` kullandınız mı?'),
+      has_code('in', incorrect_msg='Dosya türleri listesinden önce `in` kullandınız mı?'),
+      has_code('people/\*', incorrect_msg='`people/*` ile bir dosya listesi belirttiniz mi?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Dosya listesinden sonra noktalı virgül koydunuz mu?'),
+      has_code(r';\s*do', incorrect_msg='İlk noktalı virgülden sonra `do` kullandınız mı?'),
+      has_code('echo', incorrect_msg='`echo` ifadesini çağırdınız mı?'),
+      has_code(r'\$filename', incorrect_msg='`$filename` ifadesini echo ile yazdırdınız mı?'),
+      has_code(r'filename\s*;', incorrect_msg='Döngü gövdesinden sonra noktalı virgül koydunuz mu?'),
+      has_code('; done', incorrect_msg='`done` ifadesi ile bitirdiniz mi?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Döngüsel döngü! Joker karakterler ve döngüler güçlü bir kombinasyon oluşturur.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Bir grup dosyanın adlarını nasıl kaydedebilirim?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +426,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+İnsanlar genellikle bir dosya adı listesini saklamak için joker karakter içeren bir ifadeyle bir değişken ayarlar.
+Örneğin,
+`datasets` değişkenini şöyle tanımlarsan:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+sonrasında dosyaların adlarını şu şekilde görüntüleyebilirsin:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Bu, yazmayı azaltır ve hataları daha az olası hale getirir.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Bu iki komutu ana dizininde çalıştırırsan,
+kaç satır çıktı üretirler?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +453,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Hiçbiri: `files` ayrı bir satırda tanımlandığı için ikinci satırda bir değeri yoktur.
+- Bir: "files" kelimesi.
+- Dört: dört mevsimsel veri dosyasının adları.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Unutma: tek başına `X` sadece "X"'tir, `$X` ise `X` değişkeninin değeridir.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +467,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Hayır: bir değişkeni kullandığınız satırda tanımlamanız gerekmez."
+err2 = "Hayır: bu örnek `files` değişkenini aynı kabukta tanımlar ve kullanır."
+correct3 = "Doğru. Komut `for f in seasonal/*.csv; do echo $f; done` ile eşdeğerdir."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Bir değişkenin adı ve değeri
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +483,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Yaygın bir hata, bir değişken adından önce `$` koymayı unutmak.
+Bunu yaptığında,
+shell yazdığın adı kullanır,
+uygun değişkenin değeri yerine.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Deneyimli kullanıcıların daha sık yaptığı bir hata ise değişken adını yanlış yazmaktır.
+Örneğin,
+`datasets` değişkenini şöyle tanımlarsan:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+ve sonra şunu yazarsan:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+shell hiçbir şey yazdırmaz,
+çünkü `datsets` (ikinci "a" olmadan) tanımlı değildir.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Ev dizininde bu iki komutu çalıştırırsan,
+hangi çıktı yazdırılır?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Yanıtlamadan önce döngünün ilk kısmını dikkatle oku.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Unutma: tek başına `X` sadece "X" demektir, `$X` ise `X` değişkeninin değeridir.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [Tek satır: "files" sözcüğü.]
+- Dört satır: dört mevsimsel veri dosyasının adları.
+- Dört boş satır: `f` değişkenine bir değer atanmaz.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Doğru: döngü `$files` yerine `files` kullanıyor, bu yüzden listedeki öğe "files" sözcüğünün kendisi.
+- Hayır: döngü `$files` yerine `files` kullanıyor, bu yüzden liste `files` değişkeninin açılımı yerine "files" sözcüğünden oluşuyor.
+- Hayır: `f` değişkeni `for` döngüsü tarafından otomatik olarak tanımlanır.
 
 ---
 
-## How can I run many commands in a single loop?
+## Tek bir döngüde birçok komutu nasıl çalıştırabilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +540,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Dosya adlarını yazdırmak hata ayıklamak için yararlıdır,
+amma velakin döngülerin asıl amacı birden çok dosyayla işlem yapmaktır.
+Bu döngü, her veri dosyasının ikinci satırını yazdırır:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Daha önce gördüğün diğer döngülerle aynı yapıya sahiptir:
+tek fark, gövdesinin tek bir komut yerine iki komuttan oluşan bir boru hattı (pipeline) olmasıdır.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Her mevsimlik dosyada Temmuz 2017'den (`2017-07`) son girdiyi yazdıran bir döngü yaz. Şuna benzer bir çıktı üretmeli:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+ancak bunu mevsimlik dosyaların **her biri** için ayrı ayrı yapmalı. Lütfen döngü değişkeninin adı olarak `file` kullan ve örnekteki 'seasonal/winter.csv' yerine dosya listesi `seasonal/*.csv` üzerinde döngü kurmayı unutma.
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Döngü gövdesi, talimatlarda gösterilen grep komutudur; sadece `seasonal/winter.csv` yerine `$file` kullanılır.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +578,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='`for` ifadesini çağırdınız mı?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Döngü değişkeni olarak `file` kullandınız mı?'),
+      has_code('in', incorrect_msg='Dosya listesinden önce `in` kullandınız mı?'),
+      has_code('seasonal/\*', incorrect_msg='`seasonal/*` ile bir dosya listesi belirttiniz mi?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Dosya listesinden sonra noktalı virgül koydunuz mu?'),
+      has_code(r';\s*do', incorrect_msg='İlk noktalı virgülden sonra `do` kullandınız mı?'),
+      has_code('grep', incorrect_msg='`grep` ifadesini çağırdınız mı?'),
+      has_code('2017-07', incorrect_msg='`2017-07` ifadesini eşleştirdiniz mi?'),
+      has_code(r'\$file', incorrect_msg='Döngü değişkeni adı olarak `$file` kullandınız mı?'),
+      has_code(r'file\s*|', incorrect_msg='İkinci komutunuzu bağlamak için bir pipe kullandınız mı?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Her aramanın son girişini yazdırmak için `tail -n 1` kullandınız mı?'),
+      has_code('; done', incorrect_msg='`done` ile bitirdiniz mi?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Döngüsel döngü! Joker karakterler ve döngüler güçlü bir kombinasyon oluşturur.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Dosya adlarında neden boşluk kullanmamalıyım?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +610,21 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Grafiksel bir dosya gezgini kullanırken dosyalara `July 2017.csv` gibi çok kelimeli adlar vermek kolay ve mantıklıdır.
+Ancak bu, kabukta çalışırken sorun çıkarır.
+Örneğin,
+`July 2017.csv` dosyasını `2017 July data.csv` olarak yeniden adlandırmak istediğini varsayalım.
+Şunu yazamazsın:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+çünkü bu, kabuğa sanki `July`, `2017.csv`, `2017` ve (yine) `July` adında
+dört dosyayı `data.csv` adlı bir dizine taşımaya çalışıyormuşsun gibi görünür.
+Bunun yerine,
+dosya adlarını tırnak içine alman gerekir
+ki kabuk her birini tek bir parametre olarak işlesin:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +632,33 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+`current.csv` ve adında boşluk olan `last year.csv` adlı iki dosyan varsa
+ve şunu yazarsan:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+ne olur:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Biri sana bu komutu gösterse ve hangi dosyaların var olduğunu bilmesen, ne olacağını düşünürdün?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Kabuk, `last` ve `year.csv` mevcut olmadığı için bir hata iletisi yazdırır.
+- Kabuk `current.csv` dosyasını siler.
+- [Yukarıdakilerin ikisi de.]
+- Hiçbir şey.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Evet, ama hepsi bu değil.
+- Evet, ama hepsi bu değil.
+- Doğru. Dosya adlarının etrafına tek tırnak, `'`, ya da çift tırnak, `"`, koyabilirsin.
+- Maalesef hayır.
 
 ---
 
-## How can I do many things in a single loop?
+## Tek bir döngüde nasıl birçok şey yapabilirim?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +666,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Şu ana kadar gördüğün döngülerin gövdesinde tek bir komut ya da tek bir ardışık düzen (pipeline) vardı,
+amma velakin bir döngü istediğin kadar komut içerebilir.
+Kabukta bir komutun nerede bittiğini ve sonrakinin nerede başladığını belirtmek için
+bunları noktalı virgülle ayırmalısın:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +688,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Diyelim ki önceki döngüde `echo` ile `head` komutları arasındaki noktalı virgülü unuttun
+ve kabuktan şunu çalıştırmasını istedin:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Kabuk ne yapar?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Bir hata mesajı yazdırır.
+- Dört dosyanın her biri için bir satır yazdırır.
+- `autumn.csv` (ilk dosya) için bir satır yazdırır.
+- Her dosyanın son satırını yazdırır.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+`echo` çıktısını `tail` komutuna pipe edebilirsin.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +713,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Hayır: döngü çalışacak, sadece mantıklı bir şey yapmayacak."
+correct2 = "Evet: `echo` dosya adını iki kez içeren bir satır üretir, ardından `tail` bunu kopyalar."
+err3 = "Hayır: döngü dört dosya adının her biri için bir kez çalışır."
+err4 = "Hayır: `tail`'in girdisi, her dosya adı için `echo`'nun çıktısıdır."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

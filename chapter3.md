@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Araçları birleştirme
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Unix kabuğunun asıl gücü tek tek komutlarda değil, yeni şeyler yapmak için ne
+  kadar kolay birleştirilebildiklerinde yatar. Bu bölüm, istediğin veriyi seçmek
+  için bu gücü nasıl kullanacağını gösterecek ve değerleri sıralamak ile
+  yinelenenleri kaldırmak için komutları tanıtacak.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Bir komutun çıktısını bir dosyada nasıl saklayabilirim?
 ---
 
-## How can I store a command's output in a file?
+## Bir komutun çıktısını bir dosyada nasıl saklarım?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Şimdiye kadar gördüğün araçların hepsi girdi dosyalarının adını vermene izin veriyor.
+Çoğunun çıktı dosyasının adını verme seçeneği yok, çünkü gerek duymuyorlar.
+Bunun yerine,
+**yönlendirme** kullanarak herhangi bir komutun çıktısını istediğin yere kaydedebilirsin.
+Bu komutu çalıştırırsan:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+ekrana yazın verilerin ilk 5 satırını basar.
+Bunun yerine şu komutu çalıştırırsan:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+ekranda hiçbir şey görünmez.
+Bunun yerine,
+`head` çıktısı `top.csv` adlı yeni bir dosyaya yazılır.
+Bu dosyanın içeriğine `cat` ile bakabilirsin:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Büyüktür işareti `>` kabuğa `head` çıktısını bir dosyaya yönlendirmesini söyler.
+Bu işaret `head` komutunun bir parçası değildir;
+aksine,
+çıktı üreten her kabuk komutuyla çalışır.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+`tail` ile yönlendirmeyi birleştirerek `seasonal/winter.csv` dosyasının son 5 satırını `last.csv` adlı bir dosyaya kaydet.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Son 5 satırı almak için `tail -n 5` kullan.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +67,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Satır `%s` `last.csv` dosyasında olmalı, ancak değil. `tail -n 5 seasonal/winter.csv` çıktısını `>` ile `last.csv` dosyasına yönlendirin."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` dosyasında çok fazla satır var. `tail` ile `-n 5` bayrağını kullandınız mı?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Güzel! Biraz daha pratik yapalım!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Bir komutun çıktısını girdi olarak nasıl kullanabilirim?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +89,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Diyelim ki bir dosyanın ortasındaki satırları almak istiyorsun.
+Daha net olmak gerekirse,
+veri dosyalarımızdan birinden 3-5. satırları almak istiyorsun.
+İlk 5 satırı almak için `head` kullanarak başlayabilir,
+bunu bir dosyaya yönlendirebilir
+ve ardından son 3 satırı seçmek için `tail` kullanabilirsin:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Hızlı bir kontrol, bunun orijinal dosyamızın 3-5. satırları olduğunu doğrular,
+çünkü ilk 5 satırın son 3 satırıdır.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +118,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+`seasonal/winter.csv` dosyasının son iki satırını seç
+ve bunları `bottom.csv` adlı bir dosyaya kaydet.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Satırları seçmek için `tail` ve `tail` çıktısını yönlendirmek için `>` kullan.
 
 `@solution`
 ```{shell}
@@ -132,16 +132,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="`%s` satırı `bottom.csv` dosyasında olmalıdır, ancak değil. `tail -n 2 seasonal/winter.csv` çıktısını `>` ile `bottom.csv` dosyasına yönlendirin."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` dosyasında çok fazla satır var. `tail` ile `-n 2` bayrağını kullandınız mı?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +152,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Orijinal dosyanın sondan ikinci satırını almak için
+`bottom.csv` dosyasından ilk satırı seç.
 
 `@hint`
-Use `head` to select the line you want.
+İstediğin satırı seçmek için `head` kullan.
 
 `@solution`
 ```{shell}
@@ -169,17 +168,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="`bottom.csv` dosyasında bir sorun var. Onu değiştirmediğinizden emin olun!"),
+    has_expr_output(strict=True, incorrect_msg="`bottom.csv` üzerinde `head` komutunu doğru kullandınız mı? `-n` bayrağını doğru kullandığınızdan emin olun.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("Tebrikler. Komutları birleştirmenin daha iyi yollarını öğrenmek için bir sonraki alıştırmaya geçin.")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Komutları birleştirmenin daha iyi bir yolu nedir?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +186,35 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Yönlendirme kullanarak komutları birleştirmenin iki sakıncası vardır:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Ortalıkta bir sürü ara dosya bırakır (örneğin `top.csv`).
+2. Sonucu üretmek için kullandığın komutlar geçmişte birkaç satıra dağılmış olur.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Kabuk, bu iki sorunu aynı anda çözen başka bir araç sunar: **pipe** (boru).
+Yine,
+`head` komutunu çalıştırarak başla:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+`head` çıktısını bir dosyaya göndermek yerine,
+dikey bir çizgi ekle ve dosya adı olmadan `tail` komutunu kullan:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Pipe sembolü, soldaki komutun çıktısını
+sağdaki komut için girdi olarak kullanmasını kabuğa söyler.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Virgülle ayrılmış `seasonal/summer.csv` dosyasının 2. sütunundaki tüm diş adlarını seçmek için `cut` kullan ve sonucu, ters eşleşmeyle başlık satırında geçen "Tooth" kelimesini hariç tutacak şekilde `grep`'e pipe ile aktar. *`cut` ve `grep` komutları sırasıyla Bölüm 2, egzersiz 8 ve 11'de ayrıntılı olarak ele alınmıştı.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Komutun ilk kısmı şu biçimdedir: `cut -d alan_ayırıcı -f sütun_numarası dosya_adı`.
+- Komutun ikinci kısmı şu biçimdedir: `grep -v esleşecek_şey`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +230,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = '`cut -d , -f 2 seasonal/summer.csv` ifadesinin sonucunu `|` ile `grep -v Tooth` komutuna yönlendirdiniz mi?'),
+    check_not(has_output("Tooth"), incorrect_msg = '`grep` kullanarak `"Tooth"` başlık satırını çıkardınız mı?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Mükemmel yönlendirme! Bu `|` operatörünü ilk kez kullanıyor olabilirsiniz, ancak kesinlikle son olmayacak!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Birçok komutu nasıl birleştiririm?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +246,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+İstediğin sayıda komutu art arda bağlayabilirsin.
+Örneğin,
+şu komut:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+şunları yapar:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. bahar verilerinden ilk sütunu seçer;
+2. "Date" sözcüğünü içeren başlık satırını kaldırır; ve
+3. gerçek verilerin ilk 10 satırını seçer.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+Önceki egzersizde, `seasonal/summer.csv` dosyasının 2. sütunundan tüm diş adlarını seçmek için aşağıdaki komutu kullanmıştın:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Bu hattı (pipeline) bir `head` komutuyla genişlet ve yalnızca en ilk diş adını seç.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Talimatlardaki kodu kopyalayıp yapıştır, bir pipe ekle ve sonra `-n` bayrağıyla `head` komutunu çağır.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +287,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "`|` kullanarak bir `head` komutu ile boru hattını genişlettiniz mi? `-n` bayrağını doğru ayarladığınızdan emin olun."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "`|` kullanarak bir `head` komutu ile boru hattını genişlettiniz mi?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Neşeli zincirleme! Birkaç komutu bir araya getirerek güçlü veri işleme boru hatları oluşturabilirsiniz.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Bir dosyadaki kayıtları nasıl sayarım?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +304,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+`wc` komutu ("word count"ın kısaltması) bir dosyadaki **c**haracter (karakter), **w**ord (kelime) ve **l**ine (satır) sayılarını yazdırır.
+Sırasıyla yalnızca bunlardan birini yazdırması için `-c`, `-w` veya `-l` kullanabilirsin.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+`seasonal/spring.csv` içinde Temmuz 2017 (`2017-07`) tarihine sahip kaç kayıt olduğunu say.
+- Bunu yapmak için, satırları seçmek üzere kısmi bir tarihle `grep` kullan ve sonucu uygun bayrakla satırları sayması için `wc` komutuna borula.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Tarih biçimini hatırlamak için `head seasonal/spring.csv` kullan.
+- Komutun ilk kısmı `grep eslesecek_sey dosya_adi` biçimindedir.
+- Borudan, `|`, sonra `wc` komutunu `-l` bayrağıyla çağır.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +333,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "`grep` komutunu çağırdınız mı?"),
+      has_code("2017-07", incorrect_msg = "`2017-07` ifadesini aradınız mı?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "`seasonal/spring.csv` dosyasını aradınız mı?"),
+      has_code("|", incorrect_msg = "`wc` komutuna `|` kullanarak yönlendirme yaptınız mı?"),      
+      has_code("wc", incorrect_msg = "`wc` komutunu çağırdınız mı?"),
+      has_code("-l", incorrect_msg = "`-l` ile satırları saydınız mı?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Dikkatli sayma! Ne kadar veriye sahip olduğunuzu belirlemek, herhangi bir veri analizinde harika bir ilk adımdır.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Bir seferde birçok dosyayı nasıl belirtebilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +355,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Çoğu kabuk (shell) komutu, birden fazla dosya adı verirsen birden fazla dosya üzerinde çalışır.
+Örneğin,
+bütün mevsimsel veri dosyalarının ilk sütununu tek seferde şöyle alabilirsin:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Ama bir sürü dosya adını tekrar tekrar yazmak iyi bir fikir değil:
+zaman kaybettirir
+ve er ya da geç ya bir dosyayı atlar ya da bir dosya adını iki kez yazarsın.
+İşini kolaylaştırmak için,
+kabuk **joker karakterler** kullanarak tek bir ifadeyle bir dosya listesi belirtmene izin verir.
+En yaygın joker karakter `*`'tır,
+ve "sıfır veya daha fazla karakterle eşleş" anlamına gelir.
+Bunu kullanarak,
+yukarıdaki `cut` komutunu şöyle kısaltabiliriz:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+ya da:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+`head` kullanarak hem `seasonal/spring.csv` hem de `seasonal/summer.csv` dosyalarının ilk üç satırını alacak tek bir komut yaz; toplamda altı satır veri olsun, ancak sonbahar veya kış verisi dosyalarından olmasın.
+Dosya adlarını tek tek yazmak yerine bir joker karakter kullan.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Komut şu biçimdedir: `head -n number_of_lines filename_pattern`.
+- Örneğin, `a` dizinindeki, `b` ile başlayan dosyaları `a/b*` ile eşleştirebilirsin.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +405,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "`seasonal/spring.csv` ve `seasonal/summer.csv` dosyalarını seçmek için `seasonal/s*` kullanabilirsiniz. Her dosyanın yalnızca ilk üç satırını `-n` bayrağı ile dahil ettiğinizden emin olun!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "`seasonal/autumn.csv` dosyasının çıktısını dahil etmeyin. `seasonal/spring.csv` ve `seasonal/summer.csv` dosyalarını seçmek için `seasonal/s*` kullanabilirsiniz."),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "`seasonal/winter.csv` dosyasının çıktısını dahil etmeyin. `seasonal/spring.csv` ve `seasonal/summer.csv` dosyalarını seçmek için `seasonal/s*` kullanabilirsiniz.")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Harika joker karakter çalışması! Dizin yüzlerce veya binlerce dosya içeriyorsa bu daha da önemli hale gelir.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Başka hangi joker karakterleri kullanabilirim?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +422,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Kabukta başka joker karakterler de var,
+ancak daha az kullanılıyorlar:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` tek bir karakteri eşleştirir; bu yüzden `201?.txt`, `2017.txt` veya `2018.txt` ile eşleşir ama `2017-01.txt` ile eşleşmez.
+- `[...]` köşeli parantez içindeki karakterlerden herhangi birini (yalnızca bir tane) eşleştirir; bu yüzden `201[78].txt`, `2017.txt` veya `2018.txt` ile eşleşir ama `2016.txt` ile eşleşmez.
+- `{...}` süslü parantez içindeki virgülle ayrılmış desenlerden herhangi biriyle eşleşir; bu yüzden `{*.txt, *.csv}`, adı `.txt` veya `.csv` ile biten herhangi bir dosyayla eşleşir ama adı `.pdf` ile biten dosyalarla eşleşmez.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Hangi ifade `singh.pdf` ve `johel.txt` ile eşleşir ama `sandhu.pdf` veya `sandhu.txt` ile eşleşmez?
 
 `@hint`
-Match each expression against each filename in turn.
+Her ifadeyi sırayla her dosya adıyla eşleştir.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +443,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Hayır: `.pdf` ve `.txt` birer dosya adı değil.
+- Hayır: bu, `sandhu.pdf` ile de eşleşir.
+- Hayır: köşeli parantez içindeki ifade tüm kelimeleri değil, yalnızca tek bir karakteri eşleştirir.
+- Doğru!
 
 ---
 
-## How can I sort lines of text?
+## Metin satırlarını nasıl sıralayabilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +458,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Adından da anlaşılacağı gibi,
+`sort` verileri sıralar.
+Varsayılan olarak bunu artan alfabetik düzende yapar,
+amab `-n` ve `-r` bayrakları çıktıyı sayısal olarak ve ters sırada sıralamak için kullanılabilir,
+`-b` baştaki boşlukları yoksaymasını söyler
+ve `-f` büyük/küçük harfleri eşitlemesini (yani, büyük/küçük harfe duyarsız olmasını) söyler.
+Boru hatlarında genellikle istenmeyen kayıtları ayıklamak için `grep` kullanılır,
+sonra kalan kayıtları sıraya koymak için `sort` uygulanır.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+`seasonal/summer.csv` dosyasının 2. sütunundaki tüm diş adlarını seçmek için `cut` ve `grep` birleşimini hatırlıyor musun?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Bu tariften yola çıkarak, diş adlarını `seasonal/winter.csv` (not `summer.csv`) dosyasında azalan alfabetik düzende sırala. Bunu yapmak için, boru hattını bir `sort` adımıyla genişlet.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Talimatlardaki komutu kopyalayıp yapıştır, dosya adını değiştir, bir pipe ekle ve ardından `sort` komutunu `-r` bayrağıyla çağır.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +496,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "`cut` komutunu çağırdınız mı?"),
+      has_code("-d", incorrect_msg = "`-d` ile bir alan ayırıcı belirttiniz mi?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "`seasonal/winter.csv` dosyasından veri aldınız mı?"),
+      has_code("|", incorrect_msg = "`cut`'tan `grep`'e ve `sort`'a `|` kullanarak veri aktardınız mı?"),      
+      has_code("grep", incorrect_msg = "`grep` komutunu çağırdınız mı?"),
+      has_code("-v", incorrect_msg = "`-v` ile eşleşmeyi tersine çevirdiniz mi?"),
+      has_code("Tooth", incorrect_msg = "`Tooth` için arama yaptınız mı?"),
+      has_code("sort", incorrect_msg = "`sort` komutunu çağırdınız mı?"),
+      has_code("-r", incorrect_msg = "`-r` ile sıralama düzenini tersine çevirdiniz mi?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Sıralandı! `sort`'un birçok kullanımı vardır. Örneğin, `sort -n`'i `head`'e yönlendirmek size en büyük değerleri gösterir.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Yinelenen satırları nasıl kaldırabilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +521,10 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+`sort` ile sıkça birlikte kullanılan başka bir komut da, yinelenen satırları kaldıran `uniq`'tir.
+Daha net söylemek gerekirse,
+bu komut yalnızca *bitişik* yinelenen satırları kaldırır.
+Eğer bir dosya şunu içeriyorsa:
 
 ```
 2017-07-03
@@ -535,14 +533,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+`uniq` şu çıktıyı üretir:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+ama şu içerikteyse:
 
 ```
 2017-07-03
@@ -551,33 +549,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+`uniq` dört satırın hepsini yazdırır.
+Bunun nedeni `uniq` komutunun çok büyük dosyalarla çalışacak şekilde tasarlanmış olmasıdır.
+Bir dosyadan bitişik olmayan yinelenen satırları kaldırmak için
+tüm dosyayı bellekte tutması gerekir
+(ya da en azından,
+şimdiye kadar görülen tüm benzersiz satırları).
+Sadece bitişik tekrarları kaldırarak
+bellekte yalnızca en son benzersiz satırı tutması yeterlidir.
 
 `@instructions`
-Write a pipeline to:
+Bir boru hattı (pipeline) yaz:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- `seasonal/winter.csv` dosyasının ikinci sütununu al,
+- çıktıda yalnızca diş adları görünsün diye "Tooth" kelimesini kaldır,
+- çıktıyı sırala ki aynı diş adına ait tüm tekrarlar bitişik olsun; ve
+- her diş adını, kaç kez göründüğünü belirten bir sayımla birlikte yalnızca bir kez göster.
 
-The start of your pipeline is the same as the previous exercise:
+Boru hattının başlangıcı önceki egzersizle aynı:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Bunu bir `sort` komutuyla genişlet ve her benzersiz satırı kaç kez geçtiğiyle birlikte göstermek için `uniq -c` kullan; `uniq` ve `wc` kullanma.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Talimatlardaki komutu kopyalayıp yapıştır, bayraksız olarak `sort` ile pipe et, sonra tekrar `uniq` komutuna `-c` bayrağıyla pipe et.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +595,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Bu komutla başlamalısınız: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Şimdi bunu genişletin!"),
+            has_code('\|\s+sort', incorrect_msg="Komutu `| sort` ile genişlettiniz mi?"),
+            has_code('\|\s+uniq', incorrect_msg="Komutu `| uniq` ile genişlettiniz mi?"),
+            has_code('-c', incorrect_msg="`-c` ile sayıları dahil ettiniz mi?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Harika! Bir boru hattı üzerinde bu kadar çalıştıktan sonra, sonucu saklamak güzel olmaz mıydı?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Bir borunun çıktısını nasıl kaydedebilirim?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +615,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Kabuk, borulanmış komutların çıktısını yeniden yönlendirmemize izin verir:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Ancak, `>` boru hattının sonunda yer almalıdır:
+ortada kullanmaya çalışırsak, şöyle:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+bu durumda `cut`'ın tüm çıktısı `teeth-only.txt` dosyasına yazılır,
+dolayısıyla `grep` için geriye hiçbir şey kalmaz
+ve girdi gelmesini sonsuza kadar bekler.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Peki ya yeniden yönlendirmeyi bir boru hattının en önüne koyarsak ne olur:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Komutun çıktısı her zamanki gibi dosyaya yönlendirilir.]
+- Kabuk bunu bir hata olarak bildirir.
+- Kabuk girdi için sonsuza kadar bekler.
 
 `@hint`
-Try it out in the shell.
+Bunu kabukta dene.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +655,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Doğru!', 'Hayır; kabuk aslında bunu çalıştırabilir.', 'Hayır; kabuk aslında bunu çalıştırabilir.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Çalışan bir programı nasıl durdurabilirim?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +668,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Şimdiye kadar çalıştırdığın komutlar ve betikler hızlıca tamamlandı,
+amabazı işler dakikalar, saatler, hatta günler sürebilir.
+Ayrıca yanlışlıkla yeniden yönlendirmeyi bir ardışık düzenin ortasına koyup
+takılmasına neden olabilirsin.
+Bir programın çalışmaya devam etmesini istemiyorsan,
+`Ctrl` + `C` tuşlayarak sonlandırabilirsin.
+Bu, Unix dokümantasyonunda sıkça `^C` olarak yazılır;
+'b'nin küçük harf olabileceğini unutma.
 
 `@instructions`
-Run the command:
+Şu komutu çalıştır:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+argümansız olarak (böylece asla gelmeyecek bir girdiyi bekleyecek)
+ve ardından `Ctrl` + `C` tuşlayarak durdur.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Sadece head yaz, Enter’a bas ve çalışan programdan `Ctrl` + `C` ile çık.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +702,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="`head` ifadesini kullandınız mı?")
 ```
 
 ---
 
-## Wrapping up
+## Kapanış
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +715,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Kapanış olarak,
+en kısa sezonluk veri dosyasında kaç kayıt olduğunu bulmak için bir işlem hattı (pipeline) kuracaksın.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +732,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Tüm sezonluk veri dosyalarındaki satır sayılarını listelemek için uygun parametrelerle `wc` kullan.
+(Dosya adlarını tek tek yazmak yerine joker karakter kullan.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Yalnızca satır sayılarını listelemek için `-l` ve dosya adlarını eşleştirmek için `*` kullan.
 
 `@solution`
 ```{shell}
@@ -753,13 +751,12 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "`wc` komutunu çağırdınız mı?"),
+      has_code("-l", incorrect_msg = "`-l` ile satır sayısını saydınız mı?"),
+      has_code("seasonal/\*", incorrect_msg = "Tüm `seasonal/*` dosyalarından veri aldınız mı?")
     )
   )
 )
-
 ```
 
 ***
@@ -771,7 +768,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Önceki komuta bir boru ile başka bir komut ekleyerek "total" kelimesini içeren satırı kaldır.
 
 `@hint`
 
@@ -789,17 +786,16 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "`wc` komutunu çağırdınız mı?"),
+      has_code("-l", incorrect_msg = "`-l` ile satır sayısını saydınız mı?"),
+      has_code("seasonal/\*", incorrect_msg = "Tüm `seasonal/*` dosyalarından veri aldınız mı?"),
+      has_code("|", incorrect_msg = "`wc`'den `grep`'e `|` kullanarak veri aktardınız mı?"),      
+      has_code("grep", incorrect_msg = "`grep` komutunu çağırdınız mı?"),
+      has_code("-v", incorrect_msg = "`-v` ile eşleşmeyi tersine çevirdiniz mi?"),
+      has_code("total", incorrect_msg = "`total` için arama yaptınız mı?")
     )
   )
 )
-
 ```
 
 ***
@@ -811,11 +807,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+En az satır içeren dosyayı bulmak için iş hattına `sort -n` ve `head -n 1` kullanan iki aşama daha ekle.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Sayısal sıralama için `sort`'un `-n` bayrağını kullan.
+- Yalnızca 1 satır tutmak için `head`'in `-n` bayrağını kullan.
 
 `@solution`
 ```{shell}
@@ -830,19 +826,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "`wc` komutunu çağırdınız mı?"),
+      has_code("-l", incorrect_msg = "`-l` ile satır sayısını saydınız mı?"),
+      has_code("seasonal/\*", incorrect_msg = "Tüm `seasonal/*` dosyalarından veri aldınız mı?"),
+      has_code("|", incorrect_msg = "`wc`'den `grep`'e, `sort`'a ve `head`'e `|` kullanarak yönlendirdiniz mi?"),      
+      has_code("grep", incorrect_msg = "`grep` komutunu çağırdınız mı?"),
+      has_code("-v", incorrect_msg = "`-v` ile eşleşmeyi tersine çevirdiniz mi?"),
+      has_code("total", incorrect_msg = "`total` için arama yaptınız mı?"),
+      has_code("sort", incorrect_msg = "`sort` komutunu çağırdınız mı?"),
+      has_code("-n", incorrect_msg = "Saklanacak satır sayısını `-n` ile belirttiniz mi?"),
+      has_code("1", incorrect_msg = "`-n 1` ile saklanacak 1 satır belirttiniz mi?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Harika! Görünüşe göre en az satıra sahip dosya `autumn.csv`. Toplu işlem hakkında daha fazla bilgi edinmek için 4. bölüme koşun!")
 ```
