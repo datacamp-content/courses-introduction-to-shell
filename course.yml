@@ -14,6 +14,6 @@ description: >-
   on the qualified assessment. You can navigate to the assessment by clicking on
   the CPE credits callout on the right.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: 'shell-base-prod:v2.0.0'
 datasets:
   Introduction to Shell.pdf: Course Glossary
