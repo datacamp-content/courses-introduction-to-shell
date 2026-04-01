@@ -1,19 +1,20 @@
-title: Introduction to Shell
+title: Introduzione alla Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  La riga di comando Unix è sopravvissuta e prospera da quasi 50 anni perché
+  permette di fare cose complesse con poche battute sulla tastiera. A volte
+  chiamata "la colla universale della programmazione", aiuta a combinare
+  programmi esistenti in modi nuovi, ad automatizzare attività ripetitive e a
+  eseguire programmi su cluster e cloud che possono trovarsi dall'altra parte
+  del mondo. Questo corso ti presenterà gli elementi chiave e ti mostrerà come
+  usarli in modo efficiente.
 
 
-  The course glossary can be found on the right in the resources section.
+  Il glossario del corso è disponibile a destra, nella sezione risorse.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Per ottenere i crediti CPE devi completare il corso e raggiungere un punteggio
+  del 70% nella valutazione qualificata. Puoi accedere alla valutazione facendo
+  clic sull'avviso dei crediti CPE sulla destra.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
