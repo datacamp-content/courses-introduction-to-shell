@@ -1,15 +1,15 @@
 ---
-title: Creating new tools
+title: Tạo công cụ mới
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  History giúp bạn lặp lại thao tác chỉ với vài phím bấm, và pipes cho phép kết
+  hợp các lệnh sẵn có để tạo ra lệnh mới. Ở chương này, bạn sẽ tiến thêm một
+  bước để tự tạo các lệnh của riêng mình.
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: Làm sao chỉnh sửa một tệp?
 ---
 
-## How can I edit a file?
+## Làm sao để chỉnh sửa một tệp?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +17,24 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix có rất nhiều trình soạn thảo văn bản khiến bạn dễ rối.
+Trong khóa học này,
+chúng ta sẽ dùng một công cụ đơn giản tên là Nano.
+Nếu bạn gõ `nano filename`,
+nó sẽ mở `filename` để chỉnh sửa
+(hoặc tạo mới nếu tệp chưa tồn tại).
+Bạn có thể di chuyển bằng các phím mũi tên,
+xóa ký tự bằng phím backspace,
+và thực hiện các thao tác khác bằng tổ hợp phím Ctrl:
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`: xóa một dòng.
+- `Ctrl` + `U`: khôi phục dòng vừa xóa.
+- `Ctrl` + `O`: lưu tệp ('O' là viết tắt của 'output'). _Bạn cũng cần nhấn Enter để xác nhận tên tệp!_
+- `Ctrl` + `X`: thoát khỏi trình soạn thảo.
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+Chạy `nano names.txt` để chỉnh sửa một tệp mới trong thư mục home của bạn
+và nhập bốn dòng sau:
 
 ```
 Lovelace
@@ -43,10 +43,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+Để lưu những gì bạn đã viết,
+gõ `Ctrl` + `O` để ghi tệp ra đĩa,
+rồi nhấn Enter để xác nhận tên tệp,
+sau đó `Ctrl` + `X` để thoát trình soạn thảo.
 
 `@hint`
 
@@ -65,7 +65,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "Bạn đã bao gồm dòng `%s` trong tệp `names.txt` chưa? Sử dụng `nano names.txt` một lần nữa để cập nhật tệp của bạn. Sử dụng `Ctrl` + `O` để lưu và `Ctrl` + `X` để thoát."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +75,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("Làm tốt lắm! Tiếp tục đến cái tiếp theo!")
 ```
 
 ---
 
-## How can I record what I just did?
+## Làm sao lưu lại những gì tôi vừa làm?
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +88,20 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+Khi bạn đang thực hiện một phân tích phức tạp,
+bạn thường sẽ muốn lưu lại các lệnh đã dùng.
+Bạn có thể làm điều này với các công cụ bạn đã thấy:
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. Chạy `history`.
+2. Pipe đầu ra của nó vào `tail -n 10` (hoặc số bước gần đây bạn muốn lưu).
+3. Chuyển hướng đầu ra đó vào một tệp có tên như `figure-5.history`.
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+Cách này tốt hơn việc ghi chép vào sổ tay phòng thí nghiệm
+vì nó đảm bảo không bỏ sót bất kỳ bước nào.
+Nó cũng minh họa ý tưởng cốt lõi của shell:
+những công cụ đơn giản tạo và tiêu thụ các dòng văn bản
+có thể được kết hợp theo nhiều cách khác nhau
+để giải quyết một loạt vấn đề rộng lớn.
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +117,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+Sao chép các tệp `seasonal/spring.csv` và `seasonal/summer.csv` vào thư mục home của bạn.
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+Dùng `cp` để sao chép và `~` như lối tắt tới đường dẫn thư mục home của bạn.
 
 `@solution`
 ```{shell}
@@ -130,7 +130,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="Bạn đã sử dụng `cp seasonal/s* ~` để sao chép các tệp cần thiết vào thư mục chính của bạn chưa?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +138,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("Lưu trữ đáng chú ý! Nếu bạn đã gõ sai bất kỳ lệnh nào, bạn luôn có thể sử dụng `nano` để dọn dẹp tệp lịch sử lưu sau đó.")
 ```
 
 ***
@@ -151,13 +150,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+Dùng `grep` với cờ `-h` (để không in tên tệp)
+và `-v Tooth` (để chọn các dòng *không* khớp với dòng tiêu đề)
+để chọn các bản ghi dữ liệu từ `spring.csv` và `summer.csv` theo thứ tự đó
+và chuyển hướng đầu ra vào `temp.csv`.
 
 `@hint`
-Put the flags before the filenames.
+Đặt các cờ (flags) trước tên tệp.
 
 `@solution`
 ```{shell}
@@ -167,8 +166,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "Hãy đảm bảo rằng bạn chuyển hướng đầu ra của lệnh `grep` đến `temp.csv` với `>`!"
+msg2 = "Bạn đã sử dụng `grep -h -v ___ ___ ___` (điền vào chỗ trống) để điền `temp.csv` chưa?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +176,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +187,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+Pipe `history` vào `tail -n 3`
+và chuyển hướng đầu ra vào `steps.txt`
+để lưu ba lệnh gần nhất vào một tệp.
+(Bạn cần lưu ba lệnh thay vì chỉ hai
+vì chính lệnh `history` cũng sẽ có trong danh sách.)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+Nhớ rằng chuyển hướng với `>` đặt ở cuối chuỗi lệnh được pipe.
 
 `@solution`
 ```{shell}
@@ -206,8 +204,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="Hãy đảm bảo chuyển hướng đầu ra của lệnh của bạn đến `steps.txt`."
+msg2="Bạn đã sử dụng `history | tail ___ ___` (điền vào chỗ trống) để điền vào `steps.txt` chưa?"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +217,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("Làm tốt lắm! Hãy nâng cao hơn nữa!")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## Làm sao lưu lệnh để chạy lại sau này?
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +230,27 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+Đến giờ bạn đã dùng shell theo cách tương tác.
+Nhưng vì các lệnh bạn gõ chỉ là văn bản,
+bạn có thể lưu chúng vào tệp để shell chạy đi chạy lại.
+Để bắt đầu khám phá khả năng mạnh mẽ này,
+hãy đặt lệnh sau vào một tệp tên là `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+Lệnh này chọn hàng đầu tiên từ mỗi tệp CSV trong thư mục `seasonal`.
+Sau khi tạo xong tệp này,
+bạn có thể chạy nó bằng cách gõ:
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+Lệnh này bảo shell (vốn là một chương trình tên `bash`)
+chạy các lệnh có trong tệp `headers.sh`,
+và tạo ra đầu ra giống như khi bạn chạy các lệnh đó trực tiếp.
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +266,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+Dùng `nano dates.sh` để tạo một tệp tên `dates.sh`
+chứa lệnh sau:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+để trích xuất cột đầu tiên từ tất cả các tệp CSV trong `seasonal`.
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+Đặt đúng các lệnh đã cho vào tệp, không thêm dòng trống hay khoảng trắng thừa.
 
 `@solution`
 ```{shell}
@@ -291,13 +288,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "Bạn đã bao gồm dòng lệnh `cut -d , -f 1 seasonal/*.csv` trong tệp `dates.sh` chưa? Sử dụng `nano dates.sh` để cập nhật tệp của bạn. Sử dụng `Ctrl` + `O` để lưu và `Ctrl` + `X` để thoát."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +305,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+Dùng `bash` để chạy tệp `dates.sh`.
 
 `@hint`
-Use `bash filename` to run the file.
+Dùng `bash filename` để chạy tệp.
 
 `@solution`
 ```{shell}
@@ -327,17 +323,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+      has_code("dates.sh", incorrect_msg = 'Bạn đã chỉ định tệp `dates.sh` chưa?')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## Làm thế nào để tái sử dụng pipes?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +340,27 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+Một tệp chứa đầy lệnh shell được gọi là ***shell script**,
+hoặc ngắn gọn là "script". Script không nhất thiết phải có tên kết thúc bằng `.sh`,
+nhưng bài học này sẽ dùng quy ước đó
+để giúp bạn nhận ra tệp nào là script.
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+Script cũng có thể chứa pipes.
+Ví dụ,
+nếu `all-dates.sh` có dòng sau:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+thì:
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+sẽ trích xuất các ngày duy nhất từ các tệp dữ liệu theo mùa
+và lưu chúng vào `dates.out`.
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +377,13 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+Một tệp `teeth.sh` trong thư mục home của bạn đã được chuẩn bị sẵn, nhưng còn vài chỗ trống.
+Hãy dùng Nano để chỉnh sửa tệp và thay hai chỗ giữ chỗ `____`
+bằng `seasonal/*.csv` và `-c` để script này in ra số đếm
+số lần mỗi tên răng xuất hiện trong các tệp CSV trong thư mục `seasonal`.
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+Dùng `nano teeth.sh` để chỉnh sửa tệp.
 
 `@solution`
 ```{shell}
@@ -400,13 +395,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="Bạn đã thay thế các khoảng trống một cách chính xác để lệnh trong `teeth.sh` là `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c` chưa? Hãy sử dụng `nano teeth.sh` một lần nữa để thực hiện các thay đổi cần thiết."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +412,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+Dùng `bash` để chạy `teeth.sh` và dùng `>` để chuyển hướng đầu ra của nó vào `teeth.out`.
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+Hãy nhớ rằng `> teeth.out` phải đặt sau lệnh tạo ra đầu ra.
 
 `@solution`
 ```{shell}
@@ -434,7 +428,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="Bạn đã chuyển hướng chính xác kết quả của `bash teeth.sh` sang `teeth.out` với `>` chưa?"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +437,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'Bạn đã chạy tệp `teeth.sh` chưa?'),
+      has_code(">\s+teeth.out", incorrect_msg = 'Bạn đã chuyển hướng đến tệp `teeth.out` chưa?')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +454,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+Chạy `cat teeth.out` để xem kết quả của bạn.
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+Bạn có thể gõ vài ký tự đầu của tên tệp rồi nhấn phím tab để tự động hoàn thành.
 
 `@solution`
 ```{shell}
@@ -479,18 +472,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = 'Bạn đã gọi `cat` chưa?'),
+      has_code("teeth.out", incorrect_msg = 'Bạn đã chỉ định tệp `teeth.out` chưa?')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("Tuyệt vời! Ban đầu tất cả điều này có thể cảm thấy gượng ép, nhưng điều tuyệt vời là bạn đang tự động hóa các phần của quy trình làm việc của mình từng bước một. Điều này thực sự hữu ích khi bạn là một nhà khoa học dữ liệu!")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## Làm sao truyền tên tệp cho script?
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +490,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+Một script xử lý các tệp cụ thể thì hữu ích để ghi lại bạn đã làm gì, nhưng một script cho phép bạn xử lý bất kỳ tệp nào bạn muốn còn hữu ích hơn.
+Để hỗ trợ điều này,
+bạn có thể dùng biểu thức đặc biệt `$@` (dấu đô-la theo ngay sau là ký tự a còng)
+để chỉ "tất cả các tham số dòng lệnh được truyền cho script".
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+Ví dụ, nếu `unique-lines.sh` chứa `sort $@ | uniq`, khi bạn chạy:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+shell sẽ thay `$@` bằng `seasonal/summer.csv` và xử lý một tệp. Nếu bạn chạy:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+nó sẽ xử lý hai tệp dữ liệu, và tương tự cho nhiều tệp hơn.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Nhắc lại: để lưu những gì bạn đã viết trong Nano, gõ `Ctrl` + `O` để ghi tệp, sau đó Enter để xác nhận tên tệp, rồi `Ctrl` + `X` để thoát trình soạn thảo._
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +526,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+Chỉnh sửa script `count-records.sh` bằng Nano và điền vào hai chỗ trống `____`
+bằng `$@` và `-l` (_chữ cái_) tương ứng để script đếm số dòng trong một hoặc nhiều tệp,
+loại trừ dòng đầu tiên của mỗi tệp.
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* Dùng `nano count-records.sh` để chỉnh sửa tên tệp.
+* Hãy chắc chắn bạn chỉ định _chữ cái_ `-l`, không phải số một.
 
 `@solution`
 ```{shell}
@@ -552,7 +544,7 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="Bạn đã thay thế các khoảng trống đúng cách để lệnh trong `count-records.sh` đọc là `tail -q -n +2 $@ | wc -l` chưa? Sử dụng `nano count-records.sh` một lần nữa để thực hiện các thay đổi cần thiết."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
@@ -570,11 +562,11 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+Chạy `count-records.sh` trên `seasonal/*.csv`
+và chuyển hướng đầu ra vào `num-records.out` bằng `>`.
 
 `@hint`
-Use `>` to redirect the output.
+Dùng `>` để chuyển hướng đầu ra.
 
 `@solution`
 ```{shell}
@@ -589,20 +581,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'Bạn đã chạy tệp `count-records.sh` chưa?'),
+      has_code("seasonal/\*", incorrect_msg = 'Bạn đã chỉ định các tệp để xử lý với `seasonal/*` chưa?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'Bạn đã chuyển hướng đến tệp `num-records.out` chưa?')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("Làm tốt lắm! Sức mạnh shell của bạn đang ngày càng mở rộng!")
 ```
 
 ---
 
-## How can I process a single argument?
+## Làm thế nào để xử lý một đối số đơn lẻ?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +601,42 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+Bên cạnh `$@`,
+shell cho phép bạn dùng `$1`, `$2`, v.v. để tham chiếu tới các tham số dòng lệnh cụ thể.
+Bạn có thể dùng cách này để viết các lệnh trông đơn giản hoặc tự nhiên hơn so với lệnh của shell.
+Ví dụ,
+bạn có thể tạo một script tên là `column.sh` để chọn một cột duy nhất từ tệp CSV
+khi người dùng cung cấp tên tệp làm tham số thứ nhất và số cột làm tham số thứ hai:
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+rồi chạy nó bằng:
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+Lưu ý script dùng hai tham số theo thứ tự ngược lại.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+Script `get-field.sh` dự kiến sẽ nhận một tên tệp,
+số của hàng cần chọn,
+số của cột cần chọn,
+và in ra đúng trường đó từ một tệp CSV.
+Ví dụ:
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+sẽ chọn trường thứ hai ở dòng 4 của `seasonal/summer.csv`.
+Trong số các lệnh sau, lệnh nào cần đặt vào `get-field.sh` để làm được việc đó?
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+Hãy nhớ rằng các tham số dòng lệnh được đánh số từ trái sang phải.
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +645,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- Không đúng: lệnh đó sẽ cố dùng tên tệp làm số dòng để chọn với `head`.
+- Chính xác!
+- Không đúng: lệnh đó sẽ hoán đổi, dùng số cột làm số dòng và ngược lại.
+- Không đúng: lệnh đó sẽ dùng số trường làm tên tệp và ngược lại.
 
 ---
 
-## How can one shell script do many things?
+## Một shell script có thể làm nhiều việc như thế nào?
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +660,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+Các shell script của bạn đến giờ mới chỉ có một lệnh hoặc một pipeline, nhưng một script có thể chứa nhiều dòng lệnh. Ví dụ, bạn có thể tạo một script cho biết có bao nhiêu bản ghi trong tệp dữ liệu ngắn nhất và dài nhất của bạn, tức là phạm vi độ dài của các tập dữ liệu.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+Lưu ý: trong Nano, "copy and paste" được thực hiện bằng cách di chuyển tới dòng bạn muốn sao chép, nhấn `CTRL` + `K` để cắt dòng, rồi nhấn `CTRL` + `U` hai lần để dán hai bản sao của dòng đó.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Nhắc lại: để lưu những gì bạn đã viết trong Nano, gõ `Ctrl` + `O` để ghi tệp ra, rồi Enter để xác nhận tên tệp, sau đó `Ctrl` + `X` để thoát trình soạn thảo._
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +681,15 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+Dùng Nano để chỉnh sửa script `range.sh`
+và thay hai chỗ giữ chỗ `____`
+bằng `$@` và `-v`
+để liệt kê tên và số dòng của tất cả các tệp được truyền trên dòng lệnh
+mà KHÔNG hiển thị tổng số dòng của tất cả các tệp.
+(Đừng cố trừ dòng tiêu đề cột khỏi các tệp.)
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+Dùng `wc -l $@` để đếm số dòng trong tất cả các tệp được truyền trên dòng lệnh.
 
 `@solution`
 ```{shell}
@@ -710,13 +701,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="Bạn đã thay thế các chỗ trống một cách chính xác để lệnh trong `range.sh` đọc là `wc -l $@ | grep -v total` chưa? Sử dụng `nano range.sh` một lần nữa để thực hiện các thay đổi cần thiết."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +718,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+Tiếp tục dùng Nano để thêm `sort -n` và `head -n 1` theo đúng thứ tự đó
+vào pipeline trong `range.sh`
+để hiển thị tên và số dòng của tệp ngắn nhất được truyền vào.
 
 `@hint`
 
@@ -745,13 +735,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="Bạn đã thêm `sort -n` và `head -n 1` với các đường ống vào tệp `range.sh` chưa? Sử dụng `nano range.sh` một lần nữa để thực hiện các thay đổi cần thiết."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +752,13 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+Vẫn với Nano, thêm một dòng thứ hai vào `range.sh` để in tên và số bản ghi của
+tệp DÀI NHẤT trong thư mục đồng thời với tệp ngắn nhất.
+Dòng này sẽ là bản sao của dòng bạn đã viết,
+nhưng dùng `sort -n -r` thay vì `sort -n`.
 
 `@hint`
-Copy the first line and modify the sorting order.
+Sao chép dòng đầu tiên và chỉnh lại thứ tự sắp xếp.
 
 `@solution`
 ```{shell}
@@ -781,8 +770,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="Giữ dòng đầu tiên trong tệp `range.sh`: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="Bạn đã sao chép dòng đầu tiên trong `range.sh` và thực hiện một thay đổi nhỏ chưa? `sort -n -r` thay vì `sort -n`!"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +779,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +790,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+Chạy script trên các tệp trong thư mục `seasonal`
+sử dụng `seasonal/*.csv` để khớp tất cả các tệp
+và chuyển hướng đầu ra bằng `>`
+đến một tệp có tên `range.out` trong thư mục home của bạn.
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+Dùng `bash range.sh` để chạy script, `seasonal/*.csv` để chỉ định tệp, và `> range.out` để chuyển hướng đầu ra.
 
 `@solution`
 ```{shell}
@@ -818,24 +806,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="Bạn đã chuyển hướng chính xác kết quả của `bash range.sh seasonal/*.csv` sang `range.out` với `>` chưa?"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Bạn đã chạy tệp `range.sh` chưa?'),
+has_code("seasonal/\*", incorrect_msg = 'Bạn đã chỉ định các tệp để xử lý với `seasonal/*` chưa?'),
+has_code(">\s+range.out", incorrect_msg = 'Bạn đã chuyển hướng đến tệp `range.out` chưa?')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("Mọi thứ đang diễn ra tốt đẹp. Hãy chuyển sang bài tập tiếp theo để tìm hiểu về cách viết vòng lặp!")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## Làm thế nào để viết vòng lặp trong shell script?
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,10 +830,10 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+Shell script cũng có thể chứa các vòng lặp. Bạn có thể viết chúng trên một dòng với dấu chấm phẩy, hoặc tách thành nhiều dòng không có dấu chấm phẩy để dễ đọc hơn:
 
 ```{shell}
-# Print the first and last data records of each file.
+# In ra bản ghi dữ liệu đầu tiên và cuối cùng của mỗi tệp.
 for filename in $@
 do
     head -n 2 $filename | tail -n 1
@@ -854,11 +841,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+(Bạn không bắt buộc phải thụt lề các lệnh bên trong vòng lặp, nhưng làm vậy sẽ rõ ràng hơn.)
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+Dòng đầu tiên của script này là **comment** để cho người đọc biết script làm gì. Comment bắt đầu bằng ký tự `#` và kéo dài đến hết dòng. Phiên bản bạn trong tương lai sẽ cảm ơn bạn vì đã thêm các giải thích ngắn gọn như ví dụ này vào mọi script bạn viết.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Nhắc lại: để lưu nội dung bạn đã viết trong Nano, nhấn `Ctrl` + `O` để ghi tệp, rồi Enter để xác nhận tên tệp, sau đó `Ctrl` + `X` để thoát trình soạn thảo._
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +862,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+Điền các chỗ trống trong script `date-range.sh`
+với `$filename` (hai lần), `head`, và `tail`
+để nó in ra ngày đầu tiên và cuối cùng từ một hoặc nhiều tệp.
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+Hãy nhớ dùng `$filename` để lấy giá trị hiện tại của biến vòng lặp.
 
 `@solution`
 ```{shell}
@@ -892,10 +879,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="Trong `date-range.sh`, bạn đã thay đổi dòng %s trong vòng lặp thành `%s` chưa? Sử dụng `nano date-range.sh` để thực hiện thay đổi."
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('đầu tiên', cmdpatt%'head')
+msg2=msgpatt%('thứ hai', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +893,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +904,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+Chạy `date-range.sh` trên cả bốn tệp dữ liệu theo mùa
+bằng cách dùng `seasonal/*.csv` để khớp tên của chúng.
 
 `@hint`
-The wildcard expression should start with the directory name.
+Biểu thức ký tự đại diện nên bắt đầu bằng tên thư mục.
 
 `@solution`
 ```{shell}
@@ -937,9 +923,9 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Bạn đã chạy tệp `date-range.sh` chưa?'),
+      has_code("seasonal/\*", incorrect_msg = 'Bạn đã chỉ định các tệp để xử lý với `seasonal/*` chưa?')
     )
   )
 )
@@ -955,11 +941,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+Chạy `date-range.sh` trên cả bốn tệp dữ liệu theo mùa bằng `seasonal/*.csv` để khớp tên của chúng,
+và chuyển (pipe) đầu ra của nó sang `sort` để thấy rằng script của bạn có thể được dùng giống như các lệnh dựng sẵn của Unix.
 
 `@hint`
-Use the same wildcard expression you used earlier.
+Hãy dùng lại biểu thức ký tự đại diện bạn đã dùng trước đó.
 
 `@solution`
 ```{shell}
@@ -974,21 +960,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = 'Bạn đã gọi `bash` chưa?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Bạn đã chạy tệp `date-range.sh` chưa?'),
+      has_code("seasonal/\*", incorrect_msg = 'Bạn đã chỉ định các tệp để xử lý với `seasonal/*` chưa?'),
+      has_code("|", incorrect_msg = 'Bạn đã chuyển từ đầu ra của script sang `sort` chưa?'),
+      has_code("sort", incorrect_msg = 'Bạn đã gọi `sort` chưa?')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("Thật kỳ diệu! Hãy chú ý cách mà tất cả những điều chúng ta đã học có thể kết hợp với nhau.")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## Điều gì xảy ra khi tôi không cung cấp tên tệp?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +981,42 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+Một lỗi thường gặp trong script shell (và khi gõ lệnh tương tác) là đặt tên tệp sai chỗ.
+Nếu bạn gõ:
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+thì vì `tail` không được cung cấp tên tệp nào,
+nó sẽ chờ đọc dữ liệu từ bàn phím của bạn.
+Điều này có nghĩa là nếu bạn gõ:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+thì `tail` sẽ tiếp tục và in ra ba dòng cuối của `somefile.txt`,
+nhưng `head` sẽ chờ mãi dữ liệu từ bàn phím,
+vì nó không được đưa tên tệp và cũng không có gì ở phía trước nó trong pipeline.
 
 <hr>
 
-Suppose you do accidentally type:
+Giả sử bạn lỡ gõ:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+Bạn nên làm gì tiếp theo?
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- Chờ 10 giây để `head` tự hết thời gian.
+- Gõ `somefile.txt` và nhấn Enter để cung cấp đầu vào cho `head`.
+- Dùng `Ctrl` + `C` để dừng chương trình `head` đang chạy.
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+`head` sẽ làm gì nếu không có tên tệp và không có gì ở phía trước nó trong đường ống?
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +1025,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = 'Không, các lệnh sẽ không bị hết thời gian chờ.'
+a2 = 'Không, điều đó sẽ đưa cho `head` văn bản `somefile.txt` để xử lý, nhưng sau đó nó sẽ bị treo chờ thêm đầu vào.'
+a3 = "Đúng vậy! Bạn nên sử dụng `Ctrl` + `C` để dừng một chương trình đang chạy. Khóa học giới thiệu này kết thúc tại đây! Nếu bạn quan tâm đến việc học thêm các công cụ dòng lệnh, chúng tôi khuyến khích bạn tham gia khóa học giới thiệu miễn phí về Git của chúng tôi!"
 Ex().has_chosen(3, [a1, a2, a3])
 ```

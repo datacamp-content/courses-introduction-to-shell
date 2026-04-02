@@ -1,15 +1,15 @@
 ---
-title: Batch processing
+title: Xử lý hàng loạt
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Hầu hết các lệnh shell có thể xử lý nhiều tệp cùng lúc. Chương này cho bạn
+  thấy cách khiến các pipeline của riêng bạn cũng làm được điều đó. Đồng thời,
+  bạn sẽ thấy shell sử dụng biến để lưu trữ thông tin như thế nào.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Shell lưu trữ thông tin như thế nào?
 ---
 
-## How does the shell store information?
+## Shell lưu trữ thông tin như thế nào?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,28 +17,28 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Giống như các chương trình khác, shell lưu thông tin trong các biến.
+Một số biến trong đó,
+được gọi là **environment variables** (biến môi trường),
+luôn sẵn có.
+Tên của các biến môi trường theo quy ước được viết IN HOA,
+và một vài biến thường dùng được liệt kê bên dưới.
 
 | Variable | Purpose                           | Value                 |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | Thư mục home của người dùng       | `/home/repl`          |
+| `PWD `   | Thư mục làm việc hiện tại         | Giống lệnh `pwd`      |
+| `SHELL`  | Trình shell đang được sử dụng     | `/bin/bash`           |
+| `USER`   | ID người dùng                     | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Để xem đầy đủ danh sách (khá dài),
+bạn có thể gõ `set` trong shell.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Dùng `set` và `grep` với một pipe để hiển thị giá trị của `HISTFILESIZE`,
+biến quyết định có bao nhiêu lệnh cũ được lưu trong lịch sử lệnh của bạn.
+Giá trị của nó là bao nhiêu?
 
 `@possible_answers`
 - 10
@@ -47,7 +47,7 @@ What is its value?
 - The variable is not there.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Dùng `set | grep HISTFILESIZE` để lấy dòng bạn cần.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +56,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Không: shell ghi lại nhiều lịch sử hơn thế."
+err2 = "Không: shell ghi lại nhiều lịch sử hơn thế."
+correct3 = "Chính xác: shell lưu 2000 lệnh cũ theo mặc định trên hệ thống này."
+err4 = "Không: biến `HISTFILESIZE` có ở đó."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Làm sao để in giá trị của một biến?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +73,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Cách đơn giản hơn để tìm giá trị của một biến là dùng lệnh `echo`, lệnh này sẽ in ra các đối số của nó. Gõ
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+sẽ in
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Nếu bạn thử dùng nó để in giá trị của một biến như sau:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+nó sẽ in tên của biến, `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Để lấy giá trị của biến, bạn phải đặt ký hiệu đô-la `$` ở phía trước. Gõ 
 
 ```{shell}
 echo $USER
 ```
 
-prints
+sẽ in
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Điều này đúng ở mọi nơi:
+để lấy giá trị của một biến tên là `X`,
+bạn phải viết `$X`.
+(Điều này giúp shell phân biệt giữa "một tệp tên là X"
+và "giá trị của một biến tên là X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Biến `OSTYPE` chứa tên của loại hệ điều hành bạn đang dùng.
+Hiển thị giá trị của nó bằng `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Gọi `echo` với biến `OSTYPE` được thêm ký hiệu `$` ở phía trước.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +135,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Bạn đã gọi `echo` chưa?"),
+            has_code('OSTYPE', incorrect_msg="Bạn đã in biến môi trường `OSTYPE` chưa?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Hãy chắc chắn thêm `$` trước `OSTYPE`.") 
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Bạn đã thực hiện xuất sắc việc echo các biến môi trường! Bạn đã có một khởi đầu tốt. Hãy tiếp tục!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Còn những cách nào khác mà shell lưu trữ thông tin?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +154,19 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Loại biến còn lại được gọi là **biến shell**,
+giống như biến cục bộ trong một ngôn ngữ lập trình.
 
-To create a shell variable,
-you simply assign a value to a name:
+Để tạo một biến shell,
+bạn chỉ cần gán một giá trị cho một tên:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*lưu ý không* có khoảng trắng trước hoặc sau dấu `=`.
+Sau khi làm vậy,
+bạn có thể kiểm tra giá trị của biến bằng:
 
 ```{shell}
 echo $training
@@ -189,10 +189,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Định nghĩa một biến tên `testing` với giá trị `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Không được có khoảng trắng giữa tên biến và giá trị của nó.
 
 `@solution`
 ```{shell}
@@ -214,12 +214,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Bạn đã định nghĩa một biến shell có tên là `testing` chưa?'),
+        has_code('testing=', incorrect_msg='Bạn đã viết `=` ngay sau `testing`, không có khoảng trắng nào chưa?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Bạn đã đặt giá trị của `testing` thành `seasonal/winter.csv` chưa?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +230,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Dùng `head -n 1 SOMETHING` để lấy dòng đầu tiên từ `seasonal/winter.csv`
+sử dụng giá trị của biến `testing` thay cho tên tệp.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Nhớ dùng `$testing` thay vì chỉ `testing`
+(ký hiệu `$` là cần thiết để lấy giá trị của biến).
 
 `@solution`
 ```{shell}
@@ -251,23 +250,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Bạn đã tham chiếu biến shell bằng `$testing` chưa?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Bạn đã gọi `head` chưa?"),
+            has_code('-n', incorrect_msg="Bạn đã giới hạn số dòng với `-n` chưa?"),
+            has_code(r'-n\s+1', incorrect_msg="Bạn đã chọn giữ lại 1 dòng với `-n 1` chưa?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Tuyệt vời! Hãy xem cách bạn có thể lặp lại các lệnh một cách dễ dàng.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Làm sao để lặp lại một lệnh nhiều lần?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +273,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Biến shell cũng được dùng trong **vòng lặp**,
+để lặp lại lệnh nhiều lần.
+Nếu bạn chạy lệnh sau:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+nó sẽ in ra:
 
 ```
 gif
@@ -291,21 +289,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Lưu ý những điểm sau về vòng lặp:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Cấu trúc là `for` ...biến... `in` ...danh_sách... `; do` ...phần_thân... `; done`
+2. Danh sách các mục mà vòng lặp sẽ xử lý (trong ví dụ này là các từ `gif`, `jpg` và `png`).
+3. Biến dùng để theo dõi mục mà vòng lặp đang xử lý (trong ví dụ này là `filetype`).
+4. Phần thân của vòng lặp thực hiện xử lý (trong ví dụ này là `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Lưu ý rằng phần thân dùng `$filetype` để lấy giá trị của biến thay vì chỉ `filetype`,
+giống như bạn vẫn làm với bất kỳ biến shell nào khác.
+Cũng lưu ý vị trí của dấu chấm phẩy:
+dấu thứ nhất nằm giữa danh sách và từ khóa `do`,
+và dấu thứ hai nằm giữa phần thân và từ khóa `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Sửa vòng lặp để nó in ra:
 
 ```
 docx
@@ -313,10 +311,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Vui lòng dùng `filetype` làm tên biến vòng lặp.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Hãy dùng cấu trúc mã trong phần giới thiệu, nhưng đổi loại tệp hình ảnh thành loại tệp tài liệu.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +333,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Bạn đã gọi `for` chưa?'),
+      has_code('filetype', incorrect_msg='Bạn đã sử dụng `filetype` làm biến vòng lặp chưa?'),
+      has_code('in', incorrect_msg='Bạn đã sử dụng `in` trước danh sách các loại tệp chưa?'),
+      has_code('docx odt pdf', incorrect_msg='Bạn đã lặp qua `docx`, `odt` và `pdf` theo thứ tự đó chưa?'),
+      has_code(r'pdf\s*;', incorrect_msg='Bạn đã đặt dấu chấm phẩy sau phần tử cuối cùng của vòng lặp chưa?'),
+      has_code(r';\s*do', incorrect_msg='Bạn đã sử dụng `do` sau dấu chấm phẩy đầu tiên chưa?'),
+      has_code('echo', incorrect_msg='Bạn đã gọi `echo` chưa?'),
+      has_code(r'\$filetype', incorrect_msg='Bạn đã echo `$filetype` chưa?'),
+      has_code(r'filetype\s*;', incorrect_msg='Bạn đã đặt dấu chấm phẩy sau thân vòng lặp chưa?'),
+      has_code('; done', incorrect_msg='Bạn đã kết thúc với `done` chưa?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Thật tuyệt vời khi sử dụng vòng lặp! Vòng lặp rất tuyệt vời nếu bạn muốn làm cùng một việc hàng trăm hoặc hàng nghìn lần.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Làm sao lặp lại một lệnh cho từng tệp?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +359,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Bạn luôn có thể gõ trực tiếp tên các tệp muốn xử lý khi viết vòng lặp,
+nhưng thường thì dùng ký tự đại diện sẽ tốt hơn.
+Hãy thử chạy vòng lặp này trong console:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Vòng lặp in ra:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +376,14 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+vì shell sẽ mở rộng `seasonal/*.csv` thành danh sách bốn tên tệp
+trước khi chạy vòng lặp.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Sửa biểu thức ký tự đại diện thành `people/*`
+để vòng lặp in tên các tệp trong thư mục `people`
+bất kể chúng có hay không có phần đuôi nào.
+Vui lòng dùng `filename` làm tên biến vòng lặp của bạn.
 
 `@hint`
 
@@ -407,25 +405,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Bạn đã gọi `for` chưa?'),
+      has_code('filename', incorrect_msg='Bạn đã sử dụng `filename` làm biến vòng lặp chưa?'),
+      has_code('in', incorrect_msg='Bạn đã sử dụng `in` trước danh sách các loại tệp chưa?'),
+      has_code('people/\*', incorrect_msg='Bạn đã chỉ định danh sách các tệp với `people/*` chưa?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Bạn đã đặt dấu chấm phẩy sau danh sách các tệp chưa?'),
+      has_code(r';\s*do', incorrect_msg='Bạn đã sử dụng `do` sau dấu chấm phẩy đầu tiên chưa?'),
+      has_code('echo', incorrect_msg='Bạn đã gọi `echo` chưa?'),
+      has_code(r'\$filename', incorrect_msg='Bạn đã echo `$filename` chưa?'),
+      has_code(r'filename\s*;', incorrect_msg='Bạn đã đặt dấu chấm phẩy sau thân vòng lặp chưa?'),
+      has_code('; done', incorrect_msg='Bạn đã kết thúc với `done` chưa?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Vòng lặp Loopy! Ký tự đại diện và vòng lặp tạo thành một sự kết hợp mạnh mẽ.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Làm sao để lưu lại tên của một nhóm tệp?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +431,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+Mọi người thường gán một biến bằng biểu thức wildcard để lưu danh sách tên tệp.
+Ví dụ,
+nếu bạn định nghĩa `datasets` như sau:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+bạn có thể hiển thị tên các tệp sau đó bằng:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Cách này giúp đỡ phải gõ nhiều và giảm khả năng mắc lỗi.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Nếu bạn chạy hai lệnh này trong thư mục home của mình,
+chúng sẽ in ra bao nhiêu dòng?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +458,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Không có: vì `files` được định nghĩa ở một dòng riêng, nên nó không có giá trị ở dòng thứ hai.
+- Một: từ "files".
+- Bốn: tên của cả bốn tệp dữ liệu theo mùa.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Hãy nhớ rằng `X` khi đứng một mình chỉ là "X", còn `$X` là giá trị của biến `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +472,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Không: bạn không cần phải định nghĩa một biến trên cùng một dòng mà bạn sử dụng nó."
+err2 = "Không: ví dụ này định nghĩa và sử dụng biến `files` trong cùng một shell."
+correct3 = "Chính xác. Lệnh này tương đương với `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Tên biến và giá trị của biến
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +488,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Một lỗi thường gặp là quên đặt `$` trước tên biến.
+Khi làm vậy,
+shell sẽ dùng chính cái tên bạn gõ
+thay vì giá trị của biến đó.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Một lỗi phổ biến khác với người dùng có kinh nghiệm là gõ sai tên biến.
+Ví dụ,
+nếu bạn định nghĩa `datasets` như sau:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+rồi gõ:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+thì shell sẽ không in gì cả,
+vì `datsets` (thiếu chữ "a" thứ hai) chưa được định nghĩa.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Nếu bạn chạy hai lệnh sau trong thư mục home của mình,
+đầu ra sẽ in ra gì?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Hãy đọc kỹ phần đầu của vòng lặp trước khi trả lời.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Hãy nhớ rằng `X` tự thân chỉ là "X", còn `$X` mới là giá trị của biến `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [Một dòng: từ "files".]
+- Bốn dòng: tên của cả bốn tệp dữ liệu theo mùa.
+- Bốn dòng trống: biến `f` không được gán giá trị.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Đúng: vòng lặp dùng `files` thay vì `$files`, nên danh sách chỉ gồm từ "files".
+- Không: vòng lặp dùng `files` thay vì `$files`, nên danh sách gồm từ "files" chứ không phải phần mở rộng của `files`.
+- Không: biến `f` được `for` tự động gán trong vòng lặp.
 
 ---
 
-## How can I run many commands in a single loop?
+## Làm sao chạy nhiều lệnh trong một vòng lặp duy nhất?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +545,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+In tên tệp rất hữu ích để gỡ lỗi,
+nhưng mục đích thực sự của vòng lặp là xử lý nhiều tệp.
+Vòng lặp này in ra dòng thứ hai của mỗi tệp dữ liệu:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Nó có cùng cấu trúc với các vòng lặp bạn đã thấy trước đó:
+điểm khác biệt là phần thân của nó là một pipeline gồm hai lệnh thay vì một lệnh đơn.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Hãy viết một vòng lặp in ra mục cuối cùng của tháng 7 năm 2017 (`2017-07`) trong mỗi tệp seasonal. Vòng lặp nên cho đầu ra tương tự như:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+nhưng áp dụng riêng cho **_từng_** tệp seasonal. Vui lòng dùng `file` làm tên biến vòng lặp, và nhớ lặp qua danh sách tệp `seasonal/*.csv` (_thay vì 'seasonal/winter.csv' như trong ví dụ_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Phần thân vòng lặp là lệnh grep được nêu trong phần hướng dẫn, với `seasonal/winter.csv` được thay bằng `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +583,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Bạn đã gọi `for` chưa?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Bạn đã sử dụng `file` làm biến vòng lặp chưa?'),
+      has_code('in', incorrect_msg='Bạn đã sử dụng `in` trước danh sách các tệp chưa?'),
+      has_code('seasonal/\*', incorrect_msg='Bạn đã chỉ định danh sách các tệp với `seasonal/*` chưa?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Bạn đã đặt dấu chấm phẩy sau danh sách các tệp chưa?'),
+      has_code(r';\s*do', incorrect_msg='Bạn đã sử dụng `do` sau dấu chấm phẩy đầu tiên chưa?'),
+      has_code('grep', incorrect_msg='Bạn đã gọi `grep` chưa?'),
+      has_code('2017-07', incorrect_msg='Bạn đã khớp với `2017-07` chưa?'),
+      has_code(r'\$file', incorrect_msg='Bạn đã sử dụng `$file` làm tên biến vòng lặp chưa?'),
+      has_code(r'file\s*|', incorrect_msg='Bạn đã sử dụng một pipe để kết nối lệnh thứ hai của bạn chưa?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Bạn đã sử dụng `tail -n 1` để in mục cuối cùng của mỗi lần tìm kiếm trong lệnh thứ hai của bạn chưa?'),
+      has_code('; done', incorrect_msg='Bạn đã kết thúc với `done` chưa?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Vòng lặp loopy! Ký tự đại diện và vòng lặp tạo thành một sự kết hợp mạnh mẽ.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Vì sao không nên dùng dấu cách trong tên tệp?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +615,23 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Khi dùng trình quản lý tệp đồ họa, đặt tên tệp nhiều từ như `July 2017.csv` vừa dễ vừa hợp lý.
+Tuy nhiên,
+điều này gây rắc rối khi bạn làm việc trong shell.
+Ví dụ,
+giả sử bạn muốn đổi tên `July 2017.csv` thành `2017 July data.csv`.
+Bạn không thể gõ:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+vì shell sẽ nghĩ rằng bạn đang cố di chuyển
+bốn tệp tên là `July`, `2017.csv`, `2017`, và `July` (lần nữa)
+vào một thư mục tên `data.csv`.
+Thay vào đó,
+bạn phải đặt tên tệp trong dấu nháy
+để shell coi mỗi tên là một tham số đơn lẻ:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +639,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Nếu bạn có hai tệp tên `current.csv` và `last year.csv`
+(có dấu cách trong tên)
+và bạn gõ:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+thì chuyện gì sẽ xảy ra:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Bạn sẽ nghĩ điều gì sẽ xảy ra nếu ai đó đưa bạn lệnh này mà bạn không biết trong thư mục đang có những tệp nào?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Shell sẽ in thông báo lỗi vì `last` và `year.csv` không tồn tại.
+- Shell sẽ xóa `current.csv`.
+- [Cả hai ý trên.]
+- Không có gì xảy ra.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Đúng, nhưng chưa phải tất cả.
+- Đúng, nhưng chưa phải tất cả.
+- Chính xác. Bạn có thể dùng dấu nháy đơn, `'`, hoặc dấu nháy kép, `"`, để bao quanh tên tệp.
+- Tiếc là không đúng.
 
 ---
 
-## How can I do many things in a single loop?
+## Làm sao để thực hiện nhiều việc trong một vòng lặp duy nhất?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +674,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Các vòng lặp bạn đã thấy đến giờ chỉ có một lệnh hoặc một pipeline trong thân,
+nhưng một vòng lặp có thể chứa bao nhiêu lệnh cũng được.
+Để cho shell biết lệnh này kết thúc và lệnh kế tiếp bắt đầu ở đâu,
+bạn phải ngăn cách chúng bằng dấu chấm phẩy:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +696,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Giả sử bạn quên dấu chấm phẩy giữa `echo` và `head` trong vòng lặp trước,
+để rồi yêu cầu shell chạy:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Shell sẽ làm gì?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- In ra một thông báo lỗi.
+- In một dòng cho mỗi trong bốn tệp.
+- In một dòng cho `autumn.csv` (tệp đầu tiên).
+- In dòng cuối của mỗi tệp.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Bạn có thể pipe đầu ra của `echo` vào `tail`.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +721,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Không: vòng lặp sẽ chạy, chỉ là nó sẽ không thực hiện điều gì có ý nghĩa."
+correct2 = "Đúng: `echo` tạo ra một dòng bao gồm tên tệp hai lần, sau đó `tail` sao chép."
+err3 = "Không: vòng lặp chạy một lần cho mỗi trong bốn tên tệp."
+err4 = "Không: đầu vào của `tail` là đầu ra của `echo` cho mỗi tên tệp."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

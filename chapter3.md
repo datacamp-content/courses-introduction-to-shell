@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Kết hợp công cụ
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Sức mạnh thực sự của Unix shell không nằm ở từng lệnh riêng lẻ, mà ở khả năng
+  kết hợp chúng dễ dàng để làm những việc mới. Chương này sẽ hướng dẫn bạn tận
+  dụng sức mạnh đó để chọn dữ liệu mong muốn, và giới thiệu các lệnh để sắp xếp
+  giá trị và loại bỏ trùng lặp.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Làm sao lưu đầu ra của một lệnh vào tệp?
 ---
 
-## How can I store a command's output in a file?
+## Làm thế nào để lưu đầu ra của một lệnh vào tệp?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Tất cả các công cụ bạn đã thấy đến giờ đều cho phép bạn chỉ định tệp đầu vào.
+Hầu hết không có tùy chọn đặt tên tệp đầu ra vì họ không cần.
+Thay vào đó,
+bạn có thể dùng **chuyển hướng (redirection)** để lưu đầu ra của bất kỳ lệnh nào đến nơi bạn muốn.
+Nếu bạn chạy lệnh này:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+nó sẽ in 5 dòng đầu tiên của dữ liệu mùa hè lên màn hình.
+Nếu thay vào đó bạn chạy lệnh này:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+sẽ không có gì xuất hiện trên màn hình.
+Thay vào đó,
+đầu ra của `head` được ghi vào một tệp mới tên là `top.csv`.
+Bạn có thể xem nội dung của tệp đó bằng `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Dấu lớn hơn `>` cho shell biết cần chuyển hướng đầu ra của `head` vào một tệp.
+Nó không phải là một phần của lệnh `head`;
+thay vào đó,
+nó hoạt động với mọi lệnh shell tạo ra đầu ra.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Kết hợp `tail` với chuyển hướng để lưu 5 dòng cuối của `seasonal/winter.csv` vào một tệp tên `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Dùng `tail -n 5` để lấy 5 dòng cuối cùng.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +67,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Dòng `%s` phải có trong tệp `last.csv`, nhưng không có. Hãy chuyển hướng đầu ra của `tail -n 5 seasonal/winter.csv` đến `last.csv` với `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` có quá nhiều dòng. Bạn đã sử dụng cờ `-n 5` với `tail` chưa?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Tuyệt! Hãy thực hành thêm một chút nữa!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Làm cách nào dùng đầu ra của lệnh này làm đầu vào cho lệnh khác?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +89,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Giả sử bạn muốn lấy các dòng ở giữa một tệp.
+Cụ thể hơn,
+giả sử bạn muốn lấy các dòng 3–5 từ một trong các tệp dữ liệu của chúng ta.
+Bạn có thể bắt đầu bằng cách dùng `head` để lấy 5 dòng đầu tiên
+rồi chuyển hướng đầu ra đó vào một tệp,
+sau đó dùng `tail` để chọn 3 dòng cuối:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Kiểm tra nhanh cho thấy đây đúng là các dòng 3–5 của tệp gốc,
+vì đó chính là 3 dòng cuối trong 5 dòng đầu tiên.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +118,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Chọn hai dòng cuối cùng từ `seasonal/winter.csv`
+và lưu vào một tệp tên `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Dùng `tail` để chọn các dòng và `>` để chuyển hướng đầu ra của `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +132,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Dòng `%s` phải có trong tệp `bottom.csv`, nhưng không có. Hãy chuyển hướng đầu ra của `tail -n 2 seasonal/winter.csv` đến `bottom.csv` với `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` có quá nhiều dòng. Bạn đã sử dụng cờ `-n 2` với `tail` chưa?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +152,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Chọn dòng đầu tiên từ `bottom.csv`
+để lấy dòng áp chót của tệp gốc.
 
 `@hint`
-Use `head` to select the line you want.
+Dùng `head` để chọn dòng bạn cần.
 
 `@solution`
 ```{shell}
@@ -169,17 +168,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Có điều gì đó không ổn với tệp `bottom.csv`. Hãy chắc chắn rằng bạn không thay đổi nó!"),
+    has_expr_output(strict=True, incorrect_msg="Bạn đã sử dụng `head` đúng cách trên `bottom.csv` chưa? Hãy chắc chắn sử dụng cờ `-n` đúng cách.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("Làm tốt lắm. Hãy chuyển sang bài tập tiếp theo để tìm hiểu về những cách tốt hơn để kết hợp các lệnh.")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Kết hợp các lệnh theo cách nào hiệu quả hơn?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +186,35 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Kết hợp các lệnh bằng chuyển hướng có hai nhược điểm:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Nó để lại rất nhiều tệp trung gian (như `top.csv`).
+2. Các lệnh để tạo ra kết quả cuối cùng bị rải rác qua nhiều dòng trong lịch sử.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Shell cung cấp một công cụ khác giải quyết cả hai vấn đề này cùng lúc, gọi là **pipe**.
+Một lần nữa,
+bắt đầu bằng cách chạy `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Thay vì gửi đầu ra của `head` vào một tệp,
+thêm một dấu gạch dọc và lệnh `tail` *không* có tên tệp:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Ký hiệu pipe cho shell biết dùng đầu ra của lệnh bên trái
+làm đầu vào cho lệnh bên phải.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Dùng `cut` để chọn tất cả tên răng từ cột 2 của tệp phân tách bằng dấu phẩy `seasonal/summer.csv`, rồi pipe kết quả sang `grep` với chế độ đối sánh đảo ngược để loại trừ dòng tiêu đề chứa từ "Tooth". *`cut` và `grep` đã được trình bày chi tiết ở Chương 2, lần lượt trong bài tập 8 và 11.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Phần đầu của lệnh có dạng `cut -d field_delimiter -f column_number filename`.
+- Phần thứ hai của lệnh có dạng `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +230,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Bạn đã chuyển kết quả của `cut -d , -f 2 seasonal/summer.csv` vào `grep -v Tooth` với `|` chưa?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Bạn đã loại trừ dòng tiêu đề `"Tooth"` bằng cách sử dụng `grep` chưa?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Thao tác chuyển đổi hoàn hảo! Đây có thể là lần đầu tiên bạn sử dụng `|`, nhưng chắc chắn không phải là lần cuối cùng!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Làm sao để kết hợp nhiều lệnh?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +246,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Bạn có thể xâu chuỗi bất kỳ số lượng lệnh nào lại với nhau.
+Ví dụ,
+lệnh này:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+sẽ:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. chọn cột đầu tiên từ dữ liệu mùa xuân;
+2. loại bỏ dòng tiêu đề chứa từ "Date"; và
+3. chọn 10 dòng dữ liệu thực đầu tiên.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+Trong bài trước, bạn đã dùng lệnh sau để lấy tất cả tên răng ở cột 2 của `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Mở rộng pipeline này với lệnh `head` để chỉ lấy duy nhất tên răng đầu tiên.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Sao chép và dán đoạn mã trong phần hướng dẫn, thêm một dấu ống, rồi gọi `head` với cờ `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +287,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Bạn đã sử dụng `|` để mở rộng pipeline với lệnh `head` chưa? Hãy chắc chắn đặt cờ `-n` đúng cách."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Bạn đã sử dụng `|` để mở rộng pipeline với lệnh `head` chưa?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Liên kết vui vẻ! Bằng cách liên kết nhiều lệnh lại với nhau, bạn có thể xây dựng các pipeline xử lý dữ liệu mạnh mẽ.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Làm sao đếm số bản ghi trong một tệp?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +304,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Lệnh `wc` (viết tắt của "word count") in ra số **k**ý tự, **t**ừ và **d**òng trong một tệp.
+Bạn có thể bắt nó chỉ in một trong các thông tin này lần lượt bằng `-c`, `-w`, hoặc `-l`.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Hãy đếm có bao nhiêu bản ghi trong `seasonal/spring.csv` có ngày thuộc tháng 7 năm 2017 (`2017-07`). 
+- Để làm điều này, dùng `grep` với một phần của ngày để chọn các dòng, rồi pipe kết quả này sang `wc` với cờ phù hợp để đếm số dòng.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Dùng `head seasonal/spring.csv` để xem lại định dạng ngày tháng.
+- Phần đầu của lệnh có dạng `grep thing_to_match filename`.
+- Sau dấu pipe `|`, gọi `wc` với cờ `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +333,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Bạn đã gọi `grep` chưa?"),
+      has_code("2017-07", incorrect_msg = "Bạn đã tìm kiếm `2017-07` chưa?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Bạn đã tìm kiếm tệp `seasonal/spring.csv` chưa?"),
+      has_code("|", incorrect_msg = "Bạn đã sử dụng `|` để chuyển tiếp đến `wc` chưa?"),      
+      has_code("wc", incorrect_msg = "Bạn đã gọi `wc` chưa?"),
+      has_code("-l", incorrect_msg = "Bạn đã đếm số dòng với `-l` chưa?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Đếm cẩn thận! Xác định lượng dữ liệu bạn có là bước đầu tiên tuyệt vời trong bất kỳ phân tích dữ liệu nào.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Làm sao chỉ định nhiều tệp cùng lúc?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +355,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Hầu hết các lệnh shell sẽ chạy trên nhiều tệp nếu bạn đưa cho chúng nhiều tên tệp.
+Ví dụ,
+bạn có thể lấy cột đầu tiên từ tất cả các tệp dữ liệu theo mùa cùng lúc như sau:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Nhưng việc gõ lặp đi lặp lại nhiều tên tệp là một ý tưởng tệ:
+vừa tốn thời gian,
+và sớm muộn gì bạn cũng sẽ bỏ sót một tệp hoặc lặp lại tên tệp.
+Để giúp bạn làm việc hiệu quả hơn,
+shell cho phép dùng **wildcard** để chỉ định một danh sách tệp bằng một biểu thức duy nhất.
+Wildcard phổ biến nhất là `*`,
+nghĩa là "khớp không hoặc nhiều ký tự".
+Dùng ký tự này,
+chúng ta có thể rút gọn lệnh `cut` ở trên thành:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+hoặc:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Viết một lệnh duy nhất dùng `head` để lấy ba dòng đầu tiên từ cả `seasonal/spring.csv` và `seasonal/summer.csv`, tổng cộng sáu dòng dữ liệu, nhưng không lấy từ các tệp dữ liệu autumn hoặc winter.
+Hãy dùng wildcard thay vì gõ đầy đủ tên các tệp.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Lệnh có dạng `head -n number_of_lines filename_pattern`.
+- Bạn có thể khớp các tệp trong thư mục `a`, bắt đầu bằng `b`, bằng cách dùng `a/b*`, chẳng hạn.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +405,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Bạn có thể sử dụng `seasonal/s*` để chọn `seasonal/spring.csv` và `seasonal/summer.csv`. Hãy chắc chắn chỉ bao gồm ba dòng đầu tiên của mỗi tệp với cờ `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Đừng bao gồm đầu ra cho `seasonal/autumn.csv`. Bạn có thể sử dụng `seasonal/s*` để chọn `seasonal/spring.csv` và `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Đừng bao gồm đầu ra cho `seasonal/winter.csv`. Bạn có thể sử dụng `seasonal/s*` để chọn `seasonal/spring.csv` và `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Công việc wildcard tuyệt vời! Điều này trở nên quan trọng hơn nếu thư mục của bạn chứa hàng trăm hoặc hàng nghìn tệp.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Mình còn có thể dùng những ký tự đại diện nào khác?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +422,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Shell còn có những ký tự đại diện khác,
+mặc dù chúng ít dùng hơn:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` khớp một ký tự đơn, nên `201?.txt` sẽ khớp `2017.txt` hoặc `2018.txt`, nhưng không khớp `2017-01.txt`.
+- `[...]` khớp bất kỳ một ký tự nào bên trong dấu ngoặc vuông, nên `201[78].txt` khớp `2017.txt` hoặc `2018.txt`, nhưng không khớp `2016.txt`.
+- `{...}` khớp bất kỳ mẫu nào, phân tách bằng dấu phẩy, bên trong dấu ngoặc nhọn, nên `{*.txt, *.csv}` khớp mọi tệp có tên kết thúc bằng `.txt` hoặc `.csv`, nhưng không khớp các tệp có tên kết thúc bằng `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Biểu thức nào sẽ khớp `singh.pdf` và `johel.txt` nhưng KHÔNG khớp `sandhu.pdf` hoặc `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Lần lượt so khớp từng biểu thức với từng tên tệp.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +443,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Không đúng: `.pdf` và `.txt` không phải là tên tệp.
+- Không đúng: biểu thức này sẽ khớp `sandhu.pdf`.
+- Không đúng: biểu thức trong dấu ngoặc vuông chỉ khớp MỘT ký tự, không phải cả từ.
+- Chính xác!
 
 ---
 
-## How can I sort lines of text?
+## Làm thế nào để sắp xếp các dòng văn bản?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +458,19 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Đúng như tên gọi, `sort` dùng để sắp xếp dữ liệu. Mặc định, lệnh này sắp xếp theo thứ tự bảng chữ cái tăng dần, nhưng bạn có thể dùng các cờ `-n` và `-r` để sắp xếp theo số và đảo ngược thứ tự đầu ra. Cờ `-b` yêu cầu bỏ qua khoảng trắng ở đầu dòng và `-f` yêu cầu **f**old chữ hoa/thường (tức là không phân biệt hoa thường). Các pipeline thường dùng `grep` để loại bỏ các bản ghi không mong muốn rồi dùng `sort` để sắp xếp các bản ghi còn lại.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Bạn còn nhớ cách kết hợp `cut` và `grep` để lấy tất cả tên răng ở cột 2 của `seasonal/summer.csv` chứ?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Bắt đầu từ “công thức” này, hãy sắp xếp tên các răng trong `seasonal/winter.csv` (không phải `summer.csv`) theo thứ tự bảng chữ cái giảm dần. Để làm điều này, hãy mở rộng pipeline với một bước `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Sao chép và dán lệnh trong phần hướng dẫn, đổi tên tệp, thêm một pipe, rồi gọi `sort` với cờ `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +489,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Bạn đã gọi `cut` chưa?"),
+      has_code("-d", incorrect_msg = "Bạn đã chỉ định một dấu phân cách trường với `-d` chưa?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Bạn đã lấy dữ liệu từ tệp `seasonal/winter.csv` chưa?"),
+      has_code("|", incorrect_msg = "Bạn đã sử dụng `|` để chuyển từ `cut` sang `grep` rồi `sort` chưa?"),      
+      has_code("grep", incorrect_msg = "Bạn đã gọi `grep` chưa?"),
+      has_code("-v", incorrect_msg = "Bạn đã đảo ngược kết quả khớp với `-v` chưa?"),
+      has_code("Tooth", incorrect_msg = "Bạn đã tìm kiếm `Tooth` chưa?"),
+      has_code("sort", incorrect_msg = "Bạn đã gọi `sort` chưa?"),
+      has_code("-r", incorrect_msg = "Bạn đã đảo ngược thứ tự sắp xếp với `-r` chưa?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Đã sắp xếp! `sort` có nhiều cách sử dụng. Ví dụ, chuyển `sort -n` sang `head` sẽ hiển thị cho bạn các giá trị lớn nhất.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Làm thế nào để loại bỏ các dòng trùng lặp?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +514,11 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Một lệnh khác thường dùng với `sort` là `uniq`,
+chức năng của nó là loại bỏ các dòng trùng lặp.
+Cụ thể hơn,
+nó loại bỏ các dòng trùng lặp đứng cạnh nhau.
+Nếu một tệp chứa:
 
 ```
 2017-07-03
@@ -535,14 +527,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+thì `uniq` sẽ tạo ra:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+nhưng nếu tệp chứa:
 
 ```
 2017-07-03
@@ -551,33 +543,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+thì `uniq` sẽ in cả bốn dòng.
+Lý do là `uniq` được thiết kế để làm việc với các tệp rất lớn.
+Để loại bỏ các dòng trùng lặp không liền kề khỏi một tệp,
+nó sẽ phải giữ toàn bộ tệp trong bộ nhớ
+(hoặc ít nhất là
+mọi dòng duy nhất đã thấy cho đến lúc đó).
+Bằng cách chỉ loại bỏ các bản sao liền kề,
+nó chỉ cần giữ dòng duy nhất gần nhất trong bộ nhớ.
 
 `@instructions`
-Write a pipeline to:
+Viết một pipeline để:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- lấy cột thứ hai từ `seasonal/winter.csv`,
+- loại bỏ từ "Tooth" khỏi đầu ra để chỉ còn tên răng được hiển thị,
+- sắp xếp đầu ra để mọi lần xuất hiện của cùng một tên răng nằm cạnh nhau; và
+- hiển thị mỗi tên răng một lần kèm số lần xuất hiện.
 
-The start of your pipeline is the same as the previous exercise:
+Phần bắt đầu của pipeline giống bài trước:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Mở rộng nó với lệnh `sort`, và dùng `uniq -c` để hiển thị các dòng duy nhất kèm số lần xuất hiện của mỗi dòng, thay vì dùng `uniq` và `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Sao chép và dán lệnh trong phần hướng dẫn, pipe sang `sort` không dùng cờ, rồi pipe tiếp sang `uniq` với cờ `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +589,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Bạn nên bắt đầu từ lệnh này: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Bây giờ hãy mở rộng nó!"),
+            has_code('\|\s+sort', incorrect_msg="Bạn đã mở rộng lệnh với `| sort` chưa?"),
+            has_code('\|\s+uniq', incorrect_msg="Bạn đã mở rộng lệnh với `| uniq` chưa?"),
+            has_code('-c', incorrect_msg="Bạn đã bao gồm số đếm với `-c` chưa?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Tuyệt vời! Sau tất cả công việc này trên một đường ống, sẽ rất tốt nếu chúng ta có thể lưu trữ kết quả, phải không?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Làm sao lưu đầu ra của một pipeline?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +609,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Shell cho phép bạn chuyển hướng đầu ra của một chuỗi lệnh được nối bằng pipe:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Tuy nhiên, `>` phải xuất hiện ở cuối pipeline:
+nếu bạn cố dùng nó ở giữa, như thế này:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+thì toàn bộ đầu ra từ `cut` sẽ được ghi vào `teeth-only.txt`,
+nên không còn gì cho `grep`
+và nó sẽ chờ vô hạn để nhận đầu vào.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Điều gì xảy ra nếu chúng ta đặt chuyển hướng ở đầu một pipeline như sau:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Đầu ra của lệnh được chuyển hướng vào tệp như bình thường.]
+- Shell báo lỗi.
+- Shell chờ đầu vào vô thời hạn.
 
 `@hint`
-Try it out in the shell.
+Hãy thử chạy ngay trong shell.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +649,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Chính xác!', 'Không; thực tế là shell có thể thực thi điều này.', 'Không; thực tế là shell có thể thực thi điều này.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Làm thế nào để dừng một chương trình đang chạy?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +662,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Các lệnh và script bạn đã chạy đến giờ đều thực thi rất nhanh,
+nhưng một số tác vụ có thể mất hàng phút, hàng giờ, thậm chí vài ngày để hoàn thành.
+Bạn cũng có thể lỡ đặt chuyển hướng ở giữa một pipeline,
+khiến nó treo.
+Nếu bạn quyết định không muốn chương trình tiếp tục chạy nữa,
+bạn có thể nhấn `Ctrl` + `C` để kết thúc.
+Cách viết này thường được ghi là `^C` trong tài liệu Unix;
+chú ý rằng chữ 'c' có thể là chữ thường.
 
 `@instructions`
-Run the command:
+Chạy lệnh:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+không kèm đối số (để nó chờ đầu vào sẽ không bao giờ đến)
+rồi dừng lại bằng cách nhấn `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Chỉ cần gõ head, nhấn Enter và thoát chương trình đang chạy bằng `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +696,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Bạn đã sử dụng `head` chưa?")
 ```
 
 ---
 
-## Wrapping up
+## Tổng kết
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +709,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Để tổng kết,
+bạn sẽ xây dựng một pipeline để tìm xem trong các tệp dữ liệu theo mùa, tệp ngắn nhất có bao nhiêu bản ghi.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +726,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Dùng `wc` với các tham số phù hợp để liệt kê số dòng trong tất cả các tệp dữ liệu theo mùa.
+(Hãy dùng ký tự đại diện cho tên tệp thay vì gõ thủ công từng tên.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Dùng `-l` để chỉ liệt kê số dòng và `*` để khớp tên tệp.
 
 `@solution`
 ```{shell}
@@ -753,9 +745,9 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Bạn đã gọi `wc` chưa?"),
+      has_code("-l", incorrect_msg = "Bạn đã đếm số dòng với `-l` chưa?"),
+      has_code("seasonal/\*", incorrect_msg = "Bạn đã lấy dữ liệu từ tất cả các tệp `seasonal/*` chưa?")
     )
   )
 )
@@ -771,7 +763,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Thêm một lệnh nữa vào lệnh trước đó bằng một pipe để loại bỏ dòng chứa từ "total".
 
 `@hint`
 
@@ -789,13 +781,13 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Bạn đã gọi `wc` chưa?"),
+      has_code("-l", incorrect_msg = "Bạn đã đếm số dòng với `-l` chưa?"),
+      has_code("seasonal/\*", incorrect_msg = "Bạn đã lấy dữ liệu từ tất cả các tệp `seasonal/*` chưa?"),
+      has_code("|", incorrect_msg = "Bạn đã sử dụng `|` để chuyển từ `wc` sang `grep` chưa?"),      
+      has_code("grep", incorrect_msg = "Bạn đã gọi `grep` chưa?"),
+      has_code("-v", incorrect_msg = "Bạn đã đảo ngược kết quả khớp với `-v` chưa?"),
+      has_code("total", incorrect_msg = "Bạn đã tìm kiếm `total` chưa?")
     )
   )
 )
@@ -811,11 +803,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Thêm hai bước nữa vào pipeline, dùng `sort -n` và `head -n 1` để tìm tệp có ít dòng nhất.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Dùng cờ `-n` của `sort` để sắp xếp theo số.
+- Dùng cờ `-n` của `head` để giới hạn còn 1 dòng.
 
 `@solution`
 ```{shell}
@@ -830,19 +822,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Bạn đã gọi `wc` chưa?"),
+      has_code("-l", incorrect_msg = "Bạn đã đếm số dòng với `-l` chưa?"),
+      has_code("seasonal/\*", incorrect_msg = "Bạn đã lấy dữ liệu từ tất cả các tệp `seasonal/*` chưa?"),
+      has_code("|", incorrect_msg = "Bạn đã sử dụng `|` để chuyển từ `wc` sang `grep` sang `sort` sang `head` chưa?"),      
+      has_code("grep", incorrect_msg = "Bạn đã gọi `grep` chưa?"),
+      has_code("-v", incorrect_msg = "Bạn đã đảo ngược kết quả khớp với `-v` chưa?"),
+      has_code("total", incorrect_msg = "Bạn đã tìm kiếm `total` chưa?"),
+      has_code("sort", incorrect_msg = "Bạn đã gọi `sort` chưa?"),
+      has_code("-n", incorrect_msg = "Bạn đã chỉ định số dòng cần giữ lại với `-n` chưa?"),
+      has_code("1", incorrect_msg = "Bạn đã chỉ định 1 dòng cần giữ lại với `-n 1` chưa?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Tuyệt vời! Hóa ra `autumn.csv` là tệp có ít dòng nhất. Hãy chuyển sang chương 4 để tìm hiểu thêm về xử lý hàng loạt!")
 ```

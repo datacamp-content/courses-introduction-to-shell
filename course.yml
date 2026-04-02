@@ -1,19 +1,19 @@
-title: Introduction to Shell
+title: Nhập môn Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Dòng lệnh Unix đã tồn tại và phát triển suốt gần 50 năm vì nó cho phép bạn làm
+  những việc phức tạp chỉ với vài phím bấm. Đôi khi được gọi là "chất keo phổ
+  quát của lập trình", nó giúp bạn kết hợp các chương trình sẵn có theo cách
+  mới, tự động hóa tác vụ lặp lại, và chạy chương trình trên các cụm máy hoặc
+  đám mây ở cách nửa vòng trái đất. Khóa học này sẽ giới thiệu các yếu tố cốt
+  lõi và cách sử dụng chúng hiệu quả.
 
 
-  The course glossary can be found on the right in the resources section.
+  Bảng thuật ngữ của khóa học nằm ở bên phải trong mục tài nguyên.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Để nhận tín chỉ CPE, bạn cần hoàn thành khóa học và đạt ít nhất 70% ở bài đánh
+  giá đủ điều kiện. Bạn có thể đi tới bài đánh giá bằng cách nhấp vào khung
+  thông tin về tín chỉ CPE ở bên phải.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
