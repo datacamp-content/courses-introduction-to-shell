@@ -1,16 +1,17 @@
 ---
-title: Combining tools
+title: Menggabungkan alat
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Kekuatan sebenarnya dari shell Unix tidak terletak pada perintah-perintah
+  individual, melainkan pada betapa mudahnya menggabungkannya untuk melakukan
+  hal baru. Bab ini akan menunjukkan cara memanfaatkan kekuatan tersebut untuk
+  memilih data yang Anda inginkan, serta memperkenalkan perintah untuk
+  mengurutkan nilai dan menghapus duplikat.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Bagaimana cara menyimpan keluaran perintah ke dalam sebuah berkas?
 ---
 
-## How can I store a command's output in a file?
+## Bagaimana cara menyimpan keluaran perintah ke dalam sebuah file?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +19,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Semua alat yang Anda lihat sejauh ini memungkinkan Anda menyebutkan file masukan.
+Kebanyakan tidak memiliki opsi untuk menamai file keluaran karena tidak membutuhkannya.
+Sebagai gantinya,
+Anda dapat menggunakan **pengalihan (redirection)** untuk menyimpan keluaran perintah apa pun ke mana pun Anda mau.
+Jika Anda menjalankan perintah ini:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+perintah tersebut menampilkan 5 baris pertama data musim panas di layar.
+Jika sebagai gantinya Anda menjalankan perintah ini:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+tidak ada yang muncul di layar.
+Sebagai gantinya,
+keluaran `head` dimasukkan ke file baru bernama `top.csv`.
+Anda dapat melihat isi file tersebut menggunakan `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Tanda lebih besar `>` memberi tahu shell untuk mengalihkan keluaran `head` ke sebuah file.
+Tanda itu bukan bagian dari perintah `head`;
+sebaliknya,
+itu bekerja dengan setiap perintah shell yang menghasilkan keluaran.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Gabungkan `tail` dengan pengalihan untuk menyimpan 5 baris terakhir dari `seasonal/winter.csv` ke dalam file bernama `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Gunakan `tail -n 5` untuk mengambil 5 baris terakhir.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +68,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Baris `%s` seharusnya ada di dalam file `last.csv`, tetapi tidak ada. Arahkan keluaran dari `tail -n 5 seasonal/winter.csv` ke `last.csv` dengan `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` memiliki terlalu banyak baris. Apakah Anda menggunakan bendera `-n 5` dengan `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Bagus! Mari berlatih lebih banyak lagi!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Bagaimana saya dapat menggunakan keluaran sebuah perintah sebagai masukan?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +90,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Misalkan Anda ingin mengambil baris dari bagian tengah sebuah berkas.
+Lebih khusus lagi,
+misalkan Anda ingin mengambil baris ke-3 hingga ke-5 dari salah satu berkas data kami.
+Anda dapat mulai dengan menggunakan `head` untuk mengambil 5 baris pertama
+lalu mengalihkan hasilnya ke sebuah berkas,
+dan kemudian menggunakan `tail` untuk memilih 3 baris terakhir:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Pemeriksaan singkat mengonfirmasi bahwa ini adalah baris ke-3 hingga ke-5 dari berkas asli,
+karena itu merupakan 3 baris terakhir dari 5 baris pertama.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +119,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Pilih dua baris terakhir dari `seasonal/winter.csv`
+dan simpan dalam berkas bernama `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Gunakan `tail` untuk memilih baris dan `>` untuk mengalihkan keluaran `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +133,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Baris `%s` seharusnya ada di dalam file `bottom.csv`, tetapi tidak ada. Arahkan keluaran dari `tail -n 2 seasonal/winter.csv` ke `bottom.csv` dengan `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` memiliki terlalu banyak baris. Apakah Anda menggunakan bendera `-n 2` dengan `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +153,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Pilih baris pertama dari `bottom.csv`
+untuk mendapatkan baris kedua dari belakang dari berkas asli.
 
 `@hint`
-Use `head` to select the line you want.
+Gunakan `head` untuk memilih baris yang Anda inginkan.
 
 `@solution`
 ```{shell}
@@ -169,17 +169,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Ada yang salah dengan file `bottom.csv`. Pastikan Anda tidak mengubahnya!"),
+    has_expr_output(strict=True, incorrect_msg="Apakah Anda telah menggunakan `head` dengan benar pada `bottom.csv`? Pastikan untuk menggunakan flag `-n` dengan benar.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("Kerja bagus. Lanjutkan ke latihan berikutnya untuk mengetahui cara yang lebih baik dalam menggabungkan perintah.")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Apa cara yang lebih baik untuk menggabungkan perintah?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +187,35 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Menggunakan pengalihan untuk menggabungkan perintah memiliki dua kelemahan:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Menyisakan banyak berkas perantara (seperti `top.csv`).
+2. Perintah untuk menghasilkan hasil akhir tersebar di beberapa baris riwayat.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Shell menyediakan alat lain yang menyelesaikan kedua masalah ini sekaligus yang disebut **pipe**.
+Sekali lagi,
+mulailah dengan menjalankan `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Alih-alih mengirim keluaran `head` ke sebuah berkas,
+tambahkan sebuah garis vertikal dan perintah `tail` *tanpa* nama berkas:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Simbol pipe memberi tahu shell untuk menggunakan keluaran perintah di sebelah kiri
+sebagai masukan ke perintah di sebelah kanan.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Gunakan `cut` untuk memilih semua nama gigi dari kolom 2 pada berkas berformat koma `seasonal/summer.csv`, lalu salurkan hasilnya ke `grep`, dengan pencocokan terbalik, untuk mengecualikan baris header yang berisi kata "Tooth". *`cut` dan `grep` telah dibahas secara rinci di Bab 2, masing-masing pada latihan 8 dan 11.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Bagian pertama perintah berbentuk `cut -d field_delimiter -f column_number filename`.
+- Bagian kedua perintah berbentuk `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +231,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Apakah Anda telah mengalirkan hasil dari `cut -d , -f 2 seasonal/summer.csv` ke dalam `grep -v Tooth` dengan `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Apakah Anda telah mengecualikan baris header `"Tooth"` menggunakan `grep`?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Penyambungan sempurna! Ini mungkin pertama kalinya Anda menggunakan `|`, tetapi ini pasti bukan yang terakhir!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Bagaimana cara menggabungkan banyak perintah?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +247,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Anda dapat merangkai sejumlah perintah.
+Sebagai contoh,
+perintah berikut:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+akan:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. memilih kolom pertama dari data spring;
+2. menghapus baris header yang berisi kata "Date"; dan
+3. memilih 10 baris pertama dari data sebenarnya.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+Pada latihan sebelumnya, Anda menggunakan perintah berikut untuk memilih semua nama gigi dari kolom 2 berkas `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Perluas pipeline ini dengan perintah `head` untuk hanya memilih nama gigi yang paling pertama.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Salin dan tempelkan kode pada instruksi, tambahkan pipe, lalu panggil `head` dengan flag `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +288,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Apakah Anda telah menggunakan `|` untuk memperpanjang pipeline dengan perintah `head`? Pastikan untuk mengatur flag `-n` dengan benar."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Apakah Anda telah menggunakan `|` untuk memperpanjang pipeline dengan perintah `head`?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Penggabungan yang ceria! Dengan menggabungkan beberapa perintah bersama-sama, Anda dapat membangun pipeline manipulasi data yang kuat.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Bagaimana cara menghitung jumlah rekaman dalam sebuah berkas?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +305,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Perintah `wc` (singkatan dari "word count") menampilkan jumlah **c**aracter (karakter), **w**ords (kata), dan **l**ines (baris) dalam sebuah berkas.
+Anda dapat membuatnya hanya menampilkan salah satu di antaranya dengan menggunakan `-c`, `-w`, atau `-l` masing-masing.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Hitung berapa banyak rekaman di `seasonal/spring.csv` yang memiliki tanggal pada Juli 2017 (`2017-07`). 
+- Untuk melakukannya, gunakan `grep` dengan tanggal parsial untuk memilih baris, lalu teruskan hasilnya ke `wc` dengan flag yang sesuai untuk menghitung baris.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Gunakan `head seasonal/spring.csv` untuk mengingat kembali format tanggal.
+- Bagian pertama perintah berbentuk `grep thing_to_match filename`.
+- Setelah pipa, `|`, panggil `wc` dengan flag `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +334,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Apakah Anda memanggil `grep`?"),
+      has_code("2017-07", incorrect_msg = "Apakah Anda mencari `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Apakah Anda mencari file `seasonal/spring.csv`?"),
+      has_code("|", incorrect_msg = "Apakah Anda mengalirkan ke `wc` menggunakan `|`?"),      
+      has_code("wc", incorrect_msg = "Apakah Anda memanggil `wc`?"),
+      has_code("-l", incorrect_msg = "Apakah Anda menghitung baris dengan `-l`?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Penghitungan yang cermat! Menentukan seberapa banyak data yang Anda miliki adalah langkah pertama yang baik dalam analisis data apa pun.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Bagaimana cara menentukan banyak berkas sekaligus?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +356,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Sebagian besar perintah shell dapat bekerja pada banyak berkas jika Anda memberikan banyak nama berkas.
+Sebagai contoh,
+Anda dapat mengambil kolom pertama dari semua berkas data musiman sekaligus seperti ini:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Namun, mengetikkan banyak nama berkas berulang kali bukanlah ide yang baik:
+itu membuang waktu,
+dan cepat atau lambat Anda akan melewatkan sebuah berkas atau mengulangi nama berkas.
+Agar pekerjaan Anda lebih mudah,
+shell memungkinkan Anda menggunakan **wildcard** untuk menentukan daftar berkas dengan satu ekspresi.
+Wildcard yang paling umum adalah `*`,
+yang berarti "cocokkan nol atau lebih karakter".
+Dengan menggunakannya,
+kita dapat memendekkan perintah `cut` di atas menjadi seperti ini:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+atau:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Tulis satu perintah menggunakan `head` untuk mengambil tiga baris pertama dari `seasonal/spring.csv` dan `seasonal/summer.csv`, total enam baris data, tetapi bukan dari berkas data autumn atau winter.
+Gunakan wildcard alih-alih menuliskan nama berkas secara lengkap.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Perintahnya berbentuk `head -n jumlah_baris pola_nama_berkas`.
+- Anda dapat mencocokkan berkas di direktori `a` yang diawali huruf `b` dengan `a/b*`, sebagai contoh.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +406,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Anda dapat menggunakan `seasonal/s*` untuk memilih `seasonal/spring.csv` dan `seasonal/summer.csv`. Pastikan hanya menyertakan tiga baris pertama dari setiap file dengan flag `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Jangan sertakan output untuk `seasonal/autumn.csv`. Anda dapat menggunakan `seasonal/s*` untuk memilih `seasonal/spring.csv` dan `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Jangan sertakan output untuk `seasonal/winter.csv`. Anda dapat menggunakan `seasonal/s*` untuk memilih `seasonal/spring.csv` dan `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Kerja wildcard yang luar biasa! Ini menjadi lebih penting jika direktori Anda berisi ratusan atau ribuan file.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Wildcard lain apa yang bisa saya gunakan?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +423,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Shell juga memiliki wildcard lain,
+meskipun lebih jarang digunakan:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` mencocokkan satu karakter, sehingga `201?.txt` akan cocok dengan `2017.txt` atau `2018.txt`, tetapi tidak dengan `2017-01.txt`.
+- `[...]` mencocokkan salah satu karakter di dalam tanda kurung siku, sehingga `201[78].txt` cocok dengan `2017.txt` atau `2018.txt`, tetapi tidak dengan `2016.txt`.
+- `{...}` mencocokkan salah satu pola yang dipisahkan koma di dalam tanda kurung kurawal, sehingga `{*.txt, *.csv}` mencocokkan berkas apa pun yang namanya diakhiri dengan `.txt` atau `.csv`, tetapi tidak berkas yang namanya diakhiri dengan `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Ekspresi mana yang akan cocok dengan `singh.pdf` dan `johel.txt` tetapi tidak dengan `sandhu.pdf` atau `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Cocokkan setiap ekspresi dengan setiap nama berkas secara berurutan.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +444,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Tidak: `.pdf` dan `.txt` bukan nama berkas.
+- Tidak: ini akan cocok dengan `sandhu.pdf`.
+- Tidak: ekspresi dalam tanda kurung siku hanya mencocokkan satu karakter, bukan seluruh kata.
+- Benar!
 
 ---
 
-## How can I sort lines of text?
+## Bagaimana saya dapat mengurutkan baris teks?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +459,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Sesuai namanya,
+`sort` menata data.
+Secara bawaan, ini dilakukan dalam urutan alfabet naik,
+namun flag `-n` dan `-r` dapat digunakan untuk mengurutkan secara numerik dan membalik urutan keluarannya,
+sedangkan `-b` memerintahkannya untuk mengabaikan spasi di awal baris
+dan `-f` memerintahkannya untuk **f**old case (yakni tidak peka huruf besar-kecil).
+Pipa sering menggunakan `grep` untuk menyingkirkan rekaman yang tidak diinginkan
+lalu `sort` untuk menata rekaman yang tersisa.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Masih ingat kombinasi `cut` dan `grep` untuk memilih semua nama gigi dari kolom 2 berkas `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Mulai dari resep ini, urutkan nama gigi dalam `seasonal/winter.csv` (bukan `summer.csv`) dalam urutan alfabet menurun. Untuk melakukannya, perluas pipeline dengan langkah `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Salin dan tempel perintah pada instruksi, ganti nama berkas, tambahkan pipe, lalu panggil `sort` dengan flag `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +497,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Apakah Anda memanggil `cut`?"),
+      has_code("-d", incorrect_msg = "Apakah Anda menentukan pembatas bidang dengan `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Apakah Anda mendapatkan data dari file `seasonal/winter.csv`?"),
+      has_code("|", incorrect_msg = "Apakah Anda menggunakan pipe dari `cut` ke `grep` ke `sort` menggunakan `|`?"),      
+      has_code("grep", incorrect_msg = "Apakah Anda memanggil `grep`?"),
+      has_code("-v", incorrect_msg = "Apakah Anda membalikkan pencocokan dengan `-v`?"),
+      has_code("Tooth", incorrect_msg = "Apakah Anda mencari `Tooth`?"),
+      has_code("sort", incorrect_msg = "Apakah Anda memanggil `sort`?"),
+      has_code("-r", incorrect_msg = "Apakah Anda membalikkan urutan pengurutan dengan `-r`?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Diurutkan! `sort` memiliki banyak kegunaan. Sebagai contoh, menggunakan pipe `sort -n` ke `head` menunjukkan nilai terbesar.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Bagaimana cara menghapus baris duplikat?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +522,11 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Perintah lain yang sering digunakan dengan `sort` adalah `uniq`,
+yang bertugas menghapus baris yang terduplikasi.
+Lebih spesifik lagi,
+perintah ini menghapus baris duplikat yang *berdampingan*.
+Jika sebuah file berisi:
 
 ```
 2017-07-03
@@ -535,14 +535,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+maka `uniq` akan menghasilkan:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+namun jika berisi:
 
 ```
 2017-07-03
@@ -551,33 +551,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+maka `uniq` akan mencetak keempat baris tersebut.
+Alasannya adalah `uniq` dibuat untuk bekerja dengan file yang sangat besar.
+Untuk menghapus baris yang tidak berdampingan dari sebuah file,
+perintah ini harus menyimpan seluruh file dalam memori
+(atau setidaknya,
+semua baris unik yang sudah ditemui).
+Dengan hanya menghapus duplikat yang berdampingan,
+perintah ini hanya perlu menyimpan baris unik terbaru di memori.
 
 `@instructions`
-Write a pipeline to:
+Tulis sebuah pipeline untuk:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- mengambil kolom kedua dari `seasonal/winter.csv`,
+- menghapus kata "Tooth" dari output sehingga hanya nama gigi yang ditampilkan,
+- mengurutkan output sehingga semua kemunculan sebuah nama gigi saling berdampingan; dan
+- menampilkan setiap nama gigi satu kali beserta hitungannya seberapa sering muncul.
 
-The start of your pipeline is the same as the previous exercise:
+Awal pipeline Anda sama seperti latihan sebelumnya:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Perluas dengan perintah `sort`, dan gunakan `uniq -c` untuk menampilkan baris unik beserta jumlah kemunculannya alih-alih menggunakan `uniq` dan `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Salin dan tempel perintah pada instruksi, pipe ke `sort` tanpa flag, lalu pipe lagi ke `uniq` dengan flag `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +597,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Anda harus memulai dari perintah ini: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Sekarang perpanjanglah!"),
+            has_code('\|\s+sort', incorrect_msg="Apakah Anda telah memperpanjang perintah dengan `| sort`?"),
+            has_code('\|\s+uniq', incorrect_msg="Apakah Anda telah memperpanjang perintah dengan `| uniq`?"),
+            has_code('-c', incorrect_msg="Apakah Anda telah menyertakan hitungan dengan `-c`?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Bagus! Setelah semua pekerjaan ini pada pipe, akan menyenangkan jika kita bisa menyimpan hasilnya, bukan?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Bagaimana cara menyimpan keluaran dari sebuah pipe?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +617,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Shell memungkinkan kita mengalihkan keluaran dari rangkaian perintah yang dipipe:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Namun, `>` harus diletakkan di akhir pipeline:
+jika kita mencoba menggunakannya di tengah, seperti ini:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+maka seluruh keluaran dari `cut` akan ditulis ke `teeth-only.txt`,
+sehingga tidak ada yang tersisa untuk `grep`
+dan `grep` akan menunggu masukan selamanya.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Apa yang terjadi jika kita menaruh pengalihan di bagian depan pipeline seperti berikut:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Keluaran perintah dialihkan ke berkas seperti biasa.]
+- Shell melaporkannya sebagai sebuah kesalahan.
+- Shell menunggu masukan selamanya.
 
 `@hint`
-Try it out in the shell.
+Cobalah langsung di shell.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +657,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Benar!', 'Tidak; shell sebenarnya dapat mengeksekusi ini.', 'Tidak; shell sebenarnya dapat mengeksekusi ini.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Bagaimana cara menghentikan program yang sedang berjalan?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +670,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Perintah dan skrip yang telah Anda jalankan sejauh ini dieksekusi dengan cepat,
+amun beberapa tugas dapat memakan waktu menit, jam, atau bahkan hari untuk diselesaikan.
+Anda juga bisa keliru menaruh pengalihan di tengah sebuah pipeline,
+yang menyebabkan proses macet.
+Jika Anda memutuskan tidak ingin program terus berjalan,
+Anda dapat menekan `Ctrl` + `C` untuk mengakhiri proses tersebut.
+Ini sering ditulis sebagai `^C` dalam dokumentasi Unix;
+perhatikan bahwa huruf 'c' dapat menggunakan huruf kecil.
 
 `@instructions`
-Run the command:
+Jalankan perintah:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+tanpa argumen (sehingga menunggu masukan yang tidak akan pernah datang)
+dan kemudian hentikan dengan menekan `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Cukup ketik head, tekan Enter, lalu keluar dari program yang berjalan dengan `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +704,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Apakah Anda telah menggunakan `head`?")
 ```
 
 ---
 
-## Wrapping up
+## Menutup pembahasan
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +717,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Sebagai penutup,
+Anda akan membangun sebuah pipeline untuk mengetahui berapa banyak rekaman yang ada dalam berkas data musiman yang paling sedikit isinya.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +734,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Gunakan `wc` dengan parameter yang sesuai untuk menampilkan jumlah baris di semua berkas data musiman.
+(Gunakan wildcard untuk nama berkas alih-alih mengetikkannya satu per satu.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Gunakan `-l` untuk hanya menampilkan jumlah baris dan `*` untuk mencocokkan nama berkas.
 
 `@solution`
 ```{shell}
@@ -753,9 +753,9 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Apakah Anda memanggil `wc`?"),
+      has_code("-l", incorrect_msg = "Apakah Anda menghitung jumlah baris dengan `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Apakah Anda mendapatkan data dari semua file `seasonal/*`?")
     )
   )
 )
@@ -771,7 +771,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Tambahkan perintah lain ke perintah sebelumnya menggunakan pipe untuk menghapus baris yang berisi kata "total".
 
 `@hint`
 
@@ -789,13 +789,13 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Apakah Anda memanggil `wc`?"),
+      has_code("-l", incorrect_msg = "Apakah Anda menghitung jumlah baris dengan `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Apakah Anda mendapatkan data dari semua file `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Apakah Anda melakukan pipe dari `wc` ke `grep` menggunakan `|`?"),      
+      has_code("grep", incorrect_msg = "Apakah Anda memanggil `grep`?"),
+      has_code("-v", incorrect_msg = "Apakah Anda membalikkan pencocokan dengan `-v`?"),
+      has_code("total", incorrect_msg = "Apakah Anda mencari `total`?")
     )
   )
 )
@@ -811,11 +811,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Tambahkan dua tahap lagi ke pipeline yang menggunakan `sort -n` dan `head -n 1` untuk menemukan berkas yang berisi paling sedikit baris.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Gunakan flag `-n` pada `sort` untuk mengurutkan secara numerik.
+- Gunakan flag `-n` pada `head` untuk membatasi agar hanya menyisakan 1 baris.
 
 `@solution`
 ```{shell}
@@ -830,19 +830,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Apakah Anda memanggil `wc`?"),
+      has_code("-l", incorrect_msg = "Apakah Anda menghitung jumlah baris dengan `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Apakah Anda mendapatkan data dari semua file `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Apakah Anda menggunakan `|` untuk mengalirkan dari `wc` ke `grep` ke `sort` ke `head`?"),      
+      has_code("grep", incorrect_msg = "Apakah Anda memanggil `grep`?"),
+      has_code("-v", incorrect_msg = "Apakah Anda membalikkan pencocokan dengan `-v`?"),
+      has_code("total", incorrect_msg = "Apakah Anda mencari `total`?"),
+      has_code("sort", incorrect_msg = "Apakah Anda memanggil `sort`?"),
+      has_code("-n", incorrect_msg = "Apakah Anda menentukan jumlah baris yang akan disimpan dengan `-n`?"),
+      has_code("1", incorrect_msg = "Apakah Anda menentukan 1 baris untuk disimpan dengan `-n 1`?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Bagus! Ternyata `autumn.csv` adalah file dengan jumlah baris paling sedikit. Segera lanjutkan ke bab 4 untuk mempelajari lebih lanjut tentang pemrosesan batch!")
 ```

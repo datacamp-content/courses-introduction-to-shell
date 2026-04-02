@@ -1,15 +1,16 @@
 ---
-title: Batch processing
+title: Pemrosesan batch
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Kebanyakan perintah shell akan memproses banyak berkas sekaligus. Bab ini
+  menunjukkan cara membuat pipa Anda sendiri melakukan hal yang sama. Di
+  sepanjang proses, Anda akan melihat bagaimana shell menggunakan variabel untuk
+  menyimpan informasi.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Bagaimana shell menyimpan informasi?
 ---
 
-## How does the shell store information?
+## Bagaimana shell menyimpan informasi?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,28 +18,28 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Seperti program lain, shell menyimpan informasi dalam variabel.
+Beberapa di antaranya,
+disebut **environment variables**,
+tersedia setiap saat.
+Nama environment variables secara konvensional ditulis dengan huruf kapital,
+dan beberapa yang paling umum digunakan ditunjukkan di bawah ini.
 
 | Variable | Purpose                           | Value                 |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | Direktori home pengguna            | `/home/repl`          |
+| `PWD `   | Direktori kerja saat ini           | Sama seperti perintah `pwd` |
+| `SHELL`  | Program shell yang digunakan       | `/bin/bash`           |
+| `USER`   | ID pengguna                        | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Untuk mendapatkan daftar lengkap (yang cukup panjang),
+Anda dapat mengetik `set` di shell.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Gunakan `set` dan `grep` dengan pipa untuk menampilkan nilai `HISTFILESIZE`,
+yang menentukan berapa banyak perintah lama yang disimpan dalam riwayat perintah Anda.
+Berapakah nilainya?
 
 `@possible_answers`
 - 10
@@ -47,7 +48,7 @@ What is its value?
 - The variable is not there.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Gunakan `set | grep HISTFILESIZE` untuk mendapatkan baris yang Anda perlukan.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +57,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Tidak: shell mencatat lebih banyak riwayat dari itu."
+err2 = "Tidak: shell mencatat lebih banyak riwayat dari itu."
+correct3 = "Benar: shell menyimpan 2000 perintah lama secara default pada sistem ini."
+err4 = "Tidak: variabel `HISTFILESIZE` ada di sana."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Bagaimana cara mencetak nilai sebuah variabel?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +74,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Cara yang lebih sederhana untuk mengetahui nilai sebuah variabel adalah menggunakan perintah bernama `echo`, yang mencetak argumennya. Mengetik
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+akan mencetak
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Jika Anda mencoba menggunakannya untuk mencetak nilai variabel seperti ini:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+maka yang dicetak adalah nama variabelnya, `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Untuk mendapatkan nilai variabel, Anda harus menambahkan tanda dolar `$` di depannya. Mengetik 
 
 ```{shell}
 echo $USER
 ```
 
-prints
+akan mencetak
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Hal ini berlaku di mana pun:
+untuk mendapatkan nilai variabel bernama `X`,
+Anda harus menuliskannya sebagai `$X`.
+(Hal ini agar shell dapat membedakan apakah Anda bermaksud "berkas bernama X"
+atau "nilai variabel bernama X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Variabel `OSTYPE` menyimpan nama jenis sistem operasi yang Anda gunakan.
+Tampilkan nilainya menggunakan `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Panggil `echo` dengan variabel `OSTYPE` yang diawali dengan `$`.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +136,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Apakah Anda memanggil `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Apakah Anda mencetak variabel lingkungan `OSTYPE`?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Pastikan untuk menambahkan `$` di depan `OSTYPE`.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Pencetakan variabel lingkungan yang sangat baik! Anda memulai dengan baik. Mari kita lanjutkan!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Bagaimana lagi shell menyimpan informasi?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +155,19 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Jenis variabel lainnya disebut **variabel shell**,
+mirip seperti variabel lokal dalam bahasa pemrograman.
 
-To create a shell variable,
-you simply assign a value to a name:
+Untuk membuat variabel shell,
+Anda cukup menetapkan sebuah nilai ke sebuah nama:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*tanpa* spasi di sebelum atau sesudah tanda `=`.
+Setelah Anda melakukannya,
+Anda dapat memeriksa nilai variabel dengan:
 
 ```{shell}
 echo $training
@@ -189,10 +190,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Definisikan variabel bernama `testing` dengan nilai `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Tidak boleh ada spasi antara nama variabel dan nilainya.
 
 `@solution`
 ```{shell}
@@ -214,12 +215,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Apakah Anda mendefinisikan variabel shell bernama `testing`?'),
+        has_code('testing=', incorrect_msg='Apakah Anda menulis `=` langsung setelah testing, tanpa spasi?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Apakah Anda menetapkan nilai `testing` ke `seasonal/winter.csv`?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +231,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Gunakan `head -n 1 SESUATU` untuk mengambil baris pertama dari `seasonal/winter.csv`
+dengan menggunakan nilai variabel `testing` alih-alih nama berkasnya.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Ingat untuk menggunakan `$testing`, bukan hanya `testing`
+(tanda `$` diperlukan untuk mengambil nilai variabel).
 
 `@solution`
 ```{shell}
@@ -251,23 +251,23 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Apakah Anda merujuk variabel shell menggunakan `$testing`?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Apakah Anda memanggil `head`?"),
+            has_code('-n', incorrect_msg="Apakah Anda membatasi jumlah baris dengan `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Apakah Anda memilih untuk menyimpan 1 baris dengan `-n 1`?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
+Ex().success_msg("Luar biasa! Mari kita lihat bagaimana Anda dapat mengulangi perintah dengan mudah.")
 
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Bagaimana saya dapat mengulang sebuah perintah berkali-kali?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +275,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Variabel shell juga digunakan dalam **loop**,
+yang mengulang perintah berkali-kali.
+Jika kita menjalankan perintah ini:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+hasilnya adalah:
 
 ```
 gif
@@ -291,21 +291,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Perhatikan hal-hal berikut tentang loop tersebut:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Strukturnya adalah `for` ...variabel... `in` ...daftar... `; do` ...badan... `; done`
+2. Daftar hal yang akan diproses oleh loop (dalam contoh kita, kata `gif`, `jpg`, dan `png`).
+3. Variabel yang melacak item mana yang sedang diproses oleh loop (dalam contoh kita, `filetype`).
+4. Badan loop yang melakukan pemrosesan (dalam contoh kita, `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Perhatikan bahwa badan loop menggunakan `$filetype` untuk mengambil nilai variabel, bukan hanya `filetype`,
+sama seperti pada variabel shell lainnya.
+Perhatikan juga posisi tanda titik koma:
+yang pertama berada di antara daftar dan kata kunci `do`,
+dan yang kedua berada di antara badan loop dan kata kunci `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Ubah loop sehingga mencetak:
 
 ```
 docx
@@ -313,10 +313,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Harap gunakan `filetype` sebagai nama variabel loop.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Gunakan struktur kode pada teks pengantar, dengan menukar jenis berkas gambar menjadi jenis berkas dokumen.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +335,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Apakah Anda memanggil `for`?'),
+      has_code('filetype', incorrect_msg='Apakah Anda menggunakan `filetype` sebagai variabel loop?'),
+      has_code('in', incorrect_msg='Apakah Anda menggunakan `in` sebelum daftar tipe file?'),
+      has_code('docx odt pdf', incorrect_msg='Apakah Anda melakukan loop pada `docx`, `odt`, dan `pdf` dalam urutan tersebut?'),
+      has_code(r'pdf\s*;', incorrect_msg='Apakah Anda meletakkan titik koma setelah elemen loop terakhir?'),
+      has_code(r';\s*do', incorrect_msg='Apakah Anda menggunakan `do` setelah titik koma pertama?'),
+      has_code('echo', incorrect_msg='Apakah Anda memanggil `echo`?'),
+      has_code(r'\$filetype', incorrect_msg='Apakah Anda melakukan echo `$filetype`?'),
+      has_code(r'filetype\s*;', incorrect_msg='Apakah Anda meletakkan titik koma setelah badan loop?'),
+      has_code('; done', incorrect_msg='Apakah Anda mengakhiri dengan `done`?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Luar biasa untuk looping! Loop sangat brilian jika Anda ingin melakukan hal yang sama ratusan atau ribuan kali.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Bagaimana cara mengulang perintah sekali untuk setiap berkas?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +361,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Anda selalu dapat mengetikkan nama berkas yang ingin diproses saat menulis loop,
+amun biasanya lebih baik menggunakan wildcard.
+Coba jalankan loop ini di konsol:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Ini mencetak:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +378,14 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+karena shell mengembangkan `seasonal/*.csv` menjadi daftar empat nama berkas
+sebelum menjalankan loop.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Ubah ekspresi wildcard menjadi `people/*`
+agar loop mencetak nama berkas di direktori `people`
+apa pun akhiran yang mereka miliki atau tidak miliki.
+Silakan gunakan `filename` sebagai nama variabel loop Anda.
 
 `@hint`
 
@@ -407,25 +407,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Apakah Anda memanggil `for`?'),
+      has_code('filename', incorrect_msg='Apakah Anda menggunakan `filename` sebagai variabel loop?'),
+      has_code('in', incorrect_msg='Apakah Anda menggunakan `in` sebelum daftar jenis file?'),
+      has_code('people/\*', incorrect_msg='Apakah Anda menentukan daftar file dengan `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Apakah Anda meletakkan titik koma setelah daftar file?'),
+      has_code(r';\s*do', incorrect_msg='Apakah Anda menggunakan `do` setelah titik koma pertama?'),
+      has_code('echo', incorrect_msg='Apakah Anda memanggil `echo`?'),
+      has_code(r'\$filename', incorrect_msg='Apakah Anda menampilkan `$filename`?'),
+      has_code(r'filename\s*;', incorrect_msg='Apakah Anda meletakkan titik koma setelah badan loop?'),
+      has_code('; done', incorrect_msg='Apakah Anda menyelesaikan dengan `done`?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Looping yang berulang! Wildcards dan loop membuat kombinasi yang kuat.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Bagaimana cara mencatat nama sekelompok berkas?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +433,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+Sering kali orang menetapkan sebuah variabel menggunakan ekspresi wildcard untuk mencatat daftar nama berkas.
+Sebagai contoh,
+jika Anda mendefinisikan `datasets` seperti ini:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+Anda dapat menampilkan nama berkasnya nanti dengan:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Ini menghemat pengetikan dan mengurangi kemungkinan kesalahan.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Jika Anda menjalankan dua perintah ini di direktori home Anda,
+berapa banyak baris keluaran yang akan dicetak?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +460,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Tidak ada: karena `files` didefinisikan pada baris terpisah, variabel tersebut tidak memiliki nilai pada baris kedua.
+- Satu: kata "files".
+- Empat: nama dari keempat berkas data musiman.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Ingat bahwa `X` sendiri hanyalah "X", sedangkan `$X` adalah nilai dari variabel `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +474,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Tidak: Anda tidak harus mendefinisikan variabel pada baris yang sama saat Anda menggunakannya."
+err2 = "Tidak: contoh ini mendefinisikan dan menggunakan variabel `files` dalam shell yang sama."
+correct3 = "Benar. Perintah ini setara dengan `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Nama variabel versus nilainya
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +490,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Kesalahan yang umum terjadi adalah lupa menambahkan `$` sebelum nama variabel.
+Saat hal ini terjadi,
+shell akan menggunakan nama yang Anda ketikkan
+alih-alih nilai dari variabel tersebut.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Kesalahan yang lebih sering terjadi pada pengguna berpengalaman adalah salah ketik nama variabel.
+Sebagai contoh,
+jika Anda mendefinisikan `datasets` seperti ini:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+lalu mengetik:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+shell tidak akan mencetak apa pun,
+karena `datsets` (tanpa huruf "a" kedua) tidak didefinisikan.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Jika Anda menjalankan dua perintah berikut di direktori home Anda,
+output apa yang akan dicetak?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Baca bagian pertama dari loop dengan saksama sebelum menjawab.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Ingat bahwa `X` sendiri hanya berupa "X", sedangkan `$X` adalah nilai dari variabel `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [Satu baris: kata "files".]
+- Empat baris: nama keempat berkas data musiman.
+- Empat baris kosong: variabel `f` tidak diberi nilai.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Benar: loop menggunakan `files` alih-alih `$files`, sehingga daftar tersebut berisi kata "files".
+- Tidak: loop menggunakan `files` alih-alih `$files`, sehingga daftar tersebut berisi kata "files" alih-alih hasil ekspansi `files`.
+- Tidak: variabel `f` didefinisikan secara otomatis oleh loop `for`.
 
 ---
 
-## How can I run many commands in a single loop?
+## Bagaimana saya dapat menjalankan banyak perintah dalam satu loop?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +547,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Mencetak nama berkas berguna untuk debug,
+namun tujuan utama loop adalah memproses banyak berkas.
+Loop berikut mencetak baris kedua dari setiap berkas data:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Strukturnya sama seperti loop lain yang sudah Anda lihat:
+perbedaannya hanya pada badan loop yang berupa pipeline dari dua perintah, bukan satu perintah tunggal.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Tulis sebuah loop yang mencetak entri terakhir dari Juli 2017 (`2017-07`) di setiap berkas seasonal. Hasilnya harus mirip dengan:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+namun diterapkan pada **_setiap_** berkas seasonal secara terpisah. Gunakan `file` sebagai nama variabel loop, dan ingat untuk melakukan loop melalui daftar berkas `seasonal/*.csv` (_bukan 'seasonal/winter.csv' seperti pada contoh_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Badan loop adalah perintah grep yang ditunjukkan pada instruksi, dengan `seasonal/winter.csv` diganti menjadi `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +585,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Apakah Anda memanggil `for`?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Apakah Anda menggunakan `file` sebagai variabel loop?'),
+      has_code('in', incorrect_msg='Apakah Anda menggunakan `in` sebelum daftar file?'),
+      has_code('seasonal/\*', incorrect_msg='Apakah Anda menentukan daftar file dengan `seasonal/*`?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Apakah Anda meletakkan titik koma setelah daftar file?'),
+      has_code(r';\s*do', incorrect_msg='Apakah Anda menggunakan `do` setelah titik koma pertama?'),
+      has_code('grep', incorrect_msg='Apakah Anda memanggil `grep`?'),
+      has_code('2017-07', incorrect_msg='Apakah Anda mencocokkan dengan `2017-07`?'),
+      has_code(r'\$file', incorrect_msg='Apakah Anda menggunakan `$file` sebagai nama variabel loop?'),
+      has_code(r'file\s*|', incorrect_msg='Apakah Anda menggunakan pipe untuk menghubungkan perintah kedua Anda?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Apakah Anda menggunakan `tail -n 1` untuk mencetak entri terakhir dari setiap pencarian dalam perintah kedua Anda?'),
+      has_code('; done', incorrect_msg='Apakah Anda menyelesaikan dengan `done`?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Pengulangan yang berulang! Wildcards dan loop membuat kombinasi yang kuat.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Mengapa saya sebaiknya tidak menggunakan spasi dalam nama file?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +617,20 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Memberi nama file dengan beberapa kata seperti `July 2017.csv` itu mudah dan masuk akal saat Anda menggunakan penjelajah file grafis.
+Namun, ini menimbulkan masalah saat Anda bekerja di shell.
+Sebagai contoh, misalkan Anda ingin mengubah nama `July 2017.csv` menjadi `2017 July data.csv`.
+Anda tidak dapat mengetik:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+karena bagi shell, seolah-olah Anda mencoba memindahkan
+empat file bernama `July`, `2017.csv`, `2017`, dan `July` (lagi)
+ke dalam direktori bernama `data.csv`.
+Sebagai gantinya, Anda harus memberi tanda petik pada nama file
+agar shell memperlakukan masing-masing sebagai satu parameter:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +638,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Jika Anda memiliki dua file bernama `current.csv` dan `last year.csv`
+(dengan spasi pada namanya)
+dan Anda mengetik:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+apa yang akan terjadi:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Apa yang Anda pikir akan terjadi jika seseorang menunjukkan perintah tersebut kepada Anda dan Anda tidak tahu file apa saja yang ada?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Shell akan mencetak pesan galat karena `last` dan `year.csv` tidak ada.
+- Shell akan menghapus `current.csv`.
+- [Keduanya di atas.]
+- Tidak terjadi apa-apa.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Ya, tetapi itu bukan satu-satunya.
+- Ya, tetapi itu bukan satu-satunya.
+- Benar. Anda dapat menggunakan tanda petik tunggal, `'`, atau tanda petik ganda, `"`, di sekeliling nama file.
+- Sayangnya tidak.
 
 ---
 
-## How can I do many things in a single loop?
+## Bagaimana saya dapat melakukan banyak hal dalam satu loop?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +673,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Loop yang Anda lihat sejauh ini hanya memiliki satu perintah atau pipeline di dalamnya,
+amun sebuah loop dapat berisi sejumlah perintah.
+Untuk memberi tahu shell di mana satu perintah berakhir dan berikutnya dimulai,
+Anda harus memisahkannya dengan titik koma:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +695,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Misalkan Anda lupa menambahkan titik koma di antara perintah `echo` dan `head` pada loop sebelumnya,
+sehingga Anda meminta shell untuk menjalankan:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Apa yang akan dilakukan shell?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Mencetak pesan galat.
+- Mencetak satu baris untuk masing-masing dari empat berkas.
+- Mencetak satu baris untuk `autumn.csv` (berkas pertama).
+- Mencetak baris terakhir dari setiap berkas.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Anda dapat mengalirkan (pipe) keluaran dari `echo` ke `tail`.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +720,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Tidak: loop akan berjalan, hanya saja tidak akan melakukan sesuatu yang masuk akal."
+correct2 = "Ya: `echo` menghasilkan satu baris yang menyertakan nama file dua kali, yang kemudian disalin oleh `tail`."
+err3 = "Tidak: loop berjalan satu kali untuk masing-masing dari empat nama file."
+err4 = "Tidak: input dari `tail` adalah output dari `echo` untuk setiap nama file."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

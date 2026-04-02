@@ -1,19 +1,21 @@
-title: Introduction to Shell
+title: Pengantar Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Baris perintah Unix telah bertahan dan berkembang selama hampir 50 tahun
+  karena memungkinkan orang melakukan hal-hal kompleks hanya dengan beberapa
+  ketukan tombol. Sering disebut sebagai "lem universal pemrograman," baris
+  perintah membantu pengguna menggabungkan program yang sudah ada dengan cara
+  baru, mengotomatisasi tugas berulang, dan menjalankan program pada klaster dan
+  cloud yang mungkin berada di seberang dunia. Kursus ini akan memperkenalkan
+  elemen-elemennya yang utama dan menunjukkan cara menggunakannya secara
+  efisien.
 
 
-  The course glossary can be found on the right in the resources section.
+  Glosarium kursus dapat ditemukan di sebelah kanan pada bagian sumber daya.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Untuk memperoleh kredit CPE, Anda perlu menyelesaikan kursus dan mencapai skor
+  70% pada penilaian yang memenuhi syarat. Anda dapat menuju ke penilaian dengan
+  mengeklik ajakan kredit CPE di sebelah kanan.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary

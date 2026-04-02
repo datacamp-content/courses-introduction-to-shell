@@ -1,15 +1,16 @@
 ---
-title: Creating new tools
+title: Membuat alat baru
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  Riwayat memungkinkan Anda mengulangi sesuatu hanya dengan beberapa ketukan
+  tombol, dan pipa memungkinkan Anda menggabungkan perintah yang ada untuk
+  membuat yang baru. Dalam bab ini, Anda akan melihat bagaimana melangkah lebih
+  jauh dan membuat perintah baru milik Anda sendiri.
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: Bagaimana cara mengedit sebuah berkas?
 ---
 
-## How can I edit a file?
+## Bagaimana cara saya mengedit sebuah file?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +18,24 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix memiliki beragam penyunting teks yang membingungkan.
+Untuk kursus ini,
+kita akan menggunakan penyunting sederhana bernama Nano.
+Jika Anda mengetik `nano filename`,
+itu akan membuka `filename` untuk diedit
+(atau membuatnya jika belum ada).
+Anda dapat berpindah menggunakan tombol panah,
+menghapus karakter dengan tombol backspace,
+dan melakukan operasi lain dengan kombinasi tombol kontrol:
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`: hapus satu baris.
+- `Ctrl` + `U`: batalkan penghapusan baris.
+- `Ctrl` + `O`: simpan file ('O' berarti 'output'). _Anda juga perlu menekan Enter untuk mengonfirmasi nama file!_
+- `Ctrl` + `X`: keluar dari editor.
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+Jalankan `nano names.txt` untuk mengedit file baru di direktori home Anda
+dan masukkan empat baris berikut:
 
 ```
 Lovelace
@@ -43,10 +44,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+Untuk menyimpan apa yang telah Anda tulis,
+ketik `Ctrl` + `O` untuk menulis file,
+kemudian Enter untuk mengonfirmasi nama file,
+lalu `Ctrl` + `X` untuk keluar dari editor.
 
 `@hint`
 
@@ -65,7 +66,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "Apakah Anda sudah menyertakan baris `%s` dalam file `names.txt`? Gunakan `nano names.txt` lagi untuk memperbarui file Anda. Gunakan `Ctrl` + `O` untuk menyimpan dan `Ctrl` + `X` untuk keluar."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +76,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("Kerja bagus! Lanjut ke yang berikutnya!")
 ```
 
 ---
 
-## How can I record what I just did?
+## Bagaimana cara merekam apa yang baru saja saya lakukan?
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,19 +89,19 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+Saat Anda melakukan analisis yang kompleks,
+sering kali Anda ingin menyimpan catatan perintah yang digunakan.
+Anda dapat melakukannya dengan alat yang sudah Anda lihat:
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. Jalankan `history`.
+2. Pipa keluarannya ke `tail -n 10` (atau sebanyak langkah terbaru yang ingin Anda simpan).
+3. Arahkan ulang hasilnya ke sebuah berkas bernama seperti `figure-5.history`.
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
+Ini lebih baik daripada menuliskannya di buku catatan laboratorium
+karena dijamin tidak melewatkan langkah apa pun.
+Ini juga menggambarkan gagasan utama shell:
+alat-alat sederhana yang menghasilkan dan mengonsumsi baris-baris teks
+bisa dikombinasikan dalam berbagai cara
 to solve a broad range of problems.
 
 `@pre_exercise_code`
@@ -117,10 +118,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+Salin berkas `seasonal/spring.csv` dan `seasonal/summer.csv` ke direktori home Anda.
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+Gunakan `cp` untuk menyalin dan `~` sebagai pintasan ke path direktori home Anda.
 
 `@solution`
 ```{shell}
@@ -130,7 +131,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="Apakah Anda telah menggunakan `cp seasonal/s* ~` untuk menyalin file yang diperlukan ke direktori home Anda?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +139,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("Pencatatan yang luar biasa! Jika Anda salah mengetik perintah apa pun, Anda selalu dapat menggunakan `nano` untuk membersihkan file riwayat simpanan setelahnya.")
 ```
 
 ***
@@ -151,13 +151,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+Gunakan `grep` dengan flag `-h` (agar tidak mencetak nama berkas)
+dan `-v Tooth` (untuk memilih baris yang tidak cocok dengan baris header)
+untuk memilih rekaman data dari `spring.csv` dan `summer.csv` dalam urutan tersebut
+dan arahkan ulang keluarannya ke `temp.csv`.
 
 `@hint`
-Put the flags before the filenames.
+Letakkan flag sebelum nama berkas.
 
 `@solution`
 ```{shell}
@@ -167,8 +167,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "Pastikan Anda mengarahkan keluaran dari perintah `grep` ke `temp.csv` dengan `>`!"
+msg2 = "Apakah Anda telah menggunakan `grep -h -v ___ ___ ___` (isi bagian yang kosong) untuk mengisi `temp.csv`?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +177,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +188,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+Pipakan `history` ke `tail -n 3`
+dan arahkan ulang keluarannya ke `steps.txt`
+untuk menyimpan tiga perintah terakhir ke sebuah berkas.
+(Anda perlu menyimpan tiga, bukan hanya dua,
+karena perintah `history` itu sendiri akan ada dalam daftar.)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+Ingat bahwa pengalihan dengan `>` diletakkan di akhir rangkaian perintah yang dipipa.
 
 `@solution`
 ```{shell}
@@ -206,8 +205,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="Pastikan untuk mengarahkan keluaran perintah Anda ke `steps.txt`."
+msg2="Apakah Anda telah menggunakan `history | tail ___ ___` (isi bagian yang kosong) untuk mengisi `steps.txt`?"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +218,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("Kerja bagus! Mari kita tingkatkan!")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## Bagaimana cara menyimpan perintah untuk dijalankan kembali nanti?
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +231,27 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+Sejauh ini Anda menggunakan shell secara interaktif.
+Namun karena perintah yang Anda ketik hanyalah teks,
+Anda dapat menyimpannya dalam berkas agar shell menjalankannya berulang kali.
+Untuk mulai mengeksplorasi kemampuan yang kuat ini,
+letakkan perintah berikut dalam sebuah berkas bernama `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+Perintah ini memilih baris pertama dari setiap berkas CSV di direktori `seasonal`.
+Setelah Anda membuat berkas ini,
+Anda dapat menjalankannya dengan mengetik:
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+Ini memberi tahu shell (yang hanyalah program bernama `bash`)
+untuk menjalankan perintah di dalam berkas `headers.sh`,
+yang menghasilkan keluaran yang sama seperti menjalankan perintahnya secara langsung.
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +267,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+Gunakan `nano dates.sh` untuk membuat berkas bernama `dates.sh`
+yang berisi perintah berikut:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+untuk mengekstrak kolom pertama dari semua berkas CSV di `seasonal`.
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+Masukkan perintah yang ditampilkan ke dalam berkas tanpa baris kosong atau spasi tambahan.
 
 `@solution`
 ```{shell}
@@ -291,13 +289,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "Apakah Anda sudah menyertakan baris `cut -d , -f 1 seasonal/*.csv` dalam file `dates.sh`? Gunakan `nano dates.sh` lagi untuk memperbarui file Anda. Gunakan `Ctrl` + `O` untuk menyimpan dan `Ctrl` + `X` untuk keluar."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +306,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+Gunakan `bash` untuk menjalankan berkas `dates.sh`.
 
 `@hint`
-Use `bash filename` to run the file.
+Gunakan `bash filename` untuk menjalankan berkas.
 
 `@solution`
 ```{shell}
@@ -327,17 +324,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+      has_code("dates.sh", incorrect_msg = 'Apakah Anda menentukan file `dates.sh`?')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## Bagaimana saya dapat memakai ulang pipa?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +341,27 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+Berkas yang berisi banyak perintah shell disebut ***skrip shell**,
+atau sering disingkat "skrip". Skrip tidak harus diberi nama berakhiran `.sh`,
+amun pelajaran ini akan menggunakan konvensi tersebut
+untuk membantu Anda membedakan berkas mana yang merupakan skrip.
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+Skrip juga dapat berisi pipa.
+Sebagai contoh,
+jika `all-dates.sh` berisi baris berikut:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+maka:
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+akan mengekstrak tanggal unik dari berkas data musiman
+dan menyimpannya ke `dates.out`.
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +378,13 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+Berkas `teeth.sh` di direktori home Anda telah disiapkan, tetapi masih ada beberapa bagian kosong.
+Gunakan Nano untuk mengedit berkas tersebut dan ganti dua placeholder `____`
+dengan `seasonal/*.csv` dan `-c` agar skrip ini mencetak hitungan
+berapa kali setiap nama gigi muncul dalam berkas CSV di direktori `seasonal`.
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+Gunakan `nano teeth.sh` untuk mengedit berkasnya.
 
 `@solution`
 ```{shell}
@@ -400,13 +396,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="Apakah Anda telah mengganti bagian yang kosong dengan benar sehingga perintah di `teeth.sh` terbaca `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Gunakan `nano teeth.sh` lagi untuk membuat perubahan yang diperlukan."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +413,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+Gunakan `bash` untuk menjalankan `teeth.sh` dan `>` untuk mengalihkan keluarannya ke `teeth.out`.
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+Ingat bahwa `> teeth.out` harus diletakkan *setelah* perintah yang menghasilkan keluaran.
 
 `@solution`
 ```{shell}
@@ -434,7 +429,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="Apakah Anda telah mengarahkan hasil dari `bash teeth.sh` ke `teeth.out` dengan `>`?"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +438,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'Apakah Anda menjalankan file `teeth.sh`?'),
+      has_code(">\s+teeth.out", incorrect_msg = 'Apakah Anda mengarahkan ke file `teeth.out`?')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +455,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+Jalankan `cat teeth.out` untuk memeriksa hasil Anda.
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+Ingat, Anda dapat mengetik beberapa karakter pertama nama berkas lalu tekan tombol tab untuk melengkapi otomatis.
 
 `@solution`
 ```{shell}
@@ -479,18 +473,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = 'Apakah Anda memanggil `cat`?'),
+      has_code("teeth.out", incorrect_msg = 'Apakah Anda menentukan file `teeth.out`?')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("Bagus! Semua ini mungkin terasa dibuat-buat pada awalnya, tetapi hal yang baik adalah Anda mengotomatisasi bagian dari alur kerja Anda langkah demi langkah. Sesuatu yang sangat berguna sebagai seorang ilmuwan data!")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## Bagaimana cara saya meneruskan nama berkas ke skrip?
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +491,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+Skrip yang memproses berkas tertentu berguna sebagai catatan atas apa yang Anda lakukan, tetapi skrip yang memungkinkan Anda memproses berkas apa pun yang Anda inginkan lebih berguna.
+Untuk mendukung hal ini,
+Anda dapat menggunakan ekspresi khusus `$@` (tanda dolar yang diikuti langsung oleh tanda at)
+untuk berarti "semua parameter baris perintah yang diberikan ke skrip".
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+Sebagai contoh, jika `unique-lines.sh` berisi `sort $@ | uniq`, saat Anda menjalankan:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+shell akan mengganti `$@` dengan `seasonal/summer.csv` dan memproses satu berkas. Jika Anda menjalankan ini:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+skrip akan memproses dua berkas data, dan seterusnya.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Sebagai pengingat, untuk menyimpan yang telah Anda tulis di Nano, ketik `Ctrl` + `O` untuk menuliskan berkas, lalu Enter untuk mengonfirmasi nama berkas, kemudian `Ctrl` + `X` untuk keluar dari editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +527,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+Edit skrip `count-records.sh` dengan Nano dan isi dua placeholder `____`
+dengan `$@` dan `-l` (huruf) masing-masing sehingga skrip menghitung jumlah baris dalam satu atau lebih berkas,
+mengecualikan baris pertama dari setiap berkas.
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* Gunakan `nano count-records.sh` untuk mengedit nama berkas.
+* Pastikan Anda menentukan huruf `-l`, bukan angka satu.
 
 `@solution`
 ```{shell}
@@ -552,13 +545,12 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="Apakah Anda telah mengganti bagian yang kosong dengan benar sehingga perintah dalam `count-records.sh` terbaca `tail -q -n +2 $@ | wc -l`? Gunakan `nano count-records.sh` lagi untuk membuat perubahan yang diperlukan."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
         has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -570,11 +562,11 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+Jalankan `count-records.sh` pada `seasonal/*.csv`
+dan alihkan keluarannya ke `num-records.out` menggunakan `>`.
 
 `@hint`
-Use `>` to redirect the output.
+Gunakan `>` untuk mengalihkan keluaran.
 
 `@solution`
 ```{shell}
@@ -589,20 +581,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'Apakah Anda menjalankan file `count-records.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Apakah Anda menentukan file yang akan diproses dengan `seasonal/*`?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'Apakah Anda mengarahkan ke file `num-records.out`?')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("Pekerjaan yang sangat baik! Kekuatan shell Anda semakin berkembang!")
 ```
 
 ---
 
-## How can I process a single argument?
+## Bagaimana cara memroses satu argumen?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +601,42 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+Selain `$@`,
+shell memungkinkan Anda menggunakan `$1`, `$2`, dan seterusnya untuk merujuk ke parameter baris perintah tertentu.
+Anda dapat menggunakannya untuk menulis perintah yang terasa lebih sederhana atau lebih natural daripada milik shell.
+Sebagai contoh,
+Anda dapat membuat skrip bernama `column.sh` yang memilih satu kolom dari berkas CSV
+ketika pengguna memberikan nama berkas sebagai parameter pertama dan kolom sebagai parameter kedua:
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+lalu menjalankannya dengan:
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+Perhatikan bagaimana skrip menggunakan kedua parameter tersebut dalam urutan terbalik.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+Skrip `get-field.sh` seharusnya menerima sebuah nama berkas,
+nomor baris yang akan dipilih,
+nomor kolom yang akan dipilih,
+dan mencetak hanya kolom tersebut dari berkas CSV.
+Sebagai contoh:
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+seharusnya memilih kolom kedua dari baris ke-4 pada `seasonal/summer.csv`.
+Perintah manakah berikut yang harus dimasukkan ke dalam `get-field.sh` untuk melakukan hal tersebut?
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+Ingat bahwa parameter baris perintah diberi nomor dari kiri ke kanan.
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +645,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- Tidak: itu akan mencoba menggunakan nama berkas sebagai jumlah baris yang dipilih dengan `head`.
+- Benar!
+- Tidak: itu akan mencoba menggunakan nomor kolom sebagai nomor baris dan sebaliknya.
+- Tidak: itu akan menggunakan nomor kolom sebagai nama berkas dan sebaliknya.
 
 ---
 
-## How can one shell script do many things?
+## Bagaimana satu skrip shell dapat melakukan banyak hal?
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +660,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+Sejauh ini skrip shell kita hanya memiliki satu perintah atau pipa, tetapi sebuah skrip dapat berisi banyak baris perintah. Misalnya, Anda dapat membuat skrip yang memberi tahu berapa banyak record dalam berkas data terpendek dan terpanjang, yaitu rentang panjang himpunan data Anda.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+Perhatikan bahwa di Nano, "copy and paste" dilakukan dengan menavigasi ke baris yang ingin Anda salin, menekan `CTRL` + `K` untuk memotong baris tersebut, lalu `CTRL` + `U` dua kali untuk menempelkan dua salinan.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Sebagai pengingat, untuk menyimpan yang Anda tulis di Nano, ketik `Ctrl` + `O` untuk menuliskan berkas, lalu Enter untuk mengonfirmasi nama berkas, kemudian `Ctrl` + `X` untuk keluar dari editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +681,15 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+Gunakan Nano untuk mengedit skrip `range.sh`
+dan ganti dua placeholder `____`
+dengan `$@` dan `-v`
+agar skrip tersebut menampilkan nama dan jumlah baris di semua berkas yang diberikan pada baris perintah
+dan *tanpa* menampilkan total jumlah baris di semua berkas.
+(Jangan mencoba mengurangkan baris header kolom dari berkas.)
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+Gunakan `wc -l $@` untuk menghitung baris di semua berkas yang diberikan pada baris perintah.
 
 `@solution`
 ```{shell}
@@ -710,13 +701,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="Apakah Anda telah mengganti bagian yang kosong dengan benar sehingga perintah dalam `range.sh` terbaca `wc -l $@ | grep -v total`? Gunakan `nano range.sh` lagi untuk membuat perubahan yang diperlukan."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +718,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+Gunakan Nano lagi untuk menambahkan `sort -n` dan `head -n 1` secara berurutan
+ke pipeline di `range.sh`
+untuk menampilkan nama dan jumlah baris dari berkas terpendek yang diberikan kepadanya.
 
 `@hint`
 
@@ -745,13 +735,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="Apakah Anda telah menambahkan `sort -n` dan `head -n 1` dengan pipes ke file `range.sh`? Gunakan `nano range.sh` lagi untuk membuat perubahan yang diperlukan."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +752,13 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+Masih menggunakan Nano, tambahkan baris kedua ke `range.sh` untuk mencetak nama dan jumlah record dari
+berkas *terpanjang* di direktori *serta* yang terpendek.
+Baris ini harus merupakan duplikat dari yang sudah Anda tulis,
+namun dengan `sort -n -r` alih-alih `sort -n`.
 
 `@hint`
-Copy the first line and modify the sorting order.
+Salin baris pertama dan ubah urutan pengurutan.
 
 `@solution`
 ```{shell}
@@ -781,8 +770,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="Pertahankan baris pertama dalam file `range.sh`: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="Apakah Anda telah menduplikasi baris pertama di `range.sh` dan membuat sedikit perubahan? `sort -n -r` alih-alih `sort -n`!"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +779,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +790,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+Jalankan skrip pada berkas-berkas di direktori `seasonal`
+dengan menggunakan `seasonal/*.csv` untuk mencocokkan semua berkas
+dan alihkan keluarannya menggunakan `>`
+ke sebuah berkas bernama `range.out` di direktori home Anda.
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+Gunakan `bash range.sh` untuk menjalankan skrip Anda, `seasonal/*.csv` untuk menentukan berkas, dan `> range.out` untuk mengalihkan keluarannya.
 
 `@solution`
 ```{shell}
@@ -818,24 +806,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="Apakah Anda telah mengarahkan hasil dari `bash range.sh seasonal/*.csv` ke `range.out` dengan `>` dengan benar?"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Apakah Anda menjalankan file `range.sh`?'),
+has_code("seasonal/\*", incorrect_msg = 'Apakah Anda menentukan file yang akan diproses dengan `seasonal/*`?'),
+has_code(">\s+range.out", incorrect_msg = 'Apakah Anda mengarahkan ke file `range.out`?')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("Ini berjalan dengan baik. Lanjutkan ke latihan berikutnya untuk belajar tentang menulis loop!")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## Bagaimana cara menulis loop dalam skrip shell?
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,10 +830,10 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+Skrip shell juga dapat berisi loop. Anda dapat menulisnya menggunakan titik koma, atau memecahnya ke beberapa baris tanpa titik koma agar lebih mudah dibaca:
 
 ```{shell}
-# Print the first and last data records of each file.
+# Cetak rekaman data pertama dan terakhir dari setiap berkas.
 for filename in $@
 do
     head -n 2 $filename | tail -n 1
@@ -854,11 +841,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+(Anda tidak harus membuat inden untuk perintah di dalam loop, tetapi melakukannya akan membuatnya lebih jelas.)
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+Baris pertama skrip ini adalah **komentar** untuk memberi tahu pembaca apa yang dilakukan skrip. Komentar diawali dengan karakter `#` dan berlangsung hingga akhir baris. Diri Anda di masa depan akan berterima kasih karena Anda menambahkan penjelasan singkat seperti ini pada setiap skrip yang Anda tulis.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Sebagai pengingat, untuk menyimpan yang telah Anda tulis di Nano, tekan `Ctrl` + `O` untuk menulis berkas, lalu Enter untuk mengonfirmasi nama berkas, kemudian `Ctrl` + `X` untuk keluar dari editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +862,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+Lengkapi placeholder dalam skrip `date-range.sh`
+dengan `$filename` (dua kali), `head`, dan `tail`
+agar mencetak tanggal pertama dan terakhir dari satu atau beberapa berkas.
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+Ingat untuk menggunakan `$filename` untuk mengambil nilai saat ini dari variabel loop.
 
 `@solution`
 ```{shell}
@@ -892,10 +879,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="Di `date-range.sh`, apakah Anda telah mengubah baris %s dalam loop menjadi `%s`? Gunakan `nano date-range.sh` untuk membuat perubahan."
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('pertama', cmdpatt%'head')
+msg2=msgpatt%('kedua', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +893,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +904,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+Jalankan `date-range.sh` pada keempat berkas data musiman
+menggunakan `seasonal/*.csv` untuk mencocokkan nama mereka.
 
 `@hint`
-The wildcard expression should start with the directory name.
+Ekspresi wildcard harus diawali dengan nama direktori.
 
 `@solution`
 ```{shell}
@@ -937,9 +923,9 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Apakah Anda menjalankan file `date-range.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Apakah Anda menentukan file yang akan diproses dengan `seasonal/*`?')
     )
   )
 )
@@ -955,11 +941,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+Jalankan `date-range.sh` pada keempat berkas data musiman menggunakan `seasonal/*.csv` untuk mencocokkan nama mereka,
+dan teruskan keluarannya ke `sort` untuk melihat bahwa skrip Anda dapat digunakan seperti perintah bawaan Unix.
 
 `@hint`
-Use the same wildcard expression you used earlier.
+Gunakan ekspresi wildcard yang sama seperti sebelumnya.
 
 `@solution`
 ```{shell}
@@ -974,21 +960,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = 'Apakah Anda memanggil `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Apakah Anda menjalankan file `date-range.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Apakah Anda menentukan file yang akan diproses dengan `seasonal/*`?'),
+      has_code("|", incorrect_msg = 'Apakah Anda mengalirkan keluaran skrip ke `sort`?'),
+      has_code("sort", incorrect_msg = 'Apakah Anda memanggil `sort`?')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("Ajaib! Perhatikan betapa dapat digabungkannya semua hal yang telah kita pelajari.")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## Apa yang terjadi jika saya tidak memberikan nama berkas?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +981,42 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+Kesalahan umum dalam skrip shell (dan perintah interaktif) adalah menempatkan nama berkas di tempat yang salah.
+Jika Anda mengetik:
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+maka karena `tail` tidak diberi nama berkas apa pun,
+program akan menunggu masukan dari keyboard Anda.
+Ini berarti jika Anda mengetik:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+maka `tail` akan langsung mencetak tiga baris terakhir dari `somefile.txt`,
+tetapi `head` akan menunggu selamanya untuk masukan dari keyboard,
+karena tidak diberi nama berkas dan tidak ada apa pun di depannya dalam pipeline.
 
 <hr>
 
-Suppose you do accidentally type:
+Misalkan Anda tidak sengaja mengetik:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+Apa yang sebaiknya Anda lakukan selanjutnya?
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- Tunggu 10 detik hingga `head` kehabisan waktu (time out).
+- Ketik `somefile.txt` lalu tekan Enter untuk memberi masukan ke `head`.
+- Gunakan `Ctrl` + `C` untuk menghentikan program `head` yang sedang berjalan.
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+Apa yang dilakukan `head` jika tidak memiliki nama berkas dan tidak ada apa pun di hulu (upstream) darinya?
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +1025,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = 'Tidak, perintah tidak akan kedaluwarsa.'
+a2 = 'Tidak, itu akan memberikan teks `somefile.txt` ke `head` untuk diproses, tetapi kemudian akan berhenti menunggu masukan lebih lanjut.'
+a3 = "Ya! Anda harus menggunakan `Ctrl` + `C` untuk menghentikan program yang sedang berjalan. Ini mengakhiri kursus pengantar ini! Jika Anda tertarik untuk mempelajari lebih banyak alat baris perintah, kami sangat merekomendasikan mengikuti kursus pengantar Git gratis kami!"
 Ex().has_chosen(3, [a1, a2, a3])
 ```
