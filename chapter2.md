@@ -1,16 +1,14 @@
 ---
-title: Manipulating data
+title: 데이터 다루기
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  이전 장에서 본 명령은 파일 시스템에서 항목을 이동하는 방법을 보여줬습니다. 이번 장에서는 그 파일 속 데이터로 작업하는 방법을 알아봐요.
+  우리가 사용할 도구는 비교적 단순하지만, 탄탄한 기본 구성 요소예요.
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: 파일의 내용을 어떻게 볼 수 있을까요?
 ---
 
-## How can I view a file's contents?
+## 파일의 내용을 어떻게 볼 수 있나요?
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +16,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+파일 이름을 바꾸거나 삭제하기 전에,
+먼저 파일 내용부터 확인하고 싶을 때가 있어요.
+가장 간단한 방법은 `cat`을 사용하는 것입니다.
+이 명령은 파일의 내용을 화면에 그대로 출력해요.
+(이름은 "concatenate"의 줄임말로, "여러 항목을 이어 붙이다"라는 뜻입니다.
+여러 파일 이름을 넘기면, 지정한 순서대로 차례차례 출력해 줍니다.)
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +34,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+`course.txt`의 내용을 화면에 출력하세요.
 
 `@hint`
 
@@ -55,14 +53,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="명령이 올바른 출력을 생성하지 않았습니다. `cat`을 사용하고 파일 이름 `course.txt`를 뒤에 붙였는지 확인해 보세요.")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("좋습니다! 파일 내용을 보는 다른 방법을 살펴보겠습니다.")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## 파일 내용을 한 조각씩 살펴보려면 어떻게 하나요?
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +68,27 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+큰 파일을 출력하려면 `cat`을 사용하고 스크롤해도 되지만,
+보통은 출력 결과를 **페이지로 나눠** 보는 게 더 편합니다.
+이때 쓰던 원래 명령은 `more`였지만,
+지금은 더 강력한 `less`가 그 자리를 대신했습니다.
+(이런 작명은 Unix 세계에서 통하는 농담이에요.)
+파일에 `less`를 사용하면
+한 번에 한 페이지씩 표시되며,
+스페이스바로 아래로 내려가고 `q`로 종료할 수 있어요.
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+`less`에 여러 파일 이름을 주면,
+다음 파일로 이동할 때는 `:n`(콜론과 소문자 n),
+이전 파일로 돌아갈 때는 `:p`,
+종료할 때는 `:q`를 입력하면 됩니다.
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+참고: `less`를 사용하는 연습 문제의 해답을 보면,
+페이징을 테스트에 방해되지 않게 *끄는* 추가 명령이 마지막에 나옵니다.
+그래야 여러분의 답안을 효율적으로 채점할 수 있어요.
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+`less seasonal/spring.csv seasonal/summer.csv`를 사용해 두 파일을 그 순서대로 보세요.
+스페이스바로 아래로 내려가고, 두 번째 파일로 갈 때는 `:n`, 종료하려면 `:q`를 누르세요.
 
 `@hint`
 
@@ -112,7 +110,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='`less`와 파일 이름을 사용하십시오. `:n`을 사용하면 다음 파일로 이동합니다.'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +118,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## 파일의 시작 부분은 어떻게 볼 수 있나요?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +129,23 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+새로운 데이터셋을 받으면, 대부분의 데이터 과학자는 가장 먼저
+어떤 필드가 있고 각 필드에 어떤 값이 들어 있는지 파악합니다.
+데이터베이스나 스프레드시트에서 내보낸 데이터셋이라면
+대개 **comma-separated values**(CSV) 형식으로 저장됩니다.
+내용을 빠르게 파악하는 좋은 방법은 처음 몇 행을 확인하는 것입니다.
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+셸에서는 `head`라는 명령으로 이를 할 수 있습니다.
+이름에서 알 수 있듯이,
+파일의 처음 몇 줄을 출력합니다
+(여기서 "몇"은 10줄을 의미합니다),
+따라서 다음 명령을 실행하면:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+다음과 같이 표시됩니다:
 
 ```
 Date,Tooth
@@ -164,16 +162,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+파일에 10줄이 없으면 `head`는 무엇을 할까요?
+(직접 확인해 보려면 `people/agarwal.txt`의 앞부분을 확인해 보세요.)
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- 파일이 너무 짧다고 오류 메시지를 출력한다.
+- 있는 줄 수만큼만 표시한다.
+- 총 10줄이 되도록 빈 줄을 채워서 표시한다.
 
 `@hint`
-What is the most useful thing it could do?
+가장 유용하게 할 수 있는 일은 무엇일까요?
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +180,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["틀렸습니다: 그것은 가장 유용한 작업이 아닙니다.",
+                    "정답입니다!",
+                    "틀렸습니다: 그것은 빈 줄로 끝나는 파일과 구별할 수 없을 것입니다."])
 ```
 
 ---
 
-## How can I type less?
+## 입력을 줄이려면 어떻게 하나요?
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +195,21 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+셸의 강력한 도구 중 하나는 **탭 완성(tab completion)**이에요.
+파일 이름을 조금 입력한 뒤 탭 키를 누르면,
+셸이 경로를 자동으로 완성해 줍니다.
+예를 들어,
+`sea`를 입력하고 탭을 누르면
+디렉터리 이름 `seasonal/`(끝에 슬래시 포함)을 채워 넣어요.
+그다음 `a`를 입력하고 다시 탭을 누르면
+경로가 `seasonal/autumn.csv`로 완성됩니다.
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+경로가 모호한 경우,
+예를 들어 `seasonal/s`처럼 입력했을 때는,
+탭을 한 번 더 누르면 가능한 목록이 표시돼요.
+경로를 더 구체적으로 만들기 위해 한두 글자를 더 입력한 다음
+다시 탭을 누르면
+나머지 이름이 자동으로 채워집니다.
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +225,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+전체 파일 이름을 모두 입력하지 않고 `head seasonal/autumn.csv`를 실행하세요.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+필요한 만큼 경로를 입력한 뒤 탭을 누르고, 이 과정을 반복하세요.
 
 `@solution`
 ```{shell}
@@ -242,9 +240,8 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="채점기가 명령어에서 올바른 출력을 찾을 수 없습니다. `seasonal/autumn.csv`에 대해 `head`를 호출했는지 확인하십시오.")
 )
-
 ```
 
 ***
@@ -256,10 +253,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+전체 파일 이름을 모두 입력하지 않고 `head seasonal/spring.csv`를 실행하세요.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+필요한 만큼 경로를 입력한 뒤 탭을 누르고, 이 과정을 반복하세요.
 
 `@solution`
 ```{shell}
@@ -271,15 +268,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="채점기가 명령어에서 올바른 출력을 찾을 수 없습니다. `seasonal/spring.csv`에 대해 `head`를 호출했는지 확인하십시오.")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("잘하셨습니다! 탭 완성 기능에 익숙해지면 많은 시간을 절약할 수 있습니다!")
 ```
 
 ---
 
-## How can I control what commands do?
+## 명령의 동작을 어떻게 제어할 수 있나요?
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +283,30 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+항상 파일의 처음 10줄만 보고 싶지는 않을 수 있어요.
+그래서 셸에서는 **명령줄 플래그**(간단히 "플래그")를 사용해 `head`의 동작을 바꿀 수 있게 해줍니다.
+다음 명령을 실행하면:
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head`는 파일의 처음 세 줄만 표시합니다.
+`head -n 100`을 실행하면
+(그만큼 줄이 있다면) 처음 100줄을 표시하고,
+이와 같은 방식으로 동작해요.
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+플래그 이름은 보통 용도를 나타냅니다
+(예를 들어 `-n`은 "줄의 **n**개 수"를 의미합니다).
+명령 플래그가 꼭 `-` 다음에 한 글자여야 하는 것은 아니지만,
+널리 쓰이는 관례입니다.
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+참고: 모든 플래그를 파일 이름보다 *앞*에 두는 것이 좋은 스타일로 여겨집니다.
+따라서 이 강의에서는
+그 규칙을 따른 답만 정답으로 인정합니다.
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+`seasonal` 디렉터리의 `winter.csv`에서 처음 5줄을 표시하세요.
 
 `@hint`
 
@@ -331,17 +326,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="`seasonal/winter.csv` 파일에서 `head`를 호출했는지 확인하십시오."),
+        has_expr_output(strict=True, incorrect_msg="`-n 5` 플래그를 사용했는지 확인하십시오.")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "`-n 5` 플래그를 사용했는지 확인하십시오.")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("좋습니다! 이 기술을 사용하면 더 큰 텍스트 파일을 보고 싶을 때 셸이 중단되는 것을 방지할 수 있습니다.")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## 디렉터리 아래의 모든 항목을 어떻게 나열할 수 있나요?
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +344,11 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+디렉터리 아래에 있는 모든 항목을,
+얼마나 깊게 중첩되어 있든 전부 보려면,
+`ls`에 `-R` 플래그(“recursive”, 재귀적의 약자)를 주면 됩니다.
+홈 디렉터리에서 `ls -R`을 사용하면
+다음과 비슷한 결과를 볼 거예요:
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +362,19 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+이 출력은 현재 단계의 모든 파일과 디렉터리를 보여주고,
+그다음 각 하위 디렉터리의 모든 항목을,
+이와 같은 방식으로 계속 보여줍니다.
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+무엇이 무엇인지 쉽게 구분할 수 있도록,
+`ls`에는 이름 뒤에 디렉터리에는 `/`, 실행 가능한 프로그램에는 `*`를 붙여 출력하는 또 다른 플래그 `-F`가 있어요.
+두 플래그 `-R`과 `-F`를 함께 사용하고,
+홈 디렉터리의 절대 경로를 인자로 주어 그 안의 모든 내용을 확인해 보세요.
+(플래그의 순서는 중요하지 않지만, 디렉터리 이름은 반드시 마지막에 와야 합니다.)
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+홈 디렉터리는 `~` 또는 `.` 또는 절대 경로로 지정할 수 있어요.
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +389,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='`ls -R -F` 또는 `ls -F -R`와 경로 `/home/repl`을 사용하십시오.'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='`ls -R -F` 또는 `ls -F -R`와 경로 `/home/repl`을 사용하십시오.')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg('꽤 깔끔한 개요죠, 그렇지 않습니까?')
 ```
 
 ---
 
-## How can I get help for a command?
+## 명령어에 대한 도움말은 어떻게 볼 수 있나요?
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +405,8 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+명령어가 무엇을 하는지 알아볼 때는 예전에는 `man` 명령어(“manual”의 줄임말)를 자주 썼습니다.
+예를 들어, `man head` 명령어를 실행하면 다음과 같은 정보가 나옵니다:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +430,21 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man`은 자동으로 `less`를 호출하므로,
+정보를 페이지별로 넘기려면 스페이스바를 누르고,
+종료하려면 `:q`를 입력해야 할 수 있습니다.
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+`NAME` 아래의 한 줄 설명은 명령어가 무엇을 하는지 간단히 알려 주고,
+`SYNOPSIS` 아래의 요약에는 해당 명령어가 인식하는 모든 플래그가 나열됩니다.
+대괄호 `[...]` 안은 선택 사항을, 파이프 `|`는 선택지 중 하나를,
+줄임표 `...`는 반복 가능함을 의미합니다.
+따라서 `head`의 매뉴얼 페이지는 `-n`으로 줄 수를 지정하거나 `-c`로 바이트 수를 지정할 수 있으며,
+파일 이름은 원하는 만큼 줄 수 있음을 알려 줍니다.
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Unix 매뉴얼의 문제는 무엇을 찾아야 하는지 미리 알고 있어야 한다는 점입니다.
+모르겠다면 [Stack Overflow](https://stackoverflow.com/)에서 검색하거나,
+DataCamp의 Slack 채널에 질문하거나,
+이미 아는 명령어의 `SEE ALSO` 섹션을 살펴보세요.
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +460,12 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+`tail` 명령어의 매뉴얼 페이지를 읽어,
+`-n` 플래그에 사용하는 숫자 앞에 `+` 기호를 붙이면 무엇이 달라지는지 알아보세요.
+(아래로 넘기려면 스페이스바, 종료하려면 `q`를 누르세요.)
 
 `@hint`
-Remember: `man` is short for "manual".
+기억하세요: `man`은 "manual"의 줄임말입니다.
 
 `@solution`
 ```{shell}
@@ -489,8 +476,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='`man`과 명령어 이름을 사용하십시오.')
 ```
 
 ***
@@ -502,10 +488,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+`tail`에 `-n +7` 플래그를 사용해 `seasonal/spring.csv`의 앞 여섯 줄을 제외한 나머지 모든 줄을 표시하세요.
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+표시하고 싶은 줄 수 앞에 플러스 기호 '+'를 붙이세요.
 
 `@solution`
 ```{shell}
@@ -517,15 +503,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="`seasonal/spring.csv`에 대해 `tail`을 호출하고 있습니까?"),
+    has_expr_output(strict=True, incorrect_msg="`-n +7` 플래그를 사용했는지 확인하셨습니까?")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## 파일에서 특정 열만 선택하려면 어떻게 하나요?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +518,34 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head`와 `tail`은 텍스트 파일에서 행을 선택할 수 있어요.
+열을 선택하려면 `cut` 명령을 사용할 수 있어요.
+여러 옵션이 있으며(자세한 내용은 `man cut`에서 확인하세요),
+가장 흔한 사용 예는 다음과 같아요:
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+이 명령은
+"쉼표를 구분자로 사용하여,
+2번부터 5번 열과 8번 열을 선택"한다는 뜻이에요.
+`cut`은 열을 지정할 때 `-f`("fields"의 약자)를,
+구분자를 지정할 때 `-d`("delimiter"의 약자)를 사용해요.
+일부 파일은 열을 구분할 때 공백, 탭, 콜론 등을 사용할 수 있으므로, 구분자는 반드시 지정해야 해요.
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+파일 `spring.csv`에서 첫 번째 열(날짜가 들어 있는 열)만 선택하려면 어떤 명령을 사용해야 하나요?
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- 위의 둘 다.
+- 둘 다 아님. `-f`가 반드시 `-d`보다 먼저 와야 해서요.
 
 `@hint`
-The order of the flags doesn't matter.
+플래그의 순서는 중요하지 않아요.
 
 `@pre_exercise_code`
 ```{python}
@@ -570,12 +554,12 @@ The order of the flags doesn't matter.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['예, 그러나 그것이 전부는 아닙니다', '예, 그러나 그것이 전부는 아닙니다', '정답입니다! 플래그 뒤에 공백을 추가하는 것은 좋은 스타일이지만 필수는 아닙니다.', '아니요, 플래그 순서는 중요하지 않습니다'])
 ```
 
 ---
 
-## What can't cut do?
+## cut으로는 무엇을 할 수 없을까요?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +567,10 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut`은 단순한 명령입니다.
+특히,
+따옴표로 묶인 문자열을 이해하지 못합니다.
+예를 들어, 파일이 다음과 같다면:
 
 ```
 Name,Age
@@ -594,13 +578,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+다음 명령은:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+다음과 같은 출력을 만듭니다:
 
 ```
 Age
@@ -608,27 +592,27 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+모든 사람의 나이를 출력하는 대신 이렇게 되는 이유는,
+성(last name)과 이름(first name) 사이의 쉼표를 열 구분자로 인식하기 때문입니다.
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+다음 줄에 대해 `cut -d : -f 2-4`의 출력은 무엇인가요?
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+(마지막에 콜론이 있다는 점을 참고하세요.)
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- 위의 어느 것도 아님. 필드가 네 개가 아니기 때문임.
 
 `@hint`
-Pay attention to the trailing colon.
+마지막에 오는 콜론에 주의하세요.
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +621,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['아니요, 더 있습니다.', '아니요, 더 있습니다.', '정답입니다! 뒤에 오는 콜론은 네 번째 빈 필드를 만듭니다.', '아니요, `cut`은 최선을 다합니다.'])
 ```
 
 ---
 
-## How can I repeat commands?
+## 명령을 반복하려면 어떻게 하나요?
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +634,16 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+셸을 사용하면 같은 작업을 다시 수행하기가 매우 쉽다는 점이 큰 장점이에요.
+몇 가지 명령을 실행한 다음, 위쪽 화살표 키를 눌러 이전에 실행한 명령들을 순서대로 돌아볼 수 있어요.
+왼쪽/오른쪽 화살표 키와 Delete 키로 명령을 편집할 수도 있어요.
+그 상태에서 Enter를 누르면 수정한 명령이 실행됩니다.
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+더 나아가, `history`는 최근에 실행한 명령 목록을 출력해 줍니다.
+각 명령 앞에는 일련번호가 붙어 있어서 특정 명령을 다시 실행하기가 쉬워요:
+예를 들어, `!55`를 입력하면 히스토리에서 55번째 명령이 다시 실행됩니다(그만큼의 기록이 있다면요).
+또한 느낌표 뒤에 명령 이름을 붙여서 해당 명령의 가장 최근 실행을 다시 수행할 수도 있어요.
+예를 들어 `!head`나 `!cut`처럼 입력하면 됩니다.
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +659,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+홈 디렉터리에서 `head summer.csv`를 실행하세요(실패해야 합니다).
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+일치하는 파일 이름이 없으면 탭 자동 완성은 동작하지 않아요.
 
 `@solution`
 ```{shell}
@@ -693,9 +674,8 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="`head`와 파일 이름 `summer.csv`를 사용하십시오. 실패하더라도 걱정하지 마십시오. 그래야 합니다.")
 )
-
 ```
 
 ***
@@ -707,10 +687,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+`seasonal` 디렉터리로 이동하세요.
 
 `@hint`
-Remember that `cd` stands for "change directory".
+`cd`는 "change directory"(디렉터리 변경)의 약자예요.
 
 `@solution`
 ```{shell}
@@ -722,9 +702,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="현재 작업 디렉토리(`pwd`로 확인)가 `/home/repl`인 경우, `cd seasonal`을 사용하여 `seasonal` 폴더로 이동할 수 있습니다.")
 )
-
 ```
 
 ***
@@ -736,10 +715,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+`!head`로 `head` 명령을 다시 실행하세요.
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+`!`와 그다음에 오는 것 사이에 공백을 넣지 마세요.
 
 `@solution`
 ```{shell}
@@ -755,11 +734,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='`!head`를 사용하여 `head` 명령을 반복하십시오.'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +749,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+`history`로 지금까지 수행한 작업을 확인하세요.
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+`history`는 가장 최근 명령을 마지막에 보여 주므로, 실행이 끝날 때 화면에 최근 항목이 남아요.
 
 `@solution`
 ```{shell}
@@ -784,8 +762,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='이전 명령어 목록을 얻으려면 플래그 없이 `history`를 사용하십시오.')
 ```
 
 ***
@@ -797,10 +774,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+명령 번호 뒤에 `!`를 붙여 `head`를 다시 실행하세요.
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+`!`와 그다음에 오는 것 사이에 공백을 절대 넣지 마세요.
 
 `@solution`
 ```{shell}
@@ -816,7 +793,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='`!<숫자>`를 사용하여 기록에서 마지막 `head` 명령을 다시 실행하셨나요?'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +801,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("잘하셨습니다! 다음으로 넘어가세요!")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## 특정 값을 포함하는 줄만 선택하려면 어떻게 하나요?
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +814,26 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head`와 `tail`은 행을 선택하고,
+`cut`은 열을 선택하며,
+`grep`은 줄의 내용에 따라 줄을 선택합니다.
+가장 간단한 형태로,
+`grep`은 텍스트 조각과 그 뒤에 하나 이상의 파일 이름을 받아서
+해당 텍스트를 포함하는 모든 줄을 출력합니다.
+예를 들어,
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+은 "bicuspid"를 포함하는 `winter.csv`의 줄을 출력합니다.
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep`은 패턴 검색도 할 수 있으며,
+이는 다음 강의에서 살펴보겠습니다.
+지금 더 중요한 것은 `grep`에서 자주 쓰는 플래그입니다:
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: 일치하는 줄 자체가 아니라 그 개수를 출력
+- `-h`: 여러 파일을 검색할 때 파일 이름을 출력하지 않음
+- `-i`: 대소문자를 구분하지 않음(예: "Regression"과 "regression"을 일치로 처리)
+- `-l`: 일치한 내용이 아니라, 일치 항목을 포함한 파일 이름을 출력
+- `-n`: 일치한 줄의 줄 번호를 출력
+- `-v`: 일치를 뒤집어, 즉 일치하지 않는 줄만 표시
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +849,10 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+홈 디렉터리에서 단일 명령으로 `seasonal/autumn.csv`에서 `molar`라는 단어를 포함하는 모든 줄의 내용을 출력하세요. 플래그는 사용하지 마세요.
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+찾을 단어와 검색할 파일 이름을 함께 써서 `grep`을 사용하세요.
 
 `@solution`
 ```{shell}
@@ -892,13 +867,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "`grep`을 호출하셨나요?"),
+      has_code("molar", incorrect_msg = "`molar`를 검색하셨나요?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "`seasonal/autumn.csv` 파일을 검색하셨나요?")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +884,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+일치를 반대로 해서 `seasonal/spring.csv`에서 `molar`라는 단어를 포함하지 않는 줄을 모두 찾고, 그 줄 번호를 표시하세요.
+좋은 스타일로는 플래그를 파일 이름이나 검색어 "molar"보다 앞에 두는 것이 좋다는 점을 기억하세요.
 
 `@hint`
 
@@ -929,11 +903,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "`grep`을 호출하셨나요?"),
+      has_code("-v", incorrect_msg = "`-v`로 일치를 반전시키셨나요?"),
+      has_code("-n", incorrect_msg = "`-n`으로 줄 번호를 표시하셨나요?"),
+      has_code("molar", incorrect_msg = "`molar`를 검색하셨나요?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "`seasonal/spring.csv` 파일을 검색하셨나요?")
     )
   )
 )
@@ -949,11 +923,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+`autumn.csv`와 `winter.csv`를 합쳐서 `incisor`라는 단어를 포함하는 줄이 몇 개인지 세어 보세요.
+(역시 홈 디렉터리에서 단일 명령으로 실행하세요.)
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+줄 수를 세려면 `grep`에 `-c`를 사용하세요.
 
 `@solution`
 ```{shell}
@@ -968,20 +942,19 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "`grep`을 호출하셨나요?"),
+      has_code("-c", incorrect_msg = "`-c`로 개수를 얻으셨나요?"),
+      has_code("incisor", incorrect_msg = "`incisor`를 검색하셨나요?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "`seasonal/autumn.csv` 파일을 검색하셨나요?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "`seasonal/winter.csv` 파일을 검색하셨나요?")
     )
   )
 )
-
 ```
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## 항상 데이터를 텍스트처럼 다루는 것이 안전하지 않은 이유는 무엇인가요?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +962,22 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+`cut`의 매뉴얼 페이지 `SEE ALSO` 섹션에는 데이터를 잘라내는 대신 결합할 수 있는 `paste`라는 명령이 소개되어 있습니다.
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+먼저 `paste`의 매뉴얼 페이지를 읽고,
+그다음 가을과 겨울 데이터 파일을 쉼표를 구분 기호로 하여 단일 테이블로 결합하기 위해 `paste`를 실행해 보세요.
+데이터 분석 관점에서 출력 결과의 문제점은 무엇인가요?
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- 열 헤더가 반복됩니다.
+- 마지막 몇 행의 열 개수가 올바르지 않습니다.
+- `winter.csv`의 일부 데이터가 누락되었습니다.
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+`paste`의 출력에 대해 구분 기호로 쉼표를 사용해 `cut`을 적용하면
+올바른 답이 나올까요?
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +986,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = '맞습니다만, 반드시 오류는 아닙니다.'
+correct2 = '정답: 열과 함께 줄을 연결하면 시작 부분에 빈 열이 하나만 생성되고, 두 개는 아닙니다.'
+err3 = '아니요, 모든 겨울 데이터가 있습니다.'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```

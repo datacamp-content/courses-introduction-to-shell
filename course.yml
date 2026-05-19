@@ -1,19 +1,15 @@
-title: Introduction to Shell
+title: Shell 입문
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Unix 명령줄은 몇 개의 키 입력만으로도 복잡한 일을 해낼 수 있기 때문에 거의 50년 동안 살아남아 발전해 왔습니다. 때로는
+  "프로그래밍의 범용 접착제"라고 불리며, 기존 프로그램을 새로운 방식으로 조합하고, 반복 작업을 자동화하며, 지구 반대편에 있는 클러스터나
+  클라우드에서 프로그램을 실행할 수 있게 해줘요. 이 강의에서는 핵심 요소를 소개하고 효율적으로 활용하는 방법을 알려드립니다.
 
 
-  The course glossary can be found on the right in the resources section.
+  강의 용어집은 오른쪽 리소스 섹션에서 확인할 수 있어요.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  CPE 학점 취득을 위해서는 강의를 완료하고 인증 평가에서 70% 이상의 점수를 받아야 합니다. 오른쪽의 CPE 학점 안내를 클릭하면 평가로
+  이동할 수 있어요.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
