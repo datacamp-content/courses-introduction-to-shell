@@ -1,17 +1,16 @@
 ---
-title: Manipulating files and directories
+title: Práce se soubory a složkami
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  Tato kapitola je stručným úvodem do shellu Unixu. Dozvíš se, proč se používá
+  již téměř 50 let, jak se liší od grafických nástrojů, které možná znáš lépe,
+  jak se v shellu pohybovat a jak vytvářet, upravovat a mazat soubory a složky.
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: Jak se shell liší od grafického rozhraní?
 ---
 
-## How does the shell compare to a desktop interface?
+## Čím se shell liší od grafického rozhraní?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +18,51 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Operační systém, jako je Windows, Linux nebo macOS, je zvláštní druh programu.
+Řídí procesor počítače, pevný disk a síťové připojení,
+ale jeho nejdůležitějším úkolem je spouštět ostatní programy.
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+Protože lidé nejsou digitální bytosti,
+potřebují nějaké rozhraní, přes které mohou s operačním systémem komunikovat.
+Dnes je nejrozšířenější grafický správce souborů,
+který překládá kliknutí a poklepání na příkazy k otevírání souborů a spouštění programů.
+Dříve, než počítače dostaly grafické displeje,
+však
+lidé zadávali instrukce do programu zvaného **příkazový řádek (shell)**.
+Pokaždé, když zadáš příkaz,
+shell spustí příslušné programy,
+vypíše jejich výstup v čitelné podobě
+a zobrazí *prompt* jako signál, že je připravený přijmout další příkaz.
+(Název „shell" vychází z představy, že tvoří „vnější schránku" počítače.)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+Zadávání příkazů místo klikání a přetahování může zpočátku působit neohrabaně,
+ale jak brzy uvidíš,
+jakmile začneš přesně říkat počítači, co má dělat,
+můžeš kombinovat stávající příkazy a vytvářet nové
+a automatizovat opakující se úkony
+jenom s pár stisky kláves.
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+Jaký je vztah mezi grafickým správcem souborů, který většina lidí používá, a příkazovým řádkem (shellem)?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+Nezapomeň, že uživatel může s operačním systémem pracovat jen prostřednictvím nějakého programu.
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- Správce souborů umožňuje prohlížet a upravovat soubory, zatímco shell slouží ke spouštění programů.
+- Správce souborů je postaven na shellu.
+- Shell je součástí operačního systému, zatímco správce souborů je oddělený.
+- [Obojí jsou rozhraní pro zadávání příkazů operačnímu systému.]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- Obě rozhraní umožňují prohlížet a upravovat soubory i spouštět programy.
+- Grafický správce souborů i shell volají stejné funkce operačního systému.
+- Shell i správce souborů jsou programy, které převádějí příkazy uživatele (zadané textem nebo kliknutím) na volání operačního systému.
+- Správně! Obě rozhraní přijímají příkazy od uživatele (ať už zadané textem, nebo kliknutím) a předávají je operačnímu systému.
 
 ---
 
-## Where am I?
+## Kde jsem?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +70,22 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**Souborový systém** spravuje soubory a adresáře (neboli složky).
+Každý z nich je identifikován **absolutní cestou**,
+která ukazuje, jak se k němu dostat od **kořenového adresáře** souborového systému:
+`/home/repl` je adresář `repl` uvnitř adresáře `home`,
+`/home/repl/course.txt` je soubor `course.txt` v tomto adresáři
+a `/` samotné představuje kořenový adresář.
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+Aby ses dozvěděl/a, kde v souborovém systému právě jsi,
+spusť příkaz `pwd`
+(zkratka z anglického „**p**rint **w**orking **d**irectory", tedy „vypsat pracovní adresář").
+Ten zobrazí absolutní cestu k tvému **aktuálnímu pracovnímu adresáři** –
+to je místo, kde shell ve výchozím nastavení spouští příkazy a hledá soubory.
 
 <hr>
-Run `pwd`.
-Where are you right now?
+Spusť příkaz `pwd`.
+Kde se právě nacházíš?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +93,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+Unix systémy většinou ukládají domovské adresáře všech uživatelů do `/home`.
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +102,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "To není správná cesta."
+correct = "Správně – nacházíte se v `/home/repl`."
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## Jak rozpoznat soubory a adresáře?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +118,23 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` ti ukáže, kde se právě nacházíš.
+Chceš-li zjistit, co se tam nachází,
+zadej `ls` (zkratka z anglického „**l**i**s**ting") a stiskni Enter.
+Samotný příkaz `ls` vypíše obsah tvého aktuálního adresáře
+(toho, který zobrazuje `pwd`).
+Pokud zadáš názvy souborů,
+`ls` je vypíše,
+a pokud zadáš názvy adresářů,
+zobrazí jejich obsah.
+Například
+`ls /home/repl` ukáže obsah tvého výchozího adresáře
+(obvykle nazývaného **domovský adresář**).
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+Použij `ls` s vhodným argumentem a vypiš soubory v adresáři `/home/repl/seasonal`
+(který obsahuje informace o zubních ošetřeních podle data, rozdělené podle ročních období).
+Který z těchto souborů v daném adresáři *není*?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +143,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+Pokud příkazu `ls` zadáš cestu, zobrazí obsah daného umístění.
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +152,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "Tento soubor se nachází v adresáři `seasonal`."
+correct = "Správně – tento soubor se *nenachází* v adresáři `seasonal`."
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## Jak jinak můžu identifikovat soubory a adresáře?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +168,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+Absolutní cesta je jako zeměpisná souřadnice: má stejnou hodnotu bez ohledu na to, kde se nacházíš. **Relativní cesta** naopak určuje umístění od místa, kde právě jsi – je to jako říct „20 kilometrů na sever".
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+Příklady:
+- Pokud se nacházíš v adresáři `/home/repl`, **relativní** cesta `seasonal` odkazuje na stejný adresář jako **absolutní** cesta `/home/repl/seasonal`.
+- Pokud se nacházíš v adresáři `/home/repl/seasonal`, **relativní** cesta `winter.csv` odkazuje na stejný soubor jako **absolutní** cesta `/home/repl/seasonal/winter.csv`.
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Shell rozpozná, zda je cesta absolutní nebo relativní, podle prvního znaku: začíná-li znakem `/`, jde o absolutní cestu. Pokud `/` *nezačíná*, jde o relativní cestu.
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +190,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+Nacházíš se v `/home/repl`. Použij `ls` s **relativní cestou** a vypiš soubor, jehož absolutní cesta je `/home/repl/course.txt` (a pouze ten soubor).
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+Relativní cestu k souboru nebo adresáři nebo souboru, který se nachází pod tvou aktuální polohou,
+lze často sestavit tak, že od absolutní cesty k cílovému souboru odečteš absolutní cestu tvého aktuálního umístění.
 
 `@solution`
 ```{shell}
@@ -209,13 +206,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "Nezavolali jste `ls` pro vygenerování výpisu souborů."), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "Váš příkaz nevygeneroval správný výpis souborů. Použijte `ls` následované relativní cestou k `/home/repl/course.txt`.")
     )
 )
-
 ```
 
 ***
@@ -227,12 +223,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+Nacházíš se v `/home/repl`.
+Použij `ls` s **relativní** cestou
+a vypiš soubor `/home/repl/seasonal/summer.csv` (a pouze ten soubor).
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+Relativní cesty *nezačínají* lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -244,10 +240,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Nezavolali jste `ls` pro vygenerování výpisu souborů."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Váš příkaz nevygeneroval správný výpis souborů. Použijte `ls` následované relativní cestou k `/home/repl/seasonal/summer.csv`.")
     )
 )
 ```
@@ -261,12 +257,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+Nacházíš se v `/home/repl`.
+Použij `ls` s **relativní** cestou
+a vypiš obsah adresáře `/home/repl/people`.
 
 `@hint`
-Relative paths do not start with a leading '/'.
+Relativní cesty nezačínají lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -278,19 +274,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Nezavolali jste `ls` pro vygenerování výpisu souborů."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "Váš příkaz nevygeneroval správný výpis souborů. Použijte `ls` následované relativní cestou k `/home/repl/people`.")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("Výborně. Nyní, když víte, jak vypisovat soubory a adresáře, podívejme se, jak se můžete pohybovat po souborovém systému!")
 ```
 
 ---
 
-## How can I move to another directory?
+## Jak se přesunout do jiného adresáře?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +293,17 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+Stejně jako se v prohlížeči souborů přesouváš poklepáním na složky,
+můžeš se v souborovém systému pohybovat příkazem `cd`
+(zkratka anglického „change directory", tedy „změnit adresář").
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+Pokud zadáš `cd seasonal` a pak `pwd`,
+shell ti oznámí, že se teď nacházíš v `/home/repl/seasonal`.
+Spustíš-li pak `ls` bez argumentů,
+zobrací se obsah adresáře `/home/repl/seasonal`,
+protože právě tam se nacházíš.
+Pokud se chceš vrátit do svého domovského adresáře `/home/repl`,
+použij příkaz `cd /home/repl`.
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +319,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+Nacházíš se v `/home/repl`/.
+Přesuň se do adresáře `/home/repl/seasonal` pomocí relativní cesty.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Pamatuj, že `cd` je zkratka pro „change directory" a že relativní cesty nezačínají lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -340,9 +335,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Pokud je váš aktuální pracovní adresář (zjistíte pomocí `pwd`) `/home/repl`, můžete přejít do složky `seasonal` pomocí `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -354,10 +348,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+Pomocí `pwd` ověř, že se tam skutečně nacházíš.
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+Nezapomeň po zadání příkazu stisknout „Enter".
 
 `@solution`
 ```{shell}
@@ -374,7 +368,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +379,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+Spusť `ls` bez argumentů a zjisti, co se v tomto adresáři nachází.
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+Nezapomeň po zadání příkazu stisknout „Enter".
 
 `@solution`
 ```{shell}
@@ -403,17 +396,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="Váš příkaz nevygeneroval správný výstup. Použili jste `ls` bez cest pro zobrazení obsahu aktuálního adresáře?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("Výborně! Toto bylo o navigaci do podadresářů. Co přesun nahoru? Pojďme to zjistit!")
 ```
 
 ---
 
-## How can I move up a directory?
+## Jak se přesunout o adresář výš?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +413,54 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+**Nadřazený** adresář je adresář ležící o úroveň výš.
+Například `/home` je nadřazený adresář `/home/repl`
+a `/home/repl` je nadřazený adresář `/home/repl/seasonal`.
+Příkazům jako `cd` a `ls` můžeš vždy zadat absolutní cestu k nadřazenému adresáři.
+Častěji ale využiješ toho, že speciální cesta `..`
+(dvě tečky bez mezer) znamená „adresář nad tím, ve kterém se právě nacházím".
+Pokud jsi v `/home/repl/seasonal`,
+příkaz `cd ..` tě přesune do `/home/repl`.
+Pokud použiješ `cd ..` ještě jednou,
+okázneš se v `/home`.
+Další `cd ..` tě přesune do *kořenového adresáře* `/`,
+který je úplně na vrcholu souborového systému.
+(Nezapomeň dát mezeru mezi `cd` a `..` – jde o příkaz a cestu, ne o jediný čtyřpísmenný příkaz.)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+Samotná jednoduchá tečka, `.`, vždy znamená „aktuální adresář",
+takže `ls` a `ls .` dělají totéž,
+zatímco `cd .` nemá žádný efekt
+(protože tě přesune do adresáře, ve kterém už jsi).
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+Posledním speciálním znakem je `~` (vlnovka),
+která znamená „tvůj domovský adresář",
+například `/home/repl`.
+Kdekoli se nacházíš,
+`ls ~` vždy zobrazí obsah tvého domovského adresáře
+a `cd ~` tě vždy přesune domů.
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+Pokud jsi v `/home/repl/seasonal`,
+kam tě přesune `cd ~/../.`?
 
 `@hint`
-Trace the path one directory at a time.
+Sleduj cestu adresář po adresáři.
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (kořenový adresář)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- Ne, ale samotné `~` nebo `..` by tě tam dostalo.
+- Správně! Cesta znamená „domovský adresář", „o úroveň výš", „zde".
+- Ne, ale samotná `.` by to udělala.
+- Ne, poslední část cesty je `.` (tedy „zde"), nikoli `..` (tedy „výš").
 
 ---
 
-## How can I copy files?
+## Jak kopírovat soubory?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +468,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+Soubory budeš často chtít kopírovat,
+přesouvat do jiných adresářů, abys je lépe uspořádal/a,
+nebo přejmenovávat.
+K tomu slouží příkaz `cp`, zkratka anglického slova „copy".
+Pokud soubor `original.txt` existuje,
+pak příkaz:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+vytvoří jeho kopii s názvem `duplicate.txt`.
+Pokud soubor `duplicate.txt` již existoval,
+bude přepsán.
+Pokud je posledním parametrem příkazu `cp` existující adresář,
+pak příkaz jako:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+skopíruje *všechny* uvedené soubory do tohoto adresáře.
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +505,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+Vytvoř kopii souboru `seasonal/summer.csv` v adresáři `backup` (který se také nachází v `/home/repl`)
+a pojmenuj nový soubor `summer.bck`.
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+Spoj název cílového adresáře s názvem kopírovaného souboru
+a vytvoř tak relativní cestu k novému souboru.
 
 `@solution`
 ```{shell}
@@ -531,10 +521,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` se zdá, že neexistuje v adresáři `backup`. Zadejte dvě cesty k příkazu `cp`: existující soubor (`seasonal/summer.csv`) a cílový soubor (`backup/summer.bck`)."),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +535,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+Zkopíruj soubory `spring.csv` a `summer.csv` z adresáře `seasonal` do adresáře `backup`
+*bez* změny aktuálního pracovního adresáře (`/home/repl`).
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+Použij `cp` s názvy souborů, které chceš zkopírovat,
+a *pak* uveď název adresáře, do kterého je chceš zkopírovat.
 
 `@solution`
 ```{shell}
@@ -561,18 +550,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` nebyl zkopírován do adresáře `backup`. Zadejte příkazu `cp` dva názvy souborů a název adresáře."
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="Ujistěte se, že kopírujete soubory v adresáři `{{dir}}`! Použijte příkaz `cd {{dir}}` pro návrat zpět."),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("Výborně. Kromě kopírování bychom také měli být schopni přesouvat soubory z jednoho adresáře do druhého. Dozvíte se o tom v následujícím cvičení!")
 ```
 
 ---
 
-## How can I move a file?
+## Jak přesunout soubor?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +569,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+Zatímco `cp` soubor kopíruje,
+`mv` ho přesune z jednoho adresáře do druhého –
+stejně jako kdybys ho přetáhl/a v grafickém správci souborů.
+Parametry fungují stejně jako u `cp`,
+takže příkaz:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+přesune soubory `autumn.csv` a `winter.csv` z aktuálního pracovního adresáře
+o úroveň výš do nadřazeného adresáře
+(protože `..` vždy odkazuje na adresář nad tvou aktuální polohou).
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+Nacházíš se v `/home/repl`, který obsahuje podadresáře `seasonal` a `backup`.
+Jedním příkazem přesuň soubory `spring.csv` a `summer.csv` z adresáře `seasonal` do adresáře `backup`.
 
 `@hint`
 
@@ -613,20 +602,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="Soubor `%s` se nenachází v adresáři `backup`. Použili jste příkaz `mv` správně? Jako parametry příkazu `mv` použijte dva názvy souborů a adresář."
+seasonal_patt="Soubor `%s` se stále nachází v adresáři `seasonal`. Ujistěte se, že soubory přesouváte pomocí příkazu `mv`, nikoli kopírujete pomocí příkazu `cp`!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("Výborně, pokračujme dále!")
 ```
 
 ---
 
-## How can I rename files?
+## Jak přejmenovat soubory?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +623,22 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` lze také použít k přejmenování souborů. Pokud spustíš:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+soubor `course.txt` v aktuálním pracovním adresáři se „přesune" do souboru `old-course.txt`.
+To se liší od způsobu, jakým fungují správci souborů,
+ale často se to hodí.
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+Jedno upozornění:
+stejně jako `cp`
+i `mv` přepíše existující soubory.
+Pokud například
+already máš soubor s názvem `old-course.txt`,
+příkaz uvedený výše ho nahradí obsahem souboru `course.txt`.
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +654,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+Přejdi do adresáře `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Pamatuj, že `cd` znamená „change directory" a že relativní cesty nezačínají lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -681,9 +669,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Pokud je váš aktuální pracovní adresář (zjistíte pomocí `pwd`) `/home/repl`, můžete přejít do složky `seasonal` pomocí `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -695,10 +682,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+Přejmenuj soubor `winter.csv` na `winter.csv.bck`.
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+Použij `mv` se stávajícím názvem souboru a požadovaným názvem – v tomto pořadí.
 
 `@solution`
 ```{shell}
@@ -708,15 +695,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " Použijte `mv` se dvěma argumenty: soubor, který chcete přejmenovat (`winter.csv`), a nový název souboru (`winter.csv.bck`)."
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="Očekávali jsme, že `winter.csv.bck` bude nalezen v adresáři." + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="Již jsme neočekávali, že `winter.csv` bude v adresáři." + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +714,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+Spusť `ls` a ověř, že vše proběhlo správně.
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+Nezapomeň stisknout Enter, aby se příkaz spustil.
 
 `@solution`
 ```{shell}
@@ -743,22 +729,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="Použili jste `ls` k zobrazení obsahu aktuálního pracovního adresáře?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "Váš příkaz nevygeneroval správný výpis souborů. Použijte `ls` bez argumentů k zobrazení obsahu aktuálního pracovního adresáře.")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("Kopírování, přesouvání, přejmenování – to vše již ovládáte! Jako další přijde na řadu: mazání souborů.")
 ```
 
 ---
 
-## How can I delete files?
+## Jak mazat soubory?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +751,24 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+Soubory umíme kopírovat i přesouvat;
+pro jejich smazání slouží příkaz `rm`,
+který je zkratkou anglického "remove" (odebrat).
+Stejně jako u `cp` a `mv`
+můžeš příkazu `rm` předat najednou libovolný počet souborů:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+Tento příkaz smaže jak `thesis.txt`, tak `backup/thesis-2017-08.txt`.
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` dělá přesně to, co říká jeho název,
+a udělá to okamžitě:
+na rozdíl od grafických správců souborů
+shell nemá koš,
+takže jakmile příkaz zadáš,
+soubor je nenávratně pryč.
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +784,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+Nacházíš se v `/home/repl`.
+Přejdi do adresáře `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+Nezapomeň, že `cd` je zkratka pro "change directory" a že relativní cesta nezačíná lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -827,10 +811,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+Smaž soubor `autumn.csv`.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Nezapomeň, že `rm` je zkratka pro "remove".
 
 `@solution`
 ```{shell}
@@ -842,10 +826,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="Neočekávali jsme, že `autumn.csv` bude stále v adresáři `seasonal`. Použijte `rm` s cestou k souboru, který chcete odstranit."),
+    has_code('rm', incorrect_msg = 'Použijte `rm` k odstranění souboru, nikoli k jeho přesunutí.')
 )
-
 ```
 
 ***
@@ -857,10 +840,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+Vrať se do svého domovského adresáře.
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+Pokud zadáš `cd` bez jakékoli cesty, přesune tě do domovského adresáře.
 
 `@solution`
 ```{shell}
@@ -870,8 +853,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="Použijte `cd ..` nebo `cd ~` pro návrat do domovského adresáře.")
 ```
 
 ***
@@ -883,10 +865,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+Smaž soubor `seasonal/summer.csv` bez toho, aby ses znovu přepínal/a do jiného adresáře.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Nezapomeň, že `rm` je zkratka pro "remove".
 
 `@solution`
 ```{shell}
@@ -898,16 +880,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="Neočekávali jsme, že `summer.csv` bude stále v adresáři `seasonal`. Použijte `rm` s cestou k souboru, který chcete odstranit."),
+    has_code('rm', incorrect_msg = 'Použijte `rm` k odstranění souboru, nikoli k jeho přesunutí.')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("Výborně! Přejdeme na další!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## Jak vytvářet a mazat adresáře?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +896,19 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` pracuje s adresáři stejně jako se soubory:
+když jsi v domovském adresáři a spustíš příkaz `mv seasonal by-season`,
+`mv` přejmenuje adresář `seasonal` na `by-season`.
+Jinak je to ale s příkazem `rm`.
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+Pokud se pokusíš smazat adresář pomocí `rm`,
+shell vypíše chybovou zprávu, že to takto nejde –
+hlavně proto, aby ses omylem nepřipravil/a o celý adresář plný práce.
+Místo toho slouží speciální příkaz `rmdir`.
+Pro větší bezpečnost funguje pouze na prázdných adresářích,
+takže musíš soubory v adresáři smazat *dříve*, než smažeš adresář samotný.
+(Zkušenější uživatelé mohou použít přepínač `-r` u příkazu `rm` pro stejný výsledek;
+k přepínačům příkazů se dostaneme v příští kapitole.)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +924,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+Bez přechodu do jiného adresáře
+smaž soubor `agarwal.txt` v adresáři `people`.
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+Pamatuj, že `rm` je zkratka pro „remove" (odebrat) a že relativní cesta nezačíná lomítkem '/'.
 
 `@solution`
 ```{shell}
@@ -963,10 +940,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` by již neměl být v `/home/repl/people`. Použili jste `rm` správně?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'V adresáři `people` se stále nacházejí soubory. Pokud jste `agarwal.txt` pouze přesunuli nebo vytvořili nové soubory, odstraňte je všechny.')
 )
-
 ```
 
 ***
@@ -978,11 +954,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+Teď, když je adresář `people` prázdný,
+smaž ho jediným příkazem.
 
 `@hint`
-Remember that `rm` only works on files.
+Pamatuj, že `rm` funguje pouze na souborech.
 
 `@solution`
 ```{shell}
@@ -995,9 +971,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "Adresář 'people' by se již neměl nacházet ve vašem domovském adresáři. Použijte příkaz `rmdir` k jeho odstranění!")
 )
-
 ```
 
 ***
@@ -1009,13 +984,12 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+Adresář není soubor,
+proto pro jeho vytvoření použij příkaz `mkdir directory_name`.
+Vytvoř tímto příkazem nový (prázdný) adresář s názvem `yearly` ve svém domovském adresáři.
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+Spusť `mkdir` s názvem adresáře, který chceš vytvořit.
 
 `@solution`
 ```{shell}
@@ -1027,9 +1001,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="Ve vašem domovském adresáři neexistuje adresář `yearly`. Použijte `mkdir yearly` pro jeho vytvoření!")
 )
-
 ```
 
 ***
@@ -1041,12 +1014,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+Teď, když `yearly` existuje,
+vytvoř uvnitř něj další adresář s názvem `2017`
+*bez* opuštění domovského adresáře.
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+Pro podadresář, který chceš vytvořit, použij relativní cestu.
 
 `@solution`
 ```{shell}
@@ -1059,15 +1032,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="Adresář '2017' nebyl nalezen v '/home/repl/yearly'. Tento adresář můžete vytvořit pomocí relativní cesty `yearly/2017`.")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("Skvěle! Zakončeme tuto kapitolu cvičením, které zopakuje některé její koncepty!")
 ```
 
 ---
 
-## Wrapping up
+## Závěrečné shrnutí
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1047,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+Při analýze dat často vznikají mezilehlé soubory.
+Místo ukládání do domovského adresáře
+je můžeš ukládat do `/tmp`,
+kde lidé i programy běžně uchovávají soubory, které potřebují jen dočasně.
+(Pozor: `/tmp` je přímo pod kořenovým adresářem `/`,
+*ne* pod tvým domovským adresářem.)
+Toto závěrečné cvičení ti ukáže, jak na to.
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1069,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+Pomocí `cd` přejdi do `/tmp`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+Pamatuj, že `cd` znamená „change directory" (přejít do adresáře) a že absolutní cesta začíná znakem '/'.
 
 `@solution`
 ```{shell}
@@ -1112,9 +1084,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'Nacházíte se ve špatném adresáři. Použijte `cd` pro přechod do adresáře `/tmp`.')
 )
-
 ```
 
 ***
@@ -1126,10 +1097,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+Vypiš obsah `/tmp` *bez* zadání názvu adresáře.
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+Pokud příkazu `ls` nezadáš žádný adresář, zobrazí obsah aktuálního adresáře.
 
 `@solution`
 ```{shell}
@@ -1141,13 +1112,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "Nezavolali jste `ls` pro vytvoření výpisu souborů."),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "Váš příkaz nevygeneroval správný výpis souborů. Použijte `ls` bez`.")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1129,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+Uvnitř `/tmp` vytvoř nový adresář s názvem `scratch`.
 
 `@hint`
-Use `mkdir` to make directories.
+Pro vytvoření adresáře použij příkaz `mkdir`.
 
 `@solution`
 ```{shell}
@@ -1176,10 +1146,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="Nelze najít adresář 'scratch' v '/tmp'. Ujistěte se, že používáte příkaz `mkdir` správně.")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1160,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+Přesuň soubor `/home/repl/people/agarwal.txt` do `/tmp/scratch`.
+Doporučujeme použít zkratku `~` pro domovský adresář a pro druhý argument použít relativní cestu místo absolutní.
 
 `@hint`
 
@@ -1207,8 +1176,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="Soubor 'agarwal.txt' nelze najít v '/tmp/scratch'. Použijte příkaz `mv` s parametrem `~/people/agarwal.txt` jako prvním argumentem a `scratch` jako druhým.")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("Tím končí 1. kapitola kurzu Úvod do shellu! Přejděte na další kapitolu a dozvíte se více o manipulaci s daty!")
 ```

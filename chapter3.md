@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Kombinování nástrojů
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Skutečná síla shellu Unixu nespočívá v jednotlivých příkazech, ale v tom, jak
+  snadno je lze kombinovat a dělat s nimi nové věci. Tato kapitola ti ukáže, jak
+  tuto sílu využít k výběru dat, a představí příkazy pro řazení hodnot a
+  odstraňování duplicit.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Jak uložit výstup příkazu do souboru?
 ---
 
-## How can I store a command's output in a file?
+## Jak uložit výstup příkazu do souboru?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,39 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Všechny nástroje, které jsi dosud viděl/a, umožňují zadat vstupní soubory.
+Většina z nich nenabízí možnost pojmenovat výstupní soubor, protože to jednoduše není potřeba.
+Místo toho můžeš použít **přesměrování** a uložit výstup libovolného příkazu kamkoli chceš.
+Spustíš-li tento příkaz:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+vypíše prvních 5 řádků letních dat na obrazovku.
+Pokud ale spustíš tento příkaz:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+na obrazovce se nic nezobrazí.
+Místo toho se výstup příkazu `head` uloží do nového souboru s názvem `top.csv`.
+Obsah tohoto souboru si můžeš prohlédnout pomocí `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Znak `>` říká shellu, aby přesměroval výstup příkazu `head` do souboru.
+Není součástí samotného příkazu `head` –
+funguje se všemi příkazy shellu, které nějaký výstup produkují.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Zkombinuj příkaz `tail` s přesměrováním a ulož posledních 5 řádků souboru `seasonal/winter.csv` do souboru `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Použij `tail -n 5` k získání posledních 5 řádků.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +64,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Řádek `%s` by měl být v souboru `last.csv`, ale není. Přesměrujte výstup příkazu `tail -n 5 seasonal/winter.csv` do souboru `last.csv` pomocí `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` obsahuje příliš mnoho řádků. Použili jste příznak `-n 5` s příkazem `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Výborně! Pojďme si procvičit ještě více!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Jak použít výstup příkazu jako vstup?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +86,19 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Řekněme, že chceš získat řádky z prostředku souboru.
+Konkrétně třeba řádky 3–5 z jednoho z našich datových souborů.
+Můžeš začít tak, že pomocí `head` vezmeš prvních 5 řádků
+a přesměruješ je do souboru,
+a pak pomocí `tail` vybereš poslední 3:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Rychlá kontrola potvrdí, že jde skutečně o řádky 3–5 původního souboru,
+protože jsou to poslední 3 řádky z prvních 5.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +114,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Vyber poslední dva řádky ze souboru `seasonal/winter.csv`
+a ulož je do souboru `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Použij `tail` pro výběr řádků a `>` pro přesměrování výstupu příkazu `tail`.
 
 `@solution`
 ```{shell}
@@ -132,11 +128,11 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Řádek `%s` by měl být v souboru `bottom.csv`, ale není. Přesměrujte výstup příkazu `tail -n 2 seasonal/winter.csv` do souboru `bottom.csv` pomocí `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = 'Soubor `bottom.csv` obsahuje příliš mnoho řádků. Použili jste přepínač `-n 2` u příkazu `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
@@ -153,11 +149,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Vyber první řádek ze souboru `bottom.csv`,
+abys získal/a předposlední řádek původního souboru.
 
 `@hint`
-Use `head` to select the line you want.
+Použij `head` pro výběr požadovaného řádku.
 
 `@solution`
 ```{shell}
@@ -169,17 +165,16 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Se souborem `bottom.csv` je něco špatně. Ujistěte se, že jej neměníte!"),
+    has_expr_output(strict=True, incorrect_msg="Použili jste `head` správně na `bottom.csv`? Ujistěte se, že správně používáte příznak `-n`.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
-
+Ex().success_msg("Výborně. Přejděte k dalšímu cvičení a zjistěte více o lepších způsobech kombinování příkazů.")
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Jak lépe kombinovat příkazy?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +182,34 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Kombinování příkazů přes přesměrování má dvě nevýhody:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Zanechává spoustu mezilehlých souborů (jako třeba `top.csv`).
+2. Příkazy vedoucí k výslednému výstupu jsou rozházené přes několik řádků v historii.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Shell nabízí nástroj, který oba problémy řeší najednou – říká se mu **roura** (pipe).
+Nejdřív spusť `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Místo toho, aby ses výstup `head` uložil do souboru,
+přidej svislou čáru a příkaz `tail` *bez* názvu souboru:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Symbol roury říká shellu, aby použil výstup příkazu na levé straně
+jako vstup příkazu na pravé straně.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Pomocí `cut` vyber všechny názvy zubů ze sloupce 2 souboru s oddělovačem čárka `seasonal/summer.csv`, a výsledek pak předej rourou do `grep` s invertovaným hledáním, aby se vyloučil řádek záhlaví obsahující slovo "Tooth". *Příkazy `cut` a `grep` byly podrobně popsány v kapitole 2, cvičeních 8 a 11.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- První část příkazu má tvar `cut -d field_delimiter -f column_number filename`.
+- Druhá část příkazu má tvar `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +225,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Předali jste výsledek příkazu `cut -d , -f 2 seasonal/summer.csv` do příkazu `grep -v Tooth` pomocí `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Vyloučili jste řádek záhlaví `"Tooth"` pomocí příkazu `grep`?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Výborné použití roury! Možná jste použili `|` poprvé, ale rozhodně ne naposledy!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Jak zkombinovat více příkazů?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +241,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Dohromady můžeš řetězit libovolný počet příkazů.
+Například
+tento příkaz:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+Provede:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. výběr prvního sloupce z jarních dat;
+2. odstranění řádku záhlaví obsahujícího slovo „Date"; a
+3. výběr prvních 10 řádků se skutečnými daty.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+V předchozím cvičení jsi použil/a tento příkaz k výběru všech názvů zubů z druhého sloupce souboru `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Rozšiř tento řetězec příkazů o příkaz `head`, který vybere pouze úplně první název zubu.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Zkopíruj a vlož kód z instrukcí, přidej rouru a pak zavolej `head` s přepínačem `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +282,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Použili jste `|` k rozšíření pipeline o příkaz `head`? Ujistěte se, že jste správně nastavili příznak `-n`."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Použili jste `|` k rozšíření pipeline o příkaz `head`?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Skvělé řetězení! Spojením několika příkazů dohromady můžete vytvořit výkonné pipeline pro manipulaci s daty.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Jak spočítat záznamy v souboru?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +299,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Příkaz `wc` (zkratka z „word count") vypíše počet **z**naků, **s**lov a **ř**ádků v souboru.
+Pomocí přepínačů `-c`, `-w` nebo `-l` můžeš zobrazit vždy jen jeden z těchto údajů.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Spočítej, kolik záznamů v souboru `seasonal/spring.csv` má datum v červenci 2017 (`2017-07`). 
+- Použij `grep` s částí data pro výběr odpovídajících řádků a výsledek předej rourou do `wc` s vhodným přepínačem pro počítání řádků.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Pomocí `head seasonal/spring.csv` si připomeň formát data.
+- První část příkazu má tvar `grep thing_to_match filename`.
+- Za rourou `|` zavolej `wc` s přepínačem `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +328,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Zavolali jste `grep`?"),
+      has_code("2017-07", incorrect_msg = "Hledali jste `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Prohledávali jste soubor `seasonal/spring.csv`?"),
+      has_code("|", incorrect_msg = "Použili jste rouru `|` pro předání výstupu do `wc`?"),      
+      has_code("wc", incorrect_msg = "Zavolali jste `wc`?"),
+      has_code("-l", incorrect_msg = "Počítali jste řádky pomocí `-l`?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Pečlivé počítání! Zjistit, kolik dat máte k dispozici, je skvělým prvním krokem při každé analýze dat.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Jak zadat více souborů najednou?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +350,37 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Většina shellových příkazů umí pracovat s více soubory najednou, pokud jim zadáš více názvů souborů.
+Například první sloupec ze všech souborů se sezónními daty získáš takto:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Neustálé opisování názvů souborů ale není dobrý nápad:
+zabírá čas a dřív nebo později buď na nějaký soubor zapomeneš, nebo ho zadáš dvakrát.
+Aby ti to shell usnadnil, můžeš k zadání seznamu souborů jediným výrazem použít **zástupné znaky** (wildcards).
+Nejčastějším zástupným znakem je `*`,
+který znamená „odpovídá nule nebo více znakům".
+S jeho pomocí lze zkrátit výše uvedený příkaz `cut` na:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+nebo:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Napiš jediný příkaz s `head`, který získá první tři řádky ze souborů `seasonal/spring.csv` a `seasonal/summer.csv` — celkem šest řádků dat — ale *ne* ze souborů s podzimními nebo zimními daty.
+Místo plných názvů souborů použij zástupný znak.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Příkaz má tvar `head -n number_of_lines filename_pattern`.
+- Soubory v adresáři `a` začínající na `b` můžeš například vybrat vzorem `a/b*`.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +396,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Můžete použít `seasonal/s*` pro výběr souborů `seasonal/spring.csv` a `seasonal/summer.csv`. Ujistěte se, že zahrnujete pouze první tři řádky každého souboru pomocí příznaku `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Nezahrnujte výstup pro `seasonal/autumn.csv`. Můžete použít `seasonal/s*` pro výběr souborů `seasonal/spring.csv` a `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Nezahrnujte výstup pro `seasonal/winter.csv`. Můžete použít `seasonal/s*` pro výběr souborů `seasonal/spring.csv` a `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Výborná práce se zástupnými znaky! To se stává ještě důležitějším, pokud váš adresář obsahuje stovky nebo tisíce souborů.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Jaké další zástupné znaky můžu použít?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +413,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Shell podporuje i další zástupné znaky,
+i když se používají méně často:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` odpovídá jednomu libovolnému znaku, takže `201?.txt` odpovídá `2017.txt` nebo `2018.txt`, ale ne `2017-01.txt`.
+- `[...]` odpovídá libovolnému jednomu znaku z těch, které jsou uvedeny v hranatých závorkách, takže `201[78].txt` odpovídá `2017.txt` nebo `2018.txt`, ale ne `2016.txt`.
+- `{...}` odpovídá libovolnému ze vzorů oddělených čárkou uvnitř složených závorek, takže `{*.txt, *.csv}` odpovídá každému souboru, jehož název končí na `.txt` nebo `.csv`, ale ne souborům s příponou `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Který výraz odpovídá souborům `singh.pdf` a `johel.txt`, ale *ne* souborům `sandhu.pdf` nebo `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Postupně porovnej každý výraz s každým názvem souboru.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +434,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Ne: `.pdf` a `.txt` nejsou názvy souborů.
+- Ne: tento výraz odpovídá i souboru `sandhu.pdf`.
+- Ne: výraz v hranatých závorkách odpovídá pouze jednomu znaku, ne celým slovům.
+- Správně!
 
 ---
 
-## How can I sort lines of text?
+## Jak seřadit řádky textu?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +449,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Jak napovídá název,
+`sort` řadí data do pořadí.
+Výchozí řazení je vzestupné abecední,
+ale přepínače `-n` a `-r` umožňují řadit numericky a obrátit pořadí výstupu,
+`-b` ignoruje úvodní mezery
+a `-f` sjednocuje velikost písmen (tedy rozlišování ignoruje).
+V rouře se obvykle nejprve použije `grep` k odfiltrování nežádoucích záznamů
+a poté `sort` k seřazení těch zbývajících.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Pamatuješ na kombinaci `cut` a `grep`, která vybrala všechny názvy zubů ze sloupce 2 souboru `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Vycházej z tohoto příkazu a seřaď názvy zubů ze souboru `seasonal/winter.csv` (ne `summer.csv`) v sestupném abecedním pořadí. Rozšiř rouru o krok se `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Zkopíruj příkaz z instrukce, změň název souboru, přidej rouru a zavolej `sort` s přepínačem `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +487,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Zavolali jste `cut`?"),
+      has_code("-d", incorrect_msg = "Zadali jste oddělovač polí pomocí `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Získali jste data ze souboru `seasonal/winter.csv`?"),
+      has_code("|", incorrect_msg = "Propojili jste `cut`, `grep` a `sort` pomocí `|`?"),      
+      has_code("grep", incorrect_msg = "Zavolali jste `grep`?"),
+      has_code("-v", incorrect_msg = "Invertovali jste shodu pomocí `-v`?"),
+      has_code("Tooth", incorrect_msg = "Hledali jste `Tooth`?"),
+      has_code("sort", incorrect_msg = "Zavolali jste `sort`?"),
+      has_code("-r", incorrect_msg = "Obrátili jste pořadí řazení pomocí `-r`?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Seřazeno! Příkaz `sort` má mnoho využití. Například přesměrování výstupu `sort -n` do `head` zobrazí největší hodnoty.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Jak odstraním duplicitní řádky?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +512,10 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Příkaz, který se často používá spolu s `sort`, je `uniq`.
+Jeho úkolem je odstranit duplicitní řádky –
+přesněji řečeno odstraní *sousední* duplicitní řádky.
+Pokud soubor obsahuje:
 
 ```
 2017-07-03
@@ -535,14 +524,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+`uniq` vrátí:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+Ale pokud soubor obsahuje:
 
 ```
 2017-07-03
@@ -551,33 +540,31 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+`uniq` vypíše všechny čtyři řádky.
+Důvod je ten, že `uniq` je navržen pro práci s velmi velkými soubory.
+Aby mohl odstranit nesousední duplicity,
+musel by mít celý soubor v paměti
+(nebo alespoň všechny dosud zaznamenané jedinečné řádky).
+Odstraněním pouze sousedních duplicit si v paměti stačí uchovat jen poslední jedinečný řádek.
 
 `@instructions`
-Write a pipeline to:
+Sestav pipeline, která:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- získá druhý sloupec ze souboru `seasonal/winter.csv`,
+- odstraní z výstupu slovo "Tooth", aby se zobrazovaly pouze názvy zubů,
+- seřadí výstup tak, aby byly všechny výskyty daného názvu zubu sousední, a
+- zobrazí každý název zubu jednou spolu s počtem, kolikrát se vyskytuje.
 
-The start of your pipeline is the same as the previous exercise:
+Začátek pipeline je stejný jako v předchozím cvičení:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Rozšiř ho o příkaz `sort` a použij `uniq -c` k zobrazení jedinečných řádků s počtem výskytů – místo kombinace `uniq` a `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Zkopíruj a vlož příkaz z instrukcí, přidej rouru na `sort` bez přepínačů a pak další rouru na `uniq` s přepínačem `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +584,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Měli byste začít tímto příkazem: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Nyní jej rozšiřte!"),
+            has_code('\|\s+sort', incorrect_msg="Rozšířili jste příkaz o `| sort`?"),
+            has_code('\|\s+uniq', incorrect_msg="Rozšířili jste příkaz o `| uniq`?"),
+            has_code('-c', incorrect_msg="Zahrnuli jste počty pomocí `-c`?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Výborně! Po veškeré této práci s rourou by bylo užitečné, kdybychom mohli výsledek uložit, že ano?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Jak uložit výstup roury?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +604,37 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Shell umožňuje přesměrovat výstup celé sekvence příkazů spojených rourou:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Znak `>` ale musí stát vždy na konci roury.
+Pokud ho zkusíš umístit doprostřed, například takto:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+pak se celý výstup příkazu `cut` zapíše do souboru `teeth-only.txt`,
+na `grep` tak nezůstane nic a ten bude čekat na vstup donekonečna.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Co se stane, když přesměrování umístíme na začátek roury, jako zde:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Výstup příkazu se přesměruje do souboru jako obvykle.]
+- Shell to vyhodnotí jako chybu.
+- Shell bude čekat na vstup donekonečna.
 
 `@hint`
-Try it out in the shell.
+Vyzkoušej to v shellu.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +643,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Správně!', 'Ne; shell to ve skutečnosti může spustit.', 'Ne; shell to ve skutečnosti může spustit.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Jak zastavit spuštěný program?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +656,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Všechny příkazy a skripty, které jsi dosud spouštěl/a, proběhly rychle,
+ale některé úlohy mohou trvat minuty, hodiny nebo i celé dny.
+Může se také stát, že omylem vložíš přesměrování doprostřed pipeline
+a program se zasekne.
+Pokud se rozhodneš, že chceš běžící program zastavit,
+stačí stisknout `Ctrl` + `C`.
+V dokumentaci Unixu se to často zapisuje jako `^C`;
+poznámka: písmeno 'c' může být malé.
 
 `@instructions`
-Run the command:
+Spusť příkaz:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+bez jakýchkoli argumentů (program tak bude čekat na vstup, který nikdy nepřijde)
+a pak ho zastav stisknutím `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Stačí zadat head, stisknout Enter a spuštěný program ukončit pomocí `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +690,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Použili jste `head`?")
 ```
 
 ---
 
-## Wrapping up
+## Shrnutí
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +703,7 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Na závěr sestavíš pipeline, která zjistí, kolik záznamů obsahuje nejkratší ze souborů se sezónními daty.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +719,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Pomocí příkazu `wc` s odpovídajícími parametry vypiš počet řádků ve všech souborech se sezónními daty.
+(Místo ručního zadávání každého názvu souboru použij zástupný znak.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Použij přepínač `-l` pro výpis pouze počtu řádků a `*` pro shodu s názvy souborů.
 
 `@solution`
 ```{shell}
@@ -753,13 +738,12 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Použili jste příkaz `wc`?"),
+      has_code("-l", incorrect_msg = "Počítáte počet řádků pomocí `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Získáváte data ze všech souborů `seasonal/*`?")
     )
   )
 )
-
 ```
 
 ***
@@ -771,7 +755,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Přidej k předchozímu příkazu pomocí roury další příkaz, který odstraní řádek obsahující slovo "total".
 
 `@hint`
 
@@ -789,17 +773,16 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Zavolali jste `wc`?"),
+      has_code("-l", incorrect_msg = "Počítali jste počet řádků pomocí `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Získali jste data ze všech souborů `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Použili jste rouru z `wc` do `grep` pomocí `|`?"),      
+      has_code("grep", incorrect_msg = "Zavolali jste `grep`?"),
+      has_code("-v", incorrect_msg = "Obrátili jste shodu pomocí `-v`?"),
+      has_code("total", incorrect_msg = "Hledali jste `total`?")
     )
   )
 )
-
 ```
 
 ***
@@ -811,11 +794,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Přidej do pipeline další dvě fáze využívající `sort -n` a `head -n 1`, které najdou soubor s nejmenším počtem řádků.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Použij přepínač `-n` příkazu `sort` pro numerické řazení.
+- Použij přepínač `-n` příkazu `head` pro omezení výstupu na 1 řádek.
 
 `@solution`
 ```{shell}
@@ -830,19 +813,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Zavolali jste `wc`?"),
+      has_code("-l", incorrect_msg = "Počítali jste počet řádků pomocí `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Získali jste data ze všech souborů `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Propojili jste `wc`, `grep`, `sort` a `head` pomocí `|`?"),      
+      has_code("grep", incorrect_msg = "Zavolali jste `grep`?"),
+      has_code("-v", incorrect_msg = "Invertovali jste shodu pomocí `-v`?"),
+      has_code("total", incorrect_msg = "Hledali jste `total`?"),
+      has_code("sort", incorrect_msg = "Zavolali jste `sort`?"),
+      has_code("-n", incorrect_msg = "Zadali jste počet řádků k zachování pomocí `-n`?"),
+      has_code("1", incorrect_msg = "Zadali jste 1 řádek k zachování pomocí `-n 1`?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Výborně! Ukázalo se, že `autumn.csv` je soubor s nejmenším počtem řádků. Přejděte do kapitoly 4 a dozvíte se více o dávkovém zpracování!")
 ```

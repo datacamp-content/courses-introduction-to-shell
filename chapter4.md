@@ -1,15 +1,15 @@
 ---
-title: Batch processing
+title: Hromadné zpracování
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Většina příkazů shellu zpracovává najednou mnoho souborů. Tato kapitola ti
+  ukáže, jak to zařídit i ve vlastních rourách. Zároveň uvidíš, jak shell
+  používá proměnné k ukládání informací.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Jak shell ukládá informace?
 ---
 
-## How does the shell store information?
+## Jak shell ukládá informace?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +17,36 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Shell, stejně jako jiné programy, ukládá informace do proměnných.
+Některé z nich,
+zvané **proměnné prostředí**,
+jsou dostupné neustále.
+Názvy proměnných prostředí se podle konvence píší velkými písmeny.
+Několik nejčastěji používaných je uvedeno níže.
 
-| Variable | Purpose                           | Value                 |
-|----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| Proměnná | Účel                                      | Hodnota               |
+|----------|-------------------------------------------|-----------------------|
+| `HOME`   | Domovský adresář uživatele                | `/home/repl`          |
+| `PWD `   | Aktuální pracovní adresář                 | Stejné jako příkaz `pwd` |
+| `SHELL`  | Který shell program se používá            | `/bin/bash`           |
+| `USER`   | ID uživatele                              | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Úplný seznam (který je poměrně dlouhý) zobrazíš příkazem `set` v shellu.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Pomocí `set` a `grep` s rourou zobraz hodnotu proměnné `HISTFILESIZE`,
+která určuje, kolik starých příkazů se uchovává v historii příkazů.
+Jaká je její hodnota?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- Tato proměnná tam není.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Pomocí `set | grep HISTFILESIZE` získáš řádek, který hledáš.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +55,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Ne: shell zaznamenává více historie než to."
+err2 = "Ne: shell zaznamenává více historie než to."
+correct3 = "Správně: shell ve výchozím nastavení ukládá v tomto systému 2000 starých příkazů."
+err4 = "Ne: proměnná `HISTFILESIZE` tam je."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Jak vypsat hodnotu proměnné?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +72,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Jednodušší způsob, jak zjistit hodnotu proměnné, je příkaz `echo`, který vypíše své argumenty. Zadáním
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+se vypíše
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Když se ale pokusíš takhle vypsat hodnotu proměnné:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+vypíše se název proměnné, tedy `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Aby ses dostal/a k hodnotě proměnné, musíš před ni napsat znak dolaru `$`. Zadáním
 
 ```{shell}
 echo $USER
 ```
 
-prints
+se vypíše
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Toto platí vždy:
+chceš-li získat hodnotu proměnné `X`,
+musíš napsat `$X`.
+(Shell tak rozliší, jestli myslíš „soubor s názvem X",
+nebo „hodnotu proměnné X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Proměnná `OSTYPE` obsahuje název typu operačního systému, který používáš.
+Zobraz její hodnotu pomocí `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Zavolej `echo` s proměnnou `OSTYPE`, před kterou přidáš `$`.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +134,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Zavolali jste `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Vypsal jste proměnnou prostředí `OSTYPE`?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Nezapomeňte před `OSTYPE` uvést znak `$`.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Výborně, proměnná prostředí byla úspěšně zobrazena! Dobrý začátek. Pojďme pokračovat!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Jak ještě shell uchovává informace?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +153,16 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Druhý typ proměnné se nazývá **proměnná shellu** – je podobná lokální proměnné v programovacím jazyce.
 
-To create a shell variable,
-you simply assign a value to a name:
+Proměnnou shellu vytvoříš jednoduše tak, že přiřadíš hodnotu k názvu:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*bez* mezer před znakem `=` nebo za ním.
+Jakmile to uděláš, můžeš hodnotu proměnné zkontrolovat pomocí:
 
 ```{shell}
 echo $training
@@ -189,10 +185,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Definuj proměnnou s názvem `testing` a přiřaď jí hodnotu `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Mezi názvem proměnné a její hodnotou *nesmí* být mezery.
 
 `@solution`
 ```{shell}
@@ -202,7 +198,7 @@ testing=seasonal/winter.csv
 
 `@sct`
 ```{python}
-# For some reason, testing the shell variable directly always passes, so we can't do the following.
+# Z nějakého důvodu testování shellové proměnné přímo vždy projde, takže nemůžeme použít následující.
 # Ex().multi(
 #     has_cwd('/home/repl'),
 #     has_expr_output(
@@ -214,9 +210,9 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Definovali jste shellovou proměnnou s názvem `testing`?'),
+        has_code('testing=', incorrect_msg='Napsali jste `=` přímo za `testing`, bez mezer?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Nastavili jste hodnotu proměnné `testing` na `seasonal/winter.csv`?')
     )
 )
 
@@ -231,12 +227,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Pomocí příkazu `head -n 1 SOMETHING` získej první řádek ze souboru `seasonal/winter.csv` –
+místo názvu souboru použij hodnotu proměnné `testing`.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Nezapomeň použít `$testing` místo pouhého `testing`
+(znak `$` je nutný k získání hodnoty proměnné).
 
 `@solution`
 ```{shell}
@@ -251,23 +247,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Odkazovali jste na proměnnou shellu pomocí `$testing`?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Zavolali jste `head`?"),
+            has_code('-n', incorrect_msg="Omezili jste počet řádků pomocí `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Zvolili jste zachování 1 řádku pomocí `-n 1`?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Výborně! Podívejme se, jak lze snadno opakovat příkazy.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Jak opakovat příkaz vícekrát?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +270,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Shellové proměnné se používají také ve **smyčkách**,
+které opakují příkazy vícekrát.
+Pokud spustíš tento příkaz:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+vypíše se:
 
 ```
 gif
@@ -291,21 +286,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Všimni si několika věcí týkajících se smyčky:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Struktura je `for` ...proměnná... `in` ...seznam... `; do` ...tělo... `; done`
+2. Seznam položek, které má smyčka zpracovat (v tomto případě slova `gif`, `jpg` a `png`).
+3. Proměnná, která sleduje, která položka se právě zpracovává (v tomto případě `filetype`).
+4. Tělo smyčky, které provádí samotné zpracování (v tomto případě `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Všimni si, že tělo používá `$filetype` pro získání hodnoty proměnné, nikoli jen `filetype` –
+stejně jako u jakékoli jiné shellové proměnné.
+Také si všimni rozmístění středníků:
+první patří mezi seznam a klíčové slovo `do`,
+druhý mezi tělo a klíčové slovo `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Uprav smyčku tak, aby vypsala:
 
 ```
 docx
@@ -313,10 +308,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Jako název proměnné smyčky použij `filetype`.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Použij strukturu kódu z úvodního textu a nahraď typy obrázkových souborů typy dokumentů.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +330,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Použili jste `for`?'),
+      has_code('filetype', incorrect_msg='Použili jste `filetype` jako proměnnou smyčky?'),
+      has_code('in', incorrect_msg='Použili jste `in` před seznamem typů souborů?'),
+      has_code('docx odt pdf', incorrect_msg='Prošli jste smyčkou přes `docx`, `odt` a `pdf` v tomto pořadí?'),
+      has_code(r'pdf\s*;', incorrect_msg='Vložili jste středník za poslední prvek smyčky?'),
+      has_code(r';\s*do', incorrect_msg='Použili jste `do` za prvním středníkem?'),
+      has_code('echo', incorrect_msg='Použili jste `echo`?'),
+      has_code(r'\$filetype', incorrect_msg='Vypsali jste `$filetype` pomocí echo?'),
+      has_code(r'filetype\s*;', incorrect_msg='Vložili jste středník za tělo smyčky?'),
+      has_code('; done', incorrect_msg='Ukončili jste smyčku pomocí `done`?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Výborně, zvládli jste smyčku! Smyčky jsou skvělé, pokud chcete provést stejnou věc stokrát nebo tisíckrát.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Jak zopakovat příkaz pro každý soubor?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +356,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Při psaní smyčky můžeš vždy zadat názvy souborů ručně,
+ale většinou je lepší použít zástupné znaky (wildcards).
+Zkus spustit tuto smyčku v konzoli:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Vypíše:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +373,13 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+protože shell před spuštěním smyčky rozbalí výraz `seasonal/*.csv` na seznam čtyř názvů souborů.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Uprav výraz se zástupným znakem na `people/*`,
+aby smyčka vypisovala názvy souborů v adresáři `people`
+bez ohledu na to, jakou příponu mají nebo nemají.
+Jako název proměnné smyčky použij `filename`.
 
 `@hint`
 
@@ -407,25 +401,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Použili jste `for`?'),
+      has_code('filename', incorrect_msg='Použili jste `filename` jako proměnnou cyklu?'),
+      has_code('in', incorrect_msg='Použili jste `in` před seznamem typů souborů?'),
+      has_code('people/\*', incorrect_msg='Zadali jste seznam souborů pomocí `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Vložili jste středník za seznam souborů?'),
+      has_code(r';\s*do', incorrect_msg='Použili jste `do` za prvním středníkem?'),
+      has_code('echo', incorrect_msg='Použili jste `echo`?'),
+      has_code(r'\$filename', incorrect_msg='Vypsali jste `$filename` pomocí echo?'),
+      has_code(r'filename\s*;', incorrect_msg='Vložili jste středník za tělo cyklu?'),
+      has_code('; done', incorrect_msg='Ukončili jste cyklus pomocí `done`?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Výborně! Zástupné znaky a cykly tvoří mocnou kombinaci.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Jak si uložit názvy skupiny souborů?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +427,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+Proměnné se často nastavují pomocí zástupných výrazů, aby uchovávaly seznam názvů souborů.
+Například,
+pokud definuješ `datasets` takto:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+názvy souborů si můžeš zobrazit později pomocí:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Takhle ušetříš psaní a snížíš riziko chyb.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Pokud spustíš tyto dva příkazy ve svém domovském adresáři,
+kolik řádků výstupu se vypíše?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +454,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Žádný: protože `files` je definováno na samostatném řádku, nemá ve druhém řádku žádnou hodnotu.
+- Jeden: slovo "files".
+- Čtyři: názvy všech čtyř datových souborů ze složky seasonal.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Pamatuj, že samotné `X` je jen "X", zatímco `$X` je hodnota proměnné `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +468,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Ne: nemusíte definovat proměnnou na stejném řádku, na kterém ji používáte."
+err2 = "Ne: tento příklad definuje a používá proměnnou `files` ve stejném shellu."
+correct3 = "Správně. Příkaz je ekvivalentní k `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Název proměnné versus její hodnota
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +484,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Častou chybou je zapomenout napsat `$` před název proměnné.
+Pokud to uděláš,
+shell použije zadaný název
+místo hodnoty dané proměnné.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Zkušenější uživatelé zase občas chybně napíší název proměnné.
+Například,
+pokud definuješ `datasets` takto:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+a pak napíšeš:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+shell nevypíše nic,
+protože `datsets` (bez druhého "a") není definováno.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Kdyby ses spustil/a tyto dva příkazy ve svém domovském adresáři,
+jaký výstup by se zobrazil?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Před odpovědí si pozorně přečti první část smyčky.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Pamatuj, že `X` samo o sobě je jen "X", zatímco `$X` je hodnota proměnné `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [Jeden řádek: slovo "files".]
+- Čtyři řádky: názvy všech čtyř souborů se sezónními daty.
+- Čtyři prázdné řádky: proměnné `f` není přiřazena žádná hodnota.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Správně: smyčka používá `files` místo `$files`, takže seznam obsahuje pouze slovo "files".
+- Ne: smyčka používá `files` místo `$files`, takže seznam obsahuje slovo "files", nikoli rozvinutou hodnotu proměnné `files`.
+- Ne: proměnná `f` je definována automaticky smyčkou `for`.
 
 ---
 
-## How can I run many commands in a single loop?
+## Jak spustit více příkazů v jedné smyčce?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +541,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Výpis názvů souborů se hodí při ladění kódu,
+ale skutečným účelem smyček je pracovat s více soubory najednou.
+Tato smyčka vypíše druhý řádek každého datového souboru:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Má stejnou strukturu jako ostatní smyčky, které jsi už viděl/a:
+jedinný rozdíl je, že její tělo tvoří pipeline dvou příkazů místo jednoho.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Napiš smyčku, která vypíše poslední záznam z července 2017 (`2017-07`) z každého sezónního souboru. Výstup by měl být podobný tomuto:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+ale zvlášť pro **_každý_** sezónní soubor. Jako název proměnné smyčky použij `file` a nezapomeň procházet seznam souborů `seasonal/*.csv` (_místo 'seasonal/winter.csv' jako v příkladu_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Tělo smyčky tvoří příkaz grep uvedený v instrukcích, kde místo `seasonal/winter.csv` použiješ `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +579,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Použili jste `for`?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Použili jste `file` jako proměnnou smyčky?'),
+      has_code('in', incorrect_msg='Použili jste `in` před seznamem souborů?'),
+      has_code('seasonal/\*', incorrect_msg='Zadali jste seznam souborů pomocí `seasonal/*`?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Umístili jste středník za seznam souborů?'),
+      has_code(r';\s*do', incorrect_msg='Použili jste `do` za prvním středníkem?'),
+      has_code('grep', incorrect_msg='Použili jste `grep`?'),
+      has_code('2017-07', incorrect_msg='Hledali jste shodu s `2017-07`?'),
+      has_code(r'\$file', incorrect_msg='Použili jste `$file` jako název proměnné smyčky?'),
+      has_code(r'file\s*|', incorrect_msg='Použili jste rouru pro propojení druhého příkazu?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Použili jste `tail -n 1` pro výpis posledního záznamu každého hledání ve druhém příkazu?'),
+      has_code('; done', incorrect_msg='Ukončili jste příkaz pomocí `done`?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Výborně! Zástupné znaky a smyčky tvoří mocnou kombinaci.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Proč nepoužívat mezery v názvech souborů?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +611,20 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Při práci v grafickém správci souborů je přirozené pojmenovávat soubory víceslovnými názvy, jako třeba `July 2017.csv`.
+V shellu ale takové názvy způsobují problémy.
+Představ si například, že chceš přejmenovat soubor `July 2017.csv` na `2017 July data.csv`.
+Nemůžeš napsat:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+protože shell tento příkaz interpretuje tak, že se pokoušíš přesunout
+čtyři soubory s názvy `July`, `2017.csv`, `2017` a `July` (znovu)
+do adresáře `data.csv`.
+Místo toho musíš názvy souborů uzavřít do uvozovek,
+aby je shell považoval za jeden parametr:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +632,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Máš dva soubory: `current.csv` a `last year.csv`
+(s mezerou v názvu)
+a zadáš příkaz:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+Co se stane?
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Co bys čekal/a, že se stane, kdyby ti někdo ukázal tento příkaz a ty bys nevěděl/a, jaké soubory existují?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Shell zobrazí chybovou zprávu, protože soubory `last` a `year.csv` neexistují.
+- Shell smaže soubor `current.csv`.
+- [Obojí z výše uvedeného.]
+- Nic.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Ano, ale to není vše.
+- Ano, ale to není vše.
+- Správně. Názvy souborů můžeš obalit jednoduchými uvozovkami `'` nebo dvojitými uvozovkami `"`.
+- Bohužel ne.
 
 ---
 
-## How can I do many things in a single loop?
+## Jak provést více akcí v jediné smyčce?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +667,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Smyčky, které jsi dosud viděl/a, měly v těle vždy jen jeden příkaz nebo rouru,
+ale smyčka může obsahovat libovolný počet příkazů.
+Aby shell věděl, kde jeden příkaz končí a druhý začíná,
+musíš je oddělit středníky:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +689,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Představ si, že zapomeneš středník mezi příkazy `echo` a `head` z předchozí smyčky
+a shellu tak zadáš:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Co shell udělá?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Vypíše chybové hlášení.
+- Vypíše jeden řádek pro každý ze čtyř souborů.
+- Vypíše jeden řádek pro `autumn.csv` (první soubor).
+- Vypíše poslední řádek každého souboru.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Výstup příkazu `echo` můžeš přesměrovat do `tail` pomocí roury.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +714,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Ne: smyčka proběhne, jen neudělá nic smysluplného."
+correct2 = "Ano: `echo` vypíše jeden řádek, který obsahuje název souboru dvakrát, a `tail` ho pak zkopíruje."
+err3 = "Ne: smyčka proběhne jednou pro každý ze čtyř názvů souborů."
+err4 = "Ne: vstupem příkazu `tail` je výstup `echo` pro každý název souboru."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```
