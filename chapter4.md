@@ -1,15 +1,15 @@
 ---
-title: Batch processing
+title: Przetwarzanie wsadowe
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Większość poleceń powłoki przetwarza wiele plików jednocześnie. Ten rozdział
+  pokazuje, jak sprawić, by twoje własne potoki działały w ten sam sposób. Przy
+  okazji zobaczysz, jak powłoka używa zmiennych do przechowywania informacji.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Jak powłoka przechowuje informacje?
 ---
 
-## How does the shell store information?
+## Jak powłoka przechowuje informacje?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +17,37 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Podobnie jak inne programy, powłoka przechowuje informacje w zmiennych.
+Niektóre z nich,
+nazywane **zmiennymi środowiskowymi**,
+są dostępne przez cały czas.
+Nazwy zmiennych środowiskowych są zgodnie z konwencją pisane wielkimi literami.
+Kilka najczęściej używanych zmiennych przedstawia poniższa tabela.
 
-| Variable | Purpose                           | Value                 |
-|----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| Zmienna | Przeznaczenie                        | Wartość               |
+|---------|--------------------------------------|-----------------------|
+| `HOME`  | Katalog domowy użytkownika           | `/home/repl`          |
+| `PWD `  | Bieżący katalog roboczy              | Tak jak polecenie `pwd` |
+| `SHELL` | Używana powłoka                      | `/bin/bash`           |
+| `USER`  | Identyfikator użytkownika            | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Aby wyświetlić pełną listę (która jest dość długa),
+wpisz w powłoce polecenie `set`.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Użyj poleceń `set` i `grep` z potokiem, aby wyświetlić wartość zmiennej `HISTFILESIZE`,
+która określa, ile poprzednich poleceń jest przechowywanych w historii.
+Jaka jest jej wartość?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- Zmienna nie istnieje.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Użyj polecenia `set | grep HISTFILESIZE`, aby znaleźć potrzebną linię.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +56,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Nie: powłoka zapisuje więcej historii niż to."
+err2 = "Nie: powłoka zapisuje więcej historii niż to."
+correct3 = "Poprawnie: powłoka domyślnie zapisuje 2000 starych poleceń w tym systemie."
+err4 = "Nie: zmienna `HISTFILESIZE` jest tam."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Jak wyświetlić wartość zmiennej?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +73,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Prostym sposobem na sprawdzenie wartości zmiennej jest użycie polecenia `echo`, które wyświetla podane argumenty. Wpisanie
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+wyświetli
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Jeśli spróbujesz użyć `echo` do wyświetlenia wartości zmiennej w taki sposób:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+polecenie wyświetli nazwę zmiennej, czyli `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Aby uzyskać wartość zmiennej, musisz poprzedzić jej nazwę znakiem dolara `$`. Wpisanie
 
 ```{shell}
 echo $USER
 ```
 
-prints
+wyświetli
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Ta zasada obowiązuje wszędzie:
+aby odwołać się do wartości zmiennej o nazwie `X`,
+musisz napisać `$X`.
+(Dzięki temu powłoka wie, czy chodzi ci o „plik o nazwie X",
+czy o „wartość zmiennej o nazwie X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Zmienna `OSTYPE` przechowuje nazwę używanego systemu operacyjnego.
+Wyświetl jej wartość za pomocą `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Wywołaj `echo` ze zmienną `OSTYPE` poprzedzoną znakiem `$`.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +135,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Czy wywołano `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Czy wydrukowano zmienną środowiskową `OSTYPE`?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Proszę upewnić się, że przed `OSTYPE` znajduje się znak `$`.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Doskonałe wyświetlenie zmiennych środowiskowych! To dobry początek. Kontynuujmy!")
 ```
 
 ---
 
-## How else does the shell store information?
+## W jaki jeszcze sposób powłoka przechowuje informacje?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +154,16 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Drugi rodzaj zmiennej to **zmienna powłoki**, która działa podobnie do zmiennej lokalnej w języku programowania.
 
-To create a shell variable,
-you simply assign a value to a name:
+Aby utworzyć zmienną powłoki, wystarczy przypisać wartość do nazwy:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*bez* żadnych spacji przed znakiem `=` ani po nim.
+Po wykonaniu tej operacji możesz sprawdzić wartość zmiennej za pomocą:
 
 ```{shell}
 echo $training
@@ -189,10 +186,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Zdefiniuj zmienną o nazwie `testing` z wartością `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Między nazwą zmiennej a jej wartością *nie* powinno być spacji.
 
 `@solution`
 ```{shell}
@@ -214,12 +211,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Czy zdefiniowano zmienną powłoki o nazwie `testing`?'),
+        has_code('testing=', incorrect_msg='Czy napisano `=` bezpośrednio po testing, bez spacji?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Czy ustawiono wartość `testing` na `seasonal/winter.csv`?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +227,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Użyj polecenia `head -n 1 SOMETHING`, aby pobrać pierwszy wiersz z pliku `seasonal/winter.csv`,
+posługując się wartością zmiennej `testing` zamiast bezpośredniej nazwy pliku.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Pamiętaj, aby użyć `$testing`, a nie samego `testing`
+(znak `$` jest potrzebny, by odczytać wartość zmiennej).
 
 `@solution`
 ```{shell}
@@ -251,23 +247,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Czy odwołano się do zmiennej powłoki za pomocą `$testing`?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Czy wywołano `head`?"),
+            has_code('-n', incorrect_msg="Czy ograniczono liczbę wierszy za pomocą `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Czy wybrano zachowanie 1 wiersza za pomocą `-n 1`?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Doskonale! Zobaczmy, jak można łatwo powtarzać polecenia.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Jak powtórzyć polecenie wiele razy?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +270,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Zmienne powłoki są również używane w **pętlach**,
+które powtarzają polecenia wiele razy.
+Jeśli uruchomimy to polecenie:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+na wyjściu otrzymamy:
 
 ```
 gif
@@ -291,21 +286,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Zwróć uwagę na kilka rzeczy dotyczących tej pętli:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Struktura wygląda tak: `for` ...zmienna... `in` ...lista... `; do` ...treść... `; done`
+2. Lista elementów, które pętla ma przetworzyć (w naszym przypadku słowa `gif`, `jpg` i `png`).
+3. Zmienna śledząca, który element jest aktualnie przetwarzany (w naszym przypadku `filetype`).
+4. Treść pętli wykonująca właściwe działanie (w naszym przypadku `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Zauważ, że w treści pętli używamy `$filetype`, aby odczytać wartość zmiennej – a nie samego `filetype`,
+podobnie jak w przypadku każdej innej zmiennej powłoki.
+Zwróć też uwagę na położenie średników:
+pierwszy pojawia się między listą a słowem kluczowym `do`,
+a drugi – między treścią a słowem kluczowym `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Zmodyfikuj pętlę tak, żeby wypisała:
 
 ```
 docx
@@ -313,10 +308,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Jako nazwy zmiennej pętli użyj `filetype`.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Skorzystaj ze struktury kodu z tekstu wprowadzającego, zastępując rozszerzenia plików graficznych rozszerzeniami plików dokumentów.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +330,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Czy użył/a Pan/Pani `for`?'),
+      has_code('filetype', incorrect_msg='Czy użył/a Pan/Pani `filetype` jako zmiennej pętli?'),
+      has_code('in', incorrect_msg='Czy użył/a Pan/Pani `in` przed listą typów plików?'),
+      has_code('docx odt pdf', incorrect_msg='Czy iterował/a Pan/Pani po `docx`, `odt` i `pdf` w tej kolejności?'),
+      has_code(r'pdf\s*;', incorrect_msg='Czy umieścił/a Pan/Pani średnik po ostatnim elemencie pętli?'),
+      has_code(r';\s*do', incorrect_msg='Czy użył/a Pan/Pani `do` po pierwszym średniku?'),
+      has_code('echo', incorrect_msg='Czy użył/a Pan/Pani `echo`?'),
+      has_code(r'\$filetype', incorrect_msg='Czy wyświetlił/a Pan/Pani `$filetype` za pomocą echo?'),
+      has_code(r'filetype\s*;', incorrect_msg='Czy umieścił/a Pan/Pani średnik po ciele pętli?'),
+      has_code('; done', incorrect_msg='Czy zakończył/a Pan/Pani pętlę słowem `done`?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Doskonałe użycie pętli! Pętle są świetne, gdy chce się wykonać tę samą czynność setki lub tysiące razy.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Jak powtórzyć polecenie dla każdego pliku?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +356,14 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Podczas pisania pętli zawsze możesz ręcznie wpisać nazwy plików, które chcesz przetworzyć – zwykle jednak wygodniej jest użyć symboli wieloznacznych.
+Spróbuj uruchomić tę pętlę w konsoli:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Wynik:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +372,13 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+Powodem jest to, że powłoka rozwija wyrażenie `seasonal/*.csv` do listy czterech nazw plików jeszcze przed uruchomieniem pętli.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Zmień wyrażenie wieloznaczne na `people/*`,
+tak aby pętla wypisywała nazwy plików z katalogu `people`
+niezależnie od tego, czy mają jakieś rozszerzenie, czy nie.
+Jako nazwy zmiennej pętli użyj `filename`.
 
 `@hint`
 
@@ -407,25 +400,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Czy użył(a) Pan(i) `for`?'),
+      has_code('filename', incorrect_msg='Czy użył(a) Pan(i) `filename` jako zmiennej pętli?'),
+      has_code('in', incorrect_msg='Czy użył(a) Pan(i) `in` przed listą typów plików?'),
+      has_code('people/\*', incorrect_msg='Czy określił(a) Pan(i) listę plików za pomocą `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Czy umieścił(a) Pan(i) średnik po liście plików?'),
+      has_code(r';\s*do', incorrect_msg='Czy użył(a) Pan(i) `do` po pierwszym średniku?'),
+      has_code('echo', incorrect_msg='Czy wywołał(a) Pan(i) `echo`?'),
+      has_code(r'\$filename', incorrect_msg='Czy wyświetlił(a) Pan(i) `$filename` za pomocą echo?'),
+      has_code(r'filename\s*;', incorrect_msg='Czy umieścił(a) Pan(i) średnik po treści pętli?'),
+      has_code('; done', incorrect_msg='Czy zakończył(a) Pan(i) instrukcję słowem `done`?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Świetna pętla! Symbole wieloznaczne i pętle tworzą potężne połączenie.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Jak zapisać nazwy zestawu plików?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +426,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+Często stosuje się zmienne z wyrażeniami wieloznacznymi, aby zapisać listę nazw plików.
+Na przykład,
+jeśli zdefiniujesz zmienną `datasets` w ten sposób:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+może później wyświetlić nazwy tych plików za pomocą:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+To oszczędza pisania i zmniejsza ryzyko pomyłek.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Jeśli uruchomisz te dwa polecenia w swoim katalogu domowym,
+ile linii wyników zostanie wyświetlonych?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +453,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Żadnej: ponieważ `files` jest zdefiniowane w osobnej linii, w drugiej linii nie ma żadnej wartości.
+- Jedna: słowo „files".
+- Cztery: nazwy wszystkich czterech sezonowych plików z danymi.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Pamiętaj, że samo `X` to po prostu „X", natomiast `$X` to wartość zmiennej `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +467,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Nie: nie musisz definiować zmiennej w tej samej linii, w której jej używasz."
+err2 = "Nie: ten przykład definiuje i używa zmiennej `files` w tej samej powłoce."
+correct3 = "Poprawnie. Polecenie jest równoważne z `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Nazwa zmiennej a jej wartość
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +483,55 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Częstym błędem jest zapomnienie o wstawieniu `$` przed nazwą zmiennej.
+W takim przypadku powłoka traktuje wpisany tekst jako nazwę dosłowną,
+a nie jako wartość zmiennej.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Inny typowy błąd – szczególnie wśród bardziej doświadczonych użytkowników – to literówka w nazwie zmiennej.
+Na przykład,
+jeśli zdefiniujesz zmienną `datasets` w ten sposób:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+a następnie wpiszesz:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+powłoka nie wypisze nic,
+ponieważ `datsets` (bez drugiego „a") nie jest zdefiniowane.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Jakby uruchomić te dwa polecenia w katalogu domowym,
+co zostałoby wypisane na ekranie?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Uważnie przeczytaj pierwszą część pętli przed udzieleniem odpowiedzi.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Pamiętaj, że samo `X` oznacza po prostu „X", natomiast `$X` to wartość zmiennej `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [Jedna linia: słowo „files".]
+- Cztery linie: nazwy wszystkich czterech plików z danymi sezonowymi.
+- Cztery puste linie: zmienna `f` nie ma przypisanej wartości.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Poprawnie: pętla używa `files` zamiast `$files`, więc lista składa się ze słowa „files".
+- Nie: pętla używa `files` zamiast `$files`, więc lista zawiera słowo „files", a nie rozwinięcie zmiennej `files`.
+- Nie: zmienna `f` jest definiowana automatycznie przez pętlę `for`.
 
 ---
 
-## How can I run many commands in a single loop?
+## Jak uruchomić wiele poleceń w jednej pętli?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +539,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Wyświetlanie nazw plików przydaje się podczas debugowania,
+ale prawdziwy cel pętli to wykonywanie operacji na wielu plikach jednocześnie.
+Poniższa pętla wyświetla drugi wiersz każdego pliku z danymi:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Ma taką samą strukturę jak inne pętle, które już widziałeś:
+jedyna różnica polega na tym, że jej ciało to potok złożony z dwóch poleceń zamiast jednego.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Napisz pętlę, która wyświetla ostatni wpis z lipca 2017 roku (`2017-07`) z każdego sezonowego pliku. Powinna dawać wynik podobny do:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+ale dla **_każdego_** sezonowego pliku osobno. Użyj `file` jako nazwy zmiennej pętli i pamiętaj, aby iterować po liście plików `seasonal/*.csv` (_zamiast 'seasonal/winter.csv' jak w przykładzie_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Ciałem pętli jest polecenie grep pokazane w instrukcjach, z tą różnicą, że `seasonal/winter.csv` zastępujesz przez `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +577,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Czy użył(a) Pan(i) `for`?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Czy użył(a) Pan(i) `file` jako zmiennej pętli?'),
+      has_code('in', incorrect_msg='Czy użył(a) Pan(i) `in` przed listą plików?'),
+      has_code('seasonal/\*', incorrect_msg='Czy określił(a) Pan(i) listę plików za pomocą `seasonal/*`?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Czy umieścił(a) Pan(i) średnik po liście plików?'),
+      has_code(r';\s*do', incorrect_msg='Czy użył(a) Pan(i) `do` po pierwszym średniku?'),
+      has_code('grep', incorrect_msg='Czy wywołał(a) Pan(i) `grep`?'),
+      has_code('2017-07', incorrect_msg='Czy wyszukał(a) Pan(i) wyrażenia `2017-07`?'),
+      has_code(r'\$file', incorrect_msg='Czy użył(a) Pan(i) `$file` jako nazwy zmiennej pętli?'),
+      has_code(r'file\s*|', incorrect_msg='Czy użył(a) Pan(i) potoku, aby połączyć drugie polecenie?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Czy użył(a) Pan(i) `tail -n 1`, aby wyświetlić ostatni wpis każdego wyszukiwania w drugim poleceniu?'),
+      has_code('; done', incorrect_msg='Czy zakończył(a) Pan(i) polecenie słowem `done`?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Świetna robota! Symbole wieloznaczne i pętle to potężne połączenie.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Dlaczego nie używać spacji w nazwach plików?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +609,22 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Nadawanie plikom wieloczłonowych nazw, takich jak `July 2017.csv`,
+jest wygodne i naturalne podczas korzystania z graficznego menedżera plików.
+Jednak w pracy z powłoką takie nazwy mogą powodować problemy.
+Na przykład,
+jeśli chcesz zmienić nazwę pliku `July 2017.csv` na `2017 July data.csv`,
+nie możesz wpisać:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+Powyższe polecenie powłoka zinterpretuje jako próbę przeniesienia
+czterech plików o nazwach `July`, `2017.csv`, `2017` i ponownie `July`
+do katalogu o nazwie `data.csv`.
+Zamiast tego musisz ująć nazwy plików w cudzysłów,
+aby powłoka traktowała każdą z nich jako jeden parametr:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +632,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Załóżmy, że masz dwa pliki: `current.csv` oraz `last year.csv`
+(z spacją w nazwie)
+i wpisujesz:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+Co się stanie:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Zastanów się, co by się stało, gdyby ktoś pokazał ci to polecenie, a ty nie wiedziałbyś, jakie pliki istnieją.
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Powłoka wyświetli komunikat o błędzie, ponieważ pliki `last` i `year.csv` nie istnieją.
+- Powłoka usunie plik `current.csv`.
+- [Obydwie powyższe rzeczy naraz.]
+- Nic się nie stanie.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Tak, ale to nie wszystko.
+- Tak, ale to nie wszystko.
+- Zgadza się. Nazwy plików możesz ująć w pojedynczy cudzysłów, `'`, lub podwójny cudzysłów, `"`.
+- Niestety nie.
 
 ---
 
-## How can I do many things in a single loop?
+## Jak wykonać wiele operacji w jednej pętli?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +667,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Wszystkie pętle, które do tej pory widziałeś, miały w ciele tylko jedno polecenie lub jeden potok,
+ale pętla może zawierać dowolną liczbę poleceń.
+Aby wskazać powłoce, gdzie kończy się jedno polecenie, a zaczyna kolejne,
+należy oddzielić je średnikami:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +689,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Załóżmy, że zapominasz o średniku między poleceniami `echo` i `head` w powyższej pętli,
+w wyniku czego polecenie przekazane do powłoki wygląda tak:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Co zrobi powłoka?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Wyświetli komunikat o błędzie.
+- Wyświetli jeden wiersz dla każdego z czterech plików.
+- Wyświetli jeden wiersz dla pliku `autumn.csv` (pierwszego pliku).
+- Wyświetli ostatni wiersz każdego pliku.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Możesz przekierować wynik polecenia `echo` do `tail` za pomocą potoku.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +714,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Nie: pętla zostanie uruchomiona, po prostu nie wykona niczego sensownego."
+correct2 = "Tak: `echo` generuje jedną linię zawierającą nazwę pliku dwukrotnie, którą następnie `tail` kopiuje."
+err3 = "Nie: pętla wykonuje się raz dla każdej z czterech nazw plików."
+err4 = "Nie: dane wejściowe `tail` to dane wyjściowe `echo` dla każdej nazwy pliku."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

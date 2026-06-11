@@ -1,19 +1,20 @@
-title: Introduction to Shell
+title: Wprowadzenie do powłoki systemowej
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Wiersz poleceń systemu Unix przetrwał i rozwinął się przez prawie 50 lat,
+  ponieważ pozwala wykonywać złożone operacje za pomocą zaledwie kilku naciśnięć
+  klawiszy. Określany niekiedy „uniwersalnym spoiwem programowania", umożliwia
+  łączenie istniejących programów w nowy sposób, automatyzowanie powtarzalnych
+  zadań oraz uruchamianie programów na klastrach i w chmurze – nawet po drugiej
+  stronie globu. Ten kurs przedstawia kluczowe elementy powłoki i pokazuje, jak
+  efektywnie z niej korzystać.
 
 
-  The course glossary can be found on the right in the resources section.
+  Słowniczek kursu znajdziesz po prawej stronie, w sekcji zasobów.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Aby uzyskać punkty CPE, ukończ kurs i zdobądź co najmniej 70% punktów w
+  kwalifikowanej ocenie. Przejdź do oceny, klikając informację o punktach CPE po
+  prawej stronie.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
