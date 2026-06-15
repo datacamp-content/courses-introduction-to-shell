@@ -1,15 +1,16 @@
 ---
-title: Creating new tools
+title: Crearea de noi instrumente
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  Istoricul îți permite să repeți acțiuni cu doar câteva apăsări de taste, iar
+  pipe-urile îți permit să combini comenzi existente pentru a crea altele noi.
+  În acest capitol, vei vedea cum să mergi cu un pas mai departe și să îți
+  creezi propriile comenzi.
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: Cum pot edita un fișier?
 ---
 
-## How can I edit a file?
+## Cum pot edita un fișier?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +18,24 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix dispune de o varietate surprinzătoare de editoare de text.
+În cadrul acestui curs,
+vom folosi unul simplu, numit Nano.
+Dacă tastezi `nano filename`,
+se va deschide `filename` pentru editare
+(sau va fi creat dacă nu există deja).
+Poți naviga prin fișier cu tastele săgeată,
+șterge caractere cu tasta Backspace
+și efectua alte operațiuni cu combinații de taste Ctrl:
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`: șterge o linie.
+- `Ctrl` + `U`: recuperează o linie ștearsă.
+- `Ctrl` + `O`: salvează fișierul ('O' vine de la 'output'). _Va trebui să apeși și Enter pentru a confirma numele fișierului!_
+- `Ctrl` + `X`: iese din editor.
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+Rulează `nano names.txt` pentru a edita un fișier nou în directorul tău home
+și introdu următoarele patru rânduri:
 
 ```
 Lovelace
@@ -43,10 +44,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+Pentru a salva ce ai scris,
+tastează `Ctrl` + `O` pentru a scrie fișierul,
+apoi Enter pentru a confirma numele fișierului,
+iar la final `Ctrl` + `X` pentru a ieși din editor.
 
 `@hint`
 
@@ -65,7 +66,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "Ați inclus linia `%s` în fișierul `names.txt`? Folosiți `nano names.txt` din nou pentru a actualiza fișierul. Folosiți `Ctrl` + `O` pentru a salva și `Ctrl` + `X` pentru a ieși."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +76,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("Bine făcut! Trecem la următorul!")
 ```
 
 ---
 
-## How can I record what I just did?
+## Cum pot înregistra ce am făcut?
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +89,20 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+Când realizezi o analiză complexă,
+vei dori adesea să păstrezi o evidență a comenzilor folosite.
+Poți face asta cu instrumentele pe care le-ai văzut deja:
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. Rulează `history`.
+2. Direcționează rezultatul prin pipe către `tail -n 10` (sau câți pași recenți vrei să salvezi).
+3. Redirecționează rezultatul într-un fișier cu un nume precum `figure-5.history`.
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+Această metodă este mai bună decât notarea manuală într-un caiet de laborator,
+deoarece garantează că nu vei omite niciun pas.
+Ilustrează și ideea centrală a shell-ului:
+instrumente simple care produc și consumă linii de text
+pot fi combinate în fel și chip
+pentru a rezolva o gamă largă de probleme.
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +118,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+Copiază fișierele `seasonal/spring.csv` și `seasonal/summer.csv` în directorul tău home.
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+Folosește `cp` pentru a copia și `~` ca scurtătură pentru calea către directorul tău home.
 
 `@solution`
 ```{shell}
@@ -130,7 +131,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="Ați folosit `cp seasonal/s* ~` pentru a copia fișierele necesare în directorul dvs. principal?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +139,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("Evidențe remarcabile! Dacă ați tastat greșit anumite comenzi, puteți folosi oricând `nano` pentru a curăța ulterior fișierul cu istoricul salvărilor.")
 ```
 
 ***
@@ -151,13 +151,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+Folosește `grep` cu flag-ul `-h` (pentru a opri afișarea numelor de fișiere)
+și `-v Tooth` (pentru a selecta liniile care *nu* corespund liniei de antet)
+ca să selectezi înregistrările de date din `spring.csv` și `summer.csv`, în această ordine,
+și redirecționează rezultatul în `temp.csv`.
 
 `@hint`
-Put the flags before the filenames.
+Pune flag-urile înaintea numelor de fișiere.
 
 `@solution`
 ```{shell}
@@ -167,8 +167,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "Asigurați-vă că redirecționați ieșirea comenzii `grep` către `temp.csv` cu `>`!"
+msg2 = "Ați folosit `grep -h -v ___ ___ ___` (completați spațiile libere) pentru a popula `temp.csv`?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +177,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +188,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+Direcționează `history` prin pipe către `tail -n 3`
+și redirecționează rezultatul în `steps.txt`
+pentru a salva ultimele trei comenzi într-un fișier.
+(Trebuie să salvezi trei în loc de doar două
+deoarece comanda `history` în sine va apărea în listă.)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+Reține că redirecționarea cu `>` vine la sfârșitul secvenței de comenzi conectate prin pipe.
 
 `@solution`
 ```{shell}
@@ -206,8 +205,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="Asigurați-vă că redirecționați ieșirea comenzii dvs. către `steps.txt`."
+msg2="Ați folosit `history | tail ___ ___` (completați spațiile libere) pentru a popula `steps.txt`?"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +218,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("Bine făcut! Să ridicăm ștacheta!")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## Cum pot salva comenzi pentru a le rula mai târziu?
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +231,27 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+Până acum ai folosit shell-ul în mod interactiv.
+Însă, deoarece comenzile pe care le tastezi sunt simplu text,
+le poți salva în fișiere pe care shell-ul să le ruleze ori de câte ori este nevoie.
+Pentru a explora această capabilitate utilă,
+pune următoarea comandă într-un fișier numit `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+Această comandă selectează primul rând din fiecare fișier CSV din directorul `seasonal`.
+Odată ce ai creat acest fișier,
+îl poți rula tastând:
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+Astfel îi spui shell-ului (care este un program numit `bash`)
+să ruleze comenzile din fișierul `headers.sh`,
+producând același rezultat ca și cum ai rula comenzile direct.
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +267,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+Folosește `nano dates.sh` pentru a crea un fișier numit `dates.sh`
+care să conțină această comandă:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+pentru a extrage prima coloană din toate fișierele CSV din directorul `seasonal`.
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+Introdu comenzile indicate în fișier fără linii goale sau spații suplimentare.
 
 `@solution`
 ```{shell}
@@ -291,13 +289,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "Ați inclus linia `cut -d , -f 1 seasonal/*.csv` în fișierul `dates.sh`? Folosiți `nano dates.sh` din nou pentru a actualiza fișierul. Folosiți `Ctrl` + `O` pentru a salva și `Ctrl` + `X` pentru a ieși."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +306,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+Folosește `bash` pentru a rula fișierul `dates.sh`.
 
 `@hint`
-Use `bash filename` to run the file.
+Folosește `bash nume_fișier` pentru a rula fișierul.
 
 `@solution`
 ```{shell}
@@ -327,17 +324,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+      has_code("dates.sh", incorrect_msg = 'Ați specificat fișierul `dates.sh`?')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## Cum pot reutiliza pipe-uri?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +341,27 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+Un fișier care conține comenzi shell se numește ***script shell***,
+sau uneori, mai simplu, un „script". Numele scripturilor nu trebuie să se termine cu `.sh`,
+dar această lecție va folosi această convenție
+pentru a te ajuta să identifici mai ușor care fișiere sunt scripturi.
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+Scripturile pot conține și pipe-uri.
+De exemplu,
+dacă `all-dates.sh` conține această linie:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+atunci:
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+va extrage datele unice din fișierele de date sezoniere
+și le va salva în `dates.out`.
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +378,13 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+În directorul tău home a fost pregătit un fișier `teeth.sh`, dar acesta conține câteva spații libere.
+Folosește Nano pentru a edita fișierul și înlocuiește cele două marcaje `____`
+cu `seasonal/*.csv` și `-c`, astfel încât scriptul să afișeze numărul de apariții
+ale fiecărui nume de dinte în fișierele CSV din directorul `seasonal`.
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+Folosește `nano teeth.sh` pentru a edita fișierul.
 
 `@solution`
 ```{shell}
@@ -400,13 +396,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="Ați înlocuit corect spațiile libere astfel încât comanda din `teeth.sh` să citească `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Utilizați `nano teeth.sh` din nou pentru a efectua modificările necesare."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +413,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+Folosește `bash` pentru a rula `teeth.sh` și `>` pentru a redirecționa rezultatul în `teeth.out`.
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+Reține că `> teeth.out` trebuie să apară *după* comanda care produce rezultatul.
 
 `@solution`
 ```{shell}
@@ -434,7 +429,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="Ați redirecționat corect rezultatul comenzii `bash teeth.sh` către `teeth.out` folosind `>`?"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +438,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'Ați rulat fișierul `teeth.sh`?'),
+      has_code(">\s+teeth.out", incorrect_msg = 'Ați redirecționat către fișierul `teeth.out`?')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +455,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+Rulează `cat teeth.out` pentru a inspecta rezultatele.
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+Reține că poți tasta primele câteva caractere ale unui nume de fișier și apoi să apeși tasta Tab pentru a-l completa automat.
 
 `@solution`
 ```{shell}
@@ -479,18 +473,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = 'Ați apelat `cat`?'),
+      has_code("teeth.out", incorrect_msg = 'Ați specificat fișierul `teeth.out`?')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("Excelent! Toate acestea pot părea artificiale la început, dar lucrul plăcut este că automatizați părți ale fluxului de lucru pas cu pas. Ceva foarte util ca om de știință al datelor!")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## Cum pot transmite nume de fișiere către scripturi?
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +491,26 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+Un script care procesează anumite fișiere specifice este util ca înregistrare a ceea ce ai făcut, dar unul care îți permite să procesezi orice fișiere dorești este și mai valoros.
+Pentru a face acest lucru,
+poți folosi expresia specială `$@` (semnul dolar urmat imediat de simbolul @)
+cu sensul de „toți parametrii transmiși scriptului din linia de comandă".
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+De exemplu, dacă `unique-lines.sh` conține `sort $@ | uniq`, atunci când rulezi:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+shell-ul înlocuiește `$@` cu `seasonal/summer.csv` și procesează un singur fișier. Dacă rulezi:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+vor fi procesate două fișiere de date, și tot așa.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ca reminder: pentru a salva ce ai scris în Nano, apasă `Ctrl` + `O` pentru a scrie fișierul, apoi Enter pentru a confirma numele fișierului, apoi `Ctrl` + `X` pentru a ieși din editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +527,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+Editează scriptul `count-records.sh` cu Nano și completează cei doi substituenți `____`
+cu `$@` și respectiv `-l` (_litera_), astfel încât scriptul să numere liniile din unul sau mai multe fișiere,
+excluzând prima linie din fiecare.
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* Folosește `nano count-records.sh` pentru a edita fișierul.
+* Asigură-te că specifici _litera_ `-l`, nu cifra unu.
 
 `@solution`
 ```{shell}
@@ -552,13 +545,12 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="Ați înlocuit corect spațiile libere astfel încât comanda din `count-records.sh` să citească `tail -q -n +2 $@ | wc -l`? Utilizați din nou `nano count-records.sh` pentru a efectua modificările necesare."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
         has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -570,11 +562,11 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+Rulează `count-records.sh` pe `seasonal/*.csv`
+și redirecționează rezultatul către `num-records.out` folosind `>`.
 
 `@hint`
-Use `>` to redirect the output.
+Folosește `>` pentru a redirecționa rezultatul.
 
 `@solution`
 ```{shell}
@@ -589,20 +581,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'Ați rulat fișierul `count-records.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Ați specificat fișierele de procesat cu `seasonal/*`?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'Ați redirecționat către fișierul `num-records.out`?')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("Treabă bine făcută! Puterea dumneavoastră în shell este în continuă expansiune!")
 ```
 
 ---
 
-## How can I process a single argument?
+## Cum pot procesa un singur argument?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +601,42 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+Pe lângă `$@`,
+shell-ul îți permite să folosești `$1`, `$2` și așa mai departe pentru a face referire la parametri specifici din linia de comandă.
+Poți folosi acest lucru pentru a scrie comenzi care par mai simple sau mai naturale decât cele ale shell-ului.
+De exemplu,
+poți crea un script numit `column.sh` care selectează o singură coloană dintr-un fișier CSV
+atunci când utilizatorul furnizează numele fișierului ca prim parametru și coloana ca al doilea:
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+și apoi îl rulezi astfel:
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+Observă că scriptul folosește cei doi parametri în ordine inversă.
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+Scriptul `get-field.sh` ar trebui să primească un nume de fișier,
+numărul rândului de selectat,
+numărul coloanei de selectat
+și să afișeze doar acel câmp dintr-un fișier CSV.
+De exemplu:
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+ar trebui să selecteze al doilea câmp din linia 4 a fișierului `seasonal/summer.csv`.
+Care dintre următoarele comenzi ar trebui pusă în `get-field.sh` pentru a realiza asta?
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+Reține că parametrii din linia de comandă sunt numerotați de la stânga la dreapta.
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +645,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- Nu: aceasta va încerca să folosească numele fișierului ca număr de linii de selectat cu `head`.
+- Corect!
+- Nu: aceasta va încerca să folosească numărul coloanei ca număr de linie și invers.
+- Nu: aceasta va folosi numărul câmpului ca nume de fișier și invers.
 
 ---
 
-## How can one shell script do many things?
+## Cum poate un script shell să facă mai multe lucruri?
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +660,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+Scripturile shell pe care le-am scris până acum au conținut o singură comandă sau un singur pipe, dar un script poate include mai multe linii de comenzi. De exemplu, poți crea unul care îți arată câte înregistrări are cel mai scurt și cel mai lung fișier de date, adică intervalul lungimilor seturilor tale de date.
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+Notă: în Nano, „copierea și lipirea" se realizează navigând la linia pe care vrei să o copiezi, apăsând `CTRL` + `K` pentru a o decupa, apoi `CTRL` + `U` de două ori pentru a lipi două copii ale acesteia.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ca reminder: pentru a salva ce ai scris în Nano, apasă `Ctrl` + `O` pentru a scrie fișierul, apoi Enter pentru a confirma numele fișierului, iar apoi `Ctrl` + `X` pentru a ieși din editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +681,15 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+Folosește Nano pentru a edita scriptul `range.sh`
+și înlocuiește cele două marcaje `____`
+cu `$@` și `-v`,
+astfel încât să afișeze numele și numărul de linii ale tuturor fișierelor transmise în linia de comandă,
+*fără* a afișa numărul total de linii din toate fișierele.
+(Nu încerca să scazi liniile de antet ale coloanelor din fișiere.)
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+Folosește `wc -l $@` pentru a număra liniile din toate fișierele transmise în linia de comandă.
 
 `@solution`
 ```{shell}
@@ -710,13 +701,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="Ați înlocuit corect spațiile libere astfel încât comanda din `range.sh` să fie `wc -l $@ | grep -v total`? Utilizați `nano range.sh` din nou pentru a efectua modificările necesare."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +718,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+Folosește Nano din nou pentru a adăuga `sort -n` și `head -n 1`, în această ordine,
+la pipeline-ul din `range.sh`,
+pentru a afișa numele și numărul de linii ale celui mai scurt fișier transmis.
 
 `@hint`
 
@@ -745,13 +735,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="Ați adăugat `sort -n` și `head -n 1` cu pipe-uri în fișierul `range.sh`? Utilizați `nano range.sh` din nou pentru a efectua modificările necesare."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +752,13 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+Tot folosind Nano, adaugă o a doua linie în `range.sh` pentru a afișa numele și numărul de înregistrări ale
+fișierului *cel mai lung* din director, *pe lângă* cel mai scurt.
+Această linie trebuie să fie o copie a celei deja scrise,
+dar cu `sort -n -r` în loc de `sort -n`.
 
 `@hint`
-Copy the first line and modify the sorting order.
+Copiază prima linie și modifică ordinea de sortare.
 
 `@solution`
 ```{shell}
@@ -781,8 +770,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="Păstrați prima linie în fișierul `range.sh`: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="Ați duplicat prima linie din `range.sh` și ați făcut o mică modificare? `sort -n -r` în loc de `sort -n`!"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +779,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +790,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+Rulează scriptul pe fișierele din directorul `seasonal`,
+folosind `seasonal/*.csv` pentru a selecta toate fișierele,
+și redirecționează rezultatul cu `>`
+către un fișier numit `range.out` din directorul tău home.
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+Folosește `bash range.sh` pentru a rula scriptul, `seasonal/*.csv` pentru a specifica fișierele și `> range.out` pentru a redirecționa rezultatul.
 
 `@solution`
 ```{shell}
@@ -818,24 +806,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="Ați redirecționat corect rezultatul `bash range.sh seasonal/*.csv` către `range.out` cu `>`?"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+has_code("bash\s+range.sh", incorrect_msg = 'Ați rulat fișierul `range.sh`?'),
+has_code("seasonal/\*", incorrect_msg = 'Ați specificat fișierele de procesat cu `seasonal/*`?'),
+has_code(">\s+range.out", incorrect_msg = 'Ați redirecționat către fișierul `range.out`?')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("Merge bine. Treceți la exercițiul următor pentru a învăța despre scrierea buclelor!")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## Cum pot scrie bucle într-un script shell?
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,7 +830,7 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+Scripturile shell pot conține și bucle. Le poți scrie folosind punct și virgulă sau le poți împărți pe mai multe rânduri, fără punct și virgulă, pentru a fi mai ușor de citit:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -854,11 +841,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+(Nu este obligatoriu să indentezi comenzile din interiorul buclei, dar acest lucru face codul mai clar.)
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+Prima linie a acestui script este un **comentariu** care explică cititorului ce face scriptul. Comentariile încep cu caracterul `#` și se extind până la sfârșitul rândului. Versiunea ta din viitor îți va mulțumi că ai adăugat explicații scurte, ca cea de mai sus, în fiecare script pe care îl scrii.
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_Ca reminder, pentru a salva ce ai scris în Nano, tastează `Ctrl` + `O` pentru a scrie fișierul, apoi Enter pentru a confirma numele fișierului, apoi `Ctrl` + `X` pentru a ieși din editor._
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +862,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+Completează locurile marcate cu placeholder în scriptul `date-range.sh`
+cu `$filename` (de două ori), `head` și `tail`,
+astfel încât să afișeze prima și ultima dată din unul sau mai multe fișiere.
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+Nu uita să folosești `$filename` pentru a obține valoarea curentă a variabilei din buclă.
 
 `@solution`
 ```{shell}
@@ -892,10 +879,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="În `date-range.sh`, ați modificat linia %s din buclă pentru a fi `%s`? Utilizați `nano date-range.sh` pentru a efectua modificări."
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('prima', cmdpatt%'head')
+msg2=msgpatt%('a doua', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +893,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +904,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+Rulează `date-range.sh` pe toate cele patru fișiere de date sezoniere
+folosind `seasonal/*.csv` pentru a le potrivi după nume.
 
 `@hint`
-The wildcard expression should start with the directory name.
+Expresia cu wildcard trebuie să înceapă cu numele directorului.
 
 `@solution`
 ```{shell}
@@ -937,13 +923,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Ați rulat fișierul `date-range.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Ați specificat fișierele de procesat cu `seasonal/*`?')
     )
   )
 )
-
 ```
 
 ***
@@ -955,11 +940,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+Rulează `date-range.sh` pe toate cele patru fișiere de date sezoniere folosind `seasonal/*.csv` pentru a le potrivi după nume,
+și redirecționează rezultatul prin pipe către `sort` pentru a vedea că scripturile tale pot fi folosite la fel ca comenzile built-in din Unix.
 
 `@hint`
-Use the same wildcard expression you used earlier.
+Folosește aceeași expresie cu wildcard pe care ai folosit-o anterior.
 
 `@solution`
 ```{shell}
@@ -974,21 +959,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = 'Ați apelat `bash`?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'Ați rulat fișierul `date-range.sh`?'),
+      has_code("seasonal/\*", incorrect_msg = 'Ați specificat fișierele de procesat cu `seasonal/*`?'),
+      has_code("|", incorrect_msg = 'Ați redirecționat ieșirea scriptului către `sort`?'),
+      has_code("sort", incorrect_msg = 'Ați apelat `sort`?')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("Extraordinar! Observați cât de ușor se pot combina toate lucrurile pe care le-am învățat.")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## Ce se întâmplă când nu furnizezi nume de fișiere?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +980,42 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+O greșeală frecventă în scripturile shell (și în comenzile interactive) este să plasezi numele fișierelor în locul greșit.
+Dacă tastezi:
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+deoarece `tail` nu a primit niciun nume de fișier,
+va aștepta să citească date de la tastatură.
+Însemnă că, dacă tastezi:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+atunci `tail` afișează ultimele trei linii din `somefile.txt`,
+dar `head` va aștepta la nesfârșit date de la tastatură,
+deoarece nu a primit niciun nume de fișier și nu are nimic înaintea lui în pipeline.
 
 <hr>
 
-Suppose you do accidentally type:
+Să presupunem că tastezi din greșeală:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+Ce ar trebui să faci în continuare?
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- Să aștepți 10 secunde pentru ca `head` să expire.
+- Să tastezi `somefile.txt` și să apeși Enter pentru a furniza date către `head`.
+- Să folosești `Ctrl` + `C` pentru a opri programul `head` care rulează.
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+Ce face `head` dacă nu primește niciun nume de fișier și nu are nimic în amonte?
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +1024,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = 'Nu, comenzile nu vor expira.'
+a2 = 'Nu, aceasta va oferi comanzii `head` textul `somefile.txt` pentru procesare, dar apoi va aștepta în continuare mai multe date de intrare.'
+a3 = 'Da! Ar trebui să utilizați `Ctrl` + `C` pentru a opri un program în execuție. Aceasta încheie acest curs introductiv! Dacă doriți să aflați mai multe despre instrumentele liniei de comandă, vă recomandăm cu căldură să urmați cursul nostru gratuit de introducere în Git!'
 Ex().has_chosen(3, [a1, a2, a3])
 ```

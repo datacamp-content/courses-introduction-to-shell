@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Combinarea instrumentelor
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Puterea reală a shell-ului Unix nu constă în comenzile individuale, ci în
+  ușurința cu care pot fi combinate pentru a realiza lucruri noi. Acest capitol
+  îți va arăta cum să folosești această putere pentru a selecta datele dorite și
+  îți va prezenta comenzi pentru sortarea valorilor și eliminarea duplicatelor.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Cum pot salva rezultatul unei comenzi într-un fișier?
 ---
 
-## How can I store a command's output in a file?
+## Cum pot salva rezultatul unei comenzi într-un fișier?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Toate instrumentele pe care le-ai văzut până acum îți permit să specifici fișiere de intrare.
+Cele mai multe nu au o opțiune pentru a specifica un fișier de ieșire, pentru că nu au nevoie de una.
+În schimb,
+poți folosi **redirecționarea** pentru a salva rezultatul oricărei comenzi oriunde dorești.
+Dacă rulezi această comandă:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+aceasta afișează primele 5 linii din datele de vară pe ecran.
+Dacă rulezi în schimb această comandă:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+nimic nu apare pe ecran.
+În schimb,
+rezultatul lui `head` este salvat într-un fișier nou numit `top.csv`.
+Poți vizualiza conținutul acelui fișier folosind `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Semnul mai-mare-decât `>` îi spune shell-ului să redirecționeze rezultatul lui `head` către un fișier.
+Nu face parte din comanda `head`;
+în schimb,
+funcționează cu orice comandă shell care produce rezultate.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Combină `tail` cu redirecționarea pentru a salva ultimele 5 linii din `seasonal/winter.csv` într-un fișier numit `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Folosește `tail -n 5` pentru a obține ultimele 5 linii.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +67,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Linia `%s` ar trebui să se afle în fișierul `last.csv`, dar nu se află. Redirecționați ieșirea comenzii `tail -n 5 seasonal/winter.csv` către `last.csv` folosind `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` conține prea multe linii. Ați folosit indicatorul `-n 5` cu `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Excelent! Să mai exersăm puțin!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Cum pot folosi rezultatul unei comenzi ca intrare?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +89,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Să presupunem că vrei să extragi linii din mijlocul unui fișier.
+Mai exact,
+să zicem că vrei să obții liniile 3-5 dintr-unul dintre fișierele noastre de date.
+Poți începe prin a folosi `head` pentru a extrage primele 5 linii
+și a le redirecționa într-un fișier,
+apoi folosești `tail` pentru a selecta ultimele 3:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+O verificare rapidă confirmă că acestea sunt liniile 3-5 din fișierul original,
+deoarece reprezintă ultimele 3 linii din primele 5.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +118,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Selectează ultimele două linii din `seasonal/winter.csv`
+și salvează-le într-un fișier numit `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Folosește `tail` pentru a selecta liniile și `>` pentru a redirecționa rezultatul comenzii `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +132,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Linia `%s` ar trebui să se afle în fișierul `bottom.csv`, dar nu se află. Redirecționați ieșirea comenzii `tail -n 2 seasonal/winter.csv` către `bottom.csv` folosind `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` conține prea multe linii. Ați folosit indicatorul `-n 2` cu `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +152,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Selectează prima linie din `bottom.csv`
+pentru a obține penultima linie din fișierul original.
 
 `@hint`
-Use `head` to select the line you want.
+Folosește `head` pentru a selecta linia dorită.
 
 `@solution`
 ```{shell}
@@ -169,17 +168,16 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Ceva nu este în regulă cu fișierul `bottom.csv`. Asigurați-vă că nu îl modificați!"),
+    has_expr_output(strict=True, incorrect_msg="Ați folosit `head` corect pe `bottom.csv`? Asigurați-vă că utilizați corect indicatorul `-n`.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
-
+Ex().success_msg("Felicitări. Continuați cu următorul exercițiu pentru a afla despre modalități mai bune de a combina comenzile.")
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Care este o modalitate mai bună de a combina comenzi?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +185,33 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Utilizarea redirecționării pentru a combina comenzi are două dezavantaje:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Lasă în urmă multe fișiere intermediare (precum `top.csv`).
+2. Comenzile necesare pentru a obține rezultatul final sunt răspândite pe mai multe linii din istoric.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Shell-ul oferă un alt instrument care rezolvă ambele probleme dintr-o dată, numit **pipe**.
+Începe din nou prin a rula `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+În loc să trimiți rezultatul lui `head` într-un fișier,
+adaugă o bară verticală și comanda `tail` *fără* un nume de fișier:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Simbolul pipe îi indică shell-ului să folosească rezultatul comenzii din stânga drept intrare pentru comanda din dreapta.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Folosește `cut` pentru a selecta toate numele de dinți din coloana 2 a fișierului delimitat prin virgulă `seasonal/summer.csv`, apoi direcționează rezultatul către `grep`, cu o potrivire inversă, pentru a exclude linia de antet care conține cuvântul "Tooth". *`cut` și `grep` au fost tratate în detaliu în Capitolul 2, exercițiile 8 și, respectiv, 11.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Prima parte a comenzii are forma `cut -d field_delimiter -f column_number filename`.
+- A doua parte a comenzii are forma `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +227,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Ați redirecționat rezultatul comenzii `cut -d , -f 2 seasonal/summer.csv` către `grep -v Tooth` folosind `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Ați exclus linia de antet `"Tooth"` folosind `grep`?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Redirecționare perfectă! Poate că aceasta este prima dată când ați folosit `|`, dar cu siguranță nu va fi ultima!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Cum pot combina mai multe comenzi?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +243,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Poți înlănțui oricâte comenzi dorești.
+De exemplu,
+această comandă:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+va:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. selecta prima coloană din datele de primăvară;
+2. elimina linia de antet care conține cuvântul "Date"; și
+3. selecta primele 10 linii de date efective.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+În exercițiul anterior, ai folosit următoarea comandă pentru a selecta toate numele de dinți din coloana 2 a fișierului `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Extinde acest pipeline cu o comandă `head` pentru a selecta doar primul nume de dinte.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Copiază și lipește codul din instrucțiuni, adaugă un pipe, apoi apelează `head` cu indicatorul `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +284,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Ați folosit `|` pentru a extinde pipeline-ul cu o comandă `head`? Asigurați-vă că ați setat corect indicatorul `-n`."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Ați folosit `|` pentru a extinde pipeline-ul cu o comandă `head`?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Înlănțuire admirabilă! Prin înlănțuirea mai multor comenzi, puteți construi pipeline-uri puternice de manipulare a datelor.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Cum pot număra înregistrările dintr-un fișier?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +301,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Comanda `wc` (prescurtare de la „word count") afișează numărul de **c**aractere, **c**uvinte și **l**inii dintr-un fișier.
+Poți face ca aceasta să afișeze doar una dintre aceste valori folosind `-c`, `-w` sau `-l`, respectiv.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Numără câte înregistrări din `seasonal/spring.csv` au date din iulie 2017 (`2017-07`). 
+- Pentru aceasta, folosește `grep` cu o dată parțială pentru a selecta liniile și trimite rezultatul prin pipe către `wc` cu un flag potrivit pentru a număra liniile.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Folosește `head seasonal/spring.csv` pentru a-ți reaminti formatul datei.
+- Prima parte a comenzii are forma `grep thing_to_match filename`.
+- După pipe, `|`, apelează `wc` cu flag-ul `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +330,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Ați apelat `grep`?"),
+      has_code("2017-07", incorrect_msg = "Ați căutat `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Ați căutat în fișierul `seasonal/spring.csv`?"),
+      has_code("|", incorrect_msg = "Ați redirecționat către `wc` folosind `|`?"),      
+      has_code("wc", incorrect_msg = "Ați apelat `wc`?"),
+      has_code("-l", incorrect_msg = "Ați numărat liniile cu `-l`?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Numărare atentă! Determinarea cantității de date pe care o aveți este un prim pas excelent în orice analiză de date.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Cum pot specifica mai multe fișiere deodată?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +352,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Majoritatea comenzilor shell funcționează cu mai multe fișiere dacă le oferi mai multe nume de fișiere.
+De exemplu,
+pot extrage prima coloană din toate fișierele cu date sezoniere deodată, astfel:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
+Însă să tastezi numele atâtor fișiere din nou și din nou nu este o idee bună:
+piezi timp,
+iar mai devreme sau mai târziu vei omite un fișier sau vei repeta numele altuia.
+Pentru a-ți ușura munca,
+shell-ul îți permite să folosești **wildcarduri** pentru a specifica o listă de fișiere printr-o singură expresie.
+Cel mai frecvent wildcard este `*`,
+care înseamnă „potrivește zero sau mai multe caractere".
 Using it,
-we can shorten the `cut` command above to this:
+putem scurta comanda `cut` de mai sus la:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+sau:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Scrie o singură comandă folosind `head` pentru a obține primele trei linii atât din `seasonal/spring.csv`, cât și din `seasonal/summer.csv` — în total șase linii de date —, dar *nu* și din fișierele cu date de toamnă sau iarnă.
+Folosește un wildcard în loc să scrii numele fișierelor în întregime.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Comanda are forma `head -n number_of_lines filename_pattern`.
+- Pentru a potrivi fișierele din directorul `a` care încep cu `b`, poți folosi, de exemplu, `a/b*`.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +402,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Puteți folosi `seasonal/s*` pentru a selecta `seasonal/spring.csv` și `seasonal/summer.csv`. Asigurați-vă că includeți doar primele trei linii din fiecare fișier cu indicatorul `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Nu includeți rezultatul pentru `seasonal/autumn.csv`. Puteți folosi `seasonal/s*` pentru a selecta `seasonal/spring.csv` și `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Nu includeți rezultatul pentru `seasonal/winter.csv`. Puteți folosi `seasonal/s*` pentru a selecta `seasonal/spring.csv` și `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Wildcard-uri sălbatice la treabă! Acest lucru devine și mai important dacă directorul dumneavoastră conține sute sau mii de fișiere.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Ce alte metacaractere pot folosi?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +419,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Shell-ul dispune și de alte metacaractere,
+deși sunt folosite mai rar:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` se potrivește cu un singur caracter, deci `201?.txt` va fi asociat cu `2017.txt` sau `2018.txt`, dar nu cu `2017-01.txt`.
+- `[...]` se potrivește cu oricare dintre caracterele din parantezele pătrate, deci `201[78].txt` se asociază cu `2017.txt` sau `2018.txt`, dar nu cu `2016.txt`.
+- `{...}` se potrivește cu oricare dintre șabloanele separate prin virgulă din acolade, deci `{*.txt, *.csv}` se asociază cu orice fișier al cărui nume se termină cu `.txt` sau `.csv`, dar nu cu fișiere ale căror nume se termină cu `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Care expresie s-ar potrivi cu `singh.pdf` și `johel.txt`, dar *nu* și cu `sandhu.pdf` sau `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Verifică fiecare expresie față de fiecare nume de fișier pe rând.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +440,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Nu: `.pdf` și `.txt` nu sunt nume de fișiere.
+- Nu: aceasta se va potrivi cu `sandhu.pdf`.
+- Nu: expresia din paranteze pătrate se potrivește cu un singur caracter, nu cu cuvinte întregi.
+- Corect!
 
 ---
 
-## How can I sort lines of text?
+## Cum pot sorta liniile de text?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +455,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+După cum îi sugerează și numele,
+`sort` ordonează datele.
+Implicit, le sortează în ordine alfabetică crescătoare,
+dar flag-urile `-n` și `-r` pot fi folosite pentru a sorta numeric și, respectiv, pentru a inversa ordinea rezultatelor.
+În plus, `-b` ignoră spațiile de la începutul liniei,
+iar `-f` **i**gnorează diferența dintre majuscule și minuscule (adică face sortarea case-insensitive).
+În general, pipeline-urile folosesc `grep` pentru a elimina înregistrările nedorite,
+urmat de `sort` pentru a ordona înregistrările rămase.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Îți amintești combinația de `cut` și `grep` pentru a selecta toate numele dinților din coloana 2 a fișierului `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Pornind de la această comandă, sortează numele dinților din `seasonal/winter.csv` (nu din `summer.csv`) în ordine alfabetică descrescătoare. Pentru asta, extinde pipeline-ul cu un pas `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Copiază și lipește comanda din instrucțiuni, schimbă numele fișierului, adaugă un pipe, apoi apelează `sort` cu flag-ul `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +493,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Ați apelat `cut`?"),
+      has_code("-d", incorrect_msg = "Ați specificat un delimitator de câmp cu `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Ați obținut datele din fișierul `seasonal/winter.csv`?"),
+      has_code("|", incorrect_msg = "Ați redirecționat din `cut` către `grep` și `sort` folosind `|`?"),      
+      has_code("grep", incorrect_msg = "Ați apelat `grep`?"),
+      has_code("-v", incorrect_msg = "Ați inversat potrivirea cu `-v`?"),
+      has_code("Tooth", incorrect_msg = "Ați căutat `Tooth`?"),
+      has_code("sort", incorrect_msg = "Ați apelat `sort`?"),
+      has_code("-r", incorrect_msg = "Ați inversat ordinea de sortare cu `-r`?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Sortat! `sort` are multe utilizări. De exemplu, redirecționând `sort -n` către `head` vă arată cele mai mari valori.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Cum pot elimina liniile duplicate?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +518,11 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+O altă comandă folosită frecvent împreună cu `sort` este `uniq`,
+al cărei rol este să elimine liniile duplicate.
+Mai exact,
+eliminează liniile duplicate *adiacente*.
+Dacă un fișier conține:
 
 ```
 2017-07-03
@@ -535,14 +531,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+atunci `uniq` va produce:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+dar dacă fișierul conține:
 
 ```
 2017-07-03
@@ -551,33 +547,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+atunci `uniq` va afișa toate cele patru linii.
+Motivul este că `uniq` a fost conceput pentru a lucra cu fișiere foarte mari.
+Pentru a elimina liniile care nu sunt adiacente,
+ar fi nevoie să păstreze întregul fișier în memorie
+(sau cel puțin
+toate liniile unice întâlnite până în acel moment).
+Eliminând doar duplicatele adiacente,
+este suficient să păstreze în memorie doar cea mai recentă linie unică.
 
 `@instructions`
-Write a pipeline to:
+Scrie un pipeline care să:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- extragă a doua coloană din `seasonal/winter.csv`,
+- elimine cuvântul "Tooth" din rezultat, astfel încât să fie afișate doar numele dinților,
+- sorteze rezultatul, astfel încât toate aparițiile unui anumit nume să fie adiacente; și
+- afișeze fiecare nume o singură dată, împreună cu numărul de apariții.
 
-The start of your pipeline is the same as the previous exercise:
+Începutul pipeline-ului tău este același ca în exercițiul anterior:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Extinde-l cu o comandă `sort`, apoi folosește `uniq -c` pentru a afișa liniile unice împreună cu numărul de apariții, în loc să folosești `uniq` și `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Copiază și lipește comanda din instrucțiuni, direcționează rezultatul cu `|` către `sort` fără opțiuni, apoi din nou cu `|` către `uniq` cu opțiunea `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +593,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Ar trebui să începeți cu această comandă: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Acum extindeți-o!"),
+            has_code('\|\s+sort', incorrect_msg="Ați extins comanda cu `| sort`?"),
+            has_code('\|\s+uniq', incorrect_msg="Ați extins comanda cu `| uniq`?"),
+            has_code('-c', incorrect_msg="Ați inclus numărul de apariții cu `-c`?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Excelent! După toată această muncă pe un pipe, ar fi util să putem stoca rezultatul, nu-i așa?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Cum pot salva rezultatul unui pipe?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +613,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Shell-ul ne permite să redirecționăm rezultatul unei secvențe de comenzi conectate prin pipe:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Totuși, `>` trebuie să apară la sfârșitul pipeline-ului:
+dacă încercăm să îl folosim la mijloc, astfel:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+atunci tot rezultatul comenzii `cut` este scris în `teeth-only.txt`,
+așa că nu mai rămâne nimic pentru `grep`
+și acesta așteaptă la nesfârșit date de intrare.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Ce se întâmplă dacă plasăm redirecționarea la începutul unui pipeline, astfel:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Rezultatul comenzii este redirecționat în fișier ca de obicei.]
+- Shell-ul raportează o eroare.
+- Shell-ul așteaptă la nesfârșit date de intrare.
 
 `@hint`
-Try it out in the shell.
+Încearcă direct în shell.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +653,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Corect!', 'Nu; shell-ul poate de fapt executa acest lucru.', 'Nu; shell-ul poate de fapt executa acest lucru.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Cum pot opri un program în rulare?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +666,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Comenzile și scripturile pe care le-ai rulat până acum s-au executat rapid,
+dar unele sarcini pot dura minute, ore sau chiar zile.
+Poți ajunge, de asemenea, să plasezi din greșeală o redirecționare în mijlocul unui pipeline,
+cauzând blocarea acestuia.
+Dacă decizi că nu mai vrei ca un program să continue să ruleze,
+poți tasta `Ctrl` + `C` pentru a-l opri.
+Această combinație este adesea scrisă `^C` în documentația Unix;
+reține că litera 'c' poate fi scrisă cu minusculă.
 
 `@instructions`
-Run the command:
+Rulează comanda:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+fără argumente (astfel încât să aștepte o intrare care nu va veni niciodată),
+apoi oprește-o tastând `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Tastează head, apasă Enter și ieși din program cu `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +700,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Ați folosit `head`?")
 ```
 
 ---
 
-## Wrapping up
+## Recapitulare finală
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +713,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Pentru a încheia,
+vei construi un pipeline care să afle câte înregistrări conține cel mai scurt fișier de date sezoniere.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +730,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Folosește `wc` cu parametrii potriviți pentru a lista numărul de linii din toate fișierele de date sezoniere.
+(Folosește un wildcard pentru numele fișierelor, în loc să le tastezi pe toate manual.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Folosește `-l` pentru a afișa doar numărul de linii și `*` pentru a potrivi numele fișierelor.
 
 `@solution`
 ```{shell}
@@ -753,13 +749,12 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Ați apelat `wc`?"),
+      has_code("-l", incorrect_msg = "Ați numărat numărul de linii cu `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ați obținut date din toate fișierele `seasonal/*`?")
     )
   )
 )
-
 ```
 
 ***
@@ -771,7 +766,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Adaugă o altă comandă la cea anterioară, folosind un pipe pentru a elimina linia care conține cuvântul „total".
 
 `@hint`
 
@@ -789,17 +784,16 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Ați apelat `wc`?"),
+      has_code("-l", incorrect_msg = "Ați numărat numărul de linii cu `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ați obținut date din toate fișierele `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Ați redirecționat ieșirea din `wc` către `grep` folosind `|`?"),      
+      has_code("grep", incorrect_msg = "Ați apelat `grep`?"),
+      has_code("-v", incorrect_msg = "Ați inversat potrivirea cu `-v`?"),
+      has_code("total", incorrect_msg = "Ați căutat `total`?")
     )
   )
 )
-
 ```
 
 ***
@@ -811,11 +805,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Adaugă încă două etape în pipeline, folosind `sort -n` și `head -n 1`, pentru a găsi fișierul cu cel mai mic număr de linii.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Folosește opțiunea `-n` a comenzii `sort` pentru a sorta numeric.
+- Folosește opțiunea `-n` a comenzii `head` pentru a păstra doar 1 linie.
 
 `@solution`
 ```{shell}
@@ -830,19 +824,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Ați apelat `wc`?"),
+      has_code("-l", incorrect_msg = "Ați numărat numărul de linii cu `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ați obținut date din toate fișierele `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Ați redirecționat din `wc` către `grep`, apoi către `sort` și către `head` folosind `|`?"),      
+      has_code("grep", incorrect_msg = "Ați apelat `grep`?"),
+      has_code("-v", incorrect_msg = "Ați inversat potrivirea cu `-v`?"),
+      has_code("total", incorrect_msg = "Ați căutat `total`?"),
+      has_code("sort", incorrect_msg = "Ați apelat `sort`?"),
+      has_code("-n", incorrect_msg = "Ați specificat numărul de linii de păstrat cu `-n`?"),
+      has_code("1", incorrect_msg = "Ați specificat 1 linie de păstrat cu `-n 1`?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Excelent! Se pare că `autumn.csv` este fișierul cu cel mai mic număr de linii. Treceți la capitolul 4 pentru a afla mai multe despre procesarea în lot!")
 ```

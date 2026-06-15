@@ -1,17 +1,17 @@
 ---
-title: Manipulating files and directories
+title: Manipularea fișierelor și directoarelor
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  Acest capitol este o scurtă introducere în shell-ul Unix. Vei afla de ce este
+  încă folosit după aproape 50 de ani, cum se compară cu instrumentele grafice
+  cu care ești poate mai familiarizat, cum să te deplasezi în shell și cum să
+  creezi, modifici și ștergi fișiere și foldere.
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: Cum se compară shell-ul cu o interfață grafică?
 ---
 
-## How does the shell compare to a desktop interface?
+## Cum se compară shell-ul cu o interfață grafică?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +19,51 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Un sistem de operare precum Windows, Linux sau Mac OS este un tip special de program.
+Controlează procesorul, hard disk-ul și conexiunea la rețea ale calculatorului,
+dar cel mai important rol al său este să ruleze alte programe.
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+Deoarece oamenii nu sunt digitali,
+au nevoie de o interfață pentru a interacționa cu sistemul de operare.
+Cea mai comună interfață în zilele noastre este un explorator grafic de fișiere,
+care transformă clicurile și dublu-clicurile în comenzi pentru a deschide fișiere și a rula programe.
+Înainte ca calculatoarele să aibă ecrane grafice,
+însă,
+oamenii introduceau instrucțiuni într-un program numit **shell de linie de comandă**.
+De fiecare dată când este introdusă o comandă,
+shell-ul rulează alte programe,
+afișează rezultatele acestora într-un format lizibil
+și afișează apoi un *prompt* pentru a semnala că este gata să primească următoarea comandă.
+(Numele său vine din ideea că reprezintă „învelișul exterior" al calculatorului.)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+Să tastezi comenzi în loc să dai clicuri și să tragi elemente poate părea incomod la început,
+dar, după cum vei vedea,
+odată ce începi să îi spui calculatorului exact ce vrei să facă,
+poți combina comenzi existente pentru a crea unele noi
+și automatiza operațiuni repetitive
+cu doar câteva apăsări de taste.
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+Care este relația dintre exploratorul grafic de fișiere pe care îl folosesc cei mai mulți oameni și shell-ul de linie de comandă?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+Reține că un utilizator poate interacționa cu sistemul de operare doar printr-un program.
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- Exploratorul de fișiere îți permite să vizualizezi și să editezi fișiere, în timp ce shell-ul îți permite să rulezi programe.
+- Exploratorul de fișiere este construit pe baza shell-ului.
+- Shell-ul face parte din sistemul de operare, în timp ce exploratorul de fișiere este separat.
+- [Ambele sunt interfețe pentru transmiterea comenzilor către sistemul de operare.]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- Ambele îți permit să vizualizezi și să editezi fișiere și să rulezi programe.
+- Atât exploratorii grafici de fișiere, cât și shell-ul apelează aceleași funcții ale sistemului de operare.
+- Shell-ul și exploratorul de fișiere sunt ambele programe care traduc comenzile utilizatorului (tastate sau date cu clicuri) în apeluri către sistemul de operare.
+- Corect! Ambele preiau comenzile utilizatorului (fie că sunt tastate, fie că sunt date cu clicuri) și le transmit sistemului de operare.
 
 ---
 
-## Where am I?
+## Unde mă aflu?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +71,22 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**Sistemul de fișiere** gestionează fișierele și directoarele (sau folderele).
+Fiecare este identificat printr-o **cale absolută**
+care arată cum se ajunge la el din **directorul rădăcină** al sistemului de fișiere:
+`/home/repl` este directorul `repl` din directorul `home`,
+`/home/repl/course.txt` este un fișier `course.txt` din acel director,
+iar `/` de sine stătător reprezintă directorul rădăcină.
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+Pentru a afla unde te afli în sistemul de fișiere,
+rulează comanda `pwd`
+(prescurtare de la "**p**rint **w**orking **d**irectory", adică „afișează directorul de lucru curent").
+Aceasta afișează calea absolută a **directorului tău de lucru curent** –
+locul în care shell-ul execută comenzile și caută fișierele în mod implicit.
 
 <hr>
-Run `pwd`.
-Where are you right now?
+Rulează `pwd`.
+Unde te afli acum?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +94,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+Sistemele Unix plasează de obicei directoarele home ale utilizatorilor în `/home`.
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +103,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "Aceasta nu este calea corectă."
+correct = "Corect - vă aflați în `/home/repl`."
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## Cum pot identifica fișiere și directoare?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +119,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` îți arată unde te afli.
+Pentru a vedea ce conține directorul curent,
+tastează `ls` (prescurtare de la "**l**i**s**ting") și apasă tasta Enter.
+Utilizat singur,
+`ls` afișează conținutul directorului curent
+(cel afișat de `pwd`).
+Dacă adaugi numele unor fișiere,
+`ls` le va lista,
+iar dacă adaugi numele unor directoare,
+va afișa conținutul acestora.
+De exemplu,
+`ls /home/repl` îți arată ce se află în directorul tău de pornire
+(numit de obicei **directorul home**).
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+Folosește `ls` cu un argument potrivit pentru a lista fișierele din directorul `/home/repl/seasonal`
+(care conține informații despre intervenții dentare pe date, organizate pe sezoane).
+Care dintre aceste fișiere *nu* se află în acel director?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +145,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+Dacă îi dai lui `ls` o cale, îți arată ce se află la acea cale.
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +154,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "Acel fișier se află în directorul `seasonal`."
+correct = "Corect - acel fișier *nu* se află în directorul `seasonal`."
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## Cum altfel pot identifica fișiere și directoare?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +170,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+O cale absolută este ca latitudinea și longitudinea: are aceeași valoare indiferent de unde ești. O **cale relativă**, în schimb, specifică o locație pornind de unde te afli: e ca și cum ai spune „20 de kilometri spre nord".
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+Câteva exemple:
+- Dacă ești în directorul `/home/repl`, calea **relativă** `seasonal` specifică același director ca și calea **absolută** `/home/repl/seasonal`. 
+- Dacă ești în directorul `/home/repl/seasonal`, calea **relativă** `winter.csv` specifică același fișier ca și calea **absolută** `/home/repl/seasonal/winter.csv`.
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Shell-ul determină dacă o cale este absolută sau relativă uitându-se la primul caracter: dacă începe cu `/`, este absolută. Dacă *nu* începe cu `/`, este relativă.
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +192,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+Ești în `/home/repl`. Folosește `ls` cu o cale **relativă** pentru a lista fișierul cu calea absolută `/home/repl/course.txt` (și numai acel fișier).
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+Poți construi adesea calea relativă către un fișier sau director aflat sub locația ta curentă
+scăzând calea absolută a locației tale curente
+din calea absolută a elementului dorit.
 
 `@solution`
 ```{shell}
@@ -209,13 +209,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "Nu ați apelat `ls` pentru a genera lista de fișiere."), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "Comanda dumneavoastră nu a generat lista corectă de fișiere. Utilizați `ls` urmat de o cale relativă către `/home/repl/course.txt`.")
     )
 )
-
 ```
 
 ***
@@ -227,12 +226,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+Ești în `/home/repl`.
+Folosește `ls` cu o cale **relativă**
+pentru a lista fișierul `/home/repl/seasonal/summer.csv` (și numai acel fișier).
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+Căile relative *nu* încep cu '/'.
 
 `@solution`
 ```{shell}
@@ -244,10 +243,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Nu ați apelat `ls` pentru a genera lista de fișiere."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Comanda dumneavoastră nu a generat lista corectă de fișiere. Utilizați `ls` urmat de o cale relativă către `/home/repl/seasonal/summer.csv`.")
     )
 )
 ```
@@ -261,12 +260,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+Ești în `/home/repl`.
+Folosește `ls` cu o cale **relativă**
+pentru a lista conținutul directorului `/home/repl/people`.
 
 `@hint`
-Relative paths do not start with a leading '/'.
+Căile relative nu încep cu '/'.
 
 `@solution`
 ```{shell}
@@ -278,19 +277,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Nu ați apelat `ls` pentru a genera lista de fișiere."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "Comanda dumneavoastră nu a generat lista corectă de fișiere. Utilizați `ls` urmat de o cale relativă către `/home/repl/people`.")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("Bine făcut. Acum că știți cum să listați fișiere și directoare, să vedem cum vă puteți deplasa în sistemul de fișiere!")
 ```
 
 ---
 
-## How can I move to another directory?
+## Cum mă deplasez într-un alt director?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +296,17 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+Așa cum poți naviga într-un explorator de fișiere făcând dublu clic pe foldere,
+poți naviga în sistemul de fișiere folosind comanda `cd`
+(care vine de la „change directory", adică „schimbă directorul").
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+Dacă tastezi `cd seasonal` și apoi `pwd`,
+shell-ul îți va arăta că te afli acum în `/home/repl/seasonal`.
+Dacă rulezi apoi `ls` fără argumente,
+îți va afișa conținutul directorului `/home/repl/seasonal`,
+deoarece acolo te afli în acel moment.
+Dacă vrei să te întorci la directorul tău home `/home/repl`,
+poți folosi comanda `cd /home/repl`.
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +322,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+Te afli în `/home/repl`/.
+Schimbă directorul la `/home/repl/seasonal` folosind o cale relativă.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Reține că `cd` vine de la „change directory" și că căile relative nu încep cu „/'.
 
 `@solution`
 ```{shell}
@@ -340,9 +338,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Dacă directorul dvs. de lucru curent (aflați cu `pwd`) este `/home/repl`, puteți naviga la folderul `seasonal` cu `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -354,10 +351,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+Folosește `pwd` pentru a verifica că te afli în directorul corect.
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+Nu uita să apeși „Enter" sau „Return" după ce introduci comanda.
 
 `@solution`
 ```{shell}
@@ -374,7 +371,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +382,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+Folosește `ls` fără nicio cale pentru a vedea conținutul acelui director.
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+Nu uita să apeși „Enter" sau „Return" după ce introduci comanda.
 
 `@solution`
 ```{shell}
@@ -403,17 +399,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="Comanda dvs. nu a generat rezultatul corect. Ați folosit `ls` fără căi pentru a afișa conținutul directorului curent?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("Excelent! Acesta a fost despre navigarea în subdirectoare. Dar despre deplasarea în sus? Să aflăm!")
 ```
 
 ---
 
-## How can I move up a directory?
+## Cum pot urca un nivel în directoare?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +416,54 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+**Părintele** unui director este directorul aflat deasupra lui.
+De exemplu, `/home` este părintele lui `/home/repl`,
+iar `/home/repl` este părintele lui `/home/repl/seasonal`.
+Poți folosi întotdeauna calea absolută a directorului părinte în comenzi precum `cd` și `ls`.
+Cel mai adesea, însă, vei profita de faptul că calea specială `..`
+(două puncte fără spații) înseamnă „directorul de deasupra celui în care mă aflu".
+Dacă ești în `/home/repl/seasonal`,
+atunci `cd ..` te mută în `/home/repl`.
+Dacă folosești `cd ..` încă o dată,
+ajungi în `/home`.
+Încă un `cd ..` te duce în *directorul rădăcină* `/`,
+care reprezintă cel mai înalt nivel al sistemului de fișiere.
+(Nu uita să pui un spațiu între `cd` și `..` – este o comandă și o cale, nu o singură comandă de patru caractere.)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+Un singur punct, `.`, înseamnă întotdeauna „directorul curent",
+așa că `ls` singur și `ls .` fac același lucru,
+în timp ce `cd .` nu are niciun efect
+(pentru că te mută în directorul în care te afli deja).
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+O ultimă cale specială este `~` (caracterul tildă),
+care înseamnă „directorul tău home",
+de exemplu `/home/repl`.
+Indiferent unde te afli,
+`ls ~` va lista întotdeauna conținutul directorului tău home,
+iar `cd ~` te va duce întotdeauna acasă.
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+Dacă ești în `/home/repl/seasonal`,
+unde te duce `cd ~/../.`?
 
 `@hint`
-Trace the path one directory at a time.
+Urmărește calea câte un director pe rând.
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (directorul rădăcină)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- Nu, dar `~` sau `..` singur te-ar duce acolo.
+- Corect! Calea înseamnă „directorul home", „un nivel mai sus", „aici".
+- Nu, dar `.` singur ar face asta.
+- Nu, ultima parte a căii este `.` (adică „aici"), nu `..` (adică „un nivel mai sus").
 
 ---
 
-## How can I copy files?
+## Cum pot copia fișiere?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +471,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+De multe ori vei dori să copiezi fișiere,
+să le muți în alte directoare pentru a le organiza
+sau să le redenumești.
+Una dintre comenzile pentru asta este `cp`, prescurtare de la „copy" (copiere).
+Dacă `original.txt` este un fișier existent,
+atunci:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+creează o copie a fișierului `original.txt` cu numele `duplicate.txt`.
+Dacă există deja un fișier numit `duplicate.txt`,
+acesta va fi suprascris.
+Dacă ultimul parametru al comenzii `cp` este un director existent,
+atunci o comandă de tipul:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+copiază *toate* fișierele specificate în acel director.
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +508,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+Creează o copie a fișierului `seasonal/summer.csv` în directorul `backup` (aflat tot în `/home/repl`),
+numind noul fișier `summer.bck`.
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+Combină numele directorului destinație cu numele fișierului copiat
+pentru a crea o cale relativă pentru noul fișier.
 
 `@solution`
 ```{shell}
@@ -531,10 +524,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` nu pare să existe în directorul `backup`. Furnizați două căi către `cp`: fișierul existent (`seasonal/summer.csv`) și fișierul destinație (`backup/summer.bck`)."),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +538,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+Copiază fișierele `spring.csv` și `summer.csv` din directorul `seasonal` în directorul `backup`,
+*fără* a-ți schimba directorul de lucru curent (`/home/repl`).
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+Folosește `cp` cu numele fișierelor pe care vrei să le copiezi,
+urmate de numele directorului în care să fie copiate.
 
 `@solution`
 ```{shell}
@@ -561,18 +553,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` nu pare să fi fost copiat în directorul `backup`. Furnizați două nume de fișiere și un nume de director către `cp`."
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="Asigurați-vă că copiați fișierele în timp ce vă aflați în `{{dir}}`! Utilizați `cd {{dir}}` pentru a naviga înapoi acolo."),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("Bună treabă. Pe lângă copiere, ar trebui să putem și muta fișiere dintr-un director în altul. Aflați mai multe în exercițiul următor!")
 ```
 
 ---
 
-## How can I move a file?
+## Cum pot muta un fișier?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +572,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+În timp ce `cp` copiază un fișier,
+`mv` îl mută dintr-un director în altul,
+la fel ca atunci când tragi un fișier în interfața grafică.
+Comanda funcționează cu aceiași parametri ca `cp`,
+așadar comanda:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+mută fișierele `autumn.csv` și `winter.csv` din directorul de lucru curent
+cu un nivel mai sus, în directorul părinte
+(deoarece `..` se referă întotdeauna la directorul de deasupra locației tale curente).
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+Te afli în `/home/repl`, care conține subdirectoarele `seasonal` și `backup`.
+Folosind o singură comandă, mută `spring.csv` și `summer.csv` din `seasonal` în `backup`.
 
 `@hint`
 
@@ -613,20 +605,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="Fișierul `%s` nu se află în directorul `backup`. Ați folosit `mv` corect? Utilizați două nume de fișiere și un director ca parametri pentru `mv`."
+seasonal_patt="Fișierul `%s` se află încă în directorul `seasonal`. Asigurați-vă că mutați fișierele cu `mv` în loc să le copiați cu `cp`!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("Bine făcut, să continuăm cu acest tren al comenzilor shell!")
 ```
 
 ---
 
-## How can I rename files?
+## Cum pot redenumi fișiere?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +626,23 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` poate fi folosit și pentru a redenumi fișiere. Dacă rulezi:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+atunci fișierul `course.txt` din directorul de lucru curent este „mutat" în fișierul `old-course.txt`.
+Acesta este un comportament diferit față de cel al managerelor de fișiere grafice,
+dar este adesea foarte util.
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+O atenționare importantă:
+la fel ca `cp`,
+`mv` va suprascrie fișierele existente.
+Dacă,
+de exemplu,
+există deja un fișier numit `old-course.txt`,
+comanda de mai sus îl va înlocui cu conținutul din `course.txt`.
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +658,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+Navighează în directorul `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Reține că `cd` înseamnă „change directory" și că căile relative nu încep cu '/'.
 
 `@solution`
 ```{shell}
@@ -681,9 +673,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Dacă directorul dvs. de lucru curent (aflați cu `pwd`) este `/home/repl`, puteți naviga la folderul `seasonal` cu `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -695,10 +686,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+Redenumiește fișierul `winter.csv` în `winter.csv.bck`.
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+Folosește `mv` cu numele actual al fișierului urmat de numele dorit, în această ordine.
 
 `@solution`
 ```{shell}
@@ -708,15 +699,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " Utilizați `mv` cu două argumente: fișierul pe care doriți să îl redenumiți (`winter.csv`) și noul nume pentru fișier (`winter.csv.bck`)."
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="Ne așteptam să găsim `winter.csv.bck` în director." + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="Nu ne mai așteptam ca `winter.csv` să fie în director." + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +718,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+Rulează `ls` pentru a verifica că totul a funcționat corect.
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+Nu uita să apeși „Enter" sau „Return" pentru a rula comanda.
 
 `@solution`
 ```{shell}
@@ -743,22 +733,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="Ați folosit `ls` pentru a lista conținutul directorului de lucru curent?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "Comanda dvs. nu a generat listarea corectă a fișierelor. Utilizați `ls` fără argumente pentru a lista conținutul directorului de lucru curent.")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("Copiere, mutare, redenumire, le-ați înțeles pe toate! Urmează: ștergerea fișierelor.")
 ```
 
 ---
 
-## How can I delete files?
+## Cum pot șterge fișiere?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +755,25 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+Putem copia fișiere și le putem muta;
+pentru a le șterge,
+folosim `rm`,
+care provine de la "remove" (eliminare).
+Ca și în cazul `cp` și `mv`,
+poți furniza lui `rm` oricâte nume de fișiere dorești, de exemplu:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+șterge atât `thesis.txt`, cât și `backup/thesis-2017-08.txt`.
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` face exact ce îi spune numele,
+și o face imediat:
+spre deosebire de browserele grafice de fișiere,
+shell-ul nu are un coș de gunoi,
+așadar când introduci comanda de mai sus,
+lucrarea ta dispare definitiv.
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +789,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+Te afli în `/home/repl`.
+Navighează în directorul `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+Reține că `cd` înseamnă "change directory" și că o cale relativă nu începe cu '/'.
 
 `@solution`
 ```{shell}
@@ -815,7 +804,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +815,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+Șterge fișierul `autumn.csv`.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Reține că `rm` înseamnă "remove" (eliminare).
 
 `@solution`
 ```{shell}
@@ -842,10 +830,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="Nu ne așteptam ca `autumn.csv` să mai fie în directorul `seasonal`. Utilizați `rm` cu calea către fișierul pe care doriți să îl eliminați."),
+    has_code('rm', incorrect_msg = 'Utilizați `rm` pentru a elimina fișierul, în loc să îl mutați.')
 )
-
 ```
 
 ***
@@ -857,10 +844,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+Întoarce-te în directorul home.
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+Dacă folosești `cd` fără niciun argument, te duce în directorul home.
 
 `@solution`
 ```{shell}
@@ -870,8 +857,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="Utilizați `cd ..` sau `cd ~` pentru a reveni la directorul principal.")
 ```
 
 ***
@@ -883,10 +869,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+Șterge `seasonal/summer.csv` fără a mai schimba directorul.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Reține că `rm` înseamnă "remove" (eliminare).
 
 `@solution`
 ```{shell}
@@ -898,16 +884,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="Nu ne așteptam ca `summer.csv` să mai fie în directorul `seasonal`. Utilizați `rm` cu calea către fișierul pe care doriți să îl eliminați."),
+    has_code('rm', incorrect_msg = 'Utilizați `rm` pentru a elimina fișierul, în loc să îl mutați.')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("Impresionant! Trecem la următorul!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## Cum pot crea și șterge directoare?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +900,21 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` tratează directoarele la fel ca fișierele:
+dacă te afli în directorul tău home și rulezi `mv seasonal by-season`,
+de exemplu,
+`mv` schimbă numele directorului `seasonal` în `by-season`.
+Însă `rm` se comportă diferit.
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+Dacă încerci să ștergi un director cu `rm`,
+shell-ul afișează un mesaj de eroare care îți spune că nu poate face asta –
+in principal pentru a te împiedica să ștergi accidental un întreg director plin de fișiere.
+În schimb, poți folosi o comandă separată numită `rmdir`.
+Pentru siguranță suplimentară,
+această comandă funcționează doar când directorul este gol,
+așadar trebuie să ștergi fișierele dintr-un director *înainte* de a șterge directorul în sine.
+(Utilizatorii experimentați pot folosi opțiunea `-r` pentru `rm` pentru a obține același efect;
+opțiunile comenzilor vor fi discutate în capitolul următor.)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +930,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+Fără a schimba directorul curent,
+șterge fișierul `agarwal.txt` din directorul `people`.
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+Reține că `rm` înseamnă „remove" (șterge) și că o cale relativă nu începe cu '/'.
 
 `@solution`
 ```{shell}
@@ -963,10 +946,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` nu ar mai trebui să fie în `/home/repl/people`. Ați folosit `rm` corect?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'Mai există fișiere în directorul `people`. Dacă ați mutat pur și simplu `agarwal.txt` sau ați creat fișiere noi, ștergeți-le pe toate.')
 )
-
 ```
 
 ***
@@ -978,11 +960,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+Acum că directorul `people` este gol,
+folosește o singură comandă pentru a-l șterge.
 
 `@hint`
-Remember that `rm` only works on files.
+Reține că `rm` funcționează doar pentru fișiere.
 
 `@solution`
 ```{shell}
@@ -995,9 +977,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "Directorul 'people' nu ar mai trebui să se afle în directorul dvs. de acasă. Utilizați `rmdir` pentru a-l elimina!")
 )
-
 ```
 
 ***
@@ -1009,13 +990,13 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+Deoarece un director nu este un fișier,
+trebuie să folosești comanda `mkdir directory_name`
+pentru a crea un director nou (gol).
+Folosește această comandă pentru a crea un director nou numit `yearly` în directorul tău home.
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+Rulează `mkdir` cu numele directorului pe care vrei să îl creezi.
 
 `@solution`
 ```{shell}
@@ -1027,9 +1008,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="Nu există niciun director `yearly` în directorul dvs. principal. Utilizați `mkdir yearly` pentru a crea unul!")
 )
-
 ```
 
 ***
@@ -1041,12 +1021,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+Acum că `yearly` există,
+creează un alt director numit `2017` în interiorul său
+*fără* a părăsi directorul tău home.
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+Folosește o cale relativă pentru subdirectorul pe care vrei să îl creezi.
 
 `@solution`
 ```{shell}
@@ -1059,15 +1039,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="Nu se poate găsi un director '2017' în '/home/repl/yearly'. Puteți crea acest director folosind calea relativă `yearly/2017`.")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("Excelent! Să încheiem acest capitol cu un exercițiu care repetă câteva dintre conceptele sale!")
 ```
 
 ---
 
-## Wrapping up
+## Recapitulare
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1054,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+Când analizezi date, vei crea adesea fișiere intermediare.
+În loc să le stochezi în directorul tău home,
+le poți plasa în `/tmp`,
+unde oamenii și programele păstrează de obicei fișierele de care au nevoie doar pentru scurt timp.
+(Reține că `/tmp` se află imediat sub directorul rădăcină `/`,
+*nu* sub directorul tău home.)
+Acest exercițiu de recapitulare îți va arăta cum să faci asta.
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1076,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+Folosește `cd` pentru a naviga în `/tmp`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+Ține minte că `cd` înseamnă „change directory" și că o cale absolută începe cu „/'.
 
 `@solution`
 ```{shell}
@@ -1112,9 +1091,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'Vă aflați în directorul greșit. Utilizați `cd` pentru a schimba directorul în `/tmp`.')
 )
-
 ```
 
 ***
@@ -1126,10 +1104,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+Listează conținutul directorului `/tmp` *fără* a introduce un nume de director.
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+Dacă nu îi specifici lui `ls` ce să listeze, afișează conținutul directorului curent.
 
 `@solution`
 ```{shell}
@@ -1141,13 +1119,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "Nu ați apelat `ls` pentru a genera lista de fișiere."),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "Comanda dvs. nu a generat lista corectă de fișiere. Utilizați `ls` fără`.")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1136,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+Creează un director nou în `/tmp` numit `scratch`.
 
 `@hint`
-Use `mkdir` to make directories.
+Folosește `mkdir` pentru a crea directoare.
 
 `@solution`
 ```{shell}
@@ -1176,10 +1153,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="Nu se poate găsi un director 'scratch' în '/tmp'. Asigurați-vă că utilizați corect comanda `mkdir`.")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1167,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+Mută `/home/repl/people/agarwal.txt` în `/tmp/scratch`.
+Îți recomandăm să folosești comanda rapidă `~` pentru directorul tău home și o cale relativă pentru al doilea argument, în loc de calea absolută.
 
 `@hint`
 
@@ -1207,8 +1183,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="Nu se poate găsi 'agarwal.txt' în '/tmp/scratch'. Utilizați `mv` cu `~/people/agarwal.txt` ca primul parametru și `scratch` ca al doilea.")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("Aceasta încheie Capitolul 1 din Introducere în Shell! Treceți la următorul capitol pentru a afla mai multe despre manipularea datelor!")
 ```

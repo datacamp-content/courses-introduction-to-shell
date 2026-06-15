@@ -1,19 +1,20 @@
-title: Introduction to Shell
+title: Introducere în Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Linia de comandă Unix a supraviețuit și s-a dezvoltat timp de aproape 50 de
+  ani, deoarece le permite utilizatorilor să facă lucruri complexe cu doar
+  câteva apăsări de taste. Uneori numită „lipiciul universal al programării", îi
+  ajută pe utilizatori să combine programe existente în moduri noi, să
+  automatizeze sarcini repetitive și să ruleze programe pe clustere și în cloud,
+  oriunde în lume. Acest curs îți va prezenta elementele esențiale și îți va
+  arăta cum să le folosești eficient.
 
 
-  The course glossary can be found on the right in the resources section.
+  Glosarul cursului se găsește în dreapta, în secțiunea de resurse.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Pentru a obține credite CPE, trebuie să finalizezi cursul și să obții un scor
+  de 70% la evaluarea calificată. Poți naviga la evaluare făcând clic pe
+  notificarea privind creditele CPE din dreapta.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary

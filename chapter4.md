@@ -1,15 +1,16 @@
 ---
-title: Batch processing
+title: Procesarea în lot
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  Majoritatea comenzilor shell procesează mai multe fișiere simultan. Acest
+  capitol îți arată cum să configurezi propriile tale pipeline-uri pentru a face
+  același lucru. Pe parcurs, vei vedea cum folosește shell-ul variabile pentru a
+  stoca informații.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Cum stochează shell-ul informațiile?
 ---
 
-## How does the shell store information?
+## Cum stochează shell-ul informațiile?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +18,37 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Ca orice alt program, shell-ul stochează informații în variabile.
+Unele dintre acestea,
+numite **variabile de mediu**,
+sunt disponibile tot timpul.
+Numele variabilelor de mediu sunt scrise, prin convenție, cu litere mari,
+iar câteva dintre cele mai utilizate sunt prezentate mai jos.
 
-| Variable | Purpose                           | Value                 |
-|----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| Variabilă | Scop                                        | Valoare               |
+|-----------|---------------------------------------------|-----------------------|
+| `HOME`    | Directorul principal al utilizatorului      | `/home/repl`          |
+| `PWD `    | Directorul de lucru curent                  | Același cu comanda `pwd` |
+| `SHELL`   | Programul shell utilizat                    | `/bin/bash`           |
+| `USER`    | ID-ul utilizatorului                        | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+Pentru a obține lista completă (care este destul de lungă),
+pot introduce `set` în shell.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Folosește `set` și `grep` cu un pipe pentru a afișa valoarea variabilei `HISTFILESIZE`,
+care determină câte comenzi vechi sunt stocate în istoricul comenzilor tale.
+Care este valoarea sa?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- Variabila nu există.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Folosește `set | grep HISTFILESIZE` pentru a obține linia de care ai nevoie.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +57,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Nu: shell-ul înregistrează mai mult istoric decât atât."
+err2 = "Nu: shell-ul înregistrează mai mult istoric decât atât."
+correct3 = "Corect: shell-ul salvează implicit 2000 de comenzi vechi pe acest sistem."
+err4 = "Nu: variabila `HISTFILESIZE` există."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Cum pot afișa valoarea unei variabile?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +74,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+O metodă mai simplă de a afla valoarea unei variabile este să folosești comanda `echo`, care afișează argumentele primite. Dacă scrii
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+se va afișa
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+Dacă încerci să folosești `echo` pentru a afișa valoarea unei variabile, astfel:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+va fi afișat numele variabilei, adică `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+Pentru a obține valoarea variabilei, trebuie să pui semnul dolar `$` înaintea ei. Dacă scrii
 
 ```{shell}
 echo $USER
 ```
 
-prints
+se va afișa
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+Această regulă este valabilă peste tot:
+pentru a obține valoarea unei variabile numite `X`,
+trebuie să scrii `$X`.
+(Astfel, shell-ul poate distinge între „un fișier numit X"
+și „valoarea unei variabile numite X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Variabila `OSTYPE` conține numele tipului de sistem de operare pe care îl folosești.
+Afișează-i valoarea folosind `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Apelează `echo` cu variabila `OSTYPE` precedată de `$`.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +136,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Ați apelat `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Ați afișat variabila de mediu `OSTYPE`?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Asigurați-vă că prefixați `OSTYPE` cu `$`.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Excelentă afișare a variabilelor de mediu! Ați făcut un început bun. Să continuăm!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Cum mai stochează shell-ul informații?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +155,19 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Un alt tip de variabilă se numește **variabilă shell**,
+care funcționează similar cu o variabilă locală dintr-un limbaj de programare.
 
-To create a shell variable,
-you simply assign a value to a name:
+Pentru a crea o variabilă shell,
+trebuie doar să îi atribui o valoare unui nume:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*fără* spații înainte sau după semnul `=`.
+Odată ce ai făcut asta,
+poți verifica valoarea variabilei cu:
 
 ```{shell}
 echo $training
@@ -189,10 +190,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Definește o variabilă numită `testing` cu valoarea `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Nu trebuie să existe spații între numele variabilei și valoarea sa.
 
 `@solution`
 ```{shell}
@@ -214,12 +215,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Ați definit o variabilă shell numită `testing`?'),
+        has_code('testing=', incorrect_msg='Ați scris `=` imediat după testing, fără spații?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Ați setat valoarea `testing` la `seasonal/winter.csv`?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +231,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Folosește `head -n 1 SOMETHING` pentru a obține prima linie din `seasonal/winter.csv`,
+utilizând valoarea variabilei `testing` în locul numelui fișierului.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Folosește `$testing` în loc de simplu `testing`
+(semnul `$` este necesar pentru a obține valoarea variabilei).
 
 `@solution`
 ```{shell}
@@ -251,23 +251,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Ați făcut referire la variabila shell folosind `$testing`?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Ați apelat `head`?"),
+            has_code('-n', incorrect_msg="Ați limitat numărul de linii cu `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Ați ales să păstrați 1 linie cu `-n 1`?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Excelent! Să vedem cum puteți repeta comenzile cu ușurință.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Cum pot repeta o comandă de mai multe ori?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +274,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Variabilele shell sunt folosite și în **bucle**,
+care repetă comenzi de mai multe ori.
+Dacă rulăm această comandă:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+obținem:
 
 ```
 gif
@@ -291,21 +290,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Observă câteva lucruri despre această buclă:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Structura este `for` ...variabilă... `in` ...listă... `; do` ...corp... `; done`
+2. Lista elementelor pe care bucla le va procesa (în cazul nostru, cuvintele `gif`, `jpg` și `png`).
+3. Variabila care urmărește elementul procesat în acel moment de buclă (în cazul nostru, `filetype`).
+4. Corpul buclei care realizează procesarea (în cazul nostru, `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Observă că în corp se folosește `$filetype` pentru a obține valoarea variabilei, nu doar `filetype`,
+la fel ca pentru orice altă variabilă shell.
+De asemenea, observă unde se plasează punct și virgulă:
+primul apare între listă și cuvântul cheie `do`,
+iar al doilea apare între corp și cuvântul cheie `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Modifică bucla astfel încât să afișeze:
 
 ```
 docx
@@ -313,10 +312,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Te rog folosește `filetype` ca nume al variabilei din buclă.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Folosește structura de cod din textul introductiv, înlocuind tipurile de fișiere imagine cu tipuri de fișiere document.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +334,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Ați folosit `for`?'),
+      has_code('filetype', incorrect_msg='Ați folosit `filetype` ca variabilă de buclă?'),
+      has_code('in', incorrect_msg='Ați folosit `in` înainte de lista tipurilor de fișiere?'),
+      has_code('docx odt pdf', incorrect_msg='Ați iterat peste `docx`, `odt` și `pdf` în această ordine?'),
+      has_code(r'pdf\s*;', incorrect_msg='Ați pus un punct și virgulă după ultimul element al buclei?'),
+      has_code(r';\s*do', incorrect_msg='Ați folosit `do` după primul punct și virgulă?'),
+      has_code('echo', incorrect_msg='Ați apelat `echo`?'),
+      has_code(r'\$filetype', incorrect_msg='Ați afișat `$filetype` cu echo?'),
+      has_code(r'filetype\s*;', incorrect_msg='Ați pus un punct și virgulă după corpul buclei?'),
+      has_code('; done', incorrect_msg='Ați încheiat cu `done`?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Excelent pentru utilizarea buclelor! Buclele sunt extraordinare dacă doriți să efectuați același lucru de sute sau mii de ori.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Cum pot repeta o comandă pentru fiecare fișier în parte?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +360,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Poți oricând să introduci manual numele fișierelor pe care vrei să le procesezi atunci când scrii bucla,
+dar de obicei este mai bine să folosești wildcarduri.
+Încearcă să rulezi această buclă în consolă:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Aceasta afișează:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +377,14 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+deoarece shell-ul extinde `seasonal/*.csv` într-o listă cu patru nume de fișiere
+înainte de a rula bucla.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Modifică expresia wildcard la `people/*`
+astfel încât bucla să afișeze numele fișierelor din directorul `people`,
+indiferent de sufixul pe care îl au sau nu.
+Te rog folosește `filename` ca nume al variabilei din buclă.
 
 `@hint`
 
@@ -407,25 +406,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Ați folosit `for`?'),
+      has_code('filename', incorrect_msg='Ați folosit `filename` ca variabilă de buclă?'),
+      has_code('in', incorrect_msg='Ați folosit `in` înainte de lista tipurilor de fișiere?'),
+      has_code('people/\*', incorrect_msg='Ați specificat o listă de fișiere cu `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Ați pus un punct și virgulă după lista de fișiere?'),
+      has_code(r';\s*do', incorrect_msg='Ați folosit `do` după primul punct și virgulă?'),
+      has_code('echo', incorrect_msg='Ați apelat `echo`?'),
+      has_code(r'\$filename', incorrect_msg='Ați afișat cu echo `$filename`?'),
+      has_code(r'filename\s*;', incorrect_msg='Ați pus un punct și virgulă după corpul buclei?'),
+      has_code('; done', incorrect_msg='Ați încheiat cu `done`?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Buclă după buclă! Caracterele wildcard și buclele formează o combinație puternică.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Cum pot înregistra numele unui set de fișiere?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +432,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+De multe ori, o variabilă este definită folosind o expresie wildcard pentru a reține o listă de nume de fișiere.
+De exemplu,
+dacă definești `datasets` astfel:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+poți afișa numele fișierelor mai târziu cu:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Acest lucru reduce tastarea și minimizează riscul de erori.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Dacă rulezi aceste două comenzi în directorul tău home,
+câte linii de rezultate vor fi afișate?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +459,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Niciuna: deoarece `files` este definit pe o linie separată, nu are nicio valoare în a doua linie.
+- Una: cuvântul „files".
+- Patru: numele tuturor celor patru fișiere de date sezoniere.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Reține că `X` în sine înseamnă doar „X", în timp ce `$X` reprezintă valoarea variabilei `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +473,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Nu: nu trebuie să definiți o variabilă pe aceeași linie în care o utilizați."
+err2 = "Nu: acest exemplu definește și utilizează variabila `files` în același shell."
+correct3 = "Corect. Comanda este echivalentă cu `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## Numele unei variabile față de valoarea ei
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +489,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+O greșeală frecventă este uitarea semnului `$` înaintea numelui unei variabile.
+Când se întâmplă asta,
+shell-ul folosește exact numele pe care l-ai scris,
+nu valoarea acelei variabile.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+O altă greșeală, mai des întâlnită la utilizatorii experimentați, este scrierea greșită a numelui variabilei.
+De exemplu,
+dacă definești `datasets` astfel:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+și apoi scrii:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+shell-ul nu afișează nimic,
+deoarece `datsets` (fără al doilea „a") nu este definit.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Dacă ai rula aceste două comenzi în directorul tău de pornire,
+ce rezultat ar fi afișat?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Citește cu atenție prima parte a buclei înainte să răspunzi.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Reține că `X` în sine înseamnă doar „X", în timp ce `$X` reprezintă valoarea variabilei `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [O singură linie: cuvântul „files".]
+- Patru linii: numele celor patru fișiere de date sezoniere.
+- Patru linii goale: variabilei `f` nu i se atribuie nicio valoare.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Corect: bucla folosește `files` în loc de `$files`, astfel că lista conține cuvântul „files".
+- Nu: bucla folosește `files` în loc de `$files`, deci lista conține cuvântul „files", nu expansiunea variabilei `files`.
+- Nu: variabila `f` este definită automat de bucla `for`.
 
 ---
 
-## How can I run many commands in a single loop?
+## Cum pot rula mai multe comenzi într-o singură buclă?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +546,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Afișarea numelor de fișiere este utilă pentru depanare,
+dar scopul real al buclelor este să execute operații pe mai multe fișiere.
+Bucla de mai jos afișează a doua linie din fiecare fișier de date:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Are aceeași structură ca și celelalte bucle pe care le-ai văzut deja:
+singura diferență este că corpul ei este un pipeline format din două comenzi, nu una singură.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Scrie o buclă care afișează ultima înregistrare din iulie 2017 (`2017-07`) din fiecare fișier sezonier. Ar trebui să producă un rezultat similar cu:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+dar pentru **_fiecare_** fișier sezonier în parte. Te rugăm să folosești `file` ca nume al variabilei de buclă și ține minte să parcurgi lista de fișiere `seasonal/*.csv` (_în loc de 'seasonal/winter.csv', ca în exemplu_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Corpul buclei este comanda grep din instrucțiuni, cu `seasonal/winter.csv` înlocuit prin `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +584,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Ați folosit `for`?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Ați folosit `file` ca variabilă de buclă?'),
+      has_code('in', incorrect_msg='Ați folosit `in` înainte de lista de fișiere?'),
+      has_code('seasonal/\*', incorrect_msg='Ați specificat o listă de fișiere cu `seasonal/*`?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Ați pus un punct și virgulă după lista de fișiere?'),
+      has_code(r';\s*do', incorrect_msg='Ați folosit `do` după primul punct și virgulă?'),
+      has_code('grep', incorrect_msg='Ați apelat `grep`?'),
+      has_code('2017-07', incorrect_msg='Ați căutat după `2017-07`?'),
+      has_code(r'\$file', incorrect_msg='Ați folosit `$file` ca nume al variabilei de buclă?'),
+      has_code(r'file\s*|', incorrect_msg='Ați folosit un pipe pentru a conecta al doilea comandă?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Ați folosit `tail -n 1` pentru a afișa ultima intrare a fiecărei căutări în al doilea comandă?'),
+      has_code('; done', incorrect_msg='Ați terminat cu `done`?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Buclă după buclă! Caracterele wildcard și buclele formează o combinație puternică.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## De ce să nu folosesc spații în numele fișierelor?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +616,23 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+E ușor și logic să dai fișierelor nume formate din mai multe cuvinte, precum `July 2017.csv`,
+atunci când folosești un explorator grafic de fișiere.
+Însă acest lucru poate crea probleme atunci când lucrezi în shell.
+De exemplu,
+să presupunem că vrei să redenumești `July 2017.csv` în `2017 July data.csv`.
+Nu poți scrie:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+deoarece shell-ul va interpreta că încerci să muți
+patru fișiere numite `July`, `2017.csv`, `2017` și `July` (din nou)
+într-un director numit `data.csv`.
+În schimb,
+trebuie să pui numele fișierelor între ghilimele,
+astfel încât shell-ul să trateze fiecare nume ca un singur parametru:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +640,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Dacă ai două fișiere numite `current.csv` și `last year.csv`
+(cu un spațiu în nume)
+și tastezi:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+ce se va întâmpla:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Ce crezi că s-ar întâmpla dacă cineva ți-ar arăta comanda fără să știi ce fișiere există?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Shell-ul va afișa un mesaj de eroare, deoarece `last` și `year.csv` nu există.
+- Shell-ul va șterge `current.csv`.
+- [Ambele variante de mai sus.]
+- Nimic.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Da, dar nu e tot.
+- Da, dar nu e tot.
+- Corect. Poți folosi ghilimele simple, `'`, sau ghilimele duble, `"`, în jurul numelor de fișiere.
+- Din păcate, nu.
 
 ---
 
-## How can I do many things in a single loop?
+## Cum pot face mai multe lucruri într-o singură buclă?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +675,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+Buclele pe care le-ai văzut până acum aveau o singură comandă sau un singur pipeline în corpul lor,
+dar o buclă poate conține oricâte comenzi.
+Pentru a-i indica shell-ului unde se termină una și unde începe următoarea,
+trebuie să le separi cu punct și virgulă:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +697,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Să presupunem că uiți punct și virgula dintre comenzile `echo` și `head` din bucla anterioară,
+astfel încât îi ceri shell-ului să ruleze:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Ce va face shell-ul?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Va afișa un mesaj de eroare.
+- Va afișa câte o linie pentru fiecare dintre cele patru fișiere.
+- Va afișa o linie pentru `autumn.csv` (primul fișier).
+- Va afișa ultima linie din fiecare fișier.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Poți redirecționa rezultatul comenzii `echo` către `tail` folosind un pipe.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +722,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Nu: bucla va rula, doar că nu va face ceva util."
+correct2 = "Da: `echo` produce o linie care include numele fișierului de două ori, pe care `tail` o copiază."
+err3 = "Nu: bucla rulează câte o dată pentru fiecare dintre cele patru nume de fișiere."
+err4 = "Nu: intrarea lui `tail` este ieșirea lui `echo` pentru fiecare nume de fișier."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```
