@@ -1,17 +1,15 @@
 ---
-title: Manipulating files and directories
+title: 操作文件和目录
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  本章将简要介绍 Unix shell。您将了解它为何在近 50 年后仍被广泛使用、它与您可能更熟悉的图形工具有何不同、如何在 shell
+  中导航，以及如何创建、修改和删除文件与文件夹。
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: shell 与桌面界面有何不同？
 ---
 
-## How does the shell compare to a desktop interface?
+## 命令行 shell 与桌面界面有何不同？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +17,49 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Windows、Linux 或 Mac OS 这样的操作系统是一种特殊的程序。
+它控制计算机的处理器、硬盘和网络连接，
+但最重要的工作是运行其他程序。
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+由于人类不是数字化的，
+因此需要一个接口与操作系统交互。
+如今最常见的是图形文件管理器，
+它把单击和双击转换为打开文件和运行程序的命令。
+在计算机拥有图形显示之前，
+人们会把指令输入到一个名为 **命令行 shell** 的程序中。
+每次输入命令时，
+shell 都会运行其他程序，
+以人类可读的形式打印它们的输出，
+然后显示一个提示符（prompt），表示已准备好接受下一个命令。
+（这个名字来自它是计算机"外壳"的概念。）
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+相比于点击和拖拽，输入命令一开始可能显得笨拙，
+但正如您将看到的，
+一旦您开始准确描述希望计算机执行的操作，
+就可以把现有命令组合起来创造新用法，
+并用寥寥几次按键自动化重复性操作。
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+大多数人使用的图形文件管理器与命令行 shell 之间是什么关系？
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+请记住，用户只能通过某个程序与操作系统交互。
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- 文件管理器让您查看和编辑文件，而 shell 让您运行程序。
+- 文件管理器是构建在 shell 之上的。
+- shell 是操作系统的一部分，而文件管理器是独立的。
+- [它们都是向操作系统发出命令的接口。]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- 它们都允许您查看和编辑文件，并运行程序。
+- 图形文件管理器和 shell 都会调用相同的底层操作系统函数。
+- shell 和文件管理器都是把用户命令（输入或点击）翻译为对操作系统调用的程序。
+- 正确！两者都会获取用户的命令（无论是键入还是点击）并发送给操作系统。
 
 ---
 
-## Where am I?
+## 我在哪里？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +67,21 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**文件系统**用来管理文件和目录（或称文件夹）。
+每个对象都有一个 **绝对路径**，用于表示从文件系统的 **根目录** 到它的路径：
+`/home/repl` 表示目录 `home` 下的目录 `repl`，
+而 `/home/repl/course.txt` 则是该目录中的文件 `course.txt`，
+单独的 `/` 就是根目录。
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+要查看您在文件系统中的当前位置，
+运行命令 `pwd`
+（是 "**p**rint **w**orking **d**irectory" 的缩写，意为"打印当前工作目录"）。
+该命令会输出您当前的 **工作目录** 的绝对路径，
+Shell 默认会在这里运行命令并查找文件。
 
 <hr>
-Run `pwd`.
-Where are you right now?
+运行 `pwd`。
+您现在在哪里？
 
 `@possible_answers`
 - `/home`
@@ -94,7 +89,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+Unix 系统通常会把所有用户的主目录放在 `/home` 下面。
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +98,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "这不是正确的路径。"
+correct = "正确 - 您在 `/home/repl`。"
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## 如何识别文件和目录？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +114,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` 会告诉您当前位置。
+要查看这里有什么，
+输入 `ls`（是 "**l**i**s**ting" 的缩写）并按回车键。
+单独使用时，
+`ls` 会列出您当前目录的内容
+（也就是 `pwd` 显示的那个目录）。
+如果您在后面加上一些文件名，
+`ls` 会列出这些文件；
+如果加上目录名，
+它会列出这些目录的内容。
+例如，
+`ls /home/repl` 会显示您的起始目录中的内容
+（通常称为您的 **home 目录**）。
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+使用带合适参数的 `ls` 列出目录 `/home/repl/seasonal` 中的文件
+（其中按季节拆分了按日期统计的牙科手术信息）。
+下面哪个文件不在该目录中？
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +140,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+如果给 `ls` 一个路径，它会显示该路径中的内容。
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +149,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "该文件位于 `seasonal` 目录中。"
+correct = "正确 - 该文件*不*在 `seasonal` 目录中。"
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## 还有哪些方式可以标识文件和目录？
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +165,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+绝对路径就像经纬度：无论您身在何处，它的含义都不变。**相对路径**则从您当前所在位置开始描述位置：类似于说"向北 20 公里"。
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+例如：
+- 如果您位于目录 `/home/repl`，则**相对**路径 `seasonal` 与**绝对**路径 `/home/repl/seasonal` 指向同一目录。
+- 如果您位于目录 `/home/repl/seasonal`，则**相对**路径 `winter.csv` 与**绝对**路径 `/home/repl/seasonal/winter.csv` 指向同一文件。
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Shell 会通过路径的第一个字符来判断它是绝对还是相对：如果以 `/` 开头，则是绝对路径；如果*不*以 `/` 开头，则是相对路径。
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +187,10 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+您当前在 `/home/repl`。请使用带**相对路径**的 `ls`，仅列出绝对路径为 `/home/repl/course.txt` 的那个文件。
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+当目标位于您当前位置之下时，常可通过"用目标的绝对路径减去当前位置的绝对路径"来构造到该文件或目录的相对路径。
 
 `@solution`
 ```{shell}
@@ -209,13 +202,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "您没有调用 `ls` 来生成文件列表。"), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "您的命令没有生成正确的文件列表。请使用 `ls` 后跟相对路径 `/home/repl/course.txt`。")
     )
 )
-
 ```
 
 ***
@@ -227,12 +219,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+您当前在 `/home/repl`。
+请使用带**相对路径**的 `ls`
+仅列出文件 `/home/repl/seasonal/summer.csv`。
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+相对路径*不会*以开头的 '/' 起始。
 
 `@solution`
 ```{shell}
@@ -244,10 +236,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "您没有调用 `ls` 来生成文件列表。"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "您的命令没有生成正确的文件列表。请使用 `ls` 后跟相对路径 `/home/repl/seasonal/summer.csv`。")
     )
 )
 ```
@@ -261,12 +253,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+您当前在 `/home/repl`。
+请使用带**相对路径**的 `ls`
+列出目录 `/home/repl/people` 的内容。
 
 `@hint`
-Relative paths do not start with a leading '/'.
+相对路径不会以开头的 '/' 起始。
 
 `@solution`
 ```{shell}
@@ -278,19 +270,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "您没有调用 `ls` 来生成文件列表。"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "您的命令没有生成正确的文件列表。请使用 `ls` 后跟相对路径 `/home/repl/people`。")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("做得好。现在您已经了解了如何列出文件和目录，让我们看看如何在文件系统中移动！")
 ```
 
 ---
 
-## How can I move to another directory?
+## 如何切换到另一个目录？
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +289,16 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+就像在文件浏览器中双击文件夹即可在各处移动，
+您也可以使用命令 `cd`（意为 "change directory"，更改目录）在文件系统中移动。
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+如果您输入 `cd seasonal`，然后输入 `pwd`，
+shell 会告诉您现在位于 `/home/repl/seasonal`。
+接着如果单独运行 `ls`，
+它会显示 `/home/repl/seasonal` 的内容，
+因为您当前就在该目录中。
+如果您想回到主目录 `/home/repl`，
+可以使用命令 `cd /home/repl`。
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +314,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+您当前在 `/home/repl`。
+请使用相对路径切换到 `/home/repl/seasonal`。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+请记住，`cd` 表示 "change directory"（更改目录），并且相对路径不以前导 '/' 开头。
 
 `@solution`
 ```{shell}
@@ -340,9 +330,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="如果您的当前工作目录（使用 `pwd` 查看）是 `/home/repl`，您可以使用 `cd seasonal` 移动到 `seasonal` 文件夹。")
 )
-
 ```
 
 ***
@@ -354,10 +343,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+使用 `pwd` 检查您已到达该目录。
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+输入命令后请按 "enter" 或 "return"。
 
 `@solution`
 ```{shell}
@@ -386,10 +375,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+不带任何路径使用 `ls`，查看该目录中的内容。
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+在命令后请按 "enter" 或 "return"。
 
 `@solution`
 ```{shell}
@@ -403,17 +392,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="您的命令未生成正确的输出。您是否使用了不带路径的 `ls` 来显示当前目录的内容？")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("很好！这涉及到导航到子目录。那向上移动呢？让我们找出答案！")
 ```
 
 ---
 
-## How can I move up a directory?
+## 如何上移到上一层目录？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,40 +409,40 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+目录的**父目录**是其上一级的目录。
+例如，`/home` 是 `/home/repl` 的父目录，
+而 `/home/repl` 是 `/home/repl/seasonal` 的父目录。
+在使用 `cd` 和 `ls` 等命令时，您始终可以提供父目录的绝对路径。
+不过，
+更常见的是，
+您会利用特殊路径 `..` 的含义：
+（两个点，中间没有空格）表示"我当前所在目录的上一级"。
+如果您在 `/home/repl/seasonal`，
+运行 `cd ..` 会将您上移到 `/home/repl`。
+如果再次使用 `cd ..`，
+则会到达 `/home`。
+再运行一次 `cd ..` 会将您带到*根目录* `/`，
+也就是文件系统的最顶层。
+（请记得在 `cd` 和 `..` 之间加一个空格——它分别是一个命令和一条路径，而不是一个四个字符的单一命令。）
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+单独一个点 `.` 始终表示"当前目录"，
+因此单独的 `ls` 与 `ls .` 等效，
+而 `cd .` 则没有任何效果
+（因为它会把您"移动"到您已经所在的目录）。
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+最后一个特殊路径是 `~`（波浪号字符），
+它表示"您的主目录"，
+例如 `/home/repl`。
+无论您身在何处，
+`ls ~` 都会列出您的主目录内容，
+而 `cd ~` 会把您带回主目录。
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+如果您在 `/home/repl/seasonal`，
+执行 `cd ~/../.` 会把您带到哪里？
 
 `@hint`
-Trace the path one directory at a time.
+一次移动一个目录，按路径逐段追踪。
 
 `@possible_answers`
 - `/home/repl`
@@ -463,14 +451,14 @@ Trace the path one directory at a time.
 - `/` (the root directory)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- 不对，但单独使用 `~` 或 `..` 都能把您带到那里。
+- 正确！该路径表示"主目录"、"上一级"、"此处"。
+- 不对，但单独使用 `.` 可以做到这一点。
+- 不对，路径的最后一部分是 `.`（表示"此处"），而不是 `..`（表示"上一级"）。
 
 ---
 
-## How can I copy files?
+## 如何复制文件？
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +466,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+您经常需要复制文件、
+把它们移动到其他目录以便整理、
+或重命名。
+用于此目的的一个命令是 `cp`，它是 "copy" 的缩写。
+如果 `original.txt` 是一个已存在的文件，
+那么：
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+会创建 `original.txt` 的一个副本，命名为 `duplicate.txt`。
+如果已经存在名为 `duplicate.txt` 的文件，
+它会被覆盖。
+如果 `cp` 的最后一个参数是一个已存在的目录，
+那么像下面这样的命令：
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+会将这些文件的副本全部复制到该目录中。
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +503,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+请在 `backup` 目录（它也在 `/home/repl` 中）里创建 `seasonal/summer.csv` 的一份拷贝，
+并将新文件命名为 `summer.bck`。
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+将目标目录名与要复制的文件名组合起来，
+为新文件创建一个相对路径。
 
 `@solution`
 ```{shell}
@@ -531,10 +519,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` 似乎不存在于 `backup` 目录中。请为 `cp` 提供两个路径：现有文件 (`seasonal/summer.csv`) 和目标文件 (`backup/summer.bck`)。"),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +533,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+在不改变当前工作目录（`/home/repl`）的情况下，
+将 `seasonal` 目录中的 `spring.csv` 和 `summer.csv` 复制到 `backup` 目录中。
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+使用 `cp` 时先写要复制的源文件名，
+然后写要复制到的目标目录名。
 
 `@solution`
 ```{shell}
@@ -561,18 +548,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` 似乎没有被复制到 `backup` 目录中。请提供两个文件名和一个目录名给 `cp`。"
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="请确保在 `{{dir}}` 目录中复制文件！使用 `cd {{dir}}` 返回到该目录。"),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("做得好。除了复制，我们还应该能够将文件从一个目录移动到另一个目录。在下一个练习中了解它！")
 ```
 
 ---
 
-## How can I move a file?
+## 如何移动文件？
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +567,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+`cp` 会复制文件，
+而 `mv` 会将文件从一个目录移动到另一个目录，
+就像在图形化文件浏览器中拖动一样。
+它的参数用法与 `cp` 相同，
+因此下面的命令：
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+会把当前工作目录中的 `autumn.csv` 和 `winter.csv` 两个文件
+向上移动一级到其父目录
+（因为 `..` 始终指向您当前位置的上一级目录）。
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+您现在位于 `/home/repl`，其中包含子目录 `seasonal` 和 `backup`。
+请用一条命令，将 `seasonal` 中的 `spring.csv` 和 `summer.csv` 移动到 `backup`。
 
 `@hint`
 
@@ -613,20 +600,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="文件 `%s` 不在 `backup` 目录中。您是否正确使用了 `mv`？请使用两个文件名和一个目录作为 `mv` 的参数。"
+seasonal_patt="文件 `%s` 仍在 `seasonal` 目录中。请确保使用 `mv` 移动文件，而不是使用 `cp` 复制文件！"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("做得好，让我们继续这个 shell 训练！")
 ```
 
 ---
 
-## How can I rename files?
+## 如何重命名文件？
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +621,22 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` 也可用于重命名文件。如果您运行：
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+那么当前工作目录中的 `course.txt` 文件会被"移动"为 `old-course.txt` 文件。
+这与文件浏览器的工作方式不同，
+但常常很方便。
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+需要注意：
+与 `cp` 一样，
+`mv` 会覆盖已存在的文件。
+例如，
+如果您已经有一个名为 `old-course.txt` 的文件，
+那么上面的命令会用 `course.txt` 的内容替换它。
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +652,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+进入 `seasonal` 目录。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+请记住，`cd` 代表 "change directory"（切换目录），而相对路径不以斜杠 '/' 开头。
 
 `@solution`
 ```{shell}
@@ -681,9 +667,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="如果您的当前工作目录（使用 `pwd` 查看）是 `/home/repl`，您可以使用 `cd seasonal` 移动到 `seasonal` 文件夹。")
 )
-
 ```
 
 ***
@@ -695,10 +680,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+将文件 `winter.csv` 重命名为 `winter.csv.bck`。
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+按顺序使用 `mv`，先写文件当前的名字，再写您想要的新名字。
 
 `@solution`
 ```{shell}
@@ -708,15 +693,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " 使用 `mv` 命令并带有两个参数：您想要重命名的文件 (`winter.csv`) 和文件的新名称 (`winter.csv.bck`)。"
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="我们期望在目录中找到 `winter.csv.bck`。" + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="我们不再期望目录中有 `winter.csv`。" + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +712,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+运行 `ls`，检查是否一切正常。
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+请记得按 "enter" 或 "return" 以运行命令。
 
 `@solution`
 ```{shell}
@@ -743,22 +727,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="您是否使用了 `ls` 来列出当前工作目录的内容？")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "您的命令未生成正确的文件列表。使用不带参数的 `ls` 来列出当前工作目录的内容。")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("复制、移动、重命名，您都掌握了！接下来：删除文件。")
 ```
 
 ---
 
-## How can I delete files?
+## 如何删除文件？
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +749,15 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+我们可以复制文件并在各处移动；要删除它们，用 `rm`，意思是 "remove"（移除）。与 `cp` 和 `mv` 一样，您可以把任意数量的文件名传给 `rm`，例如：
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+会同时删除 `thesis.txt` 和 `backup/thesis-2017-08.txt`。
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` 顾名思义，就是移除文件，并且会立即执行：与图形化文件浏览器不同，Shell 没有回收站；因此当您输入上面的命令后，论文文件就会被永久删除。
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +773,10 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+您当前位于 `/home/repl`。进入 `seasonal` 目录。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+请记住，`cd` 是 "change directory"（切换目录）的意思，并且相对路径不以前导的 '/' 开头。
 
 `@solution`
 ```{shell}
@@ -815,7 +787,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +798,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+删除 `autumn.csv`。
 
 `@hint`
-Remember that `rm` stands for "remove".
+请记住，`rm` 是 "remove"（删除）的意思。
 
 `@solution`
 ```{shell}
@@ -842,10 +813,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="我们不希望 `autumn.csv` 仍然在 `seasonal` 目录中。使用 `rm` 和文件路径来删除它。"),
+    has_code('rm', incorrect_msg = '使用 `rm` 来删除文件，而不是移动它。')
 )
-
 ```
 
 ***
@@ -857,10 +827,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+返回到您的主目录。
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+如果不带任何路径使用 `cd`，它会把您带回主目录。
 
 `@solution`
 ```{shell}
@@ -870,8 +840,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="使用 `cd ..` 或 `cd ~` 返回到主目录。")
 ```
 
 ***
@@ -883,10 +852,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+在不再切换目录的情况下，删除 `seasonal/summer.csv`。
 
 `@hint`
-Remember that `rm` stands for "remove".
+请记住，`rm` 是 "remove"（删除）的意思。
 
 `@solution`
 ```{shell}
@@ -898,16 +867,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="我们不期望 `summer.csv` 仍然在 `seasonal` 目录中。使用 `rm` 和您想要删除的文件路径。"),
+    has_code('rm', incorrect_msg = '使用 `rm` 来删除文件，而不是移动它。')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("令人印象深刻！继续下一个！")
 ```
 
 ---
 
-## How can I create and delete directories?
+## 如何创建和删除目录？
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +883,9 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` 对目录的处理方式与对文件相同：例如，如果您在主目录中运行 `mv seasonal by-season`，`mv` 会把 `seasonal` 目录重命名为 `by-season`。然而，`rm` 的工作方式不同。
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+如果您尝试对目录使用 `rm`，shell 会打印一条错误信息，告诉您无法这样做，主要是为了防止您不小心删除装着大量工作的整个目录。相应地，您可以使用一个单独的命令 `rmdir`。为了更安全，它只在目录为空时才会生效，因此您必须在删除目录之前，先删除目录中的文件。（有经验的用户可以对 `rm` 使用 `-r` 选项来达到同样的效果；我们将在下一章讨论命令选项。）
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +901,10 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+在不切换目录的情况下，删除 `people` 目录中的文件 `agarwal.txt`。
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+记住 `rm` 表示 "remove"，而相对路径不以前导 '/' 开头。
 
 `@solution`
 ```{shell}
@@ -963,10 +916,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` 不应再位于 `/home/repl/people` 中。您是否正确使用了 `rm`？"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = '`people` 目录中仍然有文件。如果您只是移动了 `agarwal.txt`，或者创建了新文件，请删除它们。')
 )
-
 ```
 
 ***
@@ -978,11 +930,10 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+现在 `people` 目录已经为空，使用一条命令将其删除。
 
 `@hint`
-Remember that `rm` only works on files.
+请记住，`rm` 只能用于文件。
 
 `@solution`
 ```{shell}
@@ -995,7 +946,7 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "您的主目录中不应再有 'people' 目录。请使用 `rmdir` 将其删除！")
 )
 
 ```
@@ -1009,13 +960,10 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+由于目录不是文件，您必须使用命令 `mkdir directory_name` 来创建一个新的（空）目录。使用该命令在您的主目录下创建一个名为 `yearly` 的新目录。
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+运行 `mkdir`，后跟您想创建的目录名。
 
 `@solution`
 ```{shell}
@@ -1027,9 +975,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="您的主目录中没有 `yearly` 目录。请使用 `mkdir yearly` 创建一个！")
 )
-
 ```
 
 ***
@@ -1041,12 +988,10 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+现在 `yearly` 已经存在，在不离开您的主目录的情况下，在其中创建另一个名为 `2017` 的目录。
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+为要创建的子目录使用相对路径。
 
 `@solution`
 ```{shell}
@@ -1059,15 +1004,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="在 '/home/repl/yearly' 中找不到 '2017' 目录。您可以使用相对路径 `yearly/2017` 创建此目录。")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("太好了！让我们用一个练习来结束本章，该练习重复了一些概念！")
 ```
 
 ---
 
-## Wrapping up
+## 总结
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1019,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+在分析数据时，您经常会创建中间文件。
+与其把它们存放在您的主目录中，
+不如放到 `/tmp` 下，
+人和程序通常会把只需短暂使用的文件放在那里。
+（请注意，`/tmp` 位于根目录 `/` 之下，
+而不是您的主目录之下。）
+这个收尾练习将向您展示如何做到这一点。
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1041,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+使用 `cd` 进入 `/tmp`。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+请记住，`cd` 是 "change directory"（切换目录）的缩写，绝对路径以 '/' 开头。
 
 `@solution`
 ```{shell}
@@ -1112,9 +1056,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = '您在错误的目录中。使用 `cd` 将目录更改为 `/tmp`。')
 )
-
 ```
 
 ***
@@ -1126,10 +1069,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+在不输入目录名的情况下，列出 `/tmp` 的内容。
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+如果您不告诉 `ls` 要列出什么，它会显示您当前目录中的内容。
 
 `@solution`
 ```{shell}
@@ -1141,13 +1084,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "您没有调用 `ls` 来生成文件列表。"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "您的命令没有生成正确的文件列表。请使用 `ls`。")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1101,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+在 `/tmp` 下新建名为 `scratch` 的目录。
 
 `@hint`
-Use `mkdir` to make directories.
+使用 `mkdir` 创建目录。
 
 `@solution`
 ```{shell}
@@ -1176,10 +1118,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="在 '/tmp' 下找不到 'scratch' 目录。请确保正确使用 `mkdir`。")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1132,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+将 `/home/repl/people/agarwal.txt` 移动到 `/tmp/scratch`。
+建议您对主目录使用 `~` 快捷方式，并对第二个路径使用相对路径，而不是绝对路径。
 
 `@hint`
 
@@ -1207,8 +1148,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="无法在 '/tmp/scratch' 中找到 'agarwal.txt'。请使用 `mv`，将 `~/people/agarwal.txt` 作为第一个参数，`scratch` 作为第二个参数。")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("这就结束了《Shell 入门》第 1 章！赶紧进入下一章，学习更多关于数据操作的知识吧！")
 ```

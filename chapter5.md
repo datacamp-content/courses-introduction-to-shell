@@ -1,15 +1,12 @@
 ---
-title: Creating new tools
-description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+title: 创建新工具
+description: 历史记录让您只需按几下键就能重复操作，管道让您组合现有命令来创建新功能。在本章中，您将再进一步，学习如何创建您自己的新命令。
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: 如何编辑文件？
 ---
 
-## How can I edit a file?
+## 我怎样编辑文件？
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +14,24 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix 有多种多样的文本编辑器，常常让人眼花缭乱。
+在本课程中，
+我们将使用一个名为 Nano 的简单编辑器。
+如果您输入 `nano filename`，
+它会打开 `filename` 供您编辑
+（如果文件不存在则会创建）。
+您可以使用方向键移动光标，
+用退格键删除字符，
+并通过控制键组合执行其他操作：
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`：删除一行。
+- `Ctrl` + `U`：撤销删除一行。
+- `Ctrl` + `O`：保存文件（"O" 代表 "output"）。_您还需要按 Enter 确认文件名！_
+- `Ctrl` + `X`：退出编辑器。
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+运行 `nano names.txt` 在您的主目录中编辑一个新文件，
+然后输入以下四行：
 
 ```
 Lovelace
@@ -43,10 +40,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+要保存您写的内容，
+按 `Ctrl` + `O` 将文件写出，
+然后按 Enter 确认文件名，
+最后按 `Ctrl` + `X` 退出编辑器。
 
 `@hint`
 
@@ -65,7 +62,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "您是否在 `names.txt` 文件中包含了行 `%s`？请再次使用 `nano names.txt` 更新您的文件。使用 `Ctrl` + `O` 保存并使用 `Ctrl` + `X` 退出。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +72,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("做得好！继续下一个！")
 ```
 
 ---
 
-## How can I record what I just did?
+## 我刚做的事要如何记录？
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +85,20 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+当您在做复杂分析时，
+通常需要保留您使用过的命令记录。
+您可以使用之前已经见过的工具来完成：
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. 运行 `history`。
+2. 将其输出通过管道传给 `tail -n 10`（或者您想要保存的最近步骤数）。
+3. 将结果重定向到一个类似 `figure-5.history` 的文件中。
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+这比把内容记在实验笔记本里更好，
+因为它能保证不会遗漏任何步骤。
+这也体现了 shell 的核心思想：
+能产生和消费文本行的简单工具，
+可以通过多种方式组合，
+来解决各种各样的问题。
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +114,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+将文件 `seasonal/spring.csv` 和 `seasonal/summer.csv` 复制到您的主目录。
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+使用 `cp` 进行复制，并用 `~` 作为您主目录路径的快捷方式。
 
 `@solution`
 ```{shell}
@@ -130,7 +127,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="您是否使用了 `cp seasonal/s* ~` 将所需文件复制到您的主目录？"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +135,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("记录保存得非常好！如果您输入了错误的命令，您可以随时使用 `nano` 来清理保存的历史文件。")
 ```
 
 ***
@@ -151,13 +147,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+使用携带 `-h` 选项的 `grep`（阻止打印文件名）
+以及 `-v Tooth`（选择与表头不匹配的行）
+按顺序从 `spring.csv` 和 `summer.csv` 中筛选数据记录，
+并将输出重定向到 `temp.csv`。
 
 `@hint`
-Put the flags before the filenames.
+将选项放在文件名之前。
 
 `@solution`
 ```{shell}
@@ -167,8 +163,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "请确保您使用 `>` 将 `grep` 命令的输出重定向到 `temp.csv`！"
+msg2 = "您是否使用了 `grep -h -v ___ ___ ___`（填空）来填充 `temp.csv`？"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +173,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +184,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+将 `history` 通过管道传给 `tail -n 3`，
+并把输出重定向到 `steps.txt`，
+以便将最近的 3 条命令保存到文件中。
+（需要保存 3 条而不是 2 条，
+因为 `history` 命令本身也会出现在列表中。）
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+请记住，使用 `>` 进行重定向要放在整条管道命令序列的末尾。
 
 `@solution`
 ```{shell}
@@ -206,8 +201,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="请确保将命令的输出重定向到 `steps.txt`。"
+msg2="您是否使用了 `history | tail ___ ___`（填空）来填充 `steps.txt`？"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +214,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("做得好！让我们更进一步！")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## 如何保存命令以便稍后重复运行？
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +227,28 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+到目前为止，您一直在交互式地使用 shell。
+但由于您输入的命令只是文本，
+您可以把它们保存在文件中，让 shell 反复运行。
+要开始探索这一强大的能力，
+请将下面的命令放入名为 `headers.sh` 的文件中：
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+该命令会从 `seasonal` 目录中的每个 CSV 文件中选取第一行。
+创建好这个文件后，
+您可以通过输入：
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+来运行它。
+这会告诉 shell（它其实就是一个名为 `bash` 的程序）
+去运行文件 `headers.sh` 中包含的命令，
+其输出与直接运行这些命令相同。
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +264,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+使用 `nano dates.sh` 创建一个名为 `dates.sh` 的文件，
+其中包含以下命令：
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+以便从 `seasonal` 中的所有 CSV 文件中提取第一列。
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+将所示命令原样放入文件中，不要添加多余的空行或空格。
 
 `@solution`
 ```{shell}
@@ -291,13 +286,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "您是否在 `dates.sh` 文件中包含了 `cut -d , -f 1 seasonal/*.csv` 这一行？请再次使用 `nano dates.sh` 更新您的文件。使用 `Ctrl` + `O` 保存并使用 `Ctrl` + `X` 退出。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +303,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+使用 `bash` 运行文件 `dates.sh`。
 
 `@hint`
-Use `bash filename` to run the file.
+使用 `bash filename` 来运行该文件。
 
 `@solution`
 ```{shell}
@@ -327,17 +321,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+      has_code("dates.sh", incorrect_msg = '您是否指定了 `dates.sh` 文件？')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## 如何复用管道？
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +338,27 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+包含一组 Shell 命令的文件称为***shell 脚本**，
+有时也直接简称为 "script"（脚本）。脚本文件名不一定要以 `.sh` 结尾，
+但本课将使用这一约定，
+便于您分辨哪些文件是脚本。
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+脚本也可以包含管道。
+例如，
+如果 `all-dates.sh` 包含如下这一行：
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+那么：
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+将会从季节性数据文件中提取唯一日期，
+并将它们保存到 `dates.out` 中。
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +375,13 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+您的主目录中已为您准备好一个 `teeth.sh` 文件，但其中留有一些空白。
+请使用 Nano 编辑该文件，并将两个 `____` 占位符
+分别替换为 `seasonal/*.csv` 和 `-c`，以便此脚本打印出在 `seasonal` 目录下 CSV 文件中
+每个牙齿名称出现的次数统计。
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+使用 `nano teeth.sh` 来编辑该文件。
 
 `@solution`
 ```{shell}
@@ -400,13 +393,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="您是否已正确替换空白，以便 `teeth.sh` 中的命令为 `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`？请再次使用 `nano teeth.sh` 进行必要的更改。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +410,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+使用 `bash` 运行 `teeth.sh`，并用 `>` 将其输出重定向到 `teeth.out`。
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+请记住，`> teeth.out` 必须放在产生输出的命令之后。
 
 `@solution`
 ```{shell}
@@ -434,7 +426,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="您是否已正确地将 `bash teeth.sh` 的结果重定向到 `teeth.out` 文件中，并使用了 `>`？"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +435,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+      has_code("bash\s+teeth.sh", incorrect_msg = '您是否运行了 `teeth.sh` 文件？'),
+      has_code(">\s+teeth.out", incorrect_msg = '您是否重定向到了 `teeth.out` 文件？')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +452,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+运行 `cat teeth.out` 查看结果。
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+请记住，您可以先键入文件名的前几个字符，然后按 Tab 键自动补全。
 
 `@solution`
 ```{shell}
@@ -479,18 +470,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = '您调用了 `cat` 吗？'),
+      has_code("teeth.out", incorrect_msg = '您指定了 `teeth.out` 文件吗？')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("很好！一开始这可能会显得很刻意，但好处是您正在逐步自动化工作流程的各个部分。作为数据科学家，这一点非常有用！")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## 如何将文件名传递给脚本？
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +488,24 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+处理特定文件的脚本可以作为您已完成工作的记录，但能处理任意文件的脚本更有用。
+为此，您可以使用特殊表达式 `$@`（美元符号紧跟 at 符号），表示"传给脚本的所有命令行参数"。
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+例如，若 `unique-lines.sh` 中包含 `sort $@ | uniq`，当您运行：
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+shell 会将 `$@` 替换为 `seasonal/summer.csv` 并处理一个文件。若您运行：
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+它会处理两个数据文件，依此类推。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_提示：在 Nano 中保存您编写的内容，按 `Ctrl` + `O` 写出文件，回车确认文件名，然后按 `Ctrl` + `X` 退出编辑器。_
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +522,11 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+使用 Nano 编辑脚本 `count-records.sh`，将两个 `____` 占位符分别填写为 `$@` 和 `-l`（字母），以便统计一个或多个文件的行数，并排除每个文件的第一行。
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* 使用 `nano count-records.sh` 编辑文件名。
+* 请确保指定的是字母 `-l`，不是数字 1。
 
 `@solution`
 ```{shell}
@@ -552,13 +538,12 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="您是否已正确替换空白，以便 `count-records.sh` 中的命令读取为 `tail -q -n +2 $@ | wc -l`？请再次使用 `nano count-records.sh` 进行所需的更改。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
         has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -570,11 +555,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+在 `seasonal/*.csv` 上运行 `count-records.sh`，并使用 `>` 将输出重定向到 `num-records.out`。
 
 `@hint`
-Use `>` to redirect the output.
+使用 `>` 重定向输出。
 
 `@solution`
 ```{shell}
@@ -589,20 +573,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+      has_code("bash\s+count-records.sh", incorrect_msg = '您是否运行了 `count-records.sh` 文件？'),
+      has_code("seasonal/\*", incorrect_msg = '您是否使用 `seasonal/*` 指定了要处理的文件？'),
+      has_code(">\s+num-records.out", incorrect_msg = '您是否重定向到了 `num-records.out` 文件？')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("做得好！您的 shell 能力正在不断扩展！")
 ```
 
 ---
 
-## How can I process a single argument?
+## 如何处理单个参数？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +593,42 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+除了 `$@` 之外，
+shell 还允许您使用 `$1`、`$2` 等来引用特定的命令行参数。
+您可以利用这一点来编写比 shell 自带命令更简洁或更自然的脚本。
+例如，
+您可以创建一个名为 `column.sh` 的脚本，从 CSV 文件中选择单个列，
+当用户把文件名作为第 1 个参数、列号作为第 2 个参数传入时：
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+然后通过以下方式运行：
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+请注意，脚本对这两个参数的使用顺序是相反的。
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+脚本 `get-field.sh` 需要接受一个文件名、
+要选择的行号、
+要选择的列号，
+并仅从一个 CSV 文件中打印该字段。
+例如：
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+应当从 `seasonal/summer.csv` 的第 4 行选择第 2 个字段。
+下面哪些命令应写入 `get-field.sh` 才能实现上述功能？
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+请记住，命令行参数是从左到右编号的。
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +637,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- 不对：那样会把文件名当作 `head` 要选择的行数来用。
+- 正确！
+- 不对：那样会把列号当作行号，反之亦然。
+- 不对：那样会把字段号当作文件名，反之亦然。
 
 ---
 
-## How can one shell script do many things?
+## 如何让一个 shell 脚本完成多件事？
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +652,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+到目前为止，我们的 shell 脚本只包含一个命令或一条管道，但脚本可以包含多行命令。比如，您可以创建一个脚本，告诉您数据文件中最短和最长文件各有多少条记录，也就是数据集长度的范围。
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+注意，在 Nano 中，"复制粘贴"的方式是：先移动到要复制的那一行，按下 `CTRL` + `K` 剪切该行，然后按两次 `CTRL` + `U` 以粘贴出两份副本。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_提醒一下，在 Nano 中保存您写的内容：按 `Ctrl` + `O` 写入文件，然后按 Enter 确认文件名，最后按 `Ctrl` + `X` 退出编辑器。_
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +673,16 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+使用 Nano 编辑脚本 `range.sh`
+并将两个 `____` 占位符
+替换为 `$@` 和 `-v`
+使其列出命令行中给出的所有文件的名称和行数，且
+不要
+显示所有文件行数的总计。
+（不要尝试从文件中减去列表头这一行。）
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+使用 `wc -l $@` 统计命令行中给出的所有文件的行数。
 
 `@solution`
 ```{shell}
@@ -710,13 +694,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="您是否已正确替换空白，以便 `range.sh` 中的命令读取为 `wc -l $@ | grep -v total`？请再次使用 `nano range.sh` 进行所需的更改。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +711,8 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+再次使用 Nano，在 `range.sh` 的管道中按顺序加入 `sort -n` 和 `head -n 1`
+以显示传入文件中最短文件的名称和行数。
 
 `@hint`
 
@@ -745,13 +727,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="您是否已将 `sort -n` 和 `head -n 1` 与管道添加到 `range.sh` 文件中？请再次使用 `nano range.sh` 进行所需的更改。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +744,15 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+仍然使用 Nano，在 `range.sh` 中再添加一行，以打印目录中
+最长
+文件的名称和记录数，
+并同时显示最短文件。
+这一行应与您已写的那一行完全相同，
+只是将 `sort -n` 改为 `sort -n -r`。
 
 `@hint`
-Copy the first line and modify the sorting order.
+复制第一行并修改排序顺序。
 
 `@solution`
 ```{shell}
@@ -781,8 +764,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="请保留 `range.sh` 文件中的第一行：`wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="您是否在 `range.sh` 中复制了第一行并做了一个小改动？使用 `sort -n -r` 代替 `sort -n`！"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +773,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +784,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+在 `seasonal` 目录中的文件上运行该脚本，
+使用 `seasonal/*.csv` 匹配所有文件，
+并使用 `>` 重定向输出，
+将结果写到您主目录中的名为 `range.out` 的文件。
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+使用 `bash range.sh` 运行脚本，使用 `seasonal/*.csv` 指定文件，并用 `> range.out` 重定向输出。
 
 `@solution`
 ```{shell}
@@ -818,24 +800,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="您是否已正确地将 `bash range.sh seasonal/*.csv` 的结果重定向到 `range.out`，并使用了 `>`？"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+has_code("bash\s+range.sh", incorrect_msg = '您是否运行了 `range.sh` 文件？'),
+has_code("seasonal/\*", incorrect_msg = '您是否使用 `seasonal/*` 指定了要处理的文件？'),
+has_code(">\s+range.out", incorrect_msg = '您是否重定向到了 `range.out` 文件？')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("进展顺利。继续进行下一个练习，学习如何编写循环！")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## 如何在 shell 脚本中编写循环？
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,10 +824,10 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+Shell 脚本也可以包含循环。您可以用分号把它们写在同一行，或者为了更易读，将它们分成多行且不加分号：
 
 ```{shell}
-# Print the first and last data records of each file.
+# 打印每个文件的第一条和最后一条数据记录。
 for filename in $@
 do
     head -n 2 $filename | tail -n 1
@@ -854,11 +835,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+（循环体内的命令不一定要缩进，但缩进会让结构更清晰。）
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+脚本的第一行是一个**注释**，用于告诉读者脚本的作用。注释以 `#` 开头并一直延续到行尾。给您未来的自己一个便利，请像这里这样为您编写的每个脚本加上简短说明。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_提醒一下：在 Nano 中保存您写好的内容时，先按 `Ctrl` + `O` 写出文件，回车确认文件名，然后按 `Ctrl` + `X` 退出编辑器。_
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +856,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+在脚本 `date-range.sh` 中填充占位符，
+用 `$filename`（两处）、`head` 和 `tail`
+使其能从一个或多个文件中打印第一天和最后一天的日期。
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+请记得使用 `$filename` 来获取循环变量的当前值。
 
 `@solution`
 ```{shell}
@@ -892,7 +873,7 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="在 `date-range.sh` 中，您是否已将循环中的 %s 行更改为 `%s`？使用 `nano date-range.sh` 进行更改。"
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
 msg1=msgpatt%('first', cmdpatt%'head')
 msg2=msgpatt%('second', cmdpatt%'tail')
@@ -906,7 +887,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +898,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+对 4 个季节性数据文件运行 `date-range.sh`，
+使用 `seasonal/*.csv` 来匹配它们的文件名。
 
 `@hint`
-The wildcard expression should start with the directory name.
+通配符表达式应以目录名开头。
 
 `@solution`
 ```{shell}
@@ -937,13 +917,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+      has_code("bash\s+date-range.sh", incorrect_msg = '您是否运行了 `date-range.sh` 文件？'),
+      has_code("seasonal/\*", incorrect_msg = '您是否使用 `seasonal/*` 指定了要处理的文件？')
     )
   )
 )
-
 ```
 
 ***
@@ -955,11 +934,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+对 4 个季节性数据文件运行 `date-range.sh`，使用 `seasonal/*.csv` 来匹配它们的文件名，
+并将其输出通过管道传给 `sort`，以验证您的脚本可以像 Unix 内置命令一样使用。
 
 `@hint`
-Use the same wildcard expression you used earlier.
+使用与之前相同的通配符表达式。
 
 `@solution`
 ```{shell}
@@ -974,21 +953,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = '您是否调用了 `bash`？'),
+      has_code("bash\s+date-range.sh", incorrect_msg = '您是否运行了 `date-range.sh` 文件？'),
+      has_code("seasonal/\*", incorrect_msg = '您是否使用 `seasonal/*` 指定了要处理的文件？'),
+      has_code("|", incorrect_msg = '您是否将脚本输出通过管道传递给 `sort`？'),
+      has_code("sort", incorrect_msg = '您是否调用了 `sort`？')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("太棒了！注意我们所学的一切是多么具有组合性。")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## 如果我不提供文件名，会发生什么？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +974,42 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+在 shell 脚本（以及交互式命令）中，一个常见错误是把文件名放错位置。
+如果您输入：
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+由于没有给 `tail` 提供任何文件名，
+它会等待从您的键盘读取输入。
+这意味着如果您输入：
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+那么 `tail` 会照常打印 `somefile.txt` 的最后 3 行，
+但 `head` 会一直等待键盘输入，
+因为它没有得到文件名，且在管道中它前面没有任何输入源。
 
 <hr>
 
-Suppose you do accidentally type:
+假设您不小心输入了：
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+接下来应该怎么做？
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- 等待 10 秒让 `head` 超时。
+- 输入 `somefile.txt` 并按 Enter，为 `head` 提供一些输入。
+- 使用 `Ctrl` + `C` 停止正在运行的 `head` 程序。
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+如果 `head` 没有得到文件名，且其上游没有任何输入，它会做什么？
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +1018,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = '不，命令不会超时。'
+a2 = '不，那会给 `head` 文本 `somefile.txt` 进行处理，但随后它会挂起等待更多输入。'
+a3 = "是的！您应该使用 `Ctrl` + `C` 来停止正在运行的程序。这就结束了本入门课程！如果您有兴趣学习更多命令行工具，我们强烈推荐参加我们的免费 Git 入门课程！"
 Ex().has_chosen(3, [a1, a2, a3])
 ```

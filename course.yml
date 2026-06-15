@@ -1,19 +1,13 @@
-title: Introduction to Shell
+title: Shell 入门
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Unix 命令行之所以能存续并发展近 50
+  年，是因为它只需几次按键就能完成复杂操作。它常被称为"编程的通用胶水"，能够帮助用户以新的方式组合现有程序、自动化重复性任务，并在远在天边的集群和云端运行程序。本课程将介绍其关键要素，并演示如何高效使用。
 
 
-  The course glossary can be found on the right in the resources section.
+  课程术语表位于右侧的资源部分。
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  若要获得 CPE 学分，您需要完成课程并在合格测评中达到 70% 的得分。您可以点击右侧的 CPE 学分提示进入该测评。
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
