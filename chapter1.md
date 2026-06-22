@@ -1,17 +1,17 @@
 ---
-title: Manipulating files and directories
+title: Hantera filer och kataloger
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  Det här kapitlet är en kort introduktion till Unix-skalet. Du får lära dig
+  varför det fortfarande används efter nästan 50 år, hur det skiljer sig från de
+  grafiska verktyg du kanske är mer van vid, hur du navigerar i skalet samt hur
+  du skapar, ändrar och tar bort filer och mappar.
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: Hur skiljer sig skalet från ett grafiskt gränssnitt?
 ---
 
-## How does the shell compare to a desktop interface?
+## Hur förhåller sig skalet till ett grafiskt skrivbordsgränssnitt?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +19,50 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Ett operativsystem som Windows, Linux eller macOS är ett speciellt slags program.
+Det styr datorns processor, hårddisk och nätverksanslutning,
+men dess viktigaste uppgift är att köra andra program.
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+Eftersom människor inte är digitala
+behöver de ett gränssnitt för att interagera med operativsystemet.
+Det vanligaste i dag är en grafisk filhanterare,
+som översätter klick och dubbelklick till kommandon för att öppna filer och köra program.
+Innan datorer hade grafiska skärmar
+skrev folk däremot in instruktioner i ett program som kallas **kommandoradsskal**.
+Varje gång ett kommando anges
+kör skalet något annat program,
+skriver ut resultatet i ett läsbart format
+och visar sedan en *prompt* för att signalera att det är redo att ta emot nästa kommando.
+(Namnet kommer från idén att det är datorns "yttre skal".)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+Att skriva kommandon i stället för att klicka och dra kan verka omständligt till en början,
+men som du kommer att se:
+så snart du börjar formulera exakt vad du vill att datorn ska göra
+kan du kombinera gamla kommandon för att skapa nya
+och automatisera återkommande uppgifter
+med bara några få tangenttryckningar.
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+Vad är förhållandet mellan den grafiska filhanterare som de flesta använder och kommandoradsskalet?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+Kom ihåg att en användare bara kan interagera med ett operativsystem via ett program.
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- Med filhanteraren kan du visa och redigera filer, medan skalet låter dig köra program.
+- Filhanteraren är byggd ovanpå skalet.
+- Skalet är en del av operativsystemet, medan filhanteraren är fristående.
+- [De är båda gränssnitt för att skicka kommandon till operativsystemet.]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- Båda låter dig visa och redigera filer samt köra program.
+- Grafiska filhanterare och skalet anropar samma underliggande operativsystemsfunktioner.
+- Skalet och filhanteraren är båda program som översätter användarkommandon (skrivna eller klickade) till anrop mot operativsystemet.
+- Rätt! Båda tar emot användarens kommandon – oavsett om de skrivs eller klickas – och skickar dem vidare till operativsystemet.
 
 ---
 
-## Where am I?
+## Var är jag?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +70,22 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**Filsystemet** hanterar filer och kataloger (eller mappar).
+Varje fil och katalog identifieras av en **absolut sökväg**
+som visar hur man når den från filsystemets **rotkatalog**:
+`/home/repl` är katalogen `repl` i katalogen `home`,
+medan `/home/repl/course.txt` är filen `course.txt` i den katalogen,
+och `/` ensamt är rotkatalogen.
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+För att ta reda på var du befinner dig i filsystemet
+kör du kommandot `pwd`
+(förkortning för "**p**rint **w**orking **d**irectory", dvs. skriv ut arbetskatalogen).
+Det skriver ut den absoluta sökvägen till din **aktuella arbetskatalog** –
+där skalet kör kommandon och letar efter filer som standard.
 
 <hr>
-Run `pwd`.
-Where are you right now?
+Kör `pwd`.
+Var befinner du dig just nu?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +93,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+I Unix-system finns vanligtvis alla användares hemkataloger under `/home`.
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +102,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "Det är inte den korrekta sökvägen."
+correct = "Rätt - du befinner dig i `/home/repl`."
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## Hur identifierar man filer och kataloger?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +118,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` visar var du befinner dig.
+För att se vad som finns där,
+skriver du `ls` (kort för "**l**i**s**ting") och trycker på enter.
+På egen hand
+listar `ls` innehållet i din aktuella katalog
+(den som visas av `pwd`).
+Om du lägger till namn på filer
+listar `ls` dem,
+och om du lägger till namn på kataloger
+visas deras innehåll.
+Till exempel visar
+`ls /home/repl` vad som finns i din startkatalog
+(som brukar kallas din **hemkatalog**).
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+Använd `ls` med ett lämpligt argument för att lista filerna i katalogen `/home/repl/seasonal`
+(som innehåller information om tandbehandlingar per datum, uppdelat efter säsong).
+Vilken av dessa filer finns *inte* i den katalogen?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +144,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+Om du anger en sökväg till `ls` visas vad som finns i den sökvägen.
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +153,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "Den filen finns i katalogen `seasonal`."
+correct = "Rätt – den filen finns *inte* i katalogen `seasonal`."
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## Hur kan jag identifiera filer och kataloger på andra sätt?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +169,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+En absolut sökväg fungerar som latitud och longitud: den har samma värde oavsett var du befinner dig. En **relativ sökväg** anger däremot en plats med utgångspunkt från din nuvarande position – ungefär som att säga "20 kilometer norrut".
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+Som exempel:
+- Om du befinner dig i katalogen `/home/repl` pekar den **relativa** sökvägen `seasonal` på samma katalog som den **absoluta** sökvägen `/home/repl/seasonal`. 
+- Om du befinner dig i katalogen `/home/repl/seasonal` pekar den **relativa** sökvägen `winter.csv` på samma fil som den **absoluta** sökvägen `/home/repl/seasonal/winter.csv`.
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Shellen avgör om en sökväg är absolut eller relativ genom att titta på det första tecknet: Om den börjar med `/` är den absolut. Om den *inte* börjar med `/` är den relativ.
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +191,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+Du befinner dig i `/home/repl`. Använd `ls` med en **relativ sökväg** för att lista filen med den absoluta sökvägen `/home/repl/course.txt` (och endast den filen).
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+Du kan ofta konstruera den relativa sökvägen till en fil eller katalog under din nuvarande plats
+genom att subtrahera den absoluta sökvägen till din nuvarande plats
+från den absoluta sökvägen till det du vill nå.
 
 `@solution`
 ```{shell}
@@ -209,13 +208,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "Du använde inte `ls` för att generera fillistan."), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "Ditt kommando genererade inte rätt fillista. Använd `ls` följt av en relativ sökväg till `/home/repl/course.txt`.")
     )
 )
-
 ```
 
 ***
@@ -227,12 +225,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+Du befinner dig i `/home/repl`.
+Använd `ls` med en **relativ** sökväg
+för att lista filen `/home/repl/seasonal/summer.csv` (och endast den filen).
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+Relativa sökvägar börjar *inte* med ett inledande '/'.
 
 `@solution`
 ```{shell}
@@ -244,10 +242,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Du använde inte `ls` för att generera fillistan."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Ditt kommando genererade inte rätt fillista. Använd `ls` följt av en relativ sökväg till `/home/repl/seasonal/summer.csv`.")
     )
 )
 ```
@@ -261,12 +259,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+Du befinner dig i `/home/repl`.
+Använd `ls` med en **relativ** sökväg
+för att lista innehållet i katalogen `/home/repl/people`.
 
 `@hint`
-Relative paths do not start with a leading '/'.
+Relativa sökvägar börjar inte med ett inledande '/'.
 
 `@solution`
 ```{shell}
@@ -278,19 +276,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Du använde inte `ls` för att generera fillistan."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "Ditt kommando genererade inte rätt fillista. Använd `ls` följt av en relativ sökväg till `/home/repl/people`.")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("Bra gjort. Nu när du vet hur man listar filer och kataloger, låt oss se hur du kan navigera i filsystemet!")
 ```
 
 ---
 
-## How can I move to another directory?
+## Hur byter jag katalog?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +295,17 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+Precis som du navigerar i en filhanterare genom att dubbelklicka på mappar
+kan du röra dig i filsystemet med kommandot `cd`
+(som står för "change directory").
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+Om du skriver `cd seasonal` och sedan `pwd`
+berättar skalet att du nu befinner dig i `/home/repl/seasonal`.
+Kör du sedan `ls` utan argument
+visas innehållet i `/home/repl/seasonal`,
+eftersom det är där du befinner dig.
+Vill du komma tillbaka till din hemkatalog `/home/repl`
+använder du kommandot `cd /home/repl`.
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +321,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+Du befinner dig i `/home/repl`/.
+Byt katalog till `/home/repl/seasonal` med hjälp av en relativ sökväg.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Kom ihåg att `cd` står för "change directory" och att relativa sökvägar inte börjar med '/'.
 
 `@solution`
 ```{shell}
@@ -340,9 +337,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Om din nuvarande arbetskatalog (ta reda på det med `pwd`) är `/home/repl`, kan du flytta till mappen `seasonal` med `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -354,10 +350,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+Använd `pwd` för att kontrollera att du är på rätt plats.
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+Kom ihåg att trycka på "enter" eller "return" efter att du angett kommandot.
 
 `@solution`
 ```{shell}
@@ -374,7 +370,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +381,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+Använd `ls` utan några sökvägar för att se vad som finns i katalogen.
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+Kom ihåg att trycka på "enter" eller "return" efter kommandot.
 
 `@solution`
 ```{shell}
@@ -403,17 +398,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="Ditt kommando genererade inte rätt utdata. Har du använt `ls` utan sökvägar för att visa innehållet i den aktuella katalogen?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("Snyggt! Det här handlade om att navigera ned till underkataloger. Vad sägs om att flytta uppåt? Låt oss ta reda på det!")
 ```
 
 ---
 
-## How can I move up a directory?
+## Hur flyttar jag uppåt i katalogstrukturen?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +415,51 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+**Föräldern** till en katalog är katalogen ovanför den.
+Till exempel är `/home` förälder till `/home/repl`,
+och `/home/repl` är förälder till `/home/repl/seasonal`.
+Du kan alltid ange den absoluta sökvägen till din förälderkatalog i kommandon som `cd` och `ls`.
+Vanligare är dock att du utnyttjar det faktum att den speciella sökvägen `..`
+(två punkter utan mellanslag) betyder "katalogen ovanför den jag befinner mig i nu".
+Om du är i `/home/repl/seasonal` tar `cd ..` dig upp till `/home/repl`.
+Använder du `cd ..` en gång till hamnar du i `/home`.
+Ännu ett `cd ..` tar dig till *rotkatalogen* `/`,
+som är längst upp i filsystemet.
+(Kom ihåg att ha ett mellanslag mellan `cd` och `..` – det är ett kommando och en sökväg, inte ett enda fyrabokstavskommando.)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+En ensam punkt, `.`, betyder alltid "den aktuella katalogen".
+Därför gör `ls` och `ls .` samma sak,
+medans `cd .` inte har någon effekt
+(eftersom du flyttas till den katalog du redan befinner dig i).
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+En sista speciell sökväg är `~` (tildetecknet),
+som betyder "din hemkatalog",
+exempelvis `/home/repl`.
+Oavsett var du befinner dig listar `ls ~` alltid innehållet i din hemkatalog,
+och `cd ~` tar dig alltid hem.
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+Om du är i `/home/repl/seasonal`,
+var hamnar du med `cd ~/../.`?
 
 `@hint`
-Trace the path one directory at a time.
+Följ sökvägen ett katalogsteg i taget.
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (rotkatalogen)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- Nej, men antingen `~` eller `..` ensamt skulle ta dig dit.
+- Rätt! Sökvägen betyder 'hemkatalogen', 'ett steg uppåt', 'här'.
+- Nej, men `.` ensamt skulle göra det.
+- Nej, den sista delen av sökvägen är `.` (som betyder "här") snarare än `..` (som betyder "uppåt").
 
 ---
 
-## How can I copy files?
+## Hur kopierar man filer?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +467,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+Det är vanligt att man vill kopiera filer,
+flytta dem till andra kataloger för att organisera dem,
+eller byta namn på dem.
+Ett kommando för detta är `cp`, som är en förkortning av "copy".
+Om `original.txt` är en befintlig fil,
+så skapar:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+en kopia av `original.txt` med namnet `duplicate.txt`.
+Om det redan finns en fil som heter `duplicate.txt`,
+skrivs den över.
+Om den sista parametern till `cp` är en befintlig katalog,
+kommer ett kommando som:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+att kopiera *alla* angivna filer till den katalogen.
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +504,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+Skapa en kopia av `seasonal/summer.csv` i katalogen `backup` (som också finns i `/home/repl`),
+och ge den nya filen namnet `summer.bck`.
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+Kombinera namnet på målkatalogen och namnet på den kopierade filen
+för att skapa en relativ sökväg till den nya filen.
 
 `@solution`
 ```{shell}
@@ -531,10 +520,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` verkar inte finnas i katalogen `backup`. Ange två sökvägar till `cp`: den befintliga filen (`seasonal/summer.csv`) och målfilen (`backup/summer.bck`)."),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +534,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+Kopiera `spring.csv` och `summer.csv` från katalogen `seasonal` till katalogen `backup`
+*utan* att ändra din nuvarande arbetskatalog (`/home/repl`).
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+Använd `cp` med namnen på de filer du vill kopiera
+och *sedan* namnet på katalogen du vill kopiera dem till.
 
 `@solution`
 ```{shell}
@@ -561,18 +549,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` verkar inte ha kopierats till katalogen `backup`. Ange två filnamn och ett katalognamn till `cp`."
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="Se till att kopiera filerna medan du befinner dig i `{{dir}}`! Använd `cd {{dir}}` för att navigera tillbaka dit."),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("Bra jobbat. Förutom att kopiera bör vi även kunna flytta filer från en katalog till en annan. Lär dig mer om det i nästa övning!")
 ```
 
 ---
 
-## How can I move a file?
+## Hur flyttar man en fil?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +568,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+Medan `cp` kopierar en fil
+flyttar `mv` den från en katalog till en annan,
+precis som om du hade dragit den i en grafisk filhanterare.
+Kommandot tar samma parametrar som `cp`,
+så kommandot:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+flyttar filerna `autumn.csv` och `winter.csv` från den aktuella arbetskatalogen
+ett steg upp till dess överordnade katalog
+(eftersom `..` alltid refererar till katalogen ovanför din nuvarande plats).
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+Du befinner dig i `/home/repl`, som har underkatalogerna `seasonal` och `backup`.
+Använd ett enda kommando för att flytta `spring.csv` och `summer.csv` från `seasonal` till `backup`.
 
 `@hint`
 
@@ -613,20 +601,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="Filen `%s` finns inte i katalogen `backup`. Har du använt `mv` korrekt? Använd två filnamn och en katalog som parametrar till `mv`."
+seasonal_patt="Filen `%s` finns fortfarande i katalogen `seasonal`. Se till att flytta filerna med `mv` i stället för att kopiera dem med `cp`!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("Bra jobbat, låt oss hålla det här skaltåget igång!")
 ```
 
 ---
 
-## How can I rename files?
+## Hur byter man namn på filer?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +622,21 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` kan också användas för att byta namn på filer. Om du kör:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+flyttes filen `course.txt` i den aktuella arbetskatalogen till filen `old-course.txt`.
+Detta skiljer sig från hur filhanterare fungerar,
+men är ofta praktiskt.
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+En varning:
+precis som `cp`
+skriver `mv` över befintliga filer.
+Om du till exempel redan har en fil som heter `old-course.txt`
+kommer kommandot ovan att ersätta den med innehållet i `course.txt`.
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +652,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+Navigera till katalogen `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Kom ihåg att `cd` står för "change directory" och att relativa sökvägar inte börjar med ett inledande '/'.
 
 `@solution`
 ```{shell}
@@ -681,9 +667,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Om din nuvarande arbetskatalog (ta reda på det med `pwd`) är `/home/repl`, kan du flytta till mappen `seasonal` med `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -695,10 +680,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+Byt namn på filen `winter.csv` till `winter.csv.bck`.
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+Använd `mv` med filens nuvarande namn följt av det namn du vill ge den, i den ordningen.
 
 `@solution`
 ```{shell}
@@ -708,15 +693,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " Använd `mv` med två argument: filen du vill byta namn på (`winter.csv`) och det nya namnet för filen (`winter.csv.bck`)."
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="Vi förväntade oss att hitta `winter.csv.bck` i katalogen." + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="Vi förväntade oss inte längre att `winter.csv` skulle finnas i katalogen." + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +712,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+Kör `ls` för att kontrollera att allt har fungerat.
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+Kom ihåg att trycka på "enter" eller "return" för att köra kommandot.
 
 `@solution`
 ```{shell}
@@ -743,22 +727,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="Har du använt `ls` för att lista innehållet i din aktuella arbetskatalog?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "Ditt kommando genererade inte korrekt fillista. Använd `ls` utan argument för att lista innehållet i din aktuella arbetskatalog.")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("Kopiering, flyttning, namnbyte – du har koll på allt! Nästa steg: att ta bort filer.")
 ```
 
 ---
 
-## How can I delete files?
+## Hur tar man bort filer?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +749,24 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+Vi kan kopiera filer och flytta dem;
+för att ta bort dem använder vi `rm`,
+som står för "remove".
+Precis som med `cp` och `mv`
+kan du ange hur många filnamn som helst, till exempel:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+Detta tar bort både `thesis.txt` och `backup/thesis-2017-08.txt`.
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` gör precis det namnet antyder,
+och det sker omedelbart:
+olikt grafiska filhanterare
+har skalet inget papperskorg,
+så när du skriver kommandot ovan
+är filen borta för gott.
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +782,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+Du befinner dig i `/home/repl`.
+Gå in i katalogen `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+Kom ihåg att `cd` står för "change directory" och att en relativ sökväg inte börjar med '/'.
 
 `@solution`
 ```{shell}
@@ -815,7 +797,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +808,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+Ta bort `autumn.csv`.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Kom ihåg att `rm` står för "remove".
 
 `@solution`
 ```{shell}
@@ -842,10 +823,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="Vi förväntade oss inte att `autumn.csv` fortfarande skulle finnas i katalogen `seasonal`. Använd `rm` med sökvägen till filen du vill ta bort."),
+    has_code('rm', incorrect_msg = 'Använd `rm` för att ta bort filen, snarare än att flytta den.')
 )
-
 ```
 
 ***
@@ -857,10 +837,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+Gå tillbaka till din hemkatalog.
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+Om du kör `cd` utan några argument kommer du tillbaka till din hemkatalog.
 
 `@solution`
 ```{shell}
@@ -870,8 +850,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="Använd `cd ..` eller `cd ~` för att återgå till hemkatalogen.")
 ```
 
 ***
@@ -883,10 +862,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+Ta bort `seasonal/summer.csv` utan att byta katalog igen.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Kom ihåg att `rm` står för "remove".
 
 `@solution`
 ```{shell}
@@ -898,16 +877,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="Vi förväntade oss inte att `summer.csv` fortfarande skulle finnas i katalogen `seasonal`. Använd `rm` med sökvägen till filen du vill ta bort."),
+    has_code('rm', incorrect_msg = 'Använd `rm` för att ta bort filen, istället för att flytta den.')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("Imponerande! Vidare till nästa!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## Hur skapar och tar man bort kataloger?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +893,19 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` hanterar kataloger på samma sätt som filer:
+om du befinner dig i din hemkatalog och kör `mv seasonal by-season`
+ändrar `mv` till exempel namnet på katalogen `seasonal` till `by-season`.
+Däremot fungerar `rm` annorlunda.
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+Om du försöker ta bort en katalog med `rm`
+skriver skalet ut ett felmeddelande om att det inte går,
+främst för att hindra dig från att råka ta bort en hel katalog med arbete.
+Istället kan du använda ett separat kommando som heter `rmdir`.
+Av säkerhetsskäl fungerar det bara när katalogen är tom,
+så du måste ta bort filerna i en katalog *innan* du tar bort katalogen själv.
+(Erfarna användare kan använda flaggan `-r` till `rm` för att uppnå samma sak;
+vi tar upp kommandoflaggor i nästa kapitel.)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +921,10 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+Ta bort filen `agarwal.txt` i katalogen `people` utan att byta katalog.
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+Kom ihåg att `rm` står för "remove" och att en relativ sökväg inte börjar med '/'.
 
 `@solution`
 ```{shell}
@@ -963,10 +936,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` ska inte längre finnas i `/home/repl/people`. Har du använt `rm` på rätt sätt?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'Det finns fortfarande filer i katalogen `people`. Om du bara flyttade `agarwal.txt`, eller skapade nya filer, ta bort dem alla.')
 )
-
 ```
 
 ***
@@ -978,11 +950,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+Nu när katalogen `people` är tom
+använder du ett enda kommando för att ta bort den.
 
 `@hint`
-Remember that `rm` only works on files.
+Kom ihåg att `rm` bara fungerar på filer.
 
 `@solution`
 ```{shell}
@@ -995,9 +967,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "Katalogen 'people' ska inte längre finnas i din hemkatalog. Använd `rmdir` för att ta bort den!")
 )
-
 ```
 
 ***
@@ -1009,13 +980,13 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+Eftersom en katalog inte är en fil
+måste du använda kommandot `mkdir directory_name`
+för att skapa en ny (tom) katalog.
+Använd det här kommandot för att skapa en ny katalog med namnet `yearly` under din hemkatalog.
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+Kör `mkdir` med namnet på den katalog du vill skapa.
 
 `@solution`
 ```{shell}
@@ -1027,9 +998,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="Det finns ingen `yearly`-katalog i din hemkatalog. Använd `mkdir yearly` för att skapa en!")
 )
-
 ```
 
 ***
@@ -1041,12 +1011,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+Nu när `yearly` finns
+skapar du en katalog till med namnet `2017` inuti den
+*utan* att lämna din hemkatalog.
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+Använd en relativ sökväg för den underkatalog du vill skapa.
 
 `@solution`
 ```{shell}
@@ -1059,15 +1029,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="Det går inte att hitta en '2017'-katalog i '/home/repl/yearly'. Du kan skapa den här katalogen med den relativa sökvägen `yearly/2017`.")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("Bra! Låt oss avsluta det här kapitlet med en övning som upprepar några av dess koncept!")
 ```
 
 ---
 
-## Wrapping up
+## Sammanfattning
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1044,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+När du analyserar data skapar du ofta mellanliggande filer.
+Istället för att lagra dem i din hemkatalog
+kan du placera dem i `/tmp`,
+där både användare och program brukar spara filer som bara behövs en kort stund.
+(Observera att `/tmp` ligger direkt under rotkatalogen `/`,
+*inte* under din hemkatalog.)
+Den här avslutande övningen visar dig hur det går till.
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1066,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+Använd `cd` för att navigera till `/tmp`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+Kom ihåg att `cd` står för "change directory" och att en absolut sökväg börjar med '/'.
 
 `@solution`
 ```{shell}
@@ -1112,9 +1081,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'Du befinner dig i fel katalog. Använd `cd` för att byta katalog till `/tmp`.')
 )
-
 ```
 
 ***
@@ -1126,10 +1094,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+Lista innehållet i `/tmp` *utan* att ange något katalognamn.
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+Om du inte anger något argument till `ls` visas innehållet i din aktuella katalog.
 
 `@solution`
 ```{shell}
@@ -1141,13 +1109,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "Du anropade inte `ls` för att generera fillistan."),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "Ditt kommando genererade inte rätt fillista. Använd `ls` utan`.")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1126,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+Skapa en ny katalog inuti `/tmp` som heter `scratch`.
 
 `@hint`
-Use `mkdir` to make directories.
+Använd `mkdir` för att skapa kataloger.
 
 `@solution`
 ```{shell}
@@ -1176,10 +1143,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="Det går inte att hitta en 'scratch'-katalog under '/tmp'. Se till att använda `mkdir` korrekt.")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1157,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+Flytta `/home/repl/people/agarwal.txt` till `/tmp/scratch`.
+Vi rekommenderar att du använder genvägen `~` för din hemkatalog och en relativ sökväg för det andra argumentet i stället för en absolut sökväg.
 
 `@hint`
 
@@ -1207,8 +1173,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="Det går inte att hitta 'agarwal.txt' i '/tmp/scratch'. Använd `mv` med `~/people/agarwal.txt` som den första parametern och `scratch` som den andra.")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("Detta avslutar Kapitel 1 av Introduktion till Shell! Skynda dig till nästa kapitel för att lära dig mer om att manipulera data!")
 ```

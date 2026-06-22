@@ -1,19 +1,19 @@
-title: Introduction to Shell
+title: Introduktion till Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Unix-kommandoraden har överlevt och blomstrat i nästan 50 år – den låter dig
+  göra komplexa saker med bara några knapptryckningar. Den kallas ibland för
+  "programmeringens universallim" och hjälper användare att kombinera befintliga
+  program på nya sätt, automatisera återkommande uppgifter och köra program på
+  kluster och i molnet, oavsett var i världen de befinner sig. Den här kursen
+  introducerar de viktigaste delarna och visar hur du använder dem effektivt.
 
 
-  The course glossary can be found on the right in the resources section.
+  Kursens ordlista finns till höger i resurssektionen.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  För att få CPE-poäng behöver du slutföra kursen och nå 70 % på den
+  kvalificerade bedömningen. Du navigerar till bedömningen via CPE-poänglänken
+  till höger.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary

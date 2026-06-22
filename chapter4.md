@@ -1,15 +1,15 @@
 ---
-title: Batch processing
+title: Batchbearbetning
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  De flesta skalkommandon kan bearbeta många filer på en gång. Det här kapitlet
+  visar hur du får dina egna pipelines att göra detsamma. På vägen ser du hur
+  skalet använder variabler för att lagra information.
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Hur lagrar skalet information?
 ---
 
-## How does the shell store information?
+## Hur lagrar skalet information?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +17,36 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+Precis som andra program lagrar skalet information i variabler.
+En del av dessa kallas **miljövariabler**
+och är alltid tillgängliga.
+Miljövariablers namn skrivs enligt konvention med stora bokstäver,
+och några av de vanligast förekommande visas nedan.
 
-| Variable | Purpose                           | Value                 |
-|----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| Variabel | Syfte                                      | Värde                  |
+|----------|--------------------------------------------|------------------------|
+| `HOME`   | Användarens hemkatalog                     | `/home/repl`           |
+| `PWD `   | Aktuell arbetskatalog                      | Samma som `pwd`-kommandot |
+| `SHELL`  | Vilket skalprogram som används             | `/bin/bash`            |
+| `USER`   | Användarens ID                             | `repl`                 |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+För att se en fullständig lista (som är ganska lång)
+kan du skriva `set` i skalet.
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+Använd `set` och `grep` med ett rör för att visa värdet på `HISTFILESIZE`,
+som styr hur många gamla kommandon som sparas i din kommandohistorik.
+Vad är dess värde?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- Variabeln finns inte.
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+Använd `set | grep HISTFILESIZE` för att hitta den rad du behöver.
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +55,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "Nej: skalet registrerar mer historik än så."
+err2 = "Nej: skalet registrerar mer historik än så."
+correct3 = "Rätt: skalet sparar 2000 gamla kommandon som standard på det här systemet."
+err4 = "Nej: variabeln `HISTFILESIZE` finns där."
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## Hur skriver man ut en variabels värde?
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +72,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+Ett enklare sätt att ta reda på en variabels värde är att använda kommandot `echo`, som skriver ut sina argument. Om du skriver
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+skrivs
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+ut. Om du försöker använda det för att skriva ut en variabels värde så här:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+skrivs variabelns namn ut, alltså `USER`.
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+För att få ut variabelns värde måste du sätta ett dollartecken `$` framför det. Om du skriver
 
 ```{shell}
 echo $USER
 ```
 
-prints
+skrivs
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+ut. Detta gäller överallt:
+för att hämta värdet av en variabel som heter `X`
+måste du skriva `$X`.
+(På så sätt kan skalet avgöra om du menar "en fil med namnet X"
+eller "värdet av en variabel med namnet X".)
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+Variabeln `OSTYPE` innehåller namnet på den typ av operativsystem du använder.
+Visa dess värde med hjälp av `echo`.
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+Anropa `echo` med variabeln `OSTYPE` föregången av `$`.
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +134,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="Anropade du `echo`?"),
+            has_code('OSTYPE', incorrect_msg="Skrev du ut miljövariabeln `OSTYPE`?"),
+            has_code(r'\$OSTYPE', incorrect_msg="Se till att inleda `OSTYPE` med ett `$`.")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("Utmärkt användning av miljövariabler med echo! Det är en bra start. Låt oss fortsätta!")
 ```
 
 ---
 
-## How else does the shell store information?
+## Hur lagrar skalet information på andra sätt?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +153,16 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+Den andra typen av variabel kallas **skalvariabel** och fungerar ungefär som en lokal variabel i ett programmeringsspråk.
 
-To create a shell variable,
-you simply assign a value to a name:
+För att skapa en skalvariabel tilldelar du ett värde till ett namn:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*utan* några mellanslag före eller efter `=`-tecknet.
+När du har gjort det kan du kontrollera variabelns värde med:
 
 ```{shell}
 echo $training
@@ -189,10 +185,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+Definiera en variabel som heter `testing` med värdet `seasonal/winter.csv`.
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+Det ska *inte* finnas mellanslag mellan variabelns namn och dess värde.
 
 `@solution`
 ```{shell}
@@ -214,12 +210,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='Definierade du en skalvariabel med namnet `testing`?'),
+        has_code('testing=', incorrect_msg='Skrev du `=` direkt efter testing, utan mellanslag?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='Ställde du in värdet av `testing` till `seasonal/winter.csv`?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +226,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+Använd `head -n 1 SOMETHING` för att hämta den första raden från `seasonal/winter.csv`
+genom att använda variabeln `testing` i stället för filnamnet.
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+Kom ihåg att använda `$testing` i stället för bara `testing`
+(`$` behövs för att hämta variabelns värde).
 
 `@solution`
 ```{shell}
@@ -251,23 +246,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="Refererade du till skalvariabeln med `$testing`?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="Anropade du `head`?"),
+            has_code('-n', incorrect_msg="Begränsade du antalet rader med `-n`?"),
+            has_code(r'-n\s+1', incorrect_msg="Valde du att behålla 1 rad med `-n 1`?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("Utmärkt! Låt oss se hur du enkelt kan upprepa kommandon.")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## Hur kan jag upprepa ett kommando många gånger?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +269,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Skalvariabler används även i **loopar**,
+som upprepar kommandon många gånger.
+Om vi kör det här kommandot:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+ger det:
 
 ```
 gif
@@ -291,21 +285,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+Observera följande om loopen:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. Strukturen är `for` ...variabel... `in` ...lista... `; do` ...kropp... `; done`
+2. Listan med element som loopen ska bearbeta (i det här fallet orden `gif`, `jpg` och `png`).
+3. Variabeln som håller reda på vilket element loopen bearbetar just nu (i det här fallet `filetype`).
+4. Loopens kropp som utför bearbetningen (i det här fallet `echo $filetype`).
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+Observera att kroppen använder `$filetype` för att hämta variabelns värde, inte bara `filetype` –
+precis som med andra skalvariabler.
+Observera också var semikolonen placeras:
+det första kommer mellan listan och nyckelordet `do`,
+och det andra kommer mellan kroppen och nyckelordet `done`.
 
 `@instructions`
-Modify the loop so that it prints:
+Ändra loopen så att den skriver ut:
 
 ```
 docx
@@ -313,10 +307,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+Använd `filetype` som namn på loopvariabeln.
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+Använd kodstrukturen från introduktionstexten och byt ut bildfilstyperna mot dokumentfilstyper.
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +329,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Använde du `for`?'),
+      has_code('filetype', incorrect_msg='Använde du `filetype` som loopvariabel?'),
+      has_code('in', incorrect_msg='Använde du `in` före listan med filtyper?'),
+      has_code('docx odt pdf', incorrect_msg='Loopade du över `docx`, `odt` och `pdf` i den ordningen?'),
+      has_code(r'pdf\s*;', incorrect_msg='Satte du ett semikolon efter det sista loop-elementet?'),
+      has_code(r';\s*do', incorrect_msg='Använde du `do` efter det första semikolonet?'),
+      has_code('echo', incorrect_msg='Använde du `echo`?'),
+      has_code(r'\$filetype', incorrect_msg='Ekade du `$filetype`?'),
+      has_code(r'filetype\s*;', incorrect_msg='Satte du ett semikolon efter loop-kroppen?'),
+      has_code('; done', incorrect_msg='Avslutade du med `done`?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("Förstklassig for-loop! Loopar är utmärkta om du vill göra samma sak hundratals eller tusentals gånger.")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## Hur upprepar man ett kommando för varje fil?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +355,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+Du kan alltid skriva in namnen på de filer du vill bearbeta när du skriver en slinga,
+men det är oftast bättre att använda jokertecken.
+Testa att köra den här slingan i konsolen:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+Den skriver ut:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +372,14 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+eftersom skalet expanderar `seasonal/*.csv` till en lista med fyra filnamn
+innan slingan körs.
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+Ändra jokerteckensuttrycket till `people/*`
+så att slingan skriver ut namnen på filerna i katalogen `people`,
+oavsett om de har en filändelse eller inte.
+Använd `filename` som namn på din slingvariabel.
 
 `@hint`
 
@@ -407,25 +401,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='Använde du `for`?'),
+      has_code('filename', incorrect_msg='Använde du `filename` som loopvariabel?'),
+      has_code('in', incorrect_msg='Använde du `in` före listan med filtyper?'),
+      has_code('people/\*', incorrect_msg='Angav du en lista med filer med `people/*`?'),
+      has_code(r'people/\*\s*;', incorrect_msg='Satte du ett semikolon efter listan med filer?'),
+      has_code(r';\s*do', incorrect_msg='Använde du `do` efter det första semikolonet?'),
+      has_code('echo', incorrect_msg='Använde du `echo`?'),
+      has_code(r'\$filename', incorrect_msg='Använde du echo med `$filename`?'),
+      has_code(r'filename\s*;', incorrect_msg='Satte du ett semikolon efter loopens innehåll?'),
+      has_code('; done', incorrect_msg='Avslutade du med `done`?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Loopar på loopar! Jokertecken och loopar är en kraftfull kombination.")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## Hur sparar man namnen på en uppsättning filer?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +427,26 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+Det är vanligt att tilldela en variabel ett värde med hjälp av ett jokerteckenuttryck för att spara en lista med filnamn.
+Till exempel,
+om du definierar `datasets` så här:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+kan du visa filnamnen senare med:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+Detta minskar mängden skrivning och gör det mindre troligt att fel uppstår.
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+Om du kör dessa två kommandon i din hemkatalog,
+hur många rader utdata skrivs ut?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +454,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- Inga: eftersom `files` definieras på en separat rad har den inget värde på den andra raden.
+- En: ordet "files".
+- Fyra: namnen på alla fyra säsongsdatafiler.
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Kom ihåg att `X` på egen hand bara är "X", medan `$X` är värdet på variabeln `X`.
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +468,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "Nej: du behöver inte definiera en variabel på samma rad som du använder den."
+err2 = "Nej: det här exemplet definierar och använder variabeln `files` i samma skal."
+correct3 = "Rätt. Kommandot är ekvivalent med `for f in seasonal/*.csv; do echo $f; done`."
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## En variabels namn kontra dess värde
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +484,54 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+Ett vanligt misstag är att glömma att använda `$` framför variabelnamnet.
+När det händer använder skalet det namn du har skrivit
+i stället för variabelns värde.
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+Ett annat vanligt misstag, särskilt för mer erfarna användare, är att stava variabelnamnet fel.
+Om du till exempel definierar `datasets` så här:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+och sedan skriver:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+skriver skalet ingenting ut,
+eftersom `datsets` (utan det andra "a") inte är definierat.
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+Om du kör dessa två kommandon i din hemkatalog,
+vad skulle skrivas ut?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(Läs den första delen av loopen noga innan du svarar.)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+Kom ihåg att `X` på egen hand är bara "X", medan `$X` är värdet på variabeln `X`.
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [En rad: ordet "files".]
+- Fyra rader: namnen på alla fyra säsongsdatafilerna.
+- Fyra tomma rader: variabeln `f` tilldelas inget värde.
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- Rätt: loopen använder `files` i stället för `$files`, så listan består av ordet "files".
+- Nej: loopen använder `files` i stället för `$files`, så listan består av ordet "files" snarare än expansionen av `files`.
+- Nej: variabeln `f` definieras automatiskt av `for`-loopen.
 
 ---
 
-## How can I run many commands in a single loop?
+## Hur kör jag många kommandon i en enda loop?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +539,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+Att skriva ut filnamn är användbart vid felsökning,
+men det egentliga syftet med loopar är att utföra operationer på flera filer.
+Den här loopen skriver ut den andra raden i varje datafil:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+Den har samma struktur som de andra loopar du redan sett:
+enda skillnaden är att loopens kropp är en pipeline med två kommandon i stället för ett enda kommando.
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+Skriv en loop som skriver ut den sista posten från juli 2017 (`2017-07`) i varje säsongsfil. Den ska ge ett liknande utdata som:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+men för **_varje_** säsongsfil separat. Använd `file` som namn på loopvariabeln och kom ihåg att loopa igenom fillistan `seasonal/*.csv` (_i stället för 'seasonal/winter.csv' som i exemplet_).
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+Loopens kropp är grep-kommandot som visas i instruktionerna, med `seasonal/winter.csv` ersatt av `$file`.
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +577,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='Använde ni `for`?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='Använde ni `file` som loopvariabel?'),
+      has_code('in', incorrect_msg='Använde ni `in` före fillistan?'),
+      has_code('seasonal/\*', incorrect_msg='Angav ni en fillista med `seasonal/*`?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Satte ni ett semikolon efter fillistan?'),
+      has_code(r';\s*do', incorrect_msg='Använde ni `do` efter det första semikolonet?'),
+      has_code('grep', incorrect_msg='Anropade ni `grep`?'),
+      has_code('2017-07', incorrect_msg='Matchade ni på `2017-07`?'),
+      has_code(r'\$file', incorrect_msg='Använde ni `$file` som namn på loopvariabeln?'),
+      has_code(r'file\s*|', incorrect_msg='Använde ni ett rör för att koppla ihop ert andra kommando?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='Använde ni `tail -n 1` för att skriva ut den sista posten i varje sökning i ert andra kommando?'),
+      has_code('; done', incorrect_msg='Avslutade ni med `done`?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("Utmärkt loopning! Jokertecken och loopar är en kraftfull kombination.")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## Varför ska jag inte använda mellanslag i filnamn?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +609,21 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+Det känns naturligt att ge filer namn med flera ord, som `July 2017.csv`,
+när du använder en grafisk filutforskare.
+Det skapar däremot problem när du arbetar i skalet.
+Antag till exempel att du vill byta namn på `July 2017.csv` till `2017 July data.csv`.
+Du kan inte skriva:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+eftersom skalet tolkar det som att du försöker flytta
+fyra filer som heter `July`, `2017.csv`, `2017` och `July` (igen)
+till en katalog som heter `data.csv`.
+I stället måste du sätta citattecken runt filnamnen
+så att skalet behandlar vart och ett som en enskild parameter:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +631,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+Om du har två filer som heter `current.csv` och `last year.csv`
+(med ett mellanslag i namnet)
+och du skriver:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+vad händer då:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+Vad skulle du tro att kommandot gör om någon visade det för dig och du inte visste vilka filer som fanns?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Skalet skriver ut ett felmeddelande eftersom `last` och `year.csv` inte finns.
+- Skalet tar bort `current.csv`.
+- [Båda alternativen ovan.]
+- Ingenting.
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- Ja, men det är inte allt.
+- Ja, men det är inte allt.
+- Rätt. Du kan använda enkla citattecken, `'`, eller dubbla citattecken, `"`, runt filnamnen.
+- Tyvärr inte.
 
 ---
 
-## How can I do many things in a single loop?
+## Hur gör man många saker i en enda loop?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +666,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+De loopar du har sett hittills har alla haft ett enda kommando eller en enda pipeline i sin kropp,
+men en loop kan innehålla valfritt antal kommandon.
+För att tala om för skalet var ett kommando slutar och nästa börjar
+måste du separera dem med semikolon:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +688,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+Anta att du glömmer semikolonet mellan kommandona `echo` och `head` i föregående loop,
+så att du ber skalet köra:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+Vad kommer skalet att göra?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- Skriva ut ett felmeddelande.
+- Skriva ut en rad för var och en av de fyra filerna.
+- Skriva ut en rad för `autumn.csv` (den första filen).
+- Skriva ut den sista raden i varje fil.
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+Du kan skicka utdata från `echo` vidare till `tail` med ett pipe.
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +713,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "Nej: loopen kommer att köras, den kommer bara inte att göra något vettigt."
+correct2 = "Ja: `echo` producerar en rad som inkluderar filnamnet två gånger, vilket `tail` sedan kopierar."
+err3 = "Nej: loopen körs en gång för vart och ett av de fyra filnamnen."
+err4 = "Nej: indata till `tail` är utdata från `echo` för varje filnamn."
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

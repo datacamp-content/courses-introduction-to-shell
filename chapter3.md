@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Kombinera verktyg
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Unix-skalets verkliga styrka ligger inte i de enskilda kommandona, utan i hur
+  enkelt de kan kombineras för att göra nya saker. Det här kapitlet visar hur du
+  utnyttjar den kraften för att välja ut den data du vill ha, och introducerar
+  kommandon för att sortera värden och ta bort dubbletter.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Hur sparar jag ett kommandos utdata till en fil?
 ---
 
-## How can I store a command's output in a file?
+## Hur sparar jag utdata från ett kommando i en fil?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,38 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Alla verktyg du har sett hittills låter dig ange indatafiler.
+De flesta saknar ett alternativ för att ange en utdatafil, eftersom det inte behövs.
+Istället kan du använda **omdirigering** för att spara utdata från vilket kommando som helst, var du vill.
+Om du kör det här kommandot:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+skrivs de första 5 raderna av sommardata ut på skärmen.
+Om du istället kör det här kommandot:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+visas ingenting på skärmen.
+Istället sparas utdata från `head` i en ny fil som heter `top.csv`.
+Du kan titta på filens innehåll med `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Tecknet `>` instruerar skalet att omdirigera utdata från `head` till en fil.
+Det är inte en del av kommandot `head` – det fungerar med alla skalkommandon som producerar utdata.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Kombinera `tail` med omdirigering för att spara de sista 5 raderna av `seasonal/winter.csv` i en fil som heter `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Använd `tail -n 5` för att hämta de sista 5 raderna.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +63,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Raden `%s` borde finnas i filen `last.csv`, men det gör den inte. Omdirigera utdata från `tail -n 5 seasonal/winter.csv` till `last.csv` med `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` har för många rader. Använde du flaggan `-n 5` med `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Bra! Låt oss öva lite mer!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Hur kan jag använda ett kommandos utdata som indata?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +85,19 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Anta att du vill hämta rader från mitten av en fil.
+Mer specifikt, anta att du vill hämta raderna 3–5 från en av våra datafiler.
+Du kan börja med att använda `head` för att hämta de första 5 raderna
+och omdirigera dem till en fil,
+och sedan använda `tail` för att välja de sista 3:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+En snabb kontroll bekräftar att detta är raderna 3–5 i originalfilen,
+eftersom det är de sista 3 raderna av de första 5.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +113,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Välj de två sista raderna från `seasonal/winter.csv`
+och spara dem i en fil som heter `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Använd `tail` för att välja rader och `>` för att omdirigera utdata från `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +127,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Raden `%s` bör finnas i filen `bottom.csv`, men det gör den inte. Omdirigera utdata från `tail -n 2 seasonal/winter.csv` till `bottom.csv` med `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` innehåller för många rader. Använde du flaggan `-n 2` med `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +147,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Välj den första raden från `bottom.csv`
+för att hämta den näst sista raden i originalfilen.
 
 `@hint`
-Use `head` to select the line you want.
+Använd `head` för att välja den rad du vill ha.
 
 `@solution`
 ```{shell}
@@ -169,17 +163,16 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Det är något fel med filen `bottom.csv`. Se till att du inte ändrar den!"),
+    has_expr_output(strict=True, incorrect_msg="Har du använt `head` korrekt på `bottom.csv`? Se till att använda flaggan `-n` på rätt sätt.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
-
+Ex().success_msg("Bra gjort. Gå vidare till nästa övning för att lära dig om bättre sätt att kombinera kommandon.")
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Finns det ett bättre sätt att kombinera kommandon?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +180,33 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Att använda omdirigering för att kombinera kommandon har två nackdelar:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Det lämnar kvar många mellanliggande filer (som `top.csv`).
+2. Kommandona som producerar slutresultatet är utspridda över flera rader i historiken.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+Shellen erbjuder ett annat verktyg som löser båda dessa problem på en gång – ett så kallat **pipe**.
+Börja igen med att köra `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Istället för att skicka utdata från `head` till en fil,
+lägg till ett lodrätt streck och kommandot `tail` *utan* ett filnamn:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Pipe-symbolen talar om för shellen att använda utdata från kommandot till vänster som indata till kommandot till höger.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Använd `cut` för att välja ut alla tandnamn från kolumn 2 i den kommaavgränsade filen `seasonal/summer.csv`, och skicka sedan resultatet via pipe till `grep` med inverterad matchning för att utesluta rubrikraden som innehåller ordet "Tooth". *`cut` och `grep` behandlades i detalj i kapitel 2, övning 8 respektive 11.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Den första delen av kommandot har formen `cut -d field_delimiter -f column_number filename`.
+- Den andra delen av kommandot har formen `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +222,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Har du skickat resultatet av `cut -d , -f 2 seasonal/summer.csv` till `grep -v Tooth` med `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Uteslöt du rubrikraden `"Tooth"` med `grep`?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Perfekt piping! Det här kanske är första gången du använde `|`, men det kommer definitivt inte att vara den sista!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Hur kombinerar man många kommandon?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +238,28 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Du kan kedja ihop hur många kommandon som helst.
+Till exempel gör det här kommandot följande:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
-
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. väljer den första kolumnen från vårdata;
+2. tar bort rubrikraden som innehåller ordet "Date"; och
+3. väljer de första 10 raderna med faktiska data.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+I föregående övning använde du följande kommando för att välja alla tandnamn från kolumn 2 i `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Bygg ut den här pipeline-kedjan med ett `head`-kommando så att bara det allra första tandnamnet väljs.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Kopiera och klistra in koden från instruktionerna, lägg till ett pipe-tecken och anropa sedan `head` med flaggan `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +276,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Har du använt `|` för att utöka pipelinen med ett `head`-kommando? Se till att ange flaggan `-n` korrekt."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Har du använt `|` för att utöka pipelinen med ett `head`-kommando?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Glädjande kedjebyggande! Genom att kedja ihop flera kommandon kan du bygga kraftfulla datamanipuleringspipelines.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Hur räknar jag poster i en fil?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +293,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Kommandot `wc` (förkortning för "word count") skriver ut antalet **t**ecken, **o**rd och **r**ader i en fil.
+Du kan begränsa utdata till enbart ett av dessa värden med flaggorna `-c`, `-w` respektive `-l`.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Räkna hur många poster i `seasonal/spring.csv` som har datum i juli 2017 (`2017-07`). 
+- Använd `grep` med ett partiellt datum för att välja ut raderna och skicka resultatet vidare till `wc` med lämplig flagga för att räkna raderna.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Använd `head seasonal/spring.csv` för att påminna dig om datumformatet.
+- Den första delen av kommandot har formen `grep thing_to_match filename`.
+- Efter pipe-tecknet, `|`, anropar du `wc` med flaggan `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +322,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("2017-07", incorrect_msg = "Sökte du efter `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Sökte du i filen `seasonal/spring.csv`?"),
+      has_code("|", incorrect_msg = "Skickade du vidare till `wc` med hjälp av `|`?"),      
+      has_code("wc", incorrect_msg = "Anropade du `wc`?"),
+      has_code("-l", incorrect_msg = "Räknade du rader med `-l`?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Noggrant räknande! Att fastställa hur mycket data du har är ett utmärkt första steg i all dataanalys.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Hur anger jag flera filer på en gång?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +344,36 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+De flesta shell-kommandon fungerar på flera filer om du anger flera filnamn.
+Du kan till exempel hämta den första kolumnen från alla säsongsbaserade datafiler på en gång:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Men att skriva ut namnen på många filer om och om igen är opraktiskt:
+det tar tid, och förr eller senare missar du en fil eller råkar upprepa ett filnamn.
+Därför kan du använda **jokertecken** i shellet för att ange en lista med filer via ett enda uttryck.
+Det vanligaste jokertecknet är `*`, som betyder "matcha noll eller flera tecken".
+Med det kan vi förkorta `cut`-kommandot ovan till:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+eller:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Skriv ett enda kommando med `head` för att hämta de tre första raderna från både `seasonal/spring.csv` och `seasonal/summer.csv` – totalt sex rader data – men *inte* från höst- eller vinterfilerna.
+Använd ett jokertecken i stället för att skriva ut filnamnen i sin helhet.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Kommandot har formen `head -n number_of_lines filename_pattern`.
+- Du kan till exempel matcha filer i katalogen `a` som börjar med `b` med hjälp av `a/b*`.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +389,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Du kan använda `seasonal/s*` för att välja `seasonal/spring.csv` och `seasonal/summer.csv`. Se till att endast inkludera de tre första raderna i varje fil med flaggan `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Inkludera inte utdata för `seasonal/autumn.csv`. Du kan använda `seasonal/s*` för att välja `seasonal/spring.csv` och `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Inkludera inte utdata för `seasonal/winter.csv`. Du kan använda `seasonal/s*` för att välja `seasonal/spring.csv` och `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Utmärkt användning av jokertecken! Detta blir ännu viktigare om din katalog innehåller hundratals eller tusentals filer.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Vilka andra jokertecken kan jag använda?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +406,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+Skalet har även andra jokertecken,
+om än de används mer sällan:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` matchar ett enskilt tecken, så `201?.txt` matchar `2017.txt` eller `2018.txt`, men inte `2017-01.txt`.
+- `[...]` matchar vilket som helst av tecknen inom hakparenteserna, så `201[78].txt` matchar `2017.txt` eller `2018.txt`, men inte `2016.txt`.
+- `{...}` matchar något av de kommaseparerade mönstren inom klammerparenteserna, så `{*.txt, *.csv}` matchar alla filer vars namn slutar på `.txt` eller `.csv`, men inte filer vars namn slutar på `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Vilket uttryck matchar `singh.pdf` och `johel.txt` men *inte* `sandhu.pdf` eller `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Testa varje uttryck mot varje filnamn i tur och ordning.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +427,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Nej: `.pdf` och `.txt` är inte filnamn.
+- Nej: det här matchar `sandhu.pdf`.
+- Nej: uttrycket inom hakparenteser matchar bara ett enda tecken, inte hela ord.
+- Rätt!
 
 ---
 
-## How can I sort lines of text?
+## Hur sorterar jag textrader?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +442,25 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Som namnet antyder sorterar `sort` data i en bestämd ordning.
+Som standard sorteras data i stigande alfabetisk ordning,
+men flaggorna `-n` och `-r` kan användas för att sortera numeriskt respektive i omvänd ordning.
+Flaggan `-b` ignorerar inledande blanksteg
+och `-f` gör sökningen skiftlägesokänslig ("**f**old case").
+I pipelines används ofta `grep` för att filtrera bort oönskade rader
+och sedan `sort` för att ordna de återstående raderna.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Minns du kombinationen av `cut` och `grep` för att välja ut alla tandnamn från kolumn 2 i `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Utifrån det här kommandot, sortera tandnamnen i `seasonal/winter.csv` (inte `summer.csv`) i fallande alfabetisk ordning. Bygg ut pipelinen med ett `sort`-steg för att göra det.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Kopiera och klistra in kommandot i instruktionerna, ändra filnamnet, lägg till ett pipe-tecken och anropa sedan `sort` med flaggan `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +479,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Anropade du `cut`?"),
+      has_code("-d", incorrect_msg = "Angav du en fältavgränsare med `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Hämtade du data från filen `seasonal/winter.csv`?"),
+      has_code("|", incorrect_msg = "Skickade du utdata från `cut` till `grep` till `sort` med hjälp av `|`?"),      
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("-v", incorrect_msg = "Inverterade du matchningen med `-v`?"),
+      has_code("Tooth", incorrect_msg = "Sökte du efter `Tooth`?"),
+      has_code("sort", incorrect_msg = "Anropade du `sort`?"),
+      has_code("-r", incorrect_msg = "Vände du på sorteringsordningen med `-r`?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Sorterat! `sort` har många användningsområden. Till exempel visar `sort -n` skickat till `head` de största värdena.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Hur tar jag bort dubbletter av rader?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +504,10 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Ett annat kommando som ofta används tillsammans med `sort` är `uniq`,
+som tar bort duplicerade rader.
+Närmare bestämt tar det bort *angränsande* duplicerade rader.
+Om en fil innehåller:
 
 ```
 2017-07-03
@@ -535,14 +516,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+kommer `uniq` att producera:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+Men om filen innehåller:
 
 ```
 2017-07-03
@@ -551,33 +532,30 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+skriver `uniq` ut alla fyra rader.
+Anledningen är att `uniq` är byggt för att hantera mycket stora filer.
+För att ta bort icke-angränsande dubbletter skulle kommandot behöva hålla hela filen i minnet
+(eller åtminstone alla unika rader som setts hittills).
+Genom att bara ta bort angränsande dubbletter behöver det bara hålla den senaste unika raden i minnet.
 
 `@instructions`
-Write a pipeline to:
+Bygg en pipeline som:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- hämtar den andra kolumnen från `seasonal/winter.csv`,
+- tar bort ordet "Tooth" från utdata så att bara tandnamn visas,
+- sorterar utdata så att alla förekomster av ett visst tandnamn hamnar intill varandra, och
+- visar varje tandnamn en gång tillsammans med en räkning av hur ofta det förekommer.
 
-The start of your pipeline is the same as the previous exercise:
+Början på din pipeline är densamma som i föregående övning:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Bygg ut den med ett `sort`-kommando och använd `uniq -c` för att visa unika rader med en räkning av hur ofta var och en förekommer, i stället för att kombinera `uniq` och `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Kopiera och klistra in kommandot från instruktionerna, skicka det vidare till `sort` utan flaggor och sedan vidare till `uniq` med flaggan `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +575,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Du bör börja med det här kommandot: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Utöka det nu!"),
+            has_code('\|\s+sort', incorrect_msg="Har du utökat kommandot med `| sort`?"),
+            has_code('\|\s+uniq', incorrect_msg="Har du utökat kommandot med `| uniq`?"),
+            has_code('-c', incorrect_msg="Har du inkluderat antal med `-c`?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Bra gjort! Efter allt detta arbete med ett rör vore det trevligt om vi kunde lagra resultatet, eller hur?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Hur sparar jag utdata från en pipe?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +595,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Skalet låter oss omdirigera utdata från en sekvens av pipade kommandon:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Däremot måste `>` stå i slutet av pipelinen.
+Om vi försöker använda det i mitten, så här:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+skrivs all utdata från `cut` till `teeth-only.txt`,
+så det finns inget kvar för `grep`
+och det väntar för evigt på indata.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Vad händer om vi placerar omdirigeringen i början av en pipeline, som här:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Kommandots utdata omdirigeras till filen som vanligt.]
+- Skalet rapporterar det som ett fel.
+- Skalet väntar för evigt på indata.
 
 `@hint`
-Try it out in the shell.
+Prova det i skalet.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +635,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Korrekt!', 'Nej; skalet kan faktiskt köra detta.', 'Nej; skalet kan faktiskt köra detta.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Hur stoppar jag ett program som körs?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +648,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+De kommandon och skript du har kört hittills har alla körts snabbt,
+men vissa uppgifter kan ta minuter, timmar eller till och med dagar att slutföra.
+Du kan också råka placera en omdirigering mitt i en pipeline,
+vilket gör att den hänger sig.
+Om du vill avbryta ett program som körs
+kan du skriva `Ctrl` + `C` för att stoppa det.
+Detta skrivs ofta som `^C` i Unix-dokumentation;
+observera att 'c' kan vara en liten bokstav.
 
 `@instructions`
-Run the command:
+Kör kommandot:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+utant argument (så att det väntar på indata som aldrig kommer)
+och stoppa det sedan genom att skriva `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Skriv bara head, tryck på Enter och avsluta programmet med `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +682,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Har du använt `head`?")
 ```
 
 ---
 
-## Wrapping up
+## Sammanfattning
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +695,7 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Som avslutning ska du bygga en pipeline för att ta reda på hur många rader den kortaste av de säsongsbaserade datafilerna innehåller.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +711,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Använd `wc` med lämpliga parametrar för att lista antalet rader i alla säsongsbaserade datafiler.
+(Använd ett jokertecken för filnamnen i stället för att skriva in dem ett och ett.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Använd `-l` för att bara lista antalet rader och `*` för att matcha filnamn.
 
 `@solution`
 ```{shell}
@@ -753,13 +730,12 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Anropade du `wc`?"),
+      has_code("-l", incorrect_msg = "Räknade du antalet rader med `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Hämtade du data från alla `seasonal/*`-filer?")
     )
   )
 )
-
 ```
 
 ***
@@ -771,7 +747,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Lägg till ytterligare ett kommando efter det föregående med hjälp av ett pipe för att ta bort raden som innehåller ordet "total".
 
 `@hint`
 
@@ -789,17 +765,16 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Anropade du `wc`?"),
+      has_code("-l", incorrect_msg = "Räknade du antalet rader med `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Hämtade du data från alla `seasonal/*`-filer?"),
+      has_code("|", incorrect_msg = "Skickade du utdata från `wc` till `grep` med hjälp av `|`?"),      
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("-v", incorrect_msg = "Inverterade du matchningen med `-v`?"),
+      has_code("total", incorrect_msg = "Sökte du efter `total`?")
     )
   )
 )
-
 ```
 
 ***
@@ -811,11 +786,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Lägg till ytterligare två steg i pipelinen med `sort -n` och `head -n 1` för att hitta filen med färst antal rader.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Använd flaggan `-n` med `sort` för att sortera numeriskt.
+- Använd flaggan `-n` med `head` för att begränsa utdata till 1 rad.
 
 `@solution`
 ```{shell}
@@ -830,19 +805,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Anropade du `wc`?"),
+      has_code("-l", incorrect_msg = "Räknade du antalet rader med `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Hämtade du data från alla `seasonal/*`-filer?"),
+      has_code("|", incorrect_msg = "Skickade du data från `wc` till `grep` till `sort` till `head` med hjälp av `|`?"),      
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("-v", incorrect_msg = "Inverterade du matchningen med `-v`?"),
+      has_code("total", incorrect_msg = "Sökte du efter `total`?"),
+      has_code("sort", incorrect_msg = "Anropade du `sort`?"),
+      has_code("-n", incorrect_msg = "Angav du antalet rader att behålla med `-n`?"),
+      has_code("1", incorrect_msg = "Angav du 1 rad att behålla med `-n 1`?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Bra gjort! Det visar sig att `autumn.csv` är filen med färst rader. Skynda dig till kapitel 4 för att lära dig mer om batchbearbetning!")
 ```

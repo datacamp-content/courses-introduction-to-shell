@@ -1,16 +1,15 @@
 ---
-title: Manipulating data
+title: Hantera data
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  Kommandona i föregående kapitel visade hur du flyttar runt saker i
+  filsystemet. Det här kapitlet visar hur du arbetar med innehållet i filerna.
+  Verktygen vi använder är enkla men utgör ett stabilt fundament.
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: Hur visar jag innehållet i en fil?
 ---
 
-## How can I view a file's contents?
+## Hur visar jag innehållet i en fil?
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +17,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+Innan du byter namn på eller tar bort filer
+kanske du vill titta på deras innehåll.
+Det enklaste sättet är att använda `cat`,
+som skriver ut innehållet i filer direkt på skärmen.
+(Namnet är en förkortning av "concatenate", det vill säga "att länka ihop saker",
+eftersom kommandot skriver ut alla filer vars namn du anger, en efter en.)
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +35,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+Skriv ut innehållet i `course.txt` på skärmen.
 
 `@hint`
 
@@ -55,14 +54,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="Ditt kommando genererade inte rätt utdata. Har du använt `cat` följt av filnamnet, `course.txt`?")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("Bra! Låt oss titta på andra sätt att visa en fils innehåll.")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## Hur visar jag ett filinnehåll bit för bit?
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +69,26 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+Du kan använda `cat` för att skriva ut stora filer och sedan bläddra genom utdata,
+men det är oftast bekvämare att **bläddra** igenom utdata sida för sida.
+Den ursprungliga kommandot för detta kallades `more`,
+men det har ersatts av ett kraftfullare kommando som heter `less`.
+(Den här typen av namngivning är vad som räknas som humor i Unix-världen.)
+När du kör `less` på en fil visas ett sida i taget;
+du kan trycka på mellanslagstangenten för att bläddra ned eller skriva `q` för att avsluta.
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+Om du anger flera filnamn till `less`
+kan du skriva `:n` (kolon och ett gement 'n') för att gå till nästa fil,
+`:p` för att gå tillbaka till föregående,
+eller `:q` för att avsluta.
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+Obs: Om du tittar på lösningar till övningar som använder `less`
+kommer du att se ett extra kommando i slutet som stänger av sidvisningen
+så att vi kan testa dina lösningar på ett effektivt sätt.
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+Använd `less seasonal/spring.csv seasonal/summer.csv` för att visa de två filerna i den ordningen.
+Tryck på mellanslagstangenten för att bläddra ned, `:n` för att gå till den andra filen och `:q` för att avsluta.
 
 `@hint`
 
@@ -112,7 +110,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='Använd `less` och filnamnen. Kom ihåg att `:n` flyttar dig till nästa fil.'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +118,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## Hur visar jag början av en fil?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +129,23 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+Det första de flesta datavetare gör när de får ett nytt dataset att analysera är
+att ta reda på vilka fält det innehåller och vilka värden dessa fält har.
+Om datasetet har exporterats från en databas eller ett kalkylblad
+lagras det ofta som **kommaseparerade värden** (CSV).
+Ett snabbt sätt att få en överblick är att titta på de första raderna.
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+Det kan vi göra i terminalen med kommandot `head`.
+Som namnet antyder
+skriver det ut de första raderna i en fil
+(där "några" betyder 10),
+så kommandot:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+visar:
 
 ```
 Date,Tooth
@@ -164,16 +162,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+Vad händer om filen innehåller färre än 10 rader när du kör `head`?
+(Ta reda på det genom att titta på toppen av `people/agarwal.txt`.)
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- Skriver ut ett felmeddelande eftersom filen är för kort.
+- Visar så många rader som finns.
+- Fyller på med tomma rader tills totalen når 10.
 
 `@hint`
-What is the most useful thing it could do?
+Vad är det mest användbara den skulle kunna göra?
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +180,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["Felaktigt: det är inte det mest användbara det kan göra.",
+                    "Korrekt!",
+                    "Felaktigt: det skulle vara omöjligt att skilja från en fil som slutade med ett antal tomma rader."])
 ```
 
 ---
 
-## How can I type less?
+## Hur skriver du mindre?
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +195,20 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+Ett av skalens kraftfulla verktyg är **tabbkomplettering**.
+Om du börjar skriva ett filnamn och sedan trycker på tabb-tangenten
+försöker skalet automatiskt komplettera sökvägen.
+Om du till exempel skriver `sea` och trycker på tabb
+fylls katalognamnet `seasonal/` i (med ett avslutande snedstreck).
+Om du sedan skriver `a` och trycker på tabb
+kompletteras sökvägen till `seasonal/autumn.csv`.
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+Om sökvägen är tvetydig,
+till exempel `seasonal/s`,
+visas en lista med möjliga alternativ om du trycker på tabb en gång till.
+Skriv ytterligare ett tecken eller två för att göra sökvägen mer specifik
+och tryck sedan på tabb
+för att fylla i resten av namnet.
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +224,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+Kör `head seasonal/autumn.csv` utan att skriva hela filnamnet.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Skriv så mycket av sökvägen som behövs, tryck sedan på tabb och upprepa.
 
 `@solution`
 ```{shell}
@@ -242,9 +239,8 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="Kontrollanten kunde inte hitta rätt utdata i ditt kommando. Är du säker på att du anropade `head` på `seasonal/autumn.csv`?")
 )
-
 ```
 
 ***
@@ -256,10 +252,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+Kör `head seasonal/spring.csv` utan att skriva hela filnamnet.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Skriv så mycket av sökvägen som behövs, tryck sedan på tabb och upprepa.
 
 `@solution`
 ```{shell}
@@ -271,15 +267,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="Kontrollen kunde inte hitta rätt utdata i ditt kommando. Är du säker på att du anropade `head` på `seasonal/spring.csv`?")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("Bra jobbat! När du väl vant dig vid att använda tabbkomplettering kommer det att spara dig mycket tid!")
 ```
 
 ---
 
-## How can I control what commands do?
+## Hur styr jag vad kommandon gör?
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +282,31 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+Du vill inte alltid visa de första 10 raderna i en fil,
+och därför kan du ändra `head`s beteende
+genom att ge det en **kommandoradsflagga** (eller bara "flagga" för kort).
+Om du kör kommandot:
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+visar `head` bara de tre första raderna i filen.
+Kör du `head -n 100`,
+visas de första 100 raderna (förutsatt att det finns så många),
+och så vidare.
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+En flaggas namn anger vanligtvis dess syfte
+(till exempel är `-n` tänkt att signalera "**n**umber of lines").
+Kommandoflaggor behöver inte bestå av ett `-` följt av en enda bokstav,
+men det är en vanligt förekommande konvention.
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+Obs: det anses god praxis att placera alla flaggor *före* eventuella filnamn,
+och i den här kursen
+godkänner vi därför bara svar som följer den regeln.
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+Visa de första 5 raderna i `winter.csv` i katalogen `seasonal`.
 
 `@hint`
 
@@ -331,17 +326,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="Är du säker på att du anropar `head` på filen `seasonal/winter.csv`?"),
+        has_expr_output(strict=True, incorrect_msg="Är du säker på att du använde flaggan `-n 5`?")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Är du säker på att du använde flaggan `-n 5`?")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("Bra! Med den här tekniken kan du undvika att ditt skal kraschar om du vill titta på större textfiler.")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## Hur listar jag allt under en katalog?
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +344,12 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+För att se allt som finns under en katalog,
+oavsett hur djupt det är nästlat,
+kan du ge `ls` flaggan `-R`
+(som står för "recursive", det vill säga rekursiv).
+Om du kör `ls -R` i din hemkatalog
+ser du något i stil med:
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +363,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+Detta visar alla filer och kataloger på den aktuella nivån,
+sedan allt i varje underkatalog,
+och så vidare.
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+För att göra det lättare att se vad som är vad
+har `ls` ytterligare en flagga, `-F`, som skriver ut ett `/` efter namnet på varje katalog
+och ett `*` efter namnet på varje körbart program.
+Kör `ls` med de två flaggorna `-R` och `-F` samt den absoluta sökvägen till din hemkatalog
+för att se allt den innehåller.
+(Ordningen på flaggorna spelar ingen roll, men katalognamnet måste komma sist.)
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+Din hemkatalog kan anges med `~` eller `.` eller dess absoluta sökväg.
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +391,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='Använd antingen `ls -R -F` eller `ls -F -R` och sökvägen `/home/repl`.'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='Använd antingen `ls -R -F` eller `ls -F -R` och sökvägen `/home/repl`.')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg("Det är en ganska bra översikt, eller hur?")
 ```
 
 ---
 
-## How can I get help for a command?
+## Hur får jag hjälp med ett kommando?
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +407,7 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+För att ta reda på vad kommandon gör använde man förr kommandot `man` (förkortning av "manual"). Kommandot `man head` visar till exempel den här informationen:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +431,11 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` startar automatiskt `less`, så du kan behöva trycka på mellanslagstangenten för att bläddra igenom informationen och `:q` för att avsluta.
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+Enradsbeskrivningen under `NAME` berättar kort vad kommandot gör, och sammanfattningen under `SYNOPSIS` listar alla flaggor det känner till. Valfria delar visas inom hakparenteser `[...]`, antingen/eller-alternativ separeras med `|`, och saker som kan upprepas markeras med `...`. Manualsidan för `head` talar alltså om att du *antingen* kan ange ett radantal med `-n` eller ett byteantal med `-c`, och att du kan ange valfritt antal filnamn.
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Problemet med Unix-manualen är att du måste veta vad du letar efter. Om du inte gör det kan du söka på [Stack Overflow](https://stackoverflow.com/), ställa en fråga i DataCamps Slack-kanaler, eller titta i `SEE ALSO`-avsnitten för de kommandon du redan känner till.
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +451,10 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+Läs manualsidan för kommandot `tail` för att ta reda på vad ett `+`-tecken framför talet i flaggan `-n` gör. (Kom ihåg att trycka på mellanslagstangenten för att bläddra ned och/eller skriva `q` för att avsluta.)
 
 `@hint`
-Remember: `man` is short for "manual".
+Kom ihåg: `man` är en förkortning av "manual".
 
 `@solution`
 ```{shell}
@@ -489,8 +465,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Använd `man` och kommandonamnet.')
 ```
 
 ***
@@ -502,10 +477,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+Använd `tail` med flaggan `-n +7` för att visa alla rader utom de första sex i `seasonal/spring.csv`.
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+Använd ett plustecken '+' framför antalet rader du vill visa.
 
 `@solution`
 ```{shell}
@@ -517,15 +492,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="Anropar du `tail` på `seasonal/spring.csv`?"),
+    has_expr_output(strict=True, incorrect_msg="Är du säker på att du använde flaggan `-n +7`?")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## Hur väljer man kolumner från en fil?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +507,34 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` och `tail` låter dig välja rader från en textfil.
+Om du vill välja kolumner kan du använda kommandot `cut`.
+Det har flera alternativ (använd `man cut` för att utforska dem),
+men det vanligaste ser ut ungefär så här:
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+Detta innebär
+"välj kolumnerna 2 till 5 och kolumn 8,
+med kommatecken som avgränsare".
+`cut` använder `-f` (av engelskans "fields") för att ange kolumner
+och `-d` (av engelskans "delimiter") för att ange avgränsaren.
+Du behöver ange den sistnämnda eftersom vissa filer kan använda mellanslag, tabbar eller kolon för att separera kolumner.
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+Vilket kommando väljer den första kolumnen (med datum) från filen `spring.csv`?
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- Endera av ovanstående.
+- Inget av ovanstående, eftersom `-f` måste komma före `-d`.
 
 `@hint`
-The order of the flags doesn't matter.
+Ordningen på flaggorna spelar ingen roll.
 
 `@pre_exercise_code`
 ```{python}
@@ -575,7 +548,7 @@ Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Cor
 
 ---
 
-## What can't cut do?
+## Vad kan inte cut göra?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +556,9 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` är ett enkelt kommando.
+Det förstår framför allt inte citerade strängar.
+Om din fil till exempel ser ut så här:
 
 ```
 Name,Age
@@ -594,13 +566,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+kommer:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+att ge:
 
 ```
 Age
@@ -608,27 +580,27 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+i stället för allas ålder,
+eftersom kommandot tolkar kommatecknet mellan efternamn och förnamn som en kolumnavgränsare.
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+Vad ger `cut -d : -f 2-4` på raden:
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+(Observera det avslutande kolonet.)
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- Inget av ovanstående, eftersom det inte finns fyra fält.
 
 `@hint`
-Pay attention to the trailing colon.
+Var uppmärksam på det avslutande kolonet.
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +609,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['Nej, det finns mer.', 'Nej, det finns mer.', 'Korrekt! Det avslutande kolonet skapar ett tomt fjärde fält.', 'Nej, `cut` gör sitt bästa.'])
 ```
 
 ---
 
-## How can I repeat commands?
+## Hur upprepar jag kommandon?
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +622,18 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+En av de största fördelarna med att använda kommandoraden är att
+det är enkelt att upprepa saker du redan gjort.
+Om du har kört några kommandon kan du trycka på uppåtpilen för att bläddra tillbaka genom dem.
+Du kan också använda vänster- och högerpilarna samt delete-tangenten för att redigera dem.
+Tryck sedan på Enter för att köra det ändrade kommandot.
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+Ännu bättre: `history` skriver ut en lista över kommandon du nyligen har kört.
+Varje kommando föregås av ett löpnummer, vilket gör det enkelt att köra om ett specifikt kommando:
+skriver du till exempel `!55` körs det 55:e kommandot i din historik (om du har så många).
+Du kan också köra om ett kommando genom att skriva ett utropstecken följt av kommandots namn,
+till exempel `!head` eller `!cut`,
+vilket kör om den senaste användningen av det kommandot.
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +649,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+Kör `head summer.csv` i din hemkatalog (det bör misslyckas).
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+Tabbkomplettering fungerar inte om det inte finns ett matchande filnamn.
 
 `@solution`
 ```{shell}
@@ -693,9 +664,8 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Använd `head` och ett filnamn, `summer.csv`. Oroa dig inte om det misslyckas. Det ska det.")
 )
-
 ```
 
 ***
@@ -707,10 +677,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+Byt katalog till `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory".
+Kom ihåg att `cd` står för "change directory" (byt katalog).
 
 `@solution`
 ```{shell}
@@ -722,9 +692,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Om din nuvarande arbetskatalog (ta reda på det med `pwd`) är `/home/repl`, kan du flytta till mappen `seasonal` med `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -736,10 +705,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+Kör om kommandot `head` med `!head`.
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+Skriv inga mellanslag mellan `!` och det som följer.
 
 `@solution`
 ```{shell}
@@ -755,11 +724,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='Använd `!head` för att upprepa kommandot `head`.'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +739,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+Använd `history` för att se vad du har gjort.
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+Observera att `history` visar de senaste kommandona sist, så att de syns på skärmen när körningen är klar.
 
 `@solution`
 ```{shell}
@@ -784,8 +752,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='Använd `history` utan flaggor för att få en lista över tidigare kommandon.')
 ```
 
 ***
@@ -797,10 +764,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+Kör om `head` igen med hjälp av `!` följt av ett kommandonummer.
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+Skriv *inte* några mellanslag mellan `!` och det som följer.
 
 `@solution`
 ```{shell}
@@ -816,7 +783,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='Har du använt `!<a_number>` för att köra om det senaste `head`-kommandot från historiken?'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +791,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("Bra gjort! Till nästa!")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## Hur väljer jag rader som innehåller specifika värden?
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +804,25 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` och `tail` väljer rader,
+`cut` väljer kolumner,
+och `grep` väljer rader baserat på vad de innehåller.
+I sin enklaste form tar `grep` en textsträng följt av ett eller flera filnamn
+och skriver ut alla rader i dessa filer som innehåller den texten.
+Till exempel skriver
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+ut rader från `winter.csv` som innehåller "bicuspid".
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` kan även söka efter mönster –
+detta utforskar vi i nästa kurs.
+Mer relevant just nu är några av `grep`s vanligaste flaggor:
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: skriv ut antalet matchande rader i stället för själva raderna
+- `-h`: skriv *inte* ut filnamn vid sökning i flera filer
+- `-i`: ignorera skiftläge (dvs. behandla "Regression" och "regression" som matchningar)
+- `-l`: skriv ut namnen på filer som innehåller matchningar, inte matchningarna själva
+- `-n`: skriv ut radnummer för matchande rader
+- `-v`: invertera matchningen, dvs. visa bara rader som *inte* matchar
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +838,11 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+Skriv ut innehållet i alla rader som innehåller ordet `molar` i `seasonal/autumn.csv`
+genom att köra ett enda kommando från din hemkatalog. Använd inga flaggor.
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+Använd `grep` med det ord du söker efter och namnet på den eller de filer du vill söka i.
 
 `@solution`
 ```{shell}
@@ -892,13 +857,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("molar", incorrect_msg = "Sökte du efter `molar`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Sökte du i filen `seasonal/autumn.csv`?")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +874,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+Invertera matchningen för att hitta alla rader som *inte* innehåller ordet `molar` i `seasonal/spring.csv`, och visa deras radnummer.
+Kom ihåg att det anses vara god stil att placera alla flaggor *före* andra värden som filnamn eller söktermen "molar".
 
 `@hint`
 
@@ -929,15 +893,14 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("-v", incorrect_msg = "Inverterade du matchningen med `-v`?"),
+      has_code("-n", incorrect_msg = "Visade du radnummer med `-n`?"),
+      has_code("molar", incorrect_msg = "Sökte du efter `molar`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Sökte du i filen `seasonal/spring.csv`?")
     )
   )
 )
-
 ```
 
 ***
@@ -949,11 +912,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+Räkna hur många rader som innehåller ordet `incisor` i `autumn.csv` och `winter.csv` tillsammans.
+(Kör även här ett enda kommando från din hemkatalog.)
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+Kom ihåg att använda flaggan `-c` med `grep` för att räkna rader.
 
 `@solution`
 ```{shell}
@@ -968,20 +931,19 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "Anropade du `grep`?"),
+      has_code("-c", incorrect_msg = "Fick du antal med `-c`?"),
+      has_code("incisor", incorrect_msg = "Sökte du efter `incisor`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Sökte du i filen `seasonal/autumn.csv`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Sökte du i filen `seasonal/winter.csv`?")
     )
   )
 )
-
 ```
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## Varför är det inte alltid säkert att behandla data som text?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +951,24 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+Avsnittet `SEE ALSO` på manualsidan för `cut` hänvisar till ett kommando som heter `paste`,
+som kan användas för att kombinera datafiler i stället för att dela upp dem.
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+Läs manualsidan för `paste`,
+och kör sedan `paste` för att kombinera höst- och vinterfilerna i en enda tabell
+med kommatecken som avgränsare.
+Vad är problemet med utdata ur ett dataanalytiskt perspektiv?
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- Kolumnrubrikerna upprepas.
+- De sista raderna har fel antal kolumner.
+- En del data från `winter.csv` saknas.
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+Om du kör `cut` på utdata från `paste` med kommatecken som avgränsare,
+får du då rätt svar?
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +977,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = 'Sant, men det är inte nödvändigtvis ett fel.'
+correct2 = 'Rätt: att sammanfoga raderna med kolumner skapar bara en tom kolumn i början, inte två.'
+err3 = 'Nej, alla vinterdata finns där.'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```
