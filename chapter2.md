@@ -1,16 +1,16 @@
 ---
-title: Manipulating data
+title: Опрацювання даних
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  Команди з попереднього розділу давали змогу переміщувати об'єкти у файловій
+  системі. У цьому розділі ви навчитеся працювати з даними у цих файлах.
+  Інструменти, які ми використаємо, досить прості, проте це надійні будівельні
+  блоки.
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: Як переглянути вміст файла?
 ---
 
-## How can I view a file's contents?
+## Як переглянути вміст файла?
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +18,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+Перш ніж перейменовувати або видаляти файли,
+можете спершу переглянути їхній вміст.
+Найпростіший спосіб зробити це — скористатися `cat`,
+яка просто виводить вміст файлів на екран.
+(Її назва — скорочення від "concatenate", тобто «об'єднати»,
+адже вона виведе всі файли, імена яких ви їй передасте, один за одним.)
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +36,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+Виведіть на екран вміст файла `course.txt`.
 
 `@hint`
 
@@ -55,14 +55,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="Ваша команда не створила правильний вивід. Ви використали `cat`, за яким слідує назва файлу, `course.txt`?")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("Чудово! Давайте розглянемо інші способи перегляду вмісту файлу.")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## Як переглядати вміст файла частинами?
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +70,27 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+Ви можете використовувати `cat`, щоб виводити великі файли й прокручувати результат,
+але зазвичай зручніше **гортати** вивід посторінково.
+Початкову команду для цього назвали `more`,
+але згодом її замінила потужніша команда `less`.
+(Такі назви — своєрідний гумор у світі Unix.)
+Коли ви застосовуєте `less` до файла,
+вміст показується по одній сторінці;
+натискайте пробіл, щоб переглянути наступну сторінку, або введіть `q`, щоб вийти.
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+Якщо передати `less` імена кількох файлів,
+введіть `:n` (двокрапка і мала літера «n»), щоб перейти до наступного файла,
+`:p`, щоб повернутися до попереднього,
+або `:q`, щоб вийти.
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+Примітка: Якщо ви переглядаєте розв'язки вправ, де використовується `less`,
+в кінці буде додано ще одну команду, яка вимикає посторінковий режим,
+щоб ми могли ефективно тестувати ваші розв'язки.
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+Використайте `less seasonal/spring.csv seasonal/summer.csv`, щоб переглянути ці два файли саме в такому порядку.
+Натискайте пробіл, щоб гортати сторінки вниз, `:n`, щоб перейти до другого файла, і `:q`, щоб вийти.
 
 `@hint`
 
@@ -112,7 +112,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='Використовуйте `less` та імена файлів. Пам\'ятайте, що `:n` переміщує вас до наступного файлу.'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +120,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## Як переглянути початок файла?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +131,22 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+Перше, що зазвичай роблять дата-сайєнтисти, отримавши новий набір даних для аналізу, — з'ясовують, які поля він містить і які значення мають ці поля.
+Якщо набір даних експортували з бази даних або електронної таблиці,
+його часто зберігають як **значення, розділені комами** (CSV).
+Швидкий спосіб зрозуміти, що всередині, — подивитися на перші кілька рядків.
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+У shell це можна зробити командою `head`.
+Як підказує назва,
+вона виводить перші кілька рядків файла
+(де «кілька» означає 10),
+тож команда:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+відображає:
 
 ```
 Date,Tooth
@@ -164,16 +163,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+Що робить `head`, якщо у файлі менше ніж 10 рядків?
+(Щоб дізнатися, перегляньте верхню частину `people/agarwal.txt`.)
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- Вивести повідомлення про помилку, бо файл закороткий.
+- Відобразити стільки рядків, скільки є.
+- Відобразити достатньо порожніх рядків, щоб разом було 10.
 
 `@hint`
-What is the most useful thing it could do?
+Яку найкориснішу річ ця команда могла б зробити?
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +181,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["Неправильно: це не найкорисніше, що він міг би зробити.",
+                    "Правильно!",
+                    "Неправильно: це було б неможливо відрізнити від файлу, який закінчується купою порожніх рядків."])
 ```
 
 ---
 
-## How can I type less?
+## Як набирати менше?
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +196,21 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+Одним із потужних інструментів оболонки є **доповнення за табуляцією**.
+Якщо ви почнете вводити назву файла, а потім натиснете клавішу Tab,
+оболонка спробує автоматично доповнити шлях.
+Наприклад,
+якщо ви введете `sea` і натиснете Tab,
+вона підставить назву каталогу `seasonal/` (із завершальним слешем).
+Далі, якщо ви наберете `a` і натиснете Tab,
+шлях буде доповнено до `seasonal/autumn.csv`.
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+Якщо шлях неоднозначний,
+наприклад `seasonal/s`,
+повторне натискання Tab покаже список можливих варіантів.
+Наберіть ще один-два символи, щоб зробити шлях конкретнішим,
+а тоді натисніть Tab,
+і оболонка заповнить решту назви.
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +226,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+Запустіть `head seasonal/autumn.csv`, не вводячи повну назву файла.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Введіть стільки шляху, скільки потрібно, натисніть Tab і повторіть за потреби.
 
 `@solution`
 ```{shell}
@@ -242,7 +241,7 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="Перевіряючий не зміг знайти правильний результат у вашій команді. Ви впевнені, що викликали `head` на `seasonal/autumn.csv`?")
 )
 
 ```
@@ -256,10 +255,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+Запустіть `head seasonal/spring.csv`, не вводячи повну назву файла.
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+Введіть стільки шляху, скільки потрібно, натисніть Tab і повторіть за потреби.
 
 `@solution`
 ```{shell}
@@ -271,15 +270,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="Перевірка не змогла знайти правильний результат у вашій команді. Ви впевнені, що викликали `head` на `seasonal/spring.csv`?")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("Гарна робота! Як тільки ви звикнете використовувати автозаповнення, це заощадить вам багато часу!")
 ```
 
 ---
 
-## How can I control what commands do?
+## Як керувати тим, що роблять команди?
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +285,31 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+Вам не завжди потрібно переглядати перші 10 рядків файла,
+тому оболонка дає змогу змінити поведінку `head`,
+передавши їй **прапорець командного рядка** (скорочено — «прапорець»).
+Якщо ви запустите команду:
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head` покаже лише перші три рядки файла.
+Якщо запустити `head -n 100`,
+вона виведе перші 100 (якщо стільки є),
+і так далі.
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+Назва прапорця зазвичай підказує його призначення
+(наприклад, `-n` означає «кількість рядків» — від "**n**umber of lines").
+Прапорці команд не обов'язково мають бути у вигляді `-` плюс одна літера,
+але це дуже поширена домовленість.
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+Зауваження: вважається гарним стилем розміщувати всі прапорці *перед* назвами файлів,
+тож у цьому курсі
+ми приймаємо лише такі відповіді.
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+Виведіть перші 5 рядків файла `winter.csv` у каталозі `seasonal`.
 
 `@hint`
 
@@ -331,17 +329,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="Ви впевнені, що викликаєте `head` для файлу `seasonal/winter.csv`?"),
+        has_expr_output(strict=True, incorrect_msg="Ви впевнені, що використали прапорець `-n 5`?")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Ви впевнені, що використали прапорець `-n 5`?")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("Чудово! За допомогою цієї техніки ви можете уникнути перевантаження вашої оболонки, якщо захочете переглянути великі текстові файли.")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## Як перелічити все вміст каталогу рекурсивно?
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +347,12 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+Щоб побачити все, що міститься всередині каталогу,
+незалежно від глибини вкладеності,
+ви можете передати `ls` прапорець `-R`
+(означає «recursive» — рекурсивно).
+Якщо запустити `ls -R` у вашому домашньому каталозі,
+ви побачите приблизно таке:
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +366,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+Тут спершу показано всі файли й каталоги на поточному рівні,
+далі — в кожному підкаталозі,
+і так далі.
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+Щоб легше розрізняти об'єкти,
+`ls` має ще один прапорець `-F`, який додає `/` після назви кожного каталогу
+та `*` після назви кожної програми, яку можна виконати.
+Запустіть `ls` з двома прапорцями, `-R` і `-F`, і з абсолютним шляхом до вашого домашнього каталогу,
+щоб побачити весь його вміст.
+(Порядок прапорців не має значення, але назва каталогу має бути останньою.)
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+Ваш домашній каталог можна вказати за допомогою `~` або `.` або його абсолютного шляху.
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +394,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='Використовуйте або `ls -R -F`, або `ls -F -R` і шлях `/home/repl`.'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='Використовуйте або `ls -R -F`, або `ls -F -R` і шлях `/home/repl`.')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg("Це досить акуратний огляд, чи не так?")
 ```
 
 ---
 
-## How can I get help for a command?
+## Як отримати довідку щодо команди?
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +410,11 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+Щоб дізнатися, що робить команда,
+раніше користувалися командою `man`
+(скорочення від «manual», тобто «посібник»).
+Наприклад,
+команда `man head` відкриває таку інформацію:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +438,24 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` автоматично запускає `less`,
+тому, можливо, доведеться натискати пробіл, щоб перегортати сторінки,
+а щоб вийти — ввести `:q`.
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+Однорядковий опис у розділі `NAME` коротко пояснює призначення команди,
+а зведення в `SYNOPSIS` перелічує всі доступні прапорці.
+Усе необов'язкове подано в квадратних дужках `[...]`,
+альтернативи «або/або» розділено символом `|`,
+а те, що може повторюватися, позначено `...`,
+тож довідка для `head` повідомляє, що ви можете або задати кількість рядків через `-n`,
+або кількість байтів через `-c`,
+і що можна передати будь-яку кількість назв файлів.
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Проблема з посібником Unix у тому, що потрібно знати, що саме шукати.
+Якщо ні —
+шукайте на [Stack Overflow](https://stackoverflow.com/),
+ставте запитання в Slack-каналах DataCamp
+або перегляньте розділи `SEE ALSO` в командах, які ви вже знаєте.
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +471,12 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+Прочитайте сторінку посібника для команди `tail`, щоб з'ясувати,
+що означає знак `+` перед числом, яке використовують із прапорцем `-n`.
+(Пам'ятайте: натискайте пробіл, щоб перегорнути вниз, і/або введіть `q`, щоб вийти.)
 
 `@hint`
-Remember: `man` is short for "manual".
+Пам'ятайте: `man` — це скорочення від «manual».
 
 `@solution`
 ```{shell}
@@ -489,8 +487,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Використовуйте `man` та назву команди.')
 ```
 
 ***
@@ -502,10 +499,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+Використайте `tail` із прапорцем `-n +7`, щоб показати всі рядки, окрім перших шести, у `seasonal/spring.csv`.
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+Поставте знак «+» перед кількістю рядків, які хочете відобразити.
 
 `@solution`
 ```{shell}
@@ -517,15 +514,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="Ви викликаєте `tail` на `seasonal/spring.csv`?"),
+    has_expr_output(strict=True, incorrect_msg="Ви впевнені, що використали прапорець `-n +7`?")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## Як вибрати стовпці з файлу?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +529,35 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` і `tail` дають змогу вибирати рядки з текстового файлу.
+Якщо потрібно вибрати стовпці,
+скористайтеся командою `cut`.
+У неї є кілька параметрів (перегляньте їх за допомогою `man cut`),
+але найпоширеніший приклад виглядає так:
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+Це означає:
+«вибрати стовпці з 2 по 5 і стовпець 8,
+використовуючи кому як роздільник».
+`cut` використовує `-f` (від «fields», поля), щоб указати стовпці,
+та `-d` (від «delimiter», роздільник), щоб указати символ-роздільник.
+Останній потрібно вказати, тому що в деяких файлах стовпці розділяються пробілами, табуляцією або двокрапками.
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+Яка команда вибере перший стовпець (із датами) з файлу `spring.csv`?
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- Будь-яка з наведених вище.
+- Жодна з наведених вище, тому що `-f` має стояти перед `-d`.
 
 `@hint`
-The order of the flags doesn't matter.
+Порядок прапорців не має значення.
 
 `@pre_exercise_code`
 ```{python}
@@ -570,12 +566,12 @@ The order of the flags doesn't matter.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['Так, але це не все', 'Так, але це не все', 'Вірно! Додавання пробілу після прапора є гарним стилем, але не обов\'язковим.', 'Ні, порядок прапорів не має значення'])
 ```
 
 ---
 
-## What can't cut do?
+## Чого не вміє cut?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +579,10 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` — це доволі простенька команда.
+Зокрема,
+вона не розуміє рядків у лапках.
+Якщо, наприклад, ваш файл такий:
 
 ```
 Name,Age
@@ -594,13 +590,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+то:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+виведе:
 
 ```
 Age
@@ -608,27 +604,27 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+а не вік кожного,
+тому що вважатиме кому між прізвищем і ім'ям розділювачем стовпців.
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+Яким буде результат виконання `cut -d : -f 2-4` для рядка:
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+(Зверніть увагу на двокрапку в кінці.)
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- Жоден із наведених варіантів, адже тут немає чотирьох полів.
 
 `@hint`
-Pay attention to the trailing colon.
+Зверніть увагу на двокрапку в кінці.
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +633,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['Ні, є ще.', 'Ні, є ще.', 'Правильно! Двокрапка в кінці створює четверте порожнє поле.', 'Ні, `cut` робить все можливе.'])
 ```
 
 ---
 
-## How can I repeat commands?
+## Як повторювати команди?
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +646,19 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+Одна з найбільших переваг роботи в оболонці —
+можливість легко повторювати дії.
+Після виконання кількох команд
+натисніть стрілку вгору, щоб перегортати їх назад.
+Ви також можете редагувати їх стрілками ліворуч/праворуч і клавішею видалення.
+Натиснувши Enter, ви запустите змінену команду.
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+Ще краще: `history` виведе список нещодавно виконаних вами команд.
+Кожна має порядковий номер, тож повторно запустити потрібну команду дуже просто:
+наберіть `!55`, щоб повторити 55-ту команду у вашій історії (якщо їх стільки є).
+Також можна перевиконати команду, ввівши знак оклику та її назву —
+наприклад, `!head` або `!cut` —
+це запустить найостанніше використання цієї команди.
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +674,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+Запустіть `head summer.csv` у вашому домашньому каталозі (ця спроба має завершитися з помилкою).
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+Доповнення табуляцією не спрацює, якщо немає файлу з відповідною назвою.
 
 `@solution`
 ```{shell}
@@ -693,7 +689,7 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Використовуйте `head` та ім'я файлу, `summer.csv`. Не хвилюйтеся, якщо це не вдасться. Так і має бути.")
 )
 
 ```
@@ -707,10 +703,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+Перейдіть до каталогу `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory".
+Пам'ятайте, що `cd` означає «change directory» (змінити каталог).
 
 `@solution`
 ```{shell}
@@ -722,9 +718,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Якщо ваша поточна робоча директорія (дізнайтеся за допомогою `pwd`) - це `/home/repl`, ви можете перейти до папки `seasonal` за допомогою `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -736,10 +731,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+Повторіть команду `head` за допомогою `!head`.
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+Не ставте пробілів між `!` і тим, що йде після нього.
 
 `@solution`
 ```{shell}
@@ -755,11 +750,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='Використовуйте `!head`, щоб повторити команду `head`.'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +765,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+Скористайтеся `history`, щоб переглянути виконані дії.
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+Зверніть увагу: `history` показує найновіші команди в кінці, щоб після завершення їх було видно на екрані.
 
 `@solution`
 ```{shell}
@@ -784,8 +778,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='Використовуйте `history` без прапорців, щоб отримати список попередніх команд.')
 ```
 
 ***
@@ -797,10 +790,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+Знову запустіть `head`, використавши `!` і номер команди.
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+Не ставте пробілів між `!` і тим, що йде після нього.
 
 `@solution`
 ```{shell}
@@ -816,7 +809,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='Ви використали `!<a_number>` для повторного виконання останньої команди `head` з історії?'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +817,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("Чудово! До наступного завдання!")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## Як вибрати рядки, що містять певні значення?
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +830,26 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` і `tail` вибирають рядки,
+`cut` вибирає стовпці,
+а `grep` вибирає рядки залежно від їхнього вмісту.
+У найпростішому випадку
+`grep` отримує фрагмент тексту та один або кілька імен файлів
+і виводить усі рядки в цих файлах, які містять цей текст.
+Наприклад,
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+виводить рядки з `winter.csv`, що містять «bicuspid».
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` також уміє шукати за шаблонами;
+ми розглянемо це в наступному курсі.
+Наразі важливіші деякі з найуживаніших прапорців `grep`:
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: вивести кількість рядків, що збіглися, замість самих рядків
+- `-h`: не виводити імена файлів під час пошуку в кількох файлах
+- `-i`: ігнорувати регістр (наприклад, вважати «Regression» і «regression» збігами)
+- `-l`: вивести імена файлів, що містять збіги, а не самі збіги
+- `-n`: вивести номери рядків для рядків зі збігами
+- `-v`: інвертувати збіг, тобто показувати лише рядки, які не збігаються
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +865,11 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+Виведіть вміст усіх рядків, що містять слово `molar`, у `seasonal/autumn.csv`,
+запустивши одну команду з домашнього каталогу. Не використовуйте жодних прапорців.
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+Скористайтеся `grep` зі словом, яке ви шукаєте, та іменем файла(ів), у якому потрібно шукати.
 
 `@solution`
 ```{shell}
@@ -892,13 +884,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("molar", incorrect_msg = "Ви шукали `molar`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Ви шукали файл `seasonal/autumn.csv`?")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +901,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+Інвертуйте збіг, щоб знайти всі рядки, які не містять слова `molar`, у `seasonal/spring.csv`, і покажіть їхні номери рядків.
+Пам'ятайте: вважається доброю практикою ставити всі прапорці перед іншими значеннями, як-от іменами файлів або пошуковим словом «molar».
 
 `@hint`
 
@@ -929,11 +920,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("-v", incorrect_msg = "Ви інвертували збіг за допомогою `-v`?"),
+      has_code("-n", incorrect_msg = "Ви показали номери рядків за допомогою `-n`?"),
+      has_code("molar", incorrect_msg = "Ви шукали `molar`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Ви шукали файл `seasonal/spring.csv`?")
     )
   )
 )
@@ -949,11 +940,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+Підрахуйте, скільки рядків містить слово `incisor` у сукупності в `autumn.csv` та `winter.csv`.
+(Знову ж таки, запустіть одну команду з домашнього каталогу.)
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+Не забудьте використати `-c` з `grep`, щоб порахувати рядки.
 
 `@solution`
 ```{shell}
@@ -968,11 +959,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("-c", incorrect_msg = "Ви отримали підрахунки за допомогою `-c`?"),
+      has_code("incisor", incorrect_msg = "Ви шукали `incisor`?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "Ви шукали файл `seasonal/autumn.csv`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Ви шукали файл `seasonal/winter.csv`?")
     )
   )
 )
@@ -981,7 +972,7 @@ Ex().multi(
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## Чому не завжди безпечно трактувати дані як звичайний текст?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +980,24 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+Розділ `SEE ALSO` на сторінці керівництва для `cut` посилається на команду `paste`,
+яку можна використати, щоб об'єднувати файли даних замість їх розрізання.
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+Прочитайте сторінку керівництва для `paste`,
+а потім запустіть `paste`, щоб об'єднати файли даних за осінь і зиму в одну таблицю,
+використовуючи кому як роздільник.
+Що не так з цим виводом з погляду аналізу даних?
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- Заголовки стовпчиків повторюються.
+- В останніх кількох рядках неправильна кількість стовпчиків.
+- Частина даних із `winter.csv` відсутня.
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+Якщо ви застосуєте `cut` до виводу `paste`, використовуючи коми як роздільник,
+чи отримаєте ви правильну відповідь?
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +1006,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = 'Правильно, але це не обов\'язково є помилкою.'
+correct2 = 'Вірно: об\'єднання рядків зі стовпцями створює лише один порожній стовпець на початку, а не два.'
+err3 = 'Ні, всі зимові дані присутні.'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```

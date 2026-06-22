@@ -1,16 +1,16 @@
 ---
-title: Combining tools
+title: Поєднання інструментів
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  Справжня сила оболонки Unix — не в окремих командах, а в тому, як легко
+  поєднувати їх для нових завдань. У цьому розділі ви навчитеся використовувати
+  цю можливість, щоб вибирати потрібні дані, а також познайомитеся з командами
+  для сортування значень і видалення дублікатів.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Як зберегти результат виконання команди у файл?
 ---
 
-## How can I store a command's output in a file?
+## Як зберегти вивід команди у файл?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +18,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+У всіх інструментів, які ви бачили досі, можна вказати вхідні файли.
+Більшість не мають опції для назви вихідного файла, бо вона їм не потрібна.
+Натомість
+можна використати **перенаправлення**, щоб зберегти вивід будь-якої команди куди завгодно.
+Якщо запустити цю команду:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+вона виведе на екран перші 5 рядків літніх даних.
+Якщо ж запустити цю команду:
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+на екрані нічого не зʼявиться.
+Натомість
+вивід `head` буде записано в новий файл `top.csv`.
+Переглянути вміст цього файла можна за допомогою `cat`:
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Знак «більше» `>` наказує оболонці перенаправити вивід `head` у файл.
+Він не є частиною команди `head`;
+зате
+працює з будь-якою командою оболонки, що створює вивід.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Поєднайте `tail` із перенаправленням, щоб зберегти останні 5 рядків з `seasonal/winter.csv` у файл `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Скористайтеся `tail -n 5`, щоб отримати останні 5 рядків.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +67,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "Рядок `%s` повинен бути у файлі `last.csv`, але його немає. Перенаправте вивід `tail -n 5 seasonal/winter.csv` до `last.csv` за допомогою `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` має занадто багато рядків. Ви використали прапорець `-n 5` з `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Чудово! Давайте попрактикуємося ще!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Як використати вивід команди як вхідні дані?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +89,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Припустімо, ви хочете отримати рядки з середини файлу.
+Точніше,
+припустімо, вам потрібні рядки 3–5 з одного з наших файлів даних.
+Можна почати з використання `head`, щоб отримати перші 5 рядків,
+переспрямувати їх у файл,
+а потім застосувати `tail`, щоб вибрати останні 3:
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Швидка перевірка підтверджує, що це рядки 3–5 з нашого початкового файлу,
+адже це останні 3 рядки з перших 5.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +118,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Виберіть останні два рядки з `seasonal/winter.csv`
+і збережіть їх у файлі з назвою `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Скористайтеся `tail`, щоб вибрати рядки, і `>`, щоб переспрямувати вивід `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +132,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="Рядок `%s` має бути у файлі `bottom.csv`, але його там немає. Перенаправте вивід `tail -n 2 seasonal/winter.csv` до `bottom.csv` за допомогою `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` має занадто багато рядків. Чи використовували Ви прапорець `-n 2` з `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +152,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Виберіть перший рядок з `bottom.csv`,
+щоб отримати передостанній рядок початкового файлу.
 
 `@hint`
-Use `head` to select the line you want.
+Скористайтеся `head`, щоб вибрати потрібний рядок.
 
 `@solution`
 ```{shell}
@@ -169,17 +168,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Щось не так із файлом `bottom.csv`. Переконайтеся, що Ви його не змінюєте!"),
+    has_expr_output(strict=True, incorrect_msg="Ви правильно використали `head` на `bottom.csv`? Переконайтеся, що правильно використовуєте прапорець `-n`.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("Чудово. Перейдіть до наступної вправи, щоб дізнатися про кращі способи комбінування команд.")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Як краще поєднувати команди?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +186,35 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+У поєднання команд через перенаправлення є два недоліки:
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Залишається багато проміжних файлів (наприклад, `top.csv`).
+2. Команди для отримання підсумкового результату розкидані по кількох рядках історії.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+У shell є інший інструмент, який розв'язує обидві ці проблеми одночасно, — це **pipe** (конвеєр).
+Ще раз
+почніть із запуску `head`:
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Замість надсилання виводу `head` у файл
+додайте вертикальну риску та команду `tail` *без* імені файлу:
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Символ конвеєра вказує shell використати вивід команди ліворуч
+як вхід для команди праворуч.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Скористайтеся `cut`, щоб вибрати всі назви зубів із 2-го стовпця у файлі з комами-роздільниками `seasonal/summer.csv`, а потім передайте результат через конвеєр до `grep` з інверсією збігу, щоб вилучити заголовок із словом «Tooth». *`cut` і `grep` детально розглянуті у Розділі 2, вправах 8 і 11 відповідно.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- Перша частина команди має вигляд `cut -d field_delimiter -f column_number filename`.
+- Друга частина команди має вигляд `grep -v thing_to_match`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +230,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Чи передали Ви результат `cut -d , -f 2 seasonal/summer.csv` у `grep -v Tooth` за допомогою `|`?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Чи виключили Ви рядок заголовка `"Tooth"` за допомогою `grep`?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Ідеальне використання конвеєра! Можливо, це перший раз, коли Ви використовуєте `|`, але точно не останній!")
 ```
 
 ---
 
-## How can I combine many commands?
+## Як поєднати багато команд?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +246,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Ви можете послідовно з'єднати будь-яку кількість команд.
+Наприклад,
+ця команда:
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+виконає таке:
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. вибере перший стовпець із весняних даних;
+2. вилучить рядок заголовка, що містить слово «Date»; і
+3. вибере перші 10 рядків реальних даних.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+У попередній вправі ви використали таку команду, щоб вибрати всі назви зубів із стовпця 2 файлу `seasonal/summer.csv`:
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Розширте цей конвеєр командою `head`, щоб вибрати лише саму першу назву зуба.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Скопіюйте й вставте код з інструкцій, додайте вертикальну риску, потім викличте `head` із прапорцем `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +287,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Чи використовували Ви `|`, щоб розширити конвеєр командою `head`? Переконайтеся, що прапор `-n` встановлено правильно."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Чи використовували Ви `|`, щоб розширити конвеєр командою `head`?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Радісне з'єднання! Об'єднуючи кілька команд разом, Ви можете створювати потужні конвеєри для обробки даних.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Як порахувати кількість записів у файлі?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +304,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+Команда `wc` (скорочення від «word count») виводить кількість **c**имволів, **w**слів і **l**рядків у файлі.
+Ви можете змусити її виводити лише один із цих показників, використавши відповідно `-c`, `-w` або `-l`.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Порахуйте, скільки записів у `seasonal/spring.csv` мають дати за липень 2017 року (`2017-07`). 
+- Для цього скористайтеся `grep` із частковою датою, щоб вибрати потрібні рядки, і передайте результат через конвеєр у `wc` з відповідним прапорцем для підрахунку рядків.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Використайте `head seasonal/spring.csv`, щоб пригадати формат дати.
+- Перша частина команди має вигляд `grep thing_to_match filename`.
+- Після конвеєра `|` викличте `wc` із прапорцем `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +333,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("2017-07", incorrect_msg = "Ви шукали `2017-07`?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Ви шукали файл `seasonal/spring.csv`?"),
+      has_code("|", incorrect_msg = "Ви передали в `wc` за допомогою `|`?"),      
+      has_code("wc", incorrect_msg = "Ви викликали `wc`?"),
+      has_code("-l", incorrect_msg = "Ви підрахували кількість рядків за допомогою `-l`?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Уважний підрахунок! Визначення обсягу даних - це чудовий перший крок у будь-якому аналізі даних.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Як вказати багато файлів одночасно?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +355,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+Більшість команд оболонки працюють з кількома файлами, якщо передати їм кілька назв файлів.
+Наприклад,
+можна отримати перший стовпчик одразу з усіх сезонних файлів даних так:
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Але багаторазово набирати назви файлів — погана ідея:
+це витрачає час,
+і рано чи пізно ви або пропустите файл, або повторите назву файла.
+Щоб спростити роботу,
+оболонка дає змогу використовувати **підстановні символи** (wildcards), щоб задати список файлів одним виразом.
+Найпоширеніший підстановний символ — `*`,
+який означає «відповідає нулю або більшій кількості символів».
+З його допомогою
+ми можемо скоротити наведену вище команду `cut` до такого варіанта:
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+або:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Напишіть одну команду з `head`, щоб отримати перші три рядки як з `seasonal/spring.csv`, так і з `seasonal/summer.csv` — усього шість рядків даних, але не з осіннього чи зимового файлів даних.
+Використайте підстановний символ, а не прописуйте повні назви файлів.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- Команда має вигляд `head -n number_of_lines filename_pattern`.
+- Наприклад, можна підібрати файли в каталозі `a`, що починаються на `b`, так: `a/b*`.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +405,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Ви можете використовувати `seasonal/s*` для вибору `seasonal/spring.csv` та `seasonal/summer.csv`. Переконайтеся, що включили лише перші три рядки кожного файлу за допомогою прапора `-n`!"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Не включайте вивід для `seasonal/autumn.csv`. Ви можете використовувати `seasonal/s*` для вибору `seasonal/spring.csv` та `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Не включайте вивід для `seasonal/winter.csv`. Ви можете використовувати `seasonal/s*` для вибору `seasonal/spring.csv` та `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Чудова робота з використанням шаблонів! Це стає ще важливішим, якщо ваш каталог містить сотні або тисячі файлів.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Які ще шаблони-замінники можна використовувати?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +422,18 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+У оболонці є й інші шаблони-замінники, хоча їх використовують рідше:
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` відповідає одному символу, тож `201?.txt` збігатиметься з `2017.txt` або `2018.txt`, але не з `2017-01.txt`.
+- `[...]` відповідає будь-якому одному символу з наведених у квадратних дужках, тож `201[78].txt` збігатиметься з `2017.txt` або `2018.txt`, але не з `2016.txt`.
+- `{...}` відповідає будь-якому зі зразків, розділених комами, у фігурних дужках, тож `{*.txt, *.csv}` збігатиметься з будь-яким файлом, назва якого закінчується на `.txt` або `.csv`, але не з файлами, чиї назви закінчуються на `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Який вираз збігатиметься з `singh.pdf` і `johel.txt`, але не з `sandhu.pdf` або `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Послідовно зіставте кожен вираз із кожною назвою файла.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +442,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
-- Correct!
+- Ні: `.pdf` і `.txt` — це не назви файлів.
+- Ні: цей вираз також збігатиметься з `sandhu.pdf`.
+- Ні: вираз у квадратних дужках відповідає лише одному символу, а не цілим словам.
+- Правильно!
 
 ---
 
-## How can I sort lines of text?
+## Як відсортувати рядки тексту?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +457,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Як підказує назва,
+`sort` упорядковує дані.
+Типово це відбувається у зростальному алфавітному порядку,
+але прапорці `-n` і `-r` дають змогу сортувати за числовим значенням і виводити в зворотному порядку відповідно,
+тоді як `-b` наказує ігнорувати початкові пропуски,
+а `-f` — **f**old case (тобто не зважати на регістр).
+У конвеєрах часто спершу використовують `grep`, щоб прибрати непотрібні записи,
+а потім `sort`, щоб упорядкувати решту.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Пам'ятаєте поєднання `cut` і `grep`, щоб вибрати всі назви зубів із 2‑го стовпця файлу `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+Почніть із цього рецепту та відсортуйте назви зубів у файлі `seasonal/winter.csv` (не `summer.csv`) у спадному алфавітному порядку. Для цього розширте конвеєр кроком `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Скопіюйте й вставте команду з інструкцій, змініть імʼя файлу, додайте конвеєр, потім викличте `sort` із прапорцем `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +495,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Ви викликали `cut`?"),
+      has_code("-d", incorrect_msg = "Ви вказали роздільник полів за допомогою `-d`?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Ви отримали дані з файлу `seasonal/winter.csv`?"),
+      has_code("|", incorrect_msg = "Ви використовували конвеєр від `cut` до `grep` до `sort` за допомогою `|`?"),      
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("-v", incorrect_msg = "Ви інвертували збіг за допомогою `-v`?"),
+      has_code("Tooth", incorrect_msg = "Ви шукали `Tooth`?"),
+      has_code("sort", incorrect_msg = "Ви викликали `sort`?"),
+      has_code("-r", incorrect_msg = "Ви змінили порядок сортування на зворотний за допомогою `-r`?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Відсортовано! `sort` має багато застосувань. Наприклад, конвеєр `sort -n` до `head` показує вам найбільші значення.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Як вилучити дублікати рядків?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +520,11 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Ще одна команда, яку часто використовують із `sort`, — це `uniq`,
+завдання якої — вилучати повторювані рядки.
+Точніше кажучи,
+вона прибирає лише *суміжні* дублікати рядків.
+Якщо файл містить:
 
 ```
 2017-07-03
@@ -535,14 +533,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+то `uniq` виведе:
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+але якщо він містить:
 
 ```
 2017-07-03
@@ -551,33 +549,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+тоді `uniq` надрукує всі чотири рядки.
+Причина в тому, що `uniq` створено для роботи з дуже великими файлами.
+Щоб вилучити несуміжні дублікати з файла,
+їй довелося б тримати в пам'яті весь файл
+(або принаймні
+усі унікальні рядки, які вже зустрілися).
+Прибираючи лише суміжні дублікати,
+вона має зберігати в пам'яті лише останній унікальний рядок.
 
 `@instructions`
-Write a pipeline to:
+Напишіть конвеєр, щоб:
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- отримати другий стовпець із `seasonal/winter.csv`,
+- прибрати слово "Tooth" з виводу, щоб залишилися лише назви зубів,
+- відсортувати вивід так, щоб усі входження певної назви зуба були суміжними; та
+- показати кожну назву зуба один раз разом із кількістю її появ.
 
-The start of your pipeline is the same as the previous exercise:
+Початок вашого конвеєра такий самий, як у попередній вправі:
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Доповніть його командою `sort`, а також використайте `uniq -c`, щоб показати унікальні рядки разом із кількістю появ кожного, замість використання `uniq` і `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Скопіюйте й вставте команду з інструкцій, передайте в конвеєрі до `sort` без прапорів, потім ще раз передайте в конвеєрі до `uniq` з прапором `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +595,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Ви повинні почати з цієї команди: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Тепер розширте її!"),
+            has_code('\|\s+sort', incorrect_msg="Ви розширили команду за допомогою `| sort`?"),
+            has_code('\|\s+uniq', incorrect_msg="Ви розширили команду за допомогою `| uniq`?"),
+            has_code('-c', incorrect_msg="Ви включили підрахунки за допомогою `-c`?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Чудово! Після всієї цієї роботи з конвеєром було б непогано, якби ми могли зберегти результат, чи не так?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Як зберегти вивід конвеєра?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +615,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Оболонка дає змогу перенаправити вивід послідовності з'єднаних конвеєром команд:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Однак `>` має стояти наприкінці конвеєра:
+якщо спробувати використати його посередині, ось так:
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+то весь вивід `cut` буде записано до `teeth-only.txt`,
+тож для `grep` нічого не залишиться,
+і він безкінечно чекатиме на вхідні дані.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Що станеться, якщо поставити перенаправлення на початку конвеєра, як тут:
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [Вивід команди буде, як зазвичай, перенаправлено у файл.]
+- Оболонка повідомить про помилку.
+- Оболонка безкінечно чекатиме на вхідні дані.
 
 `@hint`
-Try it out in the shell.
+Спробуйте це в оболонці.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +655,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Правильно!', 'Ні; оболонка насправді може виконати це.', 'Ні; оболонка насправді може виконати це.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Як зупинити запущену програму?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +668,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Команди та скрипти, які ви запускали досі, виконувалися швидко,
+але деякі завдання можуть тривати хвилини, години або навіть дні.
+Ви також можете помилково поставити перенаправлення посеред конвеєра,
+через що він «зависне».
+Якщо ви вирішили, що програма не має продовжувати роботу,
+натисніть `Ctrl` + `C`, щоб завершити її.
+У документації Unix це часто позначають як `^C`;
+зверніть увагу, що літера «c» може бути малою.
 
 `@instructions`
-Run the command:
+Запустіть команду:
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+без аргументів (щоб вона чекала на вхідні дані, яких ніколи не буде)
+і тоді зупиніть її, натиснувши `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Просто введіть head, натисніть Enter і завершіть роботу запущеної програми за допомогою `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +702,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Ви використали `head`?")
 ```
 
 ---
 
-## Wrapping up
+## Підсумуємо
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +715,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+На завершення
+ви створите конвеєр, щоб з'ясувати, скільки записів у найкоротшому з файлів сезонних даних.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +732,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Скористайтеся `wc` з відповідними параметрами, щоб вивести кількість рядків у всіх сезонних файлах даних.
+(Використайте шаблон з підстановкою для імен файлів замість того, щоб вводити їх вручну.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Використайте `-l`, щоб показати лише кількість рядків, і `*`, щоб зіставити імена файлів.
 
 `@solution`
 ```{shell}
@@ -753,13 +751,12 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Ви викликали `wc`?"),
+      has_code("-l", incorrect_msg = "Ви підрахували кількість рядків за допомогою `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ви отримали дані з усіх файлів `seasonal/*`?")
     )
   )
 )
-
 ```
 
 ***
@@ -771,7 +768,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Додайте ще одну команду до попередньої, використавши пайп, щоб прибрати рядок, який містить слово «total».
 
 `@hint`
 
@@ -789,13 +786,13 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Ви викликали `wc`?"),
+      has_code("-l", incorrect_msg = "Ви підрахували кількість рядків за допомогою `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ви отримали дані з усіх файлів `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Ви передали дані з `wc` до `grep` за допомогою `|`?"),      
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("-v", incorrect_msg = "Ви інвертували збіг за допомогою `-v`?"),
+      has_code("total", incorrect_msg = "Ви шукали `total`?")
     )
   )
 )
@@ -811,11 +808,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Додайте ще два етапи до конвеєра, використавши `sort -n` і `head -n 1`, щоб знайти файл із найменшою кількістю рядків.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Використайте прапорець `-n` команди `sort`, щоб сортувати чисельно.
+- Використайте прапорець `-n` команди `head`, щоб обмежити вивід 1 рядком.
 
 `@solution`
 ```{shell}
@@ -830,19 +827,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Ви викликали `wc`?"),
+      has_code("-l", incorrect_msg = "Ви підрахували кількість рядків за допомогою `-l`?"),
+      has_code("seasonal/\*", incorrect_msg = "Ви отримали дані з усіх файлів `seasonal/*`?"),
+      has_code("|", incorrect_msg = "Ви використовували конвеєр від `wc` до `grep` до `sort` до `head` за допомогою `|`?"),      
+      has_code("grep", incorrect_msg = "Ви викликали `grep`?"),
+      has_code("-v", incorrect_msg = "Ви інвертували збіг за допомогою `-v`?"),
+      has_code("total", incorrect_msg = "Ви шукали `total`?"),
+      has_code("sort", incorrect_msg = "Ви викликали `sort`?"),
+      has_code("-n", incorrect_msg = "Ви вказали кількість рядків, які потрібно залишити, за допомогою `-n`?"),
+      has_code("1", incorrect_msg = "Ви вказали 1 рядок, який потрібно залишити, за допомогою `-n 1`?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Чудово! Виявляється, `autumn.csv` - це файл з найменшою кількістю рядків. Поспішайте до розділу 4, щоб дізнатися більше про пакетну обробку!")
 ```
