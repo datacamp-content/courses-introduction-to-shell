@@ -1,17 +1,17 @@
 ---
-title: Manipulating files and directories
+title: Работа с файлами и директориями
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  Эта глава — краткое введение в оболочку Unix. Вы узнаете, почему она остаётся
+  востребованной уже почти 50 лет, чем отличается от привычных графических
+  интерфейсов, как перемещаться по файловой системе, а также как создавать,
+  изменять и удалять файлы и папки.
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: Чем оболочка отличается от графического интерфейса?
 ---
 
-## How does the shell compare to a desktop interface?
+## Чем оболочка отличается от графического интерфейса?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +19,49 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Операционная система — например, Windows, Linux или Mac OS — это особый вид программы.
+Она управляет процессором, жёстким диском и сетевым подключением компьютера,
+но её главная задача — запускать другие программы.
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+Поскольку люди не являются цифровыми устройствами,
+для взаимодействия с операционной системой им нужен интерфейс.
+Сегодня самый распространённый из них — графический файловый менеджер:
+он преобразует одиночные и двойные клики в команды для открытия файлов и запуска программ.
+Однако до появления графических дисплеев
+пользователи вводили инструкции в программу, которая называлась **командной оболочкой**.
+Каждый раз, когда вводится команда,
+оболочка запускает нужные программы,
+выводит результат их работы в удобочитаемом виде
+и отображает *приглашение*, сигнализируя о готовности принять следующую команду.
+(Своё название она получила от идеи «внешней оболочки» компьютера.)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+На первый взгляд вводить команды с клавиатуры может показаться неудобным по сравнению с кликами и перетаскиванием.
+Однако, как вы убедитесь, стоит только начать точно формулировать задачи для компьютера —
+и вы сможете комбинировать готовые команды для создания новых,
+а также автоматизировать повторяющиеся операции
+всего несколькими нажатиями клавиш.
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+Каково соотношение между графическим файловым менеджером, которым пользуется большинство людей, и командной оболочкой?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+Помните, что пользователь может взаимодействовать с операционной системой только через программу.
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- Файловый менеджер позволяет просматривать и редактировать файлы, а оболочка — запускать программы.
+- Файловый менеджер построен поверх оболочки.
+- Оболочка является частью операционной системы, тогда как файловый менеджер — отдельная программа.
+- [Оба инструмента служат интерфейсами для отправки команд операционной системе.]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- Оба инструмента позволяют просматривать и редактировать файлы, а также запускать программы.
+- Графический файловый менеджер и оболочка обращаются к одним и тем же функциям операционной системы.
+- Оболочка и файловый менеджер — это программы, которые преобразуют команды пользователя (введённые или выбранные кликом) в обращения к операционной системе.
+- Верно! Оба инструмента принимают команды пользователя — введённые с клавиатуры или выбранные кликом — и передают их операционной системе.
 
 ---
 
-## Where am I?
+## Где я нахожусь?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +69,22 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**Файловая система** управляет файлами и каталогами (папками).
+Каждый из них идентифицируется **абсолютным путём**,
+который показывает, как добраться до него от **корневого каталога** файловой системы:
+`/home/repl` — это каталог `repl` внутри каталога `home`,
+`/home/repl/course.txt` — файл `course.txt` в этом каталоге,
+а `/` сам по себе — корневой каталог.
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+Чтобы узнать, где вы находитесь в файловой системе,
+выполните команду `pwd`
+(сокращение от «**p**rint **w**orking **d**irectory» — «вывести рабочий каталог»).
+Она выводит абсолютный путь до вашего **текущего рабочего каталога** —
+именно из него оболочка выполняет команды и по умолчанию ищет файлы.
 
 <hr>
-Run `pwd`.
-Where are you right now?
+Запустите `pwd`.
+Где вы находитесь прямо сейчас?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +92,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+В Unix-системах домашние каталоги пользователей, как правило, находятся внутри `/home`.
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +101,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "Это неверный путь."
+correct = "Верно — вы находитесь в `/home/repl`."
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## Как определить, что находится в файлах и каталогах?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +117,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` показывает, где вы находитесь.
+Чтобы узнать, что там есть,
+введите `ls` (сокращение от «**l**i**s**ting» — «листинг») и нажмите Enter.
+Без аргументов
+`ls` выводит содержимое текущего каталога
+(того, который отображает `pwd`).
+Если указать имена файлов,
+`ls` выведет их список,
+a если указать имена каталогов —
+покажет их содержимое.
+Например,
+`ls /home/repl` показывает содержимое вашего начального каталога
+(который обычно называется **домашним каталогом**).
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+Используйте `ls` с подходящим аргументом, чтобы вывести список файлов в каталоге `/home/repl/seasonal`
+(в нём хранится информация о стоматологических операциях по датам, разбитая по сезонам).
+Какого из перечисленных файлов *нет* в этом каталоге?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +143,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+Если передать `ls` путь в качестве аргумента, команда покажет содержимое этого пути.
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +152,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "Этот файл находится в директории `seasonal`."
+correct = "Верно — этот файл *не* находится в директории `seasonal`."
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## Как ещё можно идентифицировать файлы и каталоги?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +168,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+Абсолютный путь похож на географические координаты: его значение не зависит от того, где вы находитесь. **Относительный путь**, напротив, задаёт местоположение относительно вашего текущего положения — примерно как «20 километров к северу».
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+Для наглядности:
+- Если вы находитесь в каталоге `/home/repl`, то **относительный** путь `seasonal` указывает на тот же каталог, что и **абсолютный** путь `/home/repl/seasonal`.
+- Если вы находитесь в каталоге `/home/repl/seasonal`, то **относительный** путь `winter.csv` указывает на тот же файл, что и **абсолютный** путь `/home/repl/seasonal/winter.csv`.
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+Оболочка определяет тип пути по первому символу: если путь начинается с `/` — он абсолютный. Если *не* начинается с `/` — он относительный.
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +190,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+Вы находитесь в каталоге `/home/repl`. Используйте команду `ls` с **относительным путём**, чтобы вывести файл с абсолютным путём `/home/repl/course.txt` (и только его).
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+Относительный путь к файлу или каталогу, расположенному ниже вашего текущего местоположения,
+можно построить, «вычтя» абсолютный путь к текущему каталогу
+из абсолютного пути к нужному объекту.
 
 `@solution`
 ```{shell}
@@ -209,13 +207,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "Вы не вызвали `ls` для создания списка файлов."), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "Ваша команда не сформировала правильный список файлов. Используйте `ls` с указанием относительного пути к `/home/repl/course.txt`.")
     )
 )
-
 ```
 
 ***
@@ -227,12 +224,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+Вы находитесь в каталоге `/home/repl`.
+Используйте команду `ls` с **относительным** путём,
+чтобы вывести файл `/home/repl/seasonal/summer.csv` (и только его).
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+Относительные пути *не* начинаются с символа '/'.
 
 `@solution`
 ```{shell}
@@ -244,10 +241,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Вы не вызвали `ls` для создания списка файлов."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "Ваша команда не сформировала правильный список файлов. Используйте `ls`, указав относительный путь к `/home/repl/seasonal/summer.csv`.")
     )
 )
 ```
@@ -261,12 +258,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+Вы находитесь в каталоге `/home/repl`.
+Используйте команду `ls` с **относительным** путём,
+чтобы вывести содержимое каталога `/home/repl/people`.
 
 `@hint`
-Relative paths do not start with a leading '/'.
+Относительные пути не начинаются с символа '/'.
 
 `@solution`
 ```{shell}
@@ -278,19 +275,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "Вы не вызвали `ls` для создания списка файлов."), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "Ваша команда не создала правильный список файлов. Используйте `ls`, за которым следует относительный путь к `/home/repl/people`.")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("Отлично. Теперь, когда вы знаете о просмотре файлов и каталогов, давайте посмотрим, как можно перемещаться по файловой системе!")
 ```
 
 ---
 
-## How can I move to another directory?
+## Как перейти в другой каталог?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +294,17 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+Так же, как в файловом менеджере вы переходите в папки двойным щелчком,
+в файловой системе можно перемещаться с помощью команды `cd`
+(от английского «change directory» — «сменить каталог»).
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+Если ввести `cd seasonal`, а затем `pwd`,
+оболочка сообщит, что вы находитесь в `/home/repl/seasonal`.
+Если после этого выполнить `ls` без аргументов,
+она покажет содержимое `/home/repl/seasonal` —
+именно там вы сейчас находитесь.
+Чтобы вернуться в домашний каталог `/home/repl`,
+используйте команду `cd /home/repl`.
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +320,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+Вы находитесь в `/home/repl`/.
+Перейдите в каталог `/home/repl/seasonal`, используя относительный путь.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Помните, что `cd` означает «сменить каталог», а относительные пути не начинаются с символа '/'.
 
 `@solution`
 ```{shell}
@@ -340,9 +336,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Если ваш текущий рабочий каталог (узнайте с помощью `pwd`) — `/home/repl`, вы можете перейти в папку `seasonal` с помощью команды `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -354,10 +349,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+С помощью `pwd` убедитесь, что вы перешли в нужный каталог.
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+Не забудьте нажать «Enter» после ввода команды.
 
 `@solution`
 ```{shell}
@@ -374,7 +369,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +380,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+Выполните `ls` без аргументов, чтобы просмотреть содержимое этого каталога.
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+Не забудьте нажать «Enter» после ввода команды.
 
 `@solution`
 ```{shell}
@@ -403,17 +397,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="Ваша команда не сгенерировала правильный вывод. Вы использовали `ls` без путей для отображения содержимого текущего каталога?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("Отлично! Это было о переходе в подкаталоги. А как насчёт перехода вверх? Давайте выясним!")
 ```
 
 ---
 
-## How can I move up a directory?
+## Как перейти на уровень выше?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +414,53 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+**Родительский** каталог — это каталог, расположенный уровнем выше текущего.
+Например, `/home` является родительским для `/home/repl`,
+а `/home/repl` — родительским для `/home/repl/seasonal`.
+Вы всегда можете передать абсолютный путь к родительскому каталогу командам `cd` и `ls`.
+Однако гораздо удобнее использовать специальный путь `..`
+(две точки без пробелов), который означает «каталог на уровень выше текущего».
+Если вы находитесь в `/home/repl/seasonal`,
+то команда `cd ..` переместит вас в `/home/repl`.
+Ещё одна команда `cd ..` переведёт вас в `/home`.
+Следующая команда `cd ..` поместит вас в *корневой каталог* `/` —
+самый верхний уровень файловой системы.
+(Не забудьте поставить пробел между `cd` и `..` — это команда и путь, а не одна четырёхсимвольная команда.)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+Одна точка `.` всегда означает «текущий каталог».
+Поэтому `ls` и `ls .` делают одно и то же,
+а `cd .` не имеет никакого эффекта
+(так как перемещает вас в тот каталог, в котором вы уже находитесь).
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+Ещё один специальный путь — `~` (тильда),
+который означает «ваш домашний каталог»,
+например `/home/repl`.
+Где бы вы ни находились,
+`ls ~` всегда выведет содержимое вашего домашнего каталога,
+а `cd ~` всегда вернёт вас домой.
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+Если вы находитесь в `/home/repl/seasonal`,
+куда вас переместит команда `cd ~/../.`?
 
 `@hint`
-Trace the path one directory at a time.
+Двигайтесь по пути по одному каталогу за раз.
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (корневой каталог)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- Нет, но `~` или `..` по отдельности привели бы вас туда.
+- Верно! Этот путь означает «домашний каталог», «на уровень выше», «здесь».
+- Нет, но `.` само по себе сделало бы именно это.
+- Нет, последняя часть пути — это `.` (то есть «здесь»), а не `..` (то есть «на уровень выше»).
 
 ---
 
-## How can I copy files?
+## Как скопировать файлы?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +468,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+Нередко возникает необходимость скопировать файлы,
+переместить их в другие директории для организации,
+или переименовать.
+Одна из команд для этого — `cp` (сокращение от англ. «copy», «копировать»).
+Если файл `original.txt` уже существует,
+то команда:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+создаёт его копию с именем `duplicate.txt`.
+Если файл с именем `duplicate.txt` уже существовал,
+он будет перезаписан.
+Если последний аргумент команды `cp` — существующая директория,
+то команда вида:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+копирует *все* указанные файлы в эту директорию.
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +505,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+Создайте копию файла `seasonal/summer.csv` в директории `backup` (она также находится в `/home/repl`),
+назвав новый файл `summer.bck`.
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+Объедините имя директории назначения и имя копируемого файла,
+чтобы составить относительный путь для нового файла.
 
 `@solution`
 ```{shell}
@@ -531,10 +521,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck`, похоже, не существует в директории `backup`. Укажите два пути для `cp`: существующий файл (`seasonal/summer.csv`) и файл назначения (`backup/summer.bck`)."),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +535,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+Скопируйте файлы `spring.csv` и `summer.csv` из директории `seasonal` в директорию `backup`,
+*не меняя* текущую рабочую директорию (`/home/repl`).
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+Используйте `cp`, указав имена файлов, которые нужно скопировать,
+а *затем* — имя директории, в которую их нужно скопировать.
 
 `@solution`
 ```{shell}
@@ -561,18 +550,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` не был скопирован в директорию `backup`. Укажите два имени файла и имя директории для `cp`."
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="Убедитесь, что копирование файлов выполняется в `{{dir}}`! Используйте `cd {{dir}}` для перехода туда."),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("Отлично. Помимо копирования, мы также должны уметь перемещать файлы из одной директории в другую. Узнайте об этом в следующем упражнении!")
 ```
 
 ---
 
-## How can I move a file?
+## Как переместить файл?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +569,20 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+Команда `cp` копирует файл, а `mv` перемещает его из одной директории в другую — так же, как если бы вы перетащили его в графическом файловом менеджере.
+Параметры команды задаются так же, как у `cp`.
+Например, команда:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+перемещает файлы `autumn.csv` и `winter.csv` из текущей рабочей директории на один уровень выше — в родительскую директорию
+(потому что `..` всегда указывает на директорию, расположенную выше текущей).
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+Вы находитесь в `/home/repl`, которая содержит поддиректории `seasonal` и `backup`.
+Одной командой переместите файлы `spring.csv` и `summer.csv` из `seasonal` в `backup`.
 
 `@hint`
 
@@ -613,20 +599,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="Файл `%s` отсутствует в директории `backup`. Вы правильно использовали команду `mv`? Укажите два имени файла и директорию в качестве параметров команды `mv`."
+seasonal_patt="Файл `%s` всё ещё находится в директории `seasonal`. Убедитесь, что вы перемещаете файлы с помощью `mv`, а не копируете их с помощью `cp`!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("Отлично, продолжаем работу с командной строкой!")
 ```
 
 ---
 
-## How can I rename files?
+## Как переименовать файлы?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +620,22 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+Команда `mv` также позволяет переименовывать файлы. Например, если выполнить:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+файл `course.txt` в текущем рабочем каталоге будет «перемещён» в файл `old-course.txt`.
+Это отличается от поведения графических файловых менеджеров,
+но нередко оказывается очень удобным.
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+Обратите внимание:
+как и `cp`,
+команда `mv` перезаписывает существующие файлы.
+Если, например,
+у вас уже есть файл с именем `old-course.txt`,
+приведённая выше команда заменит его содержимым файла `course.txt`.
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +651,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+Перейдите в каталог `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+Помните, что `cd` означает «сменить каталог» (change directory), а относительные пути не начинаются с символа «/».
 
 `@solution`
 ```{shell}
@@ -681,9 +666,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="Если ваш текущий рабочий каталог (узнайте с помощью `pwd`) — `/home/repl`, вы можете перейти в папку `seasonal` с помощью команды `cd seasonal`.")
 )
-
 ```
 
 ***
@@ -695,10 +679,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+Переименуйте файл `winter.csv` в `winter.csv.bck`.
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+Используйте `mv`, указав сначала текущее имя файла, а затем новое имя.
 
 `@solution`
 ```{shell}
@@ -708,15 +692,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " Используйте `mv` с двумя аргументами: файл, который вы хотите переименовать (`winter.csv`), и новое имя для файла (`winter.csv.bck`)."
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="Ожидалось найти `winter.csv.bck` в директории." + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="Файл `winter.csv` больше не должен находиться в директории." + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +711,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+Выполните `ls`, чтобы убедиться, что всё прошло успешно.
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+Не забудьте нажать Enter, чтобы выполнить команду.
 
 `@solution`
 ```{shell}
@@ -743,22 +726,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="Вы использовали `ls` для просмотра содержимого текущего рабочего каталога?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "Ваша команда не создала правильный список файлов. Используйте `ls` без аргументов для просмотра содержимого текущего рабочего каталога.")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("Копирование, перемещение, переименование — вы разобрались со всем этим! Следующий шаг: удаление файлов.")
 ```
 
 ---
 
-## How can I delete files?
+## Как удалять файлы?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +748,25 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+Мы уже умеем копировать файлы и перемещать их;
+чтобы удалить файл,
+используйте команду `rm`
+(от английского «remove» — удалить).
+Как и в случае с `cp` и `mv`,
+команде `rm` можно передать сразу несколько файлов:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+Эта команда удалит оба файла: `thesis.txt` и `backup/thesis-2017-08.txt`.
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` делает именно то, что следует из её названия,
+и делает это немедленно:
+в отличие от графических файловых менеджеров,
+оболочка не имеет корзины,
+поэтому после выполнения команды выше
+ваш файл будет удалён безвозвратно.
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +782,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+Вы находитесь в `/home/repl`.
+Перейдите в директорию `seasonal`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+Помните, что `cd` означает «сменить директорию» и что относительный путь не начинается с символа '/'.
 
 `@solution`
 ```{shell}
@@ -815,7 +797,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +808,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+Удалите файл `autumn.csv`.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Помните, что `rm` означает «удалить».
 
 `@solution`
 ```{shell}
@@ -842,10 +823,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="Мы не ожидали, что `autumn.csv` всё ещё будет находиться в директории `seasonal`. Используйте `rm` с путём к файлу, который вы хотите удалить."),
+    has_code('rm', incorrect_msg = 'Используйте `rm` для удаления файла, а не для его перемещения.')
 )
-
 ```
 
 ***
@@ -857,10 +837,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+Вернитесь в домашнюю директорию.
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+Если вызвать `cd` без аргументов, команда переведёт вас в домашнюю директорию.
 
 `@solution`
 ```{shell}
@@ -870,8 +850,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="Используйте `cd ..` или `cd ~`, чтобы вернуться в домашний каталог.")
 ```
 
 ***
@@ -883,10 +862,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+Удалите файл `seasonal/summer.csv`, не меняя текущую директорию.
 
 `@hint`
-Remember that `rm` stands for "remove".
+Помните, что `rm` означает «удалить».
 
 `@solution`
 ```{shell}
@@ -898,16 +877,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="Мы не ожидали, что `summer.csv` всё ещё будет находиться в директории `seasonal`. Используйте `rm` с путём к файлу, который вы хотите удалить."),
+    has_code('rm', incorrect_msg = 'Используйте `rm` для удаления файла, а не для его перемещения.')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("Впечатляет! Переходим к следующему!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## Как создавать и удалять директории?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +893,21 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` работает с директориями так же, как и с файлами:
+если вы находитесь в домашней директории и выполните команду `mv seasonal by-season`,
+например,
+`mv` переименует директорию `seasonal` в `by-season`.
+Однако
+`rm` работает иначе.
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+Если вы попытаетесь удалить директорию с помощью `rm`,
+шелл выведет сообщение об ошибке — это сделано специально,
+чтобы вы случайно не удалили целую директорию с важными файлами.
+Вместо этого используйте отдельную команду `rmdir`.
+Для дополнительной безопасности она работает только с пустыми директориями,
+поэтому сначала нужно удалить все файлы внутри директории, а *затем* удалить саму директорию.
+(Опытные пользователи могут использовать флаг `-r` команды `rm` для того же эффекта;
+мы рассмотрим флаги команд в следующей главе.)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +923,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+Не меняя текущей директории,
+удалите файл `agarwal.txt` из директории `people`.
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+Помните, что `rm` расшифровывается как «remove» (удалить), а относительный путь не начинается с символа '/'.
 
 `@solution`
 ```{shell}
@@ -963,10 +939,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` больше не должен находиться в `/home/repl/people`. Вы правильно использовали `rm`?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'В директории `people` всё ещё есть файлы. Если Вы просто переместили `agarwal.txt` или создали новые файлы, удалите их все.')
 )
-
 ```
 
 ***
@@ -978,11 +953,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+Теперь, когда директория `people` пуста,
+удалите её с помощью одной команды.
 
 `@hint`
-Remember that `rm` only works on files.
+Помните, что `rm` работает только с файлами.
 
 `@solution`
 ```{shell}
@@ -995,9 +970,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "Директория 'people' больше не должна находиться в вашем домашнем каталоге. Используйте `rmdir` для её удаления!")
 )
-
 ```
 
 ***
@@ -1009,13 +983,12 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+Поскольку директория — это не файл,
+для её создания нужно использовать команду `mkdir directory_name`.
+С помощью этой команды создайте новую пустую директорию `yearly` в вашей домашней директории.
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+Выполните команду `mkdir` с именем директории, которую хотите создать.
 
 `@solution`
 ```{shell}
@@ -1027,9 +1000,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="В вашем домашнем каталоге отсутствует директория `yearly`. Используйте `mkdir yearly` для её создания!")
 )
-
 ```
 
 ***
@@ -1041,12 +1013,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+Теперь, когда директория `yearly` создана,
+создайте внутри неё ещё одну директорию с именем `2017`,
+*не покидая* домашней директории.
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+Используйте относительный путь для поддиректории, которую хотите создать.
 
 `@solution`
 ```{shell}
@@ -1059,15 +1031,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="Не удаётся найти директорию '2017' в '/home/repl/yearly'. Вы можете создать эту директорию, используя относительный путь `yearly/2017`.")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("Отлично! Давайте завершим эту главу упражнением, которое повторяет некоторые из её концепций!")
 ```
 
 ---
 
-## Wrapping up
+## Подведение итогов
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1046,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+При анализе данных нередко приходится создавать промежуточные файлы.
+Вместо того чтобы хранить их в домашней директории,
+можно поместить их в `/tmp` —
+место, где пользователи и программы обычно хранят файлы, которые нужны лишь на короткое время.
+(Обратите внимание: `/tmp` находится непосредственно под корневой директорией `/`,
+*а не* под вашей домашней директорией.)
+Это итоговое упражнение покажет вам, как это сделать.
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1068,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+С помощью `cd` перейдите в директорию `/tmp`.
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+Помните, что `cd` означает «сменить директорию» и что абсолютный путь начинается с «/».
 
 `@solution`
 ```{shell}
@@ -1112,9 +1083,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'Вы находитесь не в том каталоге. Используйте `cd` для перехода в каталог `/tmp`.')
 )
-
 ```
 
 ***
@@ -1126,10 +1096,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+Выведите содержимое `/tmp`, *не вводя* имя директории явно.
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+Если не указать `ls`, что именно выводить, команда покажет содержимое текущей директории.
 
 `@solution`
 ```{shell}
@@ -1141,13 +1111,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "Вы не вызвали `ls` для создания списка файлов."),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "Ваша команда не создала правильный список файлов. Используйте `ls` без`.")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1128,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+Создайте новую директорию внутри `/tmp` с именем `scratch`.
 
 `@hint`
-Use `mkdir` to make directories.
+Используйте `mkdir`, чтобы создавать директории.
 
 `@solution`
 ```{shell}
@@ -1176,10 +1145,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="Не удаётся найти директорию 'scratch' в '/tmp'. Убедитесь, что команда `mkdir` используется правильно.")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1159,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+Переместите файл `/home/repl/people/agarwal.txt` в `/tmp/scratch`.
+Рекомендуем использовать сокращение `~` для домашней директории и относительный путь для второго аргумента вместо абсолютного.
 
 `@hint`
 
@@ -1207,8 +1175,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="Не удаётся найти 'agarwal.txt' в '/tmp/scratch'. Используйте `mv` с `~/people/agarwal.txt` в качестве первого параметра и `scratch` в качестве второго.")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("На этом завершается Глава 1 курса «Введение в Shell»! Переходите к следующей главе, чтобы узнать больше об обработке данных!")
 ```

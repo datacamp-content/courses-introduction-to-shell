@@ -1,19 +1,19 @@
-title: Introduction to Shell
+title: Введение в Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Командная строка Unix существует уже почти 50 лет — и по-прежнему остаётся
+  незаменимым инструментом, позволяющим решать сложные задачи буквально
+  несколькими нажатиями клавиш. Её нередко называют «универсальным связующим
+  звеном программирования»: она помогает комбинировать существующие программы
+  новыми способами, автоматизировать повторяющиеся задачи и запускать программы
+  на кластерах и в облаке в любой точке мира. В этом курсе вы познакомитесь с
+  ключевыми элементами командной строки и научитесь использовать их эффективно.
 
 
-  The course glossary can be found on the right in the resources section.
+  Глоссарий курса доступен справа в разделе ресурсов.
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  Чтобы получить баллы CPE, необходимо завершить курс и набрать не менее 70% в
+  итоговом тесте. Перейти к тесту можно, нажав на блок CPE credits справа.
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
