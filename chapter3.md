@@ -1,16 +1,17 @@
 ---
-title: Combining tools
+title: Combiner des outils
 description: >-
-  The real power of the Unix shell lies not in the individual commands, but in
-  how easily they can be combined to do new things. This chapter will show you
-  how to use this power to select the data you want, and introduce commands for
-  sorting values and removing duplicates.
+  La véritable puissance de l'invite de commande Unix ne réside pas dans chaque
+  commande prise isolément, mais dans la facilité avec laquelle on peut les
+  combiner pour faire de nouvelles choses. Ce chapitre vous montrera comment
+  exploiter cette puissance pour sélectionner les données voulues et présentera
+  des commandes pour trier des valeurs et supprimer les doublons.
 lessons:
   - nb_of_exercises: 12
-    title: How can I store a command's output in a file?
+    title: Comment enregistrer la sortie d'une commande dans un fichier ?
 ---
 
-## How can I store a command's output in a file?
+## Comment puis-je enregistrer la sortie d'une commande dans un fichier ?
 
 ```yaml
 type: ConsoleExercise
@@ -18,42 +19,42 @@ key: 07a427d50c
 xp: 100
 ```
 
-All of the tools you have seen so far let you name input files.
-Most don't have an option for naming an output file because they don't need one.
-Instead,
-you can use **redirection** to save any command's output anywhere you want.
-If you run this command:
+Tous les outils que vous avez vus jusqu'ici vous permettent de nommer des fichiers d'entrée.
+La plupart n'offrent pas d'option pour nommer un fichier de sortie, parce qu'ils n'en ont pas besoin.
+À la place,
+vous pouvez utiliser la **redirection** pour enregistrer la sortie de n'importe quelle commande où vous voulez.
+Si vous exécutez cette commande :
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-it prints the first 5 lines of the summer data on the screen.
-If you run this command instead:
+elle affiche à l'écran les 5 premières lignes des données d'été.
+Si vous exécutez plutôt cette commande :
 
 ```{shell}
 head -n 5 seasonal/summer.csv > top.csv
 ```
 
-nothing appears on the screen.
-Instead,
-`head`'s output is put in a new file called `top.csv`.
-You can take a look at that file's contents using `cat`:
+rien ne s'affiche à l'écran.
+À la place,
+la sortie de `head` est envoyée dans un nouveau fichier nommé `top.csv`.
+Vous pouvez jeter un coup d'œil au contenu de ce fichier avec `cat` :
 
 ```{shell}
 cat top.csv
 ```
 
-The greater-than sign `>` tells the shell to redirect `head`'s output to a file.
-It isn't part of the `head` command;
-instead,
-it works with every shell command that produces output.
+Le signe supérieur `>` indique à l'interpréteur de commandes de rediriger la sortie de `head` vers un fichier.
+Ce n'est pas une partie de la commande `head` ;
+au contraire,
+il fonctionne avec toute commande de l'interpréteur qui produit une sortie.
 
 `@instructions`
-Combine `tail` with redirection to save the last 5 lines of `seasonal/winter.csv` in a file called `last.csv`.
+Combinez `tail` avec la redirection pour enregistrer les 5 dernières lignes de `seasonal/winter.csv` dans un fichier nommé `last.csv`.
 
 `@hint`
-Use `tail -n 5` to get the last 5 lines.
+Utilisez `tail -n 5` pour récupérer les 5 dernières lignes.
 
 `@pre_exercise_code`
 ```{python}
@@ -67,21 +68,21 @@ tail -n 5 seasonal/winter.csv > last.csv
 
 `@sct`
 ```{python}
-patt = "The line `%s` should be in the file `last.csv`, but it isn't. Redirect the output of `tail -n 5 seasonal/winter.csv` to `last.csv` with `>`."
+patt = "La ligne `%s` devrait être dans le fichier `last.csv`, mais elle ne l'est pas. Redirigez la sortie de `tail -n 5 seasonal/winter.csv` vers `last.csv` avec `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/last.csv').multi(
-        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` has too many lines. Did you use the flag `-n 5` with `tail`?'),
+        check_not(has_code('2017-07-01,incisor'), incorrect_msg='`last.csv` a trop de lignes. Avez-vous utilisé le drapeau `-n 5` avec `tail`?'),
         has_code('2017-07-17,canine', incorrect_msg=patt%'2017-07-17,canine'),
         has_code('2017-08-13,canine', incorrect_msg=patt%'2017-08-13,canine')
     )
 )
-Ex().success_msg("Nice! Let's practice some more!")
+Ex().success_msg("Bien! Pratiquons encore un peu!")
 ```
 
 ---
 
-## How can I use a command's output as an input?
+## Comment puis-je utiliser la sortie d'une commande comme entrée?
 
 ```yaml
 type: BulletConsoleExercise
@@ -89,20 +90,20 @@ key: f47d337593
 xp: 100
 ```
 
-Suppose you want to get lines from the middle of a file.
-More specifically,
-suppose you want to get lines 3-5 from one of our data files.
-You can start by using `head` to get the first 5 lines
-and redirect that to a file,
-and then use `tail` to select the last 3:
+Supposons que vous vouliez extraire des lignes au milieu d'un fichier.
+Plus précisément,
+supposons que vous vouliez obtenir les lignes 3 à 5 d'un de nos fichiers de données.
+Vous pouvez commencer par utiliser `head` pour obtenir les 5 premières lignes,
+rediriger le tout vers un fichier,
+puis utiliser `tail` pour sélectionner les 3 dernières :
 
 ```{shell}
 head -n 5 seasonal/winter.csv > top.csv
 tail -n 3 top.csv
 ```
 
-A quick check confirms that this is lines 3-5 of our original file,
-because it is the last 3 lines of the first 5.
+Une vérification rapide confirme qu'il s'agit bien des lignes 3 à 5 de notre fichier original,
+car ce sont les 3 dernières lignes des 5 premières.
 
 `@pre_exercise_code`
 ```{python}
@@ -118,11 +119,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the last two lines from `seasonal/winter.csv`
-and save them in a file called `bottom.csv`.
+Sélectionnez les deux dernières lignes de `seasonal/winter.csv`
+et enregistrez-les dans un fichier nommé `bottom.csv`.
 
 `@hint`
-Use `tail` to select lines and `>` to redirect `tail`'s output.
+Utilisez `tail` pour sélectionner des lignes et `>` pour rediriger la sortie de `tail`.
 
 `@solution`
 ```{shell}
@@ -132,16 +133,15 @@ tail -n 2 seasonal/winter.csv > bottom.csv
 
 `@sct`
 ```{python}
-patt="The line `%s` should be in the file `bottom.csv`, but it isn't. Redirect the output of `tail -n 2 seasonal/winter.csv` to `bottom.csv` with `>`."
+patt="La ligne `%s` devrait être dans le fichier `bottom.csv`, mais elle ne l'est pas. Redirigez la sortie de `tail -n 2 seasonal/winter.csv` vers `bottom.csv` avec `>`."
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/bottom.csv').multi(
-        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` has too many lines. Did you use the flag `-n 2` with `tail`?'),
+        check_not(has_code('2017-08-11,bicuspid'), incorrect_msg = '`bottom.csv` a trop de lignes. Avez-vous utilisé le drapeau `-n 2` avec `tail`?'),
         has_code('2017-08-11,wisdom', incorrect_msg=patt%"2017-08-11,wisdom"),
         has_code('2017-08-13,canine', incorrect_msg=patt%"2017-08-13,canine")
     )
 )
-
 ```
 
 ***
@@ -153,11 +153,11 @@ xp: 50
 ```
 
 `@instructions`
-Select the first line from `bottom.csv`
-in order to get the second-to-last line of the original file.
+Sélectionnez la première ligne de `bottom.csv`
+afin d'obtenir l'avant-dernière ligne du fichier original.
 
 `@hint`
-Use `head` to select the line you want.
+Utilisez `head` pour sélectionner la ligne voulue.
 
 `@solution`
 ```{shell}
@@ -169,17 +169,17 @@ head -n 1 bottom.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="There's something wrong with the `bottom.csv` file. Make sure you don't change it!"),
-    has_expr_output(strict=True, incorrect_msg="Have you used `head` correctly on `bottom.csv`? Make sure to use the `-n` flag correctly.")
+    check_file('/home/repl/bottom.csv').has_code('2017-08-11,wisdom', incorrect_msg="Il y a quelque chose qui ne va pas avec le fichier `bottom.csv`. Assurez-vous de ne pas le modifier !"),
+    has_expr_output(strict=True, incorrect_msg="Avez-vous utilisé `head` correctement sur `bottom.csv` ? Assurez-vous d'utiliser correctement le drapeau `-n`.")
 )
 
-Ex().success_msg("Well done. Head over to the next exercise to find out about better ways to combine commands.")                             
+Ex().success_msg("Bien joué. Passez à l'exercice suivant pour découvrir de meilleures façons de combiner les commandes.")                             
 
 ```
 
 ---
 
-## What's a better way to combine commands?
+## Quelle est une meilleure façon de combiner des commandes ?
 
 ```yaml
 type: ConsoleExercise
@@ -187,35 +187,35 @@ key: b36aea9a1e
 xp: 100
 ```
 
-Using redirection to combine commands has two drawbacks:
+Utiliser la redirection pour combiner des commandes a deux inconvénients :
 
-1. It leaves a lot of intermediate files lying around (like `top.csv`).
-2. The commands to produce your final result are scattered across several lines of history.
+1. Cela laisse traîner beaucoup de fichiers intermédiaires (comme `top.csv`).
+2. Les commandes pour produire votre résultat final se retrouvent éparpillées sur plusieurs lignes d'historique.
 
-The shell provides another tool that solves both of these problems at once called a **pipe**.
-Once again,
-start by running `head`:
+L'interpréteur de commandes offre un autre outil qui règle ces deux problèmes à la fois : le **tube** (pipe).
+Encore une fois,
+commencez par exécuter `head` :
 
 ```{shell}
 head -n 5 seasonal/summer.csv
 ```
 
-Instead of sending `head`'s output to a file,
-add a vertical bar and the `tail` command *without* a filename:
+Au lieu d'envoyer la sortie de `head` vers un fichier,
+ajoutez une barre verticale et la commande `tail` *sans* nom de fichier :
 
 ```{shell}
 head -n 5 seasonal/summer.csv | tail -n 3
 ```
 
-The pipe symbol tells the shell to use the output of the command on the left
-as the input to the command on the right.
+Le symbole du tube indique à l'interpréteur d'utiliser la sortie de la commande à gauche
+comme entrée de la commande à droite.
 
 `@instructions`
-Use `cut` to select all of the tooth names from column 2 of the comma delimited file `seasonal/summer.csv`, then pipe the result to `grep`, with an inverted match, to exclude the header line containing the word "Tooth". *`cut` and `grep` were covered in detail in Chapter 2, exercises 8 and 11 respectively.*
+Utilisez `cut` pour sélectionner tous les noms de dents à partir de la colonne 2 du fichier délimité par des virgules `seasonal/summer.csv`, puis acheminez le résultat vers `grep`, avec une correspondance inversée, pour exclure la ligne d'en-tête contenant le mot "Tooth". *`cut` et `grep` ont été abordés en détail au chapitre 2, exercices 8 et 11 respectivement.*
 
 `@hint`
-- The first part of the command takes the form `cut -d field_delimiter -f column_number filename`.
-- The second part of the command takes the form `grep -v thing_to_match`.
+- La première partie de la commande a la forme `cut -d délimiteur_de_champ -f numéro_de_colonne nom_de_fichier`.
+- La deuxième partie de la commande a la forme `grep -v élément_à_retrouver`.
 
 `@pre_exercise_code`
 ```{python}
@@ -231,15 +231,15 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = 'Have you piped the result of `cut -d , -f 2 seasonal/summer.csv` into `grep -v Tooth` with `|`?'),
-    check_not(has_output("Tooth"), incorrect_msg = 'Did you exclude the `"Tooth"` header line using `grep`?')
+    has_expr_output(incorrect_msg = 'Avez-vous redirigé le résultat de `cut -d , -f 2 seasonal/summer.csv` dans `grep -v Tooth` avec `|` ?'),
+    check_not(has_output("Tooth"), incorrect_msg = 'Avez-vous exclu la ligne d\'en-tête `"Tooth"` en utilisant `grep` ?')
 )
-Ex().success_msg("Perfect piping! This may be the first time you used `|`, but it's definitely not the last!")
+Ex().success_msg("Parfait enchaînement ! C'est peut-être la première fois que vous utilisez `|`, mais ce ne sera certainement pas la dernière !")
 ```
 
 ---
 
-## How can I combine many commands?
+## Comment puis-je combiner plusieurs commandes?
 
 ```yaml
 type: ConsoleExercise
@@ -247,31 +247,31 @@ key: b8753881d6
 xp: 100
 ```
 
-You can chain any number of commands together.
-For example,
-this command:
+Vous pouvez enchaîner autant de commandes que vous voulez.
+Par exemple,
+cette commande :
 
 ```{shell}
 cut -d , -f 1 seasonal/spring.csv | grep -v Date | head -n 10
 ```
 
-will:
+va :
 
-1. select the first column from the spring data;
-2. remove the header line containing the word "Date"; and
-3. select the first 10 lines of actual data.
+1. sélectionner la première colonne des données de printemps ;
+2. retirer la ligne d'en-tête qui contient le mot « Date » ;
+3. sélectionner les 10 premières lignes de données réelles.
 
 `@instructions`
-In the previous exercise, you used the following command to select all the tooth names from column 2 of `seasonal/summer.csv`:
+Dans l'exercice précédent, vous avez utilisé la commande suivante pour sélectionner tous les noms de dents depuis la colonne 2 de `seasonal/summer.csv` :
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Extend this pipeline with a `head` command to only select the very first tooth name.
+Prolongez ce traitement en ajoutant une commande `head` pour ne sélectionner que tout premier nom de dent.
 
 `@hint`
-Copy and paste the code in the instructions, append a pipe, then call `head` with the `-n` flag.
+Copiez-collez le code des instructions, ajoutez un tuyau (pipe), puis exécutez `head` avec l'option `-n`.
 
 `@pre_exercise_code`
 ```{python}
@@ -288,16 +288,16 @@ cut -d , -f 2 seasonal/summer.csv | grep -v Tooth | head -n 1
 Ex().multi(
     has_cwd('/home/repl'),
     # for some reason has_expr_output with strict=True does not work here...
-    has_output('^\s*canine\s*$', incorrect_msg = "Have you used `|` to extend the pipeline with a `head` command? Make sure to set the `-n` flag correctly."),
+    has_output('^\s*canine\s*$', incorrect_msg = "Avez-vous utilisé `|` pour étendre le pipeline avec une commande `head` ? Assurez-vous de définir correctement le drapeau `-n`."),
     # by coincidence, tail -n 1 returns the same as head -n 1, so check that head was called
-    has_code("head", "Have you used `|` to extend the pipeline with a `head` command?")
+    has_code("head", "Avez-vous utilisé `|` pour étendre le pipeline avec une commande `head` ?")
 )
-Ex().success_msg("Cheerful chaining! By chaining several commands together, you can build powerful data manipulation pipelines.")
+Ex().success_msg("Chaînage joyeux ! En enchaînant plusieurs commandes ensemble, vous pouvez construire des pipelines puissants de manipulation de données.")
 ```
 
 ---
 
-## How can I count the records in a file?
+## Comment puis-je compter les enregistrements dans un fichier ?
 
 ```yaml
 type: ConsoleExercise
@@ -305,17 +305,17 @@ key: ae6a48d6aa
 xp: 100
 ```
 
-The command `wc` (short for "word count") prints the number of **c**haracters, **w**ords, and **l**ines in a file.
-You can make it print only one of these using `-c`, `-w`, or `-l` respectively.
+La commande `wc` (pour « word count ») affiche le nombre de **c**aractères, de **m**ots et de **l**ignes dans un fichier.
+Vous pouvez lui demander d'afficher seulement l'un de ces nombres avec respectivement `-c`, `-w` ou `-l`.
 
 `@instructions`
-Count how many records in `seasonal/spring.csv` have dates in July 2017 (`2017-07`). 
-- To do this, use `grep` with a partial date to select the lines and pipe this result into `wc` with an appropriate flag to count the lines.
+Comptez combien d'enregistrements dans `seasonal/spring.csv` ont des dates en juillet 2017 (`2017-07`). 
+- Pour ce faire, utilisez `grep` avec une date partielle pour sélectionner les lignes, puis transférez ce résultat vers `wc` à l'aide d'un tuyau et de l'option appropriée pour compter les lignes.
 
 `@hint`
-- Use `head seasonal/spring.csv` to remind yourself of the date format.
-- The first part of the command takes the form `grep thing_to_match filename`.
-- After the pipe, `|`, call `wc` with the `-l` flag.
+- Utilisez `head seasonal/spring.csv` pour vous rappeler le format de date.
+- La première partie de la commande suit la forme `grep element_a_rechercher nom_de_fichier`.
+- Après le tuyau, `|`, appelez `wc` avec l'option `-l`.
 
 `@pre_exercise_code`
 ```{python}
@@ -334,21 +334,21 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("2017-07", incorrect_msg = "Did you search for `2017-07`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe to `wc` using `|`?"),      
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count lines with `-l`?")
+      has_code("grep", incorrect_msg = "Avez-vous appelé `grep` ?"),
+      has_code("2017-07", incorrect_msg = "Avez-vous recherché `2017-07` ?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "Avez-vous recherché dans le fichier `seasonal/spring.csv` ?"),
+      has_code("|", incorrect_msg = "Avez-vous utilisé un pipe vers `wc` avec `|` ?"),      
+      has_code("wc", incorrect_msg = "Avez-vous appelé `wc` ?"),
+      has_code("-l", incorrect_msg = "Avez-vous compté les lignes avec `-l` ?")
     )
   )
 )
-Ex().success_msg("Careful counting! Determining how much data you have is a great first step in any data analysis.")
+Ex().success_msg("Comptage minutieux ! Déterminer la quantité de données que vous avez est une excellente première étape dans toute analyse de données.")
 ```
 
 ---
 
-## How can I specify many files at once?
+## Comment puis-je indiquer plusieurs fichiers à la fois?
 
 ```yaml
 type: ConsoleExercise
@@ -356,41 +356,41 @@ key: 602d47e70c
 xp: 100
 ```
 
-Most shell commands will work on multiple files if you give them multiple filenames.
-For example,
-you can get the first column from all of the seasonal data files at once like this:
+La plupart des commandes du shell fonctionnent sur plusieurs fichiers si vous leur fournissez plusieurs noms de fichier.
+Par exemple,
+vous pouvez obtenir la première colonne de tous les fichiers de données saisonniers en une seule fois comme ceci :
 
 ```{shell}
 cut -d , -f 1 seasonal/winter.csv seasonal/spring.csv seasonal/summer.csv seasonal/autumn.csv
 ```
 
-But typing the names of many files over and over is a bad idea:
-it wastes time,
-and sooner or later you will either leave a file out or repeat a file's name.
-To make your life better,
-the shell allows you to use **wildcards** to specify a list of files with a single expression.
-The most common wildcard is `*`,
-which means "match zero or more characters".
-Using it,
-we can shorten the `cut` command above to this:
+Mais retaper les noms de nombreux fichiers encore et encore n'est pas une bonne idée :
+cela fait perdre du temps
+et tôt ou tard, vous allez soit en oublier un, soit répéter le nom d'un fichier.
+Pour vous simplifier la vie,
+le shell vous permet d'utiliser des **caractères génériques** pour indiquer une liste de fichiers avec une seule expression.
+Le caractère générique le plus courant est `*`,
+qui signifie « faire correspondre zéro caractère ou plus ».
+En l'utilisant,
+nous pouvons raccourcir la commande `cut` ci‑dessus ainsi :
 
 ```{shell}
 cut -d , -f 1 seasonal/*
 ```
 
-or:
+ou :
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
 `@instructions`
-Write a single command using `head` to get the first three lines from both `seasonal/spring.csv` and `seasonal/summer.csv`, a total of six lines of data, but *not* from the autumn or winter data files.
-Use a wildcard instead of spelling out the files' names in full.
+Écrivez une seule commande avec `head` pour obtenir les trois premières lignes de `seasonal/spring.csv` et de `seasonal/summer.csv`, soit un total de six lignes de données, mais pas celles des fichiers d'automne ou d'hiver.
+Utilisez un caractère générique plutôt que d'écrire les noms des fichiers au complet.
 
 `@hint`
-- The command takes the form `head -n number_of_lines filename_pattern`.
-- You could match files in directory `a`, starting with `b`, using `a/b*`, for example.
+- La commande a la forme `head -n number_of_lines filename_pattern`.
+- Vous pouvez faire correspondre des fichiers dans le répertoire `a` qui commencent par `b` en utilisant, par exemple, `a/b*`.
 
 `@pre_exercise_code`
 ```{python}
@@ -406,16 +406,16 @@ head -n 3 seasonal/s* # ...or seasonal/s*.csv, or even s*/s*.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg = "You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`. Make sure to only include the first three lines of each file with the `-n` flag!"),
-    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "Don't include the output for `seasonal/autumn.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`"),
-    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "Don't include the output for `seasonal/winter.csv`. You can use `seasonal/s*` to select `seasonal/spring.csv` and `seasonal/summer.csv`")
+    has_expr_output(incorrect_msg = "Vous pouvez utiliser `seasonal/s*` pour sélectionner `seasonal/spring.csv` et `seasonal/summer.csv`. Assurez-vous d'inclure uniquement les trois premières lignes de chaque fichier avec le drapeau `-n` !"),
+    check_not(has_output('==> seasonal/autumn.csv <=='), incorrect_msg = "N'incluez pas la sortie pour `seasonal/autumn.csv`. Vous pouvez utiliser `seasonal/s*` pour sélectionner `seasonal/spring.csv` et `seasonal/summer.csv`"),
+    check_not(has_output('==> seasonal/winter.csv <=='), incorrect_msg = "N'incluez pas la sortie pour `seasonal/winter.csv`. Vous pouvez utiliser `seasonal/s*` pour sélectionner `seasonal/spring.csv` et `seasonal/summer.csv`")
 )
-Ex().success_msg("Wild wildcard work! This becomes even more important if your directory contains hundreds or thousands of files.")
+Ex().success_msg("Travail de joker sauvage ! Cela devient encore plus important si votre répertoire contient des centaines ou des milliers de fichiers.")
 ```
 
 ---
 
-## What other wildcards can I use?
+## Quels autres caractères génériques puis-je utiliser?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -423,19 +423,19 @@ key: f8feeacd8c
 xp: 50
 ```
 
-The shell has other wildcards as well,
-though they are less commonly used:
+L'interpréteur de commandes propose aussi d'autres caractères génériques,
+bien qu'ils soient moins utilisés :
 
-- `?` matches a single character, so `201?.txt` will match `2017.txt` or `2018.txt`, but not `2017-01.txt`.
-- `[...]` matches any one of the characters inside the square brackets, so `201[78].txt` matches `2017.txt` or `2018.txt`, but not `2016.txt`.
-- `{...}` matches any of the comma-separated patterns inside the curly brackets, so `{*.txt, *.csv}` matches any file whose name ends with `.txt` or `.csv`, but not files whose names end with `.pdf`.
+- `?` correspond à un seul caractère, donc `201?.txt` fera correspondre `2017.txt` ou `2018.txt`, mais pas `2017-01.txt`.
+- `[...]` correspond à l'un des caractères entre crochets, donc `201[78].txt` correspond à `2017.txt` ou `2018.txt`, mais pas à `2016.txt`.
+- `{...}` correspond à l'un des motifs séparés par des virgules entre accolades, donc `{*.txt, *.csv}` correspond à tout fichier dont le nom se termine par `.txt` ou `.csv`, mais pas aux fichiers dont le nom se termine par `.pdf`.
 
 <hr/>
 
-Which expression would match `singh.pdf` and `johel.txt` but *not* `sandhu.pdf` or `sandhu.txt`?
+Laquelle de ces expressions ferait correspondre `singh.pdf` et `johel.txt` mais pas `sandhu.pdf` ni `sandhu.txt`?
 
 `@hint`
-Match each expression against each filename in turn.
+Faites correspondre chaque expression à chaque nom de fichier, l'un après l'autre.
 
 `@possible_answers`
 - `[sj]*.{.pdf, .txt}`
@@ -444,14 +444,14 @@ Match each expression against each filename in turn.
 - [`{singh.pdf, j*.txt}`]
 
 `@feedback`
-- No: `.pdf` and `.txt` are not filenames.
-- No: this will match `sandhu.pdf`.
-- No: the expression in square brackets matches only one character, not entire words.
+- Non : `.pdf` et `.txt` ne sont pas des noms de fichiers.
+- Non : cela fera correspondre `sandhu.pdf`.
+- Non : l'expression entre crochets correspond à un seul caractère, pas à des mots entiers.
 - Correct!
 
 ---
 
-## How can I sort lines of text?
+## Comment trier des lignes de texte?
 
 ```yaml
 type: ConsoleExercise
@@ -459,26 +459,26 @@ key: f06d9e310e
 xp: 100
 ```
 
-As its name suggests,
-`sort` puts data in order.
-By default it does this in ascending alphabetical order,
-but the flags `-n` and `-r` can be used to sort numerically and reverse the order of its output,
-while `-b` tells it to ignore leading blanks
-and `-f` tells it to **f**old case (i.e., be case-insensitive).
-Pipelines often use `grep` to get rid of unwanted records
-and then `sort` to put the remaining records in order.
+Comme son nom l'indique,
+`sort` met les données en ordre.
+Par défaut, il le fait en ordre alphabétique croissant,
+mais les options `-n` et `-r` permettent de trier numériquement et d'inverser l'ordre de la sortie,
+alors que `-b` lui indique d'ignorer les blancs initiaux
+et `-f` lui indique de neutraliser la casse (c.-à-d. ignorer les majuscules/minuscules).
+Les pipelines utilisent souvent `grep` pour éliminer les enregistrements indésirables,
+puis `sort` pour mettre en ordre ceux qui restent.
 
 `@instructions`
-Remember the combination of `cut` and `grep` to select all the tooth names from column 2 of `seasonal/summer.csv`?
+Vous vous rappelez de la combinaison de `cut` et `grep` pour sélectionner tous les noms de dents de la colonne 2 de `seasonal/summer.csv`?
 
 ```
 cut -d , -f 2 seasonal/summer.csv | grep -v Tooth
 ```
 
-Starting from this recipe, sort the names of the teeth in `seasonal/winter.csv` (not `summer.csv`) in descending alphabetical order. To do this, extend the pipeline with a `sort` step.
+En partant de cette « recette », triez les noms de dents dans `seasonal/winter.csv` (et non `summer.csv`) en ordre alphabétique décroissant. Pour ce faire, prolongez le pipeline avec une étape `sort`.
 
 `@hint`
-Copy and paste the command in the instructions, change the filename, append a pipe, then call `sort` with the `-r` flag.
+Copiez-collez la commande des instructions, changez le nom de fichier, ajoutez un tuyau, puis appelez `sort` avec l'option `-r`.
 
 `@pre_exercise_code`
 ```{python}
@@ -497,24 +497,24 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("cut", incorrect_msg = "Did you call `cut`?"),
-      has_code("-d", incorrect_msg = "Did you specify a field delimiter with `-d`?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you get data from the `seasonal/winter.csv` file?"),
-      has_code("|", incorrect_msg = "Did you pipe from `cut` to `grep` to `sort` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("Tooth", incorrect_msg = "Did you search for `Tooth`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-r", incorrect_msg = "Did you reverse the sort order with `-r`?")
+      has_code("cut", incorrect_msg = "Avez-vous appelé `cut` ?"),
+      has_code("-d", incorrect_msg = "Avez-vous spécifié un délimiteur de champ avec `-d` ?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "Avez-vous obtenu des données du fichier `seasonal/winter.csv` ?"),
+      has_code("|", incorrect_msg = "Avez-vous utilisé un pipe de `cut` à `grep` à `sort` en utilisant `|` ?"),      
+      has_code("grep", incorrect_msg = "Avez-vous appelé `grep` ?"),
+      has_code("-v", incorrect_msg = "Avez-vous inversé la correspondance avec `-v` ?"),
+      has_code("Tooth", incorrect_msg = "Avez-vous recherché `Tooth` ?"),
+      has_code("sort", incorrect_msg = "Avez-vous appelé `sort` ?"),
+      has_code("-r", incorrect_msg = "Avez-vous inversé l'ordre de tri avec `-r` ?")
     )
   )
 )
-Ex().success_msg("Sorted! `sort` has many uses. For example, piping `sort -n` to `head` shows you the largest values.")
+Ex().success_msg("Trié ! `sort` a de nombreuses utilisations. Par exemple, en utilisant un pipe de `sort -n` à `head`, vous affichez les plus grandes valeurs.")
 ```
 
 ---
 
-## How can I remove duplicate lines?
+## Comment puis-je enlever les lignes en double ?
 
 ```yaml
 type: ConsoleExercise
@@ -522,11 +522,11 @@ key: ed77aed337
 xp: 100
 ```
 
-Another command that is often used with `sort` is `uniq`,
-whose job is to remove duplicated lines.
-More specifically,
-it removes *adjacent* duplicated lines.
-If a file contains:
+Une autre commande souvent utilisée avec `sort` est `uniq`,
+dont le rôle est d'enlever les lignes dupliquées.
+Plus précisément,
+elle enlève les lignes en double qui sont *adjacentes*.
+Si un fichier contient :
 
 ```
 2017-07-03
@@ -535,14 +535,14 @@ If a file contains:
 2017-08-03
 ```
 
-then `uniq` will produce:
+alors `uniq` produira :
 
 ```
 2017-07-03
 2017-08-03
 ```
 
-but if it contains:
+mais s'il contient :
 
 ```
 2017-07-03
@@ -551,33 +551,33 @@ but if it contains:
 2017-08-03
 ```
 
-then `uniq` will print all four lines.
-The reason is that `uniq` is built to work with very large files.
-In order to remove non-adjacent lines from a file,
-it would have to keep the whole file in memory
-(or at least,
-all the unique lines seen so far).
-By only removing adjacent duplicates,
-it only has to keep the most recent unique line in memory.
+alors `uniq` affichera les quatre lignes.
+La raison est que `uniq` est conçu pour fonctionner avec des fichiers très volumineux.
+Pour enlever des lignes non adjacentes d'un fichier,
+il devrait garder tout le fichier en mémoire
+(ou du moins
+toutes les lignes uniques vues jusqu'à présent).
+En ne retirant que les doublons adjacents,
+il n'a qu'à conserver en mémoire la ligne unique la plus récente.
 
 `@instructions`
-Write a pipeline to:
+Écrivez un enchaînement de commandes pour :
 
-- get the second column from `seasonal/winter.csv`,
-- remove the word "Tooth" from the output so that only tooth names are displayed,
-- sort the output so that all occurrences of a particular tooth name are adjacent; and
-- display each tooth name once along with a count of how often it occurs.
+- extraire la deuxième colonne de `seasonal/winter.csv`,
+- enlever le mot « Tooth » de la sortie afin que seuls les noms de dents soient affichés,
+- trier la sortie de façon à regrouper toutes les occurrences d'un même nom de dent ; et
+- afficher chaque nom de dent une seule fois avec le nombre de fois où il apparaît.
 
-The start of your pipeline is the same as the previous exercise:
+Le début de votre tuyauterie est le même que dans l'exercice précédent :
 
 ```
 cut -d , -f 2 seasonal/winter.csv | grep -v Tooth
 ```
 
-Extend it with a `sort` command, and use `uniq -c` to display unique lines with a count of how often each occurs rather than using `uniq` and `wc`.
+Complétez-la avec une commande `sort`, et utilisez `uniq -c` pour afficher les lignes uniques avec un compteur du nombre d'occurrences de chacune, plutôt que d'utiliser `uniq` et `wc`.
 
 `@hint`
-Copy and paste the command in the instructions, pipe to `sort` without flags, then pipe again to `uniq` with a `-c` flag.
+Copiez-collez la commande des instructions, envoyez-la avec un tuyau vers `sort` sans indicateurs, puis à nouveau vers `uniq` avec l'indicateur `-c`.
 
 `@pre_exercise_code`
 ```{python}
@@ -597,19 +597,19 @@ Ex().multi(
         has_expr_output(),
         multi(
             has_code('cut\s+-d\s+,\s+-f\s+2\s+seasonal/winter.csv\s+\|\s+grep\s+-v\s+Tooth',
-                     incorrect_msg="You should start from this command: `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Now extend it!"),
-            has_code('\|\s+sort', incorrect_msg="Have you extended the command with `| sort`?"),
-            has_code('\|\s+uniq', incorrect_msg="Have you extended the command with `| uniq`?"),
-            has_code('-c', incorrect_msg="Have you included counts with `-c`?")
+                     incorrect_msg="Vous devriez commencer par cette commande : `cut -d , -f 2 seasonal/winter.csv | grep -v Tooth`. Maintenant, étendez-la !"),
+            has_code('\|\s+sort', incorrect_msg="Avez-vous étendu la commande avec `| sort` ?"),
+            has_code('\|\s+uniq', incorrect_msg="Avez-vous étendu la commande avec `| uniq` ?"),
+            has_code('-c', incorrect_msg="Avez-vous inclus les comptes avec `-c` ?")
         )
     )
 )
-Ex().success_msg("Great! After all of this work on a pipe, it would be nice if we could store the result, no?")
+Ex().success_msg("Super ! Après tout ce travail sur un pipe, ce serait bien si nous pouvions stocker le résultat, non ?")
 ```
 
 ---
 
-## How can I save the output of a pipe?
+## Comment puis-je enregistrer la sortie d'un tuyau (pipe) ?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -617,38 +617,38 @@ key: 4115aa25b2
 xp: 50
 ```
 
-The shell lets us redirect the output of a sequence of piped commands:
+Le shell nous permet de rediriger la sortie d'une séquence de commandes enchaînées par un tuyau :
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv | grep -v Tooth > teeth-only.txt
 ```
 
-However, `>` must appear at the end of the pipeline:
-if we try to use it in the middle, like this:
+Cependant, `>` doit apparaître à la fin du pipeline :
+si nous essayons de l'utiliser au milieu, comme ceci :
 
 ```{shell}
 cut -d , -f 2 seasonal/*.csv > teeth-only.txt | grep -v Tooth
 ```
 
-then all of the output from `cut` is written to `teeth-only.txt`,
-so there is nothing left for `grep`
-and it waits forever for some input.
+alors toute la sortie de `cut` est écrite dans `teeth-only.txt`,
+il ne reste donc rien pour `grep`,
+et celui-ci attend indéfiniment une entrée.
 
 <hr>
 
-What happens if we put redirection at the front of a pipeline as in:
+Que se passe-t-il si nous plaçons la redirection au début d'un pipeline, comme dans :
 
 ```{shell}
 > result.txt head -n 3 seasonal/winter.csv
 ```
 
 `@possible_answers`
-- [The command's output is redirected to the file as usual.]
-- The shell reports it as an error.
-- The shell waits for input forever.
+- [La sortie de la commande est redirigée vers le fichier comme d'habitude.]
+- Le shell signale une erreur.
+- Le shell attend indéfiniment une entrée.
 
 `@hint`
-Try it out in the shell.
+Essayez-le dans le shell.
 
 `@pre_exercise_code`
 ```{python}
@@ -657,12 +657,12 @@ Try it out in the shell.
 
 `@sct`
 ```{python}
-Ex().has_chosen(1, ['Correct!', 'No; the shell can actually execute this.', 'No; the shell can actually execute this.'])
+Ex().has_chosen(1, ['Correct!', 'Non; le shell peut en fait exécuter cela.', 'Non; le shell peut en fait exécuter cela.'])
 ```
 
 ---
 
-## How can I stop a running program?
+## Comment puis-je arrêter un programme en cours d'exécution ?
 
 ```yaml
 type: ConsoleExercise
@@ -670,27 +670,27 @@ key: d1694dbdcd
 xp: 100
 ```
 
-The commands and scripts that you have run so far have all executed quickly,
-but some tasks will take minutes, hours, or even days to complete.
-You may also mistakenly put redirection in the middle of a pipeline,
-causing it to hang up.
-If you decide that you don't want a program to keep running,
-you can type `Ctrl` + `C` to end it.
-This is often written `^C` in Unix documentation;
-note that the 'c' can be lower-case.
+Les commandes et scripts que vous avez exécutés jusqu'ici se sont tous terminés rapidement,
+mais certaines tâches peuvent prendre des minutes, des heures, voire des jours.
+Il peut aussi arriver de placer par erreur une redirection au milieu d'un enchaînement de commandes (pipeline),
+ce qui peut le faire bloquer.
+Si vous décidez qu'un programme ne devrait plus continuer à s'exécuter,
+vous pouvez taper `Ctrl` + `C` pour y mettre fin.
+On écrit souvent `^C` dans la documentation Unix ;
+notez que le « c » peut être en minuscule.
 
 `@instructions`
-Run the command:
+Exécutez la commande :
 
 ```{shell}
 head
 ```
 
-with no arguments (so that it waits for input that will never come)
-and then stop it by typing `Ctrl` + `C`.
+sans argument (de façon à ce qu'elle attende une entrée qui ne viendra jamais),
+puis arrêtez-la en tapant `Ctrl` + `C`.
 
 `@hint`
-Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
+Tapez simplement head, appuyez sur Entrée, puis quittez le programme en cours avec `Ctrl` + `C`.
 
 `@pre_exercise_code`
 ```{python}
@@ -704,12 +704,12 @@ Simply type head, hit Enter and exit the running program with `Ctrl` + `C`.
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Have you used `head`?")
+Ex().has_code(r'\s*head\s*', fixed=False, incorrect_msg="Avez-vous utilisé `head` ?")
 ```
 
 ---
 
-## Wrapping up
+## Pour conclure
 
 ```yaml
 type: BulletConsoleExercise
@@ -717,8 +717,8 @@ key: 659d3caa48
 xp: 100
 ```
 
-To wrap up,
-you will build a pipeline to find out how many records are in the shortest of the seasonal data files.
+Pour terminer,
+vous allez créer un enchaînement de commandes (pipeline) pour déterminer combien d'enregistrements se trouvent dans le plus court des fichiers de données saisonniers.
 
 `@pre_exercise_code`
 ```{python}
@@ -734,11 +734,11 @@ xp: 35
 ```
 
 `@instructions`
-Use `wc` with appropriate parameters to list the number of lines in all of the seasonal data files.
-(Use a wildcard for the filenames instead of typing them all in by hand.)
+Utilisez `wc` avec les paramètres appropriés pour afficher le nombre de lignes dans tous les fichiers de données saisonniers.
+(Utilisez un caractère générique pour les noms de fichiers au lieu de les taper un par un.)
 
 `@hint`
-Use `-l` to list only the lines and `*` to match filenames.
+Utilisez `-l` pour n'afficher que le nombre de lignes et `*` pour faire correspondre les noms de fichiers.
 
 `@solution`
 ```{shell}
@@ -753,9 +753,9 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?")
+      has_code("wc", incorrect_msg = "Avez-vous appelé `wc` ?"),
+      has_code("-l", incorrect_msg = "Avez-vous compté le nombre de lignes avec `-l` ?"),
+      has_code("seasonal/\*", incorrect_msg = "Avez-vous obtenu des données de tous les fichiers `seasonal/*` ?")
     )
   )
 )
@@ -771,7 +771,7 @@ xp: 35
 ```
 
 `@instructions`
-Add another command to the previous one using a pipe to remove the line containing the word "total".
+Ajoutez une autre commande à la précédente au moyen d'un tuyau (pipe) pour retirer la ligne contenant le mot « total ».
 
 `@hint`
 
@@ -789,13 +789,13 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?")
+      has_code("wc", incorrect_msg = "Avez-vous appelé `wc` ?"),
+      has_code("-l", incorrect_msg = "Avez-vous compté le nombre de lignes avec `-l` ?"),
+      has_code("seasonal/\*", incorrect_msg = "Avez-vous obtenu des données de tous les fichiers `seasonal/*` ?"),
+      has_code("|", incorrect_msg = "Avez-vous utilisé un pipe de `wc` à `grep` en utilisant `|` ?"),      
+      has_code("grep", incorrect_msg = "Avez-vous appelé `grep` ?"),
+      has_code("-v", incorrect_msg = "Avez-vous inversé la correspondance avec `-v` ?"),
+      has_code("total", incorrect_msg = "Avez-vous recherché `total` ?")
     )
   )
 )
@@ -811,11 +811,11 @@ xp: 30
 ```
 
 `@instructions`
-Add two more stages to the pipeline that use `sort -n` and `head -n 1` to find the file containing the fewest lines.
+Ajoutez deux autres étapes au pipeline qui utilisent `sort -n` et `head -n 1` pour trouver le fichier contenant le moins de lignes.
 
 `@hint`
-- Use `sort`'s `-n` flag to sort numerically.
-- Use `head`'s `-n` flag to limit to keeping 1 line.
+- Utilisez l'option `-n` de `sort` pour trier numériquement.
+- Utilisez l'option `-n` de `head` pour limiter la sortie à 1 ligne.
 
 `@solution`
 ```{shell}
@@ -830,19 +830,18 @@ Ex().multi(
   check_correct(
     has_expr_output(strict=True),
     multi(
-      has_code("wc", incorrect_msg = "Did you call `wc`?"),
-      has_code("-l", incorrect_msg = "Did you count the number of lines with `-l`?"),
-      has_code("seasonal/\*", incorrect_msg = "Did you get data from all `seasonal/*` files?"),
-      has_code("|", incorrect_msg = "Did you pipe from `wc` to `grep` to `sort` to `head` using `|`?"),      
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("total", incorrect_msg = "Did you search for `total`?"),
-      has_code("sort", incorrect_msg = "Did you call `sort`?"),
-      has_code("-n", incorrect_msg = "Did you specify the number of lines to keep with `-n`?"),
-      has_code("1", incorrect_msg = "Did you specify 1 line to keep with `-n 1`?")
+      has_code("wc", incorrect_msg = "Avez-vous appelé `wc` ?"),
+      has_code("-l", incorrect_msg = "Avez-vous compté le nombre de lignes avec `-l` ?"),
+      has_code("seasonal/\*", incorrect_msg = "Avez-vous obtenu des données de tous les fichiers `seasonal/*` ?"),
+      has_code("|", incorrect_msg = "Avez-vous utilisé `|` pour enchaîner `wc`, `grep`, `sort` et `head` ?"),      
+      has_code("grep", incorrect_msg = "Avez-vous appelé `grep` ?"),
+      has_code("-v", incorrect_msg = "Avez-vous inversé la correspondance avec `-v` ?"),
+      has_code("total", incorrect_msg = "Avez-vous recherché `total` ?"),
+      has_code("sort", incorrect_msg = "Avez-vous appelé `sort` ?"),
+      has_code("-n", incorrect_msg = "Avez-vous spécifié le nombre de lignes à conserver avec `-n` ?"),
+      has_code("1", incorrect_msg = "Avez-vous spécifié 1 ligne à conserver avec `-n 1` ?")
     )
   )
 )
-Ex().success_msg("Great! It turns out `autumn.csv` is the file with the fewest lines. Rush over to chapter 4 to learn more about batch processing!")
-
+Ex().success_msg("Super ! Il s'avère que `autumn.csv` est le fichier avec le moins de lignes. Rendez-vous au chapitre 4 pour en savoir plus sur le traitement par lots !")
 ```
