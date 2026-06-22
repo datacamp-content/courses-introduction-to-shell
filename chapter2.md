@@ -1,16 +1,16 @@
 ---
-title: Manipulating data
+title: การจัดการข้อมูล
 description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+  คำสั่งในบทที่แล้วช่วยให้ย้ายสิ่งต่าง ๆ ในระบบไฟล์ได้
+  บทนี้จะแสดงวิธีทำงานกับข้อมูลภายในไฟล์เหล่านั้น
+  เครื่องมือที่ใช้ค่อนข้างเรียบง่าย
+  แต่เป็นรากฐานที่แข็งแกร่งสำหรับการใช้งานต่อไป
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: วิธีดูเนื้อหาของไฟล์
 ---
 
-## How can I view a file's contents?
+## จะดูเนื้อหาในไฟล์ได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +18,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+ก่อนจะเปลี่ยนชื่อหรือลบไฟล์
+อาจต้องการดูเนื้อหาในไฟล์นั้นก่อน
+วิธีที่ง่ายที่สุดคือใช้คำสั่ง `cat`
+ซึ่งจะแสดงเนื้อหาของไฟล์ออกทางหน้าจอ
+(ชื่อย่อมาจาก "concatenate" ที่แปลว่า "เชื่อมต่อสิ่งต่าง ๆ เข้าด้วยกัน"
+เพราะคำสั่งนี้จะแสดงเนื้อหาของทุกไฟล์ที่ระบุชื่อไว้ ทีละไฟล์ต่อเนื่องกัน)
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +36,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+แสดงเนื้อหาของ `course.txt` ออกทางหน้าจอ
 
 `@hint`
 
@@ -55,14 +55,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="คำสั่งของท่านไม่ได้สร้างผลลัพธ์ที่ถูกต้อง ท่านได้ใช้ `cat` ตามด้วยชื่อไฟล์ `course.txt` หรือไม่?")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("ดีมาก! มาดูวิธีอื่นในการดูเนื้อหาของไฟล์กัน")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## จะดูเนื้อหาไฟล์ทีละส่วนได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +70,23 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+สามารถใช้ `cat` เพื่อแสดงไฟล์ขนาดใหญ่แล้วเลื่อนดูผลลัพธ์ได้ แต่โดยทั่วไปการ **เลื่อนหน้า** ผลลัพธ์จะสะดวกกว่า
+คำสั่งดั้งเดิมที่ใช้ทำสิ่งนี้คือ `more` แต่ปัจจุบันถูกแทนที่ด้วยคำสั่งที่มีความสามารถมากกว่าอย่าง `less`
+(การตั้งชื่อแบบนี้ถือเป็นอารมณ์ขันในแบบฉบับของโลก Unix)
+เมื่อใช้ `less` กับไฟล์ ระบบจะแสดงผลครั้งละหนึ่งหน้า
+กด spacebar เพื่อเลื่อนลง หรือพิมพ์ `q` เพื่อออก
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+หากระบุชื่อไฟล์หลายไฟล์ให้กับ `less`
+สามารถพิมพ์ `:n` (เครื่องหมายโคลอนตามด้วยตัวอักษร 'n' พิมพ์เล็ก) เพื่อไปยังไฟล์ถัดไป
+`:p` เพื่อย้อนกลับไปไฟล์ก่อนหน้า
+หรือ `:q` เพื่อออกจากโปรแกรม
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+หมายเหตุ: หากดูเฉลยของแบบฝึกหัดที่ใช้ `less` จะเห็นคำสั่งเพิ่มเติมต่อท้ายที่ทำหน้าที่ปิดการเลื่อนหน้า *ออก*
+เพื่อให้ระบบทดสอบคำตอบได้อย่างมีประสิทธิภาพ
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+ใช้ `less seasonal/spring.csv seasonal/summer.csv` เพื่อดูไฟล์ทั้งสองตามลำดับ
+กด spacebar เพื่อเลื่อนหน้าลง `:n` เพื่อไปยังไฟล์ที่สอง และ `:q` เพื่อออก
 
 `@hint`
 
@@ -112,7 +108,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='ใช้ `less` และชื่อไฟล์ โปรดจำไว้ว่า `:n` จะนำคุณไปยังไฟล์ถัดไป'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +116,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## ดูข้อมูลส่วนต้นของไฟล์ได้อย่างไร?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +127,20 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+สิ่งแรกที่นักวิทยาศาสตร์ข้อมูลมักทำเมื่อได้รับชุดข้อมูลใหม่มาวิเคราะห์ คือการดูว่าชุดข้อมูลนั้นมีฟิลด์อะไรบ้าง และแต่ละฟิลด์มีค่าอะไร
+หากชุดข้อมูลถูกส่งออกมาจากฐานข้อมูลหรือสเปรดชีต มักจะถูกจัดเก็บในรูปแบบ **ค่าที่คั่นด้วยจุลภาค** (CSV)
+วิธีที่รวดเร็วในการดูเนื้อหาของไฟล์คือการดูแค่ไม่กี่แถวแรก
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+ใน shell สามารถทำได้ด้วยคำสั่ง `head`
+ตามชื่อของมัน คำสั่งนี้จะแสดงบรรทัดแรกของไฟล์
+(โดย "ไม่กี่บรรทัด" หมายถึง 10 บรรทัด)
+ดังนั้นคำสั่ง:
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+จะแสดงผลลัพธ์:
 
 ```
 Date,Tooth
@@ -164,16 +157,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+`head` จะทำอะไรหากไฟล์มีไม่ถึง 10 บรรทัด?
+(ลองใช้คำสั่งนี้กับไฟล์ `people/agarwal.txt` เพื่อหาคำตอบ)
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- แสดงข้อความแสดงข้อผิดพลาด เพราะไฟล์มีความยาวไม่เพียงพอ
+- แสดงบรรทัดทั้งหมดเท่าที่มีในไฟล์
+- เติมบรรทัดว่างให้ครบ 10 บรรทัด
 
 `@hint`
-What is the most useful thing it could do?
+คำสั่งนี้มีประโยชน์สูงสุดในแง่ใด?
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +175,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["ไม่ถูกต้อง: นั่นไม่ใช่สิ่งที่มีประโยชน์ที่สุดที่สามารถทำได้",
+                    "ถูกต้อง!",
+                    "ไม่ถูกต้อง: เป็นไปไม่ได้ที่จะแยกความแตกต่างจากไฟล์ที่ลงท้ายด้วยบรรทัดว่างจำนวนมาก"])
 ```
 
 ---
 
-## How can I type less?
+## พิมพ์น้อยลงได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +190,13 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+หนึ่งในเครื่องมืออันทรงพลังของ shell คือ **tab completion**
+เมื่อเริ่มพิมพ์ชื่อไฟล์แล้วกดปุ่ม tab shell จะพยายามเติมพาธให้โดยอัตโนมัติ
+ตัวอย่างเช่น ถ้าพิมพ์ `sea` แล้วกด tab shell จะเติมชื่อไดเรกทอรีเป็น `seasonal/` (พร้อม slash ต่อท้าย)
+จากนั้นถ้าพิมพ์ `a` แล้วกด tab อีกครั้ง shell จะเติมพาธให้สมบูรณ์เป็น `seasonal/autumn.csv`
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+หากพาธยังไม่ชัดเจนพอ เช่น `seasonal/s` การกด tab ครั้งที่สองจะแสดงรายการตัวเลือกที่เป็นไปได้
+พิมพ์ตัวอักษรเพิ่มอีกหนึ่งหรือสองตัวเพื่อให้พาธเฉพาะเจาะจงขึ้น แล้วกด tab เพื่อเติมชื่อที่เหลือให้ครบ
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +212,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+รัน `head seasonal/autumn.csv` โดยไม่ต้องพิมพ์ชื่อไฟล์แบบเต็ม
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+พิมพ์พาธให้มากพอที่จะระบุได้ แล้วกด tab จากนั้นทำซ้ำตามต้องการ
 
 `@solution`
 ```{shell}
@@ -242,9 +227,8 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="ตัวตรวจสอบไม่พบผลลัพธ์ที่ถูกต้องในคำสั่งของคุณ คุณแน่ใจหรือไม่ว่าได้เรียกใช้ `head` กับ `seasonal/autumn.csv`?")
 )
-
 ```
 
 ***
@@ -256,10 +240,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+รัน `head seasonal/spring.csv` โดยไม่ต้องพิมพ์ชื่อไฟล์แบบเต็ม
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+พิมพ์พาธให้มากพอที่จะระบุได้ แล้วกด tab จากนั้นทำซ้ำตามต้องการ
 
 `@solution`
 ```{shell}
@@ -271,15 +255,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="ตัวตรวจสอบไม่พบผลลัพธ์ที่ถูกต้องในคำสั่งของท่าน ท่านแน่ใจหรือไม่ว่าได้เรียกใช้ `head` กับ `seasonal/spring.csv`?")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("ทำได้ดีมาก! เมื่อท่านคุ้นเคยกับการใช้การเติมคำด้วย Tab แล้ว จะช่วยประหยัดเวลาของท่านได้มาก!")
 ```
 
 ---
 
-## How can I control what commands do?
+## จะควบคุมการทำงานของคำสั่งได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +270,30 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+บางครั้งเราอาจไม่ต้องการดูแค่ 10 บรรทัดแรกของไฟล์เสมอไป
+ดังนั้น shell จึงให้เปลี่ยนพฤติกรรมของ `head` ได้
+โดยใช้ **command-line flag** (หรือเรียกสั้นๆ ว่า "flag")
+หากรันคำสั่ง:
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head` จะแสดงเพียง 3 บรรทัดแรกของไฟล์
+หากรัน `head -n 100`
+ก็จะแสดง 100 บรรทัดแรก (หากไฟล์มีจำนวนบรรทัดมากพอ)
+และเป็นเช่นนี้ต่อไปเรื่อยๆ
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+ชื่อของ flag มักบ่งบอกถึงความหมายของมัน
+(เช่น `-n` ย่อมาจาก "**n**umber of lines" หรือจำนวนบรรทัด)
+แม้ว่า flag ไม่จำเป็นต้องเป็น `-` ตามด้วยตัวอักษรเพียงตัวเดียวเสมอไป
+แต่นี่เป็นรูปแบบที่นิยมใช้กันอย่างแพร่หลาย
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+หมายเหตุ: เป็น style ที่ดีในการวาง flag ทั้งหมด *ก่อน* ชื่อไฟล์
+ดังนั้นในคอร์สนี้ จะรับเฉพาะคำตอบที่เขียนในรูปแบบดังกล่าวเท่านั้น
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+แสดง 5 บรรทัดแรกของ `winter.csv` ในไดเรกทอรี `seasonal`
 
 `@hint`
 
@@ -331,17 +313,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="คุณแน่ใจหรือไม่ว่าคุณกำลังเรียกใช้ `head` กับไฟล์ `seasonal/winter.csv`?"),
+        has_expr_output(strict=True, incorrect_msg="คุณแน่ใจหรือไม่ว่าคุณใช้แฟล็ก `-n 5`?")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "คุณแน่ใจหรือไม่ว่าคุณใช้แฟล็ก `-n 5`?")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("ดีมาก! ด้วยเทคนิคนี้ คุณสามารถป้องกันไม่ให้เชลล์ของคุณทำงานผิดพลาด หากคุณต้องการดูไฟล์ข้อความขนาดใหญ่ได้")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## จะดูรายการไฟล์ทั้งหมดภายใต้ไดเรกทอรีได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +331,12 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+หากต้องการดูไฟล์และโฟลเดอร์ทั้งหมดภายในไดเรกทอรี
+ไม่ว่าจะซ้อนกันลึกแค่ไหนก็ตาม
+ให้ใช้ `ls` พร้อมแฟล็ก `-R`
+(ย่อมาจาก "recursive" หรือ "การทำซ้ำแบบเวียนเกิด")
+หากรัน `ls -R` ในโฮมไดเรกทอรี
+จะเห็นผลลัพธ์ประมาณนี้:
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +350,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+ผลลัพธ์นี้แสดงไฟล์และไดเรกทอรีทั้งหมดในระดับปัจจุบัน
+ตามด้วยเนื้อหาในแต่ละไดเรกทอรีย่อย
+และดำเนินต่อไปเรื่อย ๆ จนครบทุกระดับ
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+เพื่อให้แยกแยะประเภทของรายการได้ง่ายขึ้น
+`ls` มีแฟล็กอีกตัวคือ `-F` ซึ่งจะพิมพ์ `/` ต่อท้ายชื่อไดเรกทอรีทุกรายการ
+และ `*` ต่อท้ายชื่อโปรแกรมที่รันได้
+ให้รัน `ls` โดยใส่แฟล็กทั้งสองตัวคือ `-R` และ `-F` พร้อมกับพาธแบบสมบูรณ์ของโฮมไดเรกทอรี
+เพื่อดูรายการทั้งหมดที่อยู่ภายใน
+(ลำดับของแฟล็กไม่มีผลต่อการทำงาน แต่ต้องวางชื่อไดเรกทอรีไว้ท้ายสุดเสมอ)
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+ระบุโฮมไดเรกทอรีได้โดยใช้ `~` หรือ `.` หรือพาธแบบสมบูรณ์
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +378,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='ใช้ `ls -R -F` หรือ `ls -F -R` และเส้นทาง `/home/repl`'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='ใช้ `ls -R -F` หรือ `ls -F -R` และเส้นทาง `/home/repl`')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg("นั่นเป็นภาพรวมที่ดีทีเดียว ใช่ไหม?")
 ```
 
 ---
 
-## How can I get help for a command?
+## จะขอความช่วยเหลือสำหรับคำสั่งได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +394,11 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+ในการค้นหาว่าคำสั่งต่าง ๆ ทำงานอย่างไร
+ในอดีตผู้คนมักใช้คำสั่ง `man`
+(ย่อมาจากคำว่า "manual" หรือคู่มือ)
+ตัวอย่างเช่น
+คำสั่ง `man head` จะแสดงข้อมูลดังนี้:
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +422,23 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` จะเรียกใช้ `less` โดยอัตโนมัติ
+ดังนั้นอาจต้องกดแป้นเว้นวรรคเพื่อเลื่อนดูข้อมูล
+และกด `:q` เพื่อออก
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+คำอธิบายสั้น ๆ ใต้หัวข้อ `NAME` จะบอกคร่าว ๆ ว่าคำสั่งนั้นทำอะไร
+ส่วนสรุปใต้หัวข้อ `SYNOPSIS` จะแสดงรายการ flag ทั้งหมดที่คำสั่งรองรับ
+รายการที่เป็นตัวเลือก (ไม่บังคับ) จะอยู่ในวงเล็บเหลี่ยม `[...]`
+ตัวเลือกแบบเลือกอย่างใดอย่างหนึ่งจะคั่นด้วย `|`
+และรายการที่สามารถระบุซ้ำได้จะแสดงด้วย `...`
+ดังนั้น หน้าคู่มือของ `head` กำลังบอกว่าสามารถระบุจำนวนบรรทัดด้วย `-n` *หรือ* จำนวนไบต์ด้วย `-c`
+และสามารถระบุชื่อไฟล์ได้หลายชื่อ
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+ข้อจำกัดของคู่มือ Unix คือต้องรู้ก่อนว่ากำลังมองหาอะไร
+หากยังไม่แน่ใจ
+ลองค้นหาได้ที่ [Stack Overflow](https://stackoverflow.com/)
+ตั้งคำถามในช่อง Slack ของ DataCamp
+หรือดูในส่วน `SEE ALSO` ของคำสั่งที่รู้จักอยู่แล้ว
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +454,11 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+อ่านหน้าคู่มือของคำสั่ง `tail` เพื่อดูว่าการใส่เครื่องหมาย `+` นำหน้าตัวเลขที่ใช้กับ flag `-n` นั้นมีผลอย่างไร
+(กดแป้นเว้นวรรคเพื่อเลื่อนลง และ/หรือพิมพ์ `q` เพื่อออก)
 
 `@hint`
-Remember: `man` is short for "manual".
+จำไว้ว่า `man` ย่อมาจาก "manual" หรือคู่มือ
 
 `@solution`
 ```{shell}
@@ -489,8 +469,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='ใช้ `man` และชื่อคำสั่ง')
 ```
 
 ***
@@ -502,10 +481,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+ใช้คำสั่ง `tail` พร้อม flag `-n +7` เพื่อแสดงทุกบรรทัด *ยกเว้น* หกบรรทัดแรกของไฟล์ `seasonal/spring.csv`
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+ใช้เครื่องหมายบวก '+' นำหน้าจำนวนบรรทัดที่ต้องการแสดง
 
 `@solution`
 ```{shell}
@@ -517,15 +496,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="คุณกำลังเรียกใช้ `tail` บน `seasonal/spring.csv` หรือไม่?"),
+    has_expr_output(strict=True, incorrect_msg="คุณแน่ใจหรือไม่ว่าได้ใช้แฟล็ก `-n +7`?")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## วิธีเลือกคอลัมน์จากไฟล์
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +511,34 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` และ `tail` ช่วยให้เลือกแถวจากไฟล์ข้อความได้
+หากต้องการเลือกคอลัมน์ ให้ใช้คำสั่ง `cut`
+คำสั่งนี้มีหลายตัวเลือก (ใช้ `man cut` เพื่อดูรายละเอียด)
+แต่รูปแบบที่ใช้บ่อยที่สุดมีลักษณะดังนี้:
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+ซึ่งหมายความว่า
+"เลือกคอลัมน์ 2 ถึง 5 และคอลัมน์ 8
+โดยใช้เครื่องหมายจุลภาคเป็นตัวคั่น"
+`cut` ใช้ `-f` (ย่อมาจาก "fields") เพื่อระบุคอลัมน์
+และ `-d` (ย่อมาจาก "delimiter") เพื่อระบุตัวคั่น
+ต้องระบุตัวคั่นเสมอ เนื่องจากบางไฟล์อาจใช้ช่องว่าง แท็บ หรือเครื่องหมายโคลอนแทน
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+คำสั่งใดที่จะเลือกคอลัมน์แรก (ซึ่งเก็บข้อมูลวันที่) จากไฟล์ `spring.csv`?
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- ใช้ได้ทั้งสองแบบ
+- ไม่มีแบบใดถูกต้อง เพราะ `-f` ต้องอยู่ก่อน `-d`
 
 `@hint`
-The order of the flags doesn't matter.
+ลำดับของ flag ไม่มีผลต่อการทำงาน
 
 `@pre_exercise_code`
 ```{python}
@@ -575,7 +552,7 @@ Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Cor
 
 ---
 
-## What can't cut do?
+## `cut` ทำอะไรไม่ได้บ้าง?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +560,9 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` เป็นคำสั่งที่ทำงานแบบตรงไปตรงมา
+โดยเฉพาะอย่างยิ่ง มันไม่เข้าใจสตริงที่อยู่ในเครื่องหมายคำพูด
+ตัวอย่างเช่น ถ้าไฟล์มีเนื้อหาดังนี้:
 
 ```
 Name,Age
@@ -594,13 +570,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+เมื่อรันคำสั่ง:
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+จะได้ผลลัพธ์เป็น:
 
 ```
 Age
@@ -608,27 +584,26 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+แทนที่จะได้อายุของแต่ละคน เพราะ `cut` จะตีความเครื่องหมายคอมมาระหว่างนามสกุลและชื่อว่าเป็นตัวคั่นคอลัมน์
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+ผลลัพธ์ของ `cut -d : -f 2-4` บนบรรทัดนี้คืออะไร:
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+(สังเกตเครื่องหมายโคลอนที่ต่อท้าย)
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- ไม่มีข้อใดถูก เพราะมีฟิลด์ไม่ครบสี่ฟิลด์
 
 `@hint`
-Pay attention to the trailing colon.
+สังเกตเครื่องหมายโคลอนที่ต่อท้ายด้วย
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +612,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['ไม่ใช่ มีมากกว่านั้น', 'ไม่ใช่ มีมากกว่านั้น', 'ถูกต้อง! เครื่องหมายโคลอนท้ายสร้างฟิลด์ที่สี่ที่ว่างเปล่า', 'ไม่ใช่ `cut` ทำได้ดีที่สุดเท่าที่จะทำได้'])
 ```
 
 ---
 
-## How can I repeat commands?
+## จะรันคำสั่งซ้ำได้อย่างไร?
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +625,16 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+หนึ่งในข้อดีที่สุดของการใช้ Shell คือทำให้การทำงานซ้ำเป็นเรื่องง่าย
+หลังจากรันคำสั่งไปแล้ว สามารถกดปุ่มลูกศรขึ้นเพื่อวนกลับไปยังคำสั่งก่อนหน้าได้
+นอกจากนี้ยังใช้ปุ่มลูกศรซ้าย-ขวาและปุ่ม Delete เพื่อแก้ไขคำสั่งได้ด้วย
+เมื่อพร้อมแล้วให้กด Enter เพื่อรันคำสั่งที่แก้ไขแล้ว
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+ยิ่งไปกว่านั้น `history` จะแสดงรายการคำสั่งที่รันไปล่าสุด
+แต่ละคำสั่งจะมีหมายเลขกำกับ ทำให้สามารถเรียกใช้คำสั่งที่ต้องการซ้ำได้ง่าย:
+เพียงพิมพ์ `!55` เพื่อรันคำสั่งที่ 55 ในประวัติของคุณ (หากมีจำนวนมากพอ)
+นอกจากนี้ยังรันคำสั่งซ้ำได้โดยพิมพ์เครื่องหมายอัศเจรีย์ตามด้วยชื่อคำสั่ง
+เช่น `!head` หรือ `!cut` ซึ่งจะรันคำสั่งนั้นที่ใช้ล่าสุดอีกครั้ง
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +650,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+รัน `head summer.csv` ใน home directory (ซึ่งควรจะเกิดข้อผิดพลาด)
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+Tab completion จะไม่ทำงานหากไม่มีชื่อไฟล์ที่ตรงกัน
 
 `@solution`
 ```{shell}
@@ -693,9 +665,8 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="ใช้ `head` และชื่อไฟล์ `summer.csv` ไม่ต้องกังวลหากเกิดข้อผิดพลาด นั่นเป็นเรื่องปกติ")
 )
-
 ```
 
 ***
@@ -707,10 +678,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+เปลี่ยนไดเรกทอรีไปที่ `seasonal`
 
 `@hint`
-Remember that `cd` stands for "change directory".
+จำไว้ว่า `cd` ย่อมาจาก "change directory" (เปลี่ยนไดเรกทอรี)
 
 `@solution`
 ```{shell}
@@ -722,9 +693,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="หากไดเรกทอรีการทำงานปัจจุบันของท่าน (ตรวจสอบด้วย `pwd`) คือ `/home/repl` ท่านสามารถย้ายไปยังโฟลเดอร์ `seasonal` ได้ด้วยคำสั่ง `cd seasonal`")
 )
-
 ```
 
 ***
@@ -736,10 +706,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+รันคำสั่ง `head` ซ้ำโดยใช้ `!head`
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+อย่าเว้นวรรคระหว่าง `!` กับส่วนที่ตามมา
 
 `@solution`
 ```{shell}
@@ -755,11 +725,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='ใช้ `!head` เพื่อทำซ้ำคำสั่ง `head`'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +740,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+ใช้ `history` เพื่อดูคำสั่งที่ผ่านมา
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+สังเกตว่า `history` จะแสดงคำสั่งล่าสุดไว้ท้ายสุด เพื่อให้เห็นได้ชัดเมื่อคำสั่งรันเสร็จ
 
 `@solution`
 ```{shell}
@@ -784,8 +753,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='ใช้ `history` โดยไม่มีแฟล็กเพื่อรับรายการคำสั่งก่อนหน้า')
 ```
 
 ***
@@ -797,10 +765,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+รัน `head` ซ้ำอีกครั้งโดยใช้ `!` ตามด้วยหมายเลขคำสั่ง
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+*อย่า*เว้นวรรคระหว่าง `!` กับส่วนที่ตามมา
 
 `@solution`
 ```{shell}
@@ -816,7 +784,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='คุณได้ใช้ `!<a_number>` เพื่อรันคำสั่ง `head` ล่าสุดจากประวัติอีกครั้งหรือไม่?'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +792,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("ยอดเยี่ยมมาก! ไปยังข้อถัดไปกันเลย!")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## จะเลือกบรรทัดที่มีค่าที่ต้องการได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +805,25 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` และ `tail` ใช้เลือกแถว
+`cut` ใช้เลือกคอลัมน์
+ส่วน `grep` ใช้เลือกบรรทัดตามเนื้อหาที่บรรทัดนั้นมี
+ในรูปแบบพื้นฐาน `grep` รับข้อความที่ต้องการค้นหา ตามด้วยชื่อไฟล์หนึ่งไฟล์หรือมากกว่า
+แล้วแสดงทุกบรรทัดในไฟล์เหล่านั้นที่มีข้อความนั้นอยู่
+ตัวอย่างเช่น
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+จะแสดงบรรทัดใน `winter.csv` ที่มีคำว่า "bicuspid"
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` สามารถค้นหาตามรูปแบบ (pattern) ได้ด้วย
+ซึ่งจะได้ศึกษาเพิ่มเติมในคอร์สถัดไป
+สิ่งที่สำคัญกว่าตอนนี้คือ flag ที่ใช้บ่อยของ `grep`:
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`: แสดงจำนวนบรรทัดที่ตรงกัน แทนที่จะแสดงตัวบรรทัด
+- `-h`: *ไม่* แสดงชื่อไฟล์เมื่อค้นหาในหลายไฟล์
+- `-i`: ไม่สนใจตัวพิมพ์เล็ก/ใหญ่ (เช่น ถือว่า "Regression" กับ "regression" ตรงกัน)
+- `-l`: แสดงชื่อไฟล์ที่มีผลลัพธ์ที่ตรงกัน แทนที่จะแสดงผลลัพธ์นั้น
+- `-n`: แสดงหมายเลขบรรทัดของบรรทัดที่ตรงกัน
+- `-v`: กลับผลการค้นหา คือแสดงเฉพาะบรรทัดที่ *ไม่* ตรงกัน
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +839,11 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+แสดงเนื้อหาทุกบรรทัดที่มีคำว่า `molar` ใน `seasonal/autumn.csv`
+โดยรันคำสั่งเดียวจาก home directory อย่าใช้ flag ใด ๆ
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+ใช้ `grep` พร้อมคำที่ต้องการค้นหาและชื่อไฟล์ที่จะค้นใน
 
 `@solution`
 ```{shell}
@@ -892,13 +858,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "คุณเรียกใช้ `grep` หรือไม่?"),
+      has_code("molar", incorrect_msg = "คุณค้นหา `molar` หรือไม่?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "คุณค้นหาในไฟล์ `seasonal/autumn.csv` หรือไม่?")
     )
   )
 )
-
 ```
 
 ***
@@ -910,8 +875,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+กลับผลการค้นหาเพื่อหาบรรทัดที่ *ไม่* มีคำว่า `molar` ใน `seasonal/spring.csv` และแสดงหมายเลขบรรทัดด้วย
+จำไว้ว่าแนวทางที่ดีคือใส่ flag ทั้งหมด *ก่อน* ค่าอื่น เช่น ชื่อไฟล์หรือคำค้นหา "molar"
 
 `@hint`
 
@@ -929,15 +894,14 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "คุณเรียกใช้ `grep` หรือไม่?"),
+      has_code("-v", incorrect_msg = "คุณใช้ `-v` เพื่อกลับผลการค้นหาหรือไม่?"),
+      has_code("-n", incorrect_msg = "คุณใช้ `-n` เพื่อแสดงหมายเลขบรรทัดหรือไม่?"),
+      has_code("molar", incorrect_msg = "คุณค้นหาคำว่า `molar` หรือไม่?"),
+      has_code("seasonal/spring.csv", incorrect_msg = "คุณค้นหาในไฟล์ `seasonal/spring.csv` หรือไม่?")
     )
   )
 )
-
 ```
 
 ***
@@ -949,11 +913,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+นับจำนวนบรรทัดที่มีคำว่า `incisor` ใน `autumn.csv` และ `winter.csv` รวมกัน
+(รันคำสั่งเดียวจาก home directory เช่นกัน)
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+อย่าลืมใช้ `-c` ร่วมกับ `grep` เพื่อนับจำนวนบรรทัด
 
 `@solution`
 ```{shell}
@@ -968,20 +932,19 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "คุณเรียกใช้ `grep` หรือไม่?"),
+      has_code("-c", incorrect_msg = "คุณได้รับจำนวนนับด้วย `-c` หรือไม่?"),
+      has_code("incisor", incorrect_msg = "คุณค้นหา `incisor` หรือไม่?"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "คุณค้นหาในไฟล์ `seasonal/autumn.csv` หรือไม่?"),
+      has_code("seasonal/winter.csv", incorrect_msg = "คุณค้นหาในไฟล์ `seasonal/winter.csv` หรือไม่?")
     )
   )
 )
-
 ```
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## เหตุใดการมองข้อมูลเป็นแค่ข้อความจึงไม่ปลอดภัยเสมอไป?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +952,23 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+ในส่วน `SEE ALSO` ของหน้า manual สำหรับ `cut` มีการอ้างถึงคำสั่งชื่อ `paste`
+ซึ่งใช้รวมไฟล์ข้อมูลเข้าด้วยกันแทนที่จะตัดแบ่งออก
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+อ่านหน้า manual ของ `paste` จากนั้นรัน `paste` เพื่อรวมไฟล์ข้อมูลฤดูใบไม้ร่วงและฤดูหนาวให้อยู่ในตารางเดียว
+โดยใช้เครื่องหมายจุลภาคเป็นตัวคั่น
+ผลลัพธ์ที่ได้มีปัญหาอะไรในแง่ของการวิเคราะห์ข้อมูล?
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- ส่วนหัวคอลัมน์ถูกแสดงซ้ำ
+- แถวท้ายบางแถวมีจำนวนคอลัมน์ไม่ถูกต้อง
+- ข้อมูลบางส่วนจาก `winter.csv` หายไป
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+ถ้าใช้ `cut` กับผลลัพธ์ของ `paste` โดยใช้เครื่องหมายจุลภาคเป็นตัวคั่น
+จะได้ผลลัพธ์ที่ถูกต้องหรือไม่?
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +977,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = 'ถูกต้อง แต่ไม่จำเป็นต้องเป็นข้อผิดพลาด'
+correct2 = 'ถูกต้อง: การรวมบรรทัดที่มีคอลัมน์เข้าด้วยกันจะสร้างคอลัมน์ว่างเพียงหนึ่งคอลัมน์ที่จุดเริ่มต้น ไม่ใช่สองคอลัมน์'
+err3 = 'ไม่ใช่ ข้อมูลฤดูหนาวทั้งหมดยังคงอยู่ครบถ้วน'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```

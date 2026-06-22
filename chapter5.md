@@ -1,15 +1,15 @@
 ---
-title: Creating new tools
+title: การสร้างเครื่องมือใหม่
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  ประวัติคำสั่งช่วยให้ทำซ้ำได้ด้วยการพิมพ์เพียงไม่กี่ครั้ง และ pipe
+  ช่วยให้รวมคำสั่งที่มีอยู่เพื่อสร้างคำสั่งใหม่ได้
+  ในบทนี้จะได้เรียนรู้วิธีก้าวไปอีกขั้นด้วยการสร้างคำสั่งของตัวเอง
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: วิธีแก้ไขไฟล์
 ---
 
-## How can I edit a file?
+## จะแก้ไขไฟล์ได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +17,22 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix มีโปรแกรมแก้ไขข้อความให้เลือกใช้หลากหลายมาก
+ในคอร์สนี้ เราจะใช้โปรแกรมที่เรียบง่ายชื่อว่า Nano
+หากพิมพ์ `nano filename` โปรแกรมจะเปิด `filename` เพื่อแก้ไข
+(หรือสร้างไฟล์ใหม่หากยังไม่มี)
+สามารถเลื่อนเคอร์เซอร์ด้วยปุ่มลูกศร,
+ลบตัวอักษรด้วยปุ่ม Backspace,
+และใช้คีย์ลัด Ctrl เพื่อทำงานต่าง ๆ ได้ดังนี้:
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`: ลบทั้งบรรทัด
+- `Ctrl` + `U`: เรียกบรรทัดที่ลบกลับคืน
+- `Ctrl` + `O`: บันทึกไฟล์ (O ย่อมาจาก 'output') _จากนั้นต้องกด Enter เพื่อยืนยันชื่อไฟล์ด้วย!_
+- `Ctrl` + `X`: ออกจากโปรแกรมแก้ไข
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+รัน `nano names.txt` เพื่อสร้างและแก้ไขไฟล์ใหม่ในโฮมไดเรกทอรี
+แล้วพิมพ์ข้อความสี่บรรทัดต่อไปนี้:
 
 ```
 Lovelace
@@ -43,10 +41,9 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+เมื่อพิมพ์เสร็จแล้ว ให้กด `Ctrl` + `O` เพื่อบันทึกไฟล์,
+จากนั้นกด Enter เพื่อยืนยันชื่อไฟล์,
+แล้วกด `Ctrl` + `X` เพื่อออกจากโปรแกรมแก้ไข
 
 `@hint`
 
@@ -65,7 +62,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "คุณได้รวมบรรทัด `%s` ในไฟล์ `names.txt` หรือไม่? ใช้ `nano names.txt` อีกครั้งเพื่ออัปเดตไฟล์ของคุณ ใช้ `Ctrl` + `O` เพื่อบันทึกและ `Ctrl` + `X` เพื่อออก"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +72,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("ยอดเยี่ยม! ไปยังข้อถัดไปกันเลย!")
 ```
 
 ---
 
-## How can I record what I just did?
+## จะบันทึกสิ่งที่เพิ่งทำได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +85,15 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+เมื่อทำการวิเคราะห์ที่ซับซ้อน มักจะต้องการเก็บบันทึกคำสั่งที่ใช้ไว้
+ทำได้โดยใช้เครื่องมือที่รู้จักอยู่แล้ว:
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. รัน `history`
+2. ส่งผลลัพธ์ผ่าน pipe ไปยัง `tail -n 10` (หรือจำนวนขั้นตอนล่าสุดที่ต้องการบันทึก)
+3. เปลี่ยนทิศทาง (redirect) ผลลัพธ์นั้นไปยังไฟล์ชื่อเช่น `figure-5.history`
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+วิธีนี้ดีกว่าการจดลงในสมุดบันทึกแล็บ เพราะรับประกันได้ว่าจะไม่มีขั้นตอนใดหลุดหาย
+นอกจากนี้ยังสะท้อนให้เห็นแนวคิดหลักของ shell ได้ชัดเจน นั่นคือ เครื่องมือเรียบง่ายที่รับและส่งออกข้อมูลเป็นบรรทัดข้อความ สามารถนำมาประกอบกันได้หลากหลายรูปแบบ เพื่อแก้ปัญหาได้อย่างกว้างขวาง
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +109,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+คัดลอกไฟล์ `seasonal/spring.csv` และ `seasonal/summer.csv` ไปยังโฮมไดเรกทอรี
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+ใช้ `cp` เพื่อคัดลอกไฟล์ และใช้ `~` เป็นชื่อย่อสำหรับพาธของโฮมไดเรกทอรี
 
 `@solution`
 ```{shell}
@@ -130,7 +122,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="คุณได้ใช้ `cp seasonal/s* ~` เพื่อคัดลอกไฟล์ที่ต้องการไปยังไดเรกทอรีหลักของคุณหรือไม่?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +130,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("การบันทึกข้อมูลที่น่าประทับใจ! หากคุณพิมพ์คำสั่งผิดพลาด คุณสามารถใช้ `nano` เพื่อแก้ไขไฟล์ประวัติการบันทึกได้ในภายหลัง")
 ```
 
 ***
@@ -151,13 +142,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+ใช้ `grep` พร้อม flag `-h` (เพื่อไม่ให้แสดงชื่อไฟล์)
+และ `-v Tooth` (เพื่อเลือกบรรทัดที่ *ไม่* ตรงกับบรรทัดส่วนหัว)
+เพื่อดึงข้อมูลจาก `spring.csv` และ `summer.csv` ตามลำดับนั้น
+แล้ว redirect ผลลัพธ์ไปยัง `temp.csv`
 
 `@hint`
-Put the flags before the filenames.
+ระบุ flag ก่อนชื่อไฟล์เสมอ
 
 `@solution`
 ```{shell}
@@ -167,8 +158,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "โปรดตรวจสอบให้แน่ใจว่าคุณได้เปลี่ยนเส้นทางผลลัพธ์ของคำสั่ง `grep` ไปยัง `temp.csv` ด้วย `>`!"
+msg2 = "คุณได้ใช้ `grep -h -v ___ ___ ___` (กรอกข้อมูลในช่องว่าง) เพื่อเติมข้อมูลใน `temp.csv` หรือไม่?"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +168,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +179,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+ส่งผลลัพธ์จาก `history` ผ่าน pipe ไปยัง `tail -n 3`
+แล้ว redirect ผลลัพธ์ไปยัง `steps.txt`
+เพื่อบันทึกคำสั่งสามรายการล่าสุดลงในไฟล์
+(ต้องบันทึกสามรายการแทนที่จะเป็นสองรายการ
+เพราะคำสั่ง `history` เองก็จะปรากฏอยู่ในรายการด้วย)
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+อย่าลืมว่าการเปลี่ยนทิศทางด้วย `>` จะอยู่ท้ายสุดของชุดคำสั่งที่เชื่อมด้วย pipe
 
 `@solution`
 ```{shell}
@@ -206,8 +196,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="ตรวจสอบให้แน่ใจว่าได้เปลี่ยนเส้นทางผลลัพธ์ของคำสั่งไปยัง `steps.txt`"
+msg2="คุณได้ใช้ `history | tail ___ ___` (กรอกข้อมูลในช่องว่าง) เพื่อเติมข้อมูลใน `steps.txt` หรือไม่?"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +209,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("ยอดเยี่ยม! มาเพิ่มระดับความท้าทายกันเถอะ!")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## จะบันทึกคำสั่งเพื่อรันซ้ำในภายหลังได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +222,25 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+จนถึงตอนนี้ คุณใช้ shell แบบโต้ตอบโดยตรง
+แต่เนื่องจากคำสั่งที่พิมพ์เข้าไปนั้นเป็นแค่ข้อความ
+จึงสามารถเก็บไว้ในไฟล์เพื่อให้ shell รันซ้ำได้เรื่อย ๆ
+ลองเริ่มสำรวจความสามารถนี้ด้วยการนำคำสั่งต่อไปนี้ไปใส่ในไฟล์ชื่อ `headers.sh`:
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+คำสั่งนี้จะดึงแถวแรกจากไฟล์ CSV แต่ละไฟล์ในไดเรกทอรี `seasonal`
+เมื่อสร้างไฟล์แล้ว ให้รันด้วยคำสั่ง:
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+คำสั่งนี้บอกให้ shell (ซึ่งก็คือโปรแกรมที่ชื่อ `bash`)
+รันคำสั่งที่อยู่ในไฟล์ `headers.sh`
+ซึ่งจะให้ผลลัพธ์เหมือนกับการรันคำสั่งโดยตรงทุกประการ
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +256,17 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+ใช้ `nano dates.sh` เพื่อสร้างไฟล์ชื่อ `dates.sh`
+ที่มีคำสั่งต่อไปนี้:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+เพื่อดึงคอลัมน์แรกจากไฟล์ CSV ทั้งหมดในไดเรกทอรี `seasonal`
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+ใส่คำสั่งที่กำหนดลงในไฟล์โดยไม่ต้องมีบรรทัดว่างหรือช่องว่างเพิ่มเติม
 
 `@solution`
 ```{shell}
@@ -291,13 +278,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "คุณได้รวมบรรทัด `cut -d , -f 1 seasonal/*.csv` ไว้ในไฟล์ `dates.sh` หรือไม่? ใช้ `nano dates.sh` อีกครั้งเพื่ออัปเดตไฟล์ของคุณ ใช้ `Ctrl` + `O` เพื่อบันทึกและ `Ctrl` + `X` เพื่อออก"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +295,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+ใช้ `bash` เพื่อรันไฟล์ `dates.sh`
 
 `@hint`
-Use `bash filename` to run the file.
+ใช้ `bash filename` เพื่อรันไฟล์
 
 `@solution`
 ```{shell}
@@ -327,17 +313,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = 'คุณเรียกใช้ `bash` หรือไม่?'),
+      has_code("dates.sh", incorrect_msg = 'คุณระบุไฟล์ `dates.sh` หรือไม่?')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## จะนำ pipe กลับมาใช้ซ้ำได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +330,22 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+ไฟล์ที่รวบรวมคำสั่ง shell ไว้เรียกว่า ***shell script*** หรือเรียกสั้น ๆ ว่า "script" ชื่อไฟล์ script ไม่จำเป็นต้องลงท้ายด้วย `.sh` แต่ในบทเรียนนี้จะใช้รูปแบบดังกล่าวเพื่อให้แยกแยะไฟล์ script ได้ง่ายขึ้น
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+Script ยังสามารถมี pipe อยู่ภายในได้ด้วย
+ตัวอย่างเช่น ถ้า `all-dates.sh` มีบรรทัดนี้:
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+แล้วรัน:
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+จะดึงวันที่ที่ไม่ซ้ำกันออกจากไฟล์ข้อมูลตามฤดูกาล และบันทึกผลลัพธ์ไว้ใน `dates.out`
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +362,11 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+ไฟล์ `teeth.sh` ในโฮมไดเรกทอรีถูกเตรียมไว้ให้แล้ว แต่ยังมีส่วนที่ว่างอยู่
+ให้ใช้ Nano แก้ไขไฟล์และแทนที่ตัวแทน `____` ทั้งสองจุดด้วย `seasonal/*.csv` และ `-c` เพื่อให้ script นี้แสดงจำนวนครั้งที่ชื่อฟันแต่ละชื่อปรากฏในไฟล์ CSV ภายในไดเรกทอรี `seasonal`
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+ใช้ `nano teeth.sh` เพื่อแก้ไขไฟล์
 
 `@solution`
 ```{shell}
@@ -400,13 +378,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="คุณได้แทนที่ช่องว่างอย่างถูกต้องหรือไม่ เพื่อให้คำสั่งใน `teeth.sh` อ่านว่า `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? ใช้ `nano teeth.sh` อีกครั้งเพื่อทำการเปลี่ยนแปลงที่จำเป็น"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +395,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+ใช้ `bash` รัน `teeth.sh` และใช้ `>` เพื่อเปลี่ยนเส้นทางผลลัพธ์ไปยัง `teeth.out`
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+จำไว้ว่า `> teeth.out` ต้องอยู่ *หลัง* คำสั่งที่สร้างผลลัพธ์
 
 `@solution`
 ```{shell}
@@ -434,7 +411,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="คุณได้เปลี่ยนเส้นทางผลลัพธ์ของ `bash teeth.sh` ไปยัง `teeth.out` ด้วย `>` อย่างถูกต้องหรือไม่?"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +420,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = 'คุณได้เรียกใช้ `bash` หรือไม่?'),
+      has_code("bash\s+teeth.sh", incorrect_msg = 'คุณได้รันไฟล์ `teeth.sh` หรือไม่?'),
+      has_code(">\s+teeth.out", incorrect_msg = 'คุณได้เปลี่ยนเส้นทางไปยังไฟล์ `teeth.out` หรือไม่?')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +437,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+รัน `cat teeth.out` เพื่อตรวจสอบผลลัพธ์
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+พิมพ์อักขระแรกสองสามตัวของชื่อไฟล์ แล้วกดปุ่ม Tab เพื่อให้ระบบเติมชื่อให้อัตโนมัติ
 
 `@solution`
 ```{shell}
@@ -479,18 +455,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = 'คุณเรียกใช้ `cat` หรือไม่?'),
+      has_code("teeth.out", incorrect_msg = 'คุณระบุไฟล์ `teeth.out` หรือไม่?')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("ยอดเยี่ยม! ในตอนแรกสิ่งเหล่านี้อาจดูเหมือนถูกสร้างขึ้นมาโดยไม่จำเป็น แต่สิ่งที่ดีคือคุณกำลังทำให้ขั้นตอนการทำงานของคุณเป็นแบบอัตโนมัติทีละขั้นตอน ซึ่งเป็นสิ่งที่มีประโยชน์อย่างมากในฐานะนักวิทยาศาสตร์ข้อมูล!")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## จะส่งชื่อไฟล์ให้สคริปต์ได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +473,25 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+สคริปต์ที่ประมวลผลไฟล์เฉพาะเจาะจงมีประโยชน์ในฐานะบันทึกสิ่งที่ทำไป แต่สคริปต์ที่ให้ประมวลผลไฟล์ใดก็ได้ตามต้องการนั้นมีประโยชน์มากกว่า
+เพื่อรองรับสิ่งนี้ สามารถใช้นิพจน์พิเศษ `$@` (เครื่องหมายดอลลาร์ตามด้วยเครื่องหมาย at ทันที)
+ซึ่งหมายถึง "พารามิเตอร์ทั้งหมดที่ส่งให้สคริปต์ผ่าน command line"
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+ตัวอย่างเช่น หาก `unique-lines.sh` มีเนื้อหาว่า `sort $@ | uniq` เมื่อรันคำสั่งนี้:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+เชลล์จะแทนที่ `$@` ด้วย `seasonal/summer.csv` และประมวลผลไฟล์เดียว แต่ถ้ารันคำสั่งนี้:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+ก็จะประมวลผลไฟล์ข้อมูลสองไฟล์ และสามารถเพิ่มได้เรื่อย ๆ
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_เตือนความจำ: หากต้องการบันทึกสิ่งที่เขียนใน Nano ให้พิมพ์ `Ctrl` + `O` เพื่อเขียนไฟล์ จากนั้นกด Enter เพื่อยืนยันชื่อไฟล์ แล้วกด `Ctrl` + `X` เพื่อออกจากตัวแก้ไข_
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +508,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+แก้ไขสคริปต์ `count-records.sh` ด้วย Nano และเติมช่องว่าง `____` ทั้งสองแห่ง
+ด้วย `$@` และ `-l` (_ตัวอักษร_) ตามลำดับ เพื่อให้สคริปต์นับจำนวนบรรทัดในไฟล์หนึ่งไฟล์หรือมากกว่า
+โดยไม่นับบรรทัดแรกของแต่ละไฟล์
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* ใช้ `nano count-records.sh` เพื่อแก้ไขไฟล์
+* ตรวจสอบให้แน่ใจว่าระบุ _ตัวอักษร_ `-l` ไม่ใช่ตัวเลข 1
 
 `@solution`
 ```{shell}
@@ -552,13 +526,12 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="คุณได้แทนที่ช่องว่างอย่างถูกต้องหรือไม่ เพื่อให้คำสั่งใน `count-records.sh` อ่านว่า `tail -q -n +2 $@ | wc -l`? ใช้ `nano count-records.sh` อีกครั้งเพื่อทำการเปลี่ยนแปลงที่จำเป็น"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
         has_code('tail\s+-q\s+-n\s+\+2\s+\$\@\s+\|\s+wc\s+-l', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -570,11 +543,11 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+รัน `count-records.sh` กับ `seasonal/*.csv`
+แล้วเปลี่ยนเส้นทางผลลัพธ์ไปยัง `num-records.out` โดยใช้ `>`
 
 `@hint`
-Use `>` to redirect the output.
+ใช้ `>` เพื่อเปลี่ยนเส้นทางผลลัพธ์
 
 `@solution`
 ```{shell}
@@ -589,20 +562,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = 'คุณเรียกใช้ `bash` หรือไม่?'),
+      has_code("bash\s+count-records.sh", incorrect_msg = 'คุณรันไฟล์ `count-records.sh` หรือไม่?'),
+      has_code("seasonal/\*", incorrect_msg = 'คุณระบุไฟล์ที่ต้องการประมวลผลด้วย `seasonal/*` หรือไม่?'),
+      has_code(">\s+num-records.out", incorrect_msg = 'คุณเปลี่ยนเส้นทางไปยังไฟล์ `num-records.out` หรือไม่?')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("ทำได้ดีมาก! ทักษะการใช้เชลล์ของคุณกำลังพัฒนาขึ้นเรื่อยๆ!")
 ```
 
 ---
 
-## How can I process a single argument?
+## การประมวลผลอาร์กิวเมนต์เดี่ยวทำได้อย่างไร?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +582,41 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+นอกจาก `$@` แล้ว
+เชลล์ยังให้ใช้ `$1`, `$2` และอื่น ๆ เพื่ออ้างอิงพารามิเตอร์บรรทัดคำสั่งแต่ละตัวได้โดยตรง
+สามารถนำไปใช้เขียนคำสั่งที่ดูเรียบง่ายและเป็นธรรมชาติมากขึ้น
+ตัวอย่างเช่น สร้างสคริปต์ชื่อ `column.sh` สำหรับเลือกคอลัมน์เดียวจากไฟล์ CSV
+โดยให้ผู้ใช้ระบุชื่อไฟล์เป็นพารามิเตอร์แรก และระบุคอลัมน์เป็นพารามิเตอร์ที่สอง:
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+จากนั้นรันด้วยคำสั่ง:
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+สังเกตว่าสคริปต์ใช้พารามิเตอร์ทั้งสองในลำดับที่สลับกัน
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+สคริปต์ `get-field.sh` ถูกออกแบบมาให้รับชื่อไฟล์,
+หมายเลขแถวที่ต้องการเลือก,
+หมายเลขคอลัมน์ที่ต้องการเลือก,
+แล้วแสดงเฉพาะฟิลด์นั้นจากไฟล์ CSV
+ตัวอย่างเช่น:
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+ควรเลือกฟิลด์ที่สองจากบรรทัดที่ 4 ของ `seasonal/summer.csv`
+ควรใส่คำสั่งใดลงใน `get-field.sh` เพื่อให้ได้ผลลัพธ์นั้น?
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+จำไว้ว่าพารามิเตอร์บรรทัดคำสั่งจะถูกนับจากซ้ายไปขวา
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +625,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- ไม่ใช่: คำสั่งนี้จะพยายามใช้ชื่อไฟล์เป็นจำนวนบรรทัดที่จะเลือกด้วย `head`
+- ถูกต้อง!
+- ไม่ใช่: คำสั่งนี้จะสลับการใช้หมายเลขคอลัมน์กับหมายเลขบรรทัด
+- ไม่ใช่: คำสั่งนี้จะสลับการใช้หมายเลขฟิลด์กับชื่อไฟล์
 
 ---
 
-## How can one shell script do many things?
+## Shell script หนึ่งไฟล์ทำงานได้หลายอย่างได้อย่างไร?
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +640,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+Shell script ที่ผ่านมามีคำสั่งหรือ pipe เพียงชุดเดียว แต่ script หนึ่งไฟล์สามารถมีคำสั่งได้หลายบรรทัด ตัวอย่างเช่น สามารถสร้าง script ที่บอกจำนวนระเบียนในไฟล์ข้อมูลที่สั้นที่สุดและยาวที่สุด นั่นคือช่วงความยาวของชุดข้อมูลทั้งหมด
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+ใน Nano การ "คัดลอกและวาง" ทำได้โดยเลื่อนไปยังบรรทัดที่ต้องการคัดลอก กด `CTRL` + `K` เพื่อตัดบรรทัด จากนั้นกด `CTRL` + `U` สองครั้งเพื่อวางสำเนาสองชุด
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_เป็นการเตือนความจำ: หากต้องการบันทึกสิ่งที่เขียนใน Nano ให้กด `Ctrl` + `O` เพื่อเขียนไฟล์ออก จากนั้นกด Enter เพื่อยืนยันชื่อไฟล์ แล้วกด `Ctrl` + `X` เพื่อออกจาก editor_
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +661,15 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+ใช้ Nano แก้ไข script `range.sh`
+แล้วแทนที่ตัวแทน `____` ทั้งสอง
+ด้วย `$@` และ `-v`
+เพื่อให้แสดงชื่อและจำนวนบรรทัดของไฟล์ทั้งหมดที่ระบุผ่าน command line
+*โดยไม่* แสดงจำนวนบรรทัดรวมของทุกไฟล์
+(ไม่ต้องหักบรรทัด header ของคอลัมน์ออกจากไฟล์)
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+ใช้ `wc -l $@` เพื่อนับจำนวนบรรทัดในไฟล์ทั้งหมดที่ระบุผ่าน command line
 
 `@solution`
 ```{shell}
@@ -710,13 +681,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="คุณได้แทนที่ช่องว่างอย่างถูกต้องแล้วหรือไม่ เพื่อให้คำสั่งใน `range.sh` อ่านว่า `wc -l $@ | grep -v total`? ใช้ `nano range.sh` อีกครั้งเพื่อทำการเปลี่ยนแปลงที่จำเป็น"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +698,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+ใช้ Nano เพิ่ม `sort -n` และ `head -n 1` ตามลำดับนั้น
+เข้าไปใน pipeline ใน `range.sh`
+เพื่อแสดงชื่อและจำนวนบรรทัดของไฟล์ที่สั้นที่สุดที่ส่งเข้ามา
 
 `@hint`
 
@@ -745,13 +715,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="คุณได้เพิ่ม `sort -n` และ `head -n 1` พร้อมกับ pipes ลงในไฟล์ `range.sh` แล้วหรือไม่? กรุณาใช้ `nano range.sh` อีกครั้งเพื่อทำการเปลี่ยนแปลงที่จำเป็น"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +732,13 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+ใช้ Nano เพิ่มบรรทัดที่สองใน `range.sh` เพื่อแสดงชื่อและจำนวนระเบียนของ
+ไฟล์ที่ *ยาวที่สุด* ในไดเรกทอรี *พร้อมกับ* ไฟล์ที่สั้นที่สุดด้วย
+บรรทัดนี้ควรเป็นสำเนาของบรรทัดที่เขียนไปแล้ว
+แต่ใช้ `sort -n -r` แทน `sort -n`
 
 `@hint`
-Copy the first line and modify the sorting order.
+คัดลอกบรรทัดแรก แล้วเปลี่ยนลำดับการเรียงข้อมูล
 
 `@solution`
 ```{shell}
@@ -781,8 +750,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="คงบรรทัดแรกในไฟล์ `range.sh` ไว้: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="คุณได้ทำการคัดลอกบรรทัดแรกในไฟล์ `range.sh` และแก้ไขเล็กน้อยหรือไม่? ใช้ `sort -n -r` แทน `sort -n`!"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +759,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +770,13 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+รัน script กับไฟล์ในไดเรกทอรี `seasonal`
+โดยใช้ `seasonal/*.csv` เพื่อจับคู่ไฟล์ทั้งหมด
+แล้วเปลี่ยนทิศทางผลลัพธ์โดยใช้ `>`
+ไปยังไฟล์ชื่อ `range.out` ในโฮมไดเรกทอรีของคุณ
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+ใช้ `bash range.sh` เพื่อรัน script, `seasonal/*.csv` เพื่อระบุไฟล์ และ `> range.out` เพื่อเปลี่ยนทิศทางผลลัพธ์
 
 `@solution`
 ```{shell}
@@ -818,24 +786,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="คุณได้เปลี่ยนเส้นทางผลลัพธ์ของ `bash range.sh seasonal/*.csv` ไปยัง `range.out` ด้วย `>` อย่างถูกต้องหรือไม่?"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = 'คุณได้เรียกใช้ `bash` หรือไม่?'),
+has_code("bash\s+range.sh", incorrect_msg = 'คุณได้รันไฟล์ `range.sh` หรือไม่?'),
+has_code("seasonal/\*", incorrect_msg = 'คุณได้ระบุไฟล์ที่ต้องการประมวลผลด้วย `seasonal/*` หรือไม่?'),
+has_code(">\s+range.out", incorrect_msg = 'คุณได้เปลี่ยนเส้นทางไปยังไฟล์ `range.out` หรือไม่?')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("ดำเนินการได้ดีมาก โปรดไปยังแบบฝึกหัดถัดไปเพื่อเรียนรู้เกี่ยวกับการเขียนลูป!")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## จะเขียนลูปในเชลล์สคริปต์ได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,7 +810,7 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+เชลล์สคริปต์สามารถมีลูปได้เช่นกัน สามารถเขียนโดยใช้เซมิโคลอนคั่น หรือจะแยกเป็นหลายบรรทัดโดยไม่ใช้เซมิโคลอนก็ได้ เพื่อให้อ่านง่ายขึ้น:
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -854,11 +821,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+(ไม่จำเป็นต้องย่อหน้าคำสั่งภายในลูป แต่การย่อหน้าจะช่วยให้โค้ดอ่านง่ายขึ้น)
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+บรรทัดแรกของสคริปต์นี้คือ **คอมเมนต์** ที่บอกให้ผู้อ่านรู้ว่าสคริปต์ทำอะไร คอมเมนต์เริ่มต้นด้วยอักขระ `#` และมีผลถึงท้ายบรรทัด การเพิ่มคำอธิบายสั้น ๆ แบบนี้ไว้ในทุกสคริปต์ที่เขียนจะเป็นประโยชน์มากในอนาคต
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_ขอเตือนว่า หากต้องการบันทึกสิ่งที่เขียนใน Nano ให้กด `Ctrl` + `O` เพื่อบันทึกไฟล์ จากนั้นกด Enter เพื่อยืนยันชื่อไฟล์ แล้วกด `Ctrl` + `X` เพื่อออกจากโปรแกรมแก้ไข_
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +842,12 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+เติมตัวแทนที่ว่างในสคริปต์ `date-range.sh`
+ด้วย `$filename` (สองครั้ง), `head` และ `tail`
+เพื่อให้สคริปต์แสดงวันที่แรกและวันที่สุดท้ายจากไฟล์อย่างน้อยหนึ่งไฟล์
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+อย่าลืมใช้ `$filename` เพื่อดึงค่าปัจจุบันของตัวแปรลูป
 
 `@solution`
 ```{shell}
@@ -892,10 +859,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="ใน `date-range.sh` คุณได้เปลี่ยนบรรทัด %s ในลูปเป็น `%s` หรือไม่? ใช้ `nano date-range.sh` เพื่อทำการเปลี่ยนแปลง"
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('แรก', cmdpatt%'head')
+msg2=msgpatt%('ที่สอง', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +873,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +884,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+รัน `date-range.sh` กับไฟล์ข้อมูลตามฤดูกาลทั้งสี่ไฟล์
+โดยใช้ `seasonal/*.csv` เพื่อจับคู่ชื่อไฟล์
 
 `@hint`
-The wildcard expression should start with the directory name.
+นิพจน์ wildcard ควรขึ้นต้นด้วยชื่อไดเรกทอรี
 
 `@solution`
 ```{shell}
@@ -937,13 +903,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = 'คุณเรียกใช้ `bash` หรือไม่?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'คุณรันไฟล์ `date-range.sh` หรือไม่?'),
+      has_code("seasonal/\*", incorrect_msg = 'คุณระบุไฟล์ที่ต้องการประมวลผลด้วย `seasonal/*` หรือไม่?')
     )
   )
 )
-
 ```
 
 ***
@@ -955,11 +920,11 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+รัน `date-range.sh` กับไฟล์ข้อมูลตามฤดูกาลทั้งสี่ไฟล์โดยใช้ `seasonal/*.csv` เพื่อจับคู่ชื่อไฟล์
+แล้ว pipe ผลลัพธ์ไปยัง `sort` เพื่อดูว่าสคริปต์ที่เขียนสามารถใช้งานได้เหมือนกับคำสั่งในตัวของ Unix
 
 `@hint`
-Use the same wildcard expression you used earlier.
+ใช้นิพจน์ wildcard เดิมที่ใช้ไปก่อนหน้านี้
 
 `@solution`
 ```{shell}
@@ -974,21 +939,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = 'คุณเรียกใช้ `bash` หรือไม่?'),
+      has_code("bash\s+date-range.sh", incorrect_msg = 'คุณรันไฟล์ `date-range.sh` หรือไม่?'),
+      has_code("seasonal/\*", incorrect_msg = 'คุณระบุไฟล์ที่ต้องการประมวลผลด้วย `seasonal/*` หรือไม่?'),
+      has_code("|", incorrect_msg = 'คุณใช้ pipe จากผลลัพธ์ของสคริปต์ไปยัง `sort` หรือไม่?'),
+      has_code("sort", incorrect_msg = 'คุณเรียกใช้ `sort` หรือไม่?')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("วิเศษมาก! โปรดสังเกตว่าสิ่งต่าง ๆ ที่เราได้เรียนรู้มานั้นสามารถนำมาประกอบกันได้อย่างไร")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## จะเกิดอะไรขึ้นเมื่อไม่ระบุชื่อไฟล์?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +960,39 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+ข้อผิดพลาดที่พบบ่อยใน shell script (และการใช้คำสั่งแบบโต้ตอบ) คือการวางชื่อไฟล์ผิดตำแหน่ง
+หากพิมพ์:
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+เนื่องจาก `tail` ไม่ได้รับชื่อไฟล์ใดๆ ระบบจะรอรับข้อมูลจากคีย์บอร์ดแทน
+นั่นหมายความว่าหากพิมพ์:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+`tail` จะแสดง 3 บรรทัดสุดท้ายของ `somefile.txt` ตามปกติ แต่ `head` จะรอรับข้อมูลจากคีย์บอร์ดไปเรื่อยๆ เพราะไม่ได้รับชื่อไฟล์และไม่มีคำสั่งใดส่งข้อมูลมาให้ใน pipeline
 
 <hr>
 
-Suppose you do accidentally type:
+สมมติว่าพิมพ์คำสั่งนี้โดยไม่ตั้งใจ:
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+ควรทำอย่างไรต่อไป?
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- รอ 10 วินาทีเพื่อให้ `head` หมดเวลา
+- พิมพ์ `somefile.txt` แล้วกด Enter เพื่อส่งข้อมูลให้ `head`
+- ใช้ `Ctrl` + `C` เพื่อหยุดการทำงานของ `head`
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+`head` จะทำอะไรถ้าไม่มีชื่อไฟล์ระบุและไม่มีคำสั่งใดอยู่ก่อนหน้าใน pipeline?
 
 `@pre_exercise_code`
 ```{python}

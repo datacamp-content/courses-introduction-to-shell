@@ -1,17 +1,16 @@
 ---
-title: Manipulating files and directories
+title: การจัดการไฟล์และไดเรกทอรี
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  บทนี้เป็นบทแนะนำ Unix shell เบื้องต้น จะได้เรียนรู้ว่าเหตุใด Shell
+  จึงยังคงถูกใช้งานมาเกือบ 50 ปี แตกต่างจากเครื่องมือแบบกราฟิกที่คุ้นเคยอย่างไร
+  วิธีเคลื่อนไหวภายใน Shell รวมถึงการสร้าง แก้ไข และลบไฟล์และโฟลเดอร์
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: Shell ต่างจากอินเทอร์เฟซแบบเดสก์ท็อปอย่างไร
 ---
 
-## How does the shell compare to a desktop interface?
+## Shell ต่างจากอินเทอร์เฟซแบบเดสก์ท็อปอย่างไร?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +18,47 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+ระบบปฏิบัติการอย่าง Windows, Linux หรือ Mac OS คือโปรแกรมประเภทพิเศษ
+มันควบคุมโปรเซสเซอร์, ฮาร์ดไดรฟ์, และการเชื่อมต่อเครือข่ายของคอมพิวเตอร์
+แต่หน้าที่สำคัญที่สุดคือการรันโปรแกรมอื่น ๆ
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+เนื่องจากมนุษย์ไม่ได้เป็นดิจิทัล
+จึงต้องมีอินเทอร์เฟซสำหรับโต้ตอบกับระบบปฏิบัติการ
+อินเทอร์เฟซที่นิยมใช้ในปัจจุบันคือโปรแกรมจัดการไฟล์แบบกราฟิก
+ซึ่งแปลงการคลิกและดับเบิลคลิกให้เป็นคำสั่งสำหรับเปิดไฟล์และรันโปรแกรม
+แต่ก่อนที่คอมพิวเตอร์จะมีจอแสดงผลแบบกราฟิก
+ผู้คนพิมพ์คำสั่งเข้าไปในโปรแกรมที่เรียกว่า **command-line shell**
+ทุกครั้งที่ป้อนคำสั่ง shell จะรันโปรแกรมอื่น
+แสดงผลลัพธ์ในรูปแบบที่มนุษย์อ่านได้
+จากนั้นแสดง *prompt* เพื่อบอกว่าพร้อมรับคำสั่งถัดไปแล้ว
+(ชื่อนี้มาจากแนวคิดที่ว่ามันคือ "เปลือกชั้นนอก" ของคอมพิวเตอร์)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+การพิมพ์คำสั่งแทนการคลิกและลากอาจดูยุ่งยากในตอนแรก
+แต่อย่างที่จะได้เห็นกัน เมื่อเริ่มระบุสิ่งที่ต้องการให้คอมพิวเตอร์ทำ
+ก็สามารถนำคำสั่งเดิมมาผสมกันเพื่อสร้างคำสั่งใหม่
+และทำงานซ้ำ ๆ ให้เป็นอัตโนมัติได้ด้วยการกดแป้นพิมพ์เพียงไม่กี่ครั้ง
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+โปรแกรมจัดการไฟล์แบบกราฟิกที่ผู้คนทั่วไปใช้กันกับ command-line shell มีความสัมพันธ์กันอย่างไร?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+จำไว้ว่าผู้ใช้จะโต้ตอบกับระบบปฏิบัติการได้ก็ต่อเมื่อผ่านโปรแกรมเท่านั้น
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- โปรแกรมจัดการไฟล์ใช้สำหรับดูและแก้ไขไฟล์ ส่วน shell ใช้สำหรับรันโปรแกรม
+- โปรแกรมจัดการไฟล์ถูกสร้างขึ้นมาบน shell
+- Shell เป็นส่วนหนึ่งของระบบปฏิบัติการ ในขณะที่โปรแกรมจัดการไฟล์แยกออกมาต่างหาก
+- [ทั้งสองต่างเป็นอินเทอร์เฟซสำหรับส่งคำสั่งไปยังระบบปฏิบัติการ]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- ทั้งสองแบบช่วยให้ดูและแก้ไขไฟล์ รวมถึงรันโปรแกรมได้
+- โปรแกรมจัดการไฟล์แบบกราฟิกและ shell ต่างก็เรียกใช้ฟังก์ชันของระบบปฏิบัติการชุดเดียวกัน
+- Shell และโปรแกรมจัดการไฟล์ต่างก็เป็นโปรแกรมที่แปลงคำสั่งของผู้ใช้ (ไม่ว่าจะพิมพ์หรือคลิก) ให้เป็นคำสั่งที่ส่งไปยังระบบปฏิบัติการ
+- ถูกต้อง! ทั้งสองรับคำสั่งจากผู้ใช้ (ไม่ว่าจะพิมพ์หรือคลิก) แล้วส่งต่อไปยังระบบปฏิบัติการ
 
 ---
 
-## Where am I?
+## ตอนนี้อยู่ที่ไหน?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +66,22 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**ระบบไฟล์ (filesystem)** ทำหน้าที่จัดการไฟล์และไดเรกทอรี (หรือโฟลเดอร์)
+แต่ละรายการจะถูกระบุด้วย **absolute path**
+ซึ่งแสดงเส้นทางจาก **root directory** ของระบบไฟล์:
+`/home/repl` คือไดเรกทอรี `repl` ที่อยู่ภายในไดเรกทอรี `home`,
+ส่วน `/home/repl/course.txt` คือไฟล์ `course.txt` ที่อยู่ในไดเรกทอรีนั้น,
+และ `/` เพียงอย่างเดียวคือ root directory
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+หากต้องการทราบว่าอยู่ที่ตำแหน่งใดในระบบไฟล์
+ให้รันคำสั่ง `pwd`
+(ย่อมาจาก "**p**rint **w**orking **d**irectory")
+คำสั่งนี้จะแสดง absolute path ของ **current working directory**
+ซึ่งเป็นตำแหน่งที่ shell ใช้รันคำสั่งและค้นหาไฟล์โดยค่าเริ่มต้น
 
 <hr>
-Run `pwd`.
-Where are you right now?
+รัน `pwd`
+ตอนนี้อยู่ที่ตำแหน่งใด?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +89,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+โดยทั่วไประบบ Unix จะจัดเก็บโฮมไดเรกทอรีของผู้ใช้ทุกคนไว้ภายใต้ `/home`
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +98,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "นั่นไม่ใช่เส้นทางที่ถูกต้อง"
+correct = "ถูกต้อง - คุณอยู่ใน `/home/repl`"
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## จะระบุไฟล์และไดเรกทอรีได้อย่างไร?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +114,24 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` บอกให้รู้ว่าตอนนี้อยู่ที่ไหน
+ส่วนถ้าอยากดูว่ามีอะไรอยู่บ้าง
+ให้พิมพ์ `ls` (ย่อมาจาก "**l**i**s**ting") แล้วกด Enter
+เมื่อใช้เพียงอย่างเดียว
+`ls` จะแสดงรายการไฟล์และโฟลเดอร์ในไดเรกทอรีปัจจุบัน
+(ไดเรกทอรีที่ `pwd` แสดงอยู่)
+ถ้าระบุชื่อไฟล์เพิ่มเข้าไป
+`ls` จะแสดงรายการไฟล์เหล่านั้น
+และถ้าระบุชื่อไดเรกทอรี
+มันจะแสดงเนื้อหาภายในไดเรกทอรีนั้น
+ตัวอย่างเช่น
+`ls /home/repl` จะแสดงไฟล์และโฟลเดอร์ทั้งหมดในไดเรกทอรีเริ่มต้นของคุณ
+(มักเรียกว่า **home directory**)
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+ใช้ `ls` พร้อม argument ที่เหมาะสม เพื่อดูรายการไฟล์ในไดเรกทอรี `/home/repl/seasonal`
+(ซึ่งเก็บข้อมูลการผ่าตัดทางทันตกรรมตามวันที่ แบ่งตามฤดูกาล)
+ไฟล์ใดต่อไปนี้ *ไม่มี* อยู่ในไดเรกทอรีนั้น?
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +140,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+ถ้าระบุ path ให้กับ `ls` มันจะแสดงไฟล์และโฟลเดอร์ที่อยู่ใน path นั้น
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +149,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "ไฟล์นั้นอยู่ในไดเรกทอรี `seasonal`"
+correct = "ถูกต้อง - ไฟล์นั้น *ไม่ได้* อยู่ในไดเรกทอรี `seasonal`"
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## มีวิธีอื่นในการระบุไฟล์และไดเรกทอรีอีกไหม?
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +165,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+พาธแบบสัมบูรณ์เปรียบได้กับพิกัดละติจูดและลองจิจูด คือมีค่าเดิมเสมอไม่ว่าจะอยู่ที่ใด ส่วน**พาธแบบสัมพัทธ์**นั้นระบุตำแหน่งโดยอ้างอิงจากที่ที่คุณอยู่ในขณะนั้น เหมือนกับการบอกว่า "ไปทางเหนือ 20 กิโลเมตร"
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+ตัวอย่างเช่น:
+- ถ้าอยู่ในไดเรกทอรี `/home/repl` พาธ**สัมพัทธ์** `seasonal` จะชี้ไปยังไดเรกทอรีเดียวกับพาธ**สัมบูรณ์** `/home/repl/seasonal`
+- ถ้าอยู่ในไดเรกทอรี `/home/repl/seasonal` พาธ**สัมพัทธ์** `winter.csv` จะชี้ไปยังไฟล์เดียวกับพาธ**สัมบูรณ์** `/home/repl/seasonal/winter.csv`
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+เชลล์จะตัดสินว่าพาธเป็นแบบสัมบูรณ์หรือสัมพัทธ์โดยดูที่อักขระตัวแรก ถ้าขึ้นต้นด้วย `/` คือสัมบูรณ์ ถ้า*ไม่*ขึ้นต้นด้วย `/` คือสัมพัทธ์
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +187,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+ขณะนี้อยู่ที่ `/home/repl` ใช้ `ls` พร้อม**พาธสัมพัทธ์**เพื่อแสดงเฉพาะไฟล์ที่มีพาธสัมบูรณ์เป็น `/home/repl/course.txt`
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+โดยทั่วไปสามารถสร้างพาธสัมพัทธ์ไปยังไฟล์หรือไดเรกทอรีที่อยู่ภายใต้ตำแหน่งปัจจุบันได้
+โดยตัดพาธสัมบูรณ์ของตำแหน่งปัจจุบันออกจากพาธสัมบูรณ์ของสิ่งที่ต้องการ
 
 `@solution`
 ```{shell}
@@ -209,13 +203,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "คุณไม่ได้เรียกใช้ `ls` เพื่อสร้างรายการไฟล์"), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "คำสั่งของคุณไม่ได้สร้างรายการไฟล์ที่ถูกต้อง กรุณาใช้ `ls` ตามด้วยเส้นทางสัมพัทธ์ไปยัง `/home/repl/course.txt`")
     )
 )
-
 ```
 
 ***
@@ -227,12 +220,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+ขณะนี้อยู่ที่ `/home/repl`
+ใช้ `ls` พร้อมพาธ**สัมพัทธ์**
+เพื่อแสดงเฉพาะไฟล์ `/home/repl/seasonal/summer.csv`
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+พาธสัมพัทธ์จะ*ไม่*ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -244,10 +237,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "คุณไม่ได้เรียกใช้ `ls` เพื่อสร้างรายการไฟล์"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "คำสั่งของคุณไม่ได้สร้างรายการไฟล์ที่ถูกต้อง กรุณาใช้ `ls` ตามด้วยเส้นทางสัมพัทธ์ไปยัง `/home/repl/seasonal/summer.csv`")
     )
 )
 ```
@@ -261,12 +254,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+ขณะนี้อยู่ที่ `/home/repl`
+ใช้ `ls` พร้อมพาธ**สัมพัทธ์**
+เพื่อแสดงเนื้อหาในไดเรกทอรี `/home/repl/people`
 
 `@hint`
-Relative paths do not start with a leading '/'.
+พาธสัมพัทธ์จะไม่ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -278,19 +271,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "คุณไม่ได้เรียกใช้ `ls` เพื่อสร้างรายการไฟล์"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "คำสั่งของคุณไม่ได้สร้างรายการไฟล์ที่ถูกต้อง กรุณาใช้ `ls` ตามด้วยเส้นทางสัมพัทธ์ไปยัง `/home/repl/people`")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("ยินดีด้วย เมื่อคุณทราบเกี่ยวกับการแสดงรายการไฟล์และไดเรกทอรีแล้ว มาดูวิธีการเคลื่อนที่ในระบบไฟล์กัน!")
 ```
 
 ---
 
-## How can I move to another directory?
+## วิธีย้ายไปยังไดเรกทอรีอื่น
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +290,16 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+เช่นเดียวกับที่เราเปิดโฟลเดอร์ด้วยการดับเบิลคลิกใน File Browser ก็สามารถย้ายตำแหน่งในระบบไฟล์ได้ด้วยคำสั่ง `cd`
+(ย่อมาจาก "change directory" หรือ "เปลี่ยนไดเรกทอรี")
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+หากพิมพ์ `cd seasonal` แล้วพิมพ์ `pwd`
+เชลล์จะแสดงว่าตอนนี้อยู่ที่ `/home/repl/seasonal`
+จากนั้นถ้ารัน `ls` โดยไม่มีพารามิเตอร์
+ก็จะเห็นเนื้อหาของ `/home/repl/seasonal`
+เพราะนั่นคือตำแหน่งปัจจุบัน
+หากต้องการกลับไปยังโฮมไดเรกทอรี `/home/repl`
+ให้ใช้คำสั่ง `cd /home/repl`
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +315,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+ขณะนี้อยู่ที่ `/home/repl`/.
+ย้ายไปยัง `/home/repl/seasonal` โดยใช้พาธแบบสัมพัทธ์
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+จำไว้ว่า `cd` ย่อมาจาก "change directory" และพาธแบบสัมพัทธ์จะไม่ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -340,9 +331,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="หากไดเรกทอรีการทำงานปัจจุบันของท่าน (ตรวจสอบด้วย `pwd`) คือ `/home/repl` ท่านสามารถย้ายไปยังโฟลเดอร์ `seasonal` ได้ด้วยคำสั่ง `cd seasonal`")
 )
-
 ```
 
 ***
@@ -354,10 +344,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+ใช้ `pwd` เพื่อตรวจสอบว่าอยู่ในไดเรกทอรีที่ถูกต้องแล้ว
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+อย่าลืมกด "Enter" หรือ "Return" หลังจากพิมพ์คำสั่งแล้ว
 
 `@solution`
 ```{shell}
@@ -374,7 +364,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +375,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+ใช้ `ls` โดยไม่ต้องระบุพาธ เพื่อดูเนื้อหาในไดเรกทอรีนั้น
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+อย่าลืมกด "Enter" หรือ "Return" หลังจากพิมพ์คำสั่งแล้ว
 
 `@solution`
 ```{shell}
@@ -403,17 +392,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="คำสั่งของคุณไม่ได้สร้างผลลัพธ์ที่ถูกต้อง คุณได้ใช้ `ls` โดยไม่มีเส้นทางเพื่อแสดงเนื้อหาของไดเรกทอรีปัจจุบันหรือไม่?")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("ยอดเยี่ยม! นี่เป็นเรื่องเกี่ยวกับการนำทางลงไปยังไดเรกทอรีย่อย แล้วการเลื่อนขึ้นล่ะ? มาดูกันเลย!")
 ```
 
 ---
 
-## How can I move up a directory?
+## จะเลื่อนขึ้นไปยังไดเรกทอรีระดับบนได้อย่างไร?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +409,54 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+**ไดเรกทอรีแม่** (parent) คือไดเรกทอรีที่อยู่ระดับสูงกว่า
+ตัวอย่างเช่น `/home` คือไดเรกทอรีแม่ของ `/home/repl`
+และ `/home/repl` คือไดเรกทอรีแม่ของ `/home/repl/seasonal`
+สามารถระบุ absolute path ของไดเรกทอรีแม่ให้กับคำสั่งอย่าง `cd` และ `ls` ได้เสมอ
+แต่ในทางปฏิบัติ
+มักใช้ประโยชน์จาก path พิเศษ `..`
+(จุดสองจุดไม่มีช่องว่าง) ซึ่งหมายถึง "ไดเรกทอรีที่อยู่เหนือไดเรกทอรีปัจจุบัน"
+หากอยู่ใน `/home/repl/seasonal`
+คำสั่ง `cd ..` จะพาขึ้นไปยัง `/home/repl`
+หากใช้ `cd ..` อีกครั้ง
+จะไปถึง `/home`
+และใช้ `cd ..` อีกหนึ่งครั้งก็จะอยู่ที่ *root directory* `/`
+ซึ่งเป็นระดับสูงสุดของระบบไฟล์
+(อย่าลืมเว้นช่องว่างระหว่าง `cd` กับ `..` เพราะเป็นคำสั่งและ path คนละส่วน ไม่ใช่คำสั่งสี่ตัวอักษรเดียว)
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+จุดเดี่ยว `.` หมายถึง "ไดเรกทอรีปัจจุบัน" เสมอ
+ดังนั้น `ls` และ `ls .` จึงให้ผลเหมือนกัน
+ส่วน `cd .` ไม่มีผลใดๆ
+(เพราะเป็นการย้ายไปยังไดเรกทอรีที่อยู่อยู่แล้ว)
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+ path พิเศษอีกอย่างหนึ่งคือ `~` (อักขระ tilde)
+ซึ่งหมายถึง "โฮมไดเรกทอรีของคุณ" เช่น `/home/repl`
+ไม่ว่าจะอยู่ที่ใด
+`ls ~` จะแสดงเนื้อหาของโฮมไดเรกทอรีเสมอ
+และ `cd ~` จะพากลับไปยังโฮมไดเรกทอรีเสมอ
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+หากอยู่ใน `/home/repl/seasonal`
+`cd ~/../.` จะพาไปที่ใด?
 
 `@hint`
-Trace the path one directory at a time.
+ติดตามเส้นทางทีละไดเรกทอรี
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (root directory)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- ไม่ใช่ แต่การใช้ `~` หรือ `..` เพียงอย่างเดียวก็จะพาไปที่นั่นได้
+- ถูกต้อง! เส้นทางนี้หมายถึง 'โฮมไดเรกทอรี', 'ขึ้นหนึ่งระดับ', 'ที่นี่'
+- ไม่ใช่ แต่การใช้ `.` เพียงอย่างเดียวจะให้ผลแบบนั้น
+- ไม่ใช่ ส่วนสุดท้ายของเส้นทางคือ `.` (หมายถึง "ที่นี่") ไม่ใช่ `..` (หมายถึง "ขึ้นระดับบน")
 
 ---
 
-## How can I copy files?
+## การคัดลอกไฟล์ทำอย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +464,23 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+บ่อยครั้งที่ต้องการคัดลอกไฟล์ ย้ายไฟล์ไปยังไดเรกทอรีอื่นเพื่อจัดระเบียบ หรือเปลี่ยนชื่อไฟล์
+คำสั่งที่ใช้สำหรับสิ่งนี้คือ `cp` ซึ่งย่อมาจาก "copy"
+หากมีไฟล์ชื่อ `original.txt` อยู่แล้ว คำสั่งต่อไปนี้:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+จะสร้างสำเนาของ `original.txt` โดยตั้งชื่อว่า `duplicate.txt`
+ถ้ามีไฟล์ชื่อ `duplicate.txt` อยู่ก่อนแล้ว ไฟล์นั้นจะถูกเขียนทับ
+หากพารามิเตอร์สุดท้ายของ `cp` เป็นไดเรกทอรีที่มีอยู่แล้ว คำสั่งเช่น:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+จะคัดลอกไฟล์ *ทั้งหมด* ไปยังไดเรกทอรีนั้น
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +496,10 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+สร้างสำเนาของ `seasonal/summer.csv` ในไดเรกทอรี `backup` (ซึ่งอยู่ใน `/home/repl` เช่นกัน) โดยตั้งชื่อไฟล์ใหม่ว่า `summer.bck`
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+รวมชื่อไดเรกทอรีปลายทางกับชื่อไฟล์ที่คัดลอก เพื่อสร้าง relative path สำหรับไฟล์ใหม่
 
 `@solution`
 ```{shell}
@@ -531,10 +510,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` ดูเหมือนจะไม่มีอยู่ในไดเรกทอรี `backup` กรุณาระบุเส้นทางสองเส้นทางให้กับ `cp`: ไฟล์ที่มีอยู่ (`seasonal/summer.csv`) และไฟล์ปลายทาง (`backup/summer.bck`)"),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +524,10 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+คัดลอก `spring.csv` และ `summer.csv` จากไดเรกทอรี `seasonal` ไปยังไดเรกทอรี `backup` *โดยไม่ต้องเปลี่ยน* current working directory (`/home/repl`)
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+ใช้ `cp` พร้อมระบุชื่อไฟล์ที่ต้องการคัดลอก *แล้วตามด้วย* ชื่อไดเรกทอรีปลายทาง
 
 `@solution`
 ```{shell}
@@ -561,18 +537,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` ดูเหมือนว่าจะไม่ได้ถูกคัดลอกไปยังไดเรกทอรี `backup` กรุณาระบุชื่อไฟล์สองชื่อและชื่อไดเรกทอรีให้กับ `cp`"
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="กรุณาตรวจสอบให้แน่ใจว่าได้คัดลอกไฟล์ขณะอยู่ใน `{{dir}}`! ใช้ `cd {{dir}}` เพื่อนำทางกลับไปที่นั่น"),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("ทำได้ดีมาก นอกจากการคัดลอกแล้ว เราควรสามารถย้ายไฟล์จากไดเรกทอรีหนึ่งไปยังอีกไดเรกทอรีหนึ่งได้ด้วย เรียนรู้เพิ่มเติมได้ในแบบฝึกหัดถัดไป!")
 ```
 
 ---
 
-## How can I move a file?
+## จะย้ายไฟล์ได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +556,19 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+คำสั่ง `cp` ใช้คัดลอกไฟล์ ส่วน `mv` ใช้ย้ายไฟล์จากไดเรกทอรีหนึ่งไปยังอีกที่หนึ่ง เหมือนกับการลากไฟล์ในโปรแกรมจัดการไฟล์แบบกราฟิก
+การระบุพารามิเตอร์ใช้วิธีเดียวกับ `cp` ตัวอย่างเช่น คำสั่ง:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+จะย้ายไฟล์ `autumn.csv` และ `winter.csv` จากไดเรกทอรีปัจจุบันขึ้นไปหนึ่งระดับสู่ไดเรกทอรีแม่
+(เนื่องจาก `..` หมายถึงไดเรกทอรีที่อยู่เหนือตำแหน่งปัจจุบันเสมอ)
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+ขณะนี้อยู่ที่ `/home/repl` ซึ่งมีไดเรกทอรีย่อยชื่อ `seasonal` และ `backup`
+ใช้คำสั่งเดียว ย้าย `spring.csv` และ `summer.csv` จาก `seasonal` ไปยัง `backup`
 
 `@hint`
 
@@ -613,20 +585,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="ไฟล์ `%s` ไม่อยู่ในไดเรกทอรี `backup` คุณได้ใช้ `mv` อย่างถูกต้องหรือไม่? กรุณาใช้ชื่อไฟล์สองชื่อและไดเรกทอรีเป็นพารามิเตอร์ของ `mv`"
+seasonal_patt="ไฟล์ `%s` ยังคงอยู่ในไดเรกทอรี `seasonal` กรุณาย้ายไฟล์ด้วย `mv` แทนการคัดลอกด้วย `cp`!"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("เยี่ยมมาก เราไปต่อกันเลย!")
 ```
 
 ---
 
-## How can I rename files?
+## การเปลี่ยนชื่อไฟล์ทำได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +606,18 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` ยังสามารถใช้เปลี่ยนชื่อไฟล์ได้ด้วย ตัวอย่างเช่น ถ้ารันคำสั่ง:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+ไฟล์ `course.txt` ในไดเรกทอรีปัจจุบันจะถูก "ย้าย" ไปเป็นไฟล์ `old-course.txt`
+วิธีนี้ต่างจากการทำงานของตัวจัดการไฟล์แบบกราฟิก แต่ก็มีประโยชน์มากในหลายสถานการณ์
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+ข้อควรระวัง:
+เช่นเดียวกับ `cp` คำสั่ง `mv` จะเขียนทับไฟล์ที่มีอยู่แล้ว
+ตัวอย่างเช่น ถ้ามีไฟล์ชื่อ `old-course.txt` อยู่แล้ว คำสั่งข้างต้นจะแทนที่ไฟล์นั้นด้วยเนื้อหาจาก `course.txt`
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +633,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+เข้าไปในไดเรกทอรี `seasonal`
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+จำไว้ว่า `cd` ย่อมาจาก "change directory" และพาธแบบ relative จะไม่ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -681,9 +648,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="หากไดเรกทอรีการทำงานปัจจุบันของท่าน (ตรวจสอบด้วย `pwd`) คือ `/home/repl` ท่านสามารถย้ายไปยังโฟลเดอร์ `seasonal` ได้ด้วยคำสั่ง `cd seasonal`")
 )
-
 ```
 
 ***
@@ -695,10 +661,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+เปลี่ยนชื่อไฟล์ `winter.csv` เป็น `winter.csv.bck`
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+ใช้ `mv` โดยระบุชื่อไฟล์ปัจจุบันก่อน ตามด้วยชื่อที่ต้องการ
 
 `@solution`
 ```{shell}
@@ -708,15 +674,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " ใช้ `mv` พร้อมกับอาร์กิวเมนต์สองตัว: ไฟล์ที่ต้องการเปลี่ยนชื่อ (`winter.csv`) และชื่อใหม่ของไฟล์ (`winter.csv.bck`)"
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="คาดว่าจะพบ `winter.csv.bck` ในไดเรกทอรี" + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="ไม่คาดว่าจะพบ `winter.csv` ในไดเรกทอรีอีกต่อไป" + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +693,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+รัน `ls` เพื่อตรวจสอบว่าทุกอย่างถูกต้อง
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+อย่าลืมกด "Enter" หรือ "Return" เพื่อรันคำสั่ง
 
 `@solution`
 ```{shell}
@@ -743,22 +708,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="คุณได้ใช้ `ls` เพื่อแสดงรายการเนื้อหาในไดเรกทอรีการทำงานปัจจุบันของคุณหรือไม่?")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "คำสั่งของคุณไม่ได้สร้างรายการไฟล์ที่ถูกต้อง กรุณาใช้ `ls` โดยไม่มีอาร์กิวเมนต์เพื่อแสดงรายการเนื้อหาในไดเรกทอรีการทำงานปัจจุบันของคุณ")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("การคัดลอก การย้าย การเปลี่ยนชื่อ คุณเข้าใจทุกอย่างแล้ว! ต่อไป: การลบไฟล์")
 ```
 
 ---
 
-## How can I delete files?
+## จะลบไฟล์ได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +730,23 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+เราสามารถคัดลอกและย้ายไฟล์ได้
+ส่วนการลบไฟล์นั้นใช้คำสั่ง `rm`
+ซึ่งย่อมาจากคำว่า "remove"
+เช่นเดียวกับ `cp` และ `mv`
+สามารถระบุชื่อไฟล์ได้หลายไฟล์พร้อมกัน เช่น:
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+คำสั่งนี้จะลบทั้ง `thesis.txt` และ `backup/thesis-2017-08.txt`
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` ทำงานตรงตามชื่อ
+และลบไฟล์ทันที:
+ต่างจากโปรแกรมจัดการไฟล์แบบกราฟิก
+เชลล์ไม่มีถังขยะ
+ดังนั้นเมื่อพิมพ์คำสั่งข้างต้น ไฟล์จะหายไปอย่างถาวร
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +762,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+ขณะนี้อยู่ที่ `/home/repl`
+เข้าไปยังไดเรกทอรี `seasonal`
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+จำไว้ว่า `cd` ย่อมาจาก "change directory" และพาธแบบ relative จะไม่ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -815,7 +777,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +788,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+ลบไฟล์ `autumn.csv`
 
 `@hint`
-Remember that `rm` stands for "remove".
+จำไว้ว่า `rm` ย่อมาจาก "remove"
 
 `@solution`
 ```{shell}
@@ -842,10 +803,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="เราไม่คาดว่า `autumn.csv` จะยังคงอยู่ในไดเรกทอรี `seasonal` กรุณาใช้ `rm` พร้อมกับเส้นทางของไฟล์ที่ต้องการลบ"),
+    has_code('rm', incorrect_msg = 'กรุณาใช้ `rm` เพื่อลบไฟล์ แทนที่จะย้ายไฟล์')
 )
-
 ```
 
 ***
@@ -857,10 +817,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+กลับไปยังโฮมไดเรกทอรี
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+หากใช้ `cd` โดยไม่ระบุพาธ คำสั่งจะพาไปยังโฮมไดเรกทอรี
 
 `@solution`
 ```{shell}
@@ -870,8 +830,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="ใช้ `cd ..` หรือ `cd ~` เพื่อกลับไปยังไดเรกทอรีหลัก")
 ```
 
 ***
@@ -883,10 +842,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+ลบไฟล์ `seasonal/summer.csv` โดยไม่ต้องเปลี่ยนไดเรกทอรีอีกครั้ง
 
 `@hint`
-Remember that `rm` stands for "remove".
+จำไว้ว่า `rm` ย่อมาจาก "remove"
 
 `@solution`
 ```{shell}
@@ -898,16 +857,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="เราไม่คาดว่า `summer.csv` จะยังคงอยู่ในไดเรกทอรี `seasonal` กรุณาใช้ `rm` พร้อมกับเส้นทางของไฟล์ที่ต้องการลบ"),
+    has_code('rm', incorrect_msg = 'กรุณาใช้ `rm` เพื่อลบไฟล์ แทนที่จะย้ายไฟล์')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("ยอดเยี่ยมมาก! ไปยังขั้นตอนถัดไปกันเลย!")
 ```
 
 ---
 
-## How can I create and delete directories?
+## จะสร้างและลบไดเรกทอรีได้อย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +873,19 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` จัดการไดเรกทอรีเหมือนกับไฟล์ทั่วไป:
+ตัวอย่างเช่น ถ้าอยู่ในโฮมไดเรกทอรีแล้วรัน `mv seasonal by-season`
+`mv` จะเปลี่ยนชื่อไดเรกทอรี `seasonal` เป็น `by-season`
+อย่างไรก็ตาม `rm` ทำงานต่างออกไป
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+หากลอง `rm` ไดเรกทอรี
+เชลล์จะแสดงข้อความแจ้งข้อผิดพลาดว่าไม่สามารถทำได้
+เพื่อป้องกันการลบไดเรกทอรีทั้งหมดโดยไม่ตั้งใจ
+ให้ใช้คำสั่งแยกต่างหากชื่อ `rmdir` แทน
+เพื่อความปลอดภัยยิ่งขึ้น คำสั่งนี้จะทำงานได้เฉพาะเมื่อไดเรกทอรีว่างเปล่าเท่านั้น
+จึงต้องลบไฟล์ภายในไดเรกทอรี *ก่อน* จึงจะลบไดเรกทอรีได้
+(ผู้ใช้ที่มีประสบการณ์สามารถใช้ option `-r` กับ `rm` เพื่อให้ได้ผลลัพธ์เดียวกัน
+เราจะพูดถึง option ของคำสั่งในบทถัดไป)
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +901,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+โดยไม่ต้องเปลี่ยนไดเรกทอรี
+ให้ลบไฟล์ `agarwal.txt` ในไดเรกทอรี `people`
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+จำไว้ว่า `rm` ย่อมาจาก "remove" และพาธแบบ relative จะไม่ขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -963,10 +917,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` ไม่ควรอยู่ใน `/home/repl/people` อีกต่อไป คุณใช้ `rm` อย่างถูกต้องหรือไม่?"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'ยังคงมีไฟล์อยู่ในไดเรกทอรี `people` หากคุณเพียงแค่ย้าย `agarwal.txt` หรือสร้างไฟล์ใหม่ โปรดลบไฟล์เหล่านั้นทั้งหมด')
 )
-
 ```
 
 ***
@@ -978,11 +931,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+เมื่อไดเรกทอรี `people` ว่างเปล่าแล้ว
+ให้ใช้คำสั่งเดียวเพื่อลบมัน
 
 `@hint`
-Remember that `rm` only works on files.
+จำไว้ว่า `rm` ใช้ได้กับไฟล์เท่านั้น
 
 `@solution`
 ```{shell}
@@ -995,9 +948,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "ไดเรกทอรี 'people' ไม่ควรอยู่ในไดเรกทอรีหลักของคุณอีกต่อไป กรุณาใช้ `rmdir` เพื่อลบออก!")
 )
-
 ```
 
 ***
@@ -1009,13 +961,13 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+เนื่องจากไดเรกทอรีไม่ใช่ไฟล์
+จึงต้องใช้คำสั่ง `mkdir directory_name`
+เพื่อสร้างไดเรกทอรีใหม่ (ที่ว่างเปล่า)
+ใช้คำสั่งนี้เพื่อสร้างไดเรกทอรีใหม่ชื่อ `yearly` ภายใต้โฮมไดเรกทอรี
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+รัน `mkdir` พร้อมระบุชื่อไดเรกทอรีที่ต้องการสร้าง
 
 `@solution`
 ```{shell}
@@ -1027,9 +979,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="ไม่มีไดเรกทอรี `yearly` ในไดเรกทอรีหลักของคุณ กรุณาใช้คำสั่ง `mkdir yearly` เพื่อสร้างไดเรกทอรีดังกล่าว!")
 )
-
 ```
 
 ***
@@ -1041,12 +992,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+เมื่อมี `yearly` แล้ว
+ให้สร้างไดเรกทอรีอีกอันชื่อ `2017` ภายใน
+*โดยไม่ต้องออกจาก*โฮมไดเรกทอรี
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+ใช้พาธแบบ relative สำหรับไดเรกทอรีย่อยที่ต้องการสร้าง
 
 `@solution`
 ```{shell}
@@ -1059,15 +1010,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="ไม่พบไดเรกทอรี '2017' ใน '/home/repl/yearly' คุณสามารถสร้างไดเรกทอรีนี้โดยใช้เส้นทางสัมพัทธ์ `yearly/2017`")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("ยอดเยี่ยม! มาสรุปบทนี้ด้วยแบบฝึกหัดที่ทบทวนแนวคิดบางส่วนของบทนี้กันเถอะ!")
 ```
 
 ---
 
-## Wrapping up
+## สรุปท้ายบท
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1025,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+ในการวิเคราะห์ข้อมูล มักจะมีการสร้างไฟล์ชั่วคราวขึ้นมาระหว่างกระบวนการ
+แทนที่จะเก็บไว้ใน home directory
+สามารถนำไปไว้ใน `/tmp` ได้
+ซึ่งเป็นที่ที่ผู้ใช้และโปรแกรมมักเก็บไฟล์ที่ต้องการเพียงชั่วคราว
+(สังเกตว่า `/tmp` อยู่ใต้ root directory `/` โดยตรง
+*ไม่ใช่* อยู่ใต้ home directory ของคุณ)
+แบบฝึกหัดสรุปท้ายบทนี้จะแสดงวิธีการทำสิ่งดังกล่าว
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1047,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+ใช้ `cd` เพื่อไปยัง `/tmp`
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+จำไว้ว่า `cd` ย่อมาจาก "change directory" และ absolute path จะขึ้นต้นด้วย '/'
 
 `@solution`
 ```{shell}
@@ -1112,9 +1062,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = 'คุณอยู่ในไดเรกทอรีที่ไม่ถูกต้อง กรุณาใช้ `cd` เพื่อเปลี่ยนไดเรกทอรีไปยัง `/tmp`')
 )
-
 ```
 
 ***
@@ -1126,10 +1075,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+แสดงรายการเนื้อหาใน `/tmp` *โดยไม่ต้อง* พิมพ์ชื่อ directory
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+หากไม่ระบุชื่อ directory ให้ `ls` `ls` จะแสดงเนื้อหาใน directory ปัจจุบัน
 
 `@solution`
 ```{shell}
@@ -1141,13 +1090,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "คุณไม่ได้เรียกใช้ `ls` เพื่อสร้างรายการไฟล์"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "คำสั่งของคุณไม่ได้สร้างรายการไฟล์ที่ถูกต้อง กรุณาใช้ `ls` โดยไม่มีอาร์กิวเมนต์")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1107,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+สร้าง directory ใหม่ภายใน `/tmp` ชื่อว่า `scratch`
 
 `@hint`
-Use `mkdir` to make directories.
+ใช้ `mkdir` เพื่อสร้าง directory
 
 `@solution`
 ```{shell}
@@ -1176,10 +1124,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="ไม่พบไดเรกทอรี 'scratch' ภายใต้ '/tmp' กรุณาตรวจสอบให้แน่ใจว่าใช้คำสั่ง `mkdir` อย่างถูกต้อง")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1138,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+ย้ายไฟล์ `/home/repl/people/agarwal.txt` ไปยัง `/tmp/scratch`
+แนะนำให้ใช้ชอร์ตคัต `~` แทน home directory และใช้ relative path สำหรับปลายทาง แทนการพิมพ์ absolute path
 
 `@hint`
 
@@ -1207,8 +1154,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="ไม่พบ 'agarwal.txt' ใน '/tmp/scratch' กรุณาใช้ `mv` โดยระบุ `~/people/agarwal.txt` เป็นพารามิเตอร์แรก และ `scratch` เป็นพารามิเตอร์ที่สอง")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("นี่คือบทสรุปของบทที่ 1 ในหลักสูตร Introduction to Shell! รีบไปยังบทถัดไปเพื่อเรียนรู้เพิ่มเติมเกี่ยวกับการจัดการข้อมูล!")
 ```

@@ -1,15 +1,14 @@
 ---
-title: Batch processing
+title: การประมวลผลแบบกลุ่ม
 description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+  คำสั่ง Shell ส่วนใหญ่สามารถประมวลผลหลายไฟล์พร้อมกันได้ บทนี้จะแสดงวิธีทำให้
+  pipeline ของคุณทำงานแบบนั้น พร้อมทั้งแนะนำการใช้ตัวแปรใน Shell เพื่อเก็บข้อมูล
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: Shell เก็บข้อมูลอย่างไร
 ---
 
-## How does the shell store information?
+## Shell เก็บข้อมูลอย่างไร?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +16,36 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+เช่นเดียวกับโปรแกรมอื่น ๆ shell จะเก็บข้อมูลไว้ในตัวแปร
+ตัวแปรบางตัวเรียกว่า **environment variables** (ตัวแปรสภาพแวดล้อม)
+ซึ่งพร้อมใช้งานตลอดเวลา
+โดยทั่วไปชื่อของ environment variables จะเขียนด้วยตัวพิมพ์ใหญ่
+ตัวแปรที่ใช้บ่อยบางส่วนแสดงไว้ในตารางด้านล่าง
 
-| Variable | Purpose                           | Value                 |
+| ตัวแปร | วัตถุประสงค์                              | ค่า                   |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | โฮมไดเรกทอรีของผู้ใช้             | `/home/repl`          |
+| `PWD `   | ไดเรกทอรีปัจจุบันที่กำลังทำงานอยู่         | เหมือนกับคำสั่ง `pwd` |
+| `SHELL`  | โปรแกรม shell ที่กำลังใช้งาน | `/bin/bash`           |
+| `USER`   | ID ของผู้ใช้                         | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+หากต้องการดูรายการทั้งหมด (ซึ่งค่อนข้างยาว)
+ให้พิมพ์ `set` ใน shell
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+ใช้ `set` และ `grep` ร่วมกับ pipe เพื่อแสดงค่าของ `HISTFILESIZE`
+ซึ่งกำหนดจำนวนคำสั่งเก่าที่จัดเก็บไว้ในประวัติคำสั่งของคุณ
+ค่าดังกล่าวคืออะไร?
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- ไม่มีตัวแปรนี้
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+ใช้ `set | grep HISTFILESIZE` เพื่อดึงบรรทัดที่ต้องการ
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +54,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "ไม่ถูกต้อง: เชลล์บันทึกประวัติมากกว่านั้น"
+err2 = "ไม่ถูกต้อง: เชลล์บันทึกประวัติมากกว่านั้น"
+correct3 = "ถูกต้อง: เชลล์บันทึกคำสั่งเก่า 2000 คำสั่งโดยค่าเริ่มต้นในระบบนี้"
+err4 = "ไม่ถูกต้อง: ตัวแปร `HISTFILESIZE` มีอยู่"
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## วิธีแสดงค่าของตัวแปร
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +71,47 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+วิธีที่ง่ายกว่าในการดูค่าของตัวแปรคือใช้คำสั่ง `echo` ซึ่งจะพิมพ์อาร์กิวเมนต์ที่ส่งเข้าไป ตัวอย่างเช่น เมื่อพิมพ์
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+จะได้ผลลัพธ์
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+แต่ถ้าลองใช้คำสั่งนี้เพื่อแสดงค่าของตัวแปรแบบนี้:
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+ระบบจะพิมพ์ชื่อตัวแปรออกมาเลย คือ `USER`
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+หากต้องการให้แสดง*ค่า*ของตัวแปร ต้องใส่เครื่องหมายดอลลาร์ `$` นำหน้าตัวแปรนั้น เมื่อพิมพ์
 
 ```{shell}
 echo $USER
 ```
 
-prints
+จะได้
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+กฎนี้ใช้ได้ทุกที่: หากต้องการดึงค่าของตัวแปรชื่อ `X` ให้เขียนเป็น `$X`
+(เพื่อให้ shell แยกแยะได้ว่าหมายถึง "ไฟล์ชื่อ X" หรือ "ค่าของตัวแปรชื่อ X")
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+ตัวแปร `OSTYPE` เก็บชื่อประเภทของระบบปฏิบัติการที่ใช้งานอยู่
+แสดงค่าของตัวแปรนี้โดยใช้คำสั่ง `echo`
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+เรียกใช้ `echo` โดยใส่ `$` นำหน้าตัวแปร `OSTYPE`
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +130,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="คุณเรียกใช้ `echo` หรือไม่?"),
+            has_code('OSTYPE', incorrect_msg="คุณพิมพ์ตัวแปรสภาพแวดล้อม `OSTYPE` หรือไม่?"),
+            has_code(r'\$OSTYPE', incorrect_msg="โปรดตรวจสอบให้แน่ใจว่าได้เติม `$` ไว้หน้า `OSTYPE`")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("ยอดเยี่ยมมากสำหรับการแสดงผลตัวแปรสภาพแวดล้อม! คุณเริ่มต้นได้ดีมาก มาดำเนินการต่อกันเลย!")
 ```
 
 ---
 
-## How else does the shell store information?
+## เชลล์เก็บข้อมูลด้วยวิธีอื่นอีกอย่างไร?
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +149,18 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+ตัวแปรอีกประเภทหนึ่งเรียกว่า **shell variable**
+ซึ่งทำงานคล้ายกับตัวแปรแบบ local ในภาษาโปรแกรมมิ่ง
 
-To create a shell variable,
-you simply assign a value to a name:
+ในการสร้าง shell variable
+ให้กำหนดค่าให้กับชื่อตัวแปรโดยตรง:
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+*โดยไม่มี* ช่องว่างก่อนหรือหลังเครื่องหมาย `=`
+เมื่อกำหนดค่าแล้ว สามารถตรวจสอบค่าของตัวแปรได้ด้วย:
 
 ```{shell}
 echo $training
@@ -189,10 +183,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+กำหนดตัวแปรชื่อ `testing` ให้มีค่าเป็น `seasonal/winter.csv`
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+*ไม่ควร* มีช่องว่างระหว่างชื่อตัวแปรกับค่าที่กำหนด
 
 `@solution`
 ```{shell}
@@ -214,12 +208,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='คุณได้กำหนดตัวแปร shell ชื่อ `testing` หรือไม่?'),
+        has_code('testing=', incorrect_msg='คุณได้เขียน `=` ต่อท้าย testing โดยตรงโดยไม่มีช่องว่างหรือไม่?'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='คุณได้กำหนดค่าของ `testing` เป็น `seasonal/winter.csv` หรือไม่?')
     )
 )
-
 ```
 
 ***
@@ -231,12 +224,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+ใช้ `head -n 1 SOMETHING` เพื่อดึงบรรทัดแรกจาก `seasonal/winter.csv`
+โดยใช้ค่าของตัวแปร `testing` แทนการระบุชื่อไฟล์โดยตรง
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+อย่าลืมใช้ `$testing` แทนที่จะใช้แค่ `testing`
+(ต้องใส่ `$` เพื่อดึงค่าของตัวแปร)
 
 `@solution`
 ```{shell}
@@ -251,23 +244,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="คุณอ้างอิงตัวแปร shell โดยใช้ `$testing` หรือไม่?"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="คุณเรียกใช้ `head` หรือไม่?"),
+            has_code('-n', incorrect_msg="คุณจำกัดจำนวนบรรทัดด้วย `-n` หรือไม่?"),
+            has_code(r'-n\s+1', incorrect_msg="คุณเลือกเก็บ 1 บรรทัดด้วย `-n 1` หรือไม่?")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("ยอดเยี่ยม! มาดูกันว่าคุณสามารถทำซ้ำคำสั่งได้อย่างง่ายดายอย่างไร")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## จะทำให้คำสั่งทำงานซ้ำหลายครั้งได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +267,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+ตัวแปร Shell ยังถูกใช้ใน **ลูป (loops)**
+ซึ่งทำให้คำสั่งทำงานซ้ำหลายครั้ง
+หากรันคำสั่งนี้:
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+จะได้ผลลัพธ์:
 
 ```
 gif
@@ -291,21 +283,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+สังเกตสิ่งต่อไปนี้เกี่ยวกับลูป:
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. โครงสร้างคือ `for` ...ตัวแปร... `in` ...รายการ... `; do` ...คำสั่งหลัก... `; done`
+2. รายการของสิ่งที่ลูปจะประมวลผล (ในกรณีนี้คือคำว่า `gif`, `jpg`, และ `png`)
+3. ตัวแปรที่ติดตามว่าลูปกำลังประมวลผลสิ่งใดอยู่ (ในกรณีนี้คือ `filetype`)
+4. คำสั่งหลักของลูปที่ทำการประมวลผล (ในกรณีนี้คือ `echo $filetype`)
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+สังเกตว่าคำสั่งหลักใช้ `$filetype` เพื่อดึงค่าของตัวแปร ไม่ใช่แค่ `filetype`
+เช่นเดียวกับการใช้ตัวแปร Shell ทั่วไป
+และให้สังเกตตำแหน่งของเครื่องหมายเซมิโคลอน:
+อันแรกอยู่ระหว่างรายการและคีย์เวิร์ด `do`
+ส่วนอันที่สองอยู่ระหว่างคำสั่งหลักและคีย์เวิร์ด `done`
 
 `@instructions`
-Modify the loop so that it prints:
+แก้ไขลูปให้แสดงผลลัพธ์ดังนี้:
 
 ```
 docx
@@ -313,10 +305,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+ให้ใช้ `filetype` เป็นชื่อตัวแปรของลูป
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+ใช้โครงสร้างโค้ดในข้อความแนะนำ โดยเปลี่ยนนามสกุลไฟล์รูปภาพเป็นนามสกุลไฟล์เอกสารแทน
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +327,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='คุณเรียกใช้ `for` หรือไม่?'),
+      has_code('filetype', incorrect_msg='คุณใช้ `filetype` เป็นตัวแปรในลูปหรือไม่?'),
+      has_code('in', incorrect_msg='คุณใช้ `in` ก่อนรายการประเภทไฟล์หรือไม่?'),
+      has_code('docx odt pdf', incorrect_msg='คุณวนลูปผ่าน `docx`, `odt` และ `pdf` ตามลำดับนั้นหรือไม่?'),
+      has_code(r'pdf\s*;', incorrect_msg='คุณใส่เครื่องหมายเซมิโคลอนหลังองค์ประกอบสุดท้ายของลูปหรือไม่?'),
+      has_code(r';\s*do', incorrect_msg='คุณใช้ `do` หลังเครื่องหมายเซมิโคลอนแรกหรือไม่?'),
+      has_code('echo', incorrect_msg='คุณเรียกใช้ `echo` หรือไม่?'),
+      has_code(r'\$filetype', incorrect_msg='คุณใช้ echo กับ `$filetype` หรือไม่?'),
+      has_code(r'filetype\s*;', incorrect_msg='คุณใส่เครื่องหมายเซมิโคลอนหลังเนื้อหาของลูปหรือไม่?'),
+      has_code('; done', incorrect_msg='คุณลงท้ายด้วย `done` หรือไม่?')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("ยอดเยี่ยมมากสำหรับการใช้ลูป! ลูปมีประโยชน์อย่างมากหากคุณต้องการทำสิ่งเดิมซ้ำหลายร้อยหรือหลายพันครั้ง")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## จะวนซ้ำคำสั่งสำหรับแต่ละไฟล์ได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +353,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+สามารถพิมพ์ชื่อไฟล์ที่ต้องการประมวลผลลงไปในลูปได้โดยตรง
+แต่โดยทั่วไปการใช้ wildcard จะสะดวกกว่า
+ลองรันลูปนี้ใน console:
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+ผลลัพธ์ที่ได้คือ:
 
 ```
 seasonal/autumn.csv
@@ -378,14 +370,14 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+เพราะ shell จะขยาย `seasonal/*.csv` ให้เป็นรายชื่อไฟล์ทั้ง 4 ไฟล์
+ก่อนที่จะรันลูป
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+แก้ไข wildcard expression เป็น `people/*`
+เพื่อให้ลูปแสดงชื่อไฟล์ทั้งหมดในไดเรกทอรี `people`
+ไม่ว่าไฟล์จะมีนามสกุลหรือไม่ก็ตาม
+กรุณาใช้ `filename` เป็นชื่อตัวแปรของลูป
 
 `@hint`
 
@@ -407,25 +399,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='คุณเรียกใช้ `for` หรือไม่?'),
+      has_code('filename', incorrect_msg='คุณใช้ `filename` เป็นตัวแปรในลูปหรือไม่?'),
+      has_code('in', incorrect_msg='คุณใช้ `in` ก่อนรายการประเภทไฟล์หรือไม่?'),
+      has_code('people/\*', incorrect_msg='คุณระบุรายการไฟล์ด้วย `people/*` หรือไม่?'),
+      has_code(r'people/\*\s*;', incorrect_msg='คุณใส่เครื่องหมายเซมิโคลอนหลังรายการไฟล์หรือไม่?'),
+      has_code(r';\s*do', incorrect_msg='คุณใช้ `do` หลังเครื่องหมายเซมิโคลอนแรกหรือไม่?'),
+      has_code('echo', incorrect_msg='คุณเรียกใช้ `echo` หรือไม่?'),
+      has_code(r'\$filename', incorrect_msg='คุณใช้ `echo` กับ `$filename` หรือไม่?'),
+      has_code(r'filename\s*;', incorrect_msg='คุณใส่เครื่องหมายเซมิโคลอนหลังเนื้อหาของลูปหรือไม่?'),
+      has_code('; done', incorrect_msg='คุณสิ้นสุดด้วย `done` หรือไม่?')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("ยอดเยี่ยมมาก! อักขระไวลด์การ์ดและลูปเป็นการผสมผสานที่มีประสิทธิภาพอย่างมาก")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## จะบันทึกชื่อของชุดไฟล์ได้อย่างไร?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +425,25 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+มักนิยมกำหนดค่าตัวแปรด้วย wildcard expression เพื่อเก็บรายชื่อไฟล์ไว้ใช้งาน
+ตัวอย่างเช่น
+หากกำหนด `datasets` แบบนี้:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+ก็สามารถแสดงชื่อไฟล์ในภายหลังได้ด้วย:
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+วิธีนี้ช่วยลดการพิมพ์ซ้ำและลดโอกาสเกิดข้อผิดพลาดได้
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+ถ้ารันสองคำสั่งนี้ใน home directory จะได้ผลลัพธ์กี่บรรทัด?
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +451,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- ไม่มีเลย: เนื่องจาก `files` ถูกกำหนดในบรรทัดแยกต่างหาก จึงไม่มีค่าในบรรทัดที่สอง
+- หนึ่งบรรทัด: คำว่า "files"
+- สี่บรรทัด: ชื่อไฟล์ข้อมูลตามฤดูกาลทั้งสี่ไฟล์
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+จำไว้ว่า `X` เพียงอย่างเดียวหมายถึง "X" ตามตัวอักษร ในขณะที่ `$X` คือค่าของตัวแปร `X`
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +465,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "ไม่ถูกต้อง: คุณไม่จำเป็นต้องกำหนดตัวแปรในบรรทัดเดียวกับที่คุณใช้งาน"
+err2 = "ไม่ถูกต้อง: ตัวอย่างนี้กำหนดและใช้งานตัวแปร `files` ใน shell เดียวกัน"
+correct3 = "ถูกต้อง คำสั่งนี้เทียบเท่ากับ `for f in seasonal/*.csv; do echo $f; done`"
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## ชื่อตัวแปรกับค่าของตัวแปร
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +481,55 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+ข้อผิดพลาดที่พบบ่อยคือการลืมใส่ `$` ไว้หน้าชื่อตัวแปร
+เมื่อเกิดเหตุการณ์นี้
+เชลล์จะใช้ชื่อที่พิมพ์เข้าไปตรงๆ
+แทนที่จะใช้ค่าของตัวแปรนั้น
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+อีกข้อผิดพลาดที่ผู้ใช้ที่มีประสบการณ์มักเจอคือการพิมพ์ชื่อตัวแปรผิด
+ตัวอย่างเช่น
+หากกำหนดตัวแปร `datasets` แบบนี้:
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+แล้วพิมพ์:
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+เชลล์จะไม่แสดงผลใดๆ
+เพราะ `datsets` (ที่ขาดตัว "a" ตัวที่สอง) ยังไม่ได้ถูกกำหนดไว้
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+หากรันคำสั่งสองบรรทัดนี้ใน home directory ผลลัพธ์ที่ได้จะเป็นอะไร?
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+(อ่านส่วนแรกของลูปให้ดีก่อนตอบ)
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+จำไว้ว่า `X` เพียงอย่างเดียวคือแค่ "X" ในขณะที่ `$X` คือค่าของตัวแปร `X`
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [หนึ่งบรรทัด: คำว่า "files"]
+- สี่บรรทัด: ชื่อของไฟล์ข้อมูล seasonal ทั้งสี่ไฟล์
+- สี่บรรทัดว่างเปล่า: ตัวแปร `f` ไม่ได้ถูกกำหนดค่าไว้
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- ถูกต้อง: ลูปใช้ `files` แทน `$files` ดังนั้นรายการจึงประกอบด้วยคำว่า "files" เพียงคำเดียว
+- ไม่ใช่: ลูปใช้ `files` แทน `$files` ดังนั้นรายการจึงประกอบด้วยคำว่า "files" ไม่ใช่การขยายค่าของตัวแปร `files`
+- ไม่ใช่: ตัวแปร `f` ถูกกำหนดโดยอัตโนมัติโดยลูป `for`
 
 ---
 
-## How can I run many commands in a single loop?
+## จะรันหลายคำสั่งในลูปเดียวได้อย่างไร?
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +537,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+การแสดงชื่อไฟล์มีประโยชน์สำหรับการดีบัก
+แต่จุดประสงค์หลักของลูปคือการทำงานกับไฟล์หลายไฟล์พร้อมกัน
+ลูปด้านล่างนี้แสดงบรรทัดที่สองของไฟล์ข้อมูลแต่ละไฟล์:
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+ลูปนี้มีโครงสร้างเดียวกับลูปที่เคยเห็นมาแล้ว
+ความแตกต่างเพียงอย่างเดียวคือเนื้อหาของลูปเป็น pipeline ของสองคำสั่งแทนที่จะเป็นคำสั่งเดียว
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+เขียนลูปเพื่อแสดงรายการล่าสุดของเดือนกรกฎาคม 2017 (`2017-07`) จากทุกไฟล์ในชุดข้อมูล seasonal ผลลัพธ์ควรคล้ายกับ:
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+แต่ให้ทำงานกับ**_ทุก_**ไฟล์ใน seasonal แยกกัน ใช้ `file` เป็นชื่อตัวแปรของลูป และวนลูปผ่านรายการไฟล์ `seasonal/*.csv` (_แทนที่จะเป็น 'seasonal/winter.csv' อย่างในตัวอย่าง_)
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+ส่วนเนื้อหาของลูปคือคำสั่ง grep ที่แสดงในคำแนะนำ โดยแทนที่ `seasonal/winter.csv` ด้วย `$file`
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +575,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='คุณเรียกใช้ `for` หรือไม่?'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='คุณใช้ `file` เป็นตัวแปรของลูปหรือไม่?'),
+      has_code('in', incorrect_msg='คุณใช้ `in` ก่อนรายการไฟล์หรือไม่?'),
+      has_code('seasonal/\*', incorrect_msg='คุณระบุรายการไฟล์ด้วย `seasonal/*` หรือไม่?'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='คุณใส่เครื่องหมายเซมิโคลอนหลังรายการไฟล์หรือไม่?'),
+      has_code(r';\s*do', incorrect_msg='คุณใช้ `do` หลังเครื่องหมายเซมิโคลอนแรกหรือไม่?'),
+      has_code('grep', incorrect_msg='คุณเรียกใช้ `grep` หรือไม่?'),
+      has_code('2017-07', incorrect_msg='คุณจับคู่กับ `2017-07` หรือไม่?'),
+      has_code(r'\$file', incorrect_msg='คุณใช้ `$file` เป็นชื่อตัวแปรของลูปหรือไม่?'),
+      has_code(r'file\s*|', incorrect_msg='คุณใช้ไปป์เพื่อเชื่อมต่อคำสั่งที่สองหรือไม่?'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='คุณใช้ `tail -n 1` เพื่อแสดงรายการสุดท้ายของการค้นหาแต่ละครั้งในคำสั่งที่สองหรือไม่?'),
+      has_code('; done', incorrect_msg='คุณลงท้ายด้วย `done` หรือไม่?')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("ยอดเยี่ยมมาก! อักขระตัวแทนและลูปเป็นการผสมผสานที่มีประสิทธิภาพอย่างยิ่ง")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## ทำไมไม่ควรใช้ช่องว่างในชื่อไฟล์?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +607,19 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+การตั้งชื่อไฟล์แบบหลายคำ เช่น `July 2017.csv` ดูเป็นเรื่องง่ายและสะดวกเมื่อใช้งานผ่าน file explorer แบบกราฟิก
+แต่จะสร้างปัญหาเมื่อทำงานใน shell
+ตัวอย่างเช่น หากต้องการเปลี่ยนชื่อไฟล์ `July 2017.csv` เป็น `2017 July data.csv`
+คุณไม่สามารถพิมพ์คำสั่งแบบนี้ได้:
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+เพราะ shell จะตีความว่าคุณกำลังพยายามย้ายไฟล์สี่ไฟล์ ได้แก่ `July`, `2017.csv`, `2017`, และ `July` (ซ้ำ)
+ไปไว้ในไดเรกทอรีชื่อ `data.csv`
+แทนที่จะทำเช่นนั้น ต้องใส่เครื่องหมายคำพูดครอบชื่อไฟล์
+เพื่อให้ shell มองแต่ละชื่อเป็น parameter เดียว:
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +627,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+สมมติว่ามีไฟล์สองไฟล์ชื่อ `current.csv` และ `last year.csv`
+(ซึ่งมีช่องว่างในชื่อ)
+แล้วพิมพ์คำสั่ง:
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+จะเกิดอะไรขึ้น:
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+ลองคิดดูว่าถ้ามีคนแสดงคำสั่งนี้ให้คุณดู โดยที่คุณไม่รู้ว่ามีไฟล์ใดอยู่บ้าง คุณจะคาดว่าจะเกิดอะไรขึ้น?
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- Shell จะแสดงข้อความแจ้งข้อผิดพลาด เพราะไม่มีไฟล์ชื่อ `last` และ `year.csv` อยู่
+- Shell จะลบไฟล์ `current.csv`
+- [เกิดทั้งสองกรณีข้างต้น]
+- ไม่มีอะไรเกิดขึ้น
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- ถูกต้อง แต่ยังไม่ครบทั้งหมด
+- ถูกต้อง แต่ยังไม่ครบทั้งหมด
+- ถูกต้อง สามารถใช้เครื่องหมายคำพูดเดี่ยว `'` หรือเครื่องหมายคำพูดคู่ `"` ครอบชื่อไฟล์ได้
+- ไม่ถูกต้อง
 
 ---
 
-## How can I do many things in a single loop?
+## จะรันคำสั่งหลายคำสั่งในลูปเดียวได้อย่างไร?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +662,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+ลูปที่เห็นมาจนถึงตอนนี้มีคำสั่งหรือ pipeline เพียงอันเดียวในส่วนตัวลูป
+แต่ในความเป็นจริง ลูปสามารถมีคำสั่งได้หลายคำสั่ง
+ในการบอก shell ว่าคำสั่งแต่ละคำสั่งสิ้นสุดที่ไหนและเริ่มต้นที่ไหน
+ต้องคั่นคำสั่งแต่ละคำสั่งด้วยเครื่องหมายเซมิโคลอน:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +684,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+สมมติว่าลืมใส่เครื่องหมายเซมิโคลอนระหว่างคำสั่ง `echo` กับ `head` ในลูปข้างต้น
+ทำให้ shell ต้องรันคำสั่งนี้แทน:
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+จะเกิดอะไรขึ้น?
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- แสดงข้อความแจ้งข้อผิดพลาด
+- แสดงผลลัพธ์หนึ่งบรรทัดสำหรับไฟล์ทั้ง 4 ไฟล์
+- แสดงผลลัพธ์หนึ่งบรรทัดสำหรับ `autumn.csv` (ไฟล์แรก)
+- แสดงบรรทัดสุดท้ายของแต่ละไฟล์
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+สามารถใช้ pipe ส่งผลลัพธ์จาก `echo` ไปยัง `tail` ได้
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +709,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "ไม่ถูกต้อง: ลูปจะทำงาน เพียงแต่จะไม่ดำเนินการในลักษณะที่สมเหตุสมผล"
+correct2 = "ถูกต้อง: `echo` สร้างบรรทัดเดียวที่มีชื่อไฟล์ปรากฏสองครั้ง จากนั้น `tail` จะคัดลอกบรรทัดนั้น"
+err3 = "ไม่ถูกต้อง: ลูปทำงานหนึ่งครั้งสำหรับแต่ละชื่อไฟล์จากทั้งสี่ชื่อไฟล์"
+err4 = "ไม่ถูกต้อง: อินพุตของ `tail` คือเอาต์พุตของ `echo` สำหรับแต่ละชื่อไฟล์"
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

@@ -1,19 +1,19 @@
 title: Introduction to Shell
 description: >-
-  The Unix command line has survived and thrived for almost 50 years because it
-  lets people do complex things with just a few keystrokes. Sometimes called
-  "the universal glue of programming," it helps users combine existing programs
-  in new ways, automate repetitive tasks, and run programs on clusters and
-  clouds that may be halfway around the world. This course will introduce its
-  key elements and show you how to use them efficiently.
+  Command line ของ Unix ยืนหยัดและเติบโตมาเกือบ 50 ปี
+  เพราะช่วยให้ทำสิ่งที่ซับซ้อนได้ด้วยการพิมพ์เพียงไม่กี่ครั้ง
+  บางครั้งถูกเรียกว่า "กาวสากลของการเขียนโปรแกรม"
+  เพราะช่วยให้นำโปรแกรมที่มีอยู่มาผสมผสานกันในรูปแบบใหม่ ทำงานซ้ำๆ ได้อัตโนมัติ
+  และรันโปรแกรมบน cluster หรือ cloud ที่อยู่ห่างออกไปได้
+  คอร์สนี้จะแนะนำองค์ประกอบสำคัญของ Shell และวิธีใช้งานอย่างมีประสิทธิภาพ
 
 
-  The course glossary can be found on the right in the resources section.
+  ดูคำศัพท์ประจำคอร์สได้ที่แถบทรัพยากรด้านขวา
 
-  To obtain CPE credits you need to complete the course and reach a score of 70%
-  on the qualified assessment. You can navigate to the assessment by clicking on
-  the CPE credits callout on the right.
+  เพื่อรับหน่วยกิต CPE ต้องทำคอร์สให้ครบและได้คะแนนอย่างน้อย 70%
+  ในการประเมินที่กำหนด สามารถไปยังแบบประเมินได้โดยคลิกที่ส่วน CPE credits
+  ด้านขวา
 programming_language: shell
-from: 'shell-base-prod:v1.1.3'
+from: shell-base-prod:v1.1.3
 datasets:
   Introduction to Shell.pdf: Course Glossary
