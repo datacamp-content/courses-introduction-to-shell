@@ -1,17 +1,14 @@
 ---
-title: Manipulating files and directories
+title: ファイルとディレクトリの操作
 description: >-
-  This chapter is a brief introduction to the Unix shell. You'll learn why it is
-  still in use after almost 50 years, how it compares to the graphical tools you
-  may be more familiar with, how to move around in the shell, and how to create,
-  modify, and delete files and folders.
+  この章では、Unixシェルについて簡単に紹介します。約50年が経った今でもUnixシェルが使われ続けている理由、より慣れ親しんでいるかもしれないグラフィカルツールとの違い、シェル内を移動する方法、ファイルやフォルダを作成、変更、削除する方法を学びます。
 free_preview: true
 lessons:
   - nb_of_exercises: 12
-    title: How does the shell compare to a desktop interface?
+    title: shellはデスクトップインターフェースとどのように比較されますか？
 ---
 
-## How does the shell compare to a desktop interface?
+## シェルはデスクトップインターフェースとどう比較されるのでしょうか？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -19,51 +16,48 @@ key: badd717ea4
 xp: 50
 ```
 
-An operating system like Windows, Linux, or Mac OS is a special kind of program.
-It controls the computer's processor, hard drive, and network connection,
-but its most important job is to run other programs.
+Windows、Linux、Mac OSのようなオペレーティングシステムは、特別な種類のプログラムです。
+コンピュータのプロセッサ、ハードドライブ、ネットワーク接続を制御します。
+しかし、最も重要な仕事は他のプログラムを実行することです。
 
-Since human beings aren't digital,
-they need an interface to interact with the operating system.
-The most common one these days is a graphical file explorer,
-which translates clicks and double-clicks into commands to open files and run programs.
-Before computers had graphical displays,
-though,
-people typed instructions into a program called a **command-line shell**.
-Each time a command is entered,
-the shell runs some other programs,
-prints their output in human-readable form,
-and then displays a *prompt* to signal that it's ready to accept the next command.
-(Its name comes from the notion that it's the "outer shell" of the computer.)
+人間はデジタルではないので、
+OSとやり取りするためのインターフェースが必要です。
+最近最も一般的なのはグラフィカルなファイルエクスプローラーです。
+クリックやダブルクリックを、ファイルを開いたりプログラムを実行したりするコマンドに変換します。
+コンピューターにグラフィカルディスプレイがなかった時代には、
+人々は**コマンドラインシェル**と呼ばれるプログラムに命令を入力していました。
+コマンドが入力されるたびに、
+シェルは他のプログラムを実行し、
+人間が読みやすい形で出力を表示し、
+そして次のコマンドを受け入れる準備ができたことを示す*プロンプト*を表示します。
+(その名前は、コンピュータの「外殻」であるという考えに由来します。)
 
-Typing commands instead of clicking and dragging may seem clumsy at first,
-but as you will see,
-once you start spelling out what you want the computer to do,
-you can combine old commands to create new ones
-and automate repetitive operations
-with just a few keystrokes.
+クリックやドラッグではなくコマンドを入力するのは、最初は不器用に感じるかもしれません。
+しかし、ご覧のとおり、一度コンピューターに何をしてほしいかを言葉で表し始めると、
+古いコマンドを組み合わせて新しいコマンドを作成でき、
+繰り返し作業を自動化できます。
 
 <hr>
-What is the relationship between the graphical file explorer that most people use and the command-line shell?
+多くの人が使うグラフィカルなファイルエクスプローラーとコマンドラインシェルの関係はどうなっているのでしょうか?
 
 `@hint`
-Remember that a user can only interact with an operating system through a program.
+ユーザーはプログラムを通じてのみオペレーティングシステムを操作できることを覚えておいてください。
 
 `@possible_answers`
-- The file explorer lets you view and edit files, while the shell lets you run programs.
-- The file explorer is built on top of the shell.
-- The shell is part of the operating system, while the file explorer is separate.
-- [They are both interfaces for issuing commands to the operating system.]
+- ファイルエクスプローラーはファイルの閲覧や編集を可能にし、シェルはプログラムの実行を可能にします。
+- ファイルエクスプローラーはシェルを基盤として構築されています。
+- シェルはオペレーティングシステムの一部であり、ファイルエクスプローラーは別のものです。
+- [どちらもオペレーティングシステムにコマンドを送るためのインターフェースです。]
 
 `@feedback`
-- Both allow you to view and edit files and run programs.
-- Graphical file explorers and the shell both call the same underlying operating system functions.
-- The shell and the file explorer are both programs that translate user commands (typed or clicked) into calls to the operating system.
-- Correct! Both take the user's commands (whether typed or clicked) and send them to the operating system.
+- どちらもファイルの閲覧や編集、プログラムの実行ができます。
+- グラフィカルファイルエクスプローラーとシェルは、どちらも同じオペレーティングシステムの機能を呼び出しています。
+- シェルとファイルエクスプローラーは、どちらもユーザーのコマンド（入力またはクリック）をオペレーティングシステムへの要求に変換するプログラムです。
+- 正解です！どちらもユーザーのコマンド（入力かクリックかを問わず）を受け取り、オペレーティングシステムに送っています。
 
 ---
 
-## Where am I?
+## ここはどこ?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -71,22 +65,21 @@ key: 7c1481dbd3
 xp: 50
 ```
 
-The **filesystem** manages files and directories (or folders).
-Each is identified by an **absolute path**
-that shows how to reach it from the filesystem's **root directory**:
-`/home/repl` is the directory `repl` in the directory `home`,
-while `/home/repl/course.txt` is a file `course.txt` in that directory,
-and `/` on its own is the root directory.
+**ファイルシステム**は、ファイルやディレクトリ(フォルダ)を管理します。
+それぞれは**絶対パス**によって識別され、
+ファイルシステムの**ルートディレクトリ**からどうたどり着くかを示します。
+`/home/repl` は `repl` ディレクトリの中にある `home` というディレクトリを指し、
+`/home/repl/course.txt` はそのディレクトリの中にある `course.txt` というファイルを指します。
+また、`/` 単体はルートディレクトリを表します。
 
-To find out where you are in the filesystem,
-run the command `pwd`
-(short for "**p**rint **w**orking **d**irectory").
-This prints the absolute path of your **current working directory**,
-which is where the shell runs commands and looks for files by default.
+ファイルシステム上の現在位置を確認するには、
+`pwd`(「**p**rint **w**orking **d**irectory」の略)コマンドを実行します。
+このコマンドは、**現在の作業ディレクトリ**の絶対パスを表示します。
+作業ディレクトリとは、シェルがコマンドを実行し、デフォルトでファイルを探す場所のことです。
 
 <hr>
-Run `pwd`.
-Where are you right now?
+`pwd` を実行しましょう。
+今、あなたはどこにいますか?
 
 `@possible_answers`
 - `/home`
@@ -94,7 +87,7 @@ Where are you right now?
 - `/home/repl`
 
 `@hint`
-Unix systems typically place all users' home directories underneath `/home`.
+Unix システムでは通常、すべてのユーザーのホームディレクトリは `/home` の下に配置されます。
 
 `@pre_exercise_code`
 ```{python}
@@ -103,15 +96,15 @@ Unix systems typically place all users' home directories underneath `/home`.
 
 `@sct`
 ```{python}
-err = "That is not the correct path."
-correct = "Correct - you are in `/home/repl`."
+err = "それは正しいパスではありません。"
+correct = "正解です - あなたは `/home/repl` にいます。"
 
 Ex().has_chosen(3, [err, err, correct])
 ```
 
 ---
 
-## How can I identify files and directories?
+## ファイルとディレクトリを識別するにはどうすればよいでしょうか？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -119,24 +112,21 @@ key: f5b0499835
 xp: 50
 ```
 
-`pwd` tells you where you are.
-To find out what's there,
-type `ls` (which is short for "**l**i**s**ting") and press the enter key.
-On its own,
-`ls` lists the contents of your current directory
-(the one displayed by `pwd`).
-If you add the names of some files,
-`ls` will list them,
-and if you add the names of directories,
-it will list their contents.
-For example,
-`ls /home/repl` shows you what's in your starting directory
-(usually called your **home directory**).
+`pwd` は現在地を教えてくれます。
+そこに何があるかを確認するには、
+`ls`（「**l**i**s**ting」の略）と入力し、エンター キーを押します。
+`ls` は単体で使うと、
+現在のディレクトリ（`pwd` で表示される場所）の中身を一覧表示します。
+ファイル名を指定すると、
+`ls` はそのファイルを表示し、
+ディレクトリ名を指定すると、
+その中身を一覧表示します。
+たとえば、
+`ls /home/repl` と入力すると、開始ディレクトリ（通常は**ホームディレクトリ**と呼ばれます）の中身が表示されます。
 
 <hr>
-Use `ls` with an appropriate argument to list the files in the directory `/home/repl/seasonal`
-(which holds information on dental surgeries by date, broken down by season).
-Which of these files is *not* in that directory?
+`ls` に適切な引数を指定して、ディレクトリ `/home/repl/seasonal`（季節ごとに分類された歯科手術の日付情報が保存されています）の中のファイルを一覧表示してください。
+次のうち、そのディレクトリに*含まれていない*ファイルはどれですか？
 
 `@possible_answers`
 - `autumn.csv`
@@ -145,7 +135,7 @@ Which of these files is *not* in that directory?
 - `winter.csv`
 
 `@hint`
-If you give `ls` a path, it shows what's in that path.
+`ls` にパスを指定すると、そのパスの中身が表示されます。
 
 `@pre_exercise_code`
 ```{python}
@@ -154,15 +144,15 @@ If you give `ls` a path, it shows what's in that path.
 
 `@sct`
 ```{python}
-err = "That file is in the `seasonal` directory."
-correct = "Correct - that file is *not* in the `seasonal` directory."
+err = "そのファイルは `seasonal` ディレクトリにあります。"
+correct = "正解です - そのファイルは `seasonal` ディレクトリには *ありません*。"
 
 Ex().has_chosen(2, [err, correct, err, err])
 ```
 
 ---
 
-## How else can I identify files and directories?
+## ファイルやディレクトリを他にどう識別できますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -170,13 +160,13 @@ key: a766184b59
 xp: 100
 ```
 
-An absolute path is like a latitude and longitude: it has the same value no matter where you are. A **relative path**, on the other hand, specifies a location starting from where you are: it's like saying "20 kilometers north".
+絶対パスは緯度と経度のようなものです。どこにいても同じ値を示します。一方、**相対パス**は、今いる場所を基準にして位置を示します。「北へ20キロメートル」と言うようなものです。
 
-As examples:
-- If you are in the directory `/home/repl`, the **relative** path `seasonal` specifies the same directory as the **absolute** path `/home/repl/seasonal`. 
-- If you are in the directory `/home/repl/seasonal`, the **relative** path `winter.csv` specifies the same file as the **absolute** path `/home/repl/seasonal/winter.csv`.
+例を見てみましょう。
+- `/home/repl` というディレクトリにいる場合、**相対**パス `seasonal` は、**絶対**パス `/home/repl/seasonal` と同じディレクトリを指します。
+- `/home/repl/seasonal` というディレクトリにいる場合、**相対**パス `winter.csv` は、**絶対**パス `/home/repl/seasonal/winter.csv` と同じファイルを指します。
 
-The shell decides if a path is absolute or relative by looking at its first character: If it begins with `/`, it is absolute. If it *does not* begin with `/`, it is relative.
+シェルは、パスの先頭の文字を見て絶対パスか相対パスかを判断します。`/` で始まっていれば絶対パスです。`/` で始まっていなければ相対パスです。
 
 `@pre_exercise_code`
 ```{python}
@@ -192,12 +182,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`. Use `ls` with a **relative path** to list the file that has an absolute path of `/home/repl/course.txt` (and only that file).
+あなたは `/home/repl` にいます。**相対パス**を使って `ls` で絶対パスが `/home/repl/course.txt` であるファイル（それのみ）を一覧表示してください。
 
 `@hint`
-You can often construct the relative path to a file or directory below your current location
-by subtracting the absolute path of your current location
-from the absolute path of the thing you want.
+現在の場所より下にあるファイルやディレクトリへの相対パスを作成できることがよくあります
+目的のものの絶対パスから現在の場所の絶対パスを引くことで。
 
 `@solution`
 ```{shell}
@@ -209,13 +198,12 @@ ls course.txt
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
+    has_code("ls", incorrect_msg = "「ls」を呼び出してファイルリストを生成していません。"), # to prevent `echo "course.txt"`
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      has_code("ls +course.txt", incorrect_msg = "コマンドが正しいファイルリストを生成しませんでした。「ls」に続けて`/home/repl/course.txt`への相対パスを使用してください。")
     )
 )
-
 ```
 
 ***
@@ -227,12 +215,12 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the file `/home/repl/seasonal/summer.csv` (and only that file).
+あなたは `/home/repl` にいます。
+`ls` を **相対** パスで使って
+ファイル `/home/repl/seasonal/summer.csv` を一覧表示してください（そのファイルのみ）。
 
 `@hint`
-Relative paths do *not* start with a leading '/'.
+相対パスは先頭に「/」を付けません。
 
 `@solution`
 ```{shell}
@@ -244,10 +232,10 @@ ls seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "ファイルリストを生成するために`ls`を呼び出していません。"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      has_code("ls +seasonal/summer.csv", incorrect_msg = "コマンドが正しいファイルリストを生成しませんでした。`ls`の後に`/home/repl/seasonal/summer.csv`への相対パスを使用してください。")
     )
 )
 ```
@@ -261,12 +249,12 @@ xp: 30
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Use `ls` with a **relative** path
-to list the contents of the directory `/home/repl/people`.
+あなたは`/home/repl`にいます。
+`ls`を**相対**パスで使って
+ディレクトリ`/home/repl/people`の内容をリストアップします。
 
 `@hint`
-Relative paths do not start with a leading '/'.
+相対パスは先頭に「/」が付きません。
 
 `@solution`
 ```{shell}
@@ -278,19 +266,18 @@ ls people
 ```{python}
 Ex().multi(
     has_cwd("/home/repl"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
+    has_code("ls", incorrect_msg = "ファイルリストを生成するために `ls` を呼び出していません。"), 
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls +people", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/people`.")
+      has_code("ls +people", incorrect_msg = "コマンドが正しいファイルリストを生成していません。`ls` の後に `/home/repl/people` への相対パスを続けて使用してください。")
     )
 )
-Ex().success_msg("Well done. Now that you know about listing files and directories, let's see how you can move around the filesystem!")
-
+Ex().success_msg("よくできました。ファイルとディレクトリのリストを作成する方法を学んだので、次はファイルシステム内を移動する方法を見てみましょう！")
 ```
 
 ---
 
-## How can I move to another directory?
+## どうすれば別のディレクトリに移動できますか?
 
 ```yaml
 type: BulletConsoleExercise
@@ -298,17 +285,16 @@ key: dbdaec5610
 xp: 100
 ```
 
-Just as you can move around in a file browser by double-clicking on folders,
-you can move around in the filesystem using the command `cd`
-(which stands for "change directory").
+ファイルブラウザでフォルダをダブルクリックして移動するのと同じように、
+コマンド `cd`（「ディレクトリを変更する」の略）を使うことで
+ファイルシステム内を移動できます。
 
-If you type `cd seasonal` and then type `pwd`,
-the shell will tell you that you are now in `/home/repl/seasonal`.
-If you then run `ls` on its own,
-it shows you the contents of `/home/repl/seasonal`,
-because that's where you are.
-If you want to get back to your home directory `/home/repl`,
-you can use the command `cd /home/repl`.
+`cd seasonal` と入力してから `pwd` を実行すると、
+シェルは現在 `/home/repl/seasonal` にいることを教えてくれます。
+そのまま `ls` を実行すると、`/home/repl/seasonal` の内容が表示されます。
+これは、今いる場所がそこだからです。
+ホームディレクトリ `/home/repl` に戻りたい場合は、
+`cd /home/repl` というコマンドを使います。
 
 `@pre_exercise_code`
 ```{python}
@@ -324,11 +310,11 @@ xp: 35
 ```
 
 `@instructions`
-You are in `/home/repl`/.
-Change directory to `/home/repl/seasonal` using a relative path.
+現在 `/home/repl`/ にいます。
+相対パスを使って `/home/repl/seasonal` にディレクトリを移動してください。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+`cd`は「ディレクトリの変更」を表し、相対パスは先頭の「/」で始まらないことを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -340,9 +326,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="現在の作業ディレクトリが `/home/repl` である場合（`pwd` で確認できます）、`cd seasonal` を使用して `seasonal` フォルダに移動できます。")
 )
-
 ```
 
 ***
@@ -354,10 +339,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `pwd` to check that you're there.
+`pwd`を使って、そこにいるか確認してください。
 
 `@hint`
-Remember to press "enter" or "return" after entering the command.
+コマンドを入力した後は「エンター」または「リターン」キーを押してください。
 
 `@solution`
 ```{shell}
@@ -374,7 +359,6 @@ Ex().multi(
       has_code('pwd')
     )
 )
-
 ```
 
 ***
@@ -386,10 +370,10 @@ xp: 30
 ```
 
 `@instructions`
-Use `ls` without any paths to see what's in that directory.
+パスを指定せずに `ls` を使って、そのディレクトリの中身を確認してください。
 
 `@hint`
-Remember to press "enter" or "return" after the command.
+コマンドの後は「エンター」または「リターン」キーを押してください。
 
 `@solution`
 ```{shell}
@@ -403,17 +387,16 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_correct(
       has_expr_output(),
-      has_code('ls', incorrect_msg="Your command did not generate the correct output. Have you used `ls` with no paths to show the contents of the current directory?")
+      has_code('ls', incorrect_msg="コマンドが正しい出力を生成しませんでした。現在のディレクトリの内容を表示するために、パスを指定せずに `ls` を使用しましたか？")
     )
 )
 
-Ex().success_msg("Neat! This was about navigating down to subdirectories. What about moving up? Let's find out!")
-
+Ex().success_msg("素晴らしいです！これはサブディレクトリに移動することについてでした。上に移動するのはどうでしょうか？見てみましょう！")
 ```
 
 ---
 
-## How can I move up a directory?
+## どうすれば親ディレクトリに移動できますか?
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -421,56 +404,52 @@ key: 09c717ef76
 xp: 50
 ```
 
-The **parent** of a directory is the directory above it.
-For example, `/home` is the parent of `/home/repl`,
-and `/home/repl` is the parent of `/home/repl/seasonal`.
-You can always give the absolute path of your parent directory to commands like `cd` and `ls`.
-More often,
-though,
-you will take advantage of the fact that the special path `..`
-(two dots with no spaces) means "the directory above the one I'm currently in".
-If you are in `/home/repl/seasonal`,
-then `cd ..` moves you up to `/home/repl`.
-If you use `cd ..` once again,
-it puts you in `/home`.
-One more `cd ..` puts you in the *root directory* `/`,
-which is the very top of the filesystem.
-(Remember to put a space between `cd` and `..` - it is a command and a path, not a single four-letter command.)
+あるディレクトリの**親ディレクトリ**とは、そのディレクトリの1つ上にあるディレクトリのことです。
+例えば、`/home` は `/home/repl` の親ディレクトリであり、
+`/home/repl` は `/home/repl/seasonal` の親ディレクトリです。
+`cd` や `ls` などのコマンドには、常に親ディレクトリの絶対パスを指定できます。
+ただし、多くの場合は、
+特殊なパスである `..`（スペースを入れずに2つのドット）を使うほうが便利です。
+これは「現在のディレクトリの1つ上」を意味します。
+`/home/repl/seasonal` にいる場合、
+`cd ..` を実行すると `/home/repl` に移動します。
+もう一度 `cd ..` を実行すると、
+`/home` に移動します。
+さらに `cd ..` を実行すると、*ルートディレクトリ* `/` に移動します。
+これはファイルシステムの最上位です。
+（`cd` と `..` の間にはスペースを入れることを忘れないようにしましょう。これは1つの4文字のコマンドではなく、コマンドとパスの組み合わせです。）
 
-A single dot on its own, `.`, always means "the current directory",
-so `ls` on its own and `ls .` do the same thing,
-while `cd .` has no effect
-(because it moves you into the directory you're currently in).
+単独のドット `.` は、常に「現在のディレクトリ」を意味します。
+そのため、`ls` 単独と `ls .` は同じ結果になりますが、
+`cd .` は何も変化を起こしません
+（現在いるディレクトリ自体に移動することになるためです）。
 
-One final special path is `~` (the tilde character),
-which means "your home directory",
-such as `/home/repl`.
-No matter where you are,
-`ls ~` will always list the contents of your home directory,
-and `cd ~` will always take you home.
+最後にもう1つの特殊なパスとして `~`（チルダ記号）があります。
+これは「自分のホームディレクトリ」を意味し、
+例えば `/home/repl` を指します。
+どこにいても、`ls ~` は常にホームディレクトリの内容を一覧表示し、`cd ~` は常にホームディレクトリに移動します。
 
 <hr>
-If you are in `/home/repl/seasonal`,
-where does `cd ~/../.` take you?
+もし `/home/repl/seasonal` にいるなら、`cd ~/../.` はどこにあなたを移動させますか?
 
 `@hint`
-Trace the path one directory at a time.
+パスを一つのディレクトリずつ追跡します。
 
 `@possible_answers`
 - `/home/repl`
 - [`/home`]
 - `/home/repl/seasonal`
-- `/` (the root directory)
+- `/` (ルートディレクトリ)
 
 `@feedback`
-- No, but either `~` or `..` on its own would take you there.
-- Correct! The path means 'home directory', 'up a level', 'here'.
-- No, but `.` on its own would do that.
-- No, the final part of the path is `.` (meaning "here") rather than `..` (meaning "up").
+- 不正解です。ただし、`~` または `..` 単独であればそこに移動できます。
+- 正解です！ このパスは「ホームディレクトリ」「1つ上」「ここ」という意味になります。
+- 不正解です。ただし、`.` 単独であればそれが可能です。
+- 不正解です。このパスの最後の部分は「ここ」を意味する `.` であり、「1つ上」を意味する `..` ではありません。
 
 ---
 
-## How can I copy files?
+## ファイルをコピーするにはどうすればよいですか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -478,28 +457,28 @@ key: 832de9e74c
 xp: 100
 ```
 
-You will often want to copy files,
-move them into other directories to organize them,
-or rename them.
-One command to do this is `cp`, which is short for "copy".
-If `original.txt` is an existing file,
-then:
+ファイルをコピーしたり、
+整理のために別のディレクトリへ移動したり、
+名前を変更したりしたい場面はよくあります。
+これを行うコマンドの1つが「コピー」を意味する `cp` です。
+もし `original.txt` が既存のファイルであれば、
+次のようにすると:
 
 ```{shell}
 cp original.txt duplicate.txt
 ```
 
-creates a copy of `original.txt` called `duplicate.txt`.
-If there already was a file called `duplicate.txt`,
-it is overwritten.
-If the last parameter to `cp` is an existing directory,
-then a command like:
+`original.txt` のコピーが `duplicate.txt` という名前で作成されます。
+もし `duplicate.txt` という名前のファイルがすでに存在していた場合は、
+そのファイルが上書きされます。
+`cp` の最後のパラメータが既存のディレクトリである場合、
+次のようなコマンドは:
 
 ```{shell}
 cp seasonal/autumn.csv seasonal/winter.csv backup
 ```
 
-copies *all* of the files into that directory.
+*すべての*ファイルをそのディレクトリにコピーします。
 
 `@pre_exercise_code`
 ```{python}
@@ -515,12 +494,12 @@ xp: 50
 ```
 
 `@instructions`
-Make a copy of `seasonal/summer.csv` in the `backup` directory (which is also in `/home/repl`),
-calling the new file `summer.bck`.
+`seasonal/summer.csv` のコピーを `backup` ディレクトリ（同じく `/home/repl` 内にあります）に作成し、
+新しいファイル名を `summer.bck` にしてください。
 
 `@hint`
-Combine the name of the destination directory and the name of the copied file
-to create a relative path for the new file.
+宛先ディレクトリの名前とコピーしたファイルの名前を組み合わせて
+新しいファイルの相対パスを作成します。
 
 `@solution`
 ```{shell}
@@ -531,10 +510,9 @@ cp seasonal/summer.csv backup/summer.bck
 `@sct`
 ```{python}
 Ex().check_correct(
-    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` doesn't appear to exist in the `backup` directory. Provide two paths to `cp`: the existing file (`seasonal/summer.csv`) and the destination file (`backup/summer.bck`)."),
+    check_file('/home/repl/backup/summer.bck', missing_msg="`summer.bck` が `backup` ディレクトリに存在しないようです。`cp` に 2 つのパスを指定してください: 存在するファイル (`seasonal/summer.csv`) と宛先ファイル (`backup/summer.bck`)。"),
     has_cwd('/home/repl')
 )
-
 ```
 
 ***
@@ -546,12 +524,12 @@ xp: 50
 ```
 
 `@instructions`
-Copy `spring.csv` and `summer.csv` from the `seasonal` directory into the `backup` directory
-*without* changing your current working directory (`/home/repl`).
+`spring.csv`と`summer.csv`を`seasonal`ディレクトリから`backup`ディレクトリにコピーします
+*現在のワーキングディレクトリ(`/home/repl`)を変更せずに*
 
 `@hint`
-Use `cp` with the names of the files you want to copy
-and *then* the name of the directory to copy them to.
+コピーしたいファイルの名前と`cp`を指定し、
+*その後に*コピー先のディレクトリ名を指定して使いましょう。
 
 `@solution`
 ```{shell}
@@ -561,18 +539,18 @@ cp seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-patt = "`%s` doesn't appear to have been copied into the `backup` directory. Provide two filenames and a directory name to `cp`."
+patt = "`%s` が `backup` ディレクトリにコピーされていないようです。2つのファイル名とディレクトリ名を `cp` に提供してください。"
 Ex().multi(
-    has_cwd('/home/repl', incorrect_msg="Make sure to copy the files while in `{{dir}}`! Use `cd {{dir}}` to navigate back there."),
+    has_cwd('/home/repl', incorrect_msg="ファイルをコピーする際は `{{dir}}` にいることを確認してください！`cd {{dir}}` を使用してそこに戻ってください。"),
     check_file('/home/repl/backup/spring.csv', missing_msg=patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=patt%'summer.csv')
 )
-Ex().success_msg("Good job. Other than copying, we should also be able to move files from one directory to another. Learn about it in the next exercise!")
+Ex().success_msg("よくできました。コピー以外にも、ファイルをあるディレクトリから別のディレクトリに移動することもできるはずです。次の演習でそれについて学びましょう！")
 ```
 
 ---
 
-## How can I move a file?
+## ファイルを移動するにはどうすればいいですか？
 
 ```yaml
 type: ConsoleExercise
@@ -580,23 +558,23 @@ key: 663a083a3c
 xp: 100
 ```
 
-While `cp` copies a file,
-`mv` moves it from one directory to another,
-just as if you had dragged it in a graphical file browser.
-It handles its parameters the same way as `cp`,
-so the command:
+`cp`がファイルをコピーするのに対し、
+`mv`はそれをあるディレクトリから別のディレクトリへ移動します。
+まるでグラフィカルなファイルブラウザでドラッグしたかのようです。
+パラメータの扱いは`cp`と同じです。
+そのため、次のコマンドは:
 
 ```{shell}
 mv autumn.csv winter.csv ..
 ```
 
-moves the files `autumn.csv` and `winter.csv` from the current working directory
-up one level to its parent directory
-(because `..` always refers to the directory above your current location).
+現在のワーキングディレクトリからファイル`autumn.csv`と`winter.csv`を
+親ディレクトリへ移動します
+(`..`は常に現在の位置の1つ上のディレクトリを指すためです。)
 
 `@instructions`
-You are in `/home/repl`, which has sub-directories `seasonal` and `backup`.
-Using a single command, move `spring.csv` and `summer.csv` from `seasonal` to `backup`.
+現在、`/home/repl` にいて、`seasonal` と `backup` というサブディレクトリがあります。
+1つのコマンドを使って、`spring.csv` と `summer.csv` を `seasonal` から `backup` へ移動しましょう。
 
 `@hint`
 
@@ -613,20 +591,20 @@ mv seasonal/spring.csv seasonal/summer.csv backup
 
 `@sct`
 ```{python}
-backup_patt="The file `%s` is not in the `backup` directory. Have you used `mv` correctly? Use two filenames and a directory as parameters to `mv`."
-seasonal_patt="The file `%s` is still in the `seasonal` directory. Make sure to move the files with `mv` rather than copying them with `cp`!"
+backup_patt="ファイル `%s` は `backup` ディレクトリにありません。`mv` を正しく使用しましたか？ `mv` のパラメータとして2つのファイル名と1つのディレクトリを使用してください。"
+seasonal_patt="ファイル `%s` はまだ `seasonal` ディレクトリにあります。`cp` でコピーするのではなく、`mv` でファイルを移動することを確認してください！"
 Ex().multi(
     check_file('/home/repl/backup/spring.csv', missing_msg=backup_patt%'spring.csv'),
     check_file('/home/repl/backup/summer.csv', missing_msg=backup_patt%'summer.csv'),
     check_not(check_file('/home/repl/seasonal/spring.csv'), incorrect_msg=seasonal_patt%'spring.csv'),
     check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg=seasonal_patt%'summer.csv')
 )
-Ex().success_msg("Well done, let's keep this shell train going!")
+Ex().success_msg("よくできました。この調子でシェルトレインを続けましょう！")
 ```
 
 ---
 
-## How can I rename files?
+## ファイルの名前を変更するには？
 
 ```yaml
 type: BulletConsoleExercise
@@ -634,23 +612,17 @@ key: 001801a652
 xp: 100
 ```
 
-`mv` can also be used to rename files. If you run:
+`mv` はファイル名の変更にも使えます。次のコマンドを実行すると:
 
 ```{shell}
 mv course.txt old-course.txt
 ```
 
-then the file `course.txt` in the current working directory is "moved" to the file `old-course.txt`.
-This is different from the way file browsers work,
-but is often handy.
+現在のワーキングディレクトリにある `course.txt` というファイルが `old-course.txt` に「移動」されます。
+これはファイルブラウザの動作とは異なりますが、便利に使える場面が多くあります。
 
-One warning:
-just like `cp`,
-`mv` will overwrite existing files.
-If,
-for example,
-you already have a file called `old-course.txt`,
-then the command shown above will replace it with whatever is in `course.txt`.
+注意点が一つあります。`cp` と同様に、`mv` も既存のファイルを上書きします。
+例えば、すでに `old-course.txt` というファイルがある場合、上記のコマンドを実行すると `course.txt` の内容でそのファイルが置き換えられてしまいます。
 
 `@pre_exercise_code`
 ```{python}
@@ -666,10 +638,10 @@ xp: 35
 ```
 
 `@instructions`
-Go into the `seasonal` directory.
+`seasonal` ディレクトリに移動しましょう。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that relative paths do not start with a leading '/'.
+`cd`は「ディレクトリの変更」を意味し、相対パスは先頭に「/」が付かないことを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -681,9 +653,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="現在の作業ディレクトリ（`pwd`で確認） が `/home/repl` の場合、`cd seasonal` で `seasonal` フォルダに移動できます。")
 )
-
 ```
 
 ***
@@ -695,10 +666,10 @@ xp: 35
 ```
 
 `@instructions`
-Rename the file `winter.csv` to be `winter.csv.bck`.
+ファイル `winter.csv` を `winter.csv.bck` に名前変更してください。
 
 `@hint`
-Use `mv` with the current name of the file and the name you want it to have in that order.
+現在のファイル名と、変更後の名前をその順番で`mv`してください。
 
 `@solution`
 ```{shell}
@@ -708,15 +679,14 @@ mv winter.csv winter.csv.bck
 
 `@sct`
 ```{python}
-hint = " Use `mv` with two arguments: the file you want to rename (`winter.csv`) and the new name for the file (`winter.csv.bck`)."
+hint = " `mv`を2つの引数と共に使用してください: 名前を変更したいファイル（`winter.csv`）とファイルの新しい名前（`winter.csv.bck`）。"
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
     multi(
-        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="We expected to find `winter.csv.bck` in the directory." + hint),
-        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="We were no longer expecting `winter.csv` to be in the directory." + hint)
+        check_file('/home/repl/seasonal/winter.csv.bck', missing_msg="ディレクトリ内に`winter.csv.bck`があることを期待していました。" + hint),
+        check_not(check_file('/home/repl/seasonal/winter.csv'), incorrect_msg="ディレクトリ内に`winter.csv`がないことを期待していました。" + hint)
     )
 )
-
 ```
 
 ***
@@ -728,10 +698,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `ls` to check that everything has worked.
+を実行して、`ls`すべてが正常に動作したことを確認してください。
 
 `@hint`
-Remember to press "enter" or "return" to run the command.
+コマンドを実行するときは「エンター」または「リターン」を押すのを忘れないでください。
 
 `@solution`
 ```{shell}
@@ -743,22 +713,21 @@ ls
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    has_expr_output(incorrect_msg="Have you used `ls` to list the contents of your current working directory?")
+    has_expr_output(incorrect_msg="`ls`を使用して、現在の作業ディレクトリの内容をリストしましたか？")
 )
 Ex().multi(
     has_cwd("/home/repl/seasonal"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("ls", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without arguments to list the contents of your current working directory.")
+      has_code("ls", incorrect_msg = "コマンドが正しいファイルリストを生成しませんでした。引数なしで`ls`を使用して、現在の作業ディレクトリの内容をリストしてください。")
     )
 )
-Ex().success_msg("Copying, moving, renaming, you've all got it figured out! Next up: deleting files.")
-
+Ex().success_msg("コピー、移動、名前の変更、すべて理解されていますね！次はファイルの削除です。")
 ```
 
 ---
 
-## How can I delete files?
+## ファイルを削除するにはどうすればよいですか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -766,25 +735,20 @@ key: '2734680614'
 xp: 100
 ```
 
-We can copy files and move them around;
-to delete them,
-we use `rm`,
-which stands for "remove".
-As with `cp` and `mv`,
-you can give `rm` the names of as many files as you'd like, so:
+これまでファイルのコピーや移動を行ってきました。
+ファイルを削除するには、`rm` を使います。
+これは「取り除く」の略です。
+`cp` や `mv` と同じように、`rm` にも好きなだけファイル名を指定できます。つまり：
 
 ```{shell}
 rm thesis.txt backup/thesis-2017-08.txt
 ```
 
-removes both `thesis.txt` and `backup/thesis-2017-08.txt`
+このコマンドは `thesis.txt` と `backup/thesis-2017-08.txt` の両方を削除します。
 
-`rm` does exactly what its name says,
-and it does it right away:
-unlike graphical file browsers,
-the shell doesn't have a trash can,
-so when you type the command above,
-your thesis is gone for good.
+`rm` はその名前の通り、削除をその場で実行します。
+グラフィカルなファイルブラウザとは異なり、シェルにはごみ箱がありません。
+そのため、上記のコマンドを実行すると、ファイルは完全に消えてしまいます。
 
 `@pre_exercise_code`
 ```{python}
@@ -800,11 +764,11 @@ xp: 25
 ```
 
 `@instructions`
-You are in `/home/repl`.
-Go into the `seasonal` directory.
+あなたは`/home/repl`にいます。
+`seasonal`ディレクトリに入ってください。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that a relative path does not start with a leading '/'.
+`cd` は「ディレクトリを変更する」を表し、相対パスは先頭に「/」が付かないことを思い出してください。
 
 `@solution`
 ```{shell}
@@ -815,7 +779,6 @@ cd seasonal
 `@sct`
 ```{python}
 Ex().has_cwd('/home/repl/seasonal')
-
 ```
 
 ***
@@ -827,10 +790,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `autumn.csv`.
+`autumn.csv`を取り除く。
 
 `@hint`
-Remember that `rm` stands for "remove".
+`rm`は「削除」を意味することを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -842,10 +805,9 @@ rm autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl/seasonal'),
-    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="We weren't expecting `autumn.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/autumn.csv'), incorrect_msg="`autumn.csv` が `seasonal` ディレクトリにまだ存在していることを想定していませんでした。削除したいファイルのパスを指定して `rm` を使用してください。"),
+    has_code('rm', incorrect_msg = '`rm` を使用してファイルを削除してください。移動するのではなく。')
 )
-
 ```
 
 ***
@@ -857,10 +819,10 @@ xp: 25
 ```
 
 `@instructions`
-Go back to your home directory.
+ホームディレクトリに戻ってください。
 
 `@hint`
-If you use `cd` without any paths, it takes you home.
+パスを指定せずに `cd` を使うと、ホームへ移動します。
 
 `@solution`
 ```{shell}
@@ -870,8 +832,7 @@ cd
 
 `@sct`
 ```{python}
-Ex().has_cwd('/home/repl', incorrect_msg="Use `cd ..` or `cd ~` to return to the home directory.")
-
+Ex().has_cwd('/home/repl', incorrect_msg="`cd ..` または `cd ~` を使用してホームディレクトリに戻ってください。")
 ```
 
 ***
@@ -883,10 +844,10 @@ xp: 25
 ```
 
 `@instructions`
-Remove `seasonal/summer.csv` without changing directories again.
+ディレクトリを再度変更せずに `seasonal/summer.csv` を取り除いてください。
 
 `@hint`
-Remember that `rm` stands for "remove".
+`rm`は「削除」を意味することを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -898,16 +859,15 @@ rm seasonal/summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="We weren't expecting `summer.csv` to still be in the `seasonal` directory. Use `rm` with the path to the file you want to remove."),
-    has_code('rm', incorrect_msg = 'Use `rm` to remove the file, rather than moving it.')
+    check_not(check_file('/home/repl/seasonal/summer.csv'), incorrect_msg="`summer.csv` が `seasonal` ディレクトリにまだ存在することを予期していませんでした。削除したいファイルへのパスを指定して `rm` を使用してください。"),
+    has_code('rm', incorrect_msg = '`rm` を使用してファイルを削除してください。移動するのではなく。')
 )
-Ex().success_msg("Impressive stuff! Off to the next one!")
-
+Ex().success_msg("素晴らしいです！次に進みましょう！")
 ```
 
 ---
 
-## How can I create and delete directories?
+## ディレクトリはどのように作成・削除できますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -915,23 +875,21 @@ key: 63e8fbd0c2
 xp: 100
 ```
 
-`mv` treats directories the same way it treats files:
-if you are in your home directory and run `mv seasonal by-season`,
-for example,
-`mv` changes the name of the `seasonal` directory to `by-season`.
-However,
-`rm` works differently.
+`mv` はディレクトリもファイルと同じ方法で扱います。
+たとえば、ホームディレクトリにいる状態で `mv seasonal by-season` を実行すると、
+`mv` は `seasonal` ディレクトリの名前を `by-season` に変更します。
+しかし、
+`rm` の動作は異なります。
 
-If you try to `rm` a directory,
-the shell prints an error message telling you it can't do that,
-primarily to stop you from accidentally deleting an entire directory full of work.
-Instead,
-you can use a separate command called `rmdir`.
-For added safety,
-it only works when the directory is empty,
-so you must delete the files in a directory *before* you delete the directory.
-(Experienced users can use the `-r` option to `rm` to get the same effect;
-we will discuss command options in the next chapter.)
+ディレクトリに対して `rm` を実行しようとすると、シェルはそれができないというエラーメッセージを表示します。
+これは主に、作業ファイルがたくさん入ったディレクトリを誤って削除してしまうのを防ぐためです。
+代わりに、
+`rmdir` という別のコマンドを使用できます。
+安全性を高めるため、
+このコマンドはディレクトリが空の場合にのみ動作します。
+つまり、ディレクトリを削除する*前に*、その中のファイルを削除しておく必要があります。
+（上級者は `-r` に `rm` オプションを付けることで同じ効果を得られます。
+コマンドのオプションについては次の章で説明します。）
 
 `@pre_exercise_code`
 ```{python}
@@ -947,11 +905,11 @@ xp: 25
 ```
 
 `@instructions`
-Without changing directories,
-delete the file `agarwal.txt` in the `people` directory.
+ディレクトリを変えずに、
+`agarwal.txt` ディレクトリ内のファイル `people` を削除してください。
 
 `@hint`
-Remember that `rm` stands for "remove" and that a relative path does not start with a leading '/'.
+`rm`は「削除」を意味し、相対パスは先頭に「/」が付かないことを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -963,10 +921,9 @@ rm people/agarwal.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` should no longer be in `/home/repl/people`. Have you used `rm` correctly?"),
-    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'There are still files in the `people` directory. If you simply moved `agarwal.txt`, or created new files, delete them all.')
+    check_not(check_file('/home/repl/people/agarwal.txt'), incorrect_msg="`agarwal.txt` はもう `/home/repl/people` に存在しないはずです。`rm` を正しく使用しましたか？"),
+    has_expr_output(expr = 'ls people', output = '', incorrect_msg = 'まだ `people` ディレクトリにファイルがあります。単に `agarwal.txt` を移動した場合や、新しいファイルを作成した場合は、それらをすべて削除してください。')
 )
-
 ```
 
 ***
@@ -978,11 +935,11 @@ xp: 25
 ```
 
 `@instructions`
-Now that the `people` directory is empty,
-use a single command to delete it.
+`people` ディレクトリが空になったので、
+1 つのコマンドで削除してください。
 
 `@hint`
-Remember that `rm` only works on files.
+`rm` はファイルに対してのみ動作することを覚えておいてください。
 
 `@solution`
 ```{shell}
@@ -995,9 +952,8 @@ rmdir people
 Ex().multi(
     has_cwd('/home/repl'),
     check_not(has_dir('/home/repl/people'),
-              incorrect_msg = "The 'people' directory should no longer be in your home directory. Use `rmdir` to remove it!")
+              incorrect_msg = "ホームディレクトリに 'people' ディレクトリが存在しないようにしてください。`rmdir` を使用して削除してください。")
 )
-
 ```
 
 ***
@@ -1009,13 +965,12 @@ xp: 25
 ```
 
 `@instructions`
-Since a directory is not a file,
-you must use the command `mkdir directory_name`
-to create a new (empty) directory.
-Use this command to create a new directory called `yearly` below your home directory.
+ディレクトリはファイルではないため、
+新しい（空の）ディレクトリを作成するには `mkdir directory_name` というコマンドを使用する必要があります。
+このコマンドを使って、ホームディレクトリの直下に `yearly` という新しいディレクトリを作成してください。
 
 `@hint`
-Run `mkdir` with the name of the directory you want to create.
+作成したいディレクトリの名前を指定して `mkdir` を実行してください。
 
 `@solution`
 ```{shell}
@@ -1027,9 +982,8 @@ mkdir yearly
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_dir('/home/repl/yearly', msg="There is no `yearly` directory in your home directory. Use `mkdir yearly` to make one!")
+    has_dir('/home/repl/yearly', msg="ホームディレクトリに `yearly` ディレクトリがありません。`mkdir yearly` を使用して作成してください！")
 )
-
 ```
 
 ***
@@ -1041,12 +995,12 @@ xp: 25
 ```
 
 `@instructions`
-Now that `yearly` exists,
-create another directory called `2017` inside it
-*without* leaving your home directory.
+`yearly` が存在したら、
+ホームディレクトリから*移動せずに*、
+その中に別のディレクトリ `2017` を作成してください。
 
 `@hint`
-Use a relative path for the sub-directory you want to create.
+作成したいサブディレクトリには相対パスを使用してください。
 
 `@solution`
 ```{shell}
@@ -1059,15 +1013,14 @@ mkdir yearly/2017
 Ex().multi(
     has_cwd('/home/repl'),
     has_dir('/home/repl/yearly/2017',
-            msg="Cannot find a '2017' directory in '/home/repl/yearly'. You can make this directory using the relative path `yearly/2017`.")
+            msg="「/home/repl/yearly」に「2017」ディレクトリが見つかりません。相対パス「yearly/2017」を使用してこのディレクトリを作成できます。")
 )
-Ex().success_msg("Cool! Let's wrap up this chapter with an exercise that repeats some of its concepts!")
-
+Ex().success_msg("素晴らしいです！この章のいくつかの概念を繰り返す演習でこの章を締めくくりましょう！")
 ```
 
 ---
 
-## Wrapping up
+## まとめ
 
 ```yaml
 type: BulletConsoleExercise
@@ -1075,13 +1028,13 @@ key: b1990e9a42
 xp: 100
 ```
 
-You will often create intermediate files when analyzing data.
-Rather than storing them in your home directory,
-you can put them in `/tmp`,
-which is where people and programs often keep files they only need briefly.
-(Note that `/tmp` is immediately below the root directory `/`,
-*not* below your home directory.)
-This wrap-up exercise will show you how to do that.
+データを分析する際には、しばしば中間ファイルを作成します。
+ホームディレクトリに保存するのではなく、
+`/tmp`に入れてください。
+そこは、人々やプログラムが短時間しか必要としないファイルをよく置いておく場所です。
+(`/tmp`はルートディレクトリ`/`の直下にあります。
+*ホームディレクトリの下では*ありません。)
+このまとめの演習では、その方法を示します。
 
 `@pre_exercise_code`
 ```{python}
@@ -1097,10 +1050,10 @@ xp: 25
 ```
 
 `@instructions`
-Use `cd` to go into `/tmp`.
+を使って`cd`に移動してください`/tmp`。
 
 `@hint`
-Remember that `cd` stands for "change directory" and that an absolute path starts with a '/'.
+`cd`は「ディレクトリを変更する」を意味し、絶対パスは「/」で始まることを覚えておきましょう。
 
 `@solution`
 ```{shell}
@@ -1112,9 +1065,8 @@ cd /tmp
 ```{python}
 Ex().check_correct(
   has_cwd('/tmp'),
-  has_code('cd +/tmp', incorrect_msg = 'You are in the wrong directory. Use `cd` to change directory to `/tmp`.')
+  has_code('cd +/tmp', incorrect_msg = '間違ったディレクトリにいます。`cd`を使用してディレクトリを`/tmp`に変更してください。')
 )
-
 ```
 
 ***
@@ -1126,10 +1078,10 @@ xp: 25
 ```
 
 `@instructions`
-List the contents of `/tmp` *without* typing a directory name.
+ディレクトリ名を入力せずに`/tmp`の内容を一覧表示してください。
 
 `@hint`
-If you don't tell `ls` what to list, it shows you what's in your current directory.
+何を一覧表示するか `ls` に指定しない場合、現在のディレクトリにあるものが表示されます。
 
 `@solution`
 ```{shell}
@@ -1141,13 +1093,12 @@ ls
 ```{python}
 Ex().multi(
     has_cwd("/tmp"),
-    has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."),
+    has_code("ls", incorrect_msg = "ファイルリストを生成するために `ls` を呼び出していません。"),
     check_correct(
       has_expr_output(strict=True),
-      has_code("^\s*ls\s*$", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` without`.")
+      has_code("^\s*ls\s*$", incorrect_msg = "コマンドが正しいファイルリストを生成しませんでした。`ls` を使用してください。")
     )
 )
-
 ```
 
 ***
@@ -1159,10 +1110,10 @@ xp: 25
 ```
 
 `@instructions`
-Make a new directory inside `/tmp` called `scratch`.
+`/tmp` の中に `scratch` という名前の新しいディレクトリを作成してください。
 
 `@hint`
-Use `mkdir` to make directories.
+`mkdir` を使用してディレクトリを作成します。
 
 `@solution`
 ```{shell}
@@ -1176,10 +1127,9 @@ Ex().multi(
     has_cwd('/tmp'),
     check_correct(
       has_dir('/tmp/scratch'),
-      has_code('mkdir +scratch', incorrect_msg="Cannot find a 'scratch' directory under '/tmp'. Make sure to use `mkdir` correctly.")
+      has_code('mkdir +scratch', incorrect_msg="'/tmp'の下に'scratch'ディレクトリが見つかりません。`mkdir`を正しく使用してください。")
     )
 )
-
 ```
 
 ***
@@ -1191,8 +1141,8 @@ xp: 25
 ```
 
 `@instructions`
-Move `/home/repl/people/agarwal.txt` into `/tmp/scratch`.
-We suggest you use the `~` shortcut for your home directory and a relative path for the second rather than the absolute path.
+`/home/repl/people/agarwal.txt` を `/tmp/scratch` に移動しましょう。
+1つ目のパスにはホームディレクトリを表す `~` のショートカットを、2つ目のパスには絶対パスではなく相対パスを使うことをおすすめします。
 
 `@hint`
 
@@ -1207,8 +1157,7 @@ mv ~/people/agarwal.txt scratch
 ```{python}
 Ex().multi(
     has_cwd('/tmp'),
-    check_file('/tmp/scratch/agarwal.txt', missing_msg="Cannot find 'agarwal.txt' in '/tmp/scratch'. Use `mv` with `~/people/agarwal.txt` as the first parameter and `scratch` as the second.")
+    check_file('/tmp/scratch/agarwal.txt', missing_msg="'/tmp/scratch'に'agarwal.txt'が見つかりません。最初のパラメータとして`~/people/agarwal.txt`を、2番目のパラメータとして`scratch`を使用して`mv`を使用してください。")
 )
-Ex().success_msg("This concludes Chapter 1 of Introduction to Shell! Rush over to the next chapter to learn more about manipulating data!")
-
+Ex().success_msg("これで「シェル入門」の第1章が終了です！次の章に急いで進み、データ操作についてさらに学びましょう！")
 ```

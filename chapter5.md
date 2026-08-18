@@ -1,15 +1,13 @@
 ---
-title: Creating new tools
+title: 新しいツールの作成
 description: >-
-  History lets you repeat things with just a few keystrokes, and pipes let you
-  combine existing commands to create new ones. In this chapter, you will see
-  how to go one step further and create new commands of your own.
+  履歴機能を使えば、数回のキー入力で操作を繰り返すことができ、パイプを使えば既存のコマンドを組み合わせて新しいコマンドを作成できます。この章では、さらに一歩進んで独自のコマンドを作成する方法を学びます。
 lessons:
   - nb_of_exercises: 9
-    title: How can I edit a file?
+    title: ファイルをどうやって編集できますか?
 ---
 
-## How can I edit a file?
+## ファイルをどうやって編集できますか?
 
 ```yaml
 type: ConsoleExercise
@@ -17,24 +15,22 @@ key: 39eee3cfc0
 xp: 100
 ```
 
-Unix has a bewildering variety of text editors.
-For this course,
-we will use a simple one called Nano.
-If you type `nano filename`,
-it will open `filename` for editing
-(or create it if it doesn't already exist).
-You can move around with the arrow keys,
-delete characters using backspace,
-and do other operations with control-key combinations:
+Unix にはさまざまなテキストエディタが存在し、その数の多さに戸惑うかもしれません。
+このコースでは、Nano というシンプルなエディタを使用します。
+`nano filename` と入力すると、`filename` を編集用に開きます
+（ファイルが存在しない場合は新規作成します）。
+矢印キーでカーソルを移動でき、
+バックスペースで文字を削除できます。
+そのほかの操作は、コントロールキーの組み合わせで行います。
 
-- `Ctrl` + `K`: delete a line.
-- `Ctrl` + `U`: un-delete a line.
-- `Ctrl` + `O`: save the file ('O' stands for 'output'). _You will also need to press Enter to confirm the filename!_
-- `Ctrl` + `X`: exit the editor.
+- `Ctrl` + `K`：行を削除します。
+- `Ctrl` + `U`：削除した行を元に戻します。
+- `Ctrl` + `O`：ファイルを保存します（O は「出力」の頭文字です）。 _ファイル名を確定するためにエンターキーを押す必要もあります。_
+- `Ctrl` + `X`：エディタを終了します。
 
 `@instructions`
-Run `nano names.txt` to edit a new file in your home directory
-and enter the following four lines:
+`nano names.txt` を実行して、ホームディレクトリに新しいファイルを作成し、
+次の 4 行を入力しましょう。
 
 ```
 Lovelace
@@ -43,10 +39,10 @@ Johnson
 Wilson
 ```
 
-To save what you have written,
-type `Ctrl` + `O` to write the file out,
-then Enter to confirm the filename,
-then `Ctrl` + `X` to exit the editor.
+入力した内容を保存するには、
+`Ctrl` + `O` と入力してファイルを書き出し、
+エンター キーを押してファイル名を確定し、
+最後に `Ctrl` + `X` を押してエディタを終了しましょう。
 
 `@hint`
 
@@ -65,7 +61,7 @@ cp /solutions/names.txt /home/repl
 
 `@sct`
 ```{python}
-patt = "Have you included the line `%s` in the `names.txt` file? Use `nano names.txt` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+patt = "ファイル `names.txt` に行 `%s` を含めましたか？再度 `nano names.txt` を使用してファイルを更新してください。`Ctrl` + `O` で保存し、`Ctrl` + `X` で終了します。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/names.txt').multi(
@@ -75,12 +71,12 @@ Ex().multi(
         has_code(r'Wilson', incorrect_msg=patt%'Wilson')
     )
 )
-Ex().success_msg("Well done! Off to the next one!")
+Ex().success_msg("よくできました！次に進みましょう！")
 ```
 
 ---
 
-## How can I record what I just did?
+## どうすれば、今行ったことの履歴を記録できますか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -88,20 +84,20 @@ key: 80c3532985
 xp: 100
 ```
 
-When you are doing a complex analysis,
-you will often want to keep a record of the commands you used.
-You can do this with the tools you have already seen:
+複雑な分析を行うときは、
+使用したコマンドの記録を残しておきたいことがよくあります。
+これまでに学んだツールを使えば、次の方法で実現できます。
 
-1. Run `history`.
-2. Pipe its output to `tail -n 10` (or however many recent steps you want to save).
-3. Redirect that to a file called something like `figure-5.history`.
+1. `history` を実行します。
+2. その出力を `tail -n 10`（保存したい直近のステップ数に応じて）にパイプで渡します。
+3. その結果を `figure-5.history` のような名前のファイルにリダイレクトします。
 
-This is better than writing things down in a lab notebook
-because it is guaranteed not to miss any steps.
-It also illustrates the central idea of the shell:
-simple tools that produce and consume lines of text
-can be combined in a wide variety of ways
-to solve a broad range of problems.
+この方法は、実験ノートに手書きで記録するよりも優れています。
+なぜなら、どのステップも漏れなく記録できることが保証されているからです。
+また、これはシェルの中心的な考え方をよく表しています。
+つまり、テキストの行を生成・処理するシンプルなツールを
+さまざまな形で組み合わせることで、
+幅広い問題を解決できるということです。
 
 `@pre_exercise_code`
 ```{python}
@@ -117,10 +113,10 @@ xp: 35
 ```
 
 `@instructions`
-Copy the files `seasonal/spring.csv` and `seasonal/summer.csv` to your home directory.
+ファイル `seasonal/spring.csv` と `seasonal/summer.csv` をホームディレクトリにコピーしてください。
 
 `@hint`
-Use `cp` to copy and `~` as a shortcut for the path to your home directory.
+コピーには `cp` を、ホームディレクトリへのパスのショートカットとして `~` を使ってください。
 
 `@solution`
 ```{shell}
@@ -130,7 +126,7 @@ cp seasonal/s* ~
 
 `@sct`
 ```{python}
-msg="Have you used `cp seasonal/s* ~` to copy the required files to your home directory?"
+msg="`cp seasonal/s* ~` を使用して、必要なファイルをホームディレクトリにコピーしましたか？"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/spring.csv', missing_msg=msg).\
@@ -138,8 +134,7 @@ Ex().multi(
     check_file('/home/repl/summer.csv', missing_msg=msg).\
         has_code(r'2017-01-11,canine', incorrect_msg=msg)
 )
-Ex().success_msg("Remarkable record-keeping! If you mistyped any commands, you can always use `nano` to clean up the saves history file afterwards.")
-
+Ex().success_msg("素晴らしい記録管理です！もしコマンドを誤って入力した場合は、後で `nano` を使用して保存履歴ファイルを整理することができます。")
 ```
 
 ***
@@ -151,13 +146,13 @@ xp: 35
 ```
 
 `@instructions`
-Use `grep` with the `-h` flag (to stop it from printing filenames)
-and `-v Tooth` (to select lines that *don't* match the header line)
-to select the data records from `spring.csv` and `summer.csv` in that order
-and redirect the output to `temp.csv`.
+`grep` に `-h` フラグ（ファイル名を表示しないようにするため）と
+`-v Tooth` フラグ（ヘッダー行に一致*しない*行を選択するため）を付けて使い、
+`spring.csv` と `summer.csv` からこの順番でデータレコードを選択し、
+その出力を `temp.csv` にリダイレクトしましょう。
 
 `@hint`
-Put the flags before the filenames.
+ファイル名の前にフラグを指定してください。
 
 `@solution`
 ```{shell}
@@ -167,8 +162,8 @@ grep -h -v Tooth spring.csv summer.csv > temp.csv
 
 `@sct`
 ```{python}
-msg1 = "Make sure you redirect the output of the `grep` command to `temp.csv` with `>`!"
-msg2 = "Have you used `grep -h -v ___ ___ ___` (fill in the blanks) to populate `temp.csv`?"
+msg1 = "「grep」コマンドの出力を「>」を使って「temp.csv」にリダイレクトしていることを確認してください！"
+msg2 = "「grep -h -v ___ ___ ___」を使用して「temp.csv」を作成しましたか？（空欄を埋めてください）"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/temp.csv', missing_msg=msg1).multi(
@@ -177,7 +172,6 @@ Ex().multi(
         has_code(r'2017-03-12,wisdom', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -189,14 +183,14 @@ xp: 30
 ```
 
 `@instructions`
-Pipe `history` into `tail -n 3`
-and redirect the output to `steps.txt`
-to save the last three commands in a file.
-(You need to save three instead of just two
-because the `history` command itself will be in the list.)
+`history` を `tail -n 3` にパイプでつなぎ、
+その出力を `steps.txt` にリダイレクトして、
+直近3つのコマンドをファイルに保存しましょう。
+（2つではなく3つ保存する必要があるのは、
+`history` コマンド自体もリストに含まれるためです。）
 
 `@hint`
-Remember that redirection with `>` comes at the end of the sequence of piped commands.
+`>` によるリダイレクトは、パイプでつないだコマンドの並びの最後に置くことを忘れないでください。
 
 `@solution`
 ```{shell}
@@ -206,8 +200,8 @@ history | tail -n 3 > steps.txt
 
 `@sct`
 ```{python}
-msg1="Make sure to redirect the output of your command to `steps.txt`."
-msg2="Have you used `history | tail ___ ___` (fill in the blanks) to populate `steps.txt`?"
+msg1="コマンドの出力を `steps.txt` にリダイレクトすることを確認してください。"
+msg2="`history | tail ___ ___`（空欄を埋めてください）を使用して `steps.txt` を作成しましたか？"
 Ex().multi(
     has_cwd('/home/repl'),
     # When run by the validator, solution3 doesn't pass, so including a has_code for that
@@ -219,13 +213,12 @@ Ex().multi(
         has_code(r'history\s+|\s+tail\s+-n\s+4\s+>\s+steps\.txt')
     )
 )
-Ex().success_msg("Well done! Let's step it up!")
-
+Ex().success_msg("よくできました！次のステップに進みましょう！")
 ```
 
 ---
 
-## How can I save commands to re-run later?
+## コマンドを保存して、後で再実行するにはどうすればよいでしょうか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -233,27 +226,22 @@ key: 4507a0dbd8
 xp: 100
 ```
 
-You have been using the shell interactively so far.
-But since the commands you type in are just text,
-you can store them in files for the shell to run over and over again.
-To start exploring this powerful capability,
-put the following command in a file called `headers.sh`:
+これまでは、シェルを対話的に使ってきました。
+しかし、入力するコマンドは単なるテキストなので、ファイルに保存しておけば、何度でも実行できます。
+この強力な機能を試すために、次のコマンドを `headers.sh` というファイルに保存しましょう。
 
 ```{shell}
 head -n 1 seasonal/*.csv
 ```
 
-This command selects the first row from each of the CSV files in the `seasonal` directory.
-Once you have created this file,
-you can run it by typing:
+このコマンドは、`seasonal` ディレクトリ内の各 CSV ファイルから最初の行を選択します。
+ファイルを作成したら、次のように入力して実行できます。
 
 ```{shell}
 bash headers.sh
 ```
 
-This tells the shell (which is just a program called `bash`)
-to run the commands contained in the file `headers.sh`,
-which produces the same output as running the commands directly.
+これは、シェル（`bash` という名前のプログラムにすぎません）に対して、`headers.sh` ファイルに含まれるコマンドを実行するよう指示しています。直接コマンドを実行した場合と同じ出力が得られます。
 
 `@pre_exercise_code`
 ```{python}
@@ -269,17 +257,16 @@ xp: 50
 ```
 
 `@instructions`
-Use `nano dates.sh` to create a file called `dates.sh`
-that contains this command:
+`nano dates.sh` を使って `dates.sh` という名前のファイルを作成し、そのファイルに次のコマンドを含めてください。
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv
 ```
 
-to extract the first column from all of the CSV files in `seasonal`.
+`seasonal` 内のすべての CSV ファイルから最初の列を抽出するためのものです。
 
 `@hint`
-Put the commands shown into the file without extra blank lines or spaces.
+表示されているコマンドを、余分な空行やスペースを入れずにファイルに記述してください。
 
 `@solution`
 ```{shell}
@@ -291,13 +278,12 @@ cp /solutions/dates.sh ~
 
 `@sct`
 ```{python}
-msg = "Have you included the line `cut -d , -f 1 seasonal/*.csv` in the `dates.sh` file? Use `nano dates.sh` again to update your file. Use `Ctrl` + `O` to save and `Ctrl` + `X` to exit."
+msg = "ファイル `dates.sh` に行 `cut -d , -f 1 seasonal/*.csv` を含めましたか？再度 `nano dates.sh` を使用してファイルを更新してください。`Ctrl` + `O` で保存し、`Ctrl` + `X` で終了します。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/dates.sh').\
         has_code('cut -d *, *-f +1 +seasonal\/\*\.csv', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -309,10 +295,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `bash` to run the file `dates.sh`.
+`bash`を使ってファイル`dates.sh`を実行してください。
 
 `@hint`
-Use `bash filename` to run the file.
+`bash filename` を使ってファイルを実行します。
 
 `@solution`
 ```{shell}
@@ -327,17 +313,16 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("dates.sh", incorrect_msg = 'Did you specify the `dates.sh` file?')
+      has_code("bash", incorrect_msg = '`bash`を呼び出しましたか？'),
+      has_code("dates.sh", incorrect_msg = '`dates.sh`ファイルを指定しましたか？')
     )
   )
 )
-
 ```
 
 ---
 
-## How can I re-use pipes?
+## パイプを再利用するには?
 
 ```yaml
 type: BulletConsoleExercise
@@ -345,27 +330,23 @@ key: da13667750
 xp: 100
 ```
 
-A file full of shell commands is called a ***shell script**,
-or sometimes just a "script" for short. Scripts don't have to have names ending in `.sh`,
-but this lesson will use that convention
-to help you keep track of which files are scripts.
+シェルコマンドを詰め込んだファイルは***シェルスクリプト**、または単に「スクリプト」と呼ばれます。スクリプト自体の名前が必ずしも `.sh` で終わる必要はありませんが、
+このレッスンではどのファイルがスクリプトかを分かりやすくするために、この規則を使います。
 
-Scripts can also contain pipes.
-For example,
-if `all-dates.sh` contains this line:
+スクリプトにはパイプを含めることもできます。
+例えば、`all-dates.sh` に次の行が含まれているとします。
 
 ```{shell}
 cut -d , -f 1 seasonal/*.csv | grep -v Date | sort | uniq
 ```
 
-then:
+この場合、
 
 ```{shell}
 bash all-dates.sh > dates.out
 ```
 
-will extract the unique dates from the seasonal data files
-and save them in `dates.out`.
+を実行すると、季節データファイルから重複のない日付が抽出され、`dates.out` に保存されます。
 
 `@pre_exercise_code`
 ```{python}
@@ -382,13 +363,12 @@ xp: 35
 ```
 
 `@instructions`
-A file `teeth.sh` in your home directory has been prepared for you, but contains some blanks.
-Use Nano to edit the file and replace the two `____` placeholders
-with `seasonal/*.csv` and `-c` so that this script prints a count of the
-number of times each tooth name appears in the CSV files in the `seasonal` directory.
+ホームディレクトリに用意されている `teeth.sh` には、いくつかの空欄があります。
+Nano を使ってこのファイルを編集し、2つの `____` プレースホルダーをそれぞれ `seasonal/*.csv` と `-c` に置き換えましょう。
+こうすることで、このスクリプトは `seasonal` ディレクトリ内の CSV ファイルに含まれる歯の名前ごとの出現回数を表示します。
 
 `@hint`
-Use `nano teeth.sh` to edit the file.
+`nano teeth.sh` を使ってファイルを編集してください。
 
 `@solution`
 ```{shell}
@@ -400,13 +380,12 @@ cp /solutions/teeth.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `teeth.sh` reads `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c`? Use `nano teeth.sh` again to make the required changes."
+msg="`teeth.sh` 内のコマンドが `cut -d , -f 2 seasonal/*.csv | grep -v Tooth | sort | uniq -c` として正しく空欄を埋めましたか？ 必要な変更を加えるために再度 `nano teeth.sh` を使用してください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/teeth.sh').\
         has_code(r'cut\s+-d\s+,\s+-f\s+2\s+seasonal/\*\.csv\s+\|\s+grep\s+-v\s+Tooth\s+\|\s+sort\s+\|\s+uniq\s+-c', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -418,10 +397,10 @@ xp: 35
 ```
 
 `@instructions`
-Use `bash` to run `teeth.sh` and `>` to redirect its output to `teeth.out`.
+`bash`を使って`teeth.sh`を実行し、`>`を使って出力を`teeth.out`にリダイレクトします。
 
 `@hint`
-Remember that `> teeth.out` must come *after* the command that is producing output.
+`> teeth.out` は、出力を生成するコマンドの*後*に置く必要があることを覚えておきましょう。
 
 `@solution`
 ```{shell}
@@ -434,7 +413,7 @@ bash teeth.sh > teeth.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash teeth.sh` to `teeth.out` with the `>`?"
+msg="`bash teeth.sh` の結果を `>` を使って `teeth.out` に正しくリダイレクトしましたか？"
 Ex().multi(
   has_cwd('/home/repl'),
   check_correct(
@@ -443,13 +422,12 @@ Ex().multi(
       has_code(r'17 wisdom', incorrect_msg=msg)
     ),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+teeth.sh", incorrect_msg = 'Did you run the `teeth.sh` file?'),
-      has_code(">\s+teeth.out", incorrect_msg = 'Did you redirect to the `teeth.out` file?')
+      has_code("bash", incorrect_msg = '`bash` を呼び出しましたか？'),
+      has_code("bash\s+teeth.sh", incorrect_msg = '`teeth.sh` ファイルを実行しましたか？'),
+      has_code(">\s+teeth.out", incorrect_msg = '`teeth.out` ファイルにリダイレクトしましたか？')
     )
   )
 )
-
 ```
 
 ***
@@ -461,10 +439,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `cat teeth.out` to inspect your results.
+`cat teeth.out` を実行して、結果を確認してください。
 
 `@hint`
-Remember, you can type the first few characters of a filename and then press the tab key to auto-complete.
+ファイル名の最初の数文字を入力してからTabキーを押すと、自動的に補完できることを覚えておきましょう。
 
 `@solution`
 ```{shell}
@@ -479,18 +457,17 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("cat", incorrect_msg = 'Did you call `cat`?'),
-      has_code("teeth.out", incorrect_msg = 'Did you specify the `teeth.out` file?')
+      has_code("cat", incorrect_msg = '`cat`を呼び出しましたか？'),
+      has_code("teeth.out", incorrect_msg = '`teeth.out`ファイルを指定しましたか？')
     )
   )
 )
-Ex().success_msg("Nice! This all may feel contrived at first, but the nice thing is that you are automating parts of your workflow step by step. Something that comes in really handy as a data scientist!")
-
+Ex().success_msg("素晴らしいです！最初は不自然に感じるかもしれませんが、素晴らしいことに、ワークフローの一部を一歩一歩自動化しています。データサイエンティストとして非常に役立つことです！")
 ```
 
 ---
 
-## How can I pass filenames to scripts?
+## スクリプトにファイル名を渡すにはどうすればよいでしょうか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -498,26 +475,24 @@ key: c2623b9c14
 xp: 100
 ```
 
-A script that processes specific files is useful as a record of what you did, but one that allows you to process any files you want is more useful.
-To support this,
-you can use the special expression `$@` (dollar sign immediately followed by at-sign)
-to mean "all of the command-line parameters given to the script".
+特定のファイルを処理するスクリプトは、実行内容の記録として役立ちます。しかし、任意のファイルを処理できるスクリプトのほうが、さらに便利です。
+これを実現するには、特殊な表現である `$@`（ドル記号の直後にアットマークを続けたもの）を使います。これは「スクリプトに渡されたすべてのコマンドラインパラメータ」を意味します。
 
-For example, if `unique-lines.sh` contains `sort $@ | uniq`, when you run:
+例えば、`unique-lines.sh` に `sort $@ | uniq` と書かれている場合、次のように実行すると:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv
 ```
 
-the shell replaces `$@` with `seasonal/summer.csv` and processes one file. If you run this:
+シェルは `$@` を `seasonal/summer.csv` に置き換え、1つのファイルを処理します。次のように実行すると:
 
 ```{shell}
 bash unique-lines.sh seasonal/summer.csv seasonal/autumn.csv
 ```
 
-it processes two data files, and so on.
+2つのデータファイルを処理します。ファイルの数が増えても同様です。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_念のため、Nano で書いた内容を保存するには、`Ctrl` + `O` を押してファイルを書き出し、Enter キーでファイル名を確定してから、`Ctrl` + `X` でエディタを終了してください。_
 
 `@pre_exercise_code`
 ```{python}
@@ -534,13 +509,13 @@ xp: 50
 ```
 
 `@instructions`
-Edit the script `count-records.sh` with Nano and fill in the two `____` placeholders
-with `$@` and `-l` (_the letter_) respectively so that it counts the number of lines in one or more files,
-excluding the first line of each.
+Nanoでスクリプト`count-records.sh`を編集し、2つの`____`プレースホルダーを
+それぞれ`$@`と`-l`(_the letter_)で埋めて、1つ以上のファイルの行数を
+各ファイルの先頭行を除いて数えるようにします。
 
 `@hint`
-* Use `nano count-records.sh` to edit the filename.
-* Make sure you are specifying the _letter_ `-l`, and not the number one.
+* `nano count-records.sh` を使ってファイル名を編集してください。
+* 指定するのは _文字_ `-l` であり、数字の 1 ではないことを確認してください。
 
 `@solution`
 ```{shell}
@@ -552,7 +527,7 @@ cp /solutions/count-records.sh ~
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `count-records.sh` reads `tail -q -n +2 $@ | wc -l`? Use `nano count-records.sh` again to make the required changes."
+msg="`count-records.sh` のコマンドが `tail -q -n +2 $@ | wc -l` となるように空欄を適切に埋めましたか？再度 `nano count-records.sh` を使用して必要な変更を行ってください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/count-records.sh').\
@@ -570,11 +545,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `count-records.sh` on `seasonal/*.csv`
-and redirect the output to `num-records.out` using `>`.
+`count-records.sh`を`seasonal/*.csv`に対して実行し、出力を`num-records.out`にリダイレクトするために`>`を使用してください。
 
 `@hint`
-Use `>` to redirect the output.
+出力をリダイレクトするには `>` を使用してください。
 
 `@solution`
 ```{shell}
@@ -589,20 +563,19 @@ Ex().multi(
   check_correct(
     check_file('/home/repl/num-records.out').has_code(r'92'),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+count-records.sh", incorrect_msg = 'Did you run the `count-records.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code(">\s+num-records.out", incorrect_msg = 'Did you redirect to the `num-records.out` file?')
+      has_code("bash", incorrect_msg = '`bash`を呼び出しましたか？'),
+      has_code("bash\s+count-records.sh", incorrect_msg = '`count-records.sh`ファイルを実行しましたか？'),
+      has_code("seasonal/\*", incorrect_msg = '`seasonal/*`で処理するファイルを指定しましたか？'),
+      has_code(">\s+num-records.out", incorrect_msg = '`num-records.out`ファイルにリダイレクトしましたか？')
     )
   )
 )
-Ex().success_msg("A job well done! Your shell power is ever-expanding!")
-
+Ex().success_msg("よくできました！あなたのシェルの力はますます拡大しています！")
 ```
 
 ---
 
-## How can I process a single argument?
+## 1つの引数を処理するにはどうすればよいでしょうか？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -610,42 +583,38 @@ key: 4092cb4cda
 xp: 50
 ```
 
-As well as `$@`,
-the shell lets you use `$1`, `$2`, and so on to refer to specific command-line parameters.
-You can use this to write commands that feel simpler or more natural than the shell's.
-For example,
-you can create a script called `column.sh` that selects a single column from a CSV file
-when the user provides the filename as the first parameter and the column as the second:
+`$@` と同様に、シェルでは `$1`、`$2` などを使って特定のコマンドラインパラメータを参照できます。
+これを使うと、シェル自体よりも簡潔で自然に感じられるコマンドを書くことができます。
+例えば、ユーザーが最初のパラメータとしてファイル名、2番目のパラメータとして列を指定すると、
+CSVファイルから1つの列を選択する `column.sh` というスクリプトを作成できます。
 
 ```{shell}
 cut -d , -f $2 $1
 ```
 
-and then run it using:
+そして、次のように実行します。
 
 ```{shell}
 bash column.sh seasonal/autumn.csv 1
 ```
 
-Notice how the script uses the two parameters in reverse order.
+このスクリプトでは、2つのパラメータを逆の順序で使っている点に注目してください。
 
 <hr>
 
-The script `get-field.sh` is supposed to take a filename,
-the number of the row to select,
-the number of the column to select,
-and print just that field from a CSV file.
-For example:
+次のスクリプト `get-field.sh` は、ファイル名、選択する行の番号、選択する列の番号を受け取り、
+CSVファイルからそのフィールドだけを出力することを目的としています。
+例えば、
 
 ```
 bash get-field.sh seasonal/summer.csv 4 2
 ```
 
-should select the second field from line 4 of `seasonal/summer.csv`.
-Which of the following commands should be put in `get-field.sh` to do that?
+は、`seasonal/summer.csv` の4行目から2番目のフィールドを選択するはずです。
+これを実現するには、`get-field.sh` に次のうちどのコマンドを記述すればよいでしょうか？
 
 `@hint`
-Remember that command-line parameters are numbered left to right.
+コマンドラインパラメータは左から右へ番号が振られることを思い出しましょう。
 
 `@possible_answers`
 - `head -n $1 $2 | tail -n 1 | cut -d , -f $3`
@@ -654,14 +623,14 @@ Remember that command-line parameters are numbered left to right.
 - `head -n $2 $3 | tail -n 1 | cut -d , -f $1`
 
 `@feedback`
-- No: that will try to use the filename as the number of lines to select with `head`.
-- Correct!
-- No: that will try to use the column number as the line number and vice versa.
-- No: that will use the field number as the filename and vice versa.
+- いいえ：それではファイル名を、で選択する行数として使用しようとします。`head`。
+- 正解!
+- いいえ：それでは列番号を行番号として、またその逆として使用することになります。
+- いいえ：それではフィールド番号をファイル名として、またその逆として使用することになります。
 
 ---
 
-## How can one shell script do many things?
+## 1つのシェルスクリプトでどうやって多くのことを行えるのでしょうか？
 
 ```yaml
 type: TabConsoleExercise
@@ -669,11 +638,11 @@ key: 846bc70e9d
 xp: 100
 ```
 
-Our shells scripts so far have had a single command or pipe, but a script can contain many lines of commands. For example, you can create one that tells you how many records are in the shortest and longest of your data files, i.e., the range of your datasets' lengths.
+これまでのシェルスクリプトには、単一のコマンドやパイプしか含まれていませんでした。しかし、スクリプトには複数行のコマンドを含めることができます。たとえば、データファイルの中で最も短いものと最も長いもののレコード数、つまりデータセットの長さの範囲を調べるスクリプトを作成できます。
 
-Note that in Nano, "copy and paste" is achieved by navigating to the line you want to copy, pressing `CTRL` + `K` to cut the line, then `CTRL` + `U` twice to paste two copies of it.
+Nano では、コピーしたい行に移動し、`CTRL` + `K` で行を切り取った後、`CTRL` + `U` を2回押すことで、その行を2つ貼り付けることができます。これが Nano における「コピー＆ペースト」の方法です。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_確認しておくと、Nano で書いた内容を保存するには、`Ctrl` + `O` を押してファイルを書き出し、エンター キーでファイル名を確定し、`Ctrl` + `X` でエディタを終了します。_
 
 `@pre_exercise_code`
 ```{python}
@@ -690,15 +659,10 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano to edit the script `range.sh`
-and replace the two `____` placeholders
-with `$@` and `-v`
-so that it lists the names and number of lines in all of the files given on the command line
-*without* showing the total number of lines in all files.
-(Do not try to subtract the column header lines from the files.)
+Nano を使ってスクリプト `range.sh` を編集し、2つの `____` プレースホルダーを `$@` と `-v` に置き換えてください。これにより、コマンドラインで指定したすべてのファイルの名前と行数を一覧表示しつつ、全ファイルの合計行数は*表示しない*ようにします。（各ファイルの列見出し行を差し引く必要はありません。）
 
 `@hint`
-Use `wc -l $@` to count lines in all the files given on the command line.
+コマンドラインで指定したすべてのファイルの行数を数えるには、`wc -l $@` を使用してください。
 
 `@solution`
 ```{shell}
@@ -710,13 +674,12 @@ cp /solutions/range-1.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you a replaced the blanks properly so the command in `range.sh` reads `wc -l $@ | grep -v total`? Use `nano range.sh` again to make the required changes."
+msg="`range.sh` のコマンドが `wc -l $@ | grep -v total` と正しくなるように空欄を埋めましたか？再度 `nano range.sh` を使用して必要な変更を行ってください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -728,9 +691,9 @@ xp: 25
 ```
 
 `@instructions`
-Use Nano again to add `sort -n` and `head -n 1` in that order
-to the pipeline in `range.sh`
-to display the name and line count of the shortest file given to it.
+再び Nano を使って、`sort -n` と `head -n 1` をこの順序で
+`range.sh` のパイプラインに追加し、
+それに与えられた最短のファイルの名前と行数を表示します。
 
 `@hint`
 
@@ -745,13 +708,12 @@ cp /solutions/range-2.sh range.sh
 
 `@sct`
 ```{python}
-msg="Have you added `sort -n` and `head -n 1` with pipes to the `range.sh` file? Use `nano range.sh` again to make the required changes."
+msg="`sort -n` と `head -n 1` をパイプでつないで `range.sh` ファイルに追加しましたか？ `nano range.sh` を再度使用して、必要な変更を行ってください。"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').\
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+|\s+head\s+-n\s+1', incorrect_msg=msg)
 )
-
 ```
 
 ***
@@ -763,13 +725,10 @@ xp: 25
 ```
 
 `@instructions`
-Again using Nano, add a second line to `range.sh` to print the name and record count of
-the *longest* file in the directory *as well as* the shortest.
-This line should be a duplicate of the one you have already written,
-but with `sort -n -r` rather than `sort -n`.
+再び Nano を使って、`range.sh` に2行目を追加し、ディレクトリ内で最も長いファイルの名前とレコード数を、*最も短い*ファイルと*同様に*表示できるようにしましょう。この行は、すでに書いた行を複製し、`sort -n -r` の代わりに `sort -n` を使うようにします。
 
 `@hint`
-Copy the first line and modify the sorting order.
+最初の行をコピーしてソート順を変更します。
 
 `@solution`
 ```{shell}
@@ -781,8 +740,8 @@ cp /solutions/range-3.sh range.sh
 
 `@sct`
 ```{python}
-msg1="Keep the first line in the `range.sh` file: `wc -l $@ | grep -v total | sort -n | head -n 1`"
-msg2="Have you duplicated the first line in `range.sh` and made a small change? `sort -n -r` instead of `sort -n`!"
+msg1="`range.sh`ファイルの最初の行を保持してください: `wc -l $@ | grep -v total | sort -n | head -n 1`"
+msg2="`range.sh`の最初の行を複製し、小さな変更を加えましたか？`sort -n`の代わりに`sort -n -r`を使用してください！"
 Ex().multi(
     has_cwd('/home/repl'),
     check_file('/home/repl/range.sh').multi(
@@ -790,7 +749,6 @@ Ex().multi(
         has_code(r'wc\s+-l\s+\$@\s+\|\s+grep\s+-v\s+total\s+\|\s+sort\s+-n\s+-r\s+|\s+head\s+-n\s+1', incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -802,13 +760,10 @@ xp: 25
 ```
 
 `@instructions`
-Run the script on the files in the `seasonal` directory
-using `seasonal/*.csv` to match all of the files
-and redirect the output using `>`
-to a file called `range.out` in your home directory.
+`seasonal` ディレクトリ内のファイルに対してスクリプトを実行し、`seasonal/*.csv` を使ってすべてのファイルに一致させ、`>` を使って出力をホームディレクトリの `range.out` というファイルにリダイレクトします。
 
 `@hint`
-Use `bash range.sh` to run your script, `seasonal/*.csv` to specify files, and `> range.out` to redirect the output.
+`bash range.sh`でスクリプトを実行し、`seasonal/*.csv`でファイルを指定し、`> range.out`で出力をリダイレクトします。
 
 `@solution`
 ```{shell}
@@ -818,24 +773,23 @@ bash range.sh seasonal/*.csv > range.out
 
 `@sct`
 ```{python}
-msg="Have you correctly redirected the result of `bash range.sh seasonal/*.csv` to `range.out` with the `>`?"
+msg="`bash range.sh seasonal/*.csv` の結果を `>` を使って `range.out` に正しくリダイレクトしましたか？"
 Ex().multi(
 has_cwd('/home/repl'),
 multi(
-has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-has_code("bash\s+range.sh", incorrect_msg = 'Did you run the `range.sh` file?'),
-has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-has_code(">\s+range.out", incorrect_msg = 'Did you redirect to the `range.out` file?')
+has_code("bash", incorrect_msg = ' `bash` を呼び出しましたか？'),
+has_code("bash\s+range.sh", incorrect_msg = ' `range.sh` ファイルを実行しましたか？'),
+has_code("seasonal/\*", incorrect_msg = ' `seasonal/*` で処理するファイルを指定しましたか？'),
+has_code(">\s+range.out", incorrect_msg = ' `range.out` ファイルにリダイレクトしましたか？')
 )
 )
 
-Ex().success_msg("This is going well. Head over to the next exercise to learn about writing loops!")
-
+Ex().success_msg("順調です。次の演習に進んで、ループの書き方を学びましょう！")
 ```
 
 ---
 
-## How can I write loops in a shell script?
+## シェルスクリプトでループを書くにはどうすればよいですか？
 
 ```yaml
 type: BulletConsoleExercise
@@ -843,7 +797,7 @@ key: 6be8ca6009
 xp: 100
 ```
 
-Shell scripts can also contain loops. You can write them using semi-colons, or split them across lines without semi-colons to make them more readable:
+シェルスクリプトにはループも記述できます。セミコロンを使って一行で書くこともできますが、セミコロンを使わずに複数行に分けて書くと読みやすくなります。
 
 ```{shell}
 # Print the first and last data records of each file.
@@ -854,11 +808,11 @@ do
 done
 ```
 
-(You don't have to indent the commands inside the loop, but doing so makes things clearer.)
+（ループ内のコマンドをインデントする必要はありませんが、インデントすると内容が分かりやすくなります。）
 
-The first line of this script is a **comment** to tell readers what the script does. Comments start with the `#` character and run to the end of the line. Your future self will thank you for adding brief explanations like the one shown here to every script you write.
+このスクリプトの最初の行は、スクリプトの内容を読み手に伝える**コメント**です。コメントは `#` 文字で始まり、その行の末尾まで続きます。このような簡単な説明をスクリプトごとに追加しておくと、後で見直すときに自分自身が助かります。
 
-_As a reminder, to save what you have written in Nano, type `Ctrl` + `O` to write the file out, then Enter to confirm the filename, then `Ctrl` + `X` to exit the editor._
+_確認: Nano で書いた内容を保存するには、`Ctrl` + `O` を押してファイルを書き出し、エンター キーでファイル名を確定し、`Ctrl` + `X` でエディタを終了します。_
 
 `@pre_exercise_code`
 ```{python}
@@ -875,12 +829,10 @@ xp: 35
 ```
 
 `@instructions`
-Fill in the placeholders in the script `date-range.sh`
-with `$filename` (twice), `head`, and `tail`
-so that it prints the first and last date from one or more files.
+スクリプト `date-range.sh` 内のプレースホルダーを `$filename`（2 か所）、`head`、`tail` で埋めて、1 つ以上のファイルから最初と最後の日付を表示できるようにしましょう。
 
 `@hint`
-Remember to use `$filename` to get the current value of the loop variable.
+ループ変数の現在の値を取得するには `$filename` を使うことを忘れないでください。
 
 `@solution`
 ```{shell}
@@ -892,10 +844,10 @@ cp /solutions/date-range.sh date-range.sh
 
 `@sct`
 ```{python}
-msgpatt="In `date-range.sh`, have you changed the %s line in the loop to be `%s`? Use `nano date-range.sh` to make changes."
+msgpatt="`date-range.sh` で、ループ内の %s 行を `%s` に変更しましたか？ `nano date-range.sh` を使用して変更を行ってください。"
 cmdpatt = 'cut -d , -f 1 $filename | grep -v Date | sort | %s -n 1'
-msg1=msgpatt%('first', cmdpatt%'head')
-msg2=msgpatt%('second', cmdpatt%'tail')
+msg1=msgpatt%('最初の', cmdpatt%'head')
+msg2=msgpatt%('2 番目の', cmdpatt%'tail')
 patt='cut\s+-d\s+,\s+-f\s+1\s+\$filename\s+\|\s+grep\s+-v\s+Date\s+\|\s+sort\s+\|\s+%s\s+-n\s+1'
 patt1 = patt%'head'
 patt2 = patt%'tail'
@@ -906,7 +858,6 @@ Ex().multi(
         has_code(patt2, incorrect_msg=msg2)
     )
 )
-
 ```
 
 ***
@@ -918,11 +869,11 @@ xp: 35
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files
-using `seasonal/*.csv` to match their names.
+4つの季節データファイルすべてで`date-range.sh`を実行し
+名前に合わせるために`seasonal/*.csv`を使ってください。
 
 `@hint`
-The wildcard expression should start with the directory name.
+ワイルドカード式はディレクトリ名から始める必要があります。
 
 `@solution`
 ```{shell}
@@ -937,13 +888,12 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?')
+      has_code("bash", incorrect_msg = '「bash」を呼び出しましたか？'),
+      has_code("bash\s+date-range.sh", incorrect_msg = '「date-range.sh」ファイルを実行しましたか？'),
+      has_code("seasonal/\*", incorrect_msg = '「seasonal/*」で処理するファイルを指定しましたか？')
     )
   )
 )
-
 ```
 
 ***
@@ -955,11 +905,10 @@ xp: 30
 ```
 
 `@instructions`
-Run `date-range.sh` on all four of the seasonal data files using `seasonal/*.csv` to match their names,
-and pipe its output to `sort` to see that your scripts can be used just like Unix's built-in commands.
+`date-range.sh` を使って名前を一致させ、季節データファイル 4 つすべてに対して `seasonal/*.csv` を実行し、その出力を `sort` にパイプしてください。これにより、自分で作成したスクリプトも Unix の組み込みコマンドと同じように使えることが分かります。
 
 `@hint`
-Use the same wildcard expression you used earlier.
+先ほど使ったものと同じワイルドカード式を使いましょう。
 
 `@solution`
 ```{shell}
@@ -974,21 +923,20 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("bash", incorrect_msg = 'Did you call `bash`?'),
-      has_code("bash\s+date-range.sh", incorrect_msg = 'Did you run the `date-range.sh` file?'),
-      has_code("seasonal/\*", incorrect_msg = 'Did you specify the files to process with `seasonal/*`?'),
-      has_code("|", incorrect_msg = 'Did you pipe from the script output to `sort`?'),
-      has_code("sort", incorrect_msg = 'Did you call `sort`?')
+      has_code("bash", incorrect_msg = '「bash」を呼び出しましたか？'),
+      has_code("bash\s+date-range.sh", incorrect_msg = '「date-range.sh」ファイルを実行しましたか？'),
+      has_code("seasonal/\*", incorrect_msg = '「seasonal/*」で処理するファイルを指定しましたか？'),
+      has_code("|", incorrect_msg = 'スクリプトの出力を「sort」にパイプしましたか？'),
+      has_code("sort", incorrect_msg = '「sort」を呼び出しましたか？')
     )
   )
 )
-Ex().success_msg("Magic! Notice how composable all the things we've learned are.")
-
+Ex().success_msg("素晴らしいです！これまで学んだことがどれほど組み合わせ可能であるかに注目してください。")
 ```
 
 ---
 
-## What happens when I don't provide filenames?
+## ファイル名を指定しないとどうなりますか?
 
 ```yaml
 type: MultipleChoiceExercise
@@ -996,42 +944,41 @@ key: 8a162c4d54
 xp: 50
 ```
 
-A common mistake in shell scripts (and interactive commands) is to put filenames in the wrong place.
-If you type:
+シェルスクリプト（や対話的なコマンド）でよくある間違いは、ファイル名を間違った場所に置いてしまうことです。
+次のように入力したとします。
 
 ```{shell}
 tail -n 3
 ```
 
-then since `tail` hasn't been given any filenames,
-it waits to read input from your keyboard.
-This means that if you type:
+この場合、`tail` にはファイル名が渡されていないため、キーボードからの入力を待ち続けます。
+つまり、次のように入力すると：
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-then `tail` goes ahead and prints the last three lines of `somefile.txt`,
-but `head` waits forever for keyboard input,
-since it wasn't given a filename and there isn't anything ahead of it in the pipeline.
+`tail` は `somefile.txt` の最後の3行をそのまま出力しますが、`head` はファイル名を指定されておらず、パイプラインの前段にも何もないため、キーボード入力を永遠に待ち続けます。
+
+これは、コマンドの引数の位置を間違えると起こりがちな問題です。
 
 <hr>
 
-Suppose you do accidentally type:
+では、誤って次のように入力してしまったとします。
 
 ```{shell}
 head -n 5 | tail -n 3 somefile.txt
 ```
 
-What should you do next?
+このとき、次に何をすればよいでしょうか。
 
 `@possible_answers`
-- Wait 10 seconds for `head` to time out.
-- Type `somefile.txt` and press Enter to give `head` some input.
-- Use `Ctrl` + `C` to stop the running `head` program.
+- `head` がタイムアウトするまで10秒待つ。
+- `somefile.txt` と入力してエンター を押し、`head` に入力を与える。
+- `Ctrl` + `C` を使って実行中の `head` を停止する。
 
 `@hint`
-What does `head` do if it doesn't have a filename and nothing is upstream from it?
+ファイル名がなく、上流にも何もない場合、`head`はどうなるのでしょうか?
 
 `@pre_exercise_code`
 ```{python}
@@ -1040,8 +987,8 @@ What does `head` do if it doesn't have a filename and nothing is upstream from i
 
 `@sct`
 ```{python}
-a1 = 'No, commands will not time out.'
-a2 = 'No, that will give `head` the text `somefile.txt` to process, but then it will hang up waiting for still more input.'
-a3 = "Yes! You should use `Ctrl` + `C` to stop a running program. This concludes this introductory course! If you're interested to learn more command line tools, we thoroughly recommend taking our free intro to Git course!"
+a1 = 'いいえ、コマンドはタイムアウトしません。'
+a2 = 'いいえ、それでは `head` に `somefile.txt` というテキストを処理させることになりますが、その後さらに入力を待ってハングアップします。'
+a3 = "はい！ 実行中のプログラムを停止するには `Ctrl` + `C` を使用する必要があります。これでこの入門コースは終了です！ さらにコマンドラインツールを学びたい場合は、無料のGit入門コースを強くお勧めします！"
 Ex().has_chosen(3, [a1, a2, a3])
 ```
