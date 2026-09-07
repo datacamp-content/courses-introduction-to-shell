@@ -1,15 +1,12 @@
 ---
-title: Batch processing
-description: >-
-  Most shell commands will process many files at once. This chapter shows you
-  how to make your own pipelines do that. Along the way, you will see how the
-  shell uses variables to store information.
+title: 批次處理
+description: 多數 shell 指令可以一次處理許多檔案。本章將說明如何讓你自己的管線也做到這點。過程中，你會看到 shell 如何用變數來儲存資訊。
 lessons:
   - nb_of_exercises: 10
-    title: How does the shell store information?
+    title: shell 如何儲存資訊？
 ---
 
-## How does the shell store information?
+## Shell 如何儲存資訊？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -17,37 +14,35 @@ key: e4d5f4adea
 xp: 50
 ```
 
-Like other programs, the shell stores information in variables.
-Some of these,
-called **environment variables**,
-are available all the time.
-Environment variables' names are conventionally written in upper case,
-and a few of the more commonly-used ones are shown below.
+和其他程式一樣，shell 會把資訊存放在變數中。
+其中有一部分稱為 **環境變數**，隨時都可用。
+環境變數的名稱慣例上使用全大寫，
+下面列出幾個常用的例子。
 
 | Variable | Purpose                           | Value                 |
 |----------|-----------------------------------|-----------------------|
-| `HOME`   | User's home directory             | `/home/repl`          |
-| `PWD `   | Present working directory         | Same as `pwd` command |
-| `SHELL`  | Which shell program is being used | `/bin/bash`           |
-| `USER`   | User's ID                         | `repl`                |
+| `HOME`   | 使用者的家目錄                    | `/home/repl`          |
+| `PWD `   | 目前工作目錄                      | 與 `pwd` 指令相同     |
+| `SHELL`  | 正在使用的 shell 程式             | `/bin/bash`           |
+| `USER`   | 使用者的 ID                        | `repl`                |
 
-To get a complete list (which is quite long),
-you can type `set` in the shell.
+若要取得完整清單（會相當長），
+你可以在 shell 中輸入 `set`。
 
 <hr>
 
-Use `set` and `grep` with a pipe to display the value of `HISTFILESIZE`,
-which determines how many old commands are stored in your command history.
-What is its value?
+使用 `set` 搭配管線與 `grep` 顯示 `HISTFILESIZE` 的值，
+它決定指令歷史會保留多少舊指令。
+它的值是多少？
 
 `@possible_answers`
 - 10
 - 500
 - [2000]
-- The variable is not there.
+- 變數不存在。
 
 `@hint`
-Use `set | grep HISTFILESIZE` to get the line you need.
+使用 `set | grep HISTFILESIZE` 來取得你需要的那一行。
 
 `@pre_exercise_code`
 ```{python}
@@ -56,16 +51,16 @@ Use `set | grep HISTFILESIZE` to get the line you need.
 
 `@sct`
 ```{python}
-err1 = "No: the shell records more history than that."
-err2 = "No: the shell records more history than that."
-correct3 = "Correct: the shell saves 2000 old commands by default on this system."
-err4 = "No: the variable `HISTFILESIZE` is there."
+err1 = "不對：shell 記錄的歷史比這個多。"
+err2 = "不對：shell 記錄的歷史比這個多。"
+correct3 = "正確：在此系統上，shell 預設會保存 2000 條舊命令。"
+err4 = "不對：變數 `HISTFILESIZE` 存在。"
 Ex().has_chosen(3, [err1, err2, correct3, err4])
 ```
 
 ---
 
-## How can I print a variable's value?
+## 怎麼印出變數的值？
 
 ```yaml
 type: ConsoleExercise
@@ -73,50 +68,50 @@ key: afae0f33a7
 xp: 100
 ```
 
-A simpler way to find a variable's value is to use a command called `echo`, which prints its arguments. Typing
+找出變數值更簡單的方法是使用 `echo` 指令，它會印出所收到的引數。輸入：
 
 ```{shell}
 echo hello DataCamp!
 ```
 
-prints
+會印出：
 
 ```
 hello DataCamp!
 ```
 
-If you try to use it to print a variable's value like this:
+如果你嘗試用它像這樣印出變數的值：
 
 ```{shell}
 echo USER
 ```
 
-it will print the variable's name, `USER`.
+它會印出變數的名稱 `USER`。
 
-To get the variable's value, you must put a dollar sign `$` in front of it. Typing 
+若要取得變數的值，必須在前面加上錢號 `$`。輸入：
 
 ```{shell}
 echo $USER
 ```
 
-prints
+會印出：
 
 ```
 repl
 ```
 
-This is true everywhere:
-to get the value of a variable called `X`,
-you must write `$X`.
-(This is so that the shell can tell whether you mean "a file named X"
-or "the value of a variable named X".)
+各處都是相同的規則：
+如果要取得名為 `X` 的變數值，
+你必須寫成 `$X`。
+（這樣做是為了讓 shell 能分辨你指的是「名為 X 的檔案」
+還是「名為 X 的變數值」。）
 
 `@instructions`
-The variable `OSTYPE` holds the name of the kind of operating system you are using.
-Display its value using `echo`.
+變數 `OSTYPE` 保存你所使用作業系統的名稱。
+使用 `echo` 顯示它的值。
 
 `@hint`
-Call `echo` with the variable `OSTYPE` prepended by `$`.
+在變數 `OSTYPE` 前面加上 `$`，再呼叫 `echo`。
 
 `@pre_exercise_code`
 ```{python}
@@ -135,18 +130,18 @@ Ex().multi(
     check_correct(
         has_expr_output(strict = True),
         multi(
-            has_code('echo', incorrect_msg="Did you call `echo`?"),
-            has_code('OSTYPE', incorrect_msg="Did you print the `OSTYPE` environment variable?"),
-            has_code(r'\$OSTYPE', incorrect_msg="Make sure to prepend `OSTYPE` by a `$`.")
+            has_code('echo', incorrect_msg="您是否呼叫了 `echo`？"),
+            has_code('OSTYPE', incorrect_msg="您是否列印了 `OSTYPE` 環境變數？"),
+            has_code(r'\$OSTYPE', incorrect_msg="請確保在 `OSTYPE` 前加上 `$`。")
         )
     )
 )
-Ex().success_msg("Excellent echoing of environment variables! You're off to a good start. Let's carry on!")
+Ex().success_msg("環境變數的回音非常出色！您有了一個良好的開始。讓我們繼續！")
 ```
 
 ---
 
-## How else does the shell store information?
+## Shell 還會用哪些方式儲存資訊？
 
 ```yaml
 type: BulletConsoleExercise
@@ -154,19 +149,19 @@ key: e925da48e4
 xp: 100
 ```
 
-The other kind of variable is called a **shell variable**,
-which is like a local variable in a programming language.
+另一種變數稱為 **shell 變數**，
+類似於程式語言中的區域變數。
 
-To create a shell variable,
-you simply assign a value to a name:
+要建立一個 shell 變數，
+只要把值指派給一個名稱即可：
 
 ```{shell}
 training=seasonal/summer.csv
 ```
 
-*without* any spaces before or after the `=` sign.
-Once you have done this,
-you can check the variable's value with:
+`=` 兩側都不要有空白字元。
+完成後，
+你可以用下列指令檢查變數的值：
 
 ```{shell}
 echo $training
@@ -189,10 +184,10 @@ xp: 50
 ```
 
 `@instructions`
-Define a variable called `testing` with the value `seasonal/winter.csv`.
+定義一個名為 `testing` 的變數，值為 `seasonal/winter.csv`。
 
 `@hint`
-There should *not* be spaces between the variable's name and its value.
+變數名稱與其值之間不應該有空白字元。
 
 `@solution`
 ```{shell}
@@ -214,12 +209,11 @@ testing=seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     multi(
-        has_code('testing', incorrect_msg='Did you define a shell variable named `testing`?'),
-        has_code('testing=', incorrect_msg='Did you write `=` directly after testing, with no spaces?'),
-        has_code('=seasonal/winter\.csv', incorrect_msg='Did you set the value of `testing` to `seasonal/winter.csv`?')
+        has_code('testing', incorrect_msg='您是否定義了一個名為 `testing` 的 shell 變數？'),
+        has_code('testing=', incorrect_msg='您是否在 testing 之後直接寫了 `=`，沒有空格？'),
+        has_code('=seasonal/winter\.csv', incorrect_msg='您是否將 `testing` 的值設置為 `seasonal/winter.csv`？')
     )
 )
-
 ```
 
 ***
@@ -231,12 +225,12 @@ xp: 50
 ```
 
 `@instructions`
-Use `head -n 1 SOMETHING` to get the first line from `seasonal/winter.csv`
-using the value of the variable `testing` instead of the name of the file.
+使用 `head -n 1 SOMETHING` 取得 `seasonal/winter.csv` 的第一行，
+並用變數 `testing` 的值來代替檔名。
 
 `@hint`
-Remember to use `$testing` rather than just `testing`
-(the `$` is needed to get the value of the variable).
+請記得使用 `$testing` 而不是只用 `testing`
+（需要加上 `$` 才能取得變數的值）。
 
 `@solution`
 ```{shell}
@@ -251,23 +245,22 @@ head -n 1 $testing
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\$testing', incorrect_msg="Did you reference the shell variable using `$testing`?"),
+    has_code(r'\$testing', incorrect_msg="您是否使用 `$testing` 來引用 shell 變數？"),
     check_correct(
         has_output('^Date,Tooth\s*$'),
         multi(
-            has_code('head', incorrect_msg="Did you call `head`?"),
-            has_code('-n', incorrect_msg="Did you limit the number of lines with `-n`?"),
-            has_code(r'-n\s+1', incorrect_msg="Did you elect to keep 1 line with `-n 1`?")     
+            has_code('head', incorrect_msg="您是否呼叫了 `head`？"),
+            has_code('-n', incorrect_msg="您是否使用 `-n` 限制了行數？"),
+            has_code(r'-n\s+1', incorrect_msg="您是否選擇使用 `-n 1` 保留 1 行？")     
         )
     )
 )
-Ex().success_msg("Stellar! Let's see how you can repeat commands easily.")
-
+Ex().success_msg("太棒了！讓我們看看您如何輕鬆重複命令。")
 ```
 
 ---
 
-## How can I repeat a command many times?
+## 我要如何重複執行同一個指令多次？
 
 ```yaml
 type: ConsoleExercise
@@ -275,15 +268,15 @@ key: 920d1887e3
 xp: 100
 ```
 
-Shell variables are also used in **loops**,
-which repeat commands many times.
-If we run this command:
+Shell 變數也常用在**迴圈**中，
+用來把同一個指令重複執行很多次。
+如果我們執行以下指令：
 
 ```{shell}
 for filetype in gif jpg png; do echo $filetype; done
 ```
 
-it produces:
+會得到：
 
 ```
 gif
@@ -291,21 +284,21 @@ jpg
 png
 ```
 
-Notice these things about the loop:
+請注意這個迴圈的幾個重點：
 
-1. The structure is `for` ...variable... `in` ...list... `; do` ...body... `; done`
-2. The list of things the loop is to process (in our case, the words `gif`, `jpg`, and `png`).
-3. The variable that keeps track of which thing the loop is currently processing (in our case, `filetype`).
-4. The body of the loop that does the processing (in our case, `echo $filetype`).
+1. 結構是 `for` …變數… `in` …清單… `; do` …主體… `; done`
+2. 要讓迴圈處理的清單（在這裡是 `gif`、`jpg`、`png` 這些字）。
+3. 記錄目前迴圈正在處理哪一個項目的變數（在這裡是 `filetype`）。
+4. 進行處理的迴圈主體（在這裡是 `echo $filetype`）。
 
-Notice that the body uses `$filetype` to get the variable's value instead of just `filetype`,
-just like it does with any other shell variable.
-Also notice where the semi-colons go:
-the first one comes between the list and the keyword `do`,
-and the second comes between the body and the keyword `done`.
+注意，主體使用 `$filetype` 來取得變數的值，而不是僅寫 `filetype`，
+就跟使用其他 shell 變數時一樣。
+另外也要留意分號的位置：
+第一個分號在清單與關鍵字 `do` 之間，
+第二個分號在主體與關鍵字 `done` 之間。
 
 `@instructions`
-Modify the loop so that it prints:
+修改這個迴圈，讓它印出：
 
 ```
 docx
@@ -313,10 +306,10 @@ odt
 pdf
 ```
 
-Please use `filetype` as the name of the loop variable.
+請使用 `filetype` 作為迴圈變數名稱。
 
 `@hint`
-Use the code structure in the introductory text, swapping the image file types for document file types.
+使用前言中的程式碼結構，把影像檔案類型換成文件檔案類型即可。
 
 `@pre_exercise_code`
 ```{python}
@@ -335,25 +328,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filetype', incorrect_msg='Did you use `filetype` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('docx odt pdf', incorrect_msg='Did you loop over `docx`, `odt` and `pdf` in that order?'),
-      has_code(r'pdf\s*;', incorrect_msg='Did you put a semi-colon after the last loop element?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filetype', incorrect_msg='Did you echo `$filetype`?'),
-      has_code(r'filetype\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='您是否呼叫了 `for`？'),
+      has_code('filetype', incorrect_msg='您是否使用 `filetype` 作為迴圈變數？'),
+      has_code('in', incorrect_msg='您是否在檔案類型列表之前使用了 `in`？'),
+      has_code('docx odt pdf', incorrect_msg='您是否按順序遍歷了 `docx`、`odt` 和 `pdf`？'),
+      has_code(r'pdf\s*;', incorrect_msg='您是否在最後一個迴圈元素後加上了分號？'),
+      has_code(r';\s*do', incorrect_msg='您是否在第一個分號後使用了 `do`？'),
+      has_code('echo', incorrect_msg='您是否呼叫了 `echo`？'),
+      has_code(r'\$filetype', incorrect_msg='您是否回顯了 `$filetype`？'),
+      has_code(r'filetype\s*;', incorrect_msg='您是否在迴圈體後加上了分號？'),
+      has_code('; done', incorrect_msg='您是否以 `done` 結束？')
     )
   )
 )
-Ex().success_msg("First-rate for looping! Loops are brilliant if you want to do the same thing hundreds or thousands of times.")
+Ex().success_msg("一流的迴圈！如果您想做相同的事情數百或數千次，迴圈是很棒的選擇。")
 ```
 
 ---
 
-## How can I repeat a command once for each file?
+## 我怎麼針對每個檔案各執行一次指令？
 
 ```yaml
 type: ConsoleExercise
@@ -361,15 +354,15 @@ key: 8468b70a71
 xp: 100
 ```
 
-You can always type in the names of the files you want to process when writing the loop,
-but it's usually better to use wildcards.
-Try running this loop in the console:
+在寫迴圈時，你當然可以手動輸入要處理的檔名，
+但通常用萬用字元會更好。
+試著在主控台執行這個迴圈：
 
 ```{shell}
 for filename in seasonal/*.csv; do echo $filename; done
 ```
 
-It prints:
+它會印出：
 
 ```
 seasonal/autumn.csv
@@ -378,14 +371,13 @@ seasonal/summer.csv
 seasonal/winter.csv
 ```
 
-because the shell expands `seasonal/*.csv` to be a list of four filenames
-before it runs the loop.
+因為 shell 會在執行迴圈之前，先把 `seasonal/*.csv` 展開成四個檔名的清單。
 
 `@instructions`
-Modify the wildcard expression to `people/*`
-so that the loop prints the names of the files in the `people` directory
-regardless of what suffix they do or don't have.
-Please use `filename` as the name of your loop variable.
+把萬用字元的表達式改成 `people/*`，
+讓迴圈印出 `people` 資料夾中的所有檔名，
+不論它們有沒有任何副檔名。
+請使用 `filename` 作為你的迴圈變數名稱。
 
 `@hint`
 
@@ -407,25 +399,25 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code('for', incorrect_msg='Did you call `for`?'),
-      has_code('filename', incorrect_msg='Did you use `filename` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of file types?'),
-      has_code('people/\*', incorrect_msg='Did you specify a list of files with `people/*`?'),
-      has_code(r'people/\*\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('echo', incorrect_msg='Did you call `echo`?'),
-      has_code(r'\$filename', incorrect_msg='Did you echo `$filename`?'),
-      has_code(r'filename\s*;', incorrect_msg='Did you put a semi-colon after the loop body?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('for', incorrect_msg='您有呼叫 `for` 嗎？'),
+      has_code('filename', incorrect_msg='您有使用 `filename` 作為迴圈變數嗎？'),
+      has_code('in', incorrect_msg='您有在檔案類型列表之前使用 `in` 嗎？'),
+      has_code('people/\*', incorrect_msg='您有使用 `people/*` 指定檔案列表嗎？'),
+      has_code(r'people/\*\s*;', incorrect_msg='您有在檔案列表後加上分號嗎？'),
+      has_code(r';\s*do', incorrect_msg='您有在第一個分號後使用 `do` 嗎？'),
+      has_code('echo', incorrect_msg='您有呼叫 `echo` 嗎？'),
+      has_code(r'\$filename', incorrect_msg='您有回顯 `$filename` 嗎？'),
+      has_code(r'filename\s*;', incorrect_msg='您有在迴圈主體後加上分號嗎？'),
+      has_code('; done', incorrect_msg='您有以 `done` 結束嗎？')
     )
   )
 )
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("迴圈的迴圈！萬用字元和迴圈是強大的組合。")
 ```
 
 ---
 
-## How can I record the names of a set of files?
+## 我要如何記錄一組檔案的名稱？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -433,26 +425,25 @@ key: 153ca10317
 xp: 50
 ```
 
-People often set a variable using a wildcard expression to record a list of filenames.
-For example,
-if you define `datasets` like this:
+人們常用萬用字元運算式來設定一個變數，用以記錄檔名清單。
+例如，若你像這樣定義 `datasets`：
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-you can display the files' names later using:
+之後就能用下列方式顯示這些檔案的名稱：
 
 ```{shell}
 for filename in $datasets; do echo $filename; done
 ```
 
-This saves typing and makes errors less likely.
+這麼做可以少打不少字，也比較不容易出錯。
 
 <hr>
 
-If you run these two commands in your home directory,
-how many lines of output will they print?
+如果你在自己的家目錄中執行以下兩行指令，
+它們會印出幾行輸出？
 
 ```{shell}
 files=seasonal/*.csv
@@ -460,12 +451,12 @@ for f in $files; do echo $f; done
 ```
 
 `@possible_answers`
-- None: since `files` is defined on a separate line, it has no value in the second line.
-- One: the word "files".
-- Four: the names of all four seasonal data files.
+- 沒有：因為 `files` 是在前一行定義的，所以在第二行沒有值。
+- 一行：就是「files」這個字。
+- 四行：四個季節性資料檔的檔名。
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+記住，單獨的 `X` 只是「X」，而 `$X` 代表變數 `X` 的值。
 
 `@pre_exercise_code`
 ```{python}
@@ -474,15 +465,15 @@ Remember that `X` on its own is just "X", while `$X` is the value of the variabl
 
 `@sct`
 ```{python}
-err1 = "No: you do not have to define a variable on the same line you use it."
-err2 = "No: this example defines and uses the variable `files` in the same shell."
-correct3 = "Correct. The command is equivalent to `for f in seasonal/*.csv; do echo $f; done`."
+err1 = "不：您不必在使用變數的同一行定義它。"
+err2 = "不：此範例在同一個 shell 中定義並使用了變數 `files`。"
+correct3 = "正確。該命令等同於 `for f in seasonal/*.csv; do echo $f; done`。"
 Ex().has_chosen(3, [err1, err2, correct3])
 ```
 
 ---
 
-## A variable's name versus its value
+## 變數名稱與其值的差別
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -490,56 +481,56 @@ key: 4fcfb63c4f
 xp: 50
 ```
 
-A common mistake is to forget to use `$` before the name of a variable.
-When you do this,
-the shell uses the name you have typed
-rather than the value of that variable.
+一個常見的錯誤是忘了在變數名稱前加上 `$`。
+當你這麼做時，
+shell 會使用你輸入的名稱，
+而不是該變數的值。
 
-A more common mistake for experienced users is to mis-type the variable's name.
-For example,
-if you define `datasets` like this:
+對有經驗的使用者來說，更常見的錯誤是把變數名稱打錯。
+例如，
+如果你這樣定義 `datasets`：
 
 ```{shell}
 datasets=seasonal/*.csv
 ```
 
-and then type:
+然後輸入：
 
 ```{shell}
 echo $datsets
 ```
 
-the shell doesn't print anything,
-because `datsets` (without the second "a") isn't defined.
+shell 不會印出任何東西，
+因為 `datsets`（少了第二個「a」）沒有被定義。
 
 <hr>
 
-If you were to run these two commands in your home directory,
-what output would be printed?
+如果你在家目錄執行下列兩個指令，
+會印出什麼輸出？
 
 ```{shell}
 files=seasonal/*.csv
 for f in files; do echo $f; done
 ```
 
-(Read the first part of the loop carefully before answering.)
+（回答前請仔細閱讀迴圈的第一部分。）
 
 `@hint`
-Remember that `X` on its own is just "X", while `$X` is the value of the variable `X`.
+記住，單獨寫 `X` 只是字串「X」，而 `$X` 才是變數 `X` 的值。
 
 `@possible_answers`
-- [One line: the word "files".]
-- Four lines: the names of all four seasonal data files.
-- Four blank lines: the variable `f` isn't assigned a value.
+- [一行：字詞「files」。]
+- 四行：四個季節性資料檔的所有檔名。
+- 四行空白：變數 `f` 沒有被指定值。
 
 `@feedback`
-- Correct: the loop uses `files` instead of `$files`, so the list consists of the word "files".
-- No: the loop uses `files` instead of `$files`, so the list consists of the word "files" rather than the expansion of `files`.
-- No: the variable `f` is defined automatically by the `for` loop.
+- 正確：這個迴圈使用的是 `files` 而不是 `$files`，所以清單只包含字詞「files」。
+- 不對：這個迴圈使用的是 `files` 而不是 `$files`，所以清單只包含字詞「files」，而不是 `files` 展開後的內容。
+- 不對：變數 `f` 是由 `for` 迴圈自動定義的。
 
 ---
 
-## How can I run many commands in a single loop?
+## 如何在同一個迴圈中執行多個指令？
 
 ```yaml
 type: ConsoleExercise
@@ -547,28 +538,28 @@ key: 39b5dcf81a
 xp: 100
 ```
 
-Printing filenames is useful for debugging,
-but the real purpose of loops is to do things with multiple files.
-This loop prints the second line of each data file:
+列印檔名對除錯很有幫助，
+但迴圈的真正用途是一次處理多個檔案。
+下面這個迴圈會列印每個資料檔的第 2 行：
 
 ```{shell}
 for file in seasonal/*.csv; do head -n 2 $file | tail -n 1; done
 ```
 
-It has the same structure as the other loops you have already seen:
-all that's different is that its body is a pipeline of two commands instead of a single command.
+它的結構和你已經看過的其他迴圈相同：
+唯一不同的是，它的主體不是單一指令，而是由兩個指令組成的管線。
 
 `@instructions`
-Write a loop that prints the last entry from July 2017 (`2017-07`) in every seasonal file. It should produce a similar output to:
+撰寫一個迴圈，列印每個 seasonal 檔案中 2017 年 7 月（`2017-07`）的最後一筆記錄。輸出應與下列結果類似：
 
 ```{shell}
 grep 2017-07 seasonal/winter.csv | tail -n 1
 ```
 
-but for **_each_** seasonal file separately. Please use `file` as the name of the loop variable, and remember to loop through the list of files `seasonal/*.csv` (_instead of 'seasonal/winter.csv' as in the example_).
+但要對每一個 seasonal 檔案分別執行。請使用 `file` 作為迴圈變數名稱，並記得要遍歷 `seasonal/*.csv` 這份檔案清單（而不是像範例中使用的『seasonal/winter.csv』）。
 
 `@hint`
-The loop body is the grep command shown in the instructions, with `seasonal/winter.csv` replaced by `$file`.
+迴圈主體就是說明中顯示的 grep 指令，將 `seasonal/winter.csv` 改成 `$file` 即可。
 
 `@pre_exercise_code`
 ```{python}
@@ -585,31 +576,31 @@ for file in seasonal/*.csv; do grep 2017-07 $file | tail -n 1; done
 Ex().multi(
   has_cwd('/home/repl'),
   # Enforce use of for loop, so students can't just use grep -h 2017-07 seasonal/*.csv
-  has_code('for', incorrect_msg='Did you call `for`?'),
+  has_code('for', incorrect_msg='您有使用 `for` 嗎？'),
   check_correct(
     has_expr_output(),
     multi(
-      has_code('file', incorrect_msg='Did you use `file` as the loop variable?'),
-      has_code('in', incorrect_msg='Did you use `in` before the list of files?'),
-      has_code('seasonal/\*', incorrect_msg='Did you specify a list of files with `seasonal/*`?'),
-      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='Did you put a semi-colon after the list of files?'),
-      has_code(r';\s*do', incorrect_msg='Did you use `do` after the first semi-colon?'),
-      has_code('grep', incorrect_msg='Did you call `grep`?'),
-      has_code('2017-07', incorrect_msg='Did you match on `2017-07`?'),
-      has_code(r'\$file', incorrect_msg='Did you use `$file` as the name of the loop variable?'),
-      has_code(r'file\s*|', incorrect_msg='Did you use a pipe to connect your second command?'),
-      has_code(r'tail\s*-n\s*1', incorrect_msg='Did you use `tail -n 1` to print the last entry of each search in your second command?'),
-      has_code('; done', incorrect_msg='Did you finish with `done`?')
+      has_code('file', incorrect_msg='您有使用 `file` 作為迴圈變數嗎？'),
+      has_code('in', incorrect_msg='您有在檔案列表前使用 `in` 嗎？'),
+      has_code('seasonal/\*', incorrect_msg='您有使用 `seasonal/*` 指定檔案列表嗎？'),
+      has_code(r'seasonal\/\*\.csv\s*;', incorrect_msg='您有在檔案列表後加上分號嗎？'),
+      has_code(r';\s*do', incorrect_msg='您有在第一個分號後使用 `do` 嗎？'),
+      has_code('grep', incorrect_msg='您有使用 `grep` 嗎？'),
+      has_code('2017-07', incorrect_msg='您有匹配 `2017-07` 嗎？'),
+      has_code(r'\$file', incorrect_msg='您有使用 `$file` 作為迴圈變數的名稱嗎？'),
+      has_code(r'file\s*|', incorrect_msg='您有使用管道來連接第二個命令嗎？'),
+      has_code(r'tail\s*-n\s*1', incorrect_msg='您有在第二個命令中使用 `tail -n 1` 來列印每次搜尋的最後一個條目嗎？'),
+      has_code('; done', incorrect_msg='您有以 `done` 結束嗎？')
     )
   )
 )
 
-Ex().success_msg("Loopy looping! Wildcards and loops make a powerful combination.")
+Ex().success_msg("迴圈的迴圈！萬用字元和迴圈是強大的組合。")
 ```
 
 ---
 
-## Why shouldn't I use spaces in filenames?
+## 為什麼檔名不該包含空白？
 
 ```yaml
 type: PureMultipleChoiceExercise
@@ -617,24 +608,20 @@ key: b974b7f45a
 xp: 50
 ```
 
-It's easy and sensible to give files multi-word names like `July 2017.csv`
-when you are using a graphical file explorer.
-However,
-this causes problems when you are working in the shell.
-For example,
-suppose you wanted to rename `July 2017.csv` to be `2017 July data.csv`.
-You cannot type:
+在使用圖形化檔案總管時，給檔案取像是 `July 2017.csv` 這樣的多字名稱既簡單又合理。
+不過，當你在 shell 中工作時，這會造成問題。
+例如，假設你想把 `July 2017.csv` 重新命名為 `2017 July data.csv`。
+你不能輸入：
 
 ```{shell}
 mv July 2017.csv 2017 July data.csv
 ```
 
-because it looks to the shell as though you are trying to move
-four files called `July`, `2017.csv`, `2017`, and `July` (again)
-into a directory called `data.csv`.
-Instead,
-you have to quote the files' names
-so that the shell treats each one as a single parameter:
+因為在 shell 看來，你像是要把四個檔案 `July`、`2017.csv`、`2017` 和（再次出現的）`July`，
+移動到名為 `data.csv` 的目錄中。
+相反地，
+你必須為檔名加上引號，
+讓 shell 把每個檔名視為單一參數：
 
 ```{shell}
 mv 'July 2017.csv' '2017 July data.csv'
@@ -642,34 +629,34 @@ mv 'July 2017.csv' '2017 July data.csv'
 
 <hr>
 
-If you have two files called `current.csv` and `last year.csv`
-(with a space in its name)
-and you type:
+如果你有兩個檔案，分別叫做 `current.csv` 和 `last year.csv`
+（後者的檔名中有空白），
+而你輸入：
 
 ```{shell}
 rm current.csv last year.csv
 ```
 
-what will happen:
+會發生什麼事：
 
 `@hint`
-What would you think was going to happen if someone showed you the command and you didn't know what files existed?
+如果有人給你看了這個指令，而你又不知道目前有哪些檔案存在，你會預期會發生什麼事？
 
 `@possible_answers`
-- The shell will print an error message because `last` and `year.csv` do not exist.
-- The shell will delete `current.csv`.
-- [Both of the above.]
-- Nothing.
+- shell 會印出錯誤訊息，因為 `last` 和 `year.csv` 並不存在。
+- shell 會刪除 `current.csv`。
+- [以上皆是。]
+- 什麼也不會發生。
 
 `@feedback`
-- Yes, but that's not all.
-- Yes, but that's not all.
-- Correct. You can use single quotes, `'`, or double quotes, `"`, around the file names.
-- Unfortunately not.
+- 沒錯，但不只如此。
+- 沒錯，但不只如此。
+- 正確。你可以用單引號（`'`）或雙引號（`"`）把檔名包起來。
+- 很可惜不是這樣。
 
 ---
 
-## How can I do many things in a single loop?
+## 如何在單一迴圈中完成多件事？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -677,10 +664,10 @@ key: f6d0530991
 xp: 50
 ```
 
-The loops you have seen so far all have a single command or pipeline in their body,
-but a loop can contain any number of commands.
-To tell the shell where one ends and the next begins,
-you must separate them with semi-colons:
+到目前為止你看到的迴圈，迴圈主體中都只包含一個指令或一條管線，
+但其實一個迴圈可以包含任意多個指令。
+為了告訴 shell 一個指令何時結束、下一個指令何時開始，
+你必須用分號分隔它們：
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f; head -n 2 $f | tail -n 1; done
@@ -699,23 +686,23 @@ seasonal/winter.csv
 
 <hr>
 
-Suppose you forget the semi-colon between the `echo` and `head` commands in the previous loop,
-so that you ask the shell to run:
+假設你忘了在前一個迴圈中的 `echo` 與 `head` 指令之間加上分號，
+因此你要 shell 執行：
 
 ```{shell}
 for f in seasonal/*.csv; do echo $f head -n 2 $f | tail -n 1; done
 ```
 
-What will the shell do?
+shell 會怎麼做？
 
 `@possible_answers`
-- Print an error message.
-- Print one line for each of the four files.
-- Print one line for `autumn.csv` (the first file).
-- Print the last line of each file.
+- 列印錯誤訊息。
+- 對四個檔案各列印一行。
+- 只列印 `autumn.csv`（第一個檔案）的一行。
+- 列印每個檔案的最後一行。
 
 `@hint`
-You can pipe the output of `echo` to `tail`.
+你可以把 `echo` 的輸出以管線傳給 `tail`。
 
 `@pre_exercise_code`
 ```{python}
@@ -724,9 +711,9 @@ You can pipe the output of `echo` to `tail`.
 
 `@sct`
 ```{python}
-err1 = "No: the loop will run, it just won't do something sensible."
-correct2 = "Yes: `echo` produces one line that includes the filename twice, which `tail` then copies."
-err3 = "No: the loop runs one for each of the four filenames."
-err4 = "No: the input of `tail` is the output of `echo` for each filename."
+err1 = "不：迴圈會運行，只是它不會執行有意義的操作。"
+correct2 = "是的：`echo` 會產生一行，其中包含兩次檔案名，然後 `tail` 會複製該行。"
+err3 = "不：迴圈對於四個檔案名中的每一個都會運行一次。"
+err4 = "不：`tail` 的輸入是每個檔案名的 `echo` 輸出。"
 Ex().has_chosen(2, [err1, correct2, err3, err4])
 ```

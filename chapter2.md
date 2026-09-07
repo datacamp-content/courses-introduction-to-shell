@@ -1,16 +1,12 @@
 ---
-title: Manipulating data
-description: >-
-  The commands you saw in the previous chapter allowed you to move things around
-  in the filesystem. This chapter will show you how to work with the data in
-  those files. The tools we’ll use are fairly simple, but are solid building
-  blocks.
+title: 操作資料
+description: 前一章的指令讓你能在檔案系統中移動東西。本章將示範如何處理那些檔案中的資料。我們要用的工具相當簡單，但足以作為穩固的基礎元件。
 lessons:
   - nb_of_exercises: 12
-    title: How can I view a file's contents?
+    title: 如何檢視檔案內容？
 ---
 
-## How can I view a file's contents?
+## 我要怎麼查看檔案內容？
 
 ```yaml
 type: ConsoleExercise
@@ -18,12 +14,12 @@ key: 8acc09ede3
 xp: 100
 ```
 
-Before you rename or delete files,
-you may want to have a look at their contents.
-The simplest way to do this is with `cat`,
-which just prints the contents of files onto the screen.
-(Its name is short for "concatenate", meaning "to link things together",
-since it will print all the files whose names you give it, one after the other.)
+在你重新命名或刪除檔案之前，
+你可能會想先看看它們的內容。
+最簡單的方式是使用 `cat`，
+它會把檔案的內容直接印在螢幕上。
+（它的名字是「concatenate」的縮寫，意思是「把東西串接在一起」，
+因為它會依你提供的檔名逐一列印所有檔案的內容。）
 
 ```{shell}
 cat agarwal.txt
@@ -36,7 +32,7 @@ benefits: full
 ```
 
 `@instructions`
-Print the contents of `course.txt` to the screen.
+將 `course.txt` 的內容印到螢幕上。
 
 `@hint`
 
@@ -55,14 +51,14 @@ cat course.txt
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="Your command didn't generate the right output. Have you used `cat` followed by the name of the file, `course.txt`?")
+    has_expr_output(incorrect_msg="您的命令未產生正確的輸出。您是否使用了 `cat` 後接檔案名稱 `course.txt`？")
 )
-Ex().success_msg("Nice! Let's look at other ways to view a file's contents.")
+Ex().success_msg("很好！讓我們看看查看檔案內容的其他方法。")
 ```
 
 ---
 
-## How can I view a file's contents piece by piece?
+## 要怎麼分頁逐步查看檔案內容？
 
 ```yaml
 type: ConsoleExercise
@@ -70,27 +66,27 @@ key: d8a30a3f81
 xp: 100
 ```
 
-You can use `cat` to print large files and then scroll through the output,
-but it is usually more convenient to **page** the output.
-The original command for doing this was called `more`,
-but it has been superseded by a more powerful command called `less`.
-(This kind of naming is what passes for humor in the Unix world.)
-When you `less` a file,
-one page is displayed at a time;
-you can press spacebar to page down or type `q` to quit.
+你可以用 `cat` 列印大型檔案，然後往回捲動輸出；
+但通常更方便的是把輸出「分頁」顯示。
+最早用的指令叫做 `more`，
+後來被功能更強的 `less` 取代。
+（在 Unix 世界，這種命名就算是一種幽默了。）
+當你用 `less` 查看檔案時，
+系統一次只會顯示一頁；
+你可以按空白鍵往下翻頁，或輸入 `q` 離開。
 
-If you give `less` the names of several files,
-you can type `:n` (colon and a lower-case 'n') to move to the next file,
-`:p` to go back to the previous one,
-or `:q` to quit.
+如果你把多個檔案名稱給 `less`，
+可以輸入 `:n`（冒號加小寫 n）切換到下一個檔案，
+用 `:p` 回到上一個，
+或用 `:q` 結束。
 
-Note: If you view solutions to exercises that use `less`,
-you will see an extra command at the end that turns paging *off*
-so that we can test your solutions efficiently.
+注意：如果你查看使用 `less` 的練習解答，
+會在最後看到一個把分頁功能關閉的額外指令，
+這樣我們才能有效率地測試你的解答。
 
 `@instructions`
-Use `less seasonal/spring.csv seasonal/summer.csv` to view those two files in that order.
-Press spacebar to page down, `:n` to go to the second file, and `:q` to quit.
+使用 `less seasonal/spring.csv seasonal/summer.csv` 依序查看這兩個檔案。
+按空白鍵往下翻頁，用 `:n` 前往第二個檔案，然後用 `:q` 離開。
 
 `@hint`
 
@@ -112,7 +108,7 @@ Ex().multi(
     has_cwd('/home/repl'),
     check_or(
         has_code(r'\s*less\s+seasonal/spring\.csv\s+seasonal/summer\.csv\s*',
-                 incorrect_msg='Use `less` and the filenames. Remember that `:n` moves you to the next file.'),
+                 incorrect_msg='使用 `less` 和檔案名稱。請記得 `:n` 會將您移至下一個檔案。'),
         has_code(r'\s*less\s+seasonal/summer\.csv\s+seasonal/spring\.csv\s*')
     )
 )
@@ -120,7 +116,7 @@ Ex().multi(
 
 ---
 
-## How can I look at the start of a file?
+## 我要怎麼查看檔案開頭？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -131,23 +127,18 @@ skills:
   - 1
 ```
 
-The first thing most data scientists do when given a new dataset to analyze is
-figure out what fields it contains and what values those fields have.
-If the dataset has been exported from a database or spreadsheet,
-it will often be stored as **comma-separated values** (CSV).
-A quick way to figure out what it contains is to look at the first few rows.
+多數資料科學家拿到新的資料集時，第一件事就是先了解它有哪些欄位，以及各欄位出現哪些值。
+如果資料集是從資料庫或試算表匯出，通常會儲存成 **逗號分隔值**（CSV）。
+想快速了解它的內容，可以先看前幾列資料。
 
-We can do this in the shell using a command called `head`.
-As its name suggests,
-it prints the first few lines of a file
-(where "a few" means 10),
-so the command:
+在 shell 中，我們可以用 `head` 指令來做到。
+顧名思義，它會印出檔案的前幾行（這裡的「幾行」指的是 10 行），所以以下指令：
 
 ```{shell}
 head seasonal/summer.csv
 ```
 
-displays:
+會顯示：
 
 ```
 Date,Tooth
@@ -164,16 +155,16 @@ Date,Tooth
 
 <hr>
 
-What does `head` do if there aren't 10 lines in the file?
-(To find out, use it to look at the top of `people/agarwal.txt`.)
+如果檔案沒有 10 行，`head` 會怎麼做？
+（要找出答案，請用它來查看 `people/agarwal.txt` 的開頭。）
 
 `@possible_answers`
-- Print an error message because the file is too short.
-- Display as many lines as there are.
-- Display enough blank lines to bring the total to 10.
+- 會印出錯誤訊息，因為檔案太短。
+- 顯示實際存在的行數。
+- 顯示足夠的空白行，讓總數補到 10 行。
 
 `@hint`
-What is the most useful thing it could do?
+它最有用的功能是什麼？
 
 `@pre_exercise_code`
 ```{python}
@@ -182,14 +173,14 @@ What is the most useful thing it could do?
 
 `@sct`
 ```{shell}
-Ex().has_chosen(2, ["Incorrect: that isn't the most useful thing it could do.",
-                    "Correct!",
-                    "Incorrect: that would be impossible to distinguish from a file that ended with a bunch of blank lines."])
+Ex().has_chosen(2, ["不正確：這不是它能做的最有用的事情。",
+                    "正確！",
+                    "不正確：這將無法與以一堆空白行結尾的文件區分開來。"])
 ```
 
 ---
 
-## How can I type less?
+## 怎麼少打一點字？
 
 ```yaml
 type: BulletConsoleExercise
@@ -197,21 +188,21 @@ key: 0b7b8ca8f7
 xp: 100
 ```
 
-One of the shell's power tools is **tab completion**.
-If you start typing the name of a file and then press the tab key,
-the shell will do its best to auto-complete the path.
-For example,
-if you type `sea` and press tab,
-it will fill in the directory name `seasonal/` (with a trailing slash).
-If you then type `a` and tab,
-it will complete the path as `seasonal/autumn.csv`.
+Shell 的強大工具之一是 **Tab 自動完成**。
+當你開始輸入檔名，然後按下 Tab 鍵，
+shell 會盡力自動完成路徑。
+例如，
+如果你輸入 `sea` 並按下 Tab，
+它會補上目錄名稱 `seasonal/`（包含結尾的斜線）。
+接著如果你再輸入 `a` 並按 Tab，
+就會把路徑補完整為 `seasonal/autumn.csv`。
 
-If the path is ambiguous,
-such as `seasonal/s`,
-pressing tab a second time will display a list of possibilities.
-Typing another character or two to make your path more specific
-and then pressing tab
-will fill in the rest of the name.
+如果路徑有多種可能，
+像是 `seasonal/s`，
+第二次按 Tab 會顯示所有可能的選項。
+再多輸入一兩個字元讓路徑更明確，
+然後再按 Tab，
+就會把剩下的名稱自動補齊。
 
 `@pre_exercise_code`
 ```{python}
@@ -227,10 +218,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/autumn.csv` without typing the full filename.
+在不完整輸入檔名的情況下，執行 `head seasonal/autumn.csv`。
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+輸入你需要的那部分路徑後按 Tab，重複此步驟即可。
 
 `@solution`
 ```{shell}
@@ -242,7 +233,7 @@ head seasonal/autumn.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/autumn.csv`?")
+    has_expr_output(incorrect_msg="檢查器無法在您的命令中找到正確的輸出。您確定您在 `seasonal/autumn.csv` 上調用了 `head` 嗎？")
 )
 
 ```
@@ -256,10 +247,10 @@ xp: 50
 ```
 
 `@instructions`
-Run `head seasonal/spring.csv` without typing the full filename.
+在不完整輸入檔名的情況下，執行 `head seasonal/spring.csv`。
 
 `@hint`
-Type as much of the path as you need to, then press tab, and repeat.
+輸入你需要的那部分路徑後按 Tab，重複此步驟即可。
 
 `@solution`
 ```{shell}
@@ -271,15 +262,14 @@ head seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_expr_output(incorrect_msg="The checker couldn't find the right output in your command. Are you sure you called `head` on `seasonal/spring.csv`?")
+    has_expr_output(incorrect_msg="檢查器無法在您的命令中找到正確的輸出。您確定對 `seasonal/spring.csv` 使用了 `head` 嗎？")
 )
-Ex().success_msg("Good work! Once you get used to using tab completion, it will save you a lot of time!")
-
+Ex().success_msg("做得好！一旦您習慣使用制表符補全，它將為您節省大量時間！")
 ```
 
 ---
 
-## How can I control what commands do?
+## 我要如何控制指令的行為？
 
 ```yaml
 type: ConsoleExercise
@@ -287,31 +277,30 @@ key: 9eb608f6c9
 xp: 100
 ```
 
-You won't always want to look at the first 10 lines of a file,
-so the shell lets you change `head`'s behavior
-by giving it a **command-line flag** (or just "flag" for short).
-If you run the command:
+你不一定總是想看檔案的前 10 行，
+所以殼層允許你透過提供 **命令列旗標**（簡稱「旗標」）來改變 `head` 的行為。
+如果你執行以下指令：
 
 ```{shell}
 head -n 3 seasonal/summer.csv
 ```
 
-`head` will only display the first three lines of the file.
-If you run `head -n 100`,
-it will display the first 100 (assuming there are that many),
-and so on.
+`head` 只會顯示該檔案的前三行。
+如果你執行 `head -n 100`，
+它會顯示前 100 行（假設檔案行數足夠），
+以此類推。
 
-A flag's name usually indicates its purpose
-(for example, `-n` is meant to signal "**n**umber of lines").
-Command flags don't have to be a `-` followed by a single letter,
-but it's a widely-used convention.
+旗標的名稱通常會暗示其用途
+（例如，`-n` 代表「行數 number of lines」）。
+指令旗標不一定是 `-` 後面接單一字母，
+但這是相當普遍的慣例。
 
-Note: it's considered good style to put all flags *before* any filenames,
-so in this course,
-we only accept answers that do that.
+注意：較好的風格是把所有旗標放在檔名「之前」，
+因此在本課程中，
+我們只接受遵守此規則的答案。
 
 `@instructions`
-Display the first 5 lines of `winter.csv` in the `seasonal` directory.
+在 `seasonal` 目錄中，顯示 `winter.csv` 的前 5 行。
 
 `@hint`
 
@@ -331,17 +320,17 @@ head -n 5 seasonal/winter.csv
 Ex().multi(
     has_cwd('/home/repl'),
     check_correct(
-        has_expr_output(incorrect_msg="Are you sure you're calling `head` on the `seasonal/winter.csv` file?"),
-        has_expr_output(strict=True, incorrect_msg="Are you sure you used the flag `-n 5`?")
+        has_expr_output(incorrect_msg="您確定您正在對 `seasonal/winter.csv` 文件調用 `head` 嗎？"),
+        has_expr_output(strict=True, incorrect_msg="您確定您使用了標誌 `-n 5` 嗎？")
     ),
-    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "Are you sure you used the flag `-n 5`?")
+    check_not(has_output("2017-02-17,incisor"), incorrect_msg = "您確定您使用了標誌 `-n 5` 嗎？")
 )
-Ex().success_msg("Nice! With this technique, you can avoid your shell from blowing up if you want to have a look at larger text files.")
+Ex().success_msg("很好！使用此技術，您可以避免在查看較大的文本文件時讓您的 shell 崩潰。")
 ```
 
 ---
 
-## How can I list everything below a directory?
+## 我要如何列出某個目錄底下的所有內容？
 
 ```yaml
 type: ConsoleExercise
@@ -349,12 +338,12 @@ key: f830d46419
 xp: 100
 ```
 
-In order to see everything underneath a directory,
-no matter how deeply nested it is,
-you can give `ls` the flag `-R`
-(which means "recursive").
-If you use `ls -R` in your home directory,
-you will see something like this:
+如果你想看到一個目錄底下的所有內容，
+不論巢狀有多深，
+你可以在 `ls` 加上 `-R` 旗標
+（代表「遞迴」）。
+如果你在家目錄使用 `ls -R`，
+你會看到像這樣的輸出：
 
 ```
 backup          course.txt      people          seasonal
@@ -368,20 +357,20 @@ agarwal.txt
 autumn.csv      spring.csv      summer.csv      winter.csv
 ```
 
-This shows every file and directory in the current level,
-then everything in each sub-directory,
-and so on.
+這會先顯示目前層級中的每個檔案與目錄，
+接著顯示每個子目錄中的所有內容，
+以此類推。
 
 `@instructions`
-To help you know what is what,
-`ls` has another flag `-F` that prints a `/` after the name of every directory
-and a `*` after the name of every runnable program.
-Run `ls` with the two flags, `-R` and `-F`, and the absolute path to your home directory
-to see everything it contains.
-(The order of the flags doesn't matter, but the directory name must come last.)
+為了幫助你辨識各種類型，
+`ls` 還有另一個旗標 `-F`，會在每個目錄名稱後加上 `/`，
+並在每個可執行的程式名稱後加上 `*`。
+請用兩個旗標 `-R` 和 `-F`，再加上你家目錄的絕對路徑來執行 `ls`，
+以查看其中包含的所有內容。
+（旗標的順序無所謂，但目錄名稱一定要放在最後。）
 
 `@hint`
-Your home directory can be specified using `~` or `.` or its absolute path.
+你的家目錄可以用 `~`、`.`，或其絕對路徑來表示。
 
 `@pre_exercise_code`
 ```{python}
@@ -396,15 +385,15 @@ ls -R -F /home/repl
 `@sct`
 ```{python}
 Ex().check_or(
-  has_expr_output(incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.'),
-  has_expr_output(expr = "ls -R -F .", incorrect_msg='Use either `ls -R -F` or `ls -F -R` and the path `/home/repl`.')
+  has_expr_output(incorrect_msg='請使用 `ls -R -F` 或 `ls -F -R` 並指定路徑 `/home/repl`。'),
+  has_expr_output(expr = "ls -R -F .", incorrect_msg='請使用 `ls -R -F` 或 `ls -F -R` 並指定路徑 `/home/repl`。')
 )
-Ex().success_msg("That's a pretty neat overview, isn't it?")
+Ex().success_msg('這是一個相當不錯的概覽，不是嗎？')
 ```
 
 ---
 
-## How can I get help for a command?
+## 我要如何查詢指令的說明？
 
 ```yaml
 type: BulletConsoleExercise
@@ -412,11 +401,7 @@ key: 7b90b8a7cd
 xp: 100
 ```
 
-To find out what commands do,
-people used to use the `man` command
-(short for "manual").
-For example,
-the command `man head` brings up this information:
+為了瞭解各個指令的用途，早期大家會使用 `man` 指令（「manual」的縮寫）。例如，執行 `man head` 會顯示以下資訊：
 
 ```
 HEAD(1)               BSD General Commands Manual              HEAD(1)
@@ -440,24 +425,11 @@ SEE ALSO
      tail(1)
 ```
 
-`man` automatically invokes `less`,
-so you may need to press spacebar to page through the information
-and `:q` to quit.
+`man` 會自動呼叫 `less`，所以你可能需要按空白鍵往下翻頁，並用 `:q` 離開。
 
-The one-line description under `NAME` tells you briefly what the command does,
-and the summary under `SYNOPSIS` lists all the flags it understands.
-Anything that is optional is shown in square brackets `[...]`,
-either/or alternatives are separated by `|`,
-and things that can be repeated are shown by `...`,
-so `head`'s manual page is telling you that you can *either* give a line count with `-n`
-or a byte count with `-c`,
-and that you can give it any number of filenames.
+`NAME` 底下那一行會用一句話簡短說明指令的功能，而 `SYNOPSIS` 的摘要則列出所有可用旗標。方括號 `[...]` 表示選用項目，選擇其一的替代關係用 `|` 分隔，可以重複的項目以 `...` 表示。因此，`head` 的手冊頁面告訴你：你可以用 `-n` 指定行數，或用 `-c` 指定位元組數，二擇一，且可以提供任意數量的檔名。
 
-The problem with the Unix manual is that you have to know what you're looking for.
-If you don't,
-you can search [Stack Overflow](https://stackoverflow.com/),
-ask a question on DataCamp's Slack channels,
-or look at the `SEE ALSO` sections of the commands you already know.
+Unix 手冊的缺點是你必須先知道自己在找什麼。如果不知道，你可以搜尋 Stack Overflow（https://stackoverflow.com/）、在 DataCamp 的 Slack 頻道發問，或查看你已熟悉指令的 `SEE ALSO` 區段。
 
 `@pre_exercise_code`
 ```{python}
@@ -473,12 +445,10 @@ xp: 50
 ```
 
 `@instructions`
-Read the manual page for the `tail` command to find out
-what putting a `+` sign in front of the number used with the `-n` flag does.
-(Remember to press spacebar to page down and/or type `q` to quit.)
+閱讀 `tail` 指令的手冊頁，找出在 `-n` 旗標所用的數字前加上 `+` 號會有什麼效果。（記得按空白鍵往下翻，或輸入 `q` 離開。）
 
 `@hint`
-Remember: `man` is short for "manual".
+記住：`man` 是「manual」的縮寫。
 
 `@solution`
 ```{shell}
@@ -489,8 +459,7 @@ man tail | cat
 
 `@sct`
 ```{python}
-Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='Use `man` and the command name.')
-
+Ex().has_code(r'\s*man\s+tail.*', incorrect_msg='使用 `man` 和命令名稱。')
 ```
 
 ***
@@ -502,10 +471,10 @@ xp: 50
 ```
 
 `@instructions`
-Use `tail` with the flag `-n +7` to display all *but* the first six lines of `seasonal/spring.csv`.
+使用 `tail` 搭配 `-n +7` 旗標，顯示 `seasonal/spring.csv` 中除前 6 行之外的所有內容。
 
 `@hint`
-Use a plus sign '+' in front of the number of lines you want displayed.
+在要顯示的行數前面加上加號「+」。
 
 `@solution`
 ```{shell}
@@ -517,15 +486,14 @@ tail -n +7 seasonal/spring.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_output('2017-09-07,molar', incorrect_msg="Are you calling `tail` on `seasonal/spring.csv`?"),
-    has_expr_output(strict=True, incorrect_msg="Are you share you used the flag `-n +7`?")
+    has_output('2017-09-07,molar', incorrect_msg="您是否在 `seasonal/spring.csv` 上使用了 `tail`？"),
+    has_expr_output(strict=True, incorrect_msg="您是否確定使用了標誌 `-n +7`？")
 )
-
 ```
 
 ---
 
-## How can I select columns from a file?
+## 要怎麼從檔案中選取欄？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -533,35 +501,35 @@ key: 925e9d645a
 xp: 50
 ```
 
-`head` and `tail` let you select rows from a text file.
-If you want to select columns,
-you can use the command `cut`.
-It has several options (use `man cut` to explore them),
-but the most common is something like:
+`head` 和 `tail` 可以從純文字檔中選取列。
+如果你想選取欄，
+可以使用指令 `cut`。
+它有好幾個選項（用 `man cut` 了解更多），
+但最常見的用法像這樣：
 
 ```{shell}
 cut -f 2-5,8 -d , values.csv
 ```
 
-which means
-"select columns 2 through 5 and columns 8,
-using comma as the separator".
-`cut` uses `-f` (meaning "fields") to specify columns
-and `-d` (meaning "delimiter") to specify the separator.
-You need to specify the latter because some files may use spaces, tabs, or colons to separate columns.
+意思是：
+「選取第 2 到第 5 欄，以及第 8 欄，
+以逗號作為分隔符」。
+`cut` 使用 `-f`（代表「fields」）來指定欄，
+並用 `-d`（代表「delimiter」）來指定分隔符。
+你需要指定分隔符，因為有些檔案可能用空白、定位字元（tab）或冒號來分隔欄。
 
 <hr>
 
-What command will select the first column (containing dates) from the  file `spring.csv`?
+要用哪個指令從檔案 `spring.csv` 中選取第一欄（包含日期）？
 
 `@possible_answers`
 - `cut -d , -f 1 seasonal/spring.csv`
 - `cut -d, -f1 seasonal/spring.csv`
-- Either of the above.
-- Neither of the above, because `-f` must come before `-d`.
+- 上述任一個皆可。
+- 以上皆非，因為 `-f` 一定要在 `-d` 之前。
 
 `@hint`
-The order of the flags doesn't matter.
+旗標的順序沒有關係。
 
 `@pre_exercise_code`
 ```{python}
@@ -570,12 +538,12 @@ The order of the flags doesn't matter.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['Yes, but that is not all', 'Yes, but that is not all', 'Correct! Adding a space after the flag is good style, but not compulsory.', 'No, flag order doesn\'t matter'])
+Ex().has_chosen(3, ['是的，但這還不是全部', '是的，但這還不是全部', '正確！在標誌後添加空格是良好的風格，但不是必須的。', '不，標誌的順序並不重要'])
 ```
 
 ---
 
-## What can't cut do?
+## `cut` 做不到什麼？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -583,10 +551,10 @@ key: b9bb10ae87
 xp: 50
 ```
 
-`cut` is a simple-minded command.
-In particular,
-it doesn't understand quoted strings.
-If, for example, your file is:
+`cut` 是個相當單純的指令。
+特別是，
+它不會理解帶引號的字串。
+例如，若你的檔案是：
 
 ```
 Name,Age
@@ -594,13 +562,13 @@ Name,Age
 "Sharma,Rupinder",26
 ```
 
-then:
+那麼：
 
 ```{shell}
 cut -f 2 -d , everyone.csv
 ```
 
-will produce:
+會產生：
 
 ```
 Age
@@ -608,27 +576,27 @@ Ranjit"
 Rupinder"
 ```
 
-rather than everyone's age,
-because it will think the comma between last and first names is a column separator.
+而不是每個人的年齡，
+因為它會把姓與名之間的逗號誤認為欄位分隔符。
 
 <hr>
 
-What is the output of `cut -d : -f 2-4` on the line:
+對於這一行執行 `cut -d : -f 2-4` 的輸出是什麼：
 
 ```
 first:second:third:
 ```
 
-(Note the trailing colon.)
+（注意最後面的冒號。）
 
 `@possible_answers`
 - `second`
 - `second:third`
 - `second:third:`
-- None of the above, because there aren't four fields.
+- 以上皆非，因為沒有四個欄位。
 
 `@hint`
-Pay attention to the trailing colon.
+注意最後面的冒號。
 
 `@pre_exercise_code`
 ```{python}
@@ -637,12 +605,12 @@ Pay attention to the trailing colon.
 
 `@sct`
 ```{python}
-Ex().has_chosen(3, ['No, there is more.', 'No, there is more.', 'Correct! The trailing colon creates an empty fourth field.', 'No, `cut` does the best it can.'])
+Ex().has_chosen(3, ['不，還有更多。', '不，還有更多。', '正確！結尾的冒號創建了一個空的第四個字段。', '不，`cut` 已經盡力了。'])
 ```
 
 ---
 
-## How can I repeat commands?
+## 我要如何重複執行指令？
 
 ```yaml
 type: TabConsoleExercise
@@ -650,19 +618,18 @@ key: 32c0d30049
 xp: 100
 ```
 
-One of the biggest advantages of using the shell is that
-it makes it easy for you to do things over again.
-If you run some commands,
-you can then press the up-arrow key to cycle back through them.
-You can also use the left and right arrow keys and the delete key to edit them.
-Pressing return will then run the modified command.
+使用 shell 的最大優勢之一，是能讓你輕鬆把事情再做一次。
+當你執行過一些指令後，
+可以按方向鍵上鍵來回顧先前輸入過的指令。
+你也可以用左右方向鍵和刪除鍵來編輯它們。
+按下 Enter 之後，就會執行你修改過的指令。
 
-Even better, `history` will print a list of commands you have run recently.
-Each one is preceded by a serial number to make it easy to re-run particular commands:
-just type `!55` to re-run the 55th command in your history (if you have that many).
-You can also re-run a command by typing an exclamation mark followed by the command's name,
-such as `!head` or `!cut`,
-which will re-run the most recent use of that command.
+更棒的是，`history` 會列出你最近執行過的指令。
+每個指令前都有一個序號，方便你重新執行特定指令：
+只要輸入 `!55`，就能重新執行歷史紀錄中的第 55 個指令（如果你有那麼多的話）。
+你也可以輸入驚嘆號加上指令名稱來重跑該指令，
+例如 `!head` 或 `!cut`，
+這會重新執行最近一次使用過的該指令。
 
 `@pre_exercise_code`
 ```{python}
@@ -678,10 +645,10 @@ xp: 20
 ```
 
 `@instructions`
-Run `head summer.csv` in your home directory (which should fail).
+在你的家目錄中執行 `head summer.csv`（應該會失敗）。
 
 `@hint`
-Tab completion won't work if there isn't a matching filename.
+如果沒有符合的檔名，Tab 自動補全不會生效。
 
 `@solution`
 ```{shell}
@@ -693,7 +660,7 @@ head summer.csv
 ```{python}
 Ex().multi(
     has_cwd('/home/repl'),
-    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="Use `head` and a filename, `summer.csv`. Don't worry if it fails. It should.")
+    has_code(r'\s*head\s+summer.csv\s*', incorrect_msg="使用 `head` 和檔案名稱 `summer.csv`。即使失敗也不用擔心。")
 )
 
 ```
@@ -707,10 +674,10 @@ xp: 20
 ```
 
 `@instructions`
-Change directory to `seasonal`.
+切換目錄到 `seasonal`。
 
 `@hint`
-Remember that `cd` stands for "change directory".
+記住，`cd` 是「change directory（切換目錄）」的縮寫。
 
 `@solution`
 ```{shell}
@@ -722,9 +689,8 @@ cd seasonal
 ```{python}
 Ex().check_correct(
   has_cwd('/home/repl/seasonal'),
-  has_code('cd +seasonal', incorrect_msg="If your current working directory (find out with `pwd`) is `/home/repl`, you can move to the `seasonal` folder with `cd seasonal`.")
+  has_code('cd +seasonal', incorrect_msg="如果您的當前工作目錄（使用 `pwd` 查詢）是 `/home/repl`，您可以使用 `cd seasonal` 移動到 `seasonal` 資料夾。")
 )
-
 ```
 
 ***
@@ -736,10 +702,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run the `head` command with `!head`.
+用 `!head` 重新執行 `head` 指令。
 
 `@hint`
-Do not type any spaces between `!` and what follows.
+不要在 `!` 和後面的內容之間輸入任何空白。
 
 `@solution`
 ```{shell}
@@ -755,11 +721,10 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Use `!head` to repeat the `head` command.'),
+                        incorrect_msg='使用 `!head` 來重複 `head` 指令。'),
         has_code('!head')
     )
 )
-
 ```
 
 ***
@@ -771,10 +736,10 @@ xp: 20
 ```
 
 `@instructions`
-Use `history` to look at what you have done.
+使用 `history` 檢視你剛才做了什麼。
 
 `@hint`
-Notice that `history` shows the most recent commands last, so that they are left on your screen when it finishes running.
+請注意，`history` 會把最新的指令顯示在最後，這樣在它執行結束時會留在你的螢幕上。
 
 `@solution`
 ```{shell}
@@ -784,8 +749,7 @@ history
 
 `@sct`
 ```{python}
-Ex().has_code(r'history', incorrect_msg='Use `history` without flags to get a list of previous commands.')
-
+Ex().has_code(r'history', incorrect_msg='使用 `history` 不帶任何標誌來獲取先前命令的列表。')
 ```
 
 ***
@@ -797,10 +761,10 @@ xp: 20
 ```
 
 `@instructions`
-Re-run `head` again using `!` followed by a command number.
+再用驚嘆號加上指令編號的方式，重新執行 `head`。
 
 `@hint`
-Do *not* type any spaces between `!` and what follows.
+請「不要」在 `!` 和後面的內容之間輸入任何空白。
 
 `@solution`
 ```{shell}
@@ -816,7 +780,7 @@ Ex().multi(
     has_cwd('/home/repl/seasonal'),
     check_or(
         has_expr_output(expr = 'head summer.csv',
-                        incorrect_msg='Have you used `!<a_number>` to rerun the last `head` from the history?'),
+                        incorrect_msg='您是否使用 `!<a_number>` 來重新執行歷史記錄中的最後一個 `head`？'),
         # The head cmd should appear twice, at positions 1 and 3, though this will change 
         # if the student typed a wrong answer.
         # Since we're also checking output, this should be niche enough to ignore.
@@ -824,13 +788,12 @@ Ex().multi(
         has_code(r'!1') 
     )
 )
-Ex().success_msg("Well done! To the next one!")
-
+Ex().success_msg("做得好！繼續下一個！")
 ```
 
 ---
 
-## How can I select lines containing specific values?
+## 我要如何選出包含特定值的行？
 
 ```yaml
 type: BulletConsoleExercise
@@ -838,26 +801,26 @@ key: adf1516acf
 xp: 100
 ```
 
-`head` and `tail` select rows,
-`cut` selects columns,
-and `grep` selects lines according to what they contain.
-In its simplest form,
-`grep` takes a piece of text followed by one or more filenames
-and prints all of the lines in those files that contain that text.
-For example,
+`head` 和 `tail` 會選出列，
+`cut` 會選出欄，
+而 `grep` 會依照內容選出行。
+最簡單的用法是：
+`grep` 接上一段文字以及一個或多個檔名，
+然後列印那些檔案中所有包含該文字的行。
+例如，
 `grep bicuspid seasonal/winter.csv`
-prints lines from `winter.csv` that contain "bicuspid".
+會印出 `winter.csv` 中包含「bicuspid」的行。
 
-`grep` can search for patterns as well;
-we will explore those in the next course.
-What's more important right now is some of `grep`'s more common flags:
+`grep` 也能搜尋樣式；
+我們會在下一門課再深入探討。
+現在更重要的是熟悉 `grep` 幾個常見的旗標：
 
-- `-c`: print a count of matching lines rather than the lines themselves
-- `-h`: do *not* print the names of files when searching multiple files
-- `-i`: ignore case (e.g., treat "Regression" and "regression" as matches)
-- `-l`: print the names of files that contain matches, not the matches
-- `-n`: print line numbers for matching lines
-- `-v`: invert the match, i.e., only show lines that *don't* match
+- `-c`：列印符合的行數，而不是行本身
+- `-h`：在搜尋多個檔案時，不要列印檔名
+- `-i`：忽略大小寫（例如將「Regression」與「regression」視為相同）
+- `-l`：只列印包含符合結果的檔案名稱，不顯示內容
+- `-n`：顯示符合行的行號
+- `-v`：反轉比對，也就是只顯示「不」符合的行
 
 `@pre_exercise_code`
 ```{python}
@@ -873,11 +836,10 @@ xp: 35
 ```
 
 `@instructions`
-Print the contents of all of the lines containing the word `molar` in `seasonal/autumn.csv`
-by running a single command while in your home directory. Don't use any flags.
+在家目錄下以單一指令，印出 `seasonal/autumn.csv` 中所有包含 `molar` 這個字的行內容。不要使用任何旗標。
 
 `@hint`
-Use `grep` with the word you are searching for and the name of the file(s) to search in.
+使用 `grep`，在後面接上要找的字以及要搜尋的檔案名稱。
 
 `@solution`
 ```{shell}
@@ -892,9 +854,9 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?")
+      has_code("grep", incorrect_msg = "您是否呼叫了 `grep`？"),
+      has_code("molar", incorrect_msg = "您是否搜尋了 `molar`？"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "您是否搜尋了 `seasonal/autumn.csv` 檔案？")
     )
   )
 )
@@ -910,8 +872,8 @@ xp: 35
 ```
 
 `@instructions`
-Invert the match to find all of the lines that *don't* contain the word `molar` in `seasonal/spring.csv`, and show their line numbers.
-Remember, it's considered good style to put all of the flags *before* other values like filenames or the search term "molar".
+反轉比對，找出 `seasonal/spring.csv` 中所有「不」包含 `molar` 這個字的行，並顯示其行號。
+記得，把所有旗標放在其他值（例如檔名或搜尋字詞「molar」）「之前」被視為良好風格。
 
 `@hint`
 
@@ -929,11 +891,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-v", incorrect_msg = "Did you invert the match with `-v`?"),
-      has_code("-n", incorrect_msg = "Did you show line numbers with `-n`?"),
-      has_code("molar", incorrect_msg = "Did you search for `molar`?"),
-      has_code("seasonal/spring.csv", incorrect_msg = "Did you search the `seasonal/spring.csv` file?")
+      has_code("grep", incorrect_msg = "您是否呼叫了 `grep`？"),
+      has_code("-v", incorrect_msg = "您是否使用 `-v` 反轉了匹配？"),
+      has_code("-n", incorrect_msg = "您是否使用 `-n` 顯示了行號？"),
+      has_code("molar", incorrect_msg = "您是否搜尋了 `molar`？"),
+      has_code("seasonal/spring.csv", incorrect_msg = "您是否搜尋了 `seasonal/spring.csv` 檔案？")
     )
   )
 )
@@ -949,11 +911,11 @@ xp: 30
 ```
 
 `@instructions`
-Count how many lines contain the word `incisor` in `autumn.csv` and `winter.csv` combined.
-(Again, run a single command from your home directory.)
+計算 `autumn.csv` 與 `winter.csv` 合計有多少行包含 `incisor` 這個字。
+（同樣地，請在家目錄下以單一指令完成。）
 
 `@hint`
-Remember to use `-c` with `grep` to count lines.
+記得搭配 `-c` 與 `grep` 來計算行數。
 
 `@solution`
 ```{shell}
@@ -968,11 +930,11 @@ Ex().multi(
   check_correct(
     has_expr_output(),
     multi(
-      has_code("grep", incorrect_msg = "Did you call `grep`?"),
-      has_code("-c", incorrect_msg = "Did you get counts with `-c`?"),
-      has_code("incisor", incorrect_msg = "Did you search for `incisor`?"),
-      has_code("seasonal/autumn.csv", incorrect_msg = "Did you search the `seasonal/autumn.csv` file?"),
-      has_code("seasonal/winter.csv", incorrect_msg = "Did you search the `seasonal/winter.csv` file?")
+      has_code("grep", incorrect_msg = "您是否呼叫了 `grep`？"),
+      has_code("-c", incorrect_msg = "您是否使用 `-c` 來獲取計數？"),
+      has_code("incisor", incorrect_msg = "您是否搜尋了 `incisor`？"),
+      has_code("seasonal/autumn.csv", incorrect_msg = "您是否搜尋了 `seasonal/autumn.csv` 檔案？"),
+      has_code("seasonal/winter.csv", incorrect_msg = "您是否搜尋了 `seasonal/winter.csv` 檔案？")
     )
   )
 )
@@ -981,7 +943,7 @@ Ex().multi(
 
 ---
 
-## Why isn't it always safe to treat data as text?
+## 為什麼把資料一律當成純文字處理並不安全？
 
 ```yaml
 type: MultipleChoiceExercise
@@ -989,24 +951,23 @@ key: 11914639fc
 xp: 50
 ```
 
-The `SEE ALSO` section of the manual page for `cut` refers to a command called `paste`
-that can be used to combine data files instead of cutting them up.
+`cut` 的說明手冊頁面裡的 `SEE ALSO` 區段提到一個名為 `paste` 的指令，
+它可以用來合併資料檔，而不是把它們切開。
 
 <hr>
 
-Read the manual page for `paste`,
-and then run `paste` to combine the autumn and winter data files in a single table
-using a comma as a separator.
-What's wrong with the output from a data analysis point of view?
+請先閱讀 `paste` 的手冊頁面，
+然後執行 `paste`，以逗號作為分隔符，將秋季與冬季的資料檔合併成同一個表格。
+從資料分析的角度來看，這份輸出有什麼問題？
 
 `@possible_answers`
-- The column headers are repeated.
-- The last few rows have the wrong number of columns.
-- Some of the data from `winter.csv` is missing.
+- 欄位標題被重複了。
+- 最後幾列的欄位數量不正確。
+- `winter.csv` 中有部分資料不見了。
 
 `@hint`
-If you `cut` the output of `paste` using commas as a separator,
-would it produce the right answer?
+如果你把 `paste` 的輸出再用 `cut`，並以逗號作為分隔符，
+會得到正確的答案嗎？
 
 `@pre_exercise_code`
 ```{python}
@@ -1015,8 +976,8 @@ would it produce the right answer?
 
 `@sct`
 ```{python}
-err1 = 'True, but it is not necessarily an error.'
-correct2 = 'Correct: joining the lines with columns creates only one empty column at the start, not two.'
-err3 = 'No, all of the winter data is there.'
+err1 = '正確，但這不一定是錯誤。'
+correct2 = '正確：將行與列連接只會在開始時創建一個空列，而不是兩個。'
+err3 = '不，所有的冬季數據都在那裡。'
 Ex().has_chosen(2, [err1, correct2, err3])
 ```
