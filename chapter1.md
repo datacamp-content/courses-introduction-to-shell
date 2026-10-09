@@ -211,8 +211,11 @@ Ex().multi(
     has_cwd("/home/repl"),
     has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), # to prevent `echo "course.txt"`
     check_correct(
-      has_expr_output(strict=True),
-      has_code("ls +course.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
+      check_or(
+        has_expr_output(strict=True),
+        has_expr_output(expr="ls ./course.txt", strict=True)
+      ),
+      has_code(r"ls +(\./)?course\.txt", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/course.txt`.")
     )
 )
 
@@ -246,8 +249,11 @@ Ex().multi(
     has_cwd("/home/repl"),
     has_code("ls", incorrect_msg = "You didn't call `ls` to generate the file listing."), 
     check_correct(
-      has_expr_output(strict=True),
-      has_code("ls +seasonal/summer.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
+      check_or(
+        has_expr_output(strict=True),
+        has_expr_output(expr="ls ./seasonal/summer.csv", strict=True)
+      ),
+      has_code(r"ls +(\./)?seasonal/summer\.csv", incorrect_msg = "Your command didn't generate the correct file listing. Use `ls` followed by a relative path to `/home/repl/seasonal/summer.csv`.")
     )
 )
 ```
