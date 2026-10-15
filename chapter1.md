@@ -446,7 +446,7 @@ e `cd ~` sempre levará você para o seu diretório pessoal.
 
 <hr>
 Se você estiver em `/home/repl/seasonal`,
-Para onde `cd ~/.../.` leva você?
+Para onde `cd ~/../.` leva você?
 
 `@hint`
 Rastreie o caminho um diretório de cada vez.
